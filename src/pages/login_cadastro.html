@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div id="header">
+        <div id="image">
+            <img src="../images/logo.png" alt="Logo Dr.Pet" class="logo">
+        </div>
+
+        <div id="menu">
+            <a class="links" href="#">Serviços</a>
+            <a class="links" href="#">Agende agora</a>
+            <a class="links" href="#">Pet shop</a>
+            <a class="links" href="#">Contato</a>
+            
+        </div>
+
+        <div id="image2">
+            <img src="../images/components/user.svg" alt="" class="user">
+        </div>   
+    </div>
+    <div class="container">
+        <div class="div-login">
+        <h1 class="titulo">Login</h1>
+        <form action="login" class="form-login" autocomplete="off">
+            <label for="" class="label">Nome do Usuário</label> <br>
+            <input type="text" name="text" class="input" required>
+            <label for="" class="label">E-mail</label> <br>
+            <input type="email" name="E-mail" class="input" required>
+            <label for="" class="label">Telefone</label> <br>
+            <input type="tel" name="text" class="input" maxlength="12" pattern="[0-9]{10}" required>
+            <label for="" class="label">Senha</label> <br>
+            <input type="password" name="text" class="input" required>
+        </form>
+        <div class="div-esq-senha">
+            <a href="" class="senha-link">Esqueceu a Senha? </a>
+        </div>
+        <div class="login-google">
+            <input type="button" name="Login com Google" id="Login com Google" value="Login com Google" class="btn-google">
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>
