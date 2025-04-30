@@ -60,3 +60,75 @@ body {
     font-weight: bold;
     font-size: 15px;
 }
+
+.btn-google {
+    margin-top: 10px;
+    width: 100%;
+    background-color: var(--gray3);
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    cursor:pointer;
+    font-size: 17px;
+    color: var(--gray9);
+
+}
+
+
+.login-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-google:hover {
+   background-color: var(--gray5);
+   transition: 0.5s;
+   color:var(--green6);
+}
+
+.div-btn-button {
+    margin-top: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.btn-login {
+    width: 50%;
+    background-color: var(--green5);
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    cursor:pointer;
+    font-size: 17px;
+    color: var(--white);
+}
+
+.btn-criar {
+    width: 50%;
+    background-color: var(--green6);
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    cursor:pointer;
+    font-size: 17px;
+    color: var(--white);
+}
+
+.btn-login:hover {
+    background-color: var(--green4);
+    transition: 0.5s;
+}
+
+.btn-criar:hover {
+    text-decoration: underline;
+    transition: 0.5s;
+}
