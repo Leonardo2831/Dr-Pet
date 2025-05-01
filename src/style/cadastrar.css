@@ -3,12 +3,13 @@ body {
     background-color: var(--gray1);
 }
 
-.container {
+.container-cadastro {
     display: flex;
     padding: 5px; 
     border: 1px solid var(--gray3); 
     border-radius: 10px;
-    height: 650px;
+    height: 720px;
+    
     width: 550px;
     margin: 60px auto;
     background-color: var(--green6);
@@ -17,9 +18,10 @@ body {
 
 
 
-.div-login {
+.div-cadastrar {
     display: flex;
     flex-direction: column;
+    
     gap: 10px;
     width: 100%;
     margin: 10px 40px;
@@ -29,12 +31,13 @@ body {
     margin-bottom: 15px;
 }
 
-.form-login {
+.form-cadastro {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 .input {
+   
     border-bottom: 2px solid var(--gray4);
     background-color: var(--green6);
     border-top: none;
@@ -48,16 +51,7 @@ body {
 
 }
 
-.senha-link {
-    text-decoration: none;
-    color: var(--white);
-    font-weight: bold;
-    font-size: 15px;
-}
 
-.senha-link:hover {
-    text-decoration: underline;
-}
 
 .btn-google {
     margin-top: 10px;
@@ -75,7 +69,7 @@ body {
 }
 
 
-.login-google {
+.cadastro-google {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,12 +85,12 @@ body {
     margin-top: 20px;
     display:flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     
 }
 
-.btn-login {
-    width: 50%;
+.btn-finalizar {
+    width: 30%;
     background-color: var(--green5);
     padding: 12px;
     border-radius: 5px;
@@ -106,27 +100,12 @@ body {
     cursor:pointer;
     font-size: 17px;
     color: var(--white);
+    text-align: center;
 }
 
-.btn-criar {
-    width: 50%;
-    background-color: var(--green6);
-    padding: 12px;
-    border-radius: 5px;
-    border: none;
-    font-family: var(--font-sans);
-    font-weight: bold;
-    cursor:pointer;
-    font-size: 17px;
-    color: var(--white);
-}
 
-.btn-login:hover {
+.btn-finalizar:hover {
     background-color: var(--green4);
     transition: 0.5s;
 }
 
-.btn-criar:hover {
-    text-decoration: underline;
-    transition: 0.5s;
-}
