@@ -1,8 +1,8 @@
 @import 'header.css';
 @import 'components.css';
 @import 'footer.css';
-@import 'login.css';
-@import 'cadastrar.css';
+
+@import 'cadastro/forms-conta.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -41,4 +41,17 @@ html{
     font-family: var(--font-sans);
     
     scroll-behavior: smooth;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+a{
+    display: inline-block;
 }
