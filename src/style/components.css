@@ -1,0 +1,9 @@
+.input-form {
+    padding: 15px 0 5px 0;
+
+    border-bottom: 2px solid var(--gray4);
+    background-color: var(--green6);
+    color: var(--white);
+
+    font-size: 26px;
+}
