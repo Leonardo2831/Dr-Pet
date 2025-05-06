@@ -6,9 +6,10 @@
     <title>Login</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>Dr.Pet | Login</title>
 </head>
 <body>
-    <div id="header">
+    <header id="header">
         <div id="image">
             <img src="../images/logo.png" alt="Logo Dr.Pet" class="logo">
         </div>
@@ -18,38 +19,50 @@
             <a class="links" href="#">Agende agora</a>
             <a class="links" href="#">Pet shop</a>
             <a class="links" href="#">Contato</a>
-            
         </div>
 
         <div id="image2">
-            <img src="../images/components/user.svg" alt="" class="user">
+            <img src="../images/components/user.svg" alt="Usuário" class="user">
         </div>   
-    </div>
-    <div class="container">
-        <div class="div-login">
-        <h1 class="titulo">Login</h1>
-        <form action="login" class="form-login" autocomplete="off">
-            <label for="" class="label">Nome do Usuário</label> <br>
-            <input type="text" name="text" class="input" required>
-            <label for="" class="label">E-mail</label> <br>
-            <input type="email" name="E-mail" class="input" required>
-            <label for="" class="label">Telefone</label> <br>
-            <input type="tel" name="text" class="input" maxlength="12" pattern="[0-9]{10}" required>
-            <label for="" class="label">Senha</label> <br>
-            <input type="password" name="text" class="input" required>
+    </header>
+    <main class="main">
+        <form class="form" action="login" autocomplete="off">
+            <h1>Login</h1>
+            <section class="form-login">
+                <div>
+                    <label for="nameUser" class="label">Nome do Usuário</label>
+                    <input type="text" name="nameUser" class="input-form" id="nameUser" required>
+                </div>
+                <div>
+                    <label for="email" class="label">E-mail</label>
+                    <input type="email" name="email" class="input-form" id="email" required>
+                </div>
+                <div>
+                    <label for="phone" class="label">Telefone</label>
+                    <input type="tel" name="phone" class="input-form" id="phone" pattern="[0-9]{10}" required>
+                </div>
+                <div class="content-password">
+                    <label for="passwordUser" class="label">Senha</label>
+                    <div>
+                        <!-- trocar para on quando clicar com javascript -->
+                        <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
+                        <input type="password" name="passwordUser" class="input-form" id="passwordUser" required>
+                    </div>
+                    <!-- mostrar com javascript próximas páginas -->
+                    <p class="esqueceu-senha">Esqueceu a Senha?</p>
+                </div>
+                <section class="send-form">
+                    <button>
+                        Login com Google
+                        <img src="../images/components/brands-icons/google-icon.svg" alt="Google Login">
+                    </button>
+                    <div class="choice-account">
+                        <button type="submit" name="Continuar">Continuar</button>
+                        <button name="criar-conta">Criar Conta</button>
+                    </div>
+                </section>
+            </section>
         </form>
-        <div class="div-esq-senha">
-            <a href="" class="senha-link">Esqueceu a Senha? </a>
-        </div>
-        <div class="login-google">
-            <input type="button" name="Login com Google" id="Login com Google" value="Login com Google" class="btn-google">         
-        </div>
-        <div class="div-btn-button">
-            <input type="submit" name="Continuar" id="Continuar" value="Continuar" class="btn-login">
-            <input type="button" name="criar-conta" id="criar-conta" value="Criar Conta" class="btn-criar">
-        </div>
-        </div>
-
-    </div>
+    </main>
 </body>
 </html>
