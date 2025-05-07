@@ -200,3 +200,13 @@ Exemplo:
 ```
 
 **Seguindo esses casos iremos ter um projeto mais fácil de trabalhar**
+
+# Git 
+
+```
+git checkout -b seuNome-feature
+git checkout main
+git merge seuNome-feature
+git push origin main
+```
+Para commits no git
