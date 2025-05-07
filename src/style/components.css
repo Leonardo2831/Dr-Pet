@@ -194,11 +194,12 @@
 
 /* inputs do formulário de fundo verde */
 .input-form{
+    width: 100%;
     padding: 15px 0 5px 0;
 
     border-bottom: 2px solid var(--gray4);
     background-color: var(--green6);
-    color: var(--white);
+    color: var(--gray2);
 }
 
 .input-form:focus{
