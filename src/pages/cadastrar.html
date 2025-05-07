@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,30 +25,49 @@
             <img src="../images/components/user.svg" alt="" class="user">
         </div>   
     </div>
-    <div class="container-cadastro">
-        <div class="div-cadastrar">
-        <h1 class="titulo">Cadastrar-se</h1>
-        <form action="cadastro" class="form-cadastro" autocomplete="off">
-            <label for="" class="label">Nome do Usuário</label> <br>
-            <input type="text" name="text" class="input" required>
-            <label for="" class="label">E-mail</label> <br>
-            <input type="email" name="E-mail" class="input" required>
-            <label for="" class="label">Telefone</label> <br>
-            <input type="tel" name="text" class="input" maxlength="12" pattern="[0-9]{10}" required>
-            <label for="" class="label">Senha</label> <br>
-            <input type="password" name="text" class="input" required>
-            <label for="" class="label">Confirmar senha</label> <br>
-            <input type="password" name="text" class="input" required>
+    <main class="main">
+        <form class="form" action="login" autocomplete="off">
+            <h1>Cadastrar-se</h1>
+            <section class="form-login">
+                <div>
+                    <label for="nameUser" class="label">Nome do Usuário</label>
+                    <input type="text" name="nameUser" class="input-form" id="nameUser" required>
+                </div>
+                <div>
+                    <label for="email" class="label">E-mail</label>
+                    <input type="email" name="email" class="input-form" id="email" required>
+                </div>
+                <div>
+                    <label for="phone" class="label">Telefone</label>
+                    <input type="tel" name="phone" class="input-form" id="phone" pattern="[0-9]{10}" required>
+                </div>
+                <div class="content-password">
+                    <label for="passwordUser" class="label">Senha</label>
+                    <div>
+                        
+                        <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
+                        <input type="password" name="passwordUser" class="input-form" id="passwordUser" required>
+                    </div> 
+                </div>
+                <div class="content-password">
+                    <label for="passwordUser" class="label">Confirmar senha</label>
+                    <div>
+                    
+                        <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
+                        <input type="password" name="passwordUserConfirm" class="input-form" id="passwordUserConfirm" required>
+                    </div> 
+                </div>
+                <section class="send-form">
+                    <button>
+                        Cadastrar com Google
+                        <img src="../images/components/brands-icons/google-icon.svg" alt="Google Login">
+                    </button>
+                    <div class="choice-account">
+                        <button type="submit" name="Finalizar">Finalizar</button>
+                    </div>
+                </section>
+            </section>
         </form>
-        
-        <div class="cadastro-google">
-            <input type="button" name="Cadastrar com o Google" id="Cadastrar com Google" value="Cadastrar com o Google" class="btn-google">         
-        </div>
-        <div class="div-btn-button">
-            <input type="submit" name="Finalizar" id="Finalizar" value="Finalizar" class="btn-finalizar">
-        </div>
-        </div>
-
-    </div>
+    </main>
 </body>
 </html>
