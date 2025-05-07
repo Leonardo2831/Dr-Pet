@@ -198,5 +198,3 @@ Exemplo:
     cursor: pointer;
 }
 ```
-
-**Seguindo esses casos iremos ter um projeto mais fácil de trabalhar**
