@@ -2,6 +2,11 @@
 @import 'components.css';
 @import 'footer.css';
 
+@import 'home/inicio.css';
+@import 'home/NossosServicos.css';
+@import 'home/petShop.css';
+@import 'home/SobreNos.css';
+
 @import 'cadastro/form-cadastrar.css';
 @import 'cadastro/form-login.css';
 
