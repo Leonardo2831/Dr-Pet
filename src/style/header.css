@@ -1,4 +1,4 @@
-#header {
+.header {
     background-color: var(--green5);
     display: flex;
     align-items: center;
@@ -7,13 +7,7 @@
     
 }
 
-#image img {
-    margin-left: 20px;
-    width: 50px;
-    height: 50px;
-}
-
-#header #menu {
+.menu-nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -24,22 +18,30 @@
     margin-right: 20px;
     
 }
-#header #menu a {
-    color: var(--white);
-    text-decoration: none;
-    border-bottom: 2px solid var(--white);
+
+.menu-nav a {
+    color: var(--gray1);
     padding-bottom: 3px;
 }
 
-#header #image2 {
+.menu-nav a:hover{
+    border-bottom: 2px solid var(--gray1);
+}
+
+.menu-user {
     padding: 10px;
     margin-right: 20px;
 }
 
+.menu-user img {
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+/* menu com barra de pesquisa*/
 .menu-pesquisa {
     display: flex;
-    
-
 }
 
 .menu-pesquisa input {
