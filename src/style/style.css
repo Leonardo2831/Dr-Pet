@@ -7,8 +7,7 @@
 @import 'home/petShop.css';
 @import 'home/SobreNos.css';
 
-@import 'cadastro/form-cadastrar.css';
-@import 'cadastro/form-login.css';
+@import 'cadastro/forms-conta.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
