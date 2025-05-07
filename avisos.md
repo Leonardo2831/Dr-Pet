@@ -201,12 +201,22 @@ Exemplo:
 
 **Seguindo esses casos iremos ter um projeto mais fácil de trabalhar**
 
+# Para iniciar o git no vscode
+
+```
+    git config --global user.name SeuNomeNoGitHub
+    git config --global user.email SeuEmailNoGitHub
+    git clone urlDoProjeto
+```
+
 # Git 
 
 ```
-git checkout -b seuNome-feature
-git checkout main
-git merge seuNome-feature
-git push origin main
+    git checkout -b seuNome-feature
+    git checkout main
+    git merge seuNome-feature
+    git push origin main
 ```
 Para commits no git
+
+**Assim conseguimos seguir usando o git sem problemas**
