@@ -35,3 +35,24 @@
     padding: 10px;
     margin-right: 20px;
 }
+
+.menu-pesquisa {
+    display: flex;
+    
+
+}
+
+.menu-pesquisa input {
+    width: 550px;
+    padding: 10px 5px;
+}
+
+
+.menu-pesquisa img {
+    width: 50px;
+    height: 50px;
+
+
+    
+}
+
