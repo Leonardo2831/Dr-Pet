@@ -27,44 +27,40 @@
     </div>
     <main class="main">
         <form class="form" action="login" autocomplete="off">
-            <h1>Cadastrar-se</h1>
-            <section class="form-login">
+            <h1 class="title-xl-semiBold">Cadastrar-se</h1>
+            <section class="form-cadastrar">
                 <div>
-                    <label for="nameUser" class="label">Nome do Usuário</label>
-                    <input type="text" name="nameUser" class="input-form" id="nameUser" required>
+                    <label for="nameUser" class="text-lg-medium">Nome do Usuário</label>
+                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="nameUser" required>
                 </div>
                 <div>
-                    <label for="email" class="label">E-mail</label>
-                    <input type="email" name="email" class="input-form" id="email" required>
+                    <label for="email" class="text-lg-medium">E-mail</label>
+                    <input type="email" name="email" class="text-lg-medium input-form" id="email" required>
                 </div>
                 <div>
-                    <label for="phone" class="label">Telefone</label>
-                    <input type="tel" name="phone" class="input-form" id="phone" pattern="[0-9]{10}" required>
+                    <label for="phone" class="text-lg-medium">Telefone</label>
+                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="label">Senha</label>
+                    <label for="passwordUser" class="text-lg-medium">Senha</label>
                     <div>
-                        
                         <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
-                        <input type="password" name="passwordUser" class="input-form" id="passwordUser" required>
+                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
                     </div> 
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="label">Confirmar senha</label>
+                    <label for="passwordUser" class="text-lg-medium">Confirmar senha</label>
                     <div>
-                    
                         <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
-                        <input type="password" name="passwordUserConfirm" class="input-form" id="passwordUserConfirm" required>
+                        <input type="password" name="passwordUserConfirm" class="text-lg-medium input-form" id="passwordUserConfirm" required>
                     </div> 
                 </div>
                 <section class="send-form">
-                    <button>
+                    <button class="button-google">
                         Cadastrar com Google
                         <img src="../images/components/brands-icons/google-icon.svg" alt="Google Login">
                     </button>
-                    <div class="choice-account">
-                        <button type="submit" name="Finalizar">Finalizar</button>
-                    </div>
+                    <button type="submit" name="Finalizar">Finalizar</button>
                 </section>
             </section>
         </form>
