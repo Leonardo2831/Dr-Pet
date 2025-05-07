@@ -1,11 +1,7 @@
-.main{
-    padding: 60px;
-}
-
-.form {
+.form{
     max-width: 880px;
     padding: 60px;
-    margin: 0 auto;
+    margin: 60px auto;
 
     background-color: var(--green6);
     border: 1px solid var(--gray3); 
@@ -18,23 +14,24 @@
 }
 
 .form-login,
-.form-cadastrar {
+.form-cadastrar{
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .form-login > div,
-.form-login input{
+.form-cadastrar > div{
     width: 100%;
 }
 
-.form-login label{
+.form-login label,
+.form-cadastrar label{
     margin: 0 0 15px 0;
 }
 
 .form-login label,
-.form-login input{
+.form-cadastrar label{
     color: var(--gray2);
 }
 
@@ -51,7 +48,8 @@
     color: var(--light-green);
 }
 
-.send-form{
+.send-form-login,
+.send-form-cadastrar{
     display: flex;
     flex-direction: column;
     gap: 40px;
