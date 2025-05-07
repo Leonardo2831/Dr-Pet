@@ -198,14 +198,3 @@ Exemplo:
     cursor: pointer;
 }
 ```
-
-**Seguindo esses casos iremos ter um projeto mais fácil de trabalhar**
-
-# Git no nosso projeto
-
-```
-git checkout -b seuNome-feature
-git checkout main        
-git merge seuNome-feature 
-git push origin main
-```
