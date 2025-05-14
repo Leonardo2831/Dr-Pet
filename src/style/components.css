@@ -245,5 +245,12 @@ fieldset {
 
 input[type=radio] {
     margin-right: -15px;
+}
+
+fieldset input[type=checkbox] {
+    width: 24px;
+    height: 24px;
+
+
     
 }
