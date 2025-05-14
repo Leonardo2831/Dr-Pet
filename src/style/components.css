@@ -196,7 +196,7 @@
 .input-form{
     width: 100%;
     padding: 15px 0 5px 0;
-
+    cursor: pointer;
     border-bottom: 2px solid var(--gray4);
     background-color: var(--green6);
     color: var(--gray2);
@@ -233,4 +233,24 @@
 .input-form:focus ~ img{
     top: 20px;
     right: 20px;
+}
+
+fieldset {
+    display: flex;
+    align-items: baseline;
+    width: 816px;
+    height: 84px ;
+    gap: 25px;
+}
+
+input[type=radio] {
+    margin-right: -15px;
+}
+
+fieldset input[type=checkbox] {
+    width: 24px;
+    height: 24px;
+
+
+    
 }
