@@ -1,0 +1,30 @@
+.inicio {
+    background-image: url(../../images/Introdução.png);
+    background-size: cover;
+    min-height: 800px;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    display: flex;
+    align-items: flex-end; 
+    
+}
+
+.inicio > div{
+    padding: 32px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--gray1);
+    border-radius: 10px 10px 0 0;
+    width: 100vw;
+
+
+    display: flex;
+    justify-content: center;
+}
+
+.inicio > div > p {
+    max-width: 1300px;
+}
+
+/* usar br p\ quebrar paragrafo */
+
