@@ -3,62 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Dr.Pet | Login</title>
 </head>
 <body>
-    <header id="header">
-        <div id="image">
-            <img src="../images/logo.png" alt="Logo Dr.Pet" class="logo">
-        </div>
+    <header class="header">
+        <figure>
+            <a href="../../index.html" id="image">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
 
-        <div id="menu">
-            <a class="links" href="#">Serviços</a>
-            <a class="links" href="#">Agende agora</a>
-            <a class="links" href="#">Pet shop</a>
-            <a class="links" href="#">Contato</a>
-        </div>
-
-        <div id="image2">
-            <img src="../images/components/user.svg" alt="Usuário" class="user">
-        </div>   
+        <figure class="menu-user">
+            <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+        </figure> 
     </header>
     <main class="main">
         <form class="form" action="login" autocomplete="off">
-            <h1>Login</h1>
+            <h1 class="title-xl-semiBold capitalize">login</h1>
             <section class="form-login">
                 <div>
-                    <label for="nameUser" class="label">Nome do Usuário</label>
-                    <input type="text" name="nameUser" class="input-form" id="nameUser" required>
+                    <label for="nameUser" class="text-lg-medium">Nome do Usuário</label>
+                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="nameUser" required>
                 </div>
                 <div>
-                    <label for="email" class="label">E-mail</label>
-                    <input type="email" name="email" class="input-form" id="email" required>
+                    <label for="email" class="text-lg-medium">E-mail</label>
+                    <input type="email" name="email" class="text-lg-medium input-form" id="email" required>
                 </div>
                 <div>
-                    <label for="phone" class="label">Telefone</label>
-                    <input type="tel" name="phone" class="input-form" id="phone" pattern="[0-9]{10}" required>
+                    <label for="phone" class="text-lg-medium capitalize">telefone</label>
+                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="label">Senha</label>
+                    <label for="passwordUser" class="text-lg-medium capitalize">senha</label>
                     <div>
                         <!-- trocar para on quando clicar com javascript -->
+                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
                         <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
-                        <input type="password" name="passwordUser" class="input-form" id="passwordUser" required>
                     </div>
                     <!-- mostrar com javascript próximas páginas -->
-                    <p class="esqueceu-senha">Esqueceu a Senha?</p>
+                    <p class="text-md-semiBold esqueceu-senha">Esqueceu a Senha?</p>
                 </div>
-                <section class="send-form">
-                    <button>
+                <section class="send-form-login">
+                    <button class="text-lg-semiBold button-google">
                         Login com Google
                         <img src="../images/components/brands-icons/google-icon.svg" alt="Google Login">
                     </button>
                     <div class="choice-account">
-                        <button type="submit" name="Continuar">Continuar</button>
-                        <button name="criar-conta">Criar Conta</button>
+                        <button type="submit" name="Continuar" class="text-xl-semiBold button-green capitalize">continuar</button>
+                        <button name="criar-conta" class="text-xl-semiBold capitalize">criar conta</button>
                     </div>
                 </section>
             </section>

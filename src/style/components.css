@@ -1,9 +1,289 @@
-.input-form {
+/* texts */
+.text-xxs-medium{
+    font-size: 0.875rem;
+    line-height: 1rem;
+    font-weight: 500;
+}
+
+.text-xs-regular{
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+}
+
+.text-xs-medium{
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+.text-sm-regular{
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+
+.text-sm-medium{
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+
+.text-sm-semiBold{
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+.text-md-regular{
+    font-size: 1.375rem;
+    line-height: 1.7rem;
+    font-weight: 400;
+}
+
+.text-md-medium{
+    font-size: 1.375rem;
+    line-height: 1.7rem;
+    font-weight: 500;
+}
+
+.text-md-semiBold{
+    font-size: 1.375rem;
+    line-height: 1.7rem;
+    font-weight: 600;
+}
+
+.text-lg-regular{
+    font-size: 1.625rem;
+    line-height: 2rem;
+    font-weight: 400;
+}
+
+.text-lg-medium{
+    font-size: 1.625rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.text-lg-semiBold{
+    font-size: 1.625rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+.text-xl-regular{
+    font-size: 1.875rem;
+    line-height: 2.3rem;
+    font-weight: 400;
+}
+
+.text-xl-medium{
+    font-size: 1.875rem;
+    line-height: 2.3rem;
+    font-weight: 500;
+}
+
+.text-xl-semiBold{
+    font-size: 1.875rem;
+    line-height: 2.3rem;
+    font-weight: 600;
+}
+
+/* titles */
+
+.title-xs-semiBold{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+}
+
+.title-xs-bold{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+}
+
+.title-sm-semiBold{
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 600;
+}
+
+.title-sm-bold{
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+}
+
+.title-md-semiBold{
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+    font-weight: 600;
+}
+
+.title-md-bold{
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+    font-weight: 700;
+}
+
+.title-xl-semiBold{
+    font-size: 3.25rem;
+    line-height: 4rem;
+    font-weight: 600;
+}
+
+.title-xl-bold{
+    font-size: 3.25rem;
+    line-height: 4rem;
+    font-weight: 700;
+}
+
+/* estilos */
+.uppercase{
+    text-transform: uppercase;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+/* components */
+
+/* butão do google */
+.button-google{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 10px;
+    padding: 12px 24px;
+    width: 100%;
+
+    border-radius: 10px;
+    background-color: var(--gray3);
+    color: var(--gray9);
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button-google:hover{
+    background-color: var(--gray2);
+}
+
+.button-google img{
+    max-width: 40px;
+    max-height: 40px;
+}
+
+/* botões verdes */
+.button-green{
+    width: fit-content;
+    padding: 16px 32px;
+
+    color: var(--gray1);
+    background-color: var(--green5);
+    border-radius: 10px;
+}
+
+.button-green:hover{
+    background-color: var(--green4);
+}
+
+/* inputs do formulário de fundo verde */
+.input-form{
+    width: 100%;
     padding: 15px 0 5px 0;
-
+    cursor: pointer;
     border-bottom: 2px solid var(--gray4);
-    background-color: var(--green6);
-    color: var(--white);
+    background-color: transparent;
+    color: var(--gray2);
+}
 
-    font-size: 26px;
+.input-form:focus{
+    border: 3px solid var(--light-green);
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+textarea.input-form{
+    height: 140px;
+    
+    border: 2px solid var(--gray4);
+    border-radius: 10px;
+}
+
+/* input de senha */
+.content-password > div{
+    position: relative;
+}
+
+.content-password input{
+    padding-right: 60px;
+}
+
+.content-password input:focus{
+    padding-right: 60px;
+}
+
+.content-password img{
+    width: 30px;
+    height: 30px;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.input-form:focus ~ img{
+    top: 20px;
+    right: 20px;
+}
+
+/* inputs de formulário de fundo branco */
+.content-formLocate > label{
+    color: var(--gray9);
+}
+
+.content-formLocate > input[type="text"]{
+    margin-top: 10px;
+    padding: 15px;
+
+    border: 2px solid var(--gray4);
+    border-radius: 10px;
+    color: var(--gray6);
+    background-color: transparent;
+
+    transition: 0.2s;
+}
+
+.content-formLocate > input[type="text"]::placeholder{
+    color: var(--gray5);
+}
+
+.content-formLocate > input[type="text"]:hover{
+    border: 2px solid var(--gray5);
+}
+
+.content-formLocate > input[type="text"]:focus{
+    border: 2px solid var(--gray6);
+    color: var(--gray6);
+}
+
+fieldset {
+    display: flex;
+    align-items: baseline;
+    width: 816px;
+    height: 84px ;
+    gap: 25px;
+}
+
+input[type=radio] {
+    margin-right: -15px;
+}
+
+fieldset input[type=checkbox] {
+    width: 24px;
+    height: 24px;
 }

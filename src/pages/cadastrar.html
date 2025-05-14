@@ -8,63 +8,55 @@
     <title>Dr.Pet | Cadastrar-se</title>
 </head>
 <body>
-    <div id="header">
-        <div id="image">
-            <img src="../images/logo.png" alt="Logo Dr.Pet" class="logo">
-        </div>
+    <header class="header">
+        <figure>
+            <a href="../../index.html" id="image">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
 
-        <div id="menu">
-            <a class="links" href="#">Serviços</a>
-            <a class="links" href="#">Agende agora</a>
-            <a class="links" href="#">Pet shop</a>
-            <a class="links" href="#">Contato</a>
-            
-        </div>
-
-        <div id="image2">
-            <img src="../images/components/user.svg" alt="" class="user">
-        </div>   
-    </div>
-    <main class="main">
+        <figure class="menu-user">
+            <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+        </figure> 
+    </header>
+    <main>
         <form class="form" action="login" autocomplete="off">
-            <h1>Cadastrar-se</h1>
-            <section class="form-login">
+            <h1 class="title-xl-semiBold">Cadastrar-se</h1>
+            <section class="form-cadastrar">
                 <div>
-                    <label for="nameUser" class="label">Nome do Usuário</label>
-                    <input type="text" name="nameUser" class="input-form" id="nameUser" required>
+                    <label for="nameUser" class="text-lg-medium">Nome do Usuário</label>
+                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="nameUser" required>
                 </div>
                 <div>
-                    <label for="email" class="label">E-mail</label>
-                    <input type="email" name="email" class="input-form" id="email" required>
+                    <label for="email" class="text-lg-medium">E-mail</label>
+                    <input type="email" name="email" class="text-lg-medium input-form" id="email" required>
                 </div>
                 <div>
-                    <label for="phone" class="label">Telefone</label>
-                    <input type="tel" name="phone" class="input-form" id="phone" pattern="[0-9]{10}" required>
+                    <label for="phone" class="text-lg-medium capitalize">telefone</label>
+                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="label">Senha</label>
+                    <label for="passwordUser" class="text-lg-medium capitalize">senha</label>
                     <div>
-                        
+                        <!-- trocar para on quando clicar com javascript -->
+                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
                         <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
-                        <input type="password" name="passwordUser" class="input-form" id="passwordUser" required>
-                    </div> 
+                    </div>
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="label">Confirmar senha</label>
+                    <label for="passwordUser" class="text-lg-medium capitalize">confirmar senha</label>
                     <div>
-                    
+                        <!-- trocar para on quando clicar com javascript -->
+                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
                         <img src="../images/components/visibily/visibility-off-icon.svg" alt="Ver senha">
-                        <input type="password" name="passwordUserConfirm" class="input-form" id="passwordUserConfirm" required>
-                    </div> 
+                    </div>
                 </div>
-                <section class="send-form">
-                    <button>
+                <section class="send-form-cadastrar">
+                    <button class="text-lg-semiBold button-google">
                         Cadastrar com Google
                         <img src="../images/components/brands-icons/google-icon.svg" alt="Google Login">
                     </button>
-                    <div class="choice-account">
-                        <button type="submit" name="Finalizar">Finalizar</button>
-                    </div>
+                    <input type="submit" name="finalizar" class="text-xl-semiBold capitalize button-green" value="Finalizar">
                 </section>
             </section>
         </form>

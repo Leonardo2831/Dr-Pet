@@ -1,0 +1,81 @@
+.form{
+    max-width: 880px;
+    padding: 60px;
+    margin: 60px auto;
+
+    background-color: var(--green6);
+    border: 1px solid var(--gray3); 
+    border-radius: 10px;
+    color: var(--white);
+}
+
+.form > h1{
+    margin: 0 0 60px 0;
+}
+
+.form-login,
+.form-cadastrar{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-login > div,
+.form-cadastrar > div{
+    width: 100%;
+}
+
+.form-login label,
+.form-cadastrar label{
+    margin: 0 0 15px 0;
+}
+
+.form-login label,
+.form-cadastrar label{
+    color: var(--gray2);
+}
+
+.esqueceu-senha{
+    margin: 20px 0 0 0;
+
+    color: var(--gray1);
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.esqueceu-senha:hover{
+    color: var(--light-green);
+}
+
+.send-form-login,
+.send-form-cadastrar{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    margin: 10px 0 0 0;
+}
+
+.choice-account{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.choice-account button:last-of-type{
+    width: fit-content;
+    padding: 16px 32px;
+
+    background-color: var(--green6);
+    color: var(--gray2);
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.choice-account button:last-of-type:hover{
+    background-color: var(--green4);
+}

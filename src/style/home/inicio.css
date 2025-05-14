@@ -1,0 +1,63 @@
+.inicio {
+    background-image: url(../../images/Introdução.png);
+    background-size: cover;
+    min-height: 800px;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    display: flex;
+    align-items: flex-end; 
+    
+}
+
+.inicio > div{
+    padding: 32px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--gray1);
+    border-radius: 10px 10px 0 0;
+    width: 100vw;
+
+
+    display: flex;
+    justify-content: center;
+}
+
+.inicio > div > p {
+    max-width: 1300px;
+}
+
+.servicos {
+    background-color: var(--gray2);
+
+}
+
+.servicos > h2 {
+    text-align: center;
+    margin-bottom: 60px;
+} 
+
+.cards_servicos {
+    background-color: var(--gray1);
+    height: 491px;
+    width: 450px;
+    border-radius: 10px;
+}
+
+.cards_servicos img {
+    max-width:450px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+}
+
+.textcard {
+    text-align: center;
+    margin: 60px;
+}
+
+.alinhamento {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+}

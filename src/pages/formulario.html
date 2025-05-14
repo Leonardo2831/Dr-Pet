@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>Dr.Pet | Formulário de Agendamento</title>
+</head>
+<body>
+    <header class="header">
+        <figure>
+            <a href="../../index.html" id="image">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
+
+        <figure class="menu-user">
+            <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+        </figure> 
+    </header>
+    <main>
+        <form class="form" action="login" autocomplete="off">
+            <h1 class="title-md-bold">Dados para o agendamento</h1>
+            <section class="form-cadastrar">
+                <div>
+                    <label for="nameUser" class="text-lg-medium">Nome</label>
+                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="namePet" required>
+                </div>
+                <div>
+                    <label for="phone" class="text-lg-medium capitalize">telefone</label>
+                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
+                </div>
+                <div class="content-password">
+                    <label for="passwordUser" class="text-lg-medium capitalize">endereço</label>
+                    <div>
+                        <input type="text" name="addressUser" class="text-lg-medium input-form" id="addressUser" required>
+                    </div>
+                </div>
+                
+                
+                <h1 class="title-xs-semiBold">Dados do Pet</h1>
+                <div>
+                    <label for="namePet" class="text-lg-medium">Nome do Pet</label>
+                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="namePet" required>
+                </div>
+                <label for="serviceType" class="text-lg-medium">Serviço</label>
+                <fieldset>
+                    <input type="radio" value="option1">
+                    <label for="option1" class="text-md-medium label-radio" id="vacina" name="radio-group">Vacinação</label>
+                    <input type="radio" value="option2" id="banho_tosa">
+                    <label for="option2" class="text-md-medium label-radio" name="radio-group">Banho e tosa</label>
+                    <input type="radio" value="option3" id="Cirurgia">
+                    <label for="option3" class="text-md-medium label-radio" name="radio-group">Cirurgia</label>
+                </fieldset>
+                <fieldset>
+                    <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
+                    <label for="checkPetAddress" class="text-md-medium">Buscar em sua residência?</label>
+                    
+                </fieldset>
+                <section class="send-form-cadastrar">
+                    <input type="submit" name="agendar" class="text-xl-semiBold capitalize button-green" value="Agendar">
+                </section>
+                
+            </section>
+        </form>
+    </main>
+</body>
+</html>
