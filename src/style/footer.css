@@ -1,9 +1,11 @@
 .contato-container {
-    background-color: #254f35;
-    color: white;
+    background-color: var(--gray5);
+    color: var(--gray1);
     padding: 60px;
     text-align: center;
     margin: 0 auto;
+
+    border-top: 4px solid var(--gray4);
 }
 
 .contato-container h2 {
@@ -45,16 +47,13 @@
 }
 
 .info-item a {
-    color: white;
+    color: var(--gray1);
     text-decoration: none;
+
+    max-width: 280px;
+    text-align: left;
 }
 
 .info-item a:hover {
     text-decoration: underline;
-}
-
-a{
-    max-width: 280px;
-    display: block;
-    text-align: left;
 }
