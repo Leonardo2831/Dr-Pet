@@ -15,29 +15,35 @@
             </a>
         </figure>
 
-        <div class="header-contentNav js-headerNav">
-            <nav class="menu-nav">
-                <a class="text-sm-medium" href="#servicos">Serviços</a>
-                <a class="text-sm-medium" href="#sobrenos">Sobre nós</a>
-                <a class="text-sm-medium" href="#petShop">Pet shop</a>
-                <a class="text-sm-medium" href="#contato">Contato</a>
-            </nav>
+        <nav class="header-menu-nav js-headerNav">
+            <a class="text-sm-medium" href="#servicos">Serviços</a>
+            <a class="text-sm-medium" href="#sobrenos">Sobre nós</a>
+            <a class="text-sm-medium" href="#petShop">Pet shop</a>
+            <a class="text-sm-medium" href="#contato">Contato</a>
+        </nav>
 
+        <div class="content-menuMobile">
             <figure class="menu-user">
-                <img src="src/images/components/header-icons/user.svg" alt="Usuário" class="user">
+                <img src="src/images/components/header-icons/user.svg" alt="Usuário">
             </figure>
+
+            <div class="header-mobileMenu js-mobileMenu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
-        <div class="header-mobileMenu js-mobileMenu">
-            <div></div>
-            <div></div>
-            <div></div>
+
+        <div class="shadow menu-conta js-menuConta openMenuConta">
+            <a href="src/pages/cadastrar.html" class="text-md-medium">Criar uma conta</a>
+            <a href="src/pages/login.html" class="text-md-medium">Entrar</a>
         </div>
     </header>
 
     <main class="main">
         <section class="main-inicio">
             <div class="main-dark-image"></div>
-            <div>
+            <div class="inicio-bottom-text">
                 <p class="text-xs-regular">
                     Cuidamos do seu pet com amor e excelência veterinária.
                     <br>
