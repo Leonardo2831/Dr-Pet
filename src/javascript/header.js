@@ -1,15 +1,34 @@
 import { Select } from "./components.js";
 
+// abrindo menu mobile
 // criando um construtor de seleção
 const selectItem = new Select;
 
-const headerMenuMobile = selectItem.single('.js-mobileMenu');
-const headerNav = selectItem.single('.js-headerNav');
+const buttonMenuMobile = selectItem.single('.js-mobileMenu');
+const headerMenuNav = selectItem.single('.js-headerNav');
+const classOpenMobile = 'openMenuMobile';
+
+const userButton = selectItem.single('.js-userButton');
+const menuConta = selectItem.single('.js-menuConta');
+const classOpenContaSemLogin = 'openMenuContaSemLogin';
 
 function openMenuMobile(){
-    const classOpen = 'openMenuMobile';
+    headerMenuNav.classList.toggle(classOpenMobile);
 
-    headerNav.classList.toggle(classOpen);
+    if(menuConta.classList.contains(classOpenContaSemLogin)){
+        menuConta.classList.remove(classOpenContaSemLogin);
+    }
 }
 
-headerMenuMobile.addEventListener('click', openMenuMobile);
+buttonMenuMobile.addEventListener('click', openMenuMobile);
+
+// abrir menu conta sem login
+function openMenuContaSemLogin(){
+    menuConta.classList.toggle(classOpenContaSemLogin);
+
+    if(headerMenuNav.classList.contains(classOpenMobile)){
+        headerMenuNav.classList.remove(classOpenMobile)
+    }
+}
+
+userButton.addEventListener('click', openMenuContaSemLogin);
