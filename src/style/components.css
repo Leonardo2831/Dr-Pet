@@ -148,6 +148,10 @@
     text-transform: capitalize;
 }
 
+.shadow{
+    box-shadow: 0 1px 2px var(--shadow);
+}
+
 /* components */
 
 /* butão do google */
