@@ -8,6 +8,15 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+
+    position: relative;
+}
+
+.main-dark-image{
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--shadow);
 }
 
 .main-inicio > div{
@@ -17,6 +26,8 @@
     background-color: var(--shadowItem);
     color: var(--gray1);
     border-radius: 10px 10px 0 0;
+
+    z-index: 1;
 }
 
 .main-inicio > div > p {
