@@ -3,9 +3,8 @@
 @import 'footer.css';
 
 @import 'home/inicio.css';
-@import 'home/NossosServicos.css';
-@import 'home/petShop.css';
-@import 'home/SobreNos.css';
+@import 'home/pet-shop.css';
+@import 'home/sobre.css';
 
 @import 'cadastro/forms-conta.css';
 
