@@ -52,7 +52,7 @@
 }
 
 /* estilos para menu conta com javascript */
-.menu-conta.openMenuConta{
+.menu-conta.openMenuContaSemLogin{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +67,7 @@
     z-index: 10;
 }
 
-.menu-conta.openMenuConta a{
+.menu-conta.openMenuContaSemLogin a{
     width: 100%;
     padding: 24px 36px;
     text-align: center;
@@ -75,7 +75,7 @@
     color: var(--gray11);
 }
 
-.menu-conta.openMenuConta a:first-of-type{
+.menu-conta.openMenuContaSemLogin a:first-of-type{
     color: var(--blue-link);
 }
 
