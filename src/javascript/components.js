@@ -1,17 +1,22 @@
-// Construtor para selecionar itens
-/** 
- * @param {string} mode Modo de seleção: '1' para o um elemento, 'all' para todos.
- * @param {string} value seletor para pegar o item
- * @return {Element|NodeList} elemento único ou lista de elementos
-*/
-export function Select(mode, value){
-
-    if(mode === 'all'){
-        return document.querySelectorAll(value);
-    } else if(mode == '1'){
+// classe para selecionar itens
+export class Select{
+    
+    /**
+     * Seleciona o primeiro elemento que casa com o seletor.
+     * @param {string} value seletor CSS para selecionar o elemento
+     * @returns {HTMLElement | null}
+    */
+    single(value){
         return document.querySelector(value);
-    } else {
-        throw new Error("Modo inválido. Use '1' ou 'all'.");
+    }
+
+    /**
+     * Seleciona todos os elementos que casam com o seletor.
+     * @param {string} value seletor CSS para selecionar o elemento
+     * @returns {NodeListOf<HTMLElement>}
+    */
+    all(value){
+        return document.querySelectorAll(value);
     }
 
 }
