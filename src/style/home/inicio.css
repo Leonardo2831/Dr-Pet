@@ -19,7 +19,7 @@
     background-color: var(--shadow);
 }
 
-.main-inicio > div{
+.inicio-bottom-text{
     padding: 32px;
     width: 100vw;
 
@@ -30,7 +30,7 @@
     z-index: 1;
 }
 
-.main-inicio > div > p {
+.inicio-bottom-text > p {
     max-width: 1300px;
     margin: 0 auto;
 }
