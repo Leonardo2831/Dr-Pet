@@ -1,11 +1,11 @@
 .contato-container {
-    background-color: var(--gray5);
+    background-color: var(--green5);
     color: var(--gray1);
     padding: 60px;
     text-align: center;
     margin: 0 auto;
 
-    border-top: 4px solid var(--gray4);
+    border-top: 4px solid var(--green4);
 }
 
 .contato-container h2 {
