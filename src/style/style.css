@@ -69,8 +69,8 @@ textarea:focus{
     outline: none;
 }
 
-a{
-    display: inline-block;
+a {
+    display: block;
 }
 
 body{
