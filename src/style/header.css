@@ -3,11 +3,16 @@
     align-items: center;
     justify-content: space-between;
     gap: 60px;
+
+    width: 100%;
     padding: 30px;
   
     background-color: var(--green5);
 
-    position: relative;
+    /* para fazer o cabeçalho seguir a rolagem */
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .header > figure:first-of-type{
