@@ -228,4 +228,8 @@
         top: 100%;
         right: 0;
     }
+
+    .margin-top-header{
+        margin-top: 120px;
+    }
 }
