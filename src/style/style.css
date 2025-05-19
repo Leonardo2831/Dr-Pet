@@ -81,14 +81,38 @@ body{
     background-color: var(--gray1);
 }
 
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+}
+
+.main-shop,
+.main-product{
+    padding: 80px;
+}
+
 @media (max-width: 1024px){
     
 }
 
 @media (max-width: 768px){
 
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 60px;
+    }
+
 }
 
 @media (max-width: 480px){
+    
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 30px;
+    }
 
 }
