@@ -251,6 +251,8 @@ fieldset label {
 
 input[type=radio] {
     accent-color: white;
+    width: 20px;
+    height: 20px;
     
 }
 
