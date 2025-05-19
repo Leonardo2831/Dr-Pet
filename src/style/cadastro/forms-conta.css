@@ -1,7 +1,13 @@
+.main-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
 .form{
     max-width: 880px;
     padding: 60px;
-    margin: 60px auto;
 
     background-color: var(--green6);
     border: 1px solid var(--gray3); 
@@ -64,7 +70,7 @@
     gap: 30px;
 }
 
-.choice-account button:last-of-type{
+.choice-account a{
     width: fit-content;
     padding: 16px 32px;
 
@@ -76,6 +82,14 @@
     transition: 0.2s;
 }
 
-.choice-account button:last-of-type:hover{
+.choice-account a:hover{
     background-color: var(--green4);
+}
+
+@media (max-width: 480px){
+
+    .main-form, .form{
+        padding: 30px;
+    }
+    
 }
