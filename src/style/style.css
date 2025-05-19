@@ -1,5 +1,8 @@
-@import 'header.css';
+@import 'reset.css';
 @import 'components.css';
+
+/* header e footer */
+@import 'header.css';
 @import 'footer.css';
 
 /* main do index */
@@ -53,28 +56,6 @@ html{
     font-family: var(--font-sans);
     
     scroll-behavior: smooth;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-}
-
-label, input{
-    display: block;
-}
-
-input:focus,
-textarea:focus{
-    outline: none;
-}
-
-a {
-    display: block;
 }
 
 body{
