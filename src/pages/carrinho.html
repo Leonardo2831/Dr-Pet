@@ -35,39 +35,43 @@
     </header>
 
     <main class="margin-top-header main">
-        <section class="shop-items">
-            <figure>
-                <img src="../images/products/GoldenSenior.png" alt="Ração Golden Senior">
-            </figure>
-            <div>
-                <h2>GoldeN Special</h2>
-                <p>Descrição: GoldeN® Special utiliza somente proteína de origem animal, para cães mais fortes e saudáveis, sendo indicado para cães adultos de todas as raças.</p>
-                <button>Excluir</button>
+        <div class="cart-shopRow">
+            <section class="shop-items">
+                <div class="item-choiced">
+                    <figure>
+                        <img src="../images/products/GoldenSenior.png" alt="Ração Golden Senior">
+                    </figure>
+                    <div>
+                        <h2 class="title-md-semiBold">GoldeN Special</h2>
+                        <p class="text-xs-regular">Descrição: GoldeN® Special utiliza somente proteína de origem animal, para cães mais fortes e saudáveis, sendo indicado para cães adultos de todas as raças.</p>
+                        <button class="text-md-medium">Excluir</button>
+                    </div>
+                    <div class="item-count">
+                        <figure>
+                            <img src="../images/components/count-shop-icons/delete-icon.svg" alt="Excluir" class="js-lessItem">
+                            <p class="text-lg-semiBold js-amoutItems">0</p>
+                            <img src="../images/components/count-shop-icons/add-icon.svg" alt="Adicionar" class="js-addItem">
+                        </figure>
+                    </div>
+                </div>
+            </section>
+            <div class="purchase-info">
+                <h1 class="text-lg-semiBold">Resumo da Compra</h1>
+                <div class="info-products">
+                    <p class="text-md-medium">Produtos(<span class="js-count">2</span>):</p>
+                    <p class="text-md-medium">R$319,98</p>
+                </div>
+                <div class="info-freight">
+                    <p class="text-sm-medium">Frete:</p>
+                    <button class="text-md-medium js-openCalcFreight">Calcular frete</button>
+                </div>
+                <div class="info-finalPrice">
+                    <p class="text-lg-semiBold">Total:</p>
+                    <sup class="title-sm-semiBold">R$</sup>
+                    <span class="title-sm-semiBold price-items js-priceItems">319,98</span>
+                    <span class="title-sm-semiBold freight-items js-textFreight"> + frete</span>
+                </div>
             </div>
-            <div>
-                <figure>
-                    <img src="../images/components/count-shop-icons/delete-icon.svg" alt="Excluir">
-                    <p>0</p>
-                    <img src="../images/components/count-shop-icons/add-icon.svg" alt="Adicionar">
-                </figure>
-            </div>
-        </section>
-        <div class="purchase-info">
-            <h1>Resumo da Compra</h1>
-            <div>
-                <p>Produtos(2):</p>
-                <p>R$319,98</p>
-            </div>
-            <div>
-                <p>Frete:</p>
-                <button>Calcular frete</button>
-            </div>
-            <p>
-                Total:
-                <sup>R$</sup>
-                <span class="price-items">R$319,98</span>
-                <span class="freight-items"> + frete</span>
-            </p>
         </div>
     </main>
 
