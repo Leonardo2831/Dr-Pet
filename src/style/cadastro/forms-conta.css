@@ -1,9 +1,4 @@
-.main-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px;
-}
+
 
 .form{
     max-width: 880px;
@@ -88,7 +83,7 @@
 
 @media (max-width: 480px){
 
-    .main-form, .form{
+    .form{
         padding: 30px;
     }
     
