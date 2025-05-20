@@ -9,14 +9,14 @@ const headerMenuNav = selectItem.single('.js-headerNav');
 const classOpenMobile = 'openMenuMobile';
 
 const userButton = selectItem.single('.js-userButton');
-const menuConta = selectItem.single('.js-menuConta');
-const classOpenContaSemLogin = 'openMenuContaSemLogin';
+const menuSemLogin = selectItem.single('.js-menuSemLogin');
+const classOpenContaSemLogin = 'openSemLogin';
 
 function openMenuMobile(){
     headerMenuNav.classList.toggle(classOpenMobile);
 
-    if(menuConta && menuConta.classList.contains(classOpenContaSemLogin)){
-        menuConta.classList.remove(classOpenContaSemLogin);
+    if(menuSemLogin && menuSemLogin.classList.contains(classOpenContaSemLogin)){
+        menuSemLogin.classList.remove(classOpenContaSemLogin);
     }
 }
 
@@ -26,7 +26,7 @@ if(buttonMenuMobile){
 
 // abrir menu conta sem login
 function openMenuContaSemLogin(){
-    menuConta.classList.toggle(classOpenContaSemLogin);
+    menuSemLogin.classList.toggle(classOpenContaSemLogin);
 
     if(headerMenuNav && headerMenuNav.classList.contains(classOpenMobile)){
         headerMenuNav.classList.remove(classOpenMobile)
