@@ -19,7 +19,7 @@
             <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
         </figure> 
     </header>
-    <main>
+    <main class="main">
         <form class="form" action="login" autocomplete="off">
             <h1 class="title-md-bold">Dados para o agendamento</h1>
             <section class="form-cadastrar">
@@ -46,14 +46,21 @@
                 </div>
                 <label for="serviceType" class="text-lg-medium">Serviço</label>
                 <fieldset>
-                    <input type="radio" value="option1">
-                    <label for="option1" class="text-md-medium label-radio" id="vacina" name="radio-group">Vacinação</label>
-                    <input type="radio" value="option2" id="banho_tosa">
-                    <label for="option2" class="text-md-medium label-radio" name="radio-group">Banho e tosa</label>
-                    <input type="radio" value="option3" id="Cirurgia">
-                    <label for="option3" class="text-md-medium label-radio" name="radio-group">Cirurgia</label>
-                </fieldset>
-                <fieldset>
+                    <div class="servico">
+                        
+                        <div class="opcoes">
+                            <label><input type="radio" name="servico" value="vacinacao"> Vacinação</label>
+                            <label><input type="radio" name="servico" value="banho"> Banho e tosa</label>
+                            <label><input type="radio" name="servico" value="cirurgia"> Cirurgia</label>
+                         </div>
+                    </div>
+             </fieldset>
+                
+                <div>
+                    <label for="descricao">Descrição do serviço</label>
+                    <textarea id="descricao" placeholder="Descreva sobre o serviço"></textarea>
+                </div>
+                <fieldset for="checkPetAddress">
                     <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
                     <label for="checkPetAddress" class="text-md-medium">Buscar em sua residência?</label>
                     
