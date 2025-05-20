@@ -15,20 +15,24 @@ const classOpenContaSemLogin = 'openMenuContaSemLogin';
 function openMenuMobile(){
     headerMenuNav.classList.toggle(classOpenMobile);
 
-    if(menuConta.classList.contains(classOpenContaSemLogin)){
+    if(menuConta && menuConta.classList.contains(classOpenContaSemLogin)){
         menuConta.classList.remove(classOpenContaSemLogin);
     }
 }
 
-buttonMenuMobile.addEventListener('click', openMenuMobile);
+if(buttonMenuMobile){
+    buttonMenuMobile.addEventListener('click', openMenuMobile);
+}
 
 // abrir menu conta sem login
 function openMenuContaSemLogin(){
     menuConta.classList.toggle(classOpenContaSemLogin);
 
-    if(headerMenuNav.classList.contains(classOpenMobile)){
+    if(headerMenuNav && headerMenuNav.classList.contains(classOpenMobile)){
         headerMenuNav.classList.remove(classOpenMobile)
     }
 }
 
-userButton.addEventListener('click', openMenuContaSemLogin);
+if(userButton){
+    userButton.addEventListener('click', openMenuContaSemLogin);
+}

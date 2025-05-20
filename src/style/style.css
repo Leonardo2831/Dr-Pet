@@ -1,12 +1,21 @@
-@import 'header.css';
+@import 'reset.css';
 @import 'components.css';
+@import 'menusPop-up.css';
+
+/* header e footer */
+@import 'header.css';
 @import 'footer.css';
 
+/* main do index */
 @import 'home/inicio.css';
 @import 'home/pet-shop.css';
 @import 'home/sobre.css';
 
+/* formulários */
 @import 'cadastro/forms-conta.css';
+
+/* carrinho */
+@import 'cart-shop/cart-shop.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -50,30 +59,20 @@ html{
     scroll-behavior: smooth;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-}
-
-label, input{
-    display: block;
-}
-
-input:focus,
-textarea:focus{
-    outline: none;
-}
-
-a {
-    display: block;
-}
-
 body{
     background-color: var(--gray1);
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+}
+
+.main-shop,
+.main-product{
+    padding: 80px;
 }
 
 @media (max-width: 1024px){
@@ -82,8 +81,24 @@ body{
 
 @media (max-width: 768px){
 
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 60px;
+    }
+
+    .margin-top-header{
+        margin-top: 100px;
+    }
+
 }
 
 @media (max-width: 480px){
+    
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 30px;
+    }
 
 }
