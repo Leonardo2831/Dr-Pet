@@ -1,5 +1,6 @@
 @import 'reset.css';
 @import 'components.css';
+@import 'menusPop-up.css';
 
 /* header e footer */
 @import 'header.css';
