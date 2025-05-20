@@ -20,6 +20,8 @@ const classOpenSemLogin = 'openSemLogin';
 const menuLogin = selectItem.single('.js-menuLogin');
 const classOpenLogin = 'openLogin';
 
+const textNameUser = selectItem.single('.js-nomeUser');
+
 function openMenuMobile(){
 
     if((menuSemLogin && menuSemLogin.classList.contains(classOpenSemLogin)) ||  (menuLogin && menuLogin.classList.contains(classOpenLogin))){
@@ -43,6 +45,8 @@ function openMenuConta(){
 
     if(user){
         menuLogin.classList.toggle(classOpenLogin);
+
+        textNameUser.textContent = user.name;
     } else {
         menuSemLogin.classList.toggle(classOpenSemLogin);
     }
