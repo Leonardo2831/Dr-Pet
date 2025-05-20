@@ -1,5 +1,9 @@
 import { Select } from "./components.js";
 
+const user = {
+    name: 'Dr Pet',
+};
+
 // abrindo menu mobile
 // criando um construtor de seleção
 const selectItem = new Select;
@@ -17,11 +21,13 @@ const menuLogin = selectItem.single('.js-menuLogin');
 const classOpenLogin = 'openLogin';
 
 function openMenuMobile(){
-    headerMenuNav.classList.toggle(classOpenMobile);
 
-    if(menuSemLogin && menuSemLogin.classList.contains(classOpenSemLogin)){
+    if((menuSemLogin && menuSemLogin.classList.contains(classOpenSemLogin)) ||  (menuLogin && menuLogin.classList.contains(classOpenLogin))){
         menuSemLogin.classList.remove(classOpenSemLogin);
     }
+    
+    headerMenuNav.classList.toggle(classOpenMobile);
+
 }
 
 if(buttonMenuMobile){
@@ -29,14 +35,19 @@ if(buttonMenuMobile){
 }
 
 // abrir menu conta sem login
-function openMenuContaSemLogin(){
-    menuSemLogin.classList.toggle(classOpenSemLogin);
-
+function openMenuConta(){
+    // se o usuário tiver uma conta
     if(headerMenuNav && headerMenuNav.classList.contains(classOpenMobile)){
-        headerMenuNav.classList.remove(classOpenMobile)
+        headerMenuNav.classList.remove(classOpenMobile);
+    }
+
+    if(user){
+        menuLogin.classList.toggle(classOpenLogin);
+    } else {
+        menuSemLogin.classList.toggle(classOpenSemLogin);
     }
 }
 
 if(userButton){
-    userButton.addEventListener('click', openMenuContaSemLogin);
+    userButton.addEventListener('click', openMenuConta);
 }
