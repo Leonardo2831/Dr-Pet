@@ -1,0 +1,97 @@
+/* introdução */
+.main-inicio {
+    display: flex;
+    align-items: flex-end;
+    min-height: 800px;
+
+    background-image: url(../../images/introduction.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    position: relative;
+}
+
+.main-dark-image{
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--shadow);
+}
+
+.inicio-bottom-text{
+    padding: 32px;
+    width: 100vw;
+
+    background-color: var(--shadowItem);
+    color: var(--gray1);
+    border-radius: 10px 10px 0 0;
+
+    z-index: 1;
+}
+
+.inicio-bottom-text > p {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* serviços */
+.main-servicos {
+    padding: 60px;
+
+    background-color: var(--gray2);
+}
+
+.main-servicos > h2 {
+    margin-bottom: 60px;
+
+    text-align: center;
+    color: var(--gray9);
+} 
+
+.main-contentCards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.cards-servicos {
+    width: 450px;
+
+    background-color: var(--gray1);
+    border-radius: 10px;
+
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.cards-servicos:hover{
+    transform: scale(1.04);
+}
+
+.cards-servicos img {
+    max-width: 450px;
+    width: 100%;
+    max-height: 300px;
+}
+
+.cards-text {
+    padding: 30px;
+}
+
+.cards-text > h3{
+    margin-bottom: 15px;
+}
+
+.main-servicos .button-green{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-servicos .button-green > img{
+    width: 30px;
+    height: 30px;
+}

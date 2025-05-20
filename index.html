@@ -15,79 +15,91 @@
             </a>
         </figure>
 
-        <nav class="menu-nav">
-            <a class="links" href="#servicos">Serviços</a>
-            <a class="links" href="#sobrenos">Sobre nós</a>
-            <a class="links" href="#petShop">Pet shop</a>
-            <a class="links" href="#contato">Contato</a>
+        <nav class="header-menu-nav js-headerNav">
+            <a class="text-sm-medium" href="#servicos">Serviços</a>
+            <a class="text-sm-medium" href="#sobrenos">Sobre nós</a>
+            <a class="text-sm-medium" href="#petShop">Pet shop</a>
+            <a class="text-sm-medium" href="#contato">Contato</a>
+        </nav>
+
+        <div class="content-menuMobile">
+            <figure class="menu-user js-userButton">
+                <img src="src/images/components/header-icons/user.svg" alt="Usuário">
+            </figure>
+
+            <div class="header-mobileMenu js-mobileMenu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
 
-        <figure class="menu-user">
-            <img src="src/images/components/header-icons/user.svg" alt="" class="user">
-        </figure> 
+        <div class="shadow menu-conta js-menuConta">
+            <a href="src/pages/cadastrar.html" class="text-md-medium">Criar uma conta</a>
+            <a href="src/pages/login.html" class="text-md-medium">Entrar</a>
+        </div>
     </header>
 
-    <main>
-        <section id="inicio">
-            <div id="fundoTransparente">
-                <p>
+    <main class="main-index">
+        <section class="main-inicio">
+            <div class="main-dark-image"></div>
+            <div class="inicio-bottom-text">
+                <p class="text-xs-regular">
                     Cuidamos do seu pet com amor e excelência veterinária.
+                    <br>
                     Seu pet merece o melhor cuidado, e na Dr. Pet  oferecemos atendimento veterinário de alta qualidade, focado no bem-estar e na saúde do seu companheiro de quatro patas.
-                    Com uma equipe altamente qualificada e liderada por especialistas, garantimos diagnósticos precisos, tratamentos eficazes e um atendimento humanizado para que você tenha total confiança nos cuidados que seu pet recebe.
+                    <br>
+                    Com uma equipe altamente qualificada e liderada por especialistas, garantimos diagnósticos precisos, tratamentos eficazes e um atendimento humanizado para que você tenha total
+                    <br>
+                    confiança nos cuidados que seu pet recebe.
                 </p>
             </div>
         </section>
 
-        <section id="servicos">
-            <h2>Nossos serviços</h2>
-            <div>
-                <div id="vacinacao">
-                    <img src="src/images/services/vacinação.png" alt="cachorro sendo vacinado">
-                    <h3>
-                        Vacinação
-                    </h3>
-                    <p>
-                        Proteção garantida contra doenças para que seu pet viva mais e melhor.
-                    </p>
+        <section class="main-servicos">
+            <h2 class="title-xl-bold">Nossos serviços</h2>
+            <div class="main-contentCards">
+                <div class="shadow cards-servicos">
+                    <img src="src/images/services/vacinação.png" alt="Vacinação">
+                    <div class="cards-text">
+                        <h3 class="text-xl-semiBold">Vacinação</h3>
+                        <p class="text-md-regular">Proteção garantida contra doenças para que seu pet viva mais e melhor.</p>
+                    </div>
                 </div>
 
-                <div id="banhoTosa">
-                    <img src="src/images/services/banho-tosa.png" alt="cachorro">
-                    <h3>
-                        Banho e Tosa
-                    </h3>
-                    <p>
-                        Higiene e cuidados para manter seu bichinho sempre limpo e saudável.
-                    </p>
+                <div class="shadow cards-servicos">
+                    <img src="src/images/services/banho-tosa.png" alt="Banho e Tosa">
+                    <div class="cards-text">
+                        <h3 class="text-xl-semiBold">Banho e Tosa</h3>
+                        <p class="text-md-regular">Higiene e cuidados para manter seu bichinho sempre limpo e saudável.</p>
+                    </div>
                 </div>
 
-                <div id="cirurgias">
-                    <img src="src/images/services/cirurgia.png" alt="cachorro recebendo arinho">
-                    <h3>
-                        Cirurgias
-                    </h3>
-                    <p>
-                        Procedimentos seguros, realizados por especialistas com equipamentos de ponta. 
-                    </p>
+                <div class="shadow cards-servicos">
+                    <img src="src/images/services/cirurgia.png" alt="Cirurgias">
+                    <div class="cards-text">
+                        <h3 class="text-xl-semiBold">Cirurgias</h3>
+                        <p class="text-md-regular">Procedimentos seguros, realizados por especialistas com equipamentos de ponta. </p>
+                     </div>
                 </div>
 
             </div>
             <div>
-                <h3>
+                <h3 class="title-md-semiBold">
                     Gostou de nossos serviços?
-                    Agende agora
                 </h3>
-                <button>
-                    AGENDE AGORA
-                </button>
+                <a href="src/pages/agenda.html" class="text-lg-semiBold uppercase button-green">
+                    <p>agende agora</p>
+                    <img src="src/images/components/calendar_clock.svg" alt="Agendamento">
+                </a>
             </div>
         </section>
 
-        <section id="sobrenos">
-            <div id="lucas">
-                <img src="src/images/image 1.jpg" alt="lucas com cachorrinhos" id="imgLucas">
+        <section class="main-about">
+            <div class="lucas">
+                <img src="src/images/imagem-sobre.jpg" alt="Veterinário Dr.Pet">
             </div>
-            <div id="txtSobrenos">
+            <div class="about-text">
                 <h2>Sobre Nós</h2>
                 <p>
                     A Dr. Pet, clínica veterinária em Mococa, oferece cuidados completos e de alta qualidade para animais de estimação, incluindo banho, tosa e assistência médica. Nosso compromisso se estende à prevenção e ao tratamento de diversas patologias, com equipamentos modernos e profissionais experientes. Reconhecida pela excelência no atendimento e ótimas avaliações, a clínica se destaca pela flexibilidade, com atendimentos presenciais e domiciliares. Priorizamos a comunicação transparente com os tutores, oferecendo orientações detalhadas e acompanhamento personalizado para cada animal. O objetivo principal da Dr. Pet é o bem-estar e a saúde dos animais, com uma equipe qualificada e atendimento profissional e acessível  
@@ -95,11 +107,11 @@
             </div>
         </section>
 
-        <section id="petShop">
-            <div id="imgPetShop">
-                <img src="src/images/imagem loja.jpg" alt="loja">
-            </div>
-            <div id="txtPetShop">
+        <section class="main-petShop">
+            <figure>
+                <img src="src/images/imagem-loja.jpg" alt="Loja">
+            </figure>
+            <div class="text-petShop">
                 <h2>Pet Shop</h2>
                 <p>
                     Em nosso petshop, você encontra tudo o que seu pet precisa para se manter saudável e feliz! Oferecemos uma ampla gama de produtos, como rações de qualidade, brinquedos, acessórios e itens de higiene, sempre com as melhores marcas do mercado. Nosso compromisso é garantir que seu animal receba o melhor em cuidado e bem-estar. Além disso, nossos produtos são cuidadosamente selecionados para atender às necessidades de cada espécie, idade e condição de saúde. Visite-nos e proporcione ao seu pet o que há de melhor! 
@@ -109,27 +121,43 @@
         </section>
     </main>
 
-    <footer id="contato" class="footer">
-       <h1>Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!</h1>
-        <p>Fique à vontade para entrar em contato conosco a qualquer momento. Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades.</p>
-        <p> Você pode nos alcançar de várias maneiras:</p>
+    <footer class="footer">
+        <h1 class="title-sm-semiBold">Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!</h1>
         <div>
-            <img src="/src/images/components/foooter-icons/locate-icon.svg" alt="Endereço">
-            <a href="https://www.google.com/maps/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.590000000000003%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDUwMy4wIKXMDSoASAFQAw%3D%3D"></a>
+            <p class="text-lg-regular">Fique à vontade para entrar em contato conosco a qualquer momento. Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades.</p>
+            <p class="text-lg-regular"> Você pode nos encontrar de alcançar de varias maneiras:</p>
         </div>
-        <div>
-            <img src="/src/images/components/foooter-icons/instagram-icon.svg" alt="Instagram">
-            <a href="https://www.instagram.com/doutorpetmococa/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D#"></a>
-        </div>
-        <div>
-            <img src="/src/images/components/foooter-icons/phone-icon.svg" alt="Contato">
-            <a href="(19) 99359-2253"></a>
-            <a href="(19)3665-6242"></a>
-        </div>
-        <div>
-            <img src="/src/images/components/foooter-icons/email-icon.svg" alt="Email">
-            <a href="mvlucasvet@gmail.com"></a>
+
+        <div class="footer-info">
+            <div class="info-item">
+                <img src="src/images/components/foooter-icons/locate-icon.png" alt="endereço">
+                <a href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2">
+                    R. Maj. Adalberto Dos Santos
+                    <br> 
+                    Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
+                </a>
+            </div>
+
+            <div class="info-item">    
+                <img src="src/images/components/foooter-icons/instagram-icon.png" alt="instagram">
+                <a href="https://www.instagram.com/doutorpetmococa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D">@doutorpetmococa</a>
+            </div>
+                        
+            <div class="info-item">
+                <img src="src/images/components/foooter-icons/phone-icon.png" alt="telefone">
+                <div>
+                    <a href="tel:+5519993592253">(19) 99359-2253</a> <br>
+                    <a href="tel:+551936656242">(19) 3665-6242</a>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <img src="src/images/components/foooter-icons/email-icon.png" alt="email">
+                <a href="mailto:mvlucasvet@gmail.com">mvlucasvet@gmail.com</a>
+            </div>
         </div>
     </footer>
+
+    <script type="module" src="src/javascript/header.js"></script>
 </body>
 </html>
