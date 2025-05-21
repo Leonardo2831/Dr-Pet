@@ -61,7 +61,7 @@
     </header>
 
     <main class="main">
-        <form class="form" action="login" autocomplete="off">
+        <form class="form" action="#" autocomplete="off">
             <h1 class="title-md-bold">Dados para o agendamento</h1>
             <section class="form-cadastrar">
                 <div>
@@ -90,24 +90,29 @@
                     <div class="servico">
                         
                         <div class="opcoes">
-                            <label><input type="radio" name="servico" value="vacinacao"> Vacinação</label>
-                            <label><input type="radio" name="servico" value="banho"> Banho e tosa</label>
-                            <label><input type="radio" name="servico" value="cirurgia"> Cirurgia</label>
+                            <label>
+                                <input type="radio" name="servico" value="vacinacao"> Vacinação
+                            </label>
+                            <label>
+                                <input type="radio" name="servico" value="banho"> Banho e tosa
+                            </label>
+                            <label>
+                                <input type="radio" name="servico" value="cirurgia"> Cirurgia
+                            </label>
                          </div>
                     </div>
-             </fieldset>
+                </fieldset>
                 
                 <div>
-                    <label for="descricao">Descrição do serviço</label>
-                    <textarea id="descricao" placeholder="Descreva sobre o serviço"></textarea>
+                    <label for="descricao" class="text-lg-medium">Descrição do serviço</label>
+                    <textarea id="descricao" class="text-md-medium" placeholder="Descreva sobre o serviço"></textarea>
                 </div>
                 <fieldset for="checkPetAddress">
                     <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
                     <label for="checkPetAddress" class="text-md-medium">Buscar em sua residência?</label>
-                    
                 </fieldset>
                 <section class="send-form-cadastrar">
-                    <input type="submit" name="agendar" class="text-xl-semiBold capitalize button-green" value="Agendar">
+                    <input type="submit" name="agendar" class="text-xl-semiBold button-green-form" value="Agendar">
                 </section>
                 
             </section>
