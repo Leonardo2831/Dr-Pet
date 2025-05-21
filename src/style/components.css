@@ -182,15 +182,24 @@
 }
 
 /* botões verdes */
+.button-green-form,
 .button-green{
     width: fit-content;
     padding: 16px 32px;
 
     color: var(--gray1);
-    background-color: var(--green5);
     border-radius: 10px;
 }
 
+.button-green-form{
+    background-color: var(--green5);
+}
+
+.button-green{
+    background-color: var(--green6);
+}
+
+.button-green-form:hover,
 .button-green:hover{
     background-color: var(--green4);
 }
