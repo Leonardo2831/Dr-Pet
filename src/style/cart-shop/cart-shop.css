@@ -182,21 +182,6 @@
 .freight-items{
     color: var(--gray9);
 }
-.agende_agora {
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
-.agende_amanha {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.title-md-semiBold{
-    text-align: center;
-    margin-bottom: 30px;
-
-}
 
 .button-finished{
     display: flex;
