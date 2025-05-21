@@ -129,6 +129,11 @@
     gap: 10px;
 }
 
+.info-products > p:first-of-type,
+.info-freight > p{
+    color: var(--gray8);
+}
+
 .info-products p:last-of-type,
 .info-freight > button{
     margin-left: auto;
@@ -177,6 +182,7 @@
     margin-left: auto;
 }
 
+.info-products p:last-of-type,
 .info-finalPrice sup,
 .price-items,
 .freight-items{
