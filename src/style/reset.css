@@ -62,3 +62,7 @@ button{
 	cursor: pointer;
 	background-color: transparent;
 }
+
+label{
+	cursor: pointer;
+}
