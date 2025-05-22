@@ -78,8 +78,10 @@
                         <input type="text" name="addressUser" id="addressUser" class="text-lg-medium input-form" required>
                     </div>
                 </div>
-                
+            </section>    
+            <section class="form-dados">
                 <h2 class="title-xs-semiBold">Dados do Pet</h2>
+                
                 <div>
                     <label for="namePet" class="text-lg-medium">Nome do Pet</label>
                     <input type="text" name="namePet" id="namePet" class="text-lg-medium input-form" required>
@@ -88,33 +90,32 @@
                 <fieldset class="form-services">  
                     <legend class="text-lg-medium">Serviço</legend>
                     <div>
-                        <label for="serviceVacina" class="text-lg-medium">
+                        <label for="serviceVacina" class="text-md-medium">
                             <input type="radio" name="service" id="serviceVacina" value="vacinacao">
                             Vacinação
                         </label>
-                        <label for="serviceBanhoTosa" class="text-lg-medium">
+                        <label for="serviceBanhoTosa" class="text-md-medium">
                             <input type="radio" name="service" id="serviceBanhoTosa" value="banho">
                             Banho e tosa
                         </label>
-                        <label for="serviceCirurgia" class="text-lg-medium">
+                        <label for="serviceCirurgia" class="text-md-medium">
                             <input type="radio" name="service" id="serviceCirurgia" value="cirurgia">
                             Cirurgia
                         </label>
                     </div>
                 </fieldset>
-                
+                    
                 <div>
                     <label for="description" class="text-lg-medium">Descrição do serviço</label>
                     <textarea name="description" id="description" class="text-lg-medium textarea-form" placeholder="Descreva sobre o serviço"></textarea>
                 </div>
-                <fieldset for="checkPetAddress">
+                <div class="form-checkbox">
                     <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
-                    <label for="checkPetAddress" class="text-md-medium">Buscar em sua residência?</label>
-                </fieldset>
-                <section class="send-form-cadastrar">
+                    <label for="checkPetAddress" class="text-md-medium">Buscarem sua residência?</label>
+                </div>
+                <div class="send-form-cadastrar">
                     <input type="submit" name="agendar" class="text-xl-semiBold button-green-form" value="Agendar">
-                </section>
-                
+                </div>
             </section>
         </form>
     </main>
