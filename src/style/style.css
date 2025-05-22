@@ -12,13 +12,12 @@
 @import 'home/sobre.css';
 
 /* formulários */
-@import 'cadastro/forms-conta.css';
+@import 'forms/forms.css';
 
 /* carrinho */
 @import 'cart-shop/cart-shop.css';
 
 /* agendamento */
-@import 'agendamento/form-agendamento.css';
 @import 'agendamento/agenda.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
