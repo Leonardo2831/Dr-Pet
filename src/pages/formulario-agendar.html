@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/style.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-    <title>Dr.Pet | Formulário de Agendamento</title>
+    <title>Dr.Pet | Agendamento</title>
 </head>
 <body>
     <header class="header">
@@ -63,49 +63,49 @@
     <main class="main">
         <form class="form" action="#" autocomplete="off">
             <h1 class="title-md-bold">Dados para o agendamento</h1>
-            <section class="form-cadastrar">
+            <section class="form-dados">
                 <div>
                     <label for="nameUser" class="text-lg-medium">Nome</label>
-                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="namePet" required>
+                    <input type="text" name="nameUser" id="nameUser" class="text-lg-medium input-form" required>
                 </div>
                 <div>
                     <label for="phone" class="text-lg-medium capitalize">telefone</label>
-                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
+                    <input type="tel" name="phone" id="phone" class="text-lg-medium input-form" pattern="[0-9]{10}" required>
                 </div>
                 <div class="content-password">
-                    <label for="passwordUser" class="text-lg-medium capitalize">endereço</label>
+                    <label for="passwordUser" class="text-lg-medium">Endereço</label>
                     <div>
-                        <input type="text" name="addressUser" class="text-lg-medium input-form" id="addressUser" required>
+                        <input type="text" name="addressUser" id="addressUser" class="text-lg-medium input-form" required>
                     </div>
                 </div>
                 
-                
-                <h1 class="title-xs-semiBold">Dados do Pet</h1>
+                <h2 class="title-xs-semiBold">Dados do Pet</h2>
                 <div>
                     <label for="namePet" class="text-lg-medium">Nome do Pet</label>
-                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="namePet" required>
+                    <input type="text" name="namePet" id="namePet" class="text-lg-medium input-form" required>
                 </div>
-                <label for="serviceType" class="text-lg-medium">Serviço</label>
-                <fieldset>
-                    <div class="servico">
-                        
-                        <div class="opcoes">
-                            <label>
-                                <input type="radio" name="servico" value="vacinacao"> Vacinação
-                            </label>
-                            <label>
-                                <input type="radio" name="servico" value="banho"> Banho e tosa
-                            </label>
-                            <label>
-                                <input type="radio" name="servico" value="cirurgia"> Cirurgia
-                            </label>
-                         </div>
+
+                <fieldset class="form-services">  
+                    <legend class="text-lg-medium">Serviço</legend>
+                    <div>
+                        <label for="serviceVacina" class="text-lg-medium">
+                            <input type="radio" name="service" id="serviceVacina" value="vacinacao">
+                            Vacinação
+                        </label>
+                        <label for="serviceBanhoTosa" class="text-lg-medium">
+                            <input type="radio" name="service" id="serviceBanhoTosa" value="banho">
+                            Banho e tosa
+                        </label>
+                        <label for="serviceCirurgia" class="text-lg-medium">
+                            <input type="radio" name="service" id="serviceCirurgia" value="cirurgia">
+                            Cirurgia
+                        </label>
                     </div>
                 </fieldset>
                 
                 <div>
-                    <label for="descricao" class="text-lg-medium">Descrição do serviço</label>
-                    <textarea id="descricao" class="text-md-medium" placeholder="Descreva sobre o serviço"></textarea>
+                    <label for="description" class="text-lg-medium">Descrição do serviço</label>
+                    <textarea name="description" id="description" class="text-lg-medium textarea-form" placeholder="Descreva sobre o serviço"></textarea>
                 </div>
                 <fieldset for="checkPetAddress">
                     <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
