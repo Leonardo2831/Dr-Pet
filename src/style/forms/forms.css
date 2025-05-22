@@ -26,8 +26,9 @@
 }
 
 .form-login label,
-.form-dados label{
-    margin: 0 0 15px 0;
+.form-dados label,
+.form-services legend{
+    margin-bottom: 15px;
 }
 
 .form-login label,
@@ -81,31 +82,70 @@
 }
 
 /* form agendamento */
-.form-services {
-    display: flex;
-    gap: 30px;
-    align-items: center;
+.form-dados > h2{
+    margin: 40px 0 10px 0;
 }
 
-.form-services label {
+.form-services div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-services label{
     display: flex;
     align-items: center;
     gap: 5px;
-    cursor: pointer;
-
+    margin: 0;
 }
 
-input[type=radio] {
-    accent-color: white;
+.form-services input[type=radio] {
     width: 20px;
     height: 20px;
+    accent-color: var(--gray2);
 }
 
-input[type="checkbox"] {
-  margin-right: 8px;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
+.form-checkbox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-checkbox > label{
+    margin: 0;
+}
+
+.form-checkbox input[type="checkbox"] {
+    /* remove o estilo do checkbox */
+    appearance: none;
+
+    width: 24px;
+    height: 24px;
+
+    border: 2px solid var(--gray4);
+    border-radius: 6px;
+
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+
+.form-checkbox input[type="checkbox"]:hover{
+    border: 2px solid var(--gray2);
+}
+
+.form-checkbox input[type="checkbox"]:checked{
+    border: 2px solid var(--light-green);
+}
+
+.form-checkbox input[type="checkbox"]:checked::after{
+    content: url(../../images/components/confere-checkbox.svg);
+    color: var(--light-green);
+    font-size: 14px;
+    position: absolute;
+    top: 2px;
+    left: 3px;
 }
 
 @media (max-width: 480px){
