@@ -1,0 +1,45 @@
+.schedule{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.calender-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.calender-menu img{
+    width: 60px;
+    height: 60px;
+
+    cursor: pointer;
+}
+
+.grid-calender{
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    justify-items: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.grid-calender p:first-of-type{
+    /* definindo grid com base no calendário, o correto deve ser feito via javascript */
+    grid-column-start: 5;
+}
+
+.schedule-hours{
+    flex: 1 1 200px;
+}
+
+@media (max-width: 768px){
+
+    .grid-calender{
+        gap: 20px;
+    }
+
+}
