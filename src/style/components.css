@@ -208,10 +208,12 @@
 .input-form{
     width: 100%;
     padding: 15px 0 5px 0;
-    cursor: pointer;
+
     border-bottom: 2px solid var(--gray4);
     background-color: transparent;
     color: var(--gray2);
+
+    cursor: pointer;
 }
 
 .input-form:focus{
@@ -220,11 +222,21 @@
     padding: 15px 20px;
 }
 
-textarea.input-form{
+.textarea-form{
+    width: 100%;
     height: 140px;
+    padding: 15px 20px;
     
+    background-color: transparent;
+    color: var(--gray2);
     border: 2px solid var(--gray4);
     border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.textarea-form:focus{
+    border: 3px solid var(--light-green);
 }
 
 /* input de senha */
@@ -282,61 +294,4 @@ textarea.input-form{
 .content-formLocate > input[type="text"]:focus{
     border: 2px solid var(--gray6);
     color: var(--gray6);
-}
-
-fieldset {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-fieldset label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    font-size: 22px;
-}
-
-input[type=radio] {
-    accent-color: white;
-    width: 20px;
-    height: 20px;
-    
-}
-
-label[for="descricao"] {
-    font-size: 26px;
-}
-
-div textarea {
-    width: 100%;
-    height: 100px;
-    padding: 15px 20px;
-    border-radius: 6px;
-    border: 2px solid #ccc;
-    resize: none;   
-    font-size: 1em;
-    box-sizing: border-box;
-    background-color: var(--green6);
-    color: white;
-    outline: none;
-}
-
-fieldset[for="checkPetAddress"] {
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-}
-
-input[type="checkbox"] {
-  margin-right: 8px;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-}
-  
-fieldset input[type=checkbox] {
-    width: 24px;
-    height: 24px;
 }
