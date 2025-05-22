@@ -1,0 +1,117 @@
+.form{
+    max-width: 880px;
+    width: 100%;
+    padding: 60px;
+
+    background-color: var(--green6);
+    border: 1px solid var(--gray3); 
+    border-radius: 10px;
+    color: var(--white);
+}
+
+.form > h1{
+    margin: 0 0 60px 0;
+}
+
+.form-login,
+.form-dados{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-login > div,
+.form-dados > div{
+    width: 100%;
+}
+
+.form-login label,
+.form-dados label{
+    margin: 0 0 15px 0;
+}
+
+.form-login label,
+.form-dados label{
+    color: var(--gray2);
+}
+
+.esqueceu-senha{
+    margin: 20px 0 0 0;
+
+    color: var(--gray1);
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.esqueceu-senha:hover{
+    color: var(--light-green);
+}
+
+.send-form-login,
+.send-form-cadastrar{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    margin: 10px 0 0 0;
+}
+
+.choice-account{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.choice-account a{
+    width: fit-content;
+    padding: 16px 32px;
+
+    background-color: var(--green6);
+    color: var(--gray2);
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.choice-account a:hover{
+    background-color: var(--green4);
+}
+
+/* form agendamento */
+.form-services {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.form-services label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+}
+
+input[type=radio] {
+    accent-color: white;
+    width: 20px;
+    height: 20px;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+@media (max-width: 480px){
+
+    .form{
+        padding: 30px;
+    }
+    
+}
