@@ -1,8 +1,23 @@
+.schedule-title{
+    color: var(--gray10);
+    margin-bottom: 60px;
+}
+
 .schedule{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 40px;
+
+    border-radius: 10px;
+}
+
+.schedule-calender{
+    padding: 20px;
+
+    background-color: var(--gray2);
+    border-radius: 10px;
 }
 
 .calender-menu{
@@ -25,6 +40,18 @@
     justify-items: center;
     align-items: center;
     gap: 40px;
+
+    padding: 15px;
+    margin-top: 35px;
+}
+
+.schedule-calender h2,
+.grid-calender h3{
+    color: var(--gray9);
+}
+
+.grid-calender p{
+    color: var(--gray8);
 }
 
 .grid-calender p:first-of-type{
@@ -32,14 +59,117 @@
     grid-column-start: 5;
 }
 
+.grid-calender p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+
+    border-radius: 100%;
+
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.grid-calender p:hover{
+    background-color: var(--gray3);
+}
+
 .schedule-hours{
     flex: 1 1 200px;
+
+    padding: 20px;
+    max-height: 705px;
+    height: 100vh;
+    max-width: 760px;
+    width: 100vw;
+
+    background-color: var(--gray2);
+    border-radius: 10px;
+}
+
+.schedule-hours h2{
+    margin: 0 10px 40px 10px;
+
+    color: var(--gray9);
+}
+
+.hours-list{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    max-height: 520px;
+
+    overflow-y: auto;
+}
+
+.hours-list li{
+    padding: 10px 30px 10px 10px;
+
+    border-radius: 10px;
+}
+
+.hours-list li:hover{
+    background-color: var(--gray3);
+}
+
+.hours-list li:hover:has(h3.close-hour){
+    background-color: var(--gray2);
+}
+
+.hours-list li h3{
+    margin-top: 15px;
+}
+
+.hours-now {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.hours-now p{
+    color: var(--gray8);
+}
+
+.hours-now img{
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+
+    cursor: pointer;
+}
+
+.info-agendado{
+    display: none;
+    margin-top: 30px;
+}
+
+.info-agendado p{
+    color: var(--gray8);
+}
+
+.info-agendado p > span{
+    color: var(--gray9);
+}
+
+.info-agendado.openedInfosAgendado{
+    display: grid;
+    gap: 10px;
 }
 
 @media (max-width: 768px){
 
     .grid-calender{
         gap: 20px;
+    }
+
+    .grid-calender p{
+        width: 50px;
+        height: 50px;
     }
 
 }
