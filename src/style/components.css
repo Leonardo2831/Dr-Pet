@@ -229,13 +229,6 @@
     padding: 15px 20px;
 }
 
-<<<<<<< HEAD
-textarea.input-form{
-    height: 140px;
-    
-    border: 2px solid var(--gray4);
-    border-radius: 10px;
-=======
 .textarea-form{
     width: 100%;
     height: 140px;
@@ -258,7 +251,6 @@ textarea.input-form{
     font-size: 1.625rem;
     line-height: 2rem;
     font-weight: 500;
->>>>>>> d93dc55f2e53a2f95e83396fa6e3b253859e09a3
 }
 
 /* input de senha */
@@ -289,40 +281,7 @@ textarea.input-form{
 }
 
 /* inputs de formulário de fundo branco */
-<<<<<<< HEAD
-.content-formLocate > label{
-    color: var(--gray9);
-}
-
-.content-formLocate > input[type="text"]{
-    margin-top: 10px;
-    padding: 15px;
-
-    border: 2px solid var(--gray4);
-    border-radius: 10px;
-    color: var(--gray6);
-    background-color: transparent;
-
-    transition: 0.2s;
-}
-
-.content-formLocate > input[type="text"]::placeholder{
-    color: var(--gray5);
-}
-
-.content-formLocate > input[type="text"]:hover{
-    border: 2px solid var(--gray5);
-}
-
-.content-formLocate > input[type="text"]:focus{
-    border: 2px solid var(--gray6);
-    color: var(--gray6);
-}
-
-fieldset {
-=======
 .inputs-row{
->>>>>>> d93dc55f2e53a2f95e83396fa6e3b253859e09a3
     display: flex;
     align-items: center;
     gap: 20px;
@@ -336,11 +295,6 @@ fieldset {
     width: 100%;
 }
 
-<<<<<<< HEAD
-fieldset input[type=checkbox] {
-    width: 24px;
-    height: 24px;
-=======
 .content-formWhite > label{
     width: 100%;
 
@@ -413,5 +367,4 @@ fieldset input[type=checkbox] {
     background-color: var(--gray5);
     border-radius: 10px;
     border: 1px solid transparent;
->>>>>>> d93dc55f2e53a2f95e83396fa6e3b253859e09a3
 }

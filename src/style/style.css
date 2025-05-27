@@ -67,22 +67,8 @@
     font-family: var(--font-sans);
 }
 
-<<<<<<< HEAD
-label, input{
-    display: block;
-}
-
-input:focus,
-textarea:focus{
-    outline: none;
-}
-
-a{
-    display: inline-block;
-=======
 html{
     scroll-behavior: smooth;
->>>>>>> d93dc55f2e53a2f95e83396fa6e3b253859e09a3
 }
 
 body{
