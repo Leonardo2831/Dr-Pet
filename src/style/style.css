@@ -11,6 +11,9 @@
 @import 'home/pet-shop.css';
 @import 'home/sobre.css';
 
+/* loja */
+@import 'shop/shop.css';
+
 /* formulários */
 @import 'forms/forms.css';
 
