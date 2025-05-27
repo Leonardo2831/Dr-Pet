@@ -20,6 +20,10 @@
 /* agendamento */
 @import 'agendamento/agenda.css';
 
+/* finzalizar compra */
+@import 'finished-shop/choice-delivery.css';
+@import 'finished-shop/choice-pay.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
@@ -72,6 +76,8 @@ body{
     align-items: center;
     justify-content: center;
     padding: 80px;
+
+    min-height: 80vh;
 }
 
 .main-shop,
