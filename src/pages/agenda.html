@@ -63,7 +63,7 @@
     </header>
 
     <main class="margin-top-header main">
-        <h1 class="title-xl-bold">Agendamento</h1>
+        <h1 class="title-xl-bold schedule-title">Agendamento</h1>
 
         <section class="schedule">
             <nav class="schedule-calender">
@@ -83,30 +83,30 @@
                     <p class="text-xl-medium">1</p>
                     <p class="text-xl-medium">2</p>
                     <p class="text-xl-medium">3</p>
-                    <p class="text-xl-medium">4</p>
+                    <p class="text-xl-medium day-not">4</p>
                     <p class="text-xl-medium">5</p>
                     <p class="text-xl-medium">6</p>
                     <p class="text-xl-medium">7</p>
                     <p class="text-xl-medium">8</p>
                     <p class="text-xl-medium">9</p>
                     <p class="text-xl-medium">10</p>
-                    <p class="text-xl-medium">11</p>
+                    <p class="text-xl-medium day-not">11</p>
                     <p class="text-xl-medium">12</p>
                     <p class="text-xl-medium">13</p>
                     <p class="text-xl-medium">14</p>
                     <p class="text-xl-medium">15</p>
                     <p class="text-xl-medium">16</p>
                     <p class="text-xl-medium">17</p>
-                    <p class="text-xl-medium">18</p>
+                    <p class="text-xl-medium day-not">18</p>
                     <p class="text-xl-medium">19</p>
                     <p class="text-xl-medium">20</p>
                     <p class="text-xl-medium">21</p>
                     <p class="text-xl-medium">22</p>
                     <p class="text-xl-medium">23</p>
                     <p class="text-xl-medium">24</p>
-                    <p class="text-xl-medium">25</p>
+                    <p class="text-xl-medium day-not">25</p>
                     <p class="text-xl-medium">26</p>
-                    <p class="text-xl-medium">27</p>
+                    <p class="text-xl-medium today">27</p>
                     <p class="text-xl-medium">28</p>
                     <p class="text-xl-medium">29</p>
                     <p class="text-xl-medium">30</p>
@@ -114,47 +114,69 @@
                 </div>
             </nav>
             <div class="schedule-hours">
-                <h2 class="title-md-semiBold">Horários  <span class="js-selectedDay">DD/MM/YYYY</span></h2>
+                <h2 class="title-md-semiBold">Horários <span class="js-selectedDay">DD/MM/YYYY</span></h2>
                 
-                <ul>
+                <ul class="hours-list scroll">
                     <li>
                         <div>
-                            <div>
+                            <div class="hours-now">
                                 <p class="title-xs-semiBold">00:00</p>
                                 <p class="title-xs-semiBold">12:00</p>
                             </div>
 
-                            <h3 class="title-sm-semiBold">Aberto</h3>
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <div>
+                            <div class="hours-now">
                                 <p class="title-xs-semiBold">13:00</p>
                                 <p class="title-xs-semiBold">17:00</p>
+                                <!-- apenas usuário Dr Pet pode ver e deixar de ponta cabeça quando abrir menu -->
+                                <img class="js-openInfosAgendado" src="../images/components/arrows/arrow-drop-down.svg" alt="Ver mais">
                             </div>
 
-                            <h3 class="title-sm-semiBold">Agendado</h3>
+                            <h3 class="title-sm-semiBold close-hour">Agendado</h3>
                         </div>
-                        <!-- apenas usuário Dr Pet pode ver -->
-                        <img src="../images/components/arrows/arrow-drop-down.svg" alt="Ver mais">
-                        <div class="js-infoAgendado">
-                            <p class="title-xs-semiBold">
-                                <span class="text-xl-semiBold">Nome</span>
+                        
+                        <!-- adicionar classe openedInfosAgendado quando aberto -->
+                        <div class="info-agendado js-infoAgendado">
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Nome:</span>
                                 Claudio de Souza
                             </p>
-                            <p class="title-xs-semiBold">
-                                <span class="text-xl-semiBold">Pet</span>
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Pet:</span>
                                 Jorge
                             </p>
-                            <p class="title-xs-semiBold">
-                                <span class="text-xl-semiBold">Serviço</span>
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Serviço:</span>
                                 Vacinação
                             </p>
-                            <p class="title-xs-semiBold">
-                                <span class="text-xl-semiBold">Descrição</span>
+                            <p class="text-xl-medium">
+                                <span class="title-xs-semiBold">Descrição:</span>
                                 Cachorro raivoso.
                             </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">00:00</p>
+                                <p class="title-xs-semiBold">12:00</p>
+                            </div>
+
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">00:00</p>
+                                <p class="title-xs-semiBold">12:00</p>
+                            </div>
+
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
                         </div>
                     </li>
                 </ul>
