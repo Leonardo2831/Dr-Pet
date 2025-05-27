@@ -60,9 +60,11 @@
     --shadowItem: rgba(0, 0, 0, 0.5);
 }
 
-html{
+*{
     font-family: var(--font-sans);
-    
+}
+
+html{
     scroll-behavior: smooth;
 }
 
