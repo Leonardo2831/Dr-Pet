@@ -1,9 +1,13 @@
 .choice-delivery{
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
+}
+
+.choice-delivery.activeSection{
+    display: flex;
 }
 
 .choice-delivery > h1{
