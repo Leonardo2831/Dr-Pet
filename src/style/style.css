@@ -24,6 +24,9 @@
 @import 'finished-shop/choice-delivery.css';
 @import 'finished-shop/choice-pay.css';
 
+/* adicionar cartão */
+@import 'add-card.css/add-card.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
