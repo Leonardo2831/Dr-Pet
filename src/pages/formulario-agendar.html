@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>Dr.Pet | Agendamento</title>
+</head>
+<body>
+    <header class="header">
+        <figure>
+            <a href="../../index.html">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
+
+        <figure class="menu-user js-userButton">
+            <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+        </figure> 
+
+        <!-- menus com e sem usuário -->
+        <nav class="shadow menu-semLogin js-menuSemLogin">
+            <a href="cadastrar.html" class="text-md-medium">Criar uma conta</a>
+            <a href="login.html" class="text-md-medium">Entrar</a>
+        </nav>
+        <nav class="shadow menu-login js-menuLogin">
+            <ul class="options-list">
+                <li>
+                    <a href="#">
+                        <img src="../images/components/menu-login-icons/user-green.svg" alt="Minha conta" class="my-account-icon">
+                        <p class="text-xl-semiBold js-nomeUser">Minha Conta</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/compra.svg" alt="Compras" class="images-options-list">
+                        Compras
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/historico.svg" alt="Histórico de compras" class="images-options-list">
+                        Histórico
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/favorites-icons/favorito.svg" alt="Seus favoritos" class="images-options-list">
+                        Favoritos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/logout.svg" alt="Sair da conta" class="images-options-list">
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <form class="form" action="#" autocomplete="off">
+            <h1 class="title-md-bold">Dados para o agendamento</h1>
+            <section class="form-dados">
+                <div>
+                    <label for="nameUser" class="text-lg-medium">Nome</label>
+                    <input type="text" name="nameUser" id="nameUser" class="text-lg-medium input-form" required>
+                </div>
+                <div>
+                    <label for="phone" class="text-lg-medium capitalize">telefone</label>
+                    <input type="tel" name="phone" id="phone" class="text-lg-medium input-form" pattern="[0-9]{10}" required>
+                </div>
+                <div class="content-password">
+                    <label for="passwordUser" class="text-lg-medium">Endereço</label>
+                    <div>
+                        <input type="text" name="addressUser" id="addressUser" class="text-lg-medium input-form" required>
+                    </div>
+                </div>
+            </section>    
+            <section class="form-dados">
+                <h2 class="title-xs-semiBold">Dados do Pet</h2>
+                
+                <div>
+                    <label for="namePet" class="text-lg-medium">Nome do Pet</label>
+                    <input type="text" name="namePet" id="namePet" class="text-lg-medium input-form" required>
+                </div>
+
+                <fieldset class="form-services">  
+                    <legend class="text-lg-medium">Serviço</legend>
+                    <div>
+                        <label for="serviceVacina" class="text-md-medium">
+                            <input type="radio" name="service" id="serviceVacina" value="vacinacao">
+                            Vacinação
+                        </label>
+                        <label for="serviceBanhoTosa" class="text-md-medium">
+                            <input type="radio" name="service" id="serviceBanhoTosa" value="banho">
+                            Banho e tosa
+                        </label>
+                        <label for="serviceCirurgia" class="text-md-medium">
+                            <input type="radio" name="service" id="serviceCirurgia" value="cirurgia">
+                            Cirurgia
+                        </label>
+                    </div>
+                </fieldset>
+                    
+                <div>
+                    <label for="description" class="text-lg-medium">Descrição do serviço</label>
+                    <textarea name="description" id="description" class="text-lg-medium textarea-form" placeholder="Descreva sobre o serviço"></textarea>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" name="checkPetAddress" id="checkPetAddress">
+                    <label for="checkPetAddress" class="text-md-medium">Buscarem sua residência?</label>
+                </div>
+                <div class="send-form-cadastrar">
+                    <input type="submit" name="agendar" class="text-xl-semiBold button-green-form" value="Agendar">
+                </div>
+            </section>
+        </form>
+    </main>
+</body>
+</html>

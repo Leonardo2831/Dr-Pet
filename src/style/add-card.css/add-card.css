@@ -1,0 +1,50 @@
+.add-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.giant-card{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+
+    max-width: 350px;
+    width: 100%;
+    min-height: 175px;
+    padding: 20px;
+
+    border-radius: 10px;
+}
+
+.giant-card > div{
+    display: grid;
+    gap: 5px;
+
+    color: var(--gray1);
+}
+
+.giant-card > div > p:last-of-type{
+    letter-spacing: 2px;
+}
+
+.form-add-card{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-add-card .button-green{
+    width: 100%;
+
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* estilização cartões cores */
+.visaVersion{
+    background-color: var(--blue-visa);
+}

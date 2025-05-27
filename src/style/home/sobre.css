@@ -1,0 +1,25 @@
+.container_img_left {
+    display: flex;
+}
+
+.img_left {
+
+}
+.right_text {
+    height: 401;
+    width: 863px;
+}
+
+.right_text h2 {
+    text-align: left;
+    margin-bottom: 40px;
+    height: 64px;
+    width: 277px;
+    font-weight: bolder;
+}
+
+.right_text p {
+    height: 297px;
+    width: 863px;
+    text-align: justify;
+}

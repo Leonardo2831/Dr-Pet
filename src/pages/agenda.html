@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>Dr.Pet | Agenda</title>
+</head>
+<body>
+    <header class="header">
+        <figure>
+            <a href="../../index.html">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
+
+        <div class="header-contentShop">
+            <figure class="menu-user js-userButton">
+                <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+            </figure> 
+        </div>
+
+        <!-- menus com e sem usuário -->
+        <nav class="shadow menu-semLogin js-menuSemLogin">
+            <a href="cadastrar.html" class="text-md-medium">Criar uma conta</a>
+            <a href="login.html" class="text-md-medium">Entrar</a>
+        </nav>
+        <nav class="shadow menu-login js-menuLogin">
+            <ul class="options-list">
+                <li>
+                    <a href="#">
+                        <img src="../images/components/menu-login-icons/user-green.svg" alt="Minha conta" class="my-account-icon">
+                        <p class="text-xl-semiBold js-nomeUser">Minha Conta</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/compra.svg" alt="Compras" class="images-options-list">
+                        Compras
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/historico.svg" alt="Histórico de compras" class="images-options-list">
+                        Histórico
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/favorites-icons/favorito.svg" alt="Seus favoritos" class="images-options-list">
+                        Favoritos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/logout.svg" alt="Sair da conta" class="images-options-list">
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="margin-top-header main">
+        <h1 class="title-xl-bold schedule-title">Agendamento</h1>
+
+        <section class="schedule">
+            <nav class="schedule-calender">
+                <div class="calender-menu">
+                    <img src="../images/components/arrows/seta-anterior.svg" alt="Mês Anterior" class="js-beforeMonth">
+                    <h2 class="title-md-semiBold">Maio 2025</h2>
+                    <img src="../images/components/arrows/seta-próximo.svg" alt="Mês Seguinte" class="js-nextMonth">
+                </div>
+                <div class="grid-calender js-calender">
+                    <h3 class="title-xs-semiBold">Dom</h3>
+                    <h3 class="title-xs-semiBold">Seg</h3>
+                    <h3 class="title-xs-semiBold">Ter</h3>
+                    <h3 class="title-xs-semiBold">Qua</h3>
+                    <h3 class="title-xs-semiBold">Qui</h3>
+                    <h3 class="title-xs-semiBold">Sex</h3>
+                    <h3 class="title-xs-semiBold">Sáb</h3>
+                    <p class="text-xl-medium">1</p>
+                    <p class="text-xl-medium">2</p>
+                    <p class="text-xl-medium">3</p>
+                    <p class="text-xl-medium day-not">4</p>
+                    <p class="text-xl-medium">5</p>
+                    <p class="text-xl-medium">6</p>
+                    <p class="text-xl-medium">7</p>
+                    <p class="text-xl-medium">8</p>
+                    <p class="text-xl-medium">9</p>
+                    <p class="text-xl-medium">10</p>
+                    <p class="text-xl-medium day-not">11</p>
+                    <p class="text-xl-medium">12</p>
+                    <p class="text-xl-medium">13</p>
+                    <p class="text-xl-medium">14</p>
+                    <p class="text-xl-medium">15</p>
+                    <p class="text-xl-medium">16</p>
+                    <p class="text-xl-medium">17</p>
+                    <p class="text-xl-medium day-not">18</p>
+                    <p class="text-xl-medium">19</p>
+                    <p class="text-xl-medium">20</p>
+                    <p class="text-xl-medium">21</p>
+                    <p class="text-xl-medium">22</p>
+                    <p class="text-xl-medium">23</p>
+                    <p class="text-xl-medium">24</p>
+                    <p class="text-xl-medium day-not">25</p>
+                    <p class="text-xl-medium">26</p>
+                    <p class="text-xl-medium today">27</p>
+                    <p class="text-xl-medium">28</p>
+                    <p class="text-xl-medium">29</p>
+                    <p class="text-xl-medium">30</p>
+                    <p class="text-xl-medium">31</p>
+                </div>
+            </nav>
+            <div class="schedule-hours">
+                <h2 class="title-md-semiBold">Horários <span class="js-selectedDay">DD/MM/YYYY</span></h2>
+                
+                <ul class="hours-list scroll">
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">00:00</p>
+                                <p class="title-xs-semiBold">12:00</p>
+                            </div>
+
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">13:00</p>
+                                <p class="title-xs-semiBold">17:00</p>
+                                <!-- apenas usuário Dr Pet pode ver e deixar de ponta cabeça quando abrir menu -->
+                                <img class="js-openInfosAgendado" src="../images/components/arrows/arrow-drop-down.svg" alt="Ver mais">
+                            </div>
+
+                            <h3 class="title-sm-semiBold close-hour">Agendado</h3>
+                        </div>
+                        
+                        <!-- adicionar classe openedInfosAgendado quando aberto -->
+                        <div class="info-agendado js-infoAgendado">
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Nome:</span>
+                                Claudio de Souza
+                            </p>
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Pet:</span>
+                                Jorge
+                            </p>
+                            <p class="text-xl-semiBold">
+                                <span class="title-xs-semiBold">Serviço:</span>
+                                Vacinação
+                            </p>
+                            <p class="text-xl-medium">
+                                <span class="title-xs-semiBold">Descrição:</span>
+                                Cachorro raivoso.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">00:00</p>
+                                <p class="title-xs-semiBold">12:00</p>
+                            </div>
+
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="hours-now">
+                                <p class="title-xs-semiBold">00:00</p>
+                                <p class="title-xs-semiBold">12:00</p>
+                            </div>
+
+                            <h3 class="title-sm-semiBold open-hour">Livre</h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h1 class="title-sm-semiBold">Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!</h1>
+        <div>
+            <p class="text-lg-regular">Fique à vontade para entrar em contato conosco a qualquer momento. Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades.</p>
+            <p class="text-lg-regular"> Você pode nos encontrar de alcançar de varias maneiras:</p>
+        </div>
+
+        <div class="footer-info">
+            <div class="info-item">
+                <img src="../images/components/foooter-icons/locate-icon.png" alt="endereço">
+                <a href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2">
+                    R. Maj. Adalberto Dos Santos
+                    <br> 
+                    Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
+                </a>
+            </div>
+
+            <div class="info-item">    
+                <img src="../images/components/foooter-icons/instagram-icon.png" alt="instagram">
+                <a href="https://www.instagram.com/doutorpetmococa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D">@doutorpetmococa</a>
+            </div>
+                        
+            <div class="info-item">
+                <img src="../images/components/foooter-icons/phone-icon.png" alt="telefone">
+                <div>
+                    <a href="tel:+5519993592253">(19) 99359-2253</a> <br>
+                    <a href="tel:+551936656242">(19) 3665-6242</a>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <img src="../images/components/foooter-icons/email-icon.png" alt="email">
+                <a href="mailto:mvlucasvet@gmail.com">mvlucasvet@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="../javascript/header.js"></script>
+</body>
+</html>

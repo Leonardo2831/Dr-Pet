@@ -1,13 +1,31 @@
-@import 'header.css';
+@import 'reset.css';
 @import 'components.css';
+@import 'menusPop-up.css';
+
+/* header e footer */
+@import 'header.css';
 @import 'footer.css';
 
+/* main do index */
 @import 'home/inicio.css';
-@import 'home/NossosServicos.css';
-@import 'home/petShop.css';
-@import 'home/SobreNos.css';
+@import 'home/pet-shop.css';
+@import 'home/sobre.css';
 
-@import 'cadastro/forms-conta.css';
+/* formulários */
+@import 'forms/forms.css';
+
+/* carrinho */
+@import 'cart-shop/cart-shop.css';
+
+/* agendamento */
+@import 'agendamento/agenda.css';
+
+/* finzalizar compra */
+@import 'finished-shop/choice-delivery.css';
+@import 'finished-shop/choice-pay.css';
+
+/* adicionar cartão */
+@import 'add-card.css/add-card.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -34,7 +52,7 @@
     --green4: #25834c;
     --green5: #256d43;
     --green6: #26573a;
-    --green7: #25af35;
+    --green7: #254F35;
 
     --blue-link: #1f59e0;
     --blue-visa: #104ad0;
@@ -42,23 +60,14 @@
     --red-alert: #800020;
 
     --shadow: rgba(0, 0, 0, 0.25);
-}
-
-html{
-    font-family: var(--font-sans);
-    
-    scroll-behavior: smooth;
+    --shadowItem: rgba(0, 0, 0, 0.5);
 }
 
 *{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
+    font-family: var(--font-sans);
 }
 
+<<<<<<< HEAD
 label, input{
     display: block;
 }
@@ -70,10 +79,29 @@ textarea:focus{
 
 a{
     display: inline-block;
+=======
+html{
+    scroll-behavior: smooth;
+>>>>>>> d93dc55f2e53a2f95e83396fa6e3b253859e09a3
 }
 
 body{
     background-color: var(--gray1);
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+
+    min-height: 80vh;
+}
+
+.main-shop,
+.main-product{
+    padding: 80px;
 }
 
 @media (max-width: 1024px){
@@ -82,8 +110,24 @@ body{
 
 @media (max-width: 768px){
 
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 60px;
+    }
+
+    .margin-top-header{
+        margin-top: 100px;
+    }
+
 }
 
 @media (max-width: 480px){
+    
+    .main,
+    .main-shop,
+    .main-product{
+        padding: 30px;
+    }
 
 }

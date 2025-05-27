@@ -1,0 +1,78 @@
+.choice-pay{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.choice-pay h1{
+    margin-bottom: 5px;
+
+    color: var(--gray9);
+}
+
+.choice-pay.activeSection{
+    display: flex;
+}
+
+.option-pix{
+    position: relative;
+}
+
+.option-pix,
+.option-cards,
+.option-boleto{
+    max-width: 430px;
+    width: 100%;
+    padding: 30px;
+
+    border-radius: 10px;
+    background-color: var(--gray2);
+}
+
+.option-pix button,
+.option-cards button,
+.option-boleto button{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+}
+
+.option-pix button > p,
+.option-cards button > p,
+.option-boleto button > p{
+    color: var(--gray9);
+}
+
+.recommended-info{
+    max-width: 140px;
+    width: 100%;
+    padding: 5px;
+
+    text-align: center;
+    background-color: var(--green6);
+    color: var(--gray1);
+    border-radius: 0 10px 0 0;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.option-cards{
+    padding: 0;
+}
+
+.option-cards button{
+    padding: 30px;
+}
+
+.option-cards button:first-of-type{
+    border-bottom: 2px solid var(--gray5);
+}
+
+.option-cards button:last-of-type > p{
+    color: var(--blue-link);
+}
