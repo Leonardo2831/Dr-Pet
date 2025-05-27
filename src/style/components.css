@@ -1,4 +1,10 @@
 /* texts */
+.text-xxs-regular{
+    font-size: 0.875rem;
+    line-height: 1rem;
+    font-weight: 400;
+}
+
 .text-xxs-medium{
     font-size: 0.875rem;
     line-height: 1rem;
