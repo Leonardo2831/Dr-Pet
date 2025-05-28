@@ -2,14 +2,6 @@
     display: flex;
 }
 
-.img_left {
-
-}
-.right_text {
-    height: 401;
-    width: 863px;
-}
-
 .right_text h2 {
     text-align: left;
     margin-bottom: 40px;
@@ -18,16 +10,9 @@
     font-weight: bolder;
 }
 
-.right_text p {
-    height: 297px;
-    width: 863px;
-    text-align: justify;
-}
-
 .img_esquerdo {
     margin: 60px;
 }
-
 
 .line {
     width: 100%;
