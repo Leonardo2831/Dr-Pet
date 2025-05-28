@@ -30,8 +30,8 @@
 /* adicionar cartão */
 @import 'add-card.css/add-card.css';
 
-/* Abas do perfil*/
-@import 'profile/profile.css';
+/* menus do perfil*/
+@import 'profile.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -69,8 +69,8 @@
     --shadowItem: rgba(0, 0, 0, 0.5);
 }
 
-*{
-    font-family: var(--font-sans);
+* {
+    font-family: var(--font-sans) !important;
 }
 
 html{
