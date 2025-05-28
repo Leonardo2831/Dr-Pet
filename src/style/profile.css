@@ -1,0 +1,85 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+}
+
+.your-account_menu a{
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    height: 142px;
+    background-color: var(--gray3);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    gap: 20px;
+    padding: 30px;
+    margin: auto;
+    
+}
+
+.your-account_menu h1{
+    font-size: 32px;
+    color: var(--gray9);
+    font-weight: 600;
+}
+
+.left-icon {
+    margin-left: 30px;
+
+}
+
+.personal-data a{
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    height: 142px;
+    background-color: var(--gray2);
+    gap: 20px;
+    padding: 30px;
+    margin: auto;
+}
+
+.personal-data h1 {
+    font-size: 30px;
+    color: var(--gray8);
+    font-weight: 600;
+}
+
+.address a {
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    height: 142px;
+    background-color: var(--gray2);
+    gap: 20px;
+    padding: 30px;
+    margin: auto;
+}
+
+.address h1 {
+    font-size: 30px;
+    color: var(--gray8);
+    font-weight: 600;
+}
+
+
+.cards a {
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    height: 142px;
+    background-color: var(--gray2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    gap: 20px;
+    padding: 30px;
+    margin: auto;
+}
+
+.cards h1 {
+    font-size: 30px;
+    color: var(--gray8);
+    font-weight: 600;
+}
