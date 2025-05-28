@@ -109,6 +109,26 @@
     margin: 30px auto 0 auto;
 }
 
+.main-inicio {
+    border-top-color: #1FA757;
+    border-bottom: #1FA757;
+}
+
+.main-servicos {
+    border-top-color: #1FA757;
+    border-bottom: #1FA757; 
+}
+
+.main-about {
+    border-top-color: #1FA757;
+    border-bottom: #1FA757; 
+}
+
+.main-petShop {
+    border-top-color: #1FA757;
+    border-bottom: #1FA757; 
+}
+
 @media (max-width: 480px){
 
     .main-servicos{
