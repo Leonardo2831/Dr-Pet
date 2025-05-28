@@ -75,7 +75,121 @@
     </header>
 
     <main class="margin-top-header main">
-        
+        <!-- mudar por navegação em tabs via javascript -->
+        <section class="choice-delivery js-choiceDelivery">
+            <h1 class="text-md-semiBold">Escolha uma forma de entrega</h1>
+            <div class="option-delivery js-optionAddress">
+                <div>
+                    <h2 class="text-xs-medium">Envia no meu endereço</h2>
+                    <span class="text-xs-medium">R$10,00</span>
+                </div>
+                <p class="text-xxs-regular">Rua do nada - 000 - Bairro nada</p>
+                <button class="text-xxs-medium">Alterar endereço ou escolher outro</button>
+            </div>
+            <div class="option-delivery js-optionWithdrawal">
+                <div>
+                    <h2 class="text-xs-medium">Retirada em nosso PetShop</h2>
+                    <span class="text-xs-medium">Grátis</span>
+                </div>
+                <p class="text-xxs-regular">R. Maj. Adalberto Dos Santos Figueiredo, 414 - Jardim São Domingos</p>
+                <div class="operation-hour">
+                    <p class="text-xxs-regular">Horário de funcionamento: </p>
+                    <p class="text-xxs-regular">Segunda-Feira a Sexta-Feira 8:00 - 5:30</p>
+                    <p class="text-xxs-regular">Sábado 8:00 - 12:00</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="choice-pay js-choicePayment">
+            <h1 class="text-lg-semiBold">Métodos de pagamento</h1>
+            <div class="option-pix">
+                <button>
+                    <img src="../images/components/brands-icons/pix.svg" alt="Pix">
+                    <p class="text-md-medium">Pix</p>
+                </button>
+                <p class="text-xxs-medium recommended-info">Recomendado</p>
+            </div>
+            <div class="option-cards">
+                <button>
+                    <img src="../images/components/brands-icons/visa-blue.svg" alt="Visa">
+                    <p class="text-md-medium">**** **** **** 4012</p>
+                </button>
+                <button>
+                    <img src="../images/components/credit-card.svg" alt="Adicionar cartão">
+                    <p class="text-md-medium">Adicionar novo cartão</p>
+                </button>
+            </div>
+            <div class="option-boleto">
+                <button>
+                    <img src="../images/components/brands-icons/boleto-icon.svg" alt="Boleto">
+                    <p class="text-md-medium">Boleto</p>
+                </button>
+            </div>
+        </section>
+
+        <section class="add-card activeSection">
+            <div class="shadow giant-card visaVersion">
+                <div>
+                    <p class="text-sm-medium js-nameHolder">Nome Titular</p>
+                    <p class="text-sm-medium js-numberCard">**** **** **** 4012</p>
+                </div>
+                <figure>
+                    <img class="js-brandCard" src="../images/components/brands-icons/visa-white.svg" alt="Visa">
+                </figure>
+            </div>
+            <form action="#" autocomplete="off" class="form-add-card">
+                <div class="content-formWhite">
+                    <label for="nameHolder" class="text-sm-medium">Nome Titular</label>
+                    <input 
+                        type="text" 
+                        name="nameHolder" 
+                        id="nameHolder" 
+                        class="text-sm-medium" 
+                        required
+                    >
+                </div>
+                <div class="content-formWhite" class="text-sm-medium">
+                    <label for="numberCard" class="text-sm-medium">Número do Cartão</label>
+                    <input 
+                        type="number" 
+                        name="numberCard" 
+                        id="numberCard" 
+                        pattern="^\d{16}$" 
+                        maxlength="16" 
+                        placeholder="0000 0000 0000 0000" 
+                        class="text-sm-medium" 
+                        required
+                    >
+                </div>
+                <div class="inputs-row">
+                    <div class="content-formWhite">
+                        <label for="dueDateCard" class="text-sm-medium">Data de Vencimento</label>
+                        <input 
+                            type="text" 
+                            name="dueDateCard" 
+                            id="dueDateCard" 
+                            pattern="^(0[1-9]|1[0-2])\/\d{2}$" 
+                            placeholder="00/00" 
+                            maxlength="5" 
+                            class="text-sm-medium" 
+                            required
+                        >
+                    </div>
+                    <div class="content-formWhite">
+                        <label for="cardVerificationValue" class="text-sm-medium">CVV</label>
+                        <input 
+                            type="number" 
+                            name="cardVerificationValue" 
+                            id="cardVerificationValue" 
+                            placeholder="000" 
+                            class="text-sm-medium" 
+                            required
+                        >
+                    </div>
+                </div>
+                <button type="submit" class="text-sm-semiBold button-green">adicionar cartão</button>
+            </form>
+        </section>
     </main>
 
     <footer class="footer">

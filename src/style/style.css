@@ -11,6 +11,9 @@
 @import 'home/pet-shop.css';
 @import 'home/sobre.css';
 
+/* loja */
+@import 'shop/shop.css';
+
 /* formulários */
 @import 'forms/forms.css';
 
@@ -19,6 +22,13 @@
 
 /* agendamento */
 @import 'agendamento/agenda.css';
+
+/* finzalizar compra */
+@import 'finished-shop/choice-delivery.css';
+@import 'finished-shop/choice-pay.css';
+
+/* adicionar cartão */
+@import 'add-card.css/add-card.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -45,7 +55,7 @@
     --green4: #25834c;
     --green5: #256d43;
     --green6: #26573a;
-    --green7: #25af35;
+    --green7: #254F35;
 
     --blue-link: #1f59e0;
     --blue-visa: #104ad0;
@@ -56,9 +66,11 @@
     --shadowItem: rgba(0, 0, 0, 0.5);
 }
 
-html{
+*{
     font-family: var(--font-sans);
-    
+}
+
+html{
     scroll-behavior: smooth;
 }
 
@@ -72,6 +84,8 @@ body{
     align-items: center;
     justify-content: center;
     padding: 80px;
+
+    min-height: 80vh;
 }
 
 .main-shop,

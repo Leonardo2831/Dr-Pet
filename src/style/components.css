@@ -1,4 +1,10 @@
 /* texts */
+.text-xxs-regular{
+    font-size: 0.875rem;
+    line-height: 1rem;
+    font-weight: 400;
+}
+
 .text-xxs-medium{
     font-size: 0.875rem;
     line-height: 1rem;
@@ -275,12 +281,28 @@
 }
 
 /* inputs de formulário de fundo branco */
-.content-formLocate > label{
+.inputs-row{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.content-formWhite{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.content-formWhite > label{
+    width: 100%;
+
     color: var(--gray9);
 }
 
-.content-formLocate > input[type="text"]{
-    margin-top: 10px;
+.content-formWhite > input{
+    width: 100%;
     padding: 15px;
 
     border: 2px solid var(--gray4);
@@ -291,15 +313,58 @@
     transition: 0.2s;
 }
 
-.content-formLocate > input[type="text"]::placeholder{
+.content-formWhite > input::placeholder{
     color: var(--gray5);
 }
 
-.content-formLocate > input[type="text"]:hover{
+.content-formWhite > input:hover{
     border: 2px solid var(--gray5);
 }
 
-.content-formLocate > input[type="text"]:focus{
+.content-formWhite > input:focus{
     border: 2px solid var(--gray6);
     color: var(--gray6);
+}
+
+@media(max-width: 480px){
+
+    .inputs-row{
+        flex-wrap: wrap;
+    }
+
+}
+
+/* agendamento dias */
+.day-not{
+    background-color: var(--red-alert) !important;
+    color: var(--gray3) !important;
+}
+
+.today{
+    background-color: var(--green7) !important;
+    color: var(--gray2) !important;
+}
+
+.open-hour{
+    color: var(--green6);
+}
+
+.close-hour{
+    color: var(--red-alert);
+}
+
+/* barra de rolagem */
+.scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: var(--gray5);
+    border-radius: 10px;
+    border: 1px solid transparent;
 }
