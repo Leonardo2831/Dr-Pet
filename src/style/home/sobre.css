@@ -23,3 +23,24 @@
     width: 863px;
     text-align: justify;
 }
+
+.img_esquerdo {
+    margin: 60px;
+}
+
+
+.line {
+    width: 100%;
+    height: 4px;
+    background-color: #256d43;
+}
+
+.right_text h2 {
+    margin-top: 120px;
+    margin-bottom: 40px;
+}
+
+.botton_agende_agora {
+    width: 282;
+    height: 66px;  
+}
