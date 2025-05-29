@@ -85,6 +85,12 @@
 
 .cards-text > h3{
     margin-bottom: 15px;
+
+    color: var(--gray9);
+}
+
+.cards-text > p{
+    color: var(--gray8);
 }
 
 .main-servicos .button-green{
@@ -104,6 +110,7 @@
 
 .content-schedule > h3{
     text-align: center;
+    color: var(--gray9);
 }
 
 .content-schedule div {
