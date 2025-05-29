@@ -20,7 +20,7 @@
 }
 
 .inicio-bottom-text{
-    padding: 32px;
+    padding: 30px;
     width: 100vw;
 
     background-color: var(--shadowItem);
@@ -37,9 +37,11 @@
 
 /* serviços */
 .main-servicos {
-    padding: 60px;
+    padding: 80px;
 
     background-color: var(--gray2);
+    border-top: 4px solid var(--green4);
+    border-bottom: 4px solid var(--green4);
 }
 
 .main-servicos > h2 {
@@ -109,28 +111,16 @@
     margin: 30px auto 0 auto;
 }
 
-.main-inicio {
-    border-top-color: #1FA757;
-    border-bottom: #1FA757;
-}
+@media (max-width: 768px){
 
-.main-servicos {
-    border-top-color: #1FA757;
-    border-bottom: #1FA757; 
-}
+    .main-servicos{
+        padding: 60px;
+    }
 
-.main-about {
-    border-top-color: #1FA757;
-    border-bottom: #1FA757; 
-}
-
-.main-petShop {
-    border-top-color: #1FA757;
-    border-bottom: #1FA757; 
 }
 
 @media (max-width: 480px){
-
+    
     .main-servicos{
         padding: 30px;
     }
