@@ -8,8 +8,7 @@
 
 /* main do index */
 @import 'home/inicio.css';
-@import 'home/pet-shop.css';
-@import 'home/sobre.css';
+@import 'home/sobre-petShop.css';
 
 /* loja */
 @import 'shop/shop.css';
