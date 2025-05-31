@@ -168,3 +168,65 @@
     justify-content: center;
     gap: 50px;
 }
+
+/* pagina do endereço */
+
+.address {
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    background-color: var(--gray2);
+    padding: 30px 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.address-text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-left: 20px;
+}
+
+.address-text h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--gray9);
+}
+
+.address-text p {
+    font-size: 22px;
+    color: var(--gray8);
+    font-weight: 400;
+    line-height: 27px;
+}
+
+.address-menu-button {
+    margin-left: auto;
+    margin-bottom: auto;
+}
+
+.address-work {
+    display: flex;
+    align-items: center;
+    width: 1505px;
+    background-color: var(--gray2);
+    padding: 30px 40px;
+}
+
+.add-address {
+    background-color: var(--gray2);
+    width: 1505px;
+    padding:30px;
+    border-top: 3px solid var(--gray5);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.add-address a{
+    color: #1F59E0;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 37px;
+}
