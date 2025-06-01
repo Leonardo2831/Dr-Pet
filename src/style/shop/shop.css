@@ -3,44 +3,135 @@
     background-color: var(--gray2);
     width: 1505px;
     height: 711px;
+    /* flex-direction: column; */
     margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 50px ;
+    gap: 30px;
+}
+
+.section-products h1 {
+
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 50px;
+    letter-spacing: 0%;
+    color: var(--gray8);
+
+}
+
+.products-container {
+    display: flex;
+    align-items: center;
 }
 
 .products-shop-items {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .products-item {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .images-item-shop {
     background-color: var(--white);
-
+    width: 347px;
+    height: 347px;
+    position: relative;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .image-item {
-    width: 340px;
-    height: 340px;
+    width: 347px;
+    height: 347px;
+    padding: 10px;
 }
 
 .shop-plus {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: var(--green6);
     padding: 10px;
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
 }
 
 .infos-product-shop {
     background-color: var(--gray3);
     padding: 20px;
     display: flex;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     flex-direction: column;
+    gap: 20px;
+}
+
+.product-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray8);
+    line-height: 25px;
+    letter-spacing: 0%;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.price-item {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray6);
+    text-decoration: line-through;
+    letter-spacing: 0%;
+    line-height: 20px;
+}
+
+.price-item-discount {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--green9);
+    line-height: 24px;
+    letter-spacing: 0%;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.discount-info {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--green5);
+    line-height: 18px;
+    letter-spacing: 0%;
+}
+
+.div-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.button-green {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 16px 10px 16px;
     gap: 10px;
+    border-radius: 10px;
+}
+
+
+/* estilização do banner */
+
+.banner-shop {
+    width: 1445px;
+    height: 350px;
+    border-radius: 10px;
 }
