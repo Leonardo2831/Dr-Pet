@@ -102,6 +102,19 @@
     cursor: pointer;
 }
 
+.header-carrinho{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: var(--gray1);
+
+    transition: 0.2s;
+}
+.header-carrinho:hover{
+    color: var(--gray3);
+}
+
 .header-carrinho img{
     width: 30px;
     height: 30px;
