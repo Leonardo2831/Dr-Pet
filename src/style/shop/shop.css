@@ -111,7 +111,7 @@
     margin-bottom: 5px;
 }
 
-.div-button button{
+.div-button a{
     display: flex;
     align-items: center;
     justify-content: center;
