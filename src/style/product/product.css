@@ -7,52 +7,46 @@
 .container-produto {
     display: flex;
     justify-content: space-between;
-    width: 1511px;
-    height: 762px;
+    gap: 50px;
 }
 
 .titulo_loja img{
     width: 30px;
     height: 39px;
-    /* margin-left: 70px; */
-
 }
 
 .container-principal-imagem-e-titulo {
     background-color: var(--gray2);
     padding: 60px;
-    width: 902px;
-    height: 762px;
+
     border-radius: 10px;
+
+    flex: 2 1 400px;
 }
 
 .product-visual {
     display: flex;
-    width: 750px;
-    height: 537px;
-    margin: 30px 92px 55px 0px;
+    flex-wrap: wrap-reverse;
+    align-items: center;
     gap: 40px;
-    
+
+    padding: 30px 0 0 0;
 }
 
-.product-visual img {
-    width: 590px;
-    height: 572px;
+.product-visual > img {
+    flex: 2 1 590px;
+    max-width: 590px;
+    width: 100%;
 }
 
 .title-product {
-    width: 782px;
-    height: 80px;
     display: flex;
     align-items: center;
     gap: 50px;
 }
 
 .title-product h1{
-    width: 682px;
-    height: 80px;
     color: var(--gray8);
-    
 }
 
 .title-product img {
@@ -61,23 +55,28 @@
 }
 
 .galeria-imagens {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+
+    flex: 1 1 120px;
 }
 
 .galeria-imagens img {
-  width: 120px;
-  height: 120px;
-  border: 3px solid var(--green4);
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: #fff;
-  transition: transform 0.2s;
+    width: 120px;
+    height: 120px;
+
+    border: 3px solid var(--green4);
+    border-radius: 20px;
+    background-color: var(--white);
+
+    transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .galeria-imagens img:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .product-visual {
@@ -86,105 +85,90 @@
 }
 
 .container-preco {
-    background-color: var(--light-green);
-    width: 490px;
-    height: 176px;
     padding: 30px;
+    
+    background-color: var(--light-green);
     border-radius: 10px;
-    gap: 5px;
+
     color: var(--gray9);
-    letter-spacing: 2%;
-    line-height: 32px;
-}
-.container-preco h1 { 
-    width: 430px;
-    height: 79px;
-}
-.container-preco span {
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 44px;
 }
 
 .container-preco-desconto h2{
-    color: var(--green6);
     margin-top: 10px;
+
+    color: var(--green6);
 }
 
 .container-compra { 
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    flex: 0 1 500px;
 }
 
 .cartao {
-    color: var(--gray8);
     display: flex;
     justify-content: space-between;
-    width: 490px;
-    height: 64px;
-    margin: 0px;
+
+    margin: 0;
+
+    color: var(--gray8);
 }
 .cartao p {
     color: var(--gray9);
-    font-weight: 600;
 }
 
 .quantidade p {
-    font-weight: 600;
     color: var(--gray9);
 }
 
 .quantidade {
-    color: var(--gray8);
     display: flex;
     justify-content: space-between;
-    width: 490px;
-    height: 64px;
+
     margin: 0px;
 
+    color: var(--gray8);
 }
 
-.cartao span {
+.cartao span{
     color: var(--green6);
 }
 
 .cartao-quantidade {
-    gap: 20px;
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .botoes {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 490px;
-    height: 137px;
 }
 
 .botao {
-    padding: 12px 24px 12px 24px;
+    padding: 12px 24px;
     border-radius: 10px;
-    width: 490px;
-    height: 61px;
 }
 
 .botao-compra {
     background-color: var(--green6);
     color: var(--gray1);
-    
 }
 
 .botao-carrinho {
     background-color: var(--gray3);
     color: var(--green7);
 }
+
 .localizacao-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 .localizacao-indefinida h1 {
     color: var(--green6);
 }
@@ -202,21 +186,19 @@
 }
 
 .descricao-produto {
-    background-color: white;
-    width: 909px;
-    height: 665px;
-    margin-top: 53px;
-    gap: 80px;
+    background-color: var(--white);
+
+    margin: 50px 0;
     padding: 30px;
+
     border-radius: 10px;
     color: var(--gray8);
 }
 
 .descricao-pagamento {
     display: flex;
-    gap: 80px;
     align-items: center;
-    
+    gap: 80px;
 }
 
 .lista-div {
@@ -227,33 +209,26 @@
 .lista-topicos {
     list-style: disc !important;
     margin-left: 30px;
-
 }
 
 .meios-pagamento {
-    color: var(--gray9);
     display: flex;
     flex-direction: column;
-    width: 480px;
-    height: 593px;
-    background-color: white;
-    padding: 30px;
     gap: 30px;
+
+    background-color: var(--white);
+    padding: 30px;
+
     border-radius: 10px;
+    color: var(--gray9);
 }
 
 .meios-pagamento h1 {
     color: var(--gray8);
 }
 
-.credito-container {
-    
-}
-
 .pagamento-icons {
     display: flex;
-    align-items: center;
-    width: 345px;
-    height: 64px;  
+    align-items: center; 
     gap: 20px;
 }
