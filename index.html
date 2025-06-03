@@ -17,7 +17,7 @@
 
         <nav class="header-menu-nav js-headerNav">
             <a class="text-sm-medium" href="#servicos">Serviços</a>
-            <a class="text-sm-medium" href="#sobrenos">Sobre nós</a>
+            <a class="text-sm-medium" href="#sobre">Sobre nós</a>
             <a class="text-sm-medium" href="#petShop">Pet shop</a>
             <a class="text-sm-medium" href="#contato">Contato</a>
         </nav>
@@ -34,15 +34,17 @@
             </div>
         </div>
 
-        <!-- menus com e sem usuário -->
+        <!-- menu sem usuário -->
         <nav class="shadow menu-semLogin js-menuSemLogin">
             <a href="src/pages/cadastrar.html" class="text-md-medium">Criar uma conta</a>
             <a href="src/pages/login.html" class="text-md-medium">Entrar</a>
         </nav>
+
+        <!-- menu com usuário -->
         <nav class="shadow menu-login js-menuLogin">
             <ul class="options-list">
                 <li>
-                    <a href="#">
+                    <a href="src/pages/sua-conta.html">
                         <img src="src/images/components/menu-login-icons/user-green.svg" alt="Minha conta" class="my-account-icon">
                         <p class="text-xl-semiBold js-nomeUser">Minha Conta</p>
                     </a>
@@ -92,7 +94,7 @@
             </div>
         </section>
 
-        <section class="main-servicos">
+        <section class="main-servicos" id="servicos">
             <h2 class="title-xl-bold">Nossos serviços</h2>
             <div class="main-contentCards">
                 <figure class="shadow cards-servicos">
@@ -131,7 +133,7 @@
             </div>
         </section>
 
-        <section class="main-content-text">
+        <section class="main-content-text" id="sobre">
             <div>
                 <img src="src/images/imagem-sobre.jpg" alt="Veterinário Dr.Pet" class="shadow">
 
@@ -144,7 +146,7 @@
             </div>
         </section>
 
-        <section class="main-content-text">
+        <section class="main-content-text" id="petShop">
             <div>         
                 <img src="src/images/imagem-loja.jpg" alt="Loja" class="shadow"> 
 
@@ -165,7 +167,7 @@
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="contato">
         <h1 class="title-sm-semiBold">Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!</h1>
         <div>
             <p class="text-lg-regular">Fique à vontade para entrar em contato conosco a qualquer momento. Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades.</p>
