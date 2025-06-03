@@ -1,5 +1,5 @@
 .section-products {
-    margin-bottom: 30px;
+    width: 100%;
     padding: 50px;
 
     border-radius: 10px;
@@ -20,19 +20,26 @@
     padding-bottom: 20px;
     max-width: 1500px;
     overflow-x: auto;
+
+    cursor: pointer;
 }
 
 .products-item {
     display: flex;
     flex-direction: column;
+
+    /* border radius para a sombra não ficar desconfigurada */
+    border-radius: 10px;
 }
 
 .images-item-shop {
-    background-color: var(--white);
     width: 350px;
     height: 350px;
-    position: relative;
+
+    background-color: var(--white);
     border-radius: 10px 10px 0 0;
+
+    position: relative;
 }
 
 .image-item {
@@ -42,63 +49,59 @@
 }
 
 .shop-plus {
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    background-color: var(--green6);
+    border-radius: 100%;
+
     position: absolute;
-    bottom: 3px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
 }
 
 .infos-product-shop {
-    background-color: var(--gray3);
-    padding: 20px;
     display: flex;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
     flex-direction: column;
     gap: 20px;
+
+    padding: 20px;
+
+    background-color: var(--gray3);
+    border-radius: 0 0 10px 10px;
 }
 
 .product-name {
-    font-size: 20px;
-    font-weight: 500;
     color: var(--gray8);
-    line-height: 25px;
-    letter-spacing: 0%;
 }
 
 .price {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.price-item {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--gray6);
-    text-decoration: line-through;
-    letter-spacing: 0%;
-    line-height: 20px;
-}
-
-.price-item-discount {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--green9);
-    line-height: 24px;
-    letter-spacing: 0%;
-
-    display: flex;
     align-items: center;
+    flex-direction: column;
     gap: 5px;
 }
 
+.price-item {
+    color: var(--gray6);
+    text-decoration: line-through;
+}
+
+.price-item-discount {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: var(--green9);
+}
+
 .discount-info {
-    font-size: 15px;
-    font-weight: 500;
     color: var(--green5);
-    line-height: 18px;
-    letter-spacing: 0%;
 }
 
 .div-button {
@@ -108,10 +111,20 @@
     margin-bottom: 5px;
 }
 
+.div-button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    text-transform: uppercase;
+}
+
 /* estilização do banner */
 
 .banner-shop {
-    width: 1445px;
-    height: 350px;
+    width: 100%;
+    margin: 100px 0;
+
     border-radius: 10px;
 }
