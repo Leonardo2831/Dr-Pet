@@ -1,34 +1,25 @@
 .section-products {
-    display: flex;
-    background-color: var(--gray2);
-    width: 1505px;
-    height: 711px;
-    /* flex-direction: column; */
     margin-bottom: 30px;
+    padding: 50px;
+
     border-radius: 10px;
-    padding: 50px ;
-    gap: 30px;
+    background-color: var(--gray2);
 }
 
 .section-products h1 {
+    margin-bottom: 30px;
 
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 50px;
-    letter-spacing: 0%;
     color: var(--gray8);
-
-}
-
-.products-container {
-    display: flex;
-    align-items: center;
 }
 
 .products-shop-items {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
+
+    padding-bottom: 20px;
+    max-width: 1500px;
+    overflow-x: auto;
 }
 
 .products-item {
@@ -38,16 +29,15 @@
 
 .images-item-shop {
     background-color: var(--white);
-    width: 347px;
-    height: 347px;
+    width: 350px;
+    height: 350px;
     position: relative;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .image-item {
-    width: 347px;
-    height: 347px;
+    width: 350px;
+    height: 350px;
     padding: 10px;
 }
 
@@ -117,16 +107,6 @@
     justify-content: center;
     margin-bottom: 5px;
 }
-
-.button-green {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px 16px 10px 16px;
-    gap: 10px;
-    border-radius: 10px;
-}
-
 
 /* estilização do banner */
 
