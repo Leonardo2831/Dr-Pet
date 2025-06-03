@@ -96,20 +96,23 @@ body{
     min-height: 80vh;
 }
 
+.main-dados{
+    padding: 80px;
+
+    min-height: 80vh;
+}
+
 .main-shop,
 .main-product{
     padding: 80px;
-}
-
-@media (max-width: 1024px){
-    
 }
 
 @media (max-width: 768px){
 
     .main,
     .main-shop,
-    .main-product{
+    .main-product,
+    .main-dados{
         padding: 60px;
     }
 
@@ -123,7 +126,8 @@ body{
     
     .main,
     .main-shop,
-    .main-product{
+    .main-product,
+    .main-dados{
         padding: 30px;
     }
 
