@@ -1,7 +1,11 @@
 .main-content-text{
-    border-bottom: 4px solid var(--green4);
-
     padding: 80px;
+
+    border-bottom: 4px solid var(--green4);
+}
+
+.main-content-text:nth-of-type(even){
+    background-color: var(--gray2);
 }
 
 .main-content-text > div {
