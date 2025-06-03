@@ -211,6 +211,22 @@
     background-color: var(--green4);
 }
 
+.button-gray{
+    width: 100%;
+    padding: 16px 32px;
+
+    background-color: var(--gray3);
+    color: var(--green7);
+    border-radius: 10px;
+
+    transition: 0.2s;
+}
+
+.button-gray:hover{
+    color: var(--gray1);
+    background-color: var(--green5);
+}
+
 /* inputs do formulário de fundo verde */
 .input-form{
     width: 100%;
