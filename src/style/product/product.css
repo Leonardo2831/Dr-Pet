@@ -148,19 +148,9 @@
     gap: 15px;
 }
 
-.botao {
-    padding: 12px 24px;
-    border-radius: 10px;
-}
-
-.botao-compra {
-    background-color: var(--green6);
-    color: var(--gray1);
-}
-
-.botao-carrinho {
-    background-color: var(--gray3);
-    color: var(--green7);
+.botoes a{
+    width: 100%;
+    text-align: center;
 }
 
 .localizacao-container {
