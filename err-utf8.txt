@@ -1,0 +1,943 @@
+﻿node.exe : Browserslist: 
+caniuse-lite is outdated. 
+Please run:
+No linha:1 caractere:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (Bro  
+  wserslist: c...ed. Ple   
+ ase run::String) [], R    
+emoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+  npx update-browserslist-d
+b@latest
+  Why you should do it 
+regularly: https://github.c
+om/browserslist/update-db#r
+eadme
+CssSyntaxError: 
+tailwindcss: C:\Users\Dell\
+Desktop\Programa├º├úo\Proje
+tos\Dr-Pet tailwind\src\sty
+le\input.css:4:1: `@layer 
+base` is used but no 
+matching `@tailwind base` 
+directive is present.
+    at Input.error (C:\User
+s\Dell\Desktop\Programa├º├ú
+o\Projetos\Dr-Pet tailwind\
+node_modules\postcss\lib\in
+put.js:135:16)
+    at AtRule.error (C:\Use
+rs\Dell\Desktop\Programa├º├
+úo\Projetos\Dr-Pet tailwind
+\node_modules\postcss\lib\n
+ode.js:146:32)
+    at normalizeTailwindDir
+ectives (C:\Users\Dell\Desk
+top\Programa├º├úo\Projetos\
+Dr-Pet tailwind\node_module
+s\tailwindcss\lib\lib\norma
+lizeTailwindDirectives.js:7
+2:32)
+    at C:\Users\Dell\Deskto
+p\Programa├º├úo\Projetos\Dr
+-Pet tailwind\node_modules\
+tailwindcss\lib\processTail
+windFeatures.js:29:98
+    at Object.Once (C:\User
+s\Dell\Desktop\Programa├º├ú
+o\Projetos\Dr-Pet tailwind\
+node_modules\tailwindcss\li
+b\cli\build\plugin.js:260:1
+9)
+    at 
+LazyResult.runOnRoot (C:\Us
+ers\Dell\Desktop\Programa├º
+├úo\Projetos\Dr-Pet tailwin
+d\node_modules\postcss\lib\
+lazy-result.js:359:23)
+    at LazyResult.runAsync 
+(C:\Users\Dell\Desktop\Prog
+rama├º├úo\Projetos\Dr-Pet t
+ailwind\node_modules\postcs
+s\lib\lazy-result.js:290:26
+)
+    at async build (C:\User
+s\Dell\Desktop\Programa├º├ú
+o\Projetos\Dr-Pet tailwind\
+node_modules\tailwindcss\li
+b\cli\build\index.js:49:9) 
+{
+  reason: '`@layer base` 
+is used but no matching 
+`@tailwind base` directive 
+is present.',
+  file: 'C:\\Users\\Dell\\D
+esktop\\Programa├º├úo\\Proj
+etos\\Dr-Pet tailwind\\src\
+\style\\input.css',
+  source: "@import url('htt
+ps://fonts.googleapis.com/c
+ss2?family=Montserrat:ital,
+wght@0,100..900;1,100..900&
+display=swap');\r\n" +
+    '@tailwind 
+utilities;\r\n' +
+    '\r\n' +
+    '@layer base {\r\n' +
+    '    * {\r\n' +
+    '        @apply 
+font-sans;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    html {\r\n' +
+    '        @apply 
+scroll-smooth 
+max-w-[1700px] 
+mx-auto;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    body {\r\n' +
+    '        @apply 
+bg-gray-50;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    
+.scroll::-webkit-scrollbar 
+{\r\n' +
+    '        @apply 
+w-[6px] h-[6px];\r\n' +
+    '    }\r\n' +
+    '    .scroll::-webkit-s
+crollbar-track {\r\n' +
+    '        @apply 
+bg-transparent;\r\n' +
+    '    }\r\n' +
+    '    .scroll::-webkit-s
+crollbar-thumb {\r\n' +
+    '        @apply 
+bg-gray-400 rounded-[10px] 
+border 
+border-transparent;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .header {\r\n' +
+    '        @apply flex 
+items-center 
+justify-between gap-[20px] 
+min-[480px]:gap-[40px] 
+md:gap-[60px] w-full 
+p-[20px] md:p-[30px] 
+bg-green-500 sticky top-0 
+z-10;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .footer {\r\n' +
+    '        @apply flex 
+flex-col items-center 
+gap-[40px] p-[40px] 
+min-[480px]:p-[60px] 
+bg-green-500 text-gray-50 
+border-t 
+border-green-400;\r\n' +
+    '    }\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    '@layer components 
+{\r\n' +
+    '    .main {\r\n' +
+    '        @apply flex 
+flex-col items-center 
+justify-center 
+min-h-[80vh] p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .main-dados 
+{\r\n' +
+    '        @apply 
+min-h-[80vh] p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .main-shop,\r\n' +
+    '    .main-product 
+{\r\n' +
+    '        @apply 
+p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    
+.margin-top-header {\r\n' +
+    '        @apply 
+max-md:mt-[100px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* texts */\r\n' +
+    '    .text-xxs-regular 
+{ @apply text-[0.875rem] 
+leading-[1rem] 
+font-normal; }\r\n' +
+    '    .text-xxs-medium 
+{ @apply text-[0.875rem] 
+leading-[1rem] 
+font-medium; }\r\n' +
+    '    .text-xs-regular 
+{ @apply text-[1rem] 
+leading-[1.25rem] 
+font-normal; }\r\n' +
+    '    .text-xs-medium { 
+@apply text-[1rem] 
+leading-[1.25rem] 
+font-medium; }\r\n' +
+    '    .text-sm-regular 
+{ @apply text-[1.25rem] 
+leading-[1.5rem] 
+font-normal; }\r\n' +
+    '    .text-sm-medium { 
+@apply text-[1.25rem] 
+leading-[1.5rem] 
+font-medium; }\r\n' +
+    '    .text-sm-semiBold 
+{ @apply text-[1.25rem] 
+leading-[1.5rem] 
+font-semibold; }\r\n' +
+    '    .text-md-regular 
+{ @apply text-[1.375rem] 
+leading-[1.7rem] 
+font-normal; }\r\n' +
+    '    .text-md-medium { 
+@apply text-[1.375rem] 
+leading-[1.7rem] 
+font-medium; }\r\n' +
+    '    .text-md-semiBold 
+{ @apply text-[1.375rem] 
+leading-[1.7rem] 
+font-semibold; }\r\n' +
+    '    .text-lg-regular 
+{ @apply text-[1.625rem] 
+leading-[2rem] 
+font-normal; }\r\n' +
+    '    .text-lg-medium { 
+@apply text-[1.625rem] 
+leading-[2rem] 
+font-medium; }\r\n' +
+    '    .text-lg-semiBold 
+{ @apply text-[1.625rem] 
+leading-[2rem] 
+font-semibold; }\r\n' +
+    '    .text-xl-regular 
+{ @apply text-[1.875rem] 
+leading-[2.3rem] 
+font-normal; }\r\n' +
+    '    .text-xl-medium { 
+@apply text-[1.875rem] 
+leading-[2.3rem] 
+font-medium; }\r\n' +
+    '    .text-xl-semiBold 
+{ @apply text-[1.875rem] 
+leading-[2.3rem] 
+font-semibold; }\r\n' +
+    '\r\n' +
+    '    /* titles */\r\n' 
++
+    '    
+.title-xs-semiBold { 
+@apply text-[2rem] 
+leading-[2.5rem] 
+font-semibold; }\r\n' +
+    '    .title-xs-bold { 
+@apply text-[2rem] 
+leading-[2.5rem] 
+font-bold; }\r\n' +
+    '    
+.title-sm-semiBold { 
+@apply text-[2.25rem] 
+leading-[2.75rem] 
+font-semibold; }\r\n' +
+    '    .title-sm-bold { 
+@apply text-[2.25rem] 
+leading-[2.75rem] 
+font-bold; }\r\n' +
+    '    
+.title-md-semiBold { 
+@apply text-[2.5rem] 
+leading-[3.125rem] 
+font-semibold; }\r\n' +
+    '    .title-md-bold { 
+@apply text-[2.5rem] 
+leading-[3.125rem] 
+font-bold; }\r\n' +
+    '    
+.title-xl-semiBold { 
+@apply text-[3.25rem] 
+leading-[4rem] 
+font-semibold; }\r\n' +
+    '    .title-xl-bold { 
+@apply text-[3.25rem] 
+leading-[4rem] font-bold; 
+}\r\n' +
+    '\r\n' +
+    '    .shadow {\r\n' +
+    '        @apply shadow-
+[0_1px_2px_theme(colors.sha
+dow)];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* components 
+*/\r\n' +
+    '    .button-google 
+{\r\n' +
+    '        @apply flex 
+items-center 
+justify-center gap-[50px] 
+mt-[10px] py-[12px] 
+px-[24px] w-full 
+rounded-[10px] bg-gray-200 
+text-gray-800 
+cursor-pointer 
+transition-colors 
+duration-200 
+hover:bg-gray-100;\r\n' +
+    '    }\r\n' +
+    '    .button-google 
+img {\r\n' +
+    '        @apply 
+max-w-[40px] 
+max-h-[40px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    
+.button-green-form,\r\n' +
+    '    .button-green 
+{\r\n' +
+    '        @apply w-fit 
+py-[16px] px-[32px] 
+text-gray-50 
+rounded-[10px] 
+transition-colors 
+duration-200;\r\n' +
+    '    }\r\n' +
+    '    
+.button-green-form {\r\n' +
+    '        @apply 
+bg-green-500 
+hover:bg-green-400;\r\n' +
+    '    }\r\n' +
+    '    .button-green 
+{\r\n' +
+    '        @apply 
+bg-green-600 
+hover:bg-green-400;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .button-gray 
+{\r\n' +
+    '        @apply w-full 
+py-[16px] px-[32px] 
+bg-gray-200 text-green-700 
+rounded-[10px] 
+transition-colors 
+duration-200 
+hover:text-gray-50 
+hover:bg-green-500;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* form inputs 
+(green background variant) 
+*/\r\n' +
+    '    .input-form 
+{\r\n' +
+    '        @apply w-full 
+pt-[15px] pb-[5px] 
+border-b-2 border-gray-300 
+bg-transparent 
+text-gray-100 
+cursor-pointer 
+focus:border-[3px] 
+focus:border-green-50 
+focus:rounded-[10px] 
+focus:py-[15px] 
+focus:px-[20px] 
+outline-none;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    .textarea-form 
+{\r\n' +
+    '        @apply w-full 
+h-[140px] py-[15px] 
+px-[20px] bg-transparent 
+text-gray-100 border-2 
+border-gray-300 
+rounded-[10px] 
+cursor-pointer 
+focus:border-[3px] 
+focus:border-green-50 
+outline-none;\r\n' +
+    '    }\r\n' +
+    '    .textarea-form::pl
+aceholder {\r\n' +
+    '        @apply 
+text-gray-400 
+text-[1.625rem] 
+leading-[2rem] 
+font-medium;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* password input 
+container */\r\n' +
+    '    .content-password 
+> div {\r\n' +
+    '        @apply 
+relative;\r\n' +
+    '    }\r\n' +
+    '    .content-password 
+input {\r\n' +
+    '        @apply 
+pr-[60px] 
+focus:pr-[60px];\r\n' +
+    '    }\r\n' +
+    '    .content-password 
+img {\r\n' +
+    '        @apply 
+w-[30px] h-[30px] absolute 
+top-[10px] 
+right-[10px];\r\n' +
+    '    }\r\n' +
+    '    .input-form:focus 
+~ img {\r\n' +
+    '        @apply 
+top-[20px] 
+right-[20px];\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* form inputs 
+(white background variant) 
+*/\r\n' +
+    '    .inputs-row 
+{\r\n' +
+    '        @apply flex 
+items-center gap-[20px] max
+-[480px]:flex-wrap;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    
+.content-formWhite {\r\n' +
+    '        @apply flex 
+flex-col gap-[10px] 
+w-full;\r\n' +
+    '    }\r\n' +
+    '    
+.content-formWhite > label 
+{\r\n' +
+    '        @apply w-full 
+text-gray-800;\r\n' +
+    '    }\r\n' +
+    '    
+.content-formWhite > input 
+{\r\n' +
+    '        @apply w-full 
+p-[15px] border-2 
+border-gray-300 
+rounded-[10px] 
+text-gray-500 
+bg-transparent 
+transition-colors 
+duration-200 
+hover:border-gray-400 
+focus:border-gray-500 
+focus:text-gray-500 
+outline-none;\r\n' +
+    '    }\r\n' +
+    '    
+.content-formWhite > 
+input::placeholder {\r\n' +
+    '        @apply 
+text-gray-400;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    /* scheduling 
+days */\r\n' +
+    '    .day-not {\r\n' +
+    '        @apply 
+bg-red-alert text-gray-200 
+!important;\r\n' +
+    '    }\r\n' +
+    '    .today {\r\n' +
+    '        @apply 
+bg-green-700 text-gray-100 
+!important;\r\n' +
+    '    }\r\n' +
+    '    .open-hour {\r\n' 
++
+    '        @apply 
+text-green-600;\r\n' +
+    '    }\r\n' +
+    '    .close-hour 
+{\r\n' +
+    '        @apply 
+text-red-alert;\r\n' +
+    '    }\r\n' +
+    '}',
+  line: 4,
+  column: 1,
+  endLine: 34,
+  endColumn: 2,
+  input: {
+    column: 1,
+    endColumn: 2,
+    endLine: 34,
+    endOffset: 936,
+    line: 4,
+    offset: 138,
+    source: "@import url('h
+ttps://fonts.googleapis.com
+/css2?family=Montserrat:ita
+l,wght@0,100..900;1,100..90
+0&display=swap');\r\n" +
+      '@tailwind 
+utilities;\r\n' +
+      '\r\n' +
+      '@layer base {\r\n' +
+      '    * {\r\n' +
+      '        @apply 
+font-sans;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    html {\r\n' +
+      '        @apply 
+scroll-smooth 
+max-w-[1700px] 
+mx-auto;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    body {\r\n' +
+      '        @apply 
+bg-gray-50;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    
+.scroll::-webkit-scrollbar 
+{\r\n' +
+      '        @apply 
+w-[6px] h-[6px];\r\n' +
+      '    }\r\n' +
+      '    .scroll::-webkit
+-scrollbar-track {\r\n' +
+      '        @apply 
+bg-transparent;\r\n' +
+      '    }\r\n' +
+      '    .scroll::-webkit
+-scrollbar-thumb {\r\n' +
+      '        @apply 
+bg-gray-400 rounded-[10px] 
+border 
+border-transparent;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    .header {\r\n' +
+      '        @apply flex 
+items-center 
+justify-between gap-[20px] 
+min-[480px]:gap-[40px] 
+md:gap-[60px] w-full 
+p-[20px] md:p-[30px] 
+bg-green-500 sticky top-0 
+z-10;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    .footer {\r\n' +
+      '        @apply flex 
+flex-col items-center 
+gap-[40px] p-[40px] 
+min-[480px]:p-[60px] 
+bg-green-500 text-gray-50 
+border-t 
+border-green-400;\r\n' +
+      '    }\r\n' +
+      '}\r\n' +
+      '\r\n' +
+      '@layer components 
+{\r\n' +
+      '    .main {\r\n' +
+      '        @apply flex 
+flex-col items-center 
+justify-center 
+min-h-[80vh] p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    .main-dados 
+{\r\n' +
+      '        @apply 
+min-h-[80vh] p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    
+.main-shop,\r\n' +
+      '    .main-product 
+{\r\n' +
+      '        @apply 
+p-[30px] 
+min-[480px]:p-[60px] 
+md:p-[80px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    
+.margin-top-header {\r\n' +
+      '        @apply 
+max-md:mt-[100px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* texts 
+*/\r\n' +
+      '    
+.text-xxs-regular { @apply 
+text-[0.875rem] 
+leading-[1rem] 
+font-normal; }\r\n' +
+      '    
+.text-xxs-medium { @apply 
+text-[0.875rem] 
+leading-[1rem] 
+font-medium; }\r\n' +
+      '    
+.text-xs-regular { @apply 
+text-[1rem] 
+leading-[1.25rem] 
+font-normal; }\r\n' +
+      '    .text-xs-medium 
+{ @apply text-[1rem] 
+leading-[1.25rem] 
+font-medium; }\r\n' +
+      '    
+.text-sm-regular { @apply 
+text-[1.25rem] 
+leading-[1.5rem] 
+font-normal; }\r\n' +
+      '    .text-sm-medium 
+{ @apply text-[1.25rem] 
+leading-[1.5rem] 
+font-medium; }\r\n' +
+      '    
+.text-sm-semiBold { @apply 
+text-[1.25rem] 
+leading-[1.5rem] 
+font-semibold; }\r\n' +
+      '    
+.text-md-regular { @apply 
+text-[1.375rem] 
+leading-[1.7rem] 
+font-normal; }\r\n' +
+      '    .text-md-medium 
+{ @apply text-[1.375rem] 
+leading-[1.7rem] 
+font-medium; }\r\n' +
+      '    
+.text-md-semiBold { @apply 
+text-[1.375rem] 
+leading-[1.7rem] 
+font-semibold; }\r\n' +
+      '    
+.text-lg-regular { @apply 
+text-[1.625rem] 
+leading-[2rem] 
+font-normal; }\r\n' +
+      '    .text-lg-medium 
+{ @apply text-[1.625rem] 
+leading-[2rem] 
+font-medium; }\r\n' +
+      '    
+.text-lg-semiBold { @apply 
+text-[1.625rem] 
+leading-[2rem] 
+font-semibold; }\r\n' +
+      '    
+.text-xl-regular { @apply 
+text-[1.875rem] 
+leading-[2.3rem] 
+font-normal; }\r\n' +
+      '    .text-xl-medium 
+{ @apply text-[1.875rem] 
+leading-[2.3rem] 
+font-medium; }\r\n' +
+      '    
+.text-xl-semiBold { @apply 
+text-[1.875rem] 
+leading-[2.3rem] 
+font-semibold; }\r\n' +
+      '\r\n' +
+      '    /* titles 
+*/\r\n' +
+      '    
+.title-xs-semiBold { 
+@apply text-[2rem] 
+leading-[2.5rem] 
+font-semibold; }\r\n' +
+      '    .title-xs-bold 
+{ @apply text-[2rem] 
+leading-[2.5rem] 
+font-bold; }\r\n' +
+      '    
+.title-sm-semiBold { 
+@apply text-[2.25rem] 
+leading-[2.75rem] 
+font-semibold; }\r\n' +
+      '    .title-sm-bold 
+{ @apply text-[2.25rem] 
+leading-[2.75rem] 
+font-bold; }\r\n' +
+      '    
+.title-md-semiBold { 
+@apply text-[2.5rem] 
+leading-[3.125rem] 
+font-semibold; }\r\n' +
+      '    .title-md-bold 
+{ @apply text-[2.5rem] 
+leading-[3.125rem] 
+font-bold; }\r\n' +
+      '    
+.title-xl-semiBold { 
+@apply text-[3.25rem] 
+leading-[4rem] 
+font-semibold; }\r\n' +
+      '    .title-xl-bold 
+{ @apply text-[3.25rem] 
+leading-[4rem] font-bold; 
+}\r\n' +
+      '\r\n' +
+      '    .shadow {\r\n' +
+      '        @apply shado
+w-[0_1px_2px_theme(colors.s
+hadow)];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* components 
+*/\r\n' +
+      '    .button-google 
+{\r\n' +
+      '        @apply flex 
+items-center 
+justify-center gap-[50px] 
+mt-[10px] py-[12px] 
+px-[24px] w-full 
+rounded-[10px] bg-gray-200 
+text-gray-800 
+cursor-pointer 
+transition-colors 
+duration-200 
+hover:bg-gray-100;\r\n' +
+      '    }\r\n' +
+      '    .button-google 
+img {\r\n' +
+      '        @apply 
+max-w-[40px] 
+max-h-[40px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    
+.button-green-form,\r\n' +
+      '    .button-green 
+{\r\n' +
+      '        @apply 
+w-fit py-[16px] px-[32px] 
+text-gray-50 
+rounded-[10px] 
+transition-colors 
+duration-200;\r\n' +
+      '    }\r\n' +
+      '    
+.button-green-form {\r\n' +
+      '        @apply 
+bg-green-500 
+hover:bg-green-400;\r\n' +
+      '    }\r\n' +
+      '    .button-green 
+{\r\n' +
+      '        @apply 
+bg-green-600 
+hover:bg-green-400;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    .button-gray 
+{\r\n' +
+      '        @apply 
+w-full py-[16px] px-[32px] 
+bg-gray-200 text-green-700 
+rounded-[10px] 
+transition-colors 
+duration-200 
+hover:text-gray-50 
+hover:bg-green-500;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* form inputs 
+(green background variant) 
+*/\r\n' +
+      '    .input-form 
+{\r\n' +
+      '        @apply 
+w-full pt-[15px] pb-[5px] 
+border-b-2 border-gray-300 
+bg-transparent 
+text-gray-100 
+cursor-pointer 
+focus:border-[3px] 
+focus:border-green-50 
+focus:rounded-[10px] 
+focus:py-[15px] 
+focus:px-[20px] 
+outline-none;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    .textarea-form 
+{\r\n' +
+      '        @apply 
+w-full h-[140px] py-[15px] 
+px-[20px] bg-transparent 
+text-gray-100 border-2 
+border-gray-300 
+rounded-[10px] 
+cursor-pointer 
+focus:border-[3px] 
+focus:border-green-50 
+outline-none;\r\n' +
+      '    }\r\n' +
+      '    .textarea-form::
+placeholder {\r\n' +
+      '        @apply 
+text-gray-400 
+text-[1.625rem] 
+leading-[2rem] 
+font-medium;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* password 
+input container */\r\n' +
+      '    
+.content-password > div 
+{\r\n' +
+      '        @apply 
+relative;\r\n' +
+      '    }\r\n' +
+      '    
+.content-password input 
+{\r\n' +
+      '        @apply 
+pr-[60px] 
+focus:pr-[60px];\r\n' +
+      '    }\r\n' +
+      '    
+.content-password img 
+{\r\n' +
+      '        @apply 
+w-[30px] h-[30px] absolute 
+top-[10px] 
+right-[10px];\r\n' +
+      '    }\r\n' +
+      '    
+.input-form:focus ~ img 
+{\r\n' +
+      '        @apply 
+top-[20px] 
+right-[20px];\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* form inputs 
+(white background variant) 
+*/\r\n' +
+      '    .inputs-row 
+{\r\n' +
+      '        @apply flex 
+items-center gap-[20px] max
+-[480px]:flex-wrap;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    
+.content-formWhite {\r\n' +
+      '        @apply flex 
+flex-col gap-[10px] 
+w-full;\r\n' +
+      '    }\r\n' +
+      '    
+.content-formWhite > label 
+{\r\n' +
+      '        @apply 
+w-full text-gray-800;\r\n' 
++
+      '    }\r\n' +
+      '    
+.content-formWhite > input 
+{\r\n' +
+      '        @apply 
+w-full p-[15px] border-2 
+border-gray-300 
+rounded-[10px] 
+text-gray-500 
+bg-transparent 
+transition-colors 
+duration-200 
+hover:border-gray-400 
+focus:border-gray-500 
+focus:text-gray-500 
+outline-none;\r\n' +
+      '    }\r\n' +
+      '    
+.content-formWhite > 
+input::placeholder {\r\n' +
+      '        @apply 
+text-gray-400;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    /* scheduling 
+days */\r\n' +
+      '    .day-not {\r\n' 
++
+      '        @apply 
+bg-red-alert text-gray-200 
+!important;\r\n' +
+      '    }\r\n' +
+      '    .today {\r\n' +
+      '        @apply 
+bg-green-700 text-gray-100 
+!important;\r\n' +
+      '    }\r\n' +
+      '    .open-hour 
+{\r\n' +
+      '        @apply 
+text-green-600;\r\n' +
+      '    }\r\n' +
+      '    .close-hour 
+{\r\n' +
+      '        @apply 
+text-red-alert;\r\n' +
+      '    }\r\n' +
+      '}',
+    url: 'file:///C:/Users/
+Dell/Desktop/Programa%C3%A7
+%C3%A3o/Projetos/Dr-Pet%20t
+ailwind/src/style/input.css
+',
+    file: 'C:\\Users\\Dell\
+\Desktop\\Programa├º├úo\\Pr
+ojetos\\Dr-Pet tailwind\\sr
+c\\style\\input.css'
+  },
+  plugin: 'tailwindcss'
+}

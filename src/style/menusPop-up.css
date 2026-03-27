@@ -1,0 +1,83 @@
+.menu-semLogin{
+    background-color: var(--gray1);
+    color: var(--gray11);
+    border-radius: 0 0 0 10px;
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+}
+
+.menu-semLogin a{
+    width: 100%;
+    padding: 24px 36px;
+    text-align: center;
+
+    color: var(--gray11);
+}
+
+.menu-semLogin a:first-of-type{
+    color: var(--blue-link);
+}
+
+.menu-semLogin, .menu-login {
+    display: none;
+}
+
+/* estilo do menu-com-login */
+
+.menu-login {
+    max-width: 500px;
+    width: 100%;
+
+    border-radius: 0 0 0 10px;
+    background-color: var(--gray1);
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+}
+
+.options-list {
+    background-color: var(--gray1);
+}
+
+.options-list li > a {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 30px;
+
+    color: var(--gray9);
+}
+
+.options-list li:first-of-type a {
+    background-color: var(--gray2);
+
+    gap: 30px;
+}
+
+.options-list li:first-of-type a img {
+    max-width: 75px;
+    max-height: 75px;
+    width: 100%;
+}
+
+.images-options-list {
+    width: 40px;
+    height: 40px;
+}
+
+/* estilo com javascript */
+.menu-semLogin.openSemLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-login.openLogin{
+    display: block;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "dr-pet",
+  "version": "0.1.0",
+  "description": "Projeto Dr-Pet com Tailwind CSS",
+  "private": true,
+  "scripts": {
+    "tailwind": "tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
