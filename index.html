@@ -1,210 +1,439 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/style/output.css">
-    <link rel="shortcut icon" href="src/images/logo.png" type="image/x-icon">
-    <title>Dr.Pet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <header class="header">
-        <figure>
-            <a href="index.html">
-                <img src="src/images/logo.png" alt="Logo Dr.Pet" class="logo">
-            </a>
-        </figure>
-
-        <nav class="hidden md:flex items-center gap-[20px] ml-auto js-headerNav">
-            <a class="text-xl font-medium text-gray-100 hover:pb-[3px] hover:border-b-[2px] hover:border-gray-100 transition-all" href="#servicos">Serviços</a>
-            <a class="text-xl font-medium text-gray-100 hover:pb-[3px] hover:border-b-[2px] hover:border-gray-100 transition-all" href="#sobre">Sobre nós</a>
-            <a class="text-xl font-medium text-gray-100 hover:pb-[3px] hover:border-b-[2px] hover:border-gray-100 transition-all" href="#petShop">Pet shop</a>
-            <a class="text-xl font-medium text-gray-100 hover:pb-[3px] hover:border-b-[2px] hover:border-gray-100 transition-all" href="#contato">Contato</a>
-        </nav>
-
-        <div class="content-menuMobile">
-            <figure class="menu-user js-userButton">
-                <img src="src/images/components/header-icons/user.svg" alt="Usuário">
-            </figure>
-
-            <div class="header-mobileMenu js-mobileMenu">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-
-        <!-- menu sem usuário -->
-        <nav class="shadow menu-semLogin js-menuSemLogin">
-            <a href="src/pages/cadastrar.html" class="text-2xl font-medium">Criar uma conta</a>
-            <a href="src/pages/login.html" class="text-2xl font-medium">Entrar</a>
-        </nav>
-
-        <!-- menu com usuário -->
-        <nav class="shadow menu-login js-menuLogin">
-            <ul class="options-list">
-                <li>
-                    <a href="src/pages/sua-conta.html">
-                        <img src="src/images/components/menu-login-icons/user-green.svg" alt="Minha conta" class="my-account-icon">
-                        <p class="text-3xl font-semibold js-nomeUser">Minha Conta</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl font-medium">
-                        <img src="src/images/components/menu-login-icons/compra.svg" alt="Compras" class="images-options-list">
-                        Compras
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl font-medium">
-                        <img src="src/images/components/menu-login-icons/historico.svg" alt="Histórico de compras" class="images-options-list">
-                        Histórico
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl font-medium">
-                        <img src="src/images/components/favorites-icons/favorito.svg" alt="Seus favoritos" class="images-options-list">
-                        Favoritos
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl font-medium">
-                        <img src="src/images/components/menu-login-icons/logout.svg" alt="Sair da conta" class="images-options-list">
-                        Sair
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-    </header>
-
-    <main class="main-index">
-        <section class="relative flex items-end min-h-[800px] bg-[url('src/images/introduction.png')] bg-cover bg-no-repeat bg-center">
-            <div class="absolute inset-0 bg-[var(--shadow)]"></div>
-            <div class="z-10 w-[100vw] p-[30px] bg-[var(--shadowItem)] text-gray-100 rounded-t-[10px]">
-                <p class="max-w-[1300px] mx-auto text-base font-normal">
-                    Cuidamos do seu pet com amor e excelência veterinária.
-                    <br>
-                    Seu pet merece o melhor cuidado, e na Dr. Pet  oferecemos atendimento veterinário de alta qualidade, focado no bem-estar e na saúde do seu companheiro de quatro patas.
-                    <br>
-                    Com uma equipe altamente qualificada e liderada por especialistas, garantimos diagnósticos precisos, tratamentos eficazes e um atendimento humanizado para que você tenha total
-                    <br>
-                    confiança nos cuidados que seu pet recebe.
-                </p>
-            </div>
-        </section>
-
-        <section class="p-[30px] md:p-[60px] lg:p-[80px] bg-gray-200 border-y-[4px] border-green-400" id="servicos">
-            <h2 class="text-5xl font-bold text-center text-gray-900 mb-[60px]">Nossos serviços</h2>
-            <div class="flex flex-wrap items-center justify-center gap-[50px]">
-                <a href="src/pages/agenda.html" class="block w-full max-w-[450px] bg-gray-100 rounded-[10px] transition-transform duration-200 hover:scale-[1.04] cursor-pointer shadow focus:outline-none focus:ring-4 focus:ring-green-400">
-                    <img src="src/images/services/vacinação.png" alt="Vacinação" class="w-full max-w-[450px] max-h-[300px] object-cover rounded-t-[10px]">
-                    <div class="p-[30px]">
-                        <h3 class="text-3xl font-semibold text-gray-900 mb-[15px]">Vacinação</h3>
-                        <p class="text-2xl font-normal text-gray-800">Proteção garantida contra doenças para que seu pet viva mais e melhor.</p>
-                    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="src/style/output.css" />
+        <link
+            rel="shortcut icon"
+            href="src/images/logo.png"
+            type="image/x-icon"
+        />
+        <title>Dr.Pet</title>
+    </head>
+    <body class="antialiased">
+        <header class="header">
+            <div class="container flex items-center justify-between mx-auto">
+                <a
+                    href="index.html"
+                    class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
+                >
+                    <img
+                        src="src/images/logo.png"
+                        alt="Logo Dr. Pet"
+                        class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
+                    />
+                    <span
+                        class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-white tracking-wide transition-all duration-300 whitespace-nowrap"
+                        >Dr. Pet</span
+                    >
                 </a>
 
-                <a href="src/pages/agenda.html" class="block w-full max-w-[450px] bg-gray-100 rounded-[10px] transition-transform duration-200 hover:scale-[1.04] cursor-pointer shadow focus:outline-none focus:ring-4 focus:ring-green-400">
-                    <img src="src/images/services/banho-tosa.png" alt="Banho e Tosa" class="w-full max-w-[450px] max-h-[300px] object-cover rounded-t-[10px]">
-                    <div class="p-[30px]">
-                        <h3 class="text-3xl font-semibold text-gray-900 mb-[15px]">Banho e Tosa</h3>
-                        <p class="text-2xl font-normal text-gray-800">Higiene e cuidados para manter seu bichinho sempre limpo e saudável.</p>
-                    </div>
-                </a>
+                <div
+                    id="nav-menu"
+                    class="absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+                >
 
-                <a href="src/pages/agenda.html" class="block w-full max-w-[450px] bg-gray-100 rounded-[10px] transition-transform duration-200 hover:scale-[1.04] cursor-pointer shadow focus:outline-none focus:ring-4 focus:ring-green-400">
-                    <img src="src/images/services/cirurgia.png" alt="Cirurgias" class="w-full max-w-[450px] max-h-[300px] object-cover rounded-t-[10px]">
-                    <div class="p-[30px]">
-                        <h3 class="text-3xl font-semibold text-gray-900 mb-[15px]">Cirurgias</h3>
-                        <p class="text-2xl font-normal text-gray-800">Procedimentos seguros, realizados por especialistas com equipamentos de ponta.</p>
-                     </div>
-                </a>
+                    <nav
+                        class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                    >
+                        <a href="#servicos" class="nav-link whitespace-nowrap"
+                            >Serviços</a
+                        >
+                        <a href="#sobre" class="nav-link whitespace-nowrap"
+                            >Sobre nós</a
+                        >
+                        <a href="#petShop" class="nav-link whitespace-nowrap"
+                            >Pet shop</a
+                        >
+                        <a href="#contato" class="nav-link whitespace-nowrap"
+                            >Contato</a
+                        >
+                    </nav>
 
-            </div>
-            <div class="mt-[60px]">
-                <h3 class="text-4xl font-semibold text-center text-gray-900">Gostou de nossos serviços?</h3>
-                <div class="w-fit mx-auto mt-[30px]">
-                    <a href="src/pages/agenda.html" class="flex items-center gap-[15px] text-2xl font-semibold uppercase button-green transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-400">
-                         agende agora
-                        <img src="src/images/components/calendar_clock.svg" alt="Agendamento" class="w-[30px] h-[30px]">
-                    </a>
+                    <button
+                        aria-label="Menu do Usuário"
+                        class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                    >
+                        <img
+                            src="src/images/components/user.svg"
+                            alt="Ícone de Usuário"
+                            class="w-[24px] md:w-5 lg:w-[24px] xl:w-[30px] h-auto transition-all duration-300"
+                        />
+                    </button>
                 </div>
+
+                <button
+                    aria-label="Abrir menu"
+                    class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+                >
+                    <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                </button>
             </div>
-        </section>
+        </header>
 
-        <section class="p-[30px] md:p-[60px] lg:p-[80px] border-b-[4px] border-green-400" id="sobre">
-            <div class="flex flex-wrap items-center gap-[60px]">
-                <img src="src/images/imagem-sobre.jpg" alt="Veterinário Dr.Pet" class="w-full max-w-[400px] mx-auto flex-[1_1_100px] rounded-[12px] shadow">
-
-                <article class="flex-[1_1_300px] grid gap-[40px]">
-                    <h2 class="text-5xl font-bold text-gray-900">Sobre Nós</h2>
-                    <p class="text-xl font-normal text-gray-800">
-                        A Dr. Pet, clínica veterinária em Mococa, oferece cuidados completos e de alta qualidade para animais de estimação, incluindo banho, tosa e assistência médica. Nosso compromisso se estende à prevenção e ao tratamento de diversas patologias, com equipamentos modernos e profissionais experientes. Reconhecida pela excelência no atendimento e ótimas avaliações, a clínica se destaca pela flexibilidade, com atendimentos presenciais e domiciliares. Priorizamos a comunicação transparente com os tutores, oferecendo orientações detalhadas e acompanhamento personalizado para cada animal. O objetivo principal da Dr. Pet é o bem-estar e a saúde dos animais, com uma equipe qualificada e atendimento profissional e acessível  
+        <main class="main-index">
+            <section
+                class="relative flex items-end min-h-[800px] bg-cover bg-no-repeat bg-center"
+            >
+                <div class="absolute inset-0 bg-[var(--shadow)]"></div>
+                <div
+                    class="z-10 w-[100vw] p-[30px] bg-[var(--shadowItem)] text-gray-100 rounded-t-[10px]"
+                >
+                    <p class="max-w-[1300px] mx-auto text-base font-normal">
+                        Cuidamos do seu pet com amor e excelência veterinária.
+                        <br />
+                        Seu pet merece o melhor cuidado, e na Dr. Pet oferecemos
+                        atendimento veterinário de alta qualidade, focado no
+                        bem-estar e na saúde do seu companheiro de quatro patas.
+                        <br />
+                        Com uma equipe altamente qualificada e liderada por
+                        especialistas, garantimos diagnósticos precisos,
+                        tratamentos eficazes e um atendimento humanizado para
+                        que você tenha total
+                        <br />
+                        confiança nos cuidados que seu pet recebe.
                     </p>
-                </article>
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <section class="p-[30px] md:p-[60px] lg:p-[80px] border-b-[4px] border-green-400 bg-gray-200" id="petShop">
-            <div class="flex flex-wrap items-center gap-[60px]">         
-                <img src="src/images/imagem-loja.jpg" alt="Loja" class="w-full max-w-[400px] mx-auto flex-[1_1_100px] rounded-[12px] shadow"> 
+            <section
+                id="servicos"
+                class="flex flex-col border-t-[4px] border-green-300"
+            >
 
-                <article class="flex-[1_1_300px] grid gap-[40px]">
-                    <h2 class="text-5xl font-bold text-gray-900">Pet Shop</h2>
-                    <p class="text-xl font-normal text-gray-800">
-                        Em nosso petshop, você encontra tudo o que seu pet precisa para se manter saudável e feliz! Oferecemos uma ampla gama de produtos, como rações de qualidade, brinquedos, acessórios e itens de higiene, sempre com as melhores marcas do mercado. Nosso compromisso é garantir que seu animal receba o melhor em cuidado e bem-estar. Além disso, nossos produtos são cuidadosamente selecionados para atender às necessidades de cada espécie, idade e condição de saúde. Visite-nos e proporcione ao seu pet o que há de melhor! 
-                    </p>
-                    <div class="w-fit">
-                        <a href="src/pages/loja.html" class="flex items-center gap-[15px] text-2xl font-semibold uppercase button-green transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-400">
-                            veja mais
-                            <img src="src/images/components/arrows/seta-button-veja.svg" alt="Agendamento" class="w-[30px] h-[30px]">
+                <div
+                    class="p-[30px] md:p-[60px] lg:p-20 bg-gray-100 flex flex-col items-center justify-center gap-10 md:gap-[60px]"
+                >
+                    <h2
+                        class="text-4xl md:text-5xl font-bold text-center text-green-700"
+                    >
+                        Nossos Serviços
+                    </h2>
+
+                    <div
+                        class="flex flex-wrap items-center justify-center gap-[50px] w-full p-5"
+                    >
+                        <a
+                            href="src/pages/agenda.html"
+                            class="service-card flex flex-col"
+                        >
+                            <img
+                                src="src/images/services/vacinação.png"
+                                alt="Vacinação"
+                                class="w-full h-[300px] object-cover"
+                            />
+                            <div class="p-[30px] flex flex-col gap-[10px]">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold text-gray-800"
+                                >
+                                    Vacinação
+                                </h3>
+                                <p
+                                    class="text-lg md:text-[22px] font-normal leading-snug text-gray-700"
+                                >
+                                    Proteção garantida contra doenças para que
+                                    seu pet viva mais e melhor.
+                                </p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="src/pages/agenda.html"
+                            class="service-card flex flex-col"
+                        >
+                            <img
+                                src="src/images/services/banho-tosa.png"
+                                alt="Banho e Tosa"
+                                class="w-full h-[300px] object-cover"
+                            />
+                            <div class="p-[30px] flex flex-col gap-[10px]">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold text-gray-800"
+                                >
+                                    Banho e Tosa
+                                </h3>
+                                <p
+                                    class="text-lg md:text-[22px] font-normal leading-snug text-gray-700"
+                                >
+                                    Higiene e cuidados para manter seu bichinho
+                                    sempre limpo e saudável.
+                                </p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="src/pages/agenda.html"
+                            class="service-card flex flex-col"
+                        >
+                            <img
+                                src="src/images/services/cirurgia.png"
+                                alt="Cirurgias"
+                                class="w-full h-[300px] object-cover"
+                            />
+                            <div class="p-[30px] flex flex-col gap-[10px]">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold text-gray-800"
+                                >
+                                    Cirurgias
+                                </h3>
+                                <p
+                                    class="text-lg md:text-[22px] font-normal leading-snug text-gray-700"
+                                >
+                                    Procedimentos seguros, realizados por
+                                    especialistas com equipamentos de ponta.
+                                </p>
+                            </div>
                         </a>
                     </div>
-                </article>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="footer" id="contato">
-        <h1 class="text-4xl font-semibold text-center">Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!</h1>
-        <div class="text-center">
-            <p class="text-3xl font-normal">Fique à vontade para entrar em contato conosco a qualquer momento. Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades.</p>
-            <p class="text-3xl font-normal"> Você pode nos encontrar de alcançar de varias maneiras:</p>
-        </div>
-
-        <nav class="footer-info">
-            <div class="info-item">
-                <img src="src/images/components/foooter-icons/locate-icon.png" alt="endereço">
-                <a target="_blank" href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2">
-                    R. Maj. Adalberto Dos Santos
-                    <br> 
-                    Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
-                </a>
-            </div>
-
-            <div class="info-item">    
-                <img src="src/images/components/foooter-icons/instagram-icon.png" alt="instagram">
-                <a target="_blank" href="https://www.instagram.com/doutorpetmococa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D">@doutorpetmococa</a>
-            </div>
-                        
-            <div class="info-item">
-                <img src="src/images/components/foooter-icons/phone-icon.png" alt="telefone">
-                <div>
-                    <a target="_blank" href="tel:+5519993592253">(19) 99359-2253</a> <br>
-                    <a target="_blank" href="tel:+551936656242">(19) 3665-6242</a>
                 </div>
+
+                <div
+                    class="px-[30px] py-10 md:px-[60px] lg:px-20 bg-green-600 flex flex-wrap items-center justify-between gap-[30px]"
+                >
+                    <h3
+                        class="text-2xl md:text-3xl lg:text-4xl font-semibold text-center md:text-left text-gray-50 flex-1 min-w-[280px] leading-tight"
+                    >
+                        Gostou de nossos serviços?
+                    </h3>
+                    <div class="w-fit mx-auto md:mx-0">
+                        <a
+                            href="src/pages/agenda.html"
+                            class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-[24px] py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300"
+                        >
+                            AGENDE AGORA
+                            <img
+                                src="src/images/components/calendar_clock.svg"
+                                alt="Agendamento"
+                                class="w-[24px] h-[24px] md:w-[30px] md:h-[30px]"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                class="py-[60px] lg:py-[100px] bg-gray-50 border-t-[4px] border-green-300"
+                id="sobre"
+            >
+                <div class="container mx-auto px-5 xs:px-[30px] md:px-10 lg:px-20">
+                    <div class="flex flex-col lg:flex-row items-center gap-[50px] lg:gap-20">
+
+                        <figure class="w-full sm:w-[80%] lg:flex-[1_1_350px] max-w-[500px] flex-shrink-0 group mx-auto lg:mx-0">
+                            <!-- Imagem Principal -->
+                            <img
+                                src="src/images/imagem-sobre.jpg"
+                                alt="Veterinário Dr.Pet"
+                                class="w-full h-auto object-cover rounded-[10px] border-[2px] border-green-800 transition-all duration-300 
+                                       shadow-[12px_12px_0_0_#2AF29B] 
+                                       md:shadow-[16px_16px_0_0_#2AF29B] 
+                                       lg:shadow-[20px_20px_0_0_#2AF29B] 
+                                       group-hover:shadow-[24px_24px_0_0_#2AF29B] 
+                                       group-hover:-translate-y-2 group-hover:-translate-x-1"
+                            />
+                        </figure>
+
+                        <article class="flex-[400px] flex flex-col gap-[30px] lg:gap-10 w-full">
+
+                            <h2 class="text-[36px] md:text-[46px] lg:text-[52px] font-bold text-green-700 leading-tight">
+                                Quem somos nós?
+                            </h2>
+                            
+                            <div class="flex flex-col gap-[30px]">
+
+                                <p class="text-lg md:text-[22px] font-medium text-gray-700 leading-snug">
+                                    A Dr. Pet oferece cuidados de alta qualidade para o bem-estar e a saúde do seu animal de estimação. Nosso compromisso se estende desde a prevenção até o tratamento de diversas patologias, priorizando sempre uma comunicação transparente e orientações detalhadas para você, tutor.
+                                </p>
+                                <ul class="flex flex-col gap-5">
+
+                                    <li class="flex items-center gap-5 group">
+                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
+                                            <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Cuidado e Assistência Completa</strong>
+                                            Prevenção, tratamentos médicos, além de serviços de banho e tosa para o seu pet.
+                                        </p>
+                                    </li>
+
+                                    <li class="flex items-center gap-5 group">
+                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
+                                            <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Infraestrutura e Equipe Qualificada</strong>
+                                            Equipamentos modernos e profissionais experientes para garantir o melhor atendimento.
+                                        </p>
+                                    </li>
+
+                                    <li class="flex items-center gap-5 group">
+                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
+                                            <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Atendimento Presencial e Domiciliar</strong>
+                                            Flexibilidade e comodidade para atender a sua necessidade, na clínica ou no lar.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                class="py-[60px] lg:py-[100px] bg-gray-100 border-b-4 border-b-green-300 border-t-4 border-t-green-300 relative"
+                id="petShop"
+            >
+                <div class="container mx-auto px-5 xs:px-[30px] md:px-10 lg:px-20">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-[70px] lg:gap-10">
+                        
+                        <article class="flex-[1_1_400px] xl:flex-[1_1_500px] max-w-[700px] flex flex-col gap-[30px] lg:gap-10 w-full lg:pr-10">
+
+                            <div class="flex flex-col gap-1 text-center lg:text-left">
+                                <h3 class="text-2xl md:text-3xl font-bold text-green-400 tracking-wide">
+                                    Nosso
+                                </h3>
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-green-700 leading-none">
+                                    Pet Shop
+                                </h2>
+                            </div>
+                            
+                            <p class="text-lg md:text-xl font-medium text-gray-600 leading-relaxed max-w-[550px] text-center lg:text-left mx-auto lg:mx-0">
+                                Em nosso petshop, você encontra tudo o que seu pet precisa para se manter saudável e feliz! Oferecemos uma ampla gama de produtos, como rações de qualidade, brinquedos, acessórios e itens de higiene, sempre com as melhores marcas do mercado. Nosso compromisso é garantir que seu animal receba o melhor em cuidado e bem-estar.
+                            </p>
+
+                            <div class="shadow bg-white w-full sm:w-fit mx-auto lg:mx-0 grid grid-cols-2 gap-x-2 xs:gap-x-6 md:gap-x-10 gap-y-4 px-3 xs:px-6 py-5 rounded-xl border border-gray-100">
+
+                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
+                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-green-light rounded-[10px] shrink-0">
+                                        <img src="src/images/components/petshop-section/bag.svg" alt="Acessórios" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                    </figure>
+                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Acessórios</span>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
+                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-red-light rounded-[10px] shrink-0">
+                                        <img src="src/images/components/petshop-section/toys.svg" alt="Brinquedos" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                    </figure>
+                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Brinquedos</span>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
+                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-orange-light rounded-[10px] shrink-0">
+                                        <img src="src/images/components/petshop-section/pet-food.svg" alt="Ração" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                    </figure>
+                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Rações</span>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
+                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-blue-light rounded-[10px] shrink-0">
+                                        <img src="src/images/components/petshop-section/hygiene.svg" alt="Higiene" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                    </figure>
+                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Higiene</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 flex justify-center lg:justify-start">
+                                <a
+                                    href="src/pages/loja.html"
+                                    class="inline-flex items-center justify-center gap-[15px] px-[32px] py-[16px] bg-green-700 hover:bg-green-600 text-lg md:text-xl font-bold text-white uppercase rounded-[12px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    VEJA MAIS SOBRE
+                                    <img src="src/images/components/petshop-section/arrow.svg" alt="Seta Direita" class="w-[24px] h-[24px] transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0" />
+                                </a>
+                            </div>
+                        </article>
+
+                        <figure class="flex-1 w-full max-w-[400px] lg:max-w-[500px] aspect-square relative mt-[50px] lg:mt-0 group mx-auto">
+                            <img
+                                src="src/images/components/petshop-section/dog-petshop.png"
+                                alt="Cachorro Pet Shop"
+                                class="absolute top-0 right-0 aspect-square rounded-2xl w-[60%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] group-hover:z-30 z-10"
+                            />
+                            <img
+                                src="src/images/components/petshop-section/cat-petshop.png"
+                                alt="Gato Pet Shop"
+                                class="absolute bottom-0 left-0 aspect-square rounded-2xl w-[60%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] z-20 group-hover:z-20"
+                            />
+                        </figure>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer" id="contato">
+            <h1 class="text-4xl font-semibold text-center">
+                Se você ficou interessado pelos nossos serviços, estamos aqui
+                para ajudar!
+            </h1>
+            <div class="text-center">
+                <p class="text-3xl font-normal">
+                    Fique à vontade para entrar em contato conosco a qualquer
+                    momento. Nossa equipe está pronta para tirar suas dúvidas,
+                    oferecer informações adicionais e discutir como podemos
+                    atender às suas necessidades.
+                </p>
+                <p class="text-3xl font-normal">
+                    Você pode nos encontrar de alcançar de varias maneiras:
+                </p>
             </div>
 
-            <div class="info-item">
-                <img src="src/images/components/foooter-icons/email-icon.png" alt="email">
-                <a target="_blank" href="mailto:mvlucasvet@gmail.com">mvlucasvet@gmail.com</a>
-            </div>
-        </nav>
-    </footer>
+            <nav class="footer-info">
+                <div class="info-item">
+                    <img
+                        src="src/images/components/foooter-icons/locate-icon.png"
+                        alt="endereço"
+                    />
+                    <a
+                        target="_blank"
+                        href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2"
+                    >
+                        R. Maj. Adalberto Dos Santos
+                        <br />
+                        Figueiredo, 414 - Chácara São Domingos, Mococa - SP,
+                        13733-130
+                    </a>
+                </div>
 
-    <script type="module" src="src/javascript/header.js"></script>
-</body>
+                <div class="info-item">
+                    <img
+                        src="src/images/components/foooter-icons/instagram-icon.png"
+                        alt="instagram"
+                    />
+                    <a
+                        target="_blank"
+                        href="https://www.instagram.com/doutorpetmococa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"
+                        >@doutorpetmococa</a
+                    >
+                </div>
+
+                <div class="info-item">
+                    <img
+                        src="src/images/components/foooter-icons/phone-icon.png"
+                        alt="telefone"
+                    />
+                    <div>
+                        <a target="_blank" href="tel:+5519993592253"
+                            >(19) 99359-2253</a
+                        >
+                        <br />
+                        <a target="_blank" href="tel:+551936656242"
+                            >(19) 3665-6242</a
+                        >
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <img
+                        src="src/images/components/foooter-icons/email-icon.png"
+                        alt="email"
+                    />
+                    <a target="_blank" href="mailto:mvlucasvet@gmail.com"
+                        >mvlucasvet@gmail.com</a
+                    >
+                </div>
+            </nav>
+        </footer>
+
+        <script type="module" src="src/javascript/header.js"></script>
+    </body>
 </html>
