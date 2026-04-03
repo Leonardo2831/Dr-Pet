@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr.Pet | Sua Conta</title>
+    <link rel="stylesheet" href="../style/style.css">
+
+</head>
+<body>
+    <header class="header">
+        <figure>
+            <a href="../../index.html">
+                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+            </a>
+        </figure>
+
+        <div class="header-contentShop">
+            <figure class="menu-user js-userButton">
+                <img src="../images/components/header-icons/user.svg" alt="Usuário" class="user">
+            </figure> 
+        </div>
+        
+        <!-- menus com e sem usuário -->
+        <nav class="shadow menu-semLogin js-menuSemLogin">
+            <a href="cadastrar.html" class="text-md-medium">Criar uma conta</a>
+            <a href="login.html" class="text-md-medium">Entrar</a>
+        </nav>
+        <nav class="shadow menu-login js-menuLogin">
+            <ul class="options-list">
+                <li>
+                    <a href="sua-conta.html">
+                        <img src="../images/components/menu-login-icons/user-green.svg" alt="Minha conta" class="my-account-icon">
+                        <p class="text-xl-semiBold js-nomeUser">Minha Conta</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/compra.svg" alt="Compras" class="images-options-list">
+                        Compras
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/historico.svg" alt="Histórico de compras" class="images-options-list">
+                        Histórico
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/favorites-icons/favorito.svg" alt="Seus favoritos" class="images-options-list">
+                        Favoritos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-lg-medium">
+                        <img src="../images/components/menu-login-icons/logout.svg" alt="Sair da conta" class="images-options-list">
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="your-account_menu">
+            <a href="#">
+                <img src="../images/components/your-account-menu/green-user.svg" alt="Usuário" class="left-icon">
+                <h1 class="title-xs-semiBold">Nome do Usuario</h1>
+                <img src="../images/components/your-account-menu/pen.svg" alt="Renomear">
+            </a>
+        </section>
+
+        <section class="personal-data">
+            <a href="dados-pessoais.html">
+                <img src="../images/components/your-account-menu/green-card.svg" alt="Dados Pessoais" class="left-icon">
+                <h1 class="text-xl-semiBold">Dados Pessoais</h1>
+            </a>
+        </section>
+
+        <section class="address">
+            <a href="endereco.html">
+                <img src="../images/components/your-account-menu/home_pin.svg" alt="Endereço" class="left-icon">
+                <h1 class="text-xl-semiBold">Endereço</h1>
+            </a>
+        </section>
+
+        <section class="cards">
+            <a href="cards.html">
+                <img src="../images/components/your-account-menu/green-credit-card.svg" alt="Cartões" class="left-icon">
+                <h1 class="text-xl-semiBold">Cartões</h1>
+            </a>
+        </section>
+    </main>
+
+    <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
+    
+    <!-- Cabeçalho do Footer -->
+    <div class="flex flex-col items-center gap-4 text-center w-full max-w-[1275px]">
+        <h2 id="footer-heading" class="text-2xl md:text-[28px] lg:text-3xl font-semibold text-gray-50 leading-tight">
+            Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!
+        </h2>
+        <p class="text-lg md:text-[22px] font-medium text-gray-50 leading-relaxed max-w-[1000px]">
+            Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades. Entre em contato conosco:
+        </p>
+    </div>
+
+    <!-- Informações de Contato (Semântico: address) -->
+    <address class="not-italic w-full max-w-[1275px] mt-4">
+        
+        <ul class="flex flex-wrap justify-center md:justify-between items-start gap-y-12 gap-x-6 w-full">
+            
+            <!-- Localização -->
+            <li class="flex flex-row items-center gap-5 flex-1 min-w-[280px] max-w-[400px]">
+                <img src="../images/components/foooter-icons/location.png" alt="Ícone de localização mapeamento geográfico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                <a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                    R. Maj. Adalberto Dos Santos Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
+                </a>
+            </li>
+            
+            <!-- Instagram -->
+            <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
+                <img src="../images/components/foooter-icons/instagram.png" alt="Logo de botão do Instagram" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/doutorpetmococa" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                    @doutorpetmococa
+                </a>
+            </li>
+            
+            <!-- Telefones -->
+            <li class="flex flex-row items-center gap-5 flex-1 min-w-[240px] max-w-[300px]">
+                <img src="../images/components/foooter-icons/phone.png" alt="Ícone de Telefone Clássico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                <div class="flex flex-col gap-2 text-base md:text-lg font-medium text-gray-50">
+                    <a target="_blank" rel="noopener noreferrer" href="tel:+551936656242" aria-label="Ligar para o telefone Fixo" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
+                        (19) 3665-6242
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="tel:+5519993592253" aria-label="Chamar no Whatsapp" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
+                        (19) 99359-2253
+                    </a>
+                </div>
+            </li>
+            
+            <!-- Endereço de Email -->
+            <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
+                <img src="../images/components/foooter-icons/email.png" alt="Ícone de Carta de Email" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                <a target="_blank" rel="noopener noreferrer" href="mailto:mvlucasvet@gmail.com" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                    mvlucasvet@gmail.com
+                </a>
+            </li>
+
+        </ul>
+    </address>
+</footer>
+
+    <script src="../javascript/header.js"></script>
+</body>
+</html>
