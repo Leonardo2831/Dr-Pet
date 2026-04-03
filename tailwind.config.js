@@ -2,7 +2,7 @@
 module.exports = {
     content: [
         "./index.html",
-        "./src/**/*.{html,js}"
+        "./public/**/*.{html,js}"
     ],
     corePlugins: {
         container: false,
