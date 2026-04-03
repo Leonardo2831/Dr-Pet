@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="src/style/output.css" />
+        <link rel="stylesheet" href="public/style/output.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link
             rel="shortcut icon"
-            href="src/images/logo.png"
+            href="public/images/logo.png"
             type="image/x-icon"
         />
         <title>Dr.Pet</title>
@@ -19,7 +20,7 @@
                     class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
                 >
                     <img
-                        src="src/images/logo.png"
+                        src="public/images/logo.png"
                         alt="Logo Dr. Pet"
                         class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
                     />
@@ -29,9 +30,10 @@
                     >
                 </a>
 
+                <!-- flex no lugar do hidden -->
                 <div
                     id="nav-menu"
-                    class="absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+                    class="hidden absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
                 >
 
                     <nav
@@ -52,13 +54,12 @@
                     </nav>
 
                     <button
-                        aria-label="Menu do Usuário"
                         class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
                     >
                         <img
-                            src="src/images/components/user.svg"
+                            src="public/images/components/user.svg"
                             alt="Ícone de Usuário"
-                            class="w-[24px] md:w-5 lg:w-[24px] xl:w-[30px] h-auto transition-all duration-300"
+                            class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
                         />
                     </button>
                 </div>
@@ -75,27 +76,35 @@
         </header>
 
         <main class="main-index">
-            <section
-                class="relative flex items-end min-h-[800px] bg-cover bg-no-repeat bg-center"
-            >
-                <div class="absolute inset-0 bg-[var(--shadow)]"></div>
-                <div
-                    class="z-10 w-[100vw] p-[30px] bg-[var(--shadowItem)] text-gray-100 rounded-t-[10px]"
-                >
-                    <p class="max-w-[1300px] mx-auto text-base font-normal">
-                        Cuidamos do seu pet com amor e excelência veterinária.
-                        <br />
-                        Seu pet merece o melhor cuidado, e na Dr. Pet oferecemos
-                        atendimento veterinário de alta qualidade, focado no
-                        bem-estar e na saúde do seu companheiro de quatro patas.
-                        <br />
-                        Com uma equipe altamente qualificada e liderada por
-                        especialistas, garantimos diagnósticos precisos,
-                        tratamentos eficazes e um atendimento humanizado para
-                        que você tenha total
-                        <br />
-                        confiança nos cuidados que seu pet recebe.
-                    </p>
+            <section class="relative w-full h-[400px] md:h-[600px] lg:h-[800px] bg-gray-100">
+                <!-- Slider main container -->
+                <div class="swiper w-full h-full">
+                <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <figure class="swiper-slide w-full h-full">
+                            <img src="public/images/introduction.png" alt="introduction" class="w-full h-full object-cover object-center">
+                        </figure>
+                        <figure class="swiper-slide w-full h-full">
+                            <img src="public/images/introduction.png" alt="introduction" class="w-full h-full object-cover object-center">
+                        </figure>
+                        <figure class="swiper-slide w-full h-full">
+                            <img src="public/images/introduction.png" alt="introduction" class="w-full h-full object-cover object-center">
+                        </figure>
+                        <figure class="swiper-slide w-full h-full">
+                            <img src="public/images/introduction.png" alt="introduction" class="w-full h-full object-cover object-center">
+                        </figure>
+                    </div>
+                    <!-- pagination -->
+                    <div class="swiper-pagination custom-swiper-pagination"></div>
+
+                    <!-- navigation buttons -->
+                    <div class="swiper-button-prev custom-swiper-button !left-4 lg:!left-10">
+                        <img src="public/images/components/slide/arrow-left.svg" alt="Anterior" class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
+                    </div>
+                    <div class="swiper-button-next custom-swiper-button !right-4 lg:!right-10">
+                        <img src="public/images/components/slide/arrow-right.svg" alt="Próximo" class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
+                    </div>
                 </div>
             </section>
 
@@ -117,11 +126,11 @@
                         class="flex flex-wrap items-center justify-center gap-[50px] w-full p-5"
                     >
                         <a
-                            href="src/pages/agenda.html"
+                            href="public/pages/agenda.html"
                             class="service-card flex flex-col"
                         >
                             <img
-                                src="src/images/services/vacinação.png"
+                                src="public/images/services/vacinação.png"
                                 alt="Vacinação"
                                 class="w-full h-[300px] object-cover"
                             />
@@ -141,11 +150,11 @@
                         </a>
 
                         <a
-                            href="src/pages/agenda.html"
+                            href="public/pages/agenda.html"
                             class="service-card flex flex-col"
                         >
                             <img
-                                src="src/images/services/banho-tosa.png"
+                                src="public/images/services/banho-tosa.png"
                                 alt="Banho e Tosa"
                                 class="w-full h-[300px] object-cover"
                             />
@@ -165,11 +174,11 @@
                         </a>
 
                         <a
-                            href="src/pages/agenda.html"
+                            href="public/pages/agenda.html"
                             class="service-card flex flex-col"
                         >
                             <img
-                                src="src/images/services/cirurgia.png"
+                                src="public/images/services/cirurgia.png"
                                 alt="Cirurgias"
                                 class="w-full h-[300px] object-cover"
                             />
@@ -194,20 +203,20 @@
                     class="px-[30px] py-10 md:px-[60px] lg:px-20 bg-green-600 flex flex-wrap items-center justify-between gap-[30px]"
                 >
                     <h3
-                        class="text-2xl md:text-3xl lg:text-4xl font-semibold text-center md:text-left text-gray-50 flex-1 min-w-[280px] leading-tight"
+                        class="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-50 flex-1 min-w-[280px] leading-tight"
                     >
                         Gostou de nossos serviços?
                     </h3>
                     <div class="w-fit mx-auto md:mx-0">
                         <a
-                            href="src/pages/agenda.html"
-                            class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-[24px] py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300"
+                            href="public/pages/agenda.html"
+                            class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-6 py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300"
                         >
                             AGENDE AGORA
                             <img
-                                src="src/images/components/calendar_clock.svg"
+                                src="public/images/components/calendar_clock.svg"
                                 alt="Agendamento"
-                                class="w-[24px] h-[24px] md:w-[30px] md:h-[30px]"
+                                class="w-6 h-6 md:w-[30px] md:h-[30px]"
                             />
                         </a>
                     </div>
@@ -224,7 +233,7 @@
                         <figure class="w-full sm:w-[80%] lg:flex-[1_1_350px] max-w-[500px] flex-shrink-0 group mx-auto lg:mx-0">
                             <!-- Imagem Principal -->
                             <img
-                                src="src/images/imagem-sobre.jpg"
+                                src="public/images/imagem-sobre.jpg"
                                 alt="Veterinário Dr.Pet"
                                 class="w-full h-auto object-cover rounded-[10px] border-[2px] border-green-800 transition-all duration-300 
                                        shadow-[12px_12px_0_0_#2AF29B] 
@@ -249,7 +258,7 @@
                                 <ul class="flex flex-col gap-5">
 
                                     <li class="flex items-center gap-5 group">
-                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <img src="public/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
                                         <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                             <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Cuidado e Assistência Completa</strong>
                                             Prevenção, tratamentos médicos, além de serviços de banho e tosa para o seu pet.
@@ -257,7 +266,7 @@
                                     </li>
 
                                     <li class="flex items-center gap-5 group">
-                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <img src="public/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
                                         <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                             <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Infraestrutura e Equipe Qualificada</strong>
                                             Equipamentos modernos e profissionais experientes para garantir o melhor atendimento.
@@ -265,7 +274,7 @@
                                     </li>
 
                                     <li class="flex items-center gap-5 group">
-                                        <img src="src/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
+                                        <img src="public/images/components/check-about.svg" alt="Check" class="w-6 h-6 md:w-8 md:h-8" />
                                         <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                             <strong class="font-semibold block mb-1 text-gray-900 group-hover:text-green-700 transition-colors">Atendimento Presencial e Domiciliar</strong>
                                             Flexibilidade e comodidade para atender a sua necessidade, na clínica ou no lar.
@@ -296,62 +305,62 @@
                                 </h2>
                             </div>
                             
-                            <p class="text-lg md:text-xl font-medium text-gray-600 leading-relaxed max-w-[550px] text-center lg:text-left mx-auto lg:mx-0">
+                            <p class="text-lg md:text-xl font-medium text-gray-600 leading-relaxed max-w-[550px] mx-auto lg:mx-0">
                                 Em nosso petshop, você encontra tudo o que seu pet precisa para se manter saudável e feliz! Oferecemos uma ampla gama de produtos, como rações de qualidade, brinquedos, acessórios e itens de higiene, sempre com as melhores marcas do mercado. Nosso compromisso é garantir que seu animal receba o melhor em cuidado e bem-estar.
                             </p>
 
-                            <div class="shadow bg-white w-full sm:w-fit mx-auto lg:mx-0 grid grid-cols-2 gap-x-2 xs:gap-x-6 md:gap-x-10 gap-y-4 px-3 xs:px-6 py-5 rounded-xl border border-gray-100">
+                            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mb-2 rounded-xl w-full mx-auto lg:mx-0">
 
-                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
-                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-green-light rounded-[10px] shrink-0">
-                                        <img src="src/images/components/petshop-section/bag.svg" alt="Acessórios" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                <div class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
+                                    <figure class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-green-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
+                                        <img src="public/images/components/petshop-section/bag.svg" alt="Acessórios" class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                     </figure>
-                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Acessórios</span>
+                                    <span class="text-base lg:text-lg font-bold text-gray-800 text-center transition-all duration-300">Acessórios</span>
                                 </div>
 
-                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
-                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-red-light rounded-[10px] shrink-0">
-                                        <img src="src/images/components/petshop-section/toys.svg" alt="Brinquedos" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                <div class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
+                                    <figure class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-red-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
+                                        <img src="public/images/components/petshop-section/toys.svg" alt="Brinquedos" class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                     </figure>
-                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Brinquedos</span>
+                                    <span class="text-base lg:text-lg font-bold text-gray-800 text-center transition-all duration-300">Brinquedos</span>
                                 </div>
 
-                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
-                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-orange-light rounded-[10px] shrink-0">
-                                        <img src="src/images/components/petshop-section/pet-food.svg" alt="Ração" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                <div class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
+                                    <figure class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-orange-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
+                                        <img src="public/images/components/petshop-section/pet-food.svg" alt="Ração" class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                     </figure>
-                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Rações</span>
+                                    <span class="text-base lg:text-lg font-bold text-gray-800 text-center transition-all duration-300">Rações</span>
                                 </div>
 
-                                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-[10px] px-2 sm:px-4 py-2 rounded-[10px]">
-                                    <figure class="flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-blue-light rounded-[10px] shrink-0">
-                                        <img src="src/images/components/petshop-section/hygiene.svg" alt="Higiene" class="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain" />
+                                <div class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
+                                    <figure class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-blue-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
+                                        <img src="public/images/components/petshop-section/hygiene.svg" alt="Higiene" class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                     </figure>
-                                    <span class="text-sm xs:text-base md:text-lg font-semibold text-gray-800 text-center">Higiene</span>
+                                    <span class="text-base lg:text-lg font-bold text-gray-800 text-center transition-all duration-300">Higiene</span>
                                 </div>
                             </div>
 
                             <div class="mt-5 flex justify-center lg:justify-start">
                                 <a
-                                    href="src/pages/loja.html"
-                                    class="inline-flex items-center justify-center gap-[15px] px-[32px] py-[16px] bg-green-700 hover:bg-green-600 text-lg md:text-xl font-bold text-white uppercase rounded-[12px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                    href="public/pages/loja.html"
+                                    class="inline-flex items-center justify-center gap-[15px] px-[32px] py-[16px] bg-green-600 hover:bg-green-500 text-lg md:text-xl font-bold text-white uppercase rounded-[12px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
                                 >
                                     VEJA MAIS SOBRE
-                                    <img src="src/images/components/petshop-section/arrow.svg" alt="Seta Direita" class="w-[24px] h-[24px] transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0" />
+                                    <img src="public/images/components/petshop-section/arrow.svg" alt="Seta Direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0" />
                                 </a>
                             </div>
                         </article>
 
-                        <figure class="flex-1 w-full max-w-[400px] lg:max-w-[500px] aspect-square relative mt-[50px] lg:mt-0 group mx-auto">
+                        <figure class="w-full sm:w-[80%] lg:flex-[1_1_400px] xl:flex-[1_1_500px] min-w-[280px] max-w-[500px] flex-shrink-0 aspect-square relative mt-[50px] lg:mt-0 group mx-auto">
                             <img
-                                src="src/images/components/petshop-section/dog-petshop.png"
+                                src="public/images/components/petshop-section/dog-petshop.png"
                                 alt="Cachorro Pet Shop"
-                                class="absolute top-0 right-0 aspect-square rounded-2xl w-[60%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] group-hover:z-30 z-10"
+                                class="absolute top-0 right-0 aspect-square rounded-2xl w-[65%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] group-hover:z-30 z-10"
                             />
                             <img
-                                src="src/images/components/petshop-section/cat-petshop.png"
+                                src="public/images/components/petshop-section/cat-petshop.png"
                                 alt="Gato Pet Shop"
-                                class="absolute bottom-0 left-0 aspect-square rounded-2xl w-[60%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] z-20 group-hover:z-20"
+                                class="absolute bottom-0 left-0 aspect-square rounded-2xl w-[65%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] z-20 group-hover:z-20"
                             />
                         </figure>
 
@@ -360,80 +369,63 @@
             </section>
         </main>
 
-        <footer class="footer" id="contato">
-            <h1 class="text-4xl font-semibold text-center">
-                Se você ficou interessado pelos nossos serviços, estamos aqui
-                para ajudar!
-            </h1>
-            <div class="text-center">
-                <p class="text-3xl font-normal">
-                    Fique à vontade para entrar em contato conosco a qualquer
-                    momento. Nossa equipe está pronta para tirar suas dúvidas,
-                    oferecer informações adicionais e discutir como podemos
-                    atender às suas necessidades.
-                </p>
-                <p class="text-3xl font-normal">
-                    Você pode nos encontrar de alcançar de varias maneiras:
+        <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato">
+    
+            <!-- Cabeçalho do Footer -->
+            <div class="flex flex-col items-center gap-4 text-center w-full max-w-[1275px]">
+                <h2 id="footer-heading" class="text-2xl md:text-[28px] lg:text-3xl font-semibold text-gray-50 leading-tight">
+                    Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!
+                </h2>
+                <p class="text-lg md:text-[22px] font-medium text-gray-50 leading-relaxed max-w-[1000px]">
+                    Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades. Entre em contato conosco:
                 </p>
             </div>
 
-            <nav class="footer-info">
-                <div class="info-item">
-                    <img
-                        src="src/images/components/foooter-icons/locate-icon.png"
-                        alt="endereço"
-                    />
-                    <a
-                        target="_blank"
-                        href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2"
-                    >
-                        R. Maj. Adalberto Dos Santos
-                        <br />
-                        Figueiredo, 414 - Chácara São Domingos, Mococa - SP,
-                        13733-130
-                    </a>
-                </div>
+            <!-- Informações de Contato (Semântico: address) -->
+            <address class="not-italic w-full max-w-[1275px] mt-4">
+                
+                <ul class="flex flex-wrap *:mx-auto max-[550px]:*:min-w-[400px] md:*:mx-0 md:justify-between items-start gap-y-12 gap-x-6">
+                    
+                    <!-- Localização -->
+                    <li class="flex flex-row items-center gap-5 flex-1 min-w-[280px] max-w-[400px]">
+                        <img src="public/images/components/foooter-icons/location.png" alt="Ícone de localização mapeamento geográfico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                        <a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                            R. Maj. Adalberto Dos Santos Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
+                        </a>
+                    </li>
+                    
+                    <!-- Instagram -->
+                    <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
+                        <img src="public/images/components/foooter-icons/instagram.png" alt="Logo de botão do Instagram" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/doutorpetmococa" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                            @doutorpetmococa
+                        </a>
+                    </li>
+                    
+                    <!-- Telefones -->
+                    <li class="flex flex-row items-center gap-5 flex-1 min-w-[240px] max-w-[300px]">
+                        <img src="public/images/components/foooter-icons/phone.png" alt="Ícone de Telefone Clássico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                        <div class="flex flex-col gap-2 text-base md:text-lg font-medium text-gray-50">
+                            <a target="_blank" rel="noopener noreferrer" href="tel:+551936656242" aria-label="Ligar para o telefone Fixo" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
+                                (19) 3665-6242
+                            </a>
+                            <a target="_blank" rel="noopener noreferrer" href="tel:+5519993592253" aria-label="Chamar no Whatsapp" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
+                                (19) 99359-2253
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <!-- Endereço de Email -->
+                    <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
+                        <img src="public/images/components/foooter-icons/email.png" alt="Ícone de Carta de Email" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
+                        <a target="_blank" rel="noopener noreferrer" href="mailto:mvlucasvet@gmail.com" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
+                            mvlucasvet@gmail.com
+                        </a>
+                    </li>
 
-                <div class="info-item">
-                    <img
-                        src="src/images/components/foooter-icons/instagram-icon.png"
-                        alt="instagram"
-                    />
-                    <a
-                        target="_blank"
-                        href="https://www.instagram.com/doutorpetmococa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"
-                        >@doutorpetmococa</a
-                    >
-                </div>
-
-                <div class="info-item">
-                    <img
-                        src="src/images/components/foooter-icons/phone-icon.png"
-                        alt="telefone"
-                    />
-                    <div>
-                        <a target="_blank" href="tel:+5519993592253"
-                            >(19) 99359-2253</a
-                        >
-                        <br />
-                        <a target="_blank" href="tel:+551936656242"
-                            >(19) 3665-6242</a
-                        >
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <img
-                        src="src/images/components/foooter-icons/email-icon.png"
-                        alt="email"
-                    />
-                    <a target="_blank" href="mailto:mvlucasvet@gmail.com"
-                        >mvlucasvet@gmail.com</a
-                    >
-                </div>
-            </nav>
+                </ul>
+            </address>
         </footer>
-
-        <script type="module" src="src/javascript/header.js"></script>
     </body>
+    <script src="public/javascript/slides.js" type="module"></script>
 </html>
