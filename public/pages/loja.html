@@ -1,496 +1,421 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/output.css">
-    <link
-        rel="shortcut icon"
-        href="../images/logo.png"
-        type="image/x-icon"
-    />
-    <title>Dr.Pet | Loja</title>
-</head>
-<body>
-    <header class="header">
-        <div class="container flex items-center justify-between mx-auto">
-            <a
-                href="../../index.html"
-                class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
-            >
-                <img
-                    src="../images/logo.png"
-                    alt="Logo Dr. Pet"
-                    class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
-                />
-                <span
-                    class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-white tracking-wide transition-all duration-300 whitespace-nowrap"
-                    >Dr. Pet</span
-                >
-            </a>
-
-            <div
-                id="nav-menu"
-                class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
-            >
-
-                <nav
-                    class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
-                >
-                    <a href="../../index.html#servicos" class="nav-link whitespace-nowrap"
-                        >Serviços</a
-                    >
-                    <a href="../../index.html#sobre" class="nav-link whitespace-nowrap"
-                        >Sobre nós</a
-                    >
-                    <a href="loja.html" class="nav-link whitespace-nowrap"
-                        >Pet shop</a
-                    >
-                    <a href="agenda.html" class="nav-link whitespace-nowrap"
-                        >Agendamento</a
-                    >
-                    <a href="#contato" class="nav-link whitespace-nowrap"
-                        >Contato</a
-                    >
-                </nav>
-
-                <button
-                    class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../style/output.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link
+            rel="shortcut icon"
+            href="../images/logo.png"
+            type="image/x-icon"
+        />
+        <title>Dr.Pet | Loja</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container flex items-center justify-between mx-auto">
+                <a
+                    href="../../index.html"
+                    class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
                 >
                     <img
-                        src="../images/components/user.svg"
-                        alt="Ícone de Usuário"
-                        class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                        src="../images/logo.png"
+                        alt="Logo Dr. Pet"
+                        class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
                     />
+                    <span
+                        class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap"
+                        >Dr. Pet</span
+                    >
+                </a>
+
+                <div
+                    id="nav-menu"
+                    class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+                >
+                    <nav
+                        class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                    >
+                        <a
+                            href="../../index.html#servicos"
+                            class="nav-link whitespace-nowrap"
+                            >Serviços
+                        </a>
+                        <a
+                            href="../../index.html#sobre"
+                            class="nav-link whitespace-nowrap"
+                            >Sobre nós
+                        </a>
+                        <a href="loja.html" class="nav-link whitespace-nowrap"
+                            >Pet shop
+                        </a>
+                        <a href="agenda.html" class="nav-link whitespace-nowrap"
+                            >Agendamento
+                        </a>
+                        <a href="#contato" class="nav-link whitespace-nowrap"
+                            >Contato
+                        </a>
+                    </nav>
+
+                    <button
+                        class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                    >
+                        <img
+                            src="../images/icons/user.svg"
+                            alt="Ícone de Usuário"
+                            class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                        />
+                    </button>
+                </div>
+
+                <button
+                    class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+                >
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
                 </button>
             </div>
+        </header>
 
-            <button
-                class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+        <main>
+            <figure>
+                <img
+                    src="../images/banner loja.jpg"
+                    alt="banner loja"
+                    class="w-full h-auto object-cover object-center"
+                />
+            </figure>
+
+            <section class="bg-gray-50 px-6 md:px-12 lg:px-20 py-10 md:py-[60px]">
+                <nav>
+                    <h1
+                        class="text-gray-800 font-sans font-semibold text-[28px] md:text-[40px] lg:text-[52px] leading-[1.23] text-left md:text-center w-full mb-[30px]"
+                    >
+                        Nosso catalogo especialmente pensado para seu
+                        <span class="text-green-300">pet!</span>
+                    </h1>
+
+                    <div class="flex items-center gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[50px]">
+                        <label for="search-input" class="relative w-full flex-grow">
+                            <input
+                                id="search-input"
+                                type="text"
+                                placeholder="Ração para Cachorros"
+                                class="w-full bg-gray-100 border-[4px] border-gray-500 text-gray-700 placeholder-gray-400 rounded-[20px] py-4 md:py-6 pl-4 md:pl-12 pr-14 md:pr-24 text-lg md:text-xl lg:text-2xl font-sans font-semibold uppercase leading-[1.23] focus:outline-none focus:border-green-400 transition-all duration-300 cursor-text"
+                            />
+                            <img
+                                src="../images/icons/loja-icons/search.svg"
+                                alt="Lupa de pesquisa"
+                                class="absolute right-[20px] md:right-[30px] lg:right-[48px] top-1/2 -translate-y-1/2 w-8 h-8 md:w-[45px] md:h-[45px] pointer-events-none"
+                            />
+                        </label>
+
+                        <button
+                            type="button"
+                            class="p-3 flex-shrink-0 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-4 focus:ring-offset-gray-50 rounded-[12px] transition-all duration-300 flex items-center justify-center cursor-pointer"
+                        >
+                            <img
+                                src="../images/icons/loja-icons/filtro.svg"
+                                alt="Ícone de Filtros"
+                                class="w-12 h-12 md:w-[50px] md:h-[50px] lg:w-[64px] lg:h-[64px] object-contain"
+                            />
+                        </button>
+                    </div>
+                </nav>
+
+                <section class="mt-10 bg-gray-100 py-10 px-[120px] md:py-[50px] rounded-[10px] relative w-full">
+                    <div class="swiper product-swiper w-full overflow-hidden">
+                        <div class="swiper-wrapper">
+                    <!-- Produto 1 -->
+                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
+                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                            <img
+                                src="../images/products/GoldenSpecial.png"
+                                alt="PremieRPet - Golden Special"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </figure>
+                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                            <article class="flex flex-col gap-2">
+                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                    PremieRPet - Golden Special
+                                </h3>
+                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                </p>
+                            </article>
+                            <div class="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    <span>Ver mais sobre</span>
+                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
+                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                            <img
+                                src="../images/products/GoldenSpecial.png"
+                                alt="PremieRPet - Golden Special"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </figure>
+                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                            <article class="flex flex-col gap-2">
+                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                    PremieRPet - Golden Special
+                                </h3>
+                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                </p>
+                            </article>
+                            <div class="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    <span>Ver mais sobre</span>
+                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
+                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                            <img
+                                src="../images/products/GoldenSpecial.png"
+                                alt="PremieRPet - Golden Special"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </figure>
+                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                            <article class="flex flex-col gap-2">
+                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                    PremieRPet - Golden Special
+                                </h3>
+                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                </p>
+                            </article>
+                            <div class="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    <span>Ver mais sobre</span>
+                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
+                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                            <img
+                                src="../images/products/GoldenSpecial.png"
+                                alt="PremieRPet - Golden Special"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </figure>
+                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                            <article class="flex flex-col gap-2">
+                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                    PremieRPet - Golden Special
+                                </h3>
+                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                </p>
+                            </article>
+                            <div class="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    <span>Ver mais sobre</span>
+                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
+                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                            <img
+                                src="../images/products/GoldenSpecial.png"
+                                alt="PremieRPet - Golden Special"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </figure>
+                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                            <article class="flex flex-col gap-2">
+                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                    PremieRPet - Golden Special
+                                </h3>
+                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                </p>
+                            </article>
+                            <div class="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
+                                >
+                                    <span>Ver mais sobre</span>
+                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button class="group loja-swiper-button-prev hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <img src="../images/icons/slide/arrow-left.svg" alt="Anterior" class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300">
+                    </button>
+                    <button class="group loja-swiper-button-next hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <img src="../images/icons/slide/arrow-right.svg" alt="Próximo" class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300">
+                    </button>
+                </section>
+
+                <div class="flex justify-center mt-10">
+                    <button class="min-w-[350px] px-8 py-4 bg-green-600 hover:bg-green-500 text-xl md:text-2xl lg:text-3xl font-semibold text-gray-50 uppercase rounded-[12px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400">
+                        Veja mais...
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer
+            class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto"
+            id="contato"
+        >
+            <!-- Cabeçalho do Footer -->
+            <div
+                class="flex flex-col items-center gap-4 text-center w-full max-w-[1275px]"
             >
-                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
-                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
-                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
-            </button>
-        </div>
-    </header>
-
-    <main class="margin-top-header main-shop main">
-        <section class="section-products">
-            <h1 class="title-md-semiBold">Ofertas</h1>
-            
-            <div class="scroll products-shop-items">
-
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                <h2
+                    id="footer-heading"
+                    class="text-2xl md:text-[28px] lg:text-3xl font-semibold text-gray-50 leading-tight"
+                >
+                    Se você ficou interessado pelos nossos serviços, estamos
+                    aqui para ajudar!
+                </h2>
+                <p
+                    class="text-lg md:text-[22px] font-medium text-gray-50 leading-relaxed max-w-[1000px]"
+                >
+                    Nossa equipe está pronta para tirar suas dúvidas, oferecer
+                    informações adicionais e discutir como podemos atender às
+                    suas necessidades. Entre em contato conosco:
+                </p>
             </div>
-        </section>
-        
-        <img src="../images/banner.jpg" alt="De o que há de melhor para seu melhor amigo" class="shadow banner-shop">
 
-        <section class="section-products">
-            <h1 class="title-md-semiBold">Mais Vendidos</h1>
-            
-            <div class="scroll products-shop-items">
+            <!-- Informações de Contato (Semântico: address) -->
+            <address class="not-italic w-full max-w-[1275px] mt-4">
+                <ul
+                    class="flex flex-wrap items-center *:mx-auto max-[550px]:*:min-w-[400px] md:*:mx-0 md:justify-between gap-y-12 gap-x-6"
+                >
+                    <!-- Localização -->
+                    <li
+                        class="flex flex-row items-center gap-5 flex-1 min-w-[280px] max-w-[400px]"
+                    >
+                        <img
+                            src="../images/icons/foooter-icons/location.png"
+                            alt="Ícone de localização mapeamento geográfico"
+                            class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0"
+                        />
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2"
+                            class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words"
+                        >
+                            R. Maj. Adalberto Dos Santos Figueiredo, 414 -
+                            Chácara São Domingos, Mococa - SP, 13733-130
+                        </a>
+                    </li>
 
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow products-item">
-                    <figure class="images-item-shop">
-                        <img src="../images/products/GoldenSpecial.png" alt="GoldenSpecial" class="image-item">
-                        <figure class="shop-plus js-addCart">
-                            <img src="../images/components/shop-plus.svg" alt="Adicionar ao carrinho">
-                        </figure>
-                    </figure>
-                    <div class="infos-product-shop">
-                        <p class="text-sm-medium product-name">PremieRPet - Golden Sepecial</p>
-                        <div class="div-price">
-                            <p class="text-xs-medium price-item js-priceItem">R$ 199,99</p>
-                            <p class="text-sm-medium price-item-discount js-discountItem">R$ 159,99 <span class="text-xs-medium discount-info js-discountInfo">20% OFF</span></p>
-                        </div>
-                        <div class="div-button">
-                            <a href="produto.html" class="text-sm-semiBold button-green">
-                                Compre Agora
-                                <img src="../images/components/shop.svg" alt="Compra">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Instagram -->
+                    <li
+                        class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]"
+                    >
+                        <img
+                            src="../images/icons/foooter-icons/instagram.png"
+                            alt="Logo de botão do Instagram"
+                            class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0"
+                        />
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://www.instagram.com/doutorpetmococa"
+                            class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words"
+                        >
+                            @doutorpetmococa
+                        </a>
+                    </li>
 
-            </div>
-        </section>
-    </main>
+                    <!-- Telefones -->
+                    <li
+                        class="flex flex-row items-center gap-5 flex-1 min-w-[240px] max-w-[300px]"
+                    >
+                        <img
+                            src="../images/icons/foooter-icons/phone.png"
+                            alt="Ícone de Telefone Clássico"
+                            class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0"
+                        />
+                        <div
+                            class="flex flex-col gap-2 text-base md:text-lg font-medium text-gray-50"
+                        >
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="tel:+551936656242"
+                                aria-label="Ligar para o telefone Fixo"
+                                class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors"
+                            >
+                                (19) 3665-6242
+                            </a>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="tel:+5519993592253"
+                                aria-label="Chamar no Whatsapp"
+                                class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors"
+                            >
+                                (19) 99359-2253
+                            </a>
+                        </div>
+                    </li>
 
-    <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
-    
-    <!-- Cabeçalho do Footer -->
-    <div class="flex flex-col items-center gap-4 text-center w-full max-w-[1275px]">
-        <h2 id="footer-heading" class="text-2xl md:text-[28px] lg:text-3xl font-semibold text-gray-50 leading-tight">
-            Se você ficou interessado pelos nossos serviços, estamos aqui para ajudar!
-        </h2>
-        <p class="text-lg md:text-[22px] font-medium text-gray-50 leading-relaxed max-w-[1000px]">
-            Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como podemos atender às suas necessidades. Entre em contato conosco:
-        </p>
-    </div>
+                    <!-- Endereço de Email -->
+                    <li
+                        class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]"
+                    >
+                        <img
+                            src="../images/icons/foooter-icons/email.png"
+                            alt="Ícone de Carta de Email"
+                            class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0"
+                        />
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="mailto:mvlucasvet@gmail.com"
+                            class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words"
+                        >
+                            mvlucasvet@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </address>
+        </footer>
 
-    <!-- Informações de Contato (Semântico: address) -->
-    <address class="not-italic w-full max-w-[1275px] mt-4">
-        
-        <ul class="flex flex-wrap justify-center md:justify-between items-start gap-y-12 gap-x-6 w-full">
-            
-            <!-- Localização -->
-            <li class="flex flex-row items-center gap-5 flex-1 min-w-[280px] max-w-[400px]">
-                <img src="../images/components/foooter-icons/location.png" alt="Ícone de localização mapeamento geográfico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
-                <a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/R.+Maj.+Adalberto+Dos+Santos+Figueiredo,+414+-+Jardim+Sao+Domingos,+Mococa+-+SP,+13733-130/@-21.4581889,-47.0063504,3a,75y,82.63h,84.41t/data=!3m7!1e1!3m5!1swakAS0cLyfDvtD3rXLxdkA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D5.592196512566815%26panoid%3DwakAS0cLyfDvtD3rXLxdkA%26yaw%3D82.63387093877445!7i16384!8i8192!4m7!3m6!1s0x94b7b84cc7c6594d:0xe5ae3fa632d5eb7f!8m2!3d-21.4581313!4d-47.0061845!10e5!16s%2Fg%2F11csf28nmh?entry=tts&g_ep=EgoyMDI1MDQwOS4wIPu8ASoASAFQAw%3D%3D&skid=0d48dcae-ed8d-4c3a-8323-205a9c8febc2" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
-                    R. Maj. Adalberto Dos Santos Figueiredo, 414 - Chácara São Domingos, Mococa - SP, 13733-130
-                </a>
-            </li>
-            
-            <!-- Instagram -->
-            <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
-                <img src="../images/components/foooter-icons/instagram.png" alt="Logo de botão do Instagram" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/doutorpetmococa" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
-                    @doutorpetmococa
-                </a>
-            </li>
-            
-            <!-- Telefones -->
-            <li class="flex flex-row items-center gap-5 flex-1 min-w-[240px] max-w-[300px]">
-                <img src="../images/components/foooter-icons/phone.png" alt="Ícone de Telefone Clássico" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
-                <div class="flex flex-col gap-2 text-base md:text-lg font-medium text-gray-50">
-                    <a target="_blank" rel="noopener noreferrer" href="tel:+551936656242" aria-label="Ligar para o telefone Fixo" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
-                        (19) 3665-6242
-                    </a>
-                    <a target="_blank" rel="noopener noreferrer" href="tel:+5519993592253" aria-label="Chamar no Whatsapp" class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors">
-                        (19) 99359-2253
-                    </a>
-                </div>
-            </li>
-            
-            <!-- Endereço de Email -->
-            <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
-                <img src="../images/components/foooter-icons/email.png" alt="Ícone de Carta de Email" class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
-                <a target="_blank" rel="noopener noreferrer" href="mailto:mvlucasvet@gmail.com" class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
-                    mvlucasvet@gmail.com
-                </a>
-            </li>
-
-        </ul>
-    </address>
-</footer>
-    
-    <script type="module" src="../javascript/header.js"></script>
-</body>
+        <script type="module" src="../javascript/loja-slides.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    </body>
 </html>
