@@ -1,72 +1,116 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/output.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Dr.Pet | Login</title>
 
 </head>
 <body>
     <header class="header">
-        <figure>
-            <a href="../../index.html">
-                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+        <div class="container flex items-center justify-between mx-auto">
+            <a
+                href="index.html"
+                class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
+            >
+                <img
+                    src="../images/logo.png"
+                    alt="Logo Dr. Pet"
+                    class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
+                />
+                <span
+                    class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap"
+                >Dr. Pet</span
+                >
             </a>
-        </figure>
 
-        <div class="header-contentShop">
-            <figure class="menu-user js-userButton">
-                <img src="../images/icons/header-icons/user.svg" alt="Usuário" class="user">
-            </figure> 
+            <div
+                id="nav-menu"
+                class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+            >
+
+                <nav
+                    class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                >
+                    <a href="#servicos" class="nav-link whitespace-nowrap"
+                        >Serviços</a
+                    >
+                    <a href="#sobre" class="nav-link whitespace-nowrap"
+                        >Sobre nós</a
+                    >
+                    <a href="loja.html" class="nav-link whitespace-nowrap"
+                        >Pet shop</a
+                    >
+                    <a href="agenda.html" class="nav-link whitespace-nowrap"
+                        >Agendamento</a
+                    >
+                    <a href="#contato" class="nav-link whitespace-nowrap"
+                        >Contato</a
+                    >
+                </nav>
+
+                <button
+                    class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                >
+                    <img
+                        src="../images/icons/user.svg"
+                        alt="Ícone de Usuário"
+                        class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                    />
+                </button>
+            </div>
+
+            <button
+                class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+            >
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+            </button>
         </div>
-
-        <!-- menu sem usuário -->
-        <nav class="shadow menu-semLogin js-menuSemLogin">
-            <a href="cadastrar.html" class="text-md-medium">Criar uma conta</a>
-            <a href="login.html" class="text-md-medium">Entrar</a>
-        </nav>
     </header>
 
-    <main class="main">
-        <form class="form" action="#" autocomplete="off">
-            <h1 class="title-xl-semiBold">Login</h1>
-            <section class="form-login">
-                <div>
-                    <label for="nameUser" class="text-lg-medium">Nome do Usuário</label>
-                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="nameUser" required>
-                </div>
-                <div>
-                    <label for="email" class="text-lg-medium">E-mail</label>
-                    <input type="email" name="email" class="text-lg-medium input-form" id="email" required>
-                </div>
-                <div>
-                    <label for="phone" class="text-lg-medium">Telefone</label>
-                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
-                </div>
-                <div class="content-password">
-                    <label for="passwordUser" class="text-lg-medium">Senha</label>
-                    <div>
-                        <!-- trocar para on quando clicar com javascript -->
-                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
-                        <img src="../images/icons/visibily/visibility-off-icon.svg" alt="Ver senha">
+    <main class="flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2 flex items-center justify-center">
+            <img src="../images/forms-images/login.jpg" alt="Faça Login em nosso site" class="w-full max-w-lg md:max-w-xl object-contain">
+        </div>
+        
+        <div class="w-full md:w-1/2 flex items-center justify-center">
+            <form action="#" class="form-auth">
+                <h1 class="form-auth-title">Login</h1>
+                
+                <div class="form-auth-group">
+                    <label for="email" class="form-auth-label">E-mail</label>
+                    <div class="form-auth-input-wrapper">
+                        <input type="email" id="email" name="email" class="form-auth-input" placeholder="Digite seu e-mail" required>
                     </div>
-                    <!-- mostrar com javascript próximas páginas -->
-                    <p class="text-md-semiBold esqueceu-senha">Esqueceu a Senha?</p>
                 </div>
-                <section class="send-form-login">
-                    <button type="button" class="text-lg-semiBold button-google">
-                        Login
-                        <img src="../images/icons/brands-icons/google-icon.svg" alt="Google Login">
+
+                <div class="form-auth-group">
+                    <label for="password" class="form-auth-label">Senha</label>
+                    <div class="form-auth-input-wrapper">
+                        <input type="password" id="password" name="password" class="form-auth-input" placeholder="Digite sua senha" required>
+                        <!-- Adicione o src correto do ícone do olho de sua pasta de imagens -->
+                        <img src="../images/icons/eye.svg" onerror="this.style.display='none'" alt="Ver senha" class="cursor-pointer w-[30px] h-[30px] absolute right-4 transition-opacity hover:opacity-75">
+                    </div>
+                </div>
+
+                <a href="#" class="form-auth-forgot">Esqueceu a senha?</a>
+
+                <div class="form-auth-actions">
+                    <button type="button" class="form-auth-btn form-auth-btn-google">
+                        <img src="../images/icons/google.svg" onerror="this.style.display='none'" alt="Google Logo" class="w-8 h-8 md:w-10 md:h-10">
+                        Login com Google
                     </button>
-                    <div class="choice-account">
-                        <button type="submit" name="Continuar" class="text-xl-semiBold button-green-form">Continuar</button>
-                        <a href="cadastrar.html" type="button" name="criar-conta" class="text-xl-semiBold">Criar Conta</a>
-                    </div>
-                </section>
-            </section>
-        </form>
+                    
+                    <button type="submit" class="form-auth-btn form-auth-btn-primary">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
 
     <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
