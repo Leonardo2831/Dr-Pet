@@ -188,6 +188,15 @@
     .today {
         @apply bg-green-700 text-gray-100 !important;
     }
+    .schedule-day-circle-green {
+        @apply w-[60px] h-[60px] mx-auto rounded-full bg-green-700 text-gray-50 text-[30px] leading-[60px] font-medium;
+    }
+    .schedule-day-circle-red {
+        @apply w-[60px] h-[60px] mx-auto rounded-full bg-red-alert text-gray-50 text-[30px] leading-[60px] font-medium;
+    }
+    .schedule-day-sunday-closed {
+        @apply text-[30px] leading-[37px] text-red-alert font-medium;
+    }
     .open-hour {
         @apply text-green-600;
     }
