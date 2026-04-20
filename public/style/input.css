@@ -122,6 +122,21 @@
         @apply w-full py-4 px-8 bg-gray-200 text-green-700 rounded-[10px] transition-colors duration-200 hover:text-gray-50 hover:bg-green-500;
     }
 
+    .btn-create-account {
+        @apply relative overflow-hidden border-b-4 border-green-300 transition-colors duration-300;
+        background:
+            linear-gradient(#1fbe75, #1fbe75) left top / 0 4px no-repeat,
+            linear-gradient(#1fbe75, #1fbe75) left top / 4px 0 no-repeat,
+            linear-gradient(#1fbe75, #1fbe75) right top / 4px 0 no-repeat,
+            linear-gradient(#1fbe75, #1fbe75) right bottom / 4px 0 no-repeat;
+        transition: background-size 300ms ease-out, color 300ms ease-out;
+    }
+
+    .btn-create-account:hover,
+    .btn-create-account:focus-visible {
+        background-size: 100% 4px, 4px 100%, 4px 100%, 4px 100%;
+    }
+
     /* form inputs (green background variant) */
     .input-form {
         @apply w-full pt-4 pb-[5px] border-b-2 border-gray-300 bg-transparent text-gray-100 cursor-pointer focus:border-[3px] focus:border-green-50 focus:rounded-[10px] focus:py-4 focus:px-5 outline-none;
@@ -235,4 +250,4 @@
     .form-auth-actions {
         @apply flex flex-col gap-5 md:gap-8 mt-4;
     }
-}
+}
