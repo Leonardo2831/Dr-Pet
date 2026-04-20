@@ -103,7 +103,7 @@
                                 id="search-input"
                                 type="text"
                                 placeholder="Ração para Cachorros"
-                                class="w-full bg-gray-100 border-[4px] border-gray-500 text-gray-700 placeholder-gray-400 rounded-[20px] py-4 md:py-6 pl-4 md:pl-12 pr-14 md:pr-24 text-lg md:text-xl lg:text-2xl font-sans font-semibold uppercase leading-[1.23] focus:outline-none focus:border-green-400 transition-all duration-300 cursor-text"
+                                class="w-full bg-gray-100 border-[4px] border-gray-500 text-gray-700 placeholder-gray-400 rounded-[20px] py-4 md:py-6 pl-4 md:pl-12 pr-14 md:pr-24 text-lg md:text-xl lg:text-2xl font-sans font-semibold uppercase leading-[1.23] outline-none focus:border-green-400 transition-all duration-300 cursor-text"
                             />
                             <img
                                 src="../images/icons/loja-icons/search.svg"
@@ -114,12 +114,12 @@
 
                         <button
                             type="button"
-                            class="p-3 flex-shrink-0 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-4 focus:ring-offset-gray-50 rounded-[12px] transition-all duration-300 flex items-center justify-center cursor-pointer"
+                            class="p-3 flex-shrink-0 outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-4 focus:ring-offset-gray-50 rounded-[12px] transition-all duration-300 flex items-center justify-center cursor-pointer"
                         >
                             <img
                                 src="../images/icons/loja-icons/filtro.svg"
                                 alt="Ícone de Filtros"
-                                class="w-12 h-12 md:w-[50px] md:h-[50px] lg:w-[64px] lg:h-[64px] object-contain"
+                                class="outline-none w-12 h-12 md:w-[50px] md:h-[50px] lg:w-[64px] lg:h-[64px] object-contain"
                             />
                         </button>
                     </div>
@@ -128,151 +128,121 @@
                 <section class="mt-10 bg-gray-100 py-10 px-[120px] md:py-[50px] rounded-[10px] relative w-full">
                     <div class="swiper product-swiper w-full overflow-hidden">
                         <div class="swiper-wrapper">
-                    <!-- Produto 1 -->
-                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
-                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
-                            <img
-                                src="../images/products/GoldenSpecial.png"
-                                alt="PremieRPet - Golden Special"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </figure>
-                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
-                            <article class="flex flex-col gap-2">
-                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
-                                    PremieRPet - Golden Special
-                                </h3>
-                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
-                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
-                                </p>
-                            </article>
-                            <div class="flex items-center justify-center">
-                                <button
-                                    type="button"
-                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
-                                >
-                                    <span>Ver mais sobre</span>
-                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
-                                </button>
+                            <!-- Produto 1 -->
+                            <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group">
+                                <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                                    <img
+                                        src="../images/products/GoldenSpecial.png"
+                                        alt="PremieRPet - Golden Special"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </figure>
+                                <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                                    <article class="flex flex-col gap-2">
+                                        <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                            PremieRPet - Golden Special
+                                        </h3>
+                                        <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                            Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                        </p>
+                                        <span class="text-green-500 font-semibold uppercase text-[18px] md:text-[20px]">
+                                            R$ 100,00
+                                        </span>
+                                    </article>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
-                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
-                            <img
-                                src="../images/products/GoldenSpecial.png"
-                                alt="PremieRPet - Golden Special"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </figure>
-                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
-                            <article class="flex flex-col gap-2">
-                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
-                                    PremieRPet - Golden Special
-                                </h3>
-                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
-                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
-                                </p>
-                            </article>
-                            <div class="flex items-center justify-center">
-                                <button
-                                    type="button"
-                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
-                                >
-                                    <span>Ver mais sobre</span>
-                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
-                                </button>
+                            <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group">
+                                <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                                    <img
+                                        src="../images/products/GoldenSpecial.png"
+                                        alt="PremieRPet - Golden Special"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </figure>
+                                <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                                    <article class="flex flex-col gap-2">
+                                        <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                            PremieRPet - Golden Special
+                                        </h3>
+                                        <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                            Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                        </p>
+                                        <span class="text-green-500 font-semibold uppercase text-[18px] md:text-[20px]">
+                                            R$ 100,00
+                                        </span>
+                                    </article>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
-                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
-                            <img
-                                src="../images/products/GoldenSpecial.png"
-                                alt="PremieRPet - Golden Special"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </figure>
-                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
-                            <article class="flex flex-col gap-2">
-                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
-                                    PremieRPet - Golden Special
-                                </h3>
-                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
-                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
-                                </p>
-                            </article>
-                            <div class="flex items-center justify-center">
-                                <button
-                                    type="button"
-                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
-                                >
-                                    <span>Ver mais sobre</span>
-                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
-                                </button>
+                            <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group">
+                                <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                                    <img
+                                        src="../images/products/GoldenSpecial.png"
+                                        alt="PremieRPet - Golden Special"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </figure>
+                                <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                                    <article class="flex flex-col gap-2">
+                                        <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                            PremieRPet - Golden Special
+                                        </h3>
+                                        <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                            Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                        </p>
+                                        <span class="text-green-500 font-semibold uppercase text-[18px] md:text-[20px]">
+                                            R$ 100,00
+                                        </span>
+                                    </article>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
-                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
-                            <img
-                                src="../images/products/GoldenSpecial.png"
-                                alt="PremieRPet - Golden Special"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </figure>
-                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
-                            <article class="flex flex-col gap-2">
-                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
-                                    PremieRPet - Golden Special
-                                </h3>
-                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
-                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
-                                </p>
-                            </article>
-                            <div class="flex items-center justify-center">
-                                <button
-                                    type="button"
-                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
-                                >
-                                    <span>Ver mais sobre</span>
-                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
-                                </button>
+                            <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group">
+                                <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                                    <img
+                                        src="../images/products/GoldenSpecial.png"
+                                        alt="PremieRPet - Golden Special"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </figure>
+                                <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                                    <article class="flex flex-col gap-2">
+                                        <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                            PremieRPet - Golden Special
+                                        </h3>
+                                        <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                            Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                        </p>
+                                        <span class="text-green-500 font-semibold uppercase text-[18px] md:text-[20px]">
+                                            R$ 100,00
+                                        </span>
+                                    </article>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow-sm hover:shadow-md transition-shadow group">
-                        <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
-                            <img
-                                src="../images/products/GoldenSpecial.png"
-                                alt="PremieRPet - Golden Special"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </figure>
-                        <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
-                            <article class="flex flex-col gap-2">
-                                <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
-                                    PremieRPet - Golden Special
-                                </h3>
-                                <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
-                                    Melhor ração para seu dog, onde irá dar muitos nutrientes
-                                </p>
-                            </article>
-                            <div class="flex items-center justify-center">
-                                <button
-                                    type="button"
-                                    class="mt-auto w-fit bg-green-600 hover:bg-green-500 text-gray-50 uppercase text-base md:text-lg font-semibold py-[10px] px-4 rounded-xl inline-flex items-center justify-between gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group"
-                                >
-                                    <span>Ver mais sobre</span>
-                                    <img src="../images/icons/arrow.svg" alt="Seta para a direita" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0">
-                                </button>
+                            <div class="swiper-slide !w-[250px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group">
+                                <figure class="relative aspect-square overflow-hidden rounded-t-[10px]">
+                                    <img
+                                        src="../images/products/GoldenSpecial.png"
+                                        alt="PremieRPet - Golden Special"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </figure>
+                                <div class="flex flex-col flex-grow bg-gray-200 p-5 md:p-6 rounded-b-[10px] gap-6">
+                                    <article class="flex flex-col gap-2">
+                                        <h3 class="text-gray-700 font-medium text-[18px] md:text-[20px] leading-tight">
+                                            PremieRPet - Golden Special
+                                        </h3>
+                                        <p class="text-gray-700 font-normal text-[16px] md:text-[18px] leading-snug">
+                                            Melhor ração para seu dog, onde irá dar muitos nutrientes
+                                        </p>
+                                        <span class="text-green-500 font-semibold uppercase text-[18px] md:text-[20px]">
+                                            R$ 100,00
+                                        </span>
+                                    </article>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                         </div>
                     </div>
                     <!-- Navigation Buttons -->
