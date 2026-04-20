@@ -3,72 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-    <title>Dr.Pet | Cadastrar-se</title>
+    <title>Dr.Pet | Cadastrar</title>
+    <link rel="stylesheet" href="../style/output.css">
 
 </head>
 <body>
     <header class="header">
-        <figure>
-            <a href="../../index.html">
-                <img src="../images/logo.png" alt="Dr.Pet" class="logo">
+        <div class="container flex items-center justify-between mx-auto">
+            <a
+                href="index.html"
+                class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
+            >
+                <img
+                    src="../images/logo.png"
+                    alt="Logo Dr. Pet"
+                    class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
+                />
+                <span
+                    class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap"
+                >Dr. Pet</span
+                >
             </a>
-        </figure>
 
-        <div class="header-contentShop">
-            <figure class="menu-user js-userButton">
-                <img src="../images/icons/header-icons/user.svg" alt="Usuário" class="user">
-            </figure> 
+            <div
+                id="nav-menu"
+                class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+            >
+
+                <nav
+                    class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                >
+                    <a href="#servicos" class="nav-link whitespace-nowrap"
+                        >Serviços</a
+                    >
+                    <a href="#sobre" class="nav-link whitespace-nowrap"
+                        >Sobre nós</a
+                    >
+                    <a href="loja.html" class="nav-link whitespace-nowrap"
+                        >Pet shop</a
+                    >
+                    <a href="agenda.html" class="nav-link whitespace-nowrap"
+                        >Agendamento</a
+                    >
+                    <a href="#contato" class="nav-link whitespace-nowrap"
+                        >Contato</a
+                    >
+                </nav>
+
+                <button
+                    class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                >
+                    <img
+                        src="../images/icons/user.svg"
+                        alt="Ícone de Usuário"
+                        class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                    />
+                </button>
+            </div>
+
+            <button
+                class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+            >
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+                <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
+            </button>
         </div>
-
-        <nav class="shadow menu-semLogin js-menuSemLogin">
-            <a href="cadastrar.html" class="text-md-medium">Criar uma conta</a>
-            <a href="login.html" class="text-md-medium">Entrar</a>
-        </nav>
     </header>
 
-    <main class="main">
-        <form class="form" action="#" autocomplete="off">
-            <h1 class="title-xl-semiBold">Cadastrar-se</h1>
-            <section class="form-dados">
-                <div>
-                    <label for="nameUser" class="text-lg-medium">Nome do Usuário</label>
-                    <input type="text" name="nameUser" class="text-lg-medium input-form" id="nameUser" required>
-                </div>
-                <div>
-                    <label for="email" class="text-lg-medium">E-mail</label>
-                    <input type="email" name="email" class="text-lg-medium input-form" id="email" required>
-                </div>
-                <div>
-                    <label for="phone" class="text-lg-medium">Telefone</label>
-                    <input type="tel" name="phone" class="text-lg-medium input-form" id="phone" pattern="[0-9]{10}" required>
-                </div>
-                <div class="content-password">
-                    <label for="passwordUser" class="text-lg-medium">Senha</label>
-                    <div>
-                        <!-- trocar para on quando clicar com javascript -->
-                        <input type="password" name="passwordUser" class="text-lg-medium input-form" id="passwordUser" required>
-                        <img src="../images/icons/visibily/visibility-off-icon.svg" alt="Ver senha">
+    <main class="flex flex-col lg:flex-row min-h-[820px]">
+        <div class="order-2 lg:order-1 flex-1 w-full">
+            <img
+                src="https://www.figma.com/api/mcp/asset/80533679-0f9d-4751-af88-c48b316eb4ae"
+                alt="Cachorro deitado na grama"
+                class="w-full h-full object-cover min-h-[350px] lg:min-h-full"
+            >
+        </div>
+
+        <div class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[40px] lg:py-[50px] xl:px-[60px] xl:py-[60px]">
+            <form action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+                <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">Cadastrar-se</h1>
+
+                <div class="flex flex-col gap-[30px]">
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="user-name" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Nome do usuário</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
+                            <input
+                                type="text"
+                                id="user-name"
+                                name="userName"
+                                class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="register-email" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">E-mail</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
+                            <input
+                                type="email"
+                                id="register-email"
+                                name="email"
+                                class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="phone" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Telefone</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="register-password" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Senha</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
+                            <input
+                                type="password"
+                                id="register-password"
+                                name="password"
+                                class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
+                                required
+                            >
+                            <button type="button" data-toggle-password="register-password" aria-controls="register-password" class="absolute right-[15px] flex items-center justify-center w-[30px] h-[30px] rounded-[6px] outline-none focus:ring-2 focus:ring-green-300">
+                                <img src="../images/icons/forms/visible-on.svg" alt="Mostrar senha" class="w-[30px] h-[30px]">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="confirm-password" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Confirmar senha</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirmPassword"
+                                class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
+                                required
+                            >
+                            <button type="button" data-toggle-password="confirm-password" aria-controls="confirm-password" class="absolute right-[15px] flex items-center justify-center w-[30px] h-[30px] rounded-[6px] outline-none focus:ring-2 focus:ring-green-300">
+                                <img src="../images/icons/forms/visible-on.svg" alt="Mostrar senha" class="w-[30px] h-[30px]">
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="content-password">
-                    <label for="confirmPasswordUser" class="text-lg-medium">Confirmar Senha</label>
-                    <div>
-                        <!-- trocar para on quando clicar com javascript -->
-                        <input type="password" name="confirmPasswordUser" class="text-lg-medium input-form" id="confirmPasswordUser" required>
-                        <img src="../images/icons/visibily/visibility-off-icon.svg" alt="Ver senha">
-                    </div>
-                </div>
-                <section class="send-form-cadastrar">
-                    <button class="text-lg-semiBold button-google">
-                        Cadastrar
-                        <img src="../images/icons/brands-icons/google-icon.svg" alt="Google Login">
-                    </button>
-                    <input type="submit" name="finalizar" class="text-xl-semiBold button-green-form" value="Finalizar">
-                </section>
-            </section>
-        </form>
+
+                <button type="button" class="w-full h-[64px] rounded-[10px] bg-gray-300 px-4 xs:px-5 sm:px-6 py-3 flex items-center justify-center gap-3 xs:gap-5 sm:gap-8 lg:gap-[50px] hover:opacity-90 transition-opacity outline-none focus:ring-4 focus:ring-gray-400">
+                    <span class="font-semibold text-lg leading-[22px] text-gray-800 xs:text-2xl sm:text-[26px] lg:text-[26px] lg:leading-[32px]">Login com Google</span>
+                    <img src="../images/icons/forms/google-icon.svg" alt="Ícone Google" class="w-8 h-8 xs:w-9 xs:h-9 sm:w-9 sm:h-9 lg:w-10 lg:h-10">
+                </button>
+
+                <button type="submit" class="w-full basis-full h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-[#0f663e] transition-colors outline-none focus:ring-4 focus:ring-green-500 mx-auto">
+                    <span class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Finalizar</span>
+                </button>
+            </form>
+        </div>
     </main>
 
     <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
@@ -128,5 +226,28 @@
         </ul>
     </address>
 </footer>
+
+    <script src="../javascript/header.js"></script>
+    <script>
+        const eyeIconOn = "../images/icons/forms/visible-on.svg";
+        const eyeIconOff = "../images/icons/forms/visibility_off.svg";
+
+        document.querySelectorAll("[data-toggle-password]").forEach((toggleButton) => {
+            toggleButton.addEventListener("click", () => {
+                const inputId = toggleButton.getAttribute("data-toggle-password");
+                const input = document.getElementById(inputId);
+                const icon = toggleButton.querySelector("img");
+
+                if (!input || !icon) {
+                    return;
+                }
+
+                const isPasswordHidden = input.type === "password";
+                input.type = isPasswordHidden ? "text" : "password";
+                icon.src = isPasswordHidden ? eyeIconOff : eyeIconOn;
+                icon.alt = isPasswordHidden ? "Ocultar senha" : "Mostrar senha";
+            });
+        });
+    </script>
 </body>
 </html>
