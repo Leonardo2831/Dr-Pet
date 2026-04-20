@@ -72,45 +72,67 @@
         </div>
     </header>
 
-    <main class="flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2 flex items-center justify-center">
-            <img src="../images/forms-images/login.jpg" alt="Faça Login em nosso site" class="w-full max-w-lg md:max-w-xl object-contain">
-        </div>
-        
-        <div class="w-full md:w-1/2 flex items-center justify-center">
-            <form action="#" class="form-auth">
-                <h1 class="form-auth-title">Login</h1>
-                
-                <div class="form-auth-group">
-                    <label for="email" class="form-auth-label">E-mail</label>
-                    <div class="form-auth-input-wrapper">
-                        <input type="email" id="email" name="email" class="form-auth-input" placeholder="Digite seu e-mail" required>
+    <main class="flex flex-col lg:flex-row">
+        <div class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
+            <form action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+                <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">Login</h1>
+
+                <div class="flex flex-col gap-[30px]">
+                    <div class="flex flex-col gap-[15px]">
+                        <label for="email" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">E-mail</label>
+                        <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <div class="flex flex-col gap-[15px]">
+                            <label for="password" class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Senha</label>
+                            <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
+                                    required
+                                >
+                                <button type="button" id="toggle-password" aria-controls="password" class="absolute right-[15px] flex items-center justify-center w-[30px] h-[30px] rounded-[6px] outline-none focus:ring-2 focus:ring-green-300">
+                                    <img src="../images/icons/forms/visible-on.svg" alt="Mostrar senha" class="w-[30px] h-[30px]">
+                                </button>
+                            </div>
+                        </div>
+                        <a href="#" class="font-semibold text-[18px] leading-[22px] text-green-700 underline w-fit hover:text-green-600 transition-colors xs:text-[19px] xs:leading-[23px] sm:text-[20px] sm:leading-[24px] lg:text-[22px] lg:leading-[27px]">Esqueceu a senha?</a>
                     </div>
                 </div>
 
-                <div class="form-auth-group">
-                    <label for="password" class="form-auth-label">Senha</label>
-                    <div class="form-auth-input-wrapper">
-                        <input type="password" id="password" name="password" class="form-auth-input" placeholder="Digite sua senha" required>
-                        <!-- Adicione o src correto do ícone do olho de sua pasta de imagens -->
-                        <img src="../images/icons/eye.svg" onerror="this.style.display='none'" alt="Ver senha" class="cursor-pointer w-[30px] h-[30px] absolute right-4 transition-opacity hover:opacity-75">
-                    </div>
-                </div>
+                <button type="button" class="w-full h-[64px] rounded-[10px] bg-gray-300 px-4 xs:px-5 sm:px-6 py-3 flex items-center justify-center gap-3 xs:gap-5 sm:gap-8 lg:gap-[50px] hover:opacity-90 transition-opacity outline-none focus:ring-4 focus:ring-gray-400">
+                    <span class="font-semibold text-lg leading-[22px] text-gray-800 xs:text-2xl sm:text-[26px] lg:text-[26px] lg:leading-[32px]">Login com Google</span>
+                    <img src="../images/icons/forms/google-icon.svg" alt="Ícone Google" class="w-8 h-8 xs:w-9 xs:h-9 sm:w-9 sm:h-9 lg:w-10 lg:h-10">
+                </button>
 
-                <a href="#" class="form-auth-forgot">Esqueceu a senha?</a>
-
-                <div class="form-auth-actions">
-                    <button type="button" class="form-auth-btn form-auth-btn-google">
-                        <img src="../images/icons/google.svg" onerror="this.style.display='none'" alt="Google Logo" class="w-8 h-8 md:w-10 md:h-10">
-                        Login com Google
+                <div class="w-full flex flex-wrap justify-center gap-5">
+                    <button type="submit" class="basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-[#0f663e] transition-colors outline-none focus:ring-4 focus:ring-green-500 mx-auto">
+                        <span class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Continuar</span>
                     </button>
-                    
-                    <button type="submit" class="form-auth-btn form-auth-btn-primary">
-                        Entrar
-                    </button>
+                    <a href="#" class="btn-create-account basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] px-8 py-4 flex items-center justify-center outline-none focus:ring-2 focus:ring-green-300 mx-auto">
+                        <span class="font-semibold text-[22px] leading-[28px] text-green-700 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Criar Conta</span>
+                    </a>
                 </div>
             </form>
         </div>
+        
+        <div class="order-2 lg:order-1 flex-1 w-full h-full flex">
+            <img src="../images/forms-images/login.jpg" 
+                 alt="Faça Login em nosso site" 
+                 class="w-full h-full object-contain lg:object-cover"
+            >
+          </div>
     </main>
 
     <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
