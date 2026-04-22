@@ -47,7 +47,7 @@ module.exports = {
             },
             'blue-link': '#1f59e0',
             'blue-light': '#D1D8ED',
-            'blue-visa': '#104ad0',
+            'blue-hover': '#0f3aa7',
             'red-alert': '#800020',
             'red-light': '#F0DDDE',
             orange: '#DF7E0F',
