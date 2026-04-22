@@ -3004,6 +3004,11 @@ body{
     line-height: 1.75rem;
   }
 
+  .sm\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
   .sm\:leading-\[24px\]{
     line-height: 24px;
   }
@@ -3804,6 +3809,16 @@ body{
     line-height: 1.75rem;
   }
 
+  .lg\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .lg\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
   .lg\:leading-\[27px\]{
     line-height: 27px;
   }
@@ -3826,6 +3841,10 @@ body{
 
   .lg\:leading-\[64px\]{
     line-height: 64px;
+  }
+
+  .lg\:leading-10{
+    line-height: 2.5rem;
   }
 
   .lg\:shadow-\[20px_20px_0_0_\#2AF29B\]{
