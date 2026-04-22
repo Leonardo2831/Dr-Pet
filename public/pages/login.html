@@ -73,7 +73,7 @@
     </header>
 
     <main class="flex flex-col lg:flex-row">
-        <div class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
+        <section class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
             <form action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
                 <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">Login</h1>
 
@@ -111,13 +111,13 @@
                     </div>
                 </div>
 
-                <button type="button" class="w-full h-[64px] rounded-[10px] bg-gray-300 px-4 xs:px-5 sm:px-6 py-3 flex items-center justify-center gap-3 xs:gap-5 sm:gap-8 lg:gap-[50px] hover:opacity-90 transition-opacity outline-none focus:ring-4 focus:ring-gray-400">
+                <button type="button" class="w-full h-[64px] rounded-[10px] bg-gray-300 px-4 xs:px-5 sm:px-6 py-3 flex items-center justify-center gap-3 xs:gap-5 sm:gap-8 lg:gap-[50px] hover:bg-gray-200 transition-colors outline-none focus:ring-4 focus:ring-gray-300">
                     <span class="font-semibold text-lg leading-[22px] text-gray-800 xs:text-2xl sm:text-[26px] lg:text-[26px] lg:leading-[32px]">Login com Google</span>
                     <img src="../images/icons/forms/google-icon.svg" alt="Ícone Google" class="w-8 h-8 xs:w-9 xs:h-9 sm:w-9 sm:h-9 lg:w-10 lg:h-10">
                 </button>
 
                 <div class="w-full flex flex-wrap justify-center gap-5">
-                    <button type="submit" class="basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-[#0f663e] transition-colors outline-none focus:ring-4 focus:ring-green-500 mx-auto">
+                    <button type="submit" class="basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-green-500 transition-colors outline-none focus:ring-4 focus:ring-green-600 mx-auto">
                         <span class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Continuar</span>
                     </button>
                     <a href="#" class="btn-create-account basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] px-8 py-4 flex items-center justify-center outline-none focus:ring-2 focus:ring-green-300 mx-auto">
@@ -125,14 +125,11 @@
                     </a>
                 </div>
             </form>
-        </div>
+        </section>
         
-        <div class="order-2 lg:order-1 flex-1 w-full h-full flex">
-            <img src="../images/forms-images/login.jpg" 
-                 alt="Faça Login em nosso site" 
-                 class="w-full h-full object-contain lg:object-cover"
-            >
-          </div>
+        <figure class="order-2 lg:order-1 flex-1 w-full h-full flex">
+            <img src="../images/forms-images/login.jpg" alt="Faça Login em nosso site" class="w-full h-full object-contain lg:object-cover">
+        </figure>
     </main>
 
     <footer class="w-full bg-green-600 border-t-[4px] border-green-200 flex flex-col items-center gap-10 py-10 px-6 md:py-[60px] md:px-12 lg:px-20 mt-auto" id="contato" aria-labelledby="footer-heading">
