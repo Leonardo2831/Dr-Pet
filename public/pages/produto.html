@@ -13,113 +13,69 @@
     </head>
     <body>
         <header class="header">
-            <figure>
-                <a href="../../index.html">
-                    <img src="../images/logo.png" alt="Dr.Pet" class="logo" />
-                </a>
-            </figure>
-
-            <div class="menu-search">
-                <label for="search">
-                    <img
-                        src="../images/icons/header-icons/search.svg"
-                        alt="Barra de pesquisa"
-                    />
-                    <input
-                        type="text"
-                        id="search"
-                        placeholder="Pesquisar"
-                        class="text-sm-medium"
-                    />
-                    <img
-                        src="../images/icons/header-icons/microphone.svg"
-                        alt="Usar microfone"
-                    />
-                </label>
-            </div>
-
-            <div class="header-contentShop">
-                <a href="carrinho.html" class="header-carrinho">
-                    <p class="text-sm-medium">Carrinho</p>
-                    <img
-                        src="../images/icons/header-icons/shop.svg"
-                        alt="carrinho"
-                    />
-                </a>
-                <figure class="menu-user js-userButton">
-                    <img
-                        src="../images/icons/header-icons/user.svg"
-                        alt="Usuário"
-                        class="user"
-                    />
-                </figure>
-            </div>
-
-            <!-- menu sem usuário -->
-            <nav class="shadow menu-semLogin js-menuSemLogin">
-                <a href="cadastrar.html" class="text-md-medium"
-                    >Criar uma conta</a
+            <div class="container flex items-center justify-between mx-auto">
+                <a
+                    href="../../index.html"
+                    class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
                 >
-                <a href="login.html" class="text-md-medium">Entrar</a>
-            </nav>
+                    <img
+                        src="../images/logo.png"
+                        alt="Logo Dr. Pet"
+                        class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
+                    />
+                    <span
+                        class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap"
+                        >Dr. Pet</span
+                    >
+                </a>
 
-            <!-- menu com usuário -->
-            <nav class="shadow menu-login js-menuLogin js-menuLogin">
-                <ul class="options-list">
-                    <li>
-                        <a href="sua-conta.html">
-                            <img
-                                src="../images/icons/menu-login-icons/user-green.svg"
-                                alt="Minha conta"
-                                class="my-account-icon"
-                            />
-                            <p class="text-xl-semiBold js-nomeUser">
-                                Minha Conta
-                            </p>
+                <div
+                    id="nav-menu"
+                    class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+                >
+                    <nav
+                        class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                    >
+                        <a
+                            href="../../index.html#servicos"
+                            class="nav-link whitespace-nowrap"
+                            >Serviços
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-lg-medium">
-                            <img
-                                src="../images/icons/menu-login-icons/compra.svg"
-                                alt="Compras"
-                                class="images-options-list"
-                            />
-                            Compras
+                        <a
+                            href="../../index.html#sobre"
+                            class="nav-link whitespace-nowrap"
+                            >Sobre nós
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-lg-medium">
-                            <img
-                                src="../images/icons/menu-login-icons/historico.svg"
-                                alt="Histórico de compras"
-                                class="images-options-list"
-                            />
-                            Histórico
+                        <a href="loja.html" class="nav-link whitespace-nowrap"
+                            >Pet shop
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-lg-medium">
-                            <img
-                                src="../images/icons/favorites-icons/favorito.svg"
-                                alt="Seus favoritos"
-                                class="images-options-list"
-                            />
-                            Favoritos
+                        <a href="agenda.html" class="nav-link whitespace-nowrap"
+                            >Agendamento
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-lg-medium">
-                            <img
-                                src="../images/icons/menu-login-icons/logout.svg"
-                                alt="Sair da conta"
-                                class="images-options-list"
-                            />
-                            Sair
+                        <a href="#contato" class="nav-link whitespace-nowrap"
+                            >Contato
                         </a>
-                    </li>
-                </ul>
-            </nav>
+                    </nav>
+
+                    <button
+                        class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                    >
+                        <img
+                            src="../images/icons/user.svg"
+                            alt="Ícone de Usuário"
+                            class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                        />
+                    </button>
+                </div>
+
+                <button
+                    class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+                >
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                </button>
+            </div>
         </header>
 
         <main class="margin-top-header main-product">
