@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../style/output.css" />
+        <link
+            rel="shortcut icon"
+            href="../images/logo.png"
+            type="image/x-icon"
+        />
+        <title>Dr.Pet | Administrador</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container flex items-center justify-between mx-auto">
+                <a
+                    href="../../index.html"
+                    class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10"
+                >
+                    <img
+                        src="../images/logo.png"
+                        alt="Logo Dr. Pet"
+                        class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300"
+                    />
+                    <span
+                        class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap"
+                        >Dr. Pet</span
+                    >
+                </a>
+
+                <div
+                    id="nav-menu"
+                    class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20"
+                >
+                    <nav
+                        class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10"
+                    >
+                        <a
+                            href="../../index.html#servicos"
+                            class="nav-link whitespace-nowrap"
+                            >Serviços
+                        </a>
+                        <a
+                            href="../../index.html#sobre"
+                            class="nav-link whitespace-nowrap"
+                            >Sobre nós
+                        </a>
+                        <a href="loja.html" class="nav-link whitespace-nowrap"
+                            >Pet shop
+                        </a>
+                        <a href="agenda.html" class="nav-link whitespace-nowrap"
+                            >Agendamento
+                        </a>
+                        <a href="#contato" class="nav-link whitespace-nowrap"
+                            >Contato
+                        </a>
+                    </nav>
+
+                    <button
+                        class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center"
+                    >
+                        <img
+                            src="../images/icons/user.svg"
+                            alt="Ícone de Usuário"
+                            class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300"
+                        />
+                    </button>
+                </div>
+
+                <button
+                    class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md"
+                >
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                </button>
+            </div>
+        </header>
+    </body>
+</html>
