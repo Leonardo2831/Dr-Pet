@@ -1099,6 +1099,14 @@ body{
   right: 0.75rem;
 }
 
+.bottom-4{
+  bottom: 1rem;
+}
+
+.left-4{
+  left: 1rem;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -1182,6 +1190,14 @@ body{
 
 .mt-6{
   margin-top: 1.5rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
+}
+
+.mt-\[-2px\]{
+  margin-top: -2px;
 }
 
 .line-clamp-2{
@@ -1322,6 +1338,14 @@ body{
 
 .h-3{
   height: 0.75rem;
+}
+
+.h-\[24px\]{
+  height: 24px;
+}
+
+.h-\[45px\]{
+  height: 45px;
 }
 
 .max-h-\[1000px\]{
@@ -1465,6 +1489,15 @@ body{
   width: 0.75rem;
 }
 
+.w-\[24px\]{
+  width: 24px;
+}
+
+.w-max{
+  width: -moz-max-content;
+  width: max-content;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1575,6 +1608,10 @@ body{
 
 .max-w-\[1400px\]{
   max-width: 1400px;
+}
+
+.max-w-\[1511px\]{
+  max-width: 1511px;
 }
 
 .flex-1{
@@ -1712,6 +1749,10 @@ body{
   align-items: center;
 }
 
+.justify-end{
+  justify-content: flex-end;
+}
+
 .justify-center{
   justify-content: center;
 }
@@ -1786,6 +1827,14 @@ body{
 
 .gap-\[70px\]{
   gap: 70px;
+}
+
+.gap-2\.5{
+  gap: 0.625rem;
+}
+
+.gap-\[2px\]{
+  gap: 2px;
 }
 
 .gap-x-1{
@@ -2284,6 +2333,11 @@ body{
   padding-right: 3rem;
 }
 
+.py-2\.5{
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .pb-2{
   padding-bottom: 0.5rem;
 }
@@ -2447,6 +2501,10 @@ body{
   line-height: 1.75rem;
 }
 
+.text-\[15px\]{
+  font-size: 15px;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -2608,6 +2666,10 @@ body{
 
 .underline{
   text-decoration-line: underline;
+}
+
+.line-through{
+  text-decoration-line: line-through;
 }
 
 .antialiased{
@@ -4135,6 +4197,14 @@ body{
     right: 48px;
   }
 
+  .lg\:left-8{
+    left: 2rem;
+  }
+
+  .lg\:right-8{
+    right: 2rem;
+  }
+
   .lg\:order-1{
     order: 1;
   }
@@ -4288,6 +4358,10 @@ body{
     width: 81px;
   }
 
+  .lg\:\!w-\[347px\]{
+    width: 347px !important;
+  }
+
   .lg\:flex-\[1_1_350px\]{
     flex: 1 1 350px;
   }
@@ -4426,6 +4500,11 @@ body{
   .lg\:py-\[60px\]{
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+
+  .lg\:px-\[120px\]{
+    padding-left: 120px;
+    padding-right: 120px;
   }
 
   .lg\:pr-10{
