@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/output.css" />
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+    <title>Dr.Pet | Administrador</title>
+</head>
+
+<body>
+    <main class="px-4 md:px-20 py-10 md:py-[120px] min-h-screen bg-gray-50 flex flex-col items-center">
+        <nav class="flex items-center justify-center flex-wrap gap-4 sm:gap-6 lg:gap-10 w-full max-w-[1288px]">
+            <button type="button"
+                class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-green-600 rounded-[10px] shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all shrink-0">
+                <span
+                    class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-gray-50">Slides</span>
+            </button>
+
+            <button type="button"
+                class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
+                <span
+                    class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Agenda</span>
+            </button>
+
+            <button type="button"
+                class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
+                <span
+                    class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Produtos</span>
+            </button>
+        </nav>
+
+        <!-- Slides -->
+        <section class="w-full max-w-[1400px] mt-10 md:mt-20">
+            <h2 class="font-sans font-bold text-2xl md:text-4xl leading-tight md:leading-[50px] text-green-700">
+                Defina os Slides da Home
+            </h2>
+
+            <picture
+                class="mt-6 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
+
+                <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
+                    style="background-image: url('../images/introduction.png');">
+                    <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
+                    <button type="button"
+                        class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
+                        <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5">
+                    </button>
+                </figure>
+
+                <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
+                    style="background-image: url('../images/introduction.png');">
+                    <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
+                    <button type="button"
+                        class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
+                        <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5">
+                    </button>
+                </figure>
+
+                <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
+                    style="background-image: url('../images/introduction.png');">
+                    <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
+                    <button type="button"
+                        class="absolute -top-3 -right-3 flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
+                        <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5">
+                    </button>
+                </figure>
+
+                <button type="button"
+                    class="max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
+                    <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10">
+                    <span class="font-sans font-semibold text-[20px] leading-[25px] text-green-600">
+                        Adicionar Slide
+                    </span>
+                </button>
+            </picture>
+        </section>
+
+        <!-- Agenda -->
+        <section class="hidden w-full max-w-[1400px] mt-10 md:mt-20">
+
+            <div class="flex flex-col gap-10 w-full">
+                <h2 class="font-sans font-bold text-2xl md:text-4xl leading-tight md:leading-[50px] text-green-700">
+                    Agenda</h2>
+                <div class="flex flex-wrap items-end gap-10 w-full">
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label
+                            class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">Escolha
+                            a data</label>
+                        <div class="relative w-[220px]">
+                            <input type="date"
+                                class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer">
+                            <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[15px]">
+                        <label
+                            class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">Escolha
+                            o Serviço</label>
+                        <div class="relative w-[220px]">
+                            <select
+                                class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
+                                <option value="cirurgia" selected>Cirurgia</option>
+                                <option value="banho">Banho e tosa</option>
+                                <option value="exame">Exames</option>
+                            </select>
+                            <img src="../images/icons/arrow-down.svg" alt="Seta" class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none">
+                        </div>
+                    </div>
+
+                    <button type="button" class="flex flex-row items-center justify-center gap-[15px] px-6 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                        <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">Visualizar Horários</span>
+                        <img class="w-5 h-5" src="../images/icons/search-gray.svg" alt="Visualizar">
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
+
+                <!-- produto -->
+                <div
+                    class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div class="flex flex-row justify-between items-start pb-5 w-full">
+                        <div class="flex flex-col gap-[5px]">
+                            <div class="flex flex-col">
+                                <span
+                                    class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">Leonardo
+                                    Ferraz</span>
+                                <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
+                                    Robson</span>
+                            </div>
+                            <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
+                                tosa</span>
+                        </div>
+                        <span class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00 -
+                            15:00</span>
+                    </div>
+
+                    <div
+                        class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div class="flex flex-row justify-between items-start pb-5 w-full">
+                        <div class="flex flex-col gap-[5px]">
+                            <div class="flex flex-col">
+                                <span
+                                    class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">Leonardo
+                                    Ferraz</span>
+                                <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
+                                    Robson</span>
+                            </div>
+                            <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
+                                tosa</span>
+                        </div>
+                        <span class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00 -
+                            15:00</span>
+                    </div>
+
+                    <div
+                        class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div class="flex flex-row justify-between items-start pb-5 w-full">
+                        <div class="flex flex-col gap-[5px]">
+                            <div class="flex flex-col">
+                                <span
+                                    class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">Leonardo
+                                    Ferraz</span>
+                                <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
+                                    Robson</span>
+                            </div>
+                            <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
+                                tosa</span>
+                        </div>
+                        <span class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00 -
+                            15:00</span>
+                    </div>
+
+                    <div
+                        class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div class="flex flex-row justify-between items-start pb-5 w-full">
+                        <div class="flex flex-col gap-[5px]">
+                            <div class="flex flex-col">
+                                <span
+                                    class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">
+                                    Leonardo
+                                    Ferraz
+                                </span>
+                                <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
+                                    Robson</span>
+                            </div>
+                            <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
+                                tosa</span>
+                        </div>
+                        <span class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00 -
+                            15:00</span>
+                    </div>
+
+                    <div
+                        class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div class="flex flex-row justify-between items-start pb-5 w-full">
+                        <div class="flex flex-col gap-[5px]">
+                            <div class="flex flex-col">
+                                <span
+                                    class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">Leonardo
+                                    Ferraz</span>
+                                <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
+                                    Robson</span>
+                            </div>
+                            <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
+                                tosa</span>
+                        </div>
+                        <span class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00 -
+                            15:00</span>
+                    </div>
+
+                    <div
+                        class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                        <button type="button"
+                            class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                            <span
+                                class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                class="w-4 h-4 md:w-5 md:h-5">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produtos -->
+        <section class="hidden w-full max-w-[1400px] mt-10 md:mt-20">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-5">
+                <h2 class="font-sans font-bold text-2xl md:text-[36px] leading-tight md:leading-[44px] text-green-700">
+                    Gestão de Produtos</h2>
+                <button type="button"
+                    class="flex flex-row items-center gap-[10px] md:gap-[30px] px-5 py-3 md:px-[36px] md:py-[16px] bg-green-400 rounded-[15px] hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all shrink-0 shadow-sm">
+                    <img src="../images/icons/administrador/plus-product.svg" alt="Novo produto"
+                        class="w-6 h-6 md:w-[30px] md:h-[30px]">
+                    <span
+                        class="font-sans font-semibold text-lg md:text-[26px] leading-[32px] uppercase text-gray-50">Novo
+                        produto</span>
+                </button>
+            </div>
+
+            <div class="mt-10 md:mt-[60px] flex flex-col p-5 md:p-[60px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] gap-10 md:gap-[60px] w-full overflow-hidden">
+                <div
+                    class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-5 xl:gap-[50px] w-full">
+                    <div
+                        class="flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
+                        <input type="text" placeholder="Busca por nome ou categoria..."
+                            class="w-full outline-none font-medium text-base md:text-[26px] leading-[32px] text-gray-500 placeholder:text-gray-500">
+                        <img src="../images/icons/search.svg" alt="Buscar" class="w-6 h-6 md:w-[32px] md:h-[33px]">
+                    </div>
+
+                    <div class="relative shrink-0 min-w-[280px] md:min-w-[400px] w-full md:w-auto">
+                        <select
+                            class="w-full pl-8 pr-20 py-3 md:py-[18px] bg-gray-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all rounded-[10px] font-semibold text-base md:text-[26px] leading-[32px] uppercase text-gray-700 cursor-pointer appearance-none">
+                            <option value="todas" selected>Todas as categorias</option>
+                            <option value="racao">Ração</option>
+                            <option value="brinquedos">Brinquedos</option>
+                            <option value="medicamentos">Medicamentos</option>
+                            <option value="acessorios">Acessórios</option>
+                        </select>
+                        <img src="../images/icons/arrow-down.svg" alt="Seta para baixo"
+                            class="absolute right-5 top-1/2 -translate-y-1/2 w-10 pointer-events-none">
+                    </div>
+                </div>
+
+                <div class="scroll w-full overflow-x-auto pb-1">
+                    <table
+                        class="table-caption w-full min-w-[1200px] xl:min-w-[1400px] text-left border-collapse [&_th]:px-4 lg:[&_th]:px-6 [&_td]:px-4 lg:[&_td]:px-6">
+                        <thead>
+                            <tr
+                                class="border-b-[3px] border-gray-100 *:pb-5 *:font-semibold *:text-lg *:md:text-[26px] *:leading-[32px] *:text-gray-700">
+                                <th>Produto</th>
+                                <th>Categoria</th>
+                                <th>Preço(R$)</th>
+                                <th>Descrição</th>
+                                <th>Linha</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                class="border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
+                                <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
+                                <td>Ração</td>
+                                <td>149,99</td>
+                                <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
+                                <td>Premium</td>
+                                <td class="py-5 text-center">
+                                    <button class="hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
+                                            class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                    </button>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
+                                            class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr
+                                class="border-b-[3px] border-gray-100 *:text-lg *:leading-[27px] *:text-gray-700 hover:bg-gray-50 transition-colors">
+                                <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
+                                <td>Ração</td>
+                                <td>149,99</td>
+                                <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
+                                <td>Premium</td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
+                                            class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                    </button>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
+                                            class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr
+                                class="border-b-[3px] border-gray-100 *:text-lg *:leading-[27px] *:text-gray-700 hover:bg-gray-50 transition-colors">
+                                <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
+                                <td>Ração</td>
+                                <td>149,99</td>
+                                <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
+                                <td>Premium</td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
+                                            class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                    </button>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
+                                            class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr
+                                class="border-b-[3px] border-gray-100 *:text-lg *:leading-[27px] *:text-gray-700 hover:bg-gray-50 transition-colors">
+                                <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
+                                <td>Ração</td>
+                                <td>149,99</td>
+                                <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
+                                <td>Premium</td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
+                                            class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                    </button>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
+                                            class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="*:text-lg *:leading-[27px] *:text-gray-700 hover:bg-gray-50 transition-colors">
+                                <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
+                                <td>Ração</td>
+                                <td>149,99</td>
+                                <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
+                                <td>Premium</td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
+                                            class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                    </button>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                        <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
+                                            class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
