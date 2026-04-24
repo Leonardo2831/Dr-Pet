@@ -22,8 +22,8 @@
                         Pet</span>
                 </a>
 
-                <div id="nav-menu"
-                    class="flex absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20">
+                <div id="nav-menu" data-menuMobile
+                    class="hidden absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20">
 
                     <nav class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10">
                         <a href="#servicos" class="nav-link whitespace-nowrap">Serviços</a>
@@ -41,6 +41,7 @@
                 </div>
 
                 <button
+                    data-button="menuMobile"
                     class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md">
                     <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
                     <div class="w-[30px] h-[3px] bg-white rounded-full"></div>
@@ -403,5 +404,6 @@
         </footer>
     </div>
     <script src="public/javascript/slides/slides-home.js" type="module"></script>
+    <script src="public/javascript/script.js" type="module"></script>
 </body>
 </html>
