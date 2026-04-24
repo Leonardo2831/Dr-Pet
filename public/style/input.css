@@ -9,11 +9,15 @@
     }
 
     html {
-        @apply scroll-smooth max-w-[1800px] mx-auto;
+        @apply scroll-smooth;
     }
 
     body {
         @apply bg-white;
+    }
+
+    .container{
+        @apply max-w-[1800px] mx-auto;
     }
 
     .scroll::-webkit-scrollbar {
