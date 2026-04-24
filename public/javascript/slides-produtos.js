@@ -14,6 +14,12 @@ const productSwiper = new Swiper('.product-swiper', {
     prevEl: '.loja-swiper-button-prev',
   },
   breakpoints: {
+    480: {
+      spaceBetween: 20,
+    },
+    768: {
+      spaceBetween: 30,
+    },
     1024: {
       spaceBetween: 40,
     },
