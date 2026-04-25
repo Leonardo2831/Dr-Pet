@@ -6,7 +6,8 @@
             "email": "adm@email.com",
             "phone": "(00) 00000-0000",
             "password": "12345adm",
-            "typeUser": "administrador"
+            "typeUser": "administrador",
+            "pets": null
         },
         {
             "id": 1,
@@ -14,7 +15,23 @@
             "email": "leo@email.com",
             "phone": "(99) 99999-9999",
             "password": "12345",
-            "typeUser": "comum"
+            "typeUser": "comum",
+            "pets": [
+                {
+                    "id": 0,
+                    "name": "Mike",
+                    "race": "Pit Bull",
+                    "descriptionPet": "Cachorro Bravo",
+                    "gender": "masculino"
+                },
+                {
+                    "id": 1,
+                    "name": "Garfield",
+                    "race": "Persa",
+                    "descriptionPet": "Gato que gosta de comer lasanha",
+                    "gender": "masculino"
+                }
+            ]
         }
     ]
 }
