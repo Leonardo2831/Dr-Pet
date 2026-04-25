@@ -1,0 +1,20 @@
+{
+    "usuarios-test": [
+        {
+            "id": 0,
+            "username": "AdministradorMaster",
+            "email": "adm@email.com",
+            "phone": "(00) 00000-0000",
+            "password": "12345adm",
+            "typeUser": "administrador"
+        },
+        {
+            "id": 1,
+            "username": "Leonardo",
+            "email": "leo@email.com",
+            "phone": "(99) 99999-9999",
+            "password": "12345",
+            "typeUser": "comum"
+        }
+    ]
+}
