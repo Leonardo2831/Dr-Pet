@@ -940,10 +940,6 @@ body{
   visibility: visible;
 }
 
-.static{
-  position: static;
-}
-
 .absolute{
   position: absolute;
 }
@@ -1523,6 +1519,22 @@ body{
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes fade-top{
+  0%{
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fadeTop{
+  animation: fade-top 0.5s forwards;
 }
 
 .cursor-not-allowed{
