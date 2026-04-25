@@ -1,0 +1,20 @@
+{
+    "slidesHome": [
+        {
+            "id": 0,
+            "urlImage": "public/images/introduction.png"
+        },
+        {
+            "id": 1,
+            "urlImage": "public/images/banner-loja.png"
+        },
+        {
+            "id": 2,
+            "urlImage": "public/images/introduction.png"
+        },
+        {
+            "id": 3,
+            "urlImage": "public/images/banner-loja.png"
+        }
+    ]
+}
