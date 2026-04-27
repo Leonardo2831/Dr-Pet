@@ -1,5 +1,5 @@
 import PopUp from "../Pop-up.js";
-import slidesHome from "../slides/slides-home.js";
+import slidesHome from "./slides-home.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     slidesHome();
