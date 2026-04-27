@@ -7,6 +7,7 @@
     <title>Dr.Pet | Opções do Usuário</title>
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../style/output.css">
+    <script src="../javascript/UserTabNav.js" defer></script>
 </head>
 
 <body>
@@ -57,7 +58,7 @@
         <main class="container w-full p-6 md:p-10 lg:p-20 flex flex-col">
 
             <!-- menu inicial, retirar hidden para ver -->
-            <section class="hidden w-full shadow-md rounded-2xl overflow-hidden bg-gray-100">
+            <section class=" w-full shadow-md rounded-2xl overflow-hidden bg-gray-100" id="menu-inicial">
                 <div class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 bg-gray-200">
                     <figure class="relative flex-shrink-0">
                         <img src="../images/icons/options/user-default.svg" alt="Foto do Usuário"
@@ -80,7 +81,7 @@
                     </div>
                 </div>
 
-                <a href="#"
+                <a href="#" data-target = "dados-pessoais"
                     class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50">
                     <div class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0">
                         <img src="../images/icons/options/card-people.svg" alt="Ícone Dados Pessoais"
@@ -89,7 +90,7 @@
                     <span class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700">Dados pessoais</span>
                 </a>
 
-                <a href="#"
+                <a href="#" data-target = "Endereco"
                     class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50">
                     <div class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0">
                         <img src="../images/icons/options/location.svg" alt="Ícone Endereço"
@@ -98,7 +99,7 @@
                     <span class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700">Endereço</span>
                 </a>
 
-                <a href="#"
+                <a href="#" data-target = "dados-pet"
                     class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none">
                     <div class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0">
                         <img src="../images/icons/options/pets.png" alt="Ícone Pets"
@@ -109,11 +110,11 @@
             </section>
 
             <!-- menu dados pessoais -->
-            <section class="hidden w-full rounded-2xl shadow-sm">
+            <section class="hidden w-full rounded-2xl shadow-sm" id="dados-pessoais">
                 <nav
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
-                    <span
-                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer">Menu</span>
+                    <span data-target="menu-inicial"
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer" >Menu</span>
                     <span class="select-none text-[0.8em]" aria-hidden="true">&gt;</span>
                     <span aria-current="page">Dados Pessoais</span>
                 </nav>
@@ -188,10 +189,10 @@
             </section>
 
             <!-- menu endereços -->
-            <section class="hidden w-full rounded-2xl shadow-sm">
+            <section class="hidden w-full rounded-2xl shadow-sm" id="Endereco">
                 <nav
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
-                    <span
+                    <span data-target="menu-inicial"
                         class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer">Menu</span>
                     <span class="select-none text-[0.8em]" aria-hidden="true">&gt;</span>
                     <span aria-current="page">Endereços</span>
@@ -274,10 +275,10 @@
             </section>
 
             <!-- menu pets -->
-            <section class="w-full rounded-2xl shadow-sm">
-                <nav
+            <section class="hidden w-full rounded-2xl shadow-sm" id="dados-pet">
+                <nav 
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
-                    <span
+                    <span data-target="menu-inicial"
                         class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md">Menu</span>
                     <span class="select-none text-[0.8em]" aria-hidden="true">&gt;</span>
                     <span aria-current="page">Pets</span>
