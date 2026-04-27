@@ -69,7 +69,7 @@
         <main class="container w-full p-6 md:p-10 lg:p-20 flex flex-col">
 
             <!-- menu inicial, retirar hidden para ver -->
-            <section class=" w-full shadow-md rounded-2xl overflow-hidden bg-gray-100" id="menu-inicial">
+            <section class="animate-fadeTop w-full shadow-md rounded-2xl overflow-hidden bg-gray-100" id="menu-inicial">
                 <div class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 bg-gray-200">
                     <figure class="relative flex-shrink-0">
                         <img src="../images/icons/options/user-default.svg" alt="Foto do Usuário"
@@ -121,11 +121,11 @@
             </section>
 
             <!-- menu dados pessoais -->
-            <section class="hidden w-full rounded-2xl shadow-sm" id="dados-pessoais">
+            <section class="animate-fadeLeft hidden w-full rounded-2xl shadow-sm" id="dados-pessoais">
                 <nav
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
                     <span data-target="menu-inicial"
-                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer" >Menu</span>
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer">Menu</span>
                     <span class="select-none text-[0.8em]" aria-hidden="true">&gt;</span>
                     <span aria-current="page">Dados Pessoais</span>
                 </nav>
@@ -200,7 +200,7 @@
             </section>
 
             <!-- menu endereços -->
-            <section class="hidden w-full rounded-2xl shadow-sm" id="Endereco">
+            <section class="animate-fadeRight hidden w-full rounded-2xl shadow-sm" id="Endereco">
                 <nav
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
                     <span data-target="menu-inicial"
@@ -286,11 +286,11 @@
             </section>
 
             <!-- menu pets -->
-            <section class="hidden w-full rounded-2xl shadow-sm" id="dados-pet">
+            <section class="animate-fadeDown hidden w-full rounded-2xl shadow-sm" id="dados-pet">
                 <nav 
                     class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]">
                     <span data-target="menu-inicial"
-                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md">Menu</span>
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer">Menu</span>
                     <span class="select-none text-[0.8em]" aria-hidden="true">&gt;</span>
                     <span aria-current="page">Pets</span>
                 </nav>
