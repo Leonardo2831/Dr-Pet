@@ -1,6 +1,6 @@
 export default function selectSectionAdm() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const tabBtns = document.querySelectorAll('[data-tab-btn]');
+    const tabContents = document.querySelectorAll('[data-tab-content]');
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
