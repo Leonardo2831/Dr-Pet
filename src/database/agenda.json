@@ -26,15 +26,13 @@
 					}
 				]
 			},
-			"petsAgendados": [
-				{
-					"id": 0,
-					"name": "Mike",
-					"race": "Pit Bull",
-					"descriptionPet": "Cachorro bravo",
-					"gender": "masculino"
-				}
-			],
+			"petAgendado": {
+				"id": 0,
+				"name": "Mike",
+				"race": "Pit Bull",
+				"descriptionPet": "Cachorro bravo",
+				"gender": "masculino"
+			},
 			"servico": {
 				"id": 301,
 				"nome": "Banho e Tosa",
@@ -44,7 +42,7 @@
 			},
 			"data": "2026-05-15",
 			"horario": "14:30",
-			"status": "agendado",
+			"status": "confirmado",
 			"observacoes": "Usar shampoo hipoalergênico para pele sensível."
 		}
 	]
