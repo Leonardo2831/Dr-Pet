@@ -79,7 +79,7 @@
                         <span class="text-green-300">pet!</span>
                     </h1>
 
-                    <div class="flex items-center gap-5 md:gap-[30px] lg:gap-10 xl:gap-[50px]">
+                    <div class="relative flex items-center gap-5 md:gap-[30px] lg:gap-10 xl:gap-[50px]">
                         <label for="search-input" class="relative w-full flex-grow">
                             <input id="search-input" type="text" placeholder="Ração para Cachorros"
                                 class="w-full bg-gray-100 border-[4px] border-gray-500 text-gray-700 placeholder-gray-400 rounded-[20px] py-4 md:py-6 pl-4 md:pl-12 pr-14 md:pr-24 text-lg md:text-xl lg:text-2xl font-sans font-semibold uppercase leading-[1.23] outline-none focus:border-green-400 transition-all duration-300 cursor-text" />
@@ -87,11 +87,26 @@
                                 class="absolute right-5 md:right-[30px] lg:right-[48px] top-1/2 -translate-y-1/2 w-8 h-8 md:w-[45px] md:h-[45px] pointer-events-none" />
                         </label>
 
-                        <button type="button"
+                        <button type="button" data-button="filtro"
                             class="p-3 flex-shrink-0 outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-4 focus:ring-offset-gray-50 rounded-[12px] transition-all duration-300 flex items-center justify-center cursor-pointer">
                             <img src="../images/icons/loja-icons/filtro.svg" alt="Ícone de Filtros"
                                 class="outline-none w-12 h-12 md:w-[50px] md:h-[50px] lg:w-[64px] lg:h-[64px] object-contain" />
                         </button>
+
+                        <aside data-modal="filtro" class="mt-2 hidden absolute top-full right-0 min-w-[250px] w-fit flex-col bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] z-50 animate-fadeTop *:cursor-pointer">
+                            <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                Acessórios
+                            </p>
+                            <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                Brinquedos
+                            </p>
+                            <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                Rações
+                            </p>
+                            <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                Higiene
+                            </p>
+                        </aside>
                     </div>
                 </nav>
 
@@ -327,8 +342,8 @@
         </footer>
     </div>
 
-    <script type="module" src="../javascript/slides/slides-produtos.js"></script>
     <script type="module" src="../javascript/menuUser.js"></script>
+    <script type="module" src="../javascript/loja/script-loja.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
