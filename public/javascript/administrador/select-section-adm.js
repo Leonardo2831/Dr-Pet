@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+export default function selectSectionAdm() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -37,4 +37,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+}
