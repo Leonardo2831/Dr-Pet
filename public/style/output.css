@@ -1024,6 +1024,18 @@ body{
   top: 100%;
 }
 
+.top-full{
+  top: 100%;
+}
+
+.top-\[200\%\]{
+  top: 200%;
+}
+
+.left-1\/2{
+  left: 50%;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -1034,6 +1046,10 @@ body{
 
 .z-40{
   z-index: 40;
+}
+
+.z-50{
+  z-index: 50;
 }
 
 .order-1{
@@ -1111,6 +1127,10 @@ body{
 
 .mt-auto{
   margin-top: auto;
+}
+
+.mt-7{
+  margin-top: 1.75rem;
 }
 
 .line-clamp-2{
@@ -1512,6 +1532,11 @@ body{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.-translate-x-1\/2{
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .rotate-180{
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1519,6 +1544,22 @@ body{
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes fade-left{
+  0%{
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+
+  100%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-fadeLeft{
+  animation: fade-left 0.5s forwards;
 }
 
 @keyframes fade-top{
@@ -1789,6 +1830,15 @@ body{
 .rounded-t-\[10px\]{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.rounded-b-md{
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.rounded-bl-\[10px\]{
+  border-bottom-left-radius: 10px;
 }
 
 .border-2{
@@ -2172,6 +2222,11 @@ body{
   padding-bottom: 60px;
 }
 
+.px-9{
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2487,6 +2542,11 @@ body{
   color: rgb(252 252 252 / var(--tw-text-opacity, 1));
 }
 
+.text-gray-950{
+  --tw-text-opacity: 1;
+  color: rgb(18 20 19 / var(--tw-text-opacity, 1));
+}
+
 .underline{
   text-decoration-line: underline;
 }
@@ -2508,6 +2568,10 @@ body{
 
 .accent-green-500{
   accent-color: #127447;
+}
+
+.opacity-0{
+  opacity: 0;
 }
 
 .opacity-100{
@@ -2640,6 +2704,10 @@ body{
   transition-duration: 700ms;
 }
 
+.duration-200{
+  transition-duration: 200ms;
+}
+
 .ease-out{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
@@ -2660,10 +2728,6 @@ body{
 
 .\*\:font-semibold > *{
   font-weight: 600;
-}
-
-.\*\:leading-\[27px\] > *{
-  line-height: 27px;
 }
 
 .\*\:leading-\[32px\] > *{
@@ -2753,11 +2817,6 @@ body{
 .hover\:bg-gray-300:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(195 199 197 / var(--tw-bg-opacity, 1));
-}
-
-.hover\:bg-gray-50:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-green-300:hover{
@@ -3408,6 +3467,14 @@ body{
     right: 30px;
   }
 
+  .md\:left-auto{
+    left: auto;
+  }
+
+  .md\:right-0{
+    right: 0px;
+  }
+
   .md\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -3423,6 +3490,10 @@ body{
 
   .md\:mt-\[60px\]{
     margin-top: 60px;
+  }
+
+  .md\:mt-7{
+    margin-top: 1.75rem;
   }
 
   .md\:flex{
@@ -3557,6 +3628,11 @@ body{
     min-width: 400px;
   }
 
+  .md\:translate-x-0{
+    --tw-translate-x: 0px;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
   .md\:grid-cols-\[repeat\(auto-fit\2c minmax\(340px\2c 1fr\)\)\]{
     grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
   }
@@ -3644,6 +3720,10 @@ body{
 
   .md\:overflow-visible{
     overflow: visible;
+  }
+
+  .md\:rounded-bl-\[10px\]{
+    border-bottom-left-radius: 10px;
   }
 
   .md\:bg-transparent{
@@ -4006,6 +4086,14 @@ body{
 
   .lg\:mt-0{
     margin-top: 0px;
+  }
+
+  .lg\:mt-8{
+    margin-top: 2rem;
+  }
+
+  .lg\:mt-9{
+    margin-top: 2.25rem;
   }
 
   .lg\:h-10{
