@@ -63,11 +63,21 @@ module.exports = {
             'fade-left': {
                 '0%': { 'transform': 'translateX(-20px)', 'opacity': 0 },
                 '100%': { 'transform': 'translateX(0)', 'opacity': 1 }
+            },
+            'fade-right': {
+                '0%': { 'transform': 'translateX(20px)', 'opacity': 0 },
+                '100%': { 'transform': 'translateX(0)', 'opacity': 1 }
+            },
+            'fade-down': {
+                '0%': { 'transform': 'translateY(20px)', 'opacity': 0 },
+                '100%': { 'transform': 'translateX(0)', 'opacity': 1 }
             }
         },
         animation: {
             'fadeTop': 'fade-top 0.5s forwards',
-            'fadeLeft': 'fade-left 0.5s forwards'
+            'fadeLeft': 'fade-left 0.5s forwards',
+            'fadeRight': 'fade-right 0.5s forwards',
+            'fadeDown': 'fade-down 0.5s forwards'
         },
         extend: {
             fontFamily: {
