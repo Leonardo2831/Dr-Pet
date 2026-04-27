@@ -1,6 +1,3 @@
-/*
-O código tem que adaptar, isso é apenas para uma seção de navegação como a do admnistrador com 3 opções, acho que funciona igual para a opção do usuário mas irá precisar criar um método e selecionar novo item guardando no this, sendo ele o botão do menu (que é um texto), para voltar na primeira section.
-*/
 export default class TabNav {
     constructor(selectorListButtons, selectorListSections, classActive){
         this.listButtons = document.querySelectorAll(selectorListButtons);
