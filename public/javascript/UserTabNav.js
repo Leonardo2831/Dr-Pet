@@ -1,5 +1,4 @@
 const links = document.querySelectorAll('[data-target]');
-
 const sections = document.querySelectorAll('section[id]');
 
 links.forEach(link => {
@@ -12,5 +11,3 @@ links.forEach(link => {
         document.getElementById(linkCorreto).classList.remove('hidden');
     })
 })
-
-
