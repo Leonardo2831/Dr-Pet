@@ -940,6 +940,14 @@ body{
   visibility: visible;
 }
 
+.static{
+  position: static;
+}
+
+.fixed{
+  position: fixed;
+}
+
 .absolute{
   position: absolute;
 }
@@ -1044,6 +1052,10 @@ body{
   z-index: 50;
 }
 
+.z-\[999\]{
+  z-index: 999;
+}
+
 .order-1{
   order: 1;
 }
@@ -1119,10 +1131,6 @@ body{
 
 .mt-auto{
   margin-top: auto;
-}
-
-.mt-3{
-  margin-top: 0.75rem;
 }
 
 .line-clamp-2{
@@ -1406,8 +1414,9 @@ body{
   min-width: 80px;
 }
 
-.min-w-\[300px\]{
-  min-width: 300px;
+.min-w-max{
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 
 .max-w-0{
@@ -1569,22 +1578,6 @@ body{
   animation: fade-left 0.5s forwards;
 }
 
-@keyframes fade-top{
-  0%{
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-
-  100%{
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-fadeTop{
-  animation: fade-top 0.5s forwards;
-}
-
 @keyframes fade-right{
   0%{
     transform: translateX(20px);
@@ -1599,6 +1592,22 @@ body{
 
 .animate-fadeRight{
   animation: fade-right 0.5s forwards;
+}
+
+@keyframes fade-top{
+  0%{
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fadeTop{
+  animation: fade-top 0.5s forwards;
 }
 
 .cursor-not-allowed{
@@ -2285,10 +2294,6 @@ body{
   padding-right: 5rem;
 }
 
-.pr-8{
-  padding-right: 2rem;
-}
-
 .pt-5{
   padding-top: 1.25rem;
 }
@@ -2857,11 +2862,6 @@ body{
   background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-gray-50:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:text-blue-hover:hover{
   --tw-text-opacity: 1;
   color: rgb(15 58 167 / var(--tw-text-opacity, 1));
@@ -2915,6 +2915,11 @@ body{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.hover\:brightness-95:hover{
+  --tw-brightness: brightness(.95);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .focus\:border-green-400:focus{
   --tw-border-opacity: 1;
   border-color: rgb(25 153 94 / var(--tw-border-opacity, 1));
@@ -2933,11 +2938,6 @@ body{
 .focus\:bg-white:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(252 252 252 / var(--tw-bg-opacity, 1));
-}
-
-.focus\:text-green-500:focus{
-  --tw-text-opacity: 1;
-  color: rgb(18 116 71 / var(--tw-text-opacity, 1));
 }
 
 .focus\:outline-none:focus{

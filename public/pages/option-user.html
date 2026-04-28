@@ -317,13 +317,15 @@
                                 </div>
                             </div>
                         </div>
-                        <button
-                            class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                            aria-label="Opções do Pet">
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                        </button>
+                        <div class="flex-shrink-0">
+                            <button data-button="options-pet"
+                                class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors"
+                                aria-label="Opções do Pet" aria-expanded="false" aria-haspopup="true">
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px]">
@@ -345,13 +347,14 @@
                                 </div>
                             </div>
                         </div>
-                        <button
-                            class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                            aria-label="Opções do Pet">
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                        </button>
+                        <div class="flex-shrink-0">
+                            <button data-button="options-pet"
+                                class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors">
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                            </button>
+                        </div>
                     </div>
 
                     <div
@@ -441,5 +444,23 @@
         </footer>
     </div>
     <script type="module" src="../javascript/menuUser.js"></script>
+    <script type="module" src="../javascript/options-user/script-optionsUser.js"></script>
+
+    <!-- pop-up pets -->
+    <aside data-popup="options-pet"
+        class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop">
+        <button
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
+            aria-label="Editar pet">
+            <span class="text-[22px] leading-[27px] font-medium text-green-400 whitespace-nowrap">Editar</span>
+            <img src="../images/icons/options/edit.svg" alt="Ícone Editar" class="w-6 h-6 flex-shrink-0" />
+        </button>
+        <button
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
+            aria-label="Excluir pet">
+            <span class="text-[22px] leading-[27px] font-medium text-gray-800 whitespace-nowrap">Excluir</span>
+            <img src="../images/icons/options/delete.svg" alt="Ícone Excluir" class="w-6 h-6 flex-shrink-0" />
+        </button>
+    </aside>
 </body>
 </html>
