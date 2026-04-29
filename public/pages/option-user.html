@@ -146,13 +146,9 @@
                                     class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px] break-all">petshop@gmail.com</span>
                             </div>
                         </div>
-                        <button
-                            class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                            aria-label="Opções de Email">
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                        </button>
+                        <a href="#" class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0">
+                            Alterar Email
+                        </a>
                     </div>
 
                     <div
@@ -170,13 +166,9 @@
                                     00000-0000</span>
                             </div>
                         </div>
-                        <button
-                            class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                            aria-label="Opções de Telefone">
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                        </button>
+                        <a href="#" class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0">
+                            Alterar telefone
+                        </a>
                     </div>
 
                     <div class="flex flex-row items-center justify-between p-4 sm:p-6 lg:p-[30px] flex-wrap gap-4">
@@ -192,9 +184,9 @@
                                     class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">*****************</span>
                             </div>
                         </div>
-                        <a href="#"
-                            class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0">Alterar
-                            senha</a>
+                        <a href="#" class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0">
+                            Alterar senha
+                        </a>
                     </div>
                 </div>
             </section>
@@ -235,7 +227,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button
+                        <button data-button="options-address"
                             class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
                             aria-label="Opções de Endereço">
                             <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
@@ -267,7 +259,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button
+                        <button data-button="options-address"
                             class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
                             aria-label="Opções de Endereço">
                             <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
@@ -447,7 +439,24 @@
     <script type="module" src="../javascript/options-user/script-optionsUser.js"></script>
 
     <!-- pop-up pets -->
-    <aside data-popup="options-pet"
+    <aside data-popup="options-pet" 
+        class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop">
+        <button
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
+            aria-label="Editar pet">
+            <span class="text-[22px] leading-[27px] font-medium text-green-400 whitespace-nowrap">Editar</span>
+            <img src="../images/icons/options/edit.svg" alt="Ícone Editar" class="w-6 h-6 flex-shrink-0" />
+        </button>
+        <button
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
+            aria-label="Excluir pet">
+            <span class="text-[22px] leading-[27px] font-medium text-gray-800 whitespace-nowrap">Excluir</span>
+            <img src="../images/icons/options/delete.svg" alt="Ícone Excluir" class="w-6 h-6 flex-shrink-0" />
+        </button>
+    </aside>
+
+    <!-- pop up address -->
+    <aside data-popup="options-address"
         class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop">
         <button
             class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
