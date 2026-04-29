@@ -1,5 +1,5 @@
-import menuOptionsPets from "./modal-pets.js";
+import MenuOptions from "./modal-menuOptions.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    menuOptionsPets();
+    const menuOptionsPets = new MenuOptions('[data-button="options-pet"]', '[data-popup="options-pet"]');
 });
