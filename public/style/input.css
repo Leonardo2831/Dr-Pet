@@ -263,4 +263,13 @@
     .form-auth-actions {
         @apply flex flex-col gap-5 md:gap-8 mt-4;
     }
+
+    /* error modal info */
+    [data-modal-info].error {
+        @apply block rounded-md shadow w-full max-w-[500px] bg-red-alert text-gray-50;
+    }
+
+    [data-modal-info].success {
+        @apply block rounded-md shadow w-full max-w-[500px] bg-green-500 text-gray-50;
+    }
 }
