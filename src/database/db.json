@@ -1,0 +1,133 @@
+{
+	"agenda": [
+		{
+			"id": 1,
+			"usuario": {
+				"id": 1,
+				"username": "Leonardo",
+				"email": "leo@email.com",
+				"phone": "(99) 99999-9999",
+				"password": "12345",
+				"typeUser": "comum",
+				"pets": [
+					{
+						"id": 0,
+						"name": "Mike",
+						"race": "Pit Bull",
+						"descriptionPet": "Cachorro bravo",
+						"gender": "masculino"
+					},
+					{
+						"id": 1,
+						"name": "Garfield",
+						"race": "Persa",
+						"descriptionPet": "Gato que gosta de comer lasanha",
+						"gender": "masculino"
+					}
+				]
+			},
+			"petAgendado": {
+				"id": 0,
+				"name": "Mike",
+				"race": "Pit Bull",
+				"descriptionPet": "Cachorro bravo",
+				"gender": "masculino"
+			},
+			"servico": {
+				"id": 301,
+				"nome": "Banho e Tosa",
+				"description": "Banho completo, secagem e tosa básica",
+				"duracaoMinutos": 90,
+				"preco": 150.0
+			},
+			"data": "2026-05-15",
+			"horario": "14:30",
+			"buscarResidencia": true,
+			"status": "confirmado",
+			"observacoes": "Usar shampoo hipoalergênico para pele sensível."
+		}
+	],
+	"produtos": [
+		{
+			"id": 0,
+			"name": "Ração Golden Cães Adultos",
+			"categoria": "racao",
+			"price": 200.0,
+			"shortDescription": "Melhor ração para o seu pet.",
+			"longDescription": "Seu companheiro de quatro patas chegou à melhor idade e merece uma alimentação que acompanhe suas necessidades especiais. A Ração Golden Premier Sênior +7 Anos Frango e Arroz foi cuidadosamente formulada para cães com mais de 7 anos, oferecendo uma nutrição completa e balanceada para uma vida longa e saudável.",
+			"urlImageMain": "../images/products/GoldenSpecial.png",
+			"urlImages": [
+				"../images/products/GoldenSpecial.png",
+				"../images/products/GoldenSenior.png",
+				"../images/products/GoldenSpecial.png"
+			]
+		},
+		{
+			"id": 1,
+			"name": "Ração Senior Cães Adultos",
+			"categoria": "racao",
+			"price": 100.0,
+			"shortDescription": "Segunda melhor ração para o seu pet.",
+			"longDescription": "Seu companheiro de quatro patas chegou à melhor idade e merece uma alimentação que acompanhe suas necessidades especiais. A Ração Senior de Frango foi cuidadosamente formulada para cães , oferecendo uma nutrição completa e balanceada alimentação.",
+			"urlImageMain": "../images/products/GoldenSenior.png",
+			"urlImages": [
+				"../images/products/GoldenSenior.png",
+				"../images/products/GoldenSpecial.png",
+				"../images/products/GoldenSenior.png"
+			]
+		}
+	],
+	"slides-home": [
+		{
+			"id": 0,
+			"urlImage": "public/images/introduction.png"
+		},
+		{
+			"id": 1,
+			"urlImage": "public/images/banner-loja.png"
+		},
+		{
+			"id": 2,
+			"urlImage": "public/images/introduction.png"
+		},
+		{
+			"id": 3,
+			"urlImage": "public/images/banner-loja.png"
+		}
+	],
+	"usuarios-test": [
+		{
+			"id": 0,
+			"username": "AdministradorMaster",
+			"email": "adm@email.com",
+			"phone": "(00) 00000-0000",
+			"password": "12345adm",
+			"typeUser": "administrador",
+			"pets": null
+		},
+		{
+			"id": 1,
+			"username": "Leonardo",
+			"email": "leo@email.com",
+			"phone": "(99) 99999-9999",
+			"password": "12345",
+			"typeUser": "comum",
+			"pets": [
+				{
+					"id": 0,
+					"name": "Mike",
+					"race": "Pit Bull",
+					"descriptionPet": "Cachorro Bravo",
+					"gender": "masculino"
+				},
+				{
+					"id": 1,
+					"name": "Garfield",
+					"race": "Persa",
+					"descriptionPet": "Gato que gosta de comer lasanha",
+					"gender": "masculino"
+				}
+			]
+		}
+	]
+}
