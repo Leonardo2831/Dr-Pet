@@ -7,22 +7,22 @@ export default class Fetch {
         this.modalInfo = document.querySelector(selectorModalInfo);
     }
 
-    showModalError(err){
+    showModalError(err, messageErr){
         if(this.modalInfo) {
             this.modalInfo.classList.add(this.classModalErro);
             this.modalInfo.classList.remove(this.classModalSucess);
 
-            this.modalInfo.textContent = 'Houve um erro ao carregar os dados!';
+            this.modalInfo.textContent = messageErr;
             console.error(err);
         }
     }
 
-    showModalSuccess(){
+    showModalSuccess(message){
         if(this.modalInfo) {
             this.modalInfo.classList.remove(this.classModalErro);
             this.modalInfo.classList.add(this.classModalSucess);
 
-            this.modalInfo.textContent = 'Os dados foram carregados com sucesso!';
+            this.modalInfo.textContent = message;
         }
     }
 
@@ -31,10 +31,10 @@ export default class Fetch {
             const response = await fetch(this.url);
             const data = await response.json();
             
-            this.showModalSuccess();
+            this.showModalSuccess('Os dados foram carregados com sucesso!');
             return data;
         } catch(err) {
-            this.showModalError(err);
+            this.showModalError(err, 'Houve um erro ao carregar os dados!');
         } finally {
             setTimeout(() => {
                 this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
@@ -42,9 +42,28 @@ export default class Fetch {
         }
     }
 
-    async post(){}
+    async post(object){
+        try{
+            const response = await fetch(this.url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(object),
+            });
+            
+            this.showModalSuccess('Os dados foram enviados com sucesso!');
+            return response;
+        } catch(err) {
+            this.showModalError(err, 'Houve um erro ao enviar os dados!');
+        } finally {
+            setTimeout(() => {
+                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+            }, 5000);
+        }
+    }
 
-    async put(){}
+    async put(id, object){}
 
-    async delete(){}
+    async delete(id){}
 }
