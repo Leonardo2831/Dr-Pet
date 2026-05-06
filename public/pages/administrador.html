@@ -58,10 +58,11 @@
 
                         <div class="flex flex-col gap-[15px]">
                             <label
-                                class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">Escolha
-                                a data</label>
+                                class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">
+                                Escolha a data
+                            </label>
                             <div class="relative w-[220px]">
-                                <input type="date"
+                                <input type="date" data-input-date="adm"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer">
                                 <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none">
@@ -70,71 +71,34 @@
 
                         <div class="flex flex-col gap-[15px]">
                             <label
-                                class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">Escolha
-                                o Serviço</label>
+                                class="font-sans font-semibold text-xl md:text-[26px] leading-[32px] text-gray-700">
+                                Escolha o Serviço
+                            </label>
                             <div class="relative w-[220px]">
                                 <select
+                                    data-select="service"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
-                                    <option value="cirurgia" selected>Cirurgia</option>
-                                    <option value="banho">Banho e tosa</option>
-                                    <option value="exame">Exames</option>
+                                    <option value="Cirurgia" selected>Cirurgia</option>
+                                    <option value="Banho e tosa">Banho e tosa</option>
+                                    <option value="Exames">Exames</option>
                                 </select>
                                 <img src="../images/icons/arrow-down.svg" alt="Seta"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none">
                             </div>
                         </div>
 
-                        <button type="button"
-                            class="flex flex-row items-center justify-center gap-[15px] px-6 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                        <button type="button" data-button="searchSchedule"
+                            class="flex flex-row items-center justify-center gap-[15px] px-7 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                             <span
-                                class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">Visualizar
-                                Horários</span>
+                                class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
+                                Filtrar Horários
+                            </span>
                             <img class="w-5 h-5" src="../images/icons/search-gray.svg" alt="Visualizar">
                         </button>
                     </div>
                 </div>
 
-                <div
-                    class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
-
-                    <div
-                        class="flex flex-col w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
-                        <div class="flex flex-row justify-between items-start pb-5 w-full">
-                            <div class="flex flex-col gap-[5px]">
-                                <div class="flex flex-col">
-                                    <span
-                                        class="font-sans font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">Leonardo
-                                        Ferraz</span>
-                                    <span class="font-sans font-medium text-[16px] leading-[20px] text-gray-700">Pet:
-                                        Robson</span>
-                                </div>
-                                <span class="font-sans font-normal text-[16px] leading-[20px] text-gray-700">Banho e
-                                    tosa</span>
-                            </div>
-                            <span
-                                class="font-sans font-medium text-lg md:text-[22px] leading-[27px] text-green-600">14:00
-                                - 15:00</span>
-                        </div>
-
-                        <div
-                            class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
-                            <button type="button"
-                                class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
-                                <span
-                                    class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
-                                <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
-                                    class="w-4 h-4 md:w-5 md:h-5">
-                            </button>
-                            <button type="button"
-                                class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
-                                <span
-                                    class="font-sans font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
-                                <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
-                                    class="w-4 h-4 md:w-5 md:h-5">
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div data-content-schedule class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2"></div>
             </section>
 
             <section id="section-produtos" data-tab-content class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
