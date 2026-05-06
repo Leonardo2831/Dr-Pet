@@ -2,8 +2,8 @@ export default class Fetch {
     classModalErro = 'error';
     classModalSucess = 'success';
 
-    constructor(url, selectorModalInfo){
-        this.url = url;
+    constructor(urlFinal, selectorModalInfo){
+        this.url = 'http://localhost:3000/' + urlFinal;
         this.modalInfo = document.querySelector(selectorModalInfo);
     }
 
@@ -46,8 +46,26 @@ export default class Fetch {
         try{
             const response = await fetch(this.url, {
                 method: "POST",
+                body: JSON.stringify(object),
+            });
+            
+            this.showModalSuccess('Os dados foram enviados com sucesso!');
+            return response;
+        } catch(err) {
+            this.showModalError(err, 'Houve um erro ao enviar os dados!');
+        } finally {
+            setTimeout(() => {
+                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+            }, 5000);
+        }
+    }
+
+    async post(object, type){
+        try{
+            const response = await fetch(this.url, {
+                method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": type,
                 },
                 body: JSON.stringify(object),
             });
@@ -65,5 +83,20 @@ export default class Fetch {
 
     async put(id, object){}
 
-    async delete(id){}
+    async delete(id){
+        try{
+            const response = await fetch(`${this.url}/${id}`, {
+                method: "DELETE",
+            });
+            
+            this.showModalSuccess('Os dados foram deletados com sucesso!');
+            return response;
+        } catch(err) {
+            this.showModalError(err, 'Houve um erro ao deletar os dados!');
+        } finally {
+            setTimeout(() => {
+                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+            }, 5000);
+        }
+    }
 }
