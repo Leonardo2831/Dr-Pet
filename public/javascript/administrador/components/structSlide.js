@@ -16,8 +16,8 @@ export default function structSlide(object){
 
     const button = figure.querySelector('button');
     button.addEventListener('click', () => {
-        const fetch = new Fetch(`http://localhost:3000/api/slides/slides-home/${object.id}`);
-        fetch.delete();
+        const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
+        fetchAPI.delete(object.id);
         figure.remove();
     });
 
