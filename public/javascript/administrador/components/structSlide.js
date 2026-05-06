@@ -2,7 +2,7 @@ import Fetch from "../../Fetch.js";
 
 export default function structSlide(object){
     const figure = document.createElement('figure');
-    figure.className = "relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat";
+    figure.className = "animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat";
     figure.setAttribute('data-content-slides', object.id);
     figure.setAttribute('aria-label', object.altImage || 'Slide image');
     figure.style.backgroundImage = `url('${object.image}')`;
