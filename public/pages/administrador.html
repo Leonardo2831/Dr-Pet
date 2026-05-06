@@ -39,44 +39,14 @@
 
                 <picture data-content-slides
                     class="mt-6 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
-
-                    <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
-                        style="background-image: url('../images/introduction.png');">
-                        <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-                        <button type="button"
-                            class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
-                            <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide"
-                                class="w-5 h-5">
-                        </button>
-                    </figure>
-
-                    <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
-                        style="background-image: url('../images/introduction.png');">
-                        <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-                        <button type="button"
-                            class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
-                            <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide"
-                                class="w-5 h-5">
-                        </button>
-                    </figure>
-
-                    <figure class="relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
-                        style="background-image: url('../images/introduction.png');">
-                        <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-                        <button type="button"
-                            class="absolute -top-3 -right-3 flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
-                            <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide"
-                                class="w-5 h-5">
-                        </button>
-                    </figure>
-
-                    <button type="button"
-                        class="max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
+                    <label type="file" data-add-slide for="button-add-slide-file"
+                        class="cursor-pointer max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
                         <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10">
                         <span class="font-sans font-semibold text-[20px] leading-[25px] text-green-600">
                             Adicionar Slide
                         </span>
-                    </button>
+                        <input type="file" class="hidden overflow-hidden" id="button-add-slide-file">
+                    </label>
                 </picture>
             </section>
 
@@ -252,6 +222,7 @@
     </div>
 
     <aside data-modal-info="adm" class="hidden animate-fadeItem opacity-0 absolute bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">Teste do request</aside>
+    
     <script type="module" src="../javascript/administrador/script-adm.js"></script>
 </body>
 </html>
