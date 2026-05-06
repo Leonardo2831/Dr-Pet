@@ -998,16 +998,8 @@ body{
   right: 1rem !important;
 }
 
-.-right-3{
-  right: -0.75rem;
-}
-
 .-right-\[12px\]{
   right: -12px;
-}
-
-.-top-3{
-  top: -0.75rem;
 }
 
 .-top-\[12px\]{
