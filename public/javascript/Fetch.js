@@ -31,7 +31,10 @@ export default class Fetch {
             const response = await fetch(this.url);
             const data = await response.json();
             
-            this.showModalSuccess('Os dados foram carregados com sucesso!');
+            if (data && Object.keys(data).length > 0) {
+                this.showModalSuccess('Os dados foram carregados com sucesso!');
+            }
+
             return data;
         } catch(err) {
             this.showModalError(err, 'Houve um erro ao carregar os dados!');
@@ -46,26 +49,8 @@ export default class Fetch {
         try{
             const response = await fetch(this.url, {
                 method: "POST",
-                body: JSON.stringify(object),
-            });
-            
-            this.showModalSuccess('Os dados foram enviados com sucesso!');
-            return response;
-        } catch(err) {
-            this.showModalError(err, 'Houve um erro ao enviar os dados!');
-        } finally {
-            setTimeout(() => {
-                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
-            }, 5000);
-        }
-    }
-
-    async post(object, type){
-        try{
-            const response = await fetch(this.url, {
-                method: "POST",
                 headers: {
-                    "Content-Type": type,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(object),
             });
