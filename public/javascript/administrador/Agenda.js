@@ -41,7 +41,10 @@ export default class Agenda {
         
         if(this.inputDate.value && this.selectService.value){
             this.schedules.forEach((scheduleObject) => {
-                if((scheduleObject.date == this.inputDate.value) && (scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase())){
+                const matchDate = scheduleObject.date == this.inputDate.value;
+                const matchService = this.selectService.value === 'all' || scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase();
+                
+                if(matchDate && matchService){
                     this.createStructSchedule(scheduleObject);
                 }
             });
