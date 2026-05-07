@@ -41,7 +41,7 @@ export default class Fetch {
         } finally {
             setTimeout(() => {
                 this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
-            }, 1000);
+            }, 1500);
         }
     }
 
@@ -62,7 +62,7 @@ export default class Fetch {
         } finally {
             setTimeout(() => {
                 this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
-            }, 1000);
+            }, 1500);
         }
     }
 
@@ -81,7 +81,7 @@ export default class Fetch {
         } finally {
             setTimeout(() => {
                 this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
-            }, 1000);
+            }, 1500);
         }
     }
 }
