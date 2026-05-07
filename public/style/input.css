@@ -70,35 +70,6 @@
         @apply max-md:mt-[100px];
     }
 
-    /* texts */
-    /*
-    .text-xxs-regular { @apply text-[0.875rem] leading-[1rem] font-normal; }
-    .text-xxs-medium { @apply text-[0.875rem] leading-[1rem] font-medium; }
-    .text-xs-regular { @apply text-[1rem] leading-[1.25rem] font-normal; }
-    .text-xs-medium { @apply text-[1rem] leading-[1.25rem] font-medium; }
-    .text-sm-regular { @apply text-[1.25rem] leading-[1.5rem] font-normal; }
-    .text-sm-medium { @apply text-[1.25rem] leading-[1.5rem] font-medium; }
-    .text-sm-semiBold { @apply text-[1.25rem] leading-[1.5rem] font-semibold; }
-    .text-md-regular { @apply text-[1.375rem] leading-[1.7rem] font-normal; }
-    .text-md-medium { @apply text-[1.375rem] leading-[1.7rem] font-medium; }
-    .text-md-semiBold { @apply text-[1.375rem] leading-[1.7rem] font-semibold; }
-    .text-lg-regular { @apply text-[1.625rem] leading-[2rem] font-normal; }
-    .text-lg-medium { @apply text-[1.625rem] leading-[2rem] font-medium; }
-    .text-lg-semiBold { @apply text-[1.625rem] leading-[2rem] font-semibold; }
-    .text-xl-regular { @apply text-[1.875rem] leading-[2.3rem] font-normal; }
-    .text-xl-medium { @apply text-[1.875rem] leading-[2.3rem] font-medium; }
-    .text-xl-semiBold { @apply text-[1.875rem] leading-[2.3rem] font-semibold; }
-
-    .title-xs-semiBold { @apply text-[2rem] leading-[2.5rem] font-semibold; }
-    .title-xs-bold { @apply text-[2rem] leading-[2.5rem] font-bold; }
-    .title-sm-semiBold { @apply text-[2.25rem] leading-[2.75rem] font-semibold; }
-    .title-sm-bold { @apply text-[2.25rem] leading-[2.75rem] font-bold; }
-    .title-md-semiBold { @apply text-[2.5rem] leading-[3.125rem] font-semibold; }
-    .title-md-bold { @apply text-[2.5rem] leading-[3.125rem] font-bold; }
-    .title-xl-semiBold { @apply text-[3.25rem] leading-[4rem] font-semibold; }
-    .title-xl-bold { @apply text-[3.25rem] leading-[4rem] font-bold; }
-    */
-
     .shadow {
         @apply shadow-[0_1px_2px_theme(colors.shadow)];
     }
@@ -271,5 +242,13 @@
 
     [data-modal-info].success {
         @apply block rounded-md shadow w-full max-w-[500px] bg-green-500 text-gray-50;
+    }
+
+    input.error, textarea.error, select.error {
+        @apply bg-red-light border-2 border-red-alert;
+    }
+
+    label.error {
+        @apply border-red-alert bg-red-light;
     }
 }
