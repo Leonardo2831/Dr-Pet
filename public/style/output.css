@@ -1081,6 +1081,10 @@ body{
   z-index: 20;
 }
 
+.z-30{
+  z-index: 30;
+}
+
 .z-40{
   z-index: 40;
 }
@@ -1421,10 +1425,6 @@ body{
 
 .w-full{
   width: 100%;
-}
-
-.w-\[240px\]{
-  width: 240px;
 }
 
 .min-w-\[1200px\]{
@@ -1816,10 +1816,6 @@ body{
 
 .gap-\[70px\]{
   gap: 70px;
-}
-
-.gap-\[px\]{
-  gap: px;
 }
 
 .gap-x-1{
@@ -2414,10 +2410,6 @@ body{
   font-size: 14px;
 }
 
-.text-\[16px\]{
-  font-size: 16px;
-}
-
 .text-\[18px\]{
   font-size: 18px;
 }
@@ -2755,10 +2747,6 @@ body{
 
 .invert-\[0\.3\]{
   --tw-invert: invert(0.3);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
