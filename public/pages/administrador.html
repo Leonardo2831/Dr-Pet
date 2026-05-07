@@ -158,6 +158,93 @@
         </main>
     </div>
 
+    <!-- form add product -->
+    <div data-modal="addProduct" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="addProduct" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+                
+                <button type="button" data-button="closeFormProduct" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar Novo Produto</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-product-name" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Produto</label>
+                    <input data-input="product-name" id="input-product-name" type="text" name="name" placeholder="Ex: Ração Golden Cães Adultos" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="select-product-category" class="font-sans font-semibold text-base md:text-lg text-gray-700">Categoria</label>
+                        <div class="relative">
+                            <select data-select-new="productCategory" id="select-product-category" name="category" required
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all">
+                                <option value="" disabled selected>Selecione uma categoria</option>
+                                <option value="Ração">Ração</option>
+                                <option value="Brinquedos">Brinquedos</option>
+                                <option value="Medicamentos">Medicamentos</option>
+                                <option value="Acessórios">Acessórios</option>
+                                <option value="Higiene">Higiene</option>
+                            </select>
+                            <img src="../images/icons/arrow-down.svg" alt="Seta para baixo" class="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[10px] sm:w-[200px]">
+                        <label for="input-product-price" class="font-sans font-semibold text-base md:text-lg text-gray-700">Preço (R$)</label>
+                        <input data-input="priceProduct" id="input-product-price" type="text" name="price" min="0" step="0.01" placeholder="R$ 0,00" required
+                            class="appearance-none px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="textarea-short-description" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Curta</label>
+                    <textarea data-textarea="shortDescription" id="textarea-short-description" name="shortDescription" rows="2" placeholder="Breve descrição do produto..." required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-y min-h-[70px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="textarea-long-description" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Longa</label>
+                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription" rows="4" placeholder="Descrição detalhada do produto..." required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-y min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-main-image" class="font-sans font-semibold text-base md:text-lg text-gray-700">Imagem Principal</label>
+                    <label for="input-main-image"
+                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
+                        <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar imagem" class="w-8 h-8 opacity-60">
+                        <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar a imagem principal</span>
+                    </label>
+                    <input data-input="imageMainProduct" id="input-main-image" type="file" name="mainImage" accept="image/*" required class="hidden">
+                    <span data-info="mainImage" class="font-sans text-sm text-green-600 truncate hidden"></span>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-slide-images" class="font-sans font-semibold text-base md:text-lg text-gray-700">Imagens do Slide</label>
+                    <label for="input-slide-images"
+                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
+                        <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar imagens" class="w-8 h-8 opacity-60">
+                        <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar as imagens do slide</span>
+                    </label>
+                    <input data-input="imageSlideProduct" id="input-slide-images" type="file" name="slideImages" accept="image/*" multiple required class="hidden">
+                    <div class="font-sans text-xs md:text-sm text-amber-600 flex items-center gap-3">
+                        <span class="text-base">⚠</span> 
+                        <p>Selecione todas as imagens do slide de uma vez (mantenha <b>Ctrl</b> ou <b>Shift</b> pressionado ao selecionar).</p>
+                    </div>
+                    <span data-info="slideImages" class="font-sans text-sm text-green-600 truncate hidden"></span>
+                </div>
+
+                <button type="submit"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Cadastrar Produto</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <aside data-modal-info="adm" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
     
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
