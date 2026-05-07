@@ -197,8 +197,8 @@
     {
       "id": "0",
       "name": "Ração Golden Cães Adultos",
-      "categoria": "racao",
-      "price": 200,
+      "category": "Ração",
+      "price": 200.00,
       "shortDescription": "Melhor ração para o seu pet.",
       "longDescription": "Seu companheiro de quatro patas chegou à melhor idade e merece uma alimentação que acompanhe suas necessidades especiais. A Ração Golden Premier Sênior +7 Anos Frango e Arroz foi cuidadosamente formulada para cães com mais de 7 anos, oferecendo uma nutrição completa e balanceada para uma vida longa e saudável.",
       "urlImageMain": "../images/products/GoldenSpecial.png",
@@ -211,7 +211,7 @@
     {
       "id": "1",
       "name": "Ração Senior Cães Adultos",
-      "categoria": "racao",
+      "category": "Ração",
       "price": 100,
       "shortDescription": "Segunda melhor ração para o seu pet.",
       "longDescription": "Seu companheiro de quatro patas chegou à melhor idade e merece uma alimentação que acompanhe suas necessidades especiais. A Ração Senior de Frango foi cuidadosamente formulada para cães , oferecendo uma nutrição completa e balanceada alimentação.",
