@@ -117,26 +117,23 @@
                     </button>
                 </div>
 
-                <div
-                    class="mt-10 md:mt-[60px] flex flex-col p-5 md:p-[60px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] gap-10 md:gap-[60px] w-full overflow-hidden">
-                    <div
-                        class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-5 xl:gap-[50px] w-full">
-                        <div
-                            class="flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
-                            <input data-input="filterProduct" type="text" placeholder="Busca por nome ou categoria..." class="w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500">
+                <div class="mt-10 md:mt-[60px] flex flex-col p-7 md:p-[60px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] gap-10 md:gap-[60px] w-full overflow-hidden">
+                    <div class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-3 xl:gap-10 w-full">
+                        <div class="relative flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
+                            <input data-input="filterProduct" type="text" placeholder="Busca por nome..." class="w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500">
                             <img src="../images/icons/search.svg" alt="Buscar" class="w-6 h-6 md:w-[32px] md:h-[33px]">
                         </div>
 
-                        <div class="relative shrink-0 min-w-[280px] md:min-w-[400px] w-full md:w-auto">
-                            <select data-select="typeProduct" class="w-full pl-8 pr-20 py-3 md:py-[18px] bg-gray-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all rounded-[10px] font-semibold text-base md:text-2xl uppercase text-gray-700 cursor-pointer appearance-none">
-                                <option value="todas" selected>Todas as Categorias</option>
-                                <option value="racao">Ração</option>
+                        <div class="relative shrink-0 min-w-fit md:min-w-[400px] w-full md:w-auto">
+                            <select data-select="typeProduct" class="w-full pl-8 pr-8 xs:pr-20 py-3 md:py-[18px] bg-gray-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all rounded-[10px] font-semibold text-sm xs:text-base md:text-2xl uppercase text-gray-700 cursor-pointer appearance-none">
+                                <option value="all" selected>Todas as Categorias</option>
+                                <option value="ração">Ração</option>
                                 <option value="brinquedos">Brinquedos</option>
                                 <option value="medicamentos">Medicamentos</option>
-                                <option value="acessorios">Acessórios</option>
+                                <option value="acessórios">Acessórios</option>
+                                <option value="higiene">Higiene</option>
                             </select>
-                            <img src="../images/icons/arrow-down.svg" alt="Seta para baixo"
-                                class="absolute right-5 top-1/2 -translate-y-1/2 w-10 pointer-events-none">
+                            <img src="../images/icons/arrow-down.svg" alt="Seta para baixo" class="hidden xs:block absolute right-5 top-1/2 -translate-y-1/2 w-10 pointer-events-none">
                         </div>
                     </div>
 
@@ -163,6 +160,7 @@
 
     <aside data-modal-info="adm" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
     
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
     <script type="module" src="../javascript/administrador/script-adm.js"></script>
 </body>
 </html>
