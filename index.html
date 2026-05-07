@@ -65,19 +65,7 @@
 
             <div class="swiper w-full h-full">
 
-                <div class="swiper-wrapper">
-                    <figure class="swiper-slide w-full h-full">
-                        <img src="public/images/introduction.png" alt="introduction"
-                            class="w-full h-full object-cover object-center">
-                    </figure>
-                    <figure class="swiper-slide w-full h-full">
-                        <img src="public/images/introduction.png" alt="introduction"
-                            class="w-full h-full object-cover object-center">
-                    </figure>
-                    <figure class="swiper-slide w-full h-full">
-                        <img src="public/images/introduction.png" alt="introduction"
-                            class="w-full h-full object-cover object-center">
-                    </figure>
+                <div data-content-imgs="slideHome" class="swiper-wrapper">
                     <figure class="swiper-slide w-full h-full">
                         <img src="public/images/introduction.png" alt="introduction"
                             class="w-full h-full object-cover object-center">
@@ -412,6 +400,9 @@
             </address>
         </footer>
     </div>
+
+    <aside data-modal-info="home" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
+
     <script type="module" src="public/javascript/home/script-home.js"></script>
     <script type="module" src="public/javascript/menuUser.js"></script>
 </body>
