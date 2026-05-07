@@ -1,3 +1,5 @@
+import Fetch from '../../Fetch.js';
+
 export default function structProducts(object){
     const tr = document.createElement('tr');
     tr.className = "animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors";
