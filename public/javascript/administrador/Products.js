@@ -1,3 +1,4 @@
+import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/+esm';
 import Fetch from "../Fetch.js";
 import structProducts from './components/structProducts.js';
 
@@ -10,6 +11,8 @@ export default class Products{
 
         this.products = null;
         this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
+
+        this.fuse = null;
     }
 
     createStructRowTable(productObject){
@@ -18,27 +21,79 @@ export default class Products{
     }
 
     filterProducts(){
-        this.contentSchedule.innerHTML = "";
-        
-        if(this.inputDate.value && this.selectService.value){
-            this.schedules.forEach((scheduleObject) => {
-                const matchDate = scheduleObject.date == this.inputDate.value;
-                const matchService = this.selectService.value === 'all' || scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase();
-                
-                if(matchDate && matchService){
-                    this.createStructSchedule(scheduleObject);
-                }
-            });
+        const textInput = this.inputSearchProduct.value.trim();
+        const category = this.selectTypeProduct.value;
+
+        let results = [];
+
+        if (textInput) {
+            const fuseResult = this.fuse.search(textInput);
+            results = fuseResult.map(res => res.item);
         } else {
-            this.scheduleInit();
+            // caso pesquisar sem texto no input mas com categoria definida
+            results = [...this.products];
         }
 
-        if(!this.contentSchedule.children.length){
-            const alert = document.createElement('p');
-            alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center';
-            alert.textContent = "Não há nenhum horário para esse dia e este serviço";
-            this.contentSchedule.appendChild(alert);
+        if (category !== 'all') {
+            // filtra os produtos pela categoria
+            results = results.filter((product) => product.category.toLowerCase() === category.toLowerCase());
         }
+
+        this.contentProducts.innerHTML = '';
+        results.forEach((product) => {
+            this.createStructRowTable(product);
+        });
+    }
+
+    createInfoEnter(){
+        const p = document.createElement('p');
+        p.className = 'animate-fadeItem absolute font-medium text-sm md:text-base text-gray-500 -top-7 xl:top-auto xl:-bottom-8 right-1';
+        p.innerHTML = `Presione <b class="font-semibold text-gray-600">Enter</b> para Pesquisar`;
+
+        return p;
+    }
+
+    addEvents(){
+        this.inputSearchProduct.addEventListener('input', () => {
+            const textInput = this.inputSearchProduct.value.trim();
+
+            if(textInput){
+                const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
+                if(!infoEnter) this.inputSearchProduct.after(this.createInfoEnter());
+            } else {
+                const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
+                if(infoEnter) infoEnter.remove();
+            }
+        });
+
+        this.inputSearchProduct.addEventListener('keydown', (event) => {
+            if(event.key === 'Enter'){
+                event.preventDefault();
+                this.filterProducts();
+            }
+        });
+
+        this.selectTypeProduct.addEventListener('change', () => {
+            this.filterProducts();
+        });
+
+        this.selectTypeProduct.addEventListener('keydown', (event) => {
+            if(event.key === 'Enter'){
+                event.preventDefault();
+                this.filterProducts();
+            }
+        });
+    };
+
+    initSearch(){
+        const configSearch = {
+            keys: ['name', 'category'],
+            threshold: 0.5
+        };
+
+        this.fuse = new Fuse(this.products, configSearch);
+
+        this.addEvents();
     }
 
     initTable(){
@@ -52,6 +107,7 @@ export default class Products{
             if(Array.isArray(products)){
                 this.products = products;
                 this.initTable();
+                this.initSearch();
             }
         });
     }
