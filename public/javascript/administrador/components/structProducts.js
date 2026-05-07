@@ -1,6 +1,6 @@
 export default function structProducts(object){
     const tr = document.createElement('tr');
-    tr.className = "border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors";
+    tr.className = "animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors";
     tr.setAttribute('data-id', object.id);
 
     tr.innerHTML = `
