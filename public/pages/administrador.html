@@ -33,7 +33,7 @@
             </nav>
 
             <section id="section-slides" data-tab-content class="animate-fadeLeft opacity-1 w-full max-w-[1400px] mt-10 md:mt-20">
-                <h2 class="font-sans font-bold text-2xl md:text-4xl leading-tight md:leading-[50px] text-green-700">
+                <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
                     Defina os Slides da Home
                 </h2>
 
@@ -52,7 +52,7 @@
 
             <section id="section-agenda" data-tab-content class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
                 <div class="flex flex-col gap-10 w-full">
-                    <h2 class="font-sans font-bold text-2xl md:text-4xl leading-tight md:leading-[50px] text-green-700">
+                    <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
                         Agenda</h2>
                     <div class="flex flex-wrap items-end gap-10 w-full">
 
@@ -63,7 +63,7 @@
                             </label>
                             <div class="relative w-[220px]">
                                 <input type="date" data-input-date="adm"
-                                    class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer">
+                                    class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer">
                                 <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none">
                             </div>
@@ -104,15 +104,14 @@
 
             <section id="section-produtos" data-tab-content class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-5">
-                    <h2 class="font-sans font-bold text-2xl md:text-[36px] leading-tight md:leading-[44px] text-green-700">
+                    <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
                         Gestão de Produtos
                     </h2>
                     <button type="button"
                         class="flex flex-row items-center gap-[10px] md:gap-[30px] px-5 py-3 md:px-[36px] md:py-[16px] bg-green-400 rounded-[15px] hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all shrink-0 shadow-sm">
                         <img src="../images/icons/administrador/plus-product.svg" alt="Novo produto"
                             class="w-6 h-6 md:w-[30px] md:h-[30px]">
-                        <span
-                            class="font-sans font-semibold text-lg md:text-2xl uppercase text-gray-50">
+                        <span data-button="addProduct" class="font-sans font-semibold text-lg md:text-2xl uppercase text-gray-50">
                             Novo produto
                         </span>
                     </button>
@@ -124,15 +123,13 @@
                         class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-5 xl:gap-[50px] w-full">
                         <div
                             class="flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
-                            <input type="text" placeholder="Busca por nome ou categoria..."
-                                class="w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500">
+                            <input data-input="filterProduct" type="text" placeholder="Busca por nome ou categoria..." class="w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500">
                             <img src="../images/icons/search.svg" alt="Buscar" class="w-6 h-6 md:w-[32px] md:h-[33px]">
                         </div>
 
                         <div class="relative shrink-0 min-w-[280px] md:min-w-[400px] w-full md:w-auto">
-                            <select
-                                class="w-full pl-8 pr-20 py-3 md:py-[18px] bg-gray-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all rounded-[10px] font-semibold text-base md:text-2xl uppercase text-gray-700 cursor-pointer appearance-none">
-                                <option value="todas" selected>Todas as categorias</option>
+                            <select data-select="typeProduct" class="w-full pl-8 pr-20 py-3 md:py-[18px] bg-gray-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all rounded-[10px] font-semibold text-base md:text-2xl uppercase text-gray-700 cursor-pointer appearance-none">
+                                <option value="todas" selected>Todas as Categorias</option>
                                 <option value="racao">Ração</option>
                                 <option value="brinquedos">Brinquedos</option>
                                 <option value="medicamentos">Medicamentos</option>
@@ -144,42 +141,19 @@
                     </div>
 
                     <div class="scroll w-full overflow-x-auto pb-1">
-                        <table
-                            class="table-caption w-full min-w-[1200px] xl:min-w-[1400px] text-left border-collapse [&_th]:px-4 lg:[&_th]:px-6 [&_td]:px-4 lg:[&_td]:px-6">
+                        <table class="table-caption w-full min-w-[1200px] xl:min-w-[1400px] text-left border-collapse [&_th]:px-4 lg:[&_th]:px-6 [&_td]:px-4 lg:[&_td]:px-6">
                             <thead>
-                                <tr
-                                    class="border-b-[3px] border-gray-100 *:pb-5 *:font-semibold *:text-lg *:md:text-[26px] *:leading-[32px] *:text-gray-700">
+                                <tr class="border-b-[3px] border-gray-100 *:pb-5 *:font-semibold *:text-sm *:md:text-lg *:lg:text-xl *:leading-[32px] *:text-gray-700 *:whitespace-nowrap">
                                     <th>Produto</th>
                                     <th>Categoria</th>
-                                    <th>Preço(R$)</th>
-                                    <th>Descrição</th>
-                                    <th>Linha</th>
+                                    <th>Preço (R$)</th>
+                                    <th>Descrição Longa</th>
+                                    <th>Descrição Curta</th>
                                     <th class="text-center">Editar</th>
                                     <th class="text-center">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr
-                                    class="border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
-                                    <td class="max-w-0 truncate w-[25%]">Ração Golden Cães Adultos</td>
-                                    <td>Ração</td>
-                                    <td>149,99</td>
-                                    <td class="max-w-0 truncate w-[25%]">Descrição do produto</td>
-                                    <td>Premium</td>
-                                    <td class="py-5 text-center">
-                                        <button class="hover:opacity-80 transition-opacity mx-auto flex">
-                                            <img src="../images/icons/administrador/edit-blue.svg" alt="Editar"
-                                                class="w-6 h-6 md:w-[35px] md:h-[38px]">
-                                        </button>
-                                    </td>
-                                    <td class="py-5 text-center">
-                                        <button class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
-                                            <img src="../images/icons/administrador/delete-product.svg" alt="Excluir"
-                                                class="w-6 h-6 md:w-[37px] md:h-[38px]">
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody data-content-products="table"></tbody>
                         </table>
                     </div>
                 </div>
