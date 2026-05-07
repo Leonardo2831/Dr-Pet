@@ -2,13 +2,15 @@ import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/+esm';
 import Fetch from "../Fetch.js";
 import structProducts from './components/structProducts.js';
 
-export default class Products{
-    constructor(selectorContentProducts, selectorButtonNew, selectorInputSearchProduct, selectorSelectTypeProduct){
+export default class Products {
+    constructor(selectorContentProducts, selectorButtonNew, selectorInputSearchProduct, selectorSelectTypeProduct, formProduct){
         this.contentProducts = document.querySelector(selectorContentProducts);
         this.buttonNew = document.querySelector(selectorButtonNew);
         this.inputSearchProduct = document.querySelector(selectorInputSearchProduct);
         this.selectTypeProduct = document.querySelector(selectorSelectTypeProduct);
-
+        
+        this.formProduct = formProduct;
+        
         this.products = null;
         this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
 
@@ -83,6 +85,10 @@ export default class Products{
                 this.filterProducts();
             }
         });
+
+        if(this.formProduct){
+            this.buttonNew.addEventListener('click', this.formProduct.openFormCreate);
+        }
     };
 
     initSearch(){
