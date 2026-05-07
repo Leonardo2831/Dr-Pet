@@ -5,7 +5,7 @@ export default function structProducts(object){
 
     tr.innerHTML = `
         <td class="max-w-0 truncate w-[25%]">${object.name}</td>
-        <td>${object.category}</td>
+        <td class="capitalize">${object.category}</td>
         <td>${Number(object.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
         <td class="max-w-0 truncate w-[25%]">${object.shortDescription}</td>
         <td class="max-w-0 truncate w-[25%]">${object.longDescription}</td>
