@@ -105,7 +105,7 @@ export default class ProductsLoja {
 
     initSearch() {
         const configSearch = {
-            keys: ['name', 'category'],
+            keys: ['name', 'category', 'shortDescription'],
             threshold: 0.5
         };
 
