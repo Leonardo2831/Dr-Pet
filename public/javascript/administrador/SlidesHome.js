@@ -60,8 +60,6 @@ export default class SlidesHome{
             image: imageBase64
         };
 
-        console.log(objectImage);
-
         this.fetchJson.post(objectImage);
         structSlide(objectImage);
     }
