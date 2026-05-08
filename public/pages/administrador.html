@@ -62,7 +62,7 @@
                                 Escolha a data
                             </label>
                             <div class="relative w-[220px]">
-                                <input type="date" data-input-date="adm"
+                                <input type="date" data-input-date="adm" min="2026-01-01"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer">
                                 <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none">
@@ -99,7 +99,9 @@
                     </div>
                 </div>
 
-                <div data-content-schedule class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2"></div>
+                <div data-content-schedule class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
+                    <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">Não há nenhum horário para esse dia e este serviço</p>
+                </div>
             </section>
 
             <section id="section-produtos" data-tab-content class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
@@ -201,13 +203,13 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="textarea-short-description" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Curta</label>
-                    <textarea data-textarea="shortDescription" id="textarea-short-description" name="shortDescription" rows="2" placeholder="Breve descrição do produto..." required
+                    <textarea data-textarea="shortDescription" id="textarea-short-description" name="shortDescription" rows="2" placeholder="Breve descrição do produto..." maxlength="50" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-y min-h-[70px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
                 </div>
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="textarea-long-description" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Longa</label>
-                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription" rows="4" placeholder="Descrição detalhada do produto..." required
+                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription" rows="4" placeholder="Descrição detalhada do produto..." maxlength="200" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-y min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
                 </div>
 
