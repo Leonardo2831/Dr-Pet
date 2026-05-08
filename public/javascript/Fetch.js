@@ -66,7 +66,26 @@ export default class Fetch {
         }
     }
 
-    async put(id, object){}
+    async put(id, object){
+        try {
+            const response = await fetch(`${this.url}/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(object),
+            });
+            
+            this.showModalSuccess('Os dados foram atualizados com sucesso!');
+            return response;
+        } catch(err) {
+            this.showModalError(err, 'Houve um erro ao atualizar os dados!');
+        } finally {
+            setTimeout(() => {
+                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+            }, 1500);
+        }
+    }
 
     async delete(id){
         try{
