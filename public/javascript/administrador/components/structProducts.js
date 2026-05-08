@@ -1,4 +1,9 @@
 import Fetch from '../../Fetch.js';
+import FormProduct from '../FormProduct.js';
+
+const formProduct = new FormProduct('[data-modal="addProduct"]', '[data-form="addProduct"]', '[data-button="closeFormProduct"]', 
+    '[data-input="product-name"]', '[data-select-new="productCategory"]', '[data-input="priceProduct"]', '[data-textarea="shortDescription"]', '[data-textarea="longDescription"]',
+    '[data-input="imageMainProduct"]', '[data-input="imageSlideProduct"]', '[data-info="mainImage"]', '[data-info="slideImages"]', '[data-button="createProduct"]').init();
 
 export default function structProducts(object){
     const tr = document.createElement('tr');
@@ -12,7 +17,7 @@ export default function structProducts(object){
         <td class="max-w-0 truncate w-[25%]">${object.shortDescription}</td>
         <td class="max-w-0 truncate w-[25%]">${object.longDescription}</td>
         <td class="py-5 text-center">
-            <button class="hover:opacity-80 transition-opacity mx-auto flex">
+            <button data-button="editProduct" class="hover:opacity-80 transition-opacity mx-auto flex">
                 <img src="../images/icons/administrador/edit-blue.svg" alt="Editar" class="w-6 h-6 md:w-[35px] md:h-[38px]">
             </button>
         </td>
@@ -22,6 +27,11 @@ export default function structProducts(object){
             </button>
         </td>
     `;
+
+    tr.querySelector('[data-button="editProduct"]').addEventListener('click', () => {
+        formProduct.putValuesForm(object);
+        formProduct.openFormCreate();
+    });
 
     tr.querySelector('[data-button="deleteProduct"]').addEventListener('click', () => {
         const fetchAPI = new Fetch('produtos', '[data-modal-info="adm"]');
