@@ -192,6 +192,14 @@ export default class FormProduct {
         }
     }
 
+    putValuesForm(product){
+        this.inputName.value = product.name;
+        this.selectCategory.value = product.category;
+        this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
+        this.areaShortDescription.value = product.shortDescription;
+        this.areaLongDescription.value = product.longDescription;
+    }
+
     openFormCreate() {
         if (!this.modalProduct) return;
         this.modalProduct.classList.remove('hidden');
