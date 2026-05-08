@@ -1,8 +1,8 @@
 
 import PopUp from './../Pop-up.js';
-import slidesLoja from './slides-produtos-loja.js';
+import ProductsLoja from './ProductsLoja.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    slidesLoja();
-    const filtroMenu = new PopUp('[data-button="filtro"]', '[data-modal="filtro"]').init();
+    const filtroMenuModal = new PopUp('[data-button="filtro"]', '[data-modal="filtroLoja"]').init();
+    const productsLoja = new ProductsLoja('[data-content-shop="products"]', '[data-input="filterLojaProducts"]', '[data-modal="filtroLoja"]').init();
 });
