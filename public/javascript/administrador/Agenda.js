@@ -16,6 +16,15 @@ export default class Agenda {
         this.filterSchedule = this.filterSchedule.bind(this);
     }
 
+    verifyIfHasSchedule(){
+        if(!this.contentSchedule.children.length){
+            const alert = document.createElement('p');
+            alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center';
+            alert.textContent = "Não há nenhum horário para esse dia e este serviço";
+            this.contentSchedule.appendChild(alert);
+        }
+    }
+
     createStructSchedule(scheduleObject){
         const div = structAgenda(scheduleObject);
         this.contentSchedule.appendChild(div);
@@ -29,6 +38,8 @@ export default class Agenda {
                 this.createStructSchedule(scheduleObject);
             }
         });
+
+        this.verifyIfHasSchedule();
     }
 
     inputInit(){
@@ -64,12 +75,7 @@ export default class Agenda {
             this.scheduleInit();
         }
 
-        if(!this.contentSchedule.children.length){
-            const alert = document.createElement('p');
-            alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center';
-            alert.textContent = "Não há nenhum horário para esse dia e este serviço";
-            this.contentSchedule.appendChild(alert);
-        }
+        verifyIfHasSchedule();
     }
 
     addEvents(){
