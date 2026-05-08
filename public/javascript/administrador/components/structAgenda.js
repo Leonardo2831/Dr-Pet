@@ -3,18 +3,21 @@ export default function structAgenda(object){
     div.className = "flex flex-col justify-between w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
     div.setAttribute('data-id', object.id);
 
+    const [year, month, day] = object.date.split('-');
+    const formatDate = `${day}/${month}/${year}`;
+
     div.innerHTML = `
         <div class="flex flex-row justify-between items-start pb-5 w-full">
             <div class="flex flex-col gap-2">
                 <div class="flex flex-col">
-                    <span class="font-semibold text-lg md:text-[20px] leading-[25px] text-gray-800">
-                        ${object.user.username}
+                    <span class="font-semibold text-base md:text-lg text-gray-800">
+                        ${object.user.username} - <span class="whitespace-nowrap">${formatDate}</span>
                     </span>
                     <span class="font-medium text-base text-gray-700">
                         Pet: ${object.petAgendado.name}
                     </span>
                 </div>
-                <div class="flex flex-col gap-[5px]">
+                <div class="flex flex-col">
                     <span class="font-normal text-base text-gray-700">
                         <span class="font-medium">Serviço:</span> ${object.service.name}
                     </span>
