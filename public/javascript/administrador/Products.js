@@ -3,26 +3,26 @@ import Fetch from "../Fetch.js";
 import structProducts from './components/structProducts.js';
 
 export default class Products {
-    constructor(selectorContentProducts, selectorButtonNew, selectorInputSearchProduct, selectorSelectTypeProduct, formProduct){
+    constructor(selectorContentProducts, selectorButtonNew, selectorInputSearchProduct, selectorSelectTypeProduct, formProduct) {
         this.contentProducts = document.querySelector(selectorContentProducts);
         this.buttonNew = document.querySelector(selectorButtonNew);
         this.inputSearchProduct = document.querySelector(selectorInputSearchProduct);
         this.selectTypeProduct = document.querySelector(selectorSelectTypeProduct);
-        
+
         this.formProduct = formProduct;
-        
+
         this.products = null;
         this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
 
         this.fuse = null;
     }
 
-    createStructRowTable(productObject){
+    createStructRowTable(productObject) {
         const tr = structProducts(productObject);
         this.contentProducts.appendChild(tr);
     }
 
-    filterProducts(){
+    filterProducts() {
         const textInput = this.inputSearchProduct.value.trim();
         const category = this.selectTypeProduct.value;
 
@@ -47,7 +47,7 @@ export default class Products {
         });
     }
 
-    createInfoEnter(){
+    createInfoEnter() {
         const p = document.createElement('p');
         p.className = 'animate-fadeItem absolute font-medium text-sm md:text-base text-gray-500 -top-7 xl:top-auto xl:-bottom-8 right-1';
         p.innerHTML = `Presione <b class="font-semibold text-gray-600">Enter</b> para Pesquisar`;
@@ -55,21 +55,21 @@ export default class Products {
         return p;
     }
 
-    addEvents(){
+    addEvents() {
         this.inputSearchProduct.addEventListener('input', () => {
             const textInput = this.inputSearchProduct.value.trim();
 
-            if(textInput){
+            if (textInput) {
                 const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
-                if(!infoEnter) this.inputSearchProduct.after(this.createInfoEnter());
+                if (!infoEnter) this.inputSearchProduct.after(this.createInfoEnter());
             } else {
                 const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
-                if(infoEnter) infoEnter.remove();
+                if (infoEnter) infoEnter.remove();
             }
         });
 
         this.inputSearchProduct.addEventListener('keydown', (event) => {
-            if(event.key === 'Enter'){
+            if (event.key === 'Enter') {
                 event.preventDefault();
                 this.filterProducts();
             }
@@ -80,18 +80,18 @@ export default class Products {
         });
 
         this.selectTypeProduct.addEventListener('keydown', (event) => {
-            if(event.key === 'Enter'){
+            if (event.key === 'Enter') {
                 event.preventDefault();
                 this.filterProducts();
             }
         });
 
-        if(this.formProduct){
-            this.buttonNew.addEventListener('click', this.formProduct.openFormCreate);
+        if (this.formProduct) {
+            this.buttonNew.addEventListener('click', this.formProduct.openForm);
         }
     };
 
-    initSearch(){
+    initSearch() {
         const configSearch = {
             keys: ['name', 'category'],
             threshold: 0.5
@@ -102,15 +102,15 @@ export default class Products {
         this.addEvents();
     }
 
-    initTable(){
+    initTable() {
         this.products.forEach((productObject) => {
             this.createStructRowTable(productObject);
         });
     }
 
-    getProducts(){
+    getProducts() {
         this.fetchJson.get().then((products) => {
-            if(Array.isArray(products)){
+            if (Array.isArray(products)) {
                 this.products = products;
                 this.initTable();
                 this.initSearch();
@@ -118,8 +118,8 @@ export default class Products {
         });
     }
 
-    init(){
-        if(this.contentProducts && this.buttonNew && this.inputSearchProduct && this.selectTypeProduct){
+    init() {
+        if (this.contentProducts && this.buttonNew && this.inputSearchProduct && this.selectTypeProduct) {
             this.getProducts();
         }
 

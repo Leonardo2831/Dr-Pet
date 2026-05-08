@@ -1,11 +1,11 @@
 import Fetch from '../../Fetch.js';
 import FormProduct from '../FormProduct.js';
 
-const formProduct = new FormProduct('[data-modal="addProduct"]', '[data-form="addProduct"]', '[data-button="closeFormProduct"]', 
+const formProduct = new FormProduct('[data-modal="addProduct"]', '[data-form="addProduct"]', '[data-button="closeFormProduct"]',
     '[data-input="product-name"]', '[data-select-new="productCategory"]', '[data-input="priceProduct"]', '[data-textarea="shortDescription"]', '[data-textarea="longDescription"]',
     '[data-input="imageMainProduct"]', '[data-input="imageSlideProduct"]', '[data-info="mainImage"]', '[data-info="slideImages"]', '[data-button="createProduct"]').init();
 
-export default function structProducts(object){
+export default function structProducts(object) {
     const tr = document.createElement('tr');
     tr.className = "animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors";
     tr.setAttribute('data-id', object.id);
@@ -29,8 +29,8 @@ export default function structProducts(object){
     `;
 
     tr.querySelector('[data-button="editProduct"]').addEventListener('click', () => {
+        formProduct.openForm();
         formProduct.putValuesForm(object);
-        formProduct.openFormCreate();
     });
 
     tr.querySelector('[data-button="deleteProduct"]').addEventListener('click', () => {

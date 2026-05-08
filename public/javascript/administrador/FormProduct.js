@@ -22,8 +22,8 @@ export default class FormProduct {
 
         this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
 
-        this.openFormCreate = this.openFormCreate.bind(this);
-        this.closeFormCreate = this.closeFormCreate.bind(this);
+        this.openForm = this.openForm.bind(this);
+        this.closeForm = this.closeForm.bind(this);
         this.showNameFileMain = this.showNameFileMain.bind(this);
         this.showCountFilesSlide = this.showCountFilesSlide.bind(this);
         this.formatInputPrice = this.formatInputPrice.bind(this);
@@ -96,7 +96,7 @@ export default class FormProduct {
         return hasName && hasCategory && hasPrice && hasShortDescription && hasLongDescription && hasMainImage && hasSlideImages;
     }
 
-    transformImagesBase64(images){
+    transformImagesBase64(images) {
         return Promise.all(
             images.map(image => {
                 return new Promise((resolve, reject) => {
@@ -113,7 +113,7 @@ export default class FormProduct {
         );
     }
 
-    transformOneImageBase64(image){
+    transformOneImageBase64(image) {
         return new Promise((resolve, reject) => {
             try {
                 const reader = new FileReader();
@@ -126,7 +126,7 @@ export default class FormProduct {
         });
     }
 
-    async createObjectProduct(){
+    async createObjectProduct() {
         return {
             id: crypto.randomUUID(),
             name: this.inputName.value.trim(),
@@ -141,8 +141,17 @@ export default class FormProduct {
 
     async initCreateProduct() {
         if (this.verifyInputs()) {
-            await this.fetchJson.post(await this.createObjectProduct());
-            this.closeFormCreate();
+            const idProduct = this.buttonCreateProduct.getAttribute('data-id');
+            const createObject = await this.createObjectProduct();
+
+            if (idProduct) {
+                createObject.id = idProduct;
+                await this.fetchJson.put(idProduct, createObject);
+            } else {
+                await this.fetchJson.post(createObject);
+            }
+
+            this.closeForm();
         } else {
             this.markErrors();
         }
@@ -174,7 +183,7 @@ export default class FormProduct {
         }
     }
 
-    closeFormCreate() {
+    closeForm() {
         if (!this.modalProduct) return;
         this.modalProduct.classList.add('hidden');
         this.modalProduct.classList.remove('flex');
@@ -192,7 +201,9 @@ export default class FormProduct {
         }
     }
 
-    putValuesForm(product){
+    putValuesForm(product) {
+        this.buttonCreateProduct.setAttribute('data-id', product.id);
+        this.buttonCreateProduct.querySelector('span').textContent = 'Atualizar Produto';
         this.inputName.value = product.name;
         this.selectCategory.value = product.category;
         this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
@@ -200,16 +211,18 @@ export default class FormProduct {
         this.areaLongDescription.value = product.longDescription;
     }
 
-    openFormCreate() {
+    openForm() {
+        this.buttonCreateProduct.setAttribute('data-id', '');
+        this.buttonCreateProduct.querySelector('span').textContent = 'Cadastrar Produto';
         if (!this.modalProduct) return;
         this.modalProduct.classList.remove('hidden');
         this.modalProduct.classList.add('flex');
 
-        if (this.formProduct) clickOutside(this.formProduct, 'click', this.closeFormCreate);
+        if (this.formProduct) clickOutside(this.formProduct, 'click', this.closeForm);
     }
 
     addEvents() {
-        if (this.buttonCloseForm) this.buttonCloseForm.addEventListener('click', this.closeFormCreate);
+        if (this.buttonCloseForm) this.buttonCloseForm.addEventListener('click', this.closeForm);
         if (this.inputMainImage && this.infoMainImage) this.inputMainImage.addEventListener('change', this.showNameFileMain);
         if (this.inputSlideImages && this.infoSlidesImages) this.inputSlideImages.addEventListener('change', this.showCountFilesSlide);
         if (this.inputPrice) this.inputPrice.addEventListener('input', this.formatInputPrice);
