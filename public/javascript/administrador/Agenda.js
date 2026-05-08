@@ -22,12 +22,16 @@ export default class Agenda {
     }
 
     scheduleInit(){
+        this.contentSchedule.innerHTML = "";
+
         this.schedules.forEach((scheduleObject) => {
-            this.createStructSchedule(scheduleObject);
+            if(scheduleObject.date == this.inputDate.value){
+                this.createStructSchedule(scheduleObject);
+            }
         });
     }
 
-    inputsInit(){
+    inputInit(){
         const today = new Date();
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -37,6 +41,14 @@ export default class Agenda {
     }
 
     filterSchedule(){
+        if(!this.inputDate.value || this.inputDate.value < this.inputDate.min){
+            this.inputDate.classList.add('error');
+            this.inputDate.addEventListener('click', () => {
+                this.inputDate.classList.remove('error');
+            });
+            return;
+        }
+
         this.contentSchedule.innerHTML = "";
         
         if(this.inputDate.value && this.selectService.value){
@@ -75,7 +87,7 @@ export default class Agenda {
 
     init(){
         if(this.contentSchedule && this.inputDate && this.selectService && this.buttonSearchSchedule){
-            this.inputsInit();
+            this.inputInit();
             this.getSchedules();
             this.addEvents();
         }
