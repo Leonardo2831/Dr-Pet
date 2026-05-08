@@ -134,8 +134,18 @@ export default class FormProduct {
             price: Number(this.inputPrice.value.replace(',', '.').replace('R$', '')),
             shortDescription: this.areaShortDescription.value.trim(),
             longDescription: this.areaLongDescription.value.trim(),
-            imageMain: await this.transformOneImageBase64(this.inputMainImage.files[0]),
-            imagesSlide: await this.transformImagesBase64(Array.from(this.inputSlideImages.files))
+            imageMain: {
+                image: await this.transformOneImageBase64(this.inputMainImage.files[0]),
+                alt: this.inputMainImage.files[0].name
+            },
+            imagesSlide: [
+                ...(await this.transformImagesBase64(Array.from(this.inputSlideImages.files))).map((image, index) => {
+                    return {
+                        image,
+                        alt: this.inputSlideImages.files[index].name
+                    };
+                })
+            ]
         };
     }
 
