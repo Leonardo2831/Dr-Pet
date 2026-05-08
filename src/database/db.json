@@ -114,7 +114,7 @@
         "duracaoMinutos": 45,
         "preco": 80
       },
-      "date": "2026-05-16",
+      "date": "2026-05-07",
       "hour": "11:00",
       "buscarResidencia": true
     },
@@ -229,18 +229,6 @@
       "price": 35.9,
       "shortDescription": "Shampoo suave para higiene e banho de pets.",
       "longDescription": "Formulado para cães e gatos, o shampoo neutro garante uma higiene perfeita, deixando o pelo brilhante, limpo e suavemente perfumado.",
-      "urlImageMain": "../images/products/GoldenSpecial.png",
-      "urlImages": [
-        "../images/products/GoldenSpecial.png"
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Bola de Borracha com Corda",
-      "category": "Brinquedos",
-      "price": 25.5,
-      "shortDescription": "Brinquedo resistente para atividades e brincadeiras.",
-      "longDescription": "Bola de borracha durável com corda integrada, ideal para brincadeiras ao ar livre e exercícios. Perfeita para estimular o instinto natural de busca do seu pet e garantir horas de diversão segura.",
       "urlImageMain": "../images/products/GoldenSpecial.png",
       "urlImages": [
         "../images/products/GoldenSpecial.png"
