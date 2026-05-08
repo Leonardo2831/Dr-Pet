@@ -1,6 +1,8 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-export default function slidesLoja(){
+export default function slidesLoja(previousSwiper){
+  if (previousSwiper) previousSwiper.destroy(true, true);
+
   const productSwiper = new Swiper('.product-swiper', {
     direction: 'horizontal',
     loop: false,
@@ -26,4 +28,6 @@ export default function slidesLoja(){
       },
     },
   });
+
+  return productSwiper;
 }
