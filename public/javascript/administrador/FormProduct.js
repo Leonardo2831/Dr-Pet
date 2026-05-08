@@ -1,5 +1,5 @@
 import { clickOutside } from "../clickOutside.js";
-
+import Fetch from "../Fetch.js";
 export default class FormProduct {
     constructor(selectorModal, selectorForm, selectorButtonClose,
         selectorInputName, selectorSelectCategory, selectorInputPrice, selectorAreaShortDescription, selectorAreaLongDescription,
@@ -20,28 +20,19 @@ export default class FormProduct {
         this.infoMainImage = document.querySelector(selectorInfoMainImage);
         this.infoSlidesImages = document.querySelector(selectorInfoSlideImages);
 
+        this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
+
         this.openFormCreate = this.openFormCreate.bind(this);
         this.closeFormCreate = this.closeFormCreate.bind(this);
         this.showNameFileMain = this.showNameFileMain.bind(this);
         this.showCountFilesSlide = this.showCountFilesSlide.bind(this);
         this.formatInputPrice = this.formatInputPrice.bind(this);
-    }
-
-    verifyInputs() {
-        const hasName = this.inputName?.value.trim() !== '';
-        const hasCategory = this.selectCategory?.value !== '';
-        const hasPrice = Number(this.inputPrice?.value.replace(/\D/g, '')) > 0;
-        const hasShortDescription = this.areaShortDescription?.value.trim() !== '';
-        const hasLongDescription = this.areaLongDescription?.value.trim() !== '';
-        const hasMainImage = this.inputMainImage?.files.length > 0;
-        const hasSlideImages = this.inputSlideImages?.files.length > 0;
-
-        return hasName && hasCategory && hasPrice && hasShortDescription && hasLongDescription && hasMainImage && hasSlideImages;
+        this.initCreateProduct = this.initCreateProduct.bind(this);
     }
 
     // Pega o label estilizado, pois o input do estilo file está escondido
     getLabelFile(input) {
-        if (!input?.id) return null;
+        if (!input.id) return null;
         return this.formProduct?.querySelector(`label[for="${input.id}"].cursor-pointer`) ?? null;
     }
 
@@ -93,9 +84,65 @@ export default class FormProduct {
         }
     }
 
-    createProduct() {
-        if (this.verifyInputs()) {
+    verifyInputs() {
+        const hasName = this.inputName?.value.trim() !== '';
+        const hasCategory = this.selectCategory?.value !== '';
+        const hasPrice = Number(this.inputPrice?.value.replace(',', '.').replace('R$', '')) > 0;
+        const hasShortDescription = this.areaShortDescription?.value.trim() !== '';
+        const hasLongDescription = this.areaLongDescription?.value.trim() !== '';
+        const hasMainImage = this.inputMainImage?.files.length > 0;
+        const hasSlideImages = this.inputSlideImages?.files.length > 0;
 
+        return hasName && hasCategory && hasPrice && hasShortDescription && hasLongDescription && hasMainImage && hasSlideImages;
+    }
+
+    transformImagesBase64(images){
+        return Promise.all(
+            images.map(image => {
+                return new Promise((resolve, reject) => {
+                    try {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.onerror = (err) => reject(err);
+                        reader.readAsDataURL(image);
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            })
+        );
+    }
+
+    transformOneImageBase64(image){
+        return new Promise((resolve, reject) => {
+            try {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = (err) => reject(err);
+                reader.readAsDataURL(image);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    async createObjectProduct(){
+        return {
+            id: crypto.randomUUID(),
+            name: this.inputName.value.trim(),
+            category: this.selectCategory.value,
+            price: Number(this.inputPrice.value.replace(',', '.').replace('R$', '')),
+            shortDescription: this.areaShortDescription.value.trim(),
+            longDescription: this.areaLongDescription.value.trim(),
+            imageMain: await this.transformOneImageBase64(this.inputMainImage.files[0]),
+            imagesSlide: await this.transformImagesBase64(Array.from(this.inputSlideImages.files))
+        };
+    }
+
+    async initCreateProduct() {
+        if (this.verifyInputs()) {
+            await this.fetchJson.post(await this.createObjectProduct());
+            this.closeFormCreate();
         } else {
             this.markErrors();
         }
@@ -103,7 +150,7 @@ export default class FormProduct {
 
     formatInputPrice() {
         const valueInput = this.inputPrice.value.replace(/\D/g, '');;
-        this.inputPrice.value = "R$ " + (Number(valueInput) / 100).toFixed(2);
+        this.inputPrice.value = "R$ " + (Number(valueInput) / 100).toFixed(2).replace('.', ',');
     }
 
     showCountFilesSlide() {
@@ -158,7 +205,7 @@ export default class FormProduct {
         if (this.inputMainImage && this.infoMainImage) this.inputMainImage.addEventListener('change', this.showNameFileMain);
         if (this.inputSlideImages && this.infoSlidesImages) this.inputSlideImages.addEventListener('change', this.showCountFilesSlide);
         if (this.inputPrice) this.inputPrice.addEventListener('input', this.formatInputPrice);
-        if (this.buttonCreateProduct) this.buttonCreateProduct('click', this.createProduct);
+        if (this.buttonCreateProduct) this.buttonCreateProduct.addEventListener('click', this.initCreateProduct);
     }
 
     init() {
