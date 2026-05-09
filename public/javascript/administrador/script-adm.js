@@ -3,6 +3,7 @@ import SlidesHome from "./SlidesHome.js";
 import Agenda from "./Agenda.js";
 import Products from "./Products.js";
 import FormProduct from "./FormProduct.js";
+import eventoSlides from "./eventoSlides.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     selectSectionAdm();
@@ -12,4 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         '[data-input="product-name"]', '[data-select-new="productCategory"]', '[data-input="priceProduct"]', '[data-textarea="shortDescription"]', '[data-textarea="longDescription"]',
         '[data-input="imageMainProduct"]', '[data-input="imageSlideProduct"]', '[data-info="mainImage"]', '[data-info="slideImages"]', '[data-button="createProduct"]').init();
     const productsConfig = new Products('[data-content-products="table"]', '[data-button="addProduct"]', '[data-input="filterProduct"]', '[data-select="typeProduct"]', formProduct).init();
-});
+    
+    eventoSlides();
+}); 
