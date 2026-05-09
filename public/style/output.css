@@ -935,7 +935,7 @@ input.error, textarea.error, select.error{
   background-color: rgb(240 221 222 / var(--tw-bg-opacity, 1));
 }
 
-label.error{
+label.error, div.error{
   --tw-border-opacity: 1;
   border-color: rgb(128 0 32 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
