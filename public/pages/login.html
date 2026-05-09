@@ -79,7 +79,7 @@
                             class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">E-mail</label>
                         <div
                             class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
-                            <input type="email" id="email" name="email"
+                            <input type="email" id="email" name="email" autocomplete="email"
                                 class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
                                 required>
                         </div>
@@ -87,14 +87,14 @@
 
                     <div class="flex flex-col gap-[20px]">
                         <div class="flex flex-col gap-[15px]">
-                            <label for="password"
+                            <label for="current-password"
                                 class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Senha</label>
                             <div
                                 class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
-                                <input type="password" id="password" name="password"
+                                <input type="password" id="current-password" name="current-password" autocomplete="current-password"
                                     class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
                                     required>
-                                <button data-toggle-password="password" type="button" id="toggle-password"
+                                <button data-toggle-password="current-password" type="button" id="toggle-password"
                                     class="absolute right-[15px] flex items-center justify-center w-[30px] h-[30px] rounded-[6px] outline-none focus:ring-2 focus:ring-green-300">
                                     <img src="../images/icons/forms/visible-on.svg" alt="Mostrar senha"
                                         class="w-[30px] h-[30px]">
@@ -215,6 +215,6 @@
         </footer>
     </div>
     <script type="module" src="../javascript/menuUser.js"></script>
-    <script type="module" src="../javascript/forms/script-login.js"></script>
+    <!-- <script type="module" src="../javascript/forms/script-login.js"></script> -->
 </body>
 </html>

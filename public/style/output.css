@@ -971,6 +971,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   visibility: visible;
 }
 
+.static{
+  position: static;
+}
+
 .fixed{
   position: fixed;
 }
@@ -2983,11 +2987,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 .hover\:border-green-500:hover{
   --tw-border-opacity: 1;
   border-color: rgb(18 116 71 / var(--tw-border-opacity, 1));
-}
-
-.hover\:bg-\[\#0f663e\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 102 62 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-gray-100:hover{
