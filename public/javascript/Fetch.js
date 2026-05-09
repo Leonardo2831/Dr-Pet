@@ -26,9 +26,9 @@ export default class Fetch {
         }
     }
 
-    async get(){
+    async get(id = ""){
         try{
-            const response = await fetch(this.url);
+            const response = await fetch(`${this.url}${id ? "/" + id : ""}`);
             const data = await response.json();
             
             if (data && Object.keys(data).length > 0) {
@@ -40,7 +40,9 @@ export default class Fetch {
             this.showModalError(err, 'Houve um erro ao carregar os dados!');
         } finally {
             setTimeout(() => {
-                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                if(this.modalInfo) {
+                    this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                }
             }, 1500);
         }
     }
@@ -61,7 +63,9 @@ export default class Fetch {
             this.showModalError(err, 'Houve um erro ao enviar os dados!');
         } finally {
             setTimeout(() => {
-                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                if(this.modalInfo) {
+                    this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                }
             }, 1500);
         }
     }
@@ -82,7 +86,9 @@ export default class Fetch {
             this.showModalError(err, 'Houve um erro ao atualizar os dados!');
         } finally {
             setTimeout(() => {
-                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                if(this.modalInfo) {
+                    this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                }
             }, 1500);
         }
     }
@@ -99,7 +105,9 @@ export default class Fetch {
             this.showModalError(err, 'Houve um erro ao deletar os dados!');
         } finally {
             setTimeout(() => {
-                this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                if(this.modalInfo) {
+                    this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+                }
             }, 1500);
         }
     }
