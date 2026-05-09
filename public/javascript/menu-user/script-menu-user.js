@@ -1,5 +1,5 @@
-import PopUp from '../Pop-up.js';
+import MenuUserLoading from './MenuUserLoding.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const menuUser = new PopUp('[data-menuUser]', '[data-modal="menuUser"]').init();
+    const menuUserConfig = new MenuUserLoading('[data-modal="menuUser"]').init();
 });
