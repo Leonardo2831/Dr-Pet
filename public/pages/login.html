@@ -68,9 +68,9 @@
     <main class="flex flex-col lg:flex-row">
         <section
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
-            <form action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+            <form class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
                 <h1
-                    class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">
+                    class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]" id="form-login">
                     Login</h1>
 
                 <div class="flex flex-col gap-[30px]">
@@ -130,6 +130,7 @@
                     </a>
                 </div>
             </form>
+            <div id="modal-info"></div>
         </section>
 
         <figure class="order-2 lg:order-1 flex-1 w-full h-full flex">
@@ -214,5 +215,6 @@
         </footer>
     </div>
     <script type="module" src="../javascript/menuUser.js"></script>
+    <script type="module" src="../javascript/forms/script-login.js"></script>
 </body>
 </html>
