@@ -68,10 +68,10 @@
     <main class="flex flex-col lg:flex-row">
         <section
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
-            <form class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
-                <h1
-                    class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]" id="form-login">
-                    Login</h1>
+            <form data-form="login" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+                <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]" id="form-login">
+                    Login
+                </h1>
 
                 <div class="flex flex-col gap-[30px]">
                     <div class="flex flex-col gap-[15px]">
@@ -79,7 +79,7 @@
                             class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">E-mail</label>
                         <div
                             class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
-                            <input type="email" id="email" name="email" autocomplete="email"
+                            <input data-input="emailLogin" type="email" id="email" name="email" autocomplete="email"
                                 class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
                                 required>
                         </div>
@@ -91,7 +91,7 @@
                                 class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Senha</label>
                             <div
                                 class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
-                                <input type="password" id="current-password" name="current-password" autocomplete="current-password"
+                                <input data-input="passwordLogin" type="password" id="current-password" name="current-password" autocomplete="current-password"
                                     class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
                                     required>
                                 <button data-toggle-password="current-password" type="button" id="toggle-password"
@@ -102,8 +102,9 @@
                             </div>
                         </div>
                         <a href="#"
-                            class="font-semibold text-[18px] leading-[22px] text-green-700 underline w-fit hover:text-green-600 transition-colors xs:text-[19px] xs:leading-[23px] sm:text-[20px] sm:leading-[24px] lg:text-[22px] lg:leading-[27px]">Esqueceu
-                            a senha?</a>
+                            class="font-semibold text-[18px] leading-[22px] text-green-700 underline w-fit hover:text-green-600 transition-colors xs:text-[19px] xs:leading-[23px] sm:text-[20px] sm:leading-[24px] lg:text-[22px] lg:leading-[27px]">
+                            Esqueceu a senha?
+                        </a>
                     </div>
                 </div>
 
@@ -214,7 +215,9 @@
             </address>
         </footer>
     </div>
+    <aside data-modal-info="login" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
+
     <script type="module" src="../javascript/menuUser.js"></script>
-    <!-- <script type="module" src="../javascript/forms/script-login.js"></script> -->
+    <script type="module" src="../javascript/forms/login-account/script-login.js"></script>
 </body>
 </html>
