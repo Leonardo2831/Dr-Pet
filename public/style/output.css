@@ -1295,12 +1295,20 @@ aside[data-modal="filtroLoja"] p.activeOption{
   height: 400px;
 }
 
+.h-\[40px\]{
+  height: 40px;
+}
+
 .h-\[50px\]{
   height: 50px;
 }
 
 .h-\[56px\]{
   height: 56px;
+}
+
+.h-\[60px\]{
+  height: 60px;
 }
 
 .h-\[62px\]{
@@ -1428,6 +1436,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   width: 30px;
 }
 
+.w-\[40px\]{
+  width: 40px;
+}
+
 .w-\[45px\]{
   width: 45px;
 }
@@ -1440,8 +1452,16 @@ aside[data-modal="filtroLoja"] p.activeOption{
   width: 56px;
 }
 
+.w-\[60px\]{
+  width: 60px;
+}
+
 .w-\[65\%\]{
   width: 65%;
+}
+
+.w-\[730px\]{
+  width: 730px;
 }
 
 .w-\[80px\]{
@@ -2041,6 +2061,11 @@ aside[data-modal="filtroLoja"] p.activeOption{
   border-color: rgb(232 235 233 / var(--tw-border-opacity, 1));
 }
 
+.border-gray-200{
+  --tw-border-opacity: 1;
+  border-color: rgb(212 217 214 / var(--tw-border-opacity, 1));
+}
+
 .border-gray-200\/50{
   border-color: rgb(212 217 214 / 0.5);
 }
@@ -2493,6 +2518,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   font-size: 28px;
 }
 
+.text-\[30px\]{
+  font-size: 30px;
+}
+
 .text-\[34px\]{
   font-size: 34px;
 }
@@ -2586,6 +2615,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   line-height: 32px;
 }
 
+.leading-\[37px\]{
+  line-height: 37px;
+}
+
 .leading-\[42px\]{
   line-height: 42px;
 }
@@ -2604,6 +2637,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .leading-tight{
   line-height: 1.25;
+}
+
+.tracking-\[0\.02em\]{
+  letter-spacing: 0.02em;
 }
 
 .tracking-\[0\.3px\]{
@@ -2850,14 +2887,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .transition-transform{
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition{
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -4381,6 +4410,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
   .lg\:h-auto{
     height: auto;
+  }
+
+  .lg\:h-20{
+    height: 5rem;
   }
 
   .lg\:max-h-\[600px\]{
