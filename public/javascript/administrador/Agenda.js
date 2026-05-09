@@ -75,7 +75,7 @@ export default class Agenda {
             this.scheduleInit();
         }
 
-        verifyIfHasSchedule();
+        this.verifyIfHasSchedule();
     }
 
     addEvents(){
