@@ -1,4 +1,5 @@
 import Fetch from '../../Fetch.js';
+import Storage from '../../Storage.js';
 import toggleShowPassword from '../toggleShowPassword.js';
 
 export default class Login{
@@ -27,15 +28,16 @@ export default class Login{
     async loginAccount(event){
         event.preventDefault();
 
-        const dados = await this.fetchJson.get();
+        const data = await this.fetchJson.get();
         // procura usuário válido
-        const usuarioValido = dados.find(user =>
+        const validUser = data.find(user =>
             user.email === this.inputEmail.value &&
             user.password === this.inputPassword.value
         );
 
-        if (usuarioValido) {
+        if (validUser) {
             this.fetchJson.showModalSuccess('Login realizado com sucesso!');
+            Storage.setValueStorage('user-id', validUser.id);
             window.location.href = '../../index.html';
         } else {
             this.fetchJson.showModalError(null, 'E-mail ou senha incorretos');
