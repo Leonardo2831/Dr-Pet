@@ -72,7 +72,7 @@
 
         <div
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[40px] lg:py-[50px] xl:px-[60px] xl:py-[60px]">
-            <form action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+            <form data-form="cadastrar" action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
                 <div id="modal-info" class="text-center font-bold p-2 hidden"> </div>
                 <h1
                     class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">
@@ -158,7 +158,7 @@
                 </button>
 
                 <button type="submit"
-                    class="w-full basis-full h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-[#0f663e] transition-colors outline-none focus:ring-4 focus:ring-green-500 mx-auto">
+                    class="w-full basis-full h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-green-500 transition-colors outline-none focus:ring-4 focus:ring-green-400 mx-auto">
                     <span
                         class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Finalizar</span>
                 </button>
@@ -240,7 +240,9 @@
             </address>
         </footer>
     </div>
+    <aside data-modal-info="cadastrar" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
+
     <script type="module" src="../javascript/menuUser.js"></script>
-    <script type="module" src="../javascript/cadastro.js"></script>
+    <script type="module" src="../javascript/forms/cadastrar-account/script-createAccount.js"></script>
 </body>
 </html>
