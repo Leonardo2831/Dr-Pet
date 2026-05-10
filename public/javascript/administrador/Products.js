@@ -18,7 +18,7 @@ export default class Products {
     }
 
     createStructRowTable(productObject) {
-        const tr = structProducts(productObject);
+        const tr = structProducts(productObject, this.formProduct);
         this.contentProducts.appendChild(tr);
     }
 
