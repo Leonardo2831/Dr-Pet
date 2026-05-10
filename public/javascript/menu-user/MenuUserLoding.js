@@ -12,7 +12,8 @@ export default class MenuUserLoading{
     addEventLogout(){
         this.menuUserContent.querySelector('[data-button="logout"]').addEventListener('click', () => {
             Storage.removeItemStorage('user-id');
-            window.location.href = '../login.html';
+            const isInPages = window.location.pathname.includes('/public/pages/');
+            window.location.href = isInPages ? './login.html' : 'public/pages/login.html';
         });
     }
 
