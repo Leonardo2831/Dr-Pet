@@ -17,7 +17,7 @@ export default class Cadastrar {
         const dadosUsuario = Object.fromEntries(formData.entries());
 
         if (dadosUsuario.password !== dadosUsuario.confirmPassword) {
-            this.api.showModalError('As senhas não são iguais');
+            this.api.showModalError("Erro de autenticação, senhas diferentes", 'As senhas não são iguais');
             return;
         }
 
