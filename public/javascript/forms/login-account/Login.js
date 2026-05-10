@@ -37,8 +37,12 @@ export default class Login{
 
         if (validUser) {
             this.fetchJson.showModalSuccess('Login realizado com sucesso!');
-            Storage.setValueStorage('user-id', validUser.id);
-            window.location.href = '../../index.html';
+            if(validUser.typeUser == "comum"){
+                Storage.setValueStorage('user-id', validUser.id);
+                window.location.href = '../../index.html';
+            } else {
+                window.location.href = '../../public/pages/administrador.html';
+            }
         } else {
             this.fetchJson.showModalError(null, 'E-mail ou senha incorretos');
             this.markErrorInput();
