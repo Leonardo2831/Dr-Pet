@@ -32,9 +32,7 @@ export default class MenuUserLoading{
         new PopUp('[data-menuUser]', '[data-modal="menuUser"]').init();
     }
 
-    init(){
-        console.log(this.menuUserContent);
-        
+    init(){        
         if(this.menuUserContent){
             this.lodingContent();
         }
