@@ -11,6 +11,7 @@
         />
         <link rel="stylesheet" href="../style/output.css" />
         <script src="../javascript/UserTabNav.js" defer></script>
+        <script type="module" src="./../javascript/UserChangeDataPopUp.js" defer></script>
     </head>
 
     <body>
@@ -255,7 +256,7 @@
                                         class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
                                         >Email</span
                                     >
-                                    <span
+                                    <span data-info="email"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px] break-all"
                                         >petshop@gmail.com</span
                                     >
@@ -264,6 +265,7 @@
                             <a
                                 href="#"
                                 class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                                data-button="openEditEmail"
                             >
                                 Alterar Email
                             </a>
@@ -291,7 +293,7 @@
                                         class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
                                         >Telefone</span
                                     >
-                                    <span
+                                    <span data-info="telefone"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
                                         >(00) 00000-0000</span
                                     >
@@ -300,6 +302,7 @@
                             <a
                                 href="#"
                                 class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                                data-button="openEditTelefone"
                             >
                                 Alterar telefone
                             </a>
@@ -327,7 +330,7 @@
                                         class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
                                         >Senha</span
                                     >
-                                    <span
+                                    <span data-info="senha"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
                                         >*****************</span
                                     >
@@ -336,6 +339,7 @@
                             <a
                                 href="#"
                                 class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                                data-button="openEditSenha"
                             >
                                 Alterar senha
                             </a>
@@ -856,5 +860,80 @@
             type="module"
             src="../javascript/menu-user/script-menu-user.js"
         ></script>
+
+
+        <!-- modal alterar email -->
+    <div data-modal="editEmail" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editEmail" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditEmail" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Email</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-email" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Email</label>
+                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" placeholder="seu@email.com" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveEmail" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div data-modal="editTelefone" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editTelefone" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditTelefone" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Telefone</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-Telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Telefone</label>
+                    <input data-input="editTelefone" id="input-edit-Telefone" type="tel" name="Telefone" placeholder="(XX) XX XXXX-XXXX" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveTelefone" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div data-modal="editSenha" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditSenha" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Senha</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
+                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="Senha" placeholder="Digite sua senha" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveSenha" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
     </body>
 </html>
