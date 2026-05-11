@@ -10,8 +10,6 @@
             type="image/x-icon"
         />
         <link rel="stylesheet" href="../style/output.css" />
-        <script src="../javascript/UserTabNav.js" defer></script>
-        <script type="module" src="./../javascript/UserChangeDataPopUp.js" defer></script>
     </head>
 
     <body>
@@ -133,9 +131,9 @@
                         <div
                             class="flex items-center gap-3 sm:gap-4 lg:gap-6 flex-wrap w-full"
                         >
-                            <span
+                            <span data-info="nameUser"
                                 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 break-words line-clamp-2"
-                                >Nome do usuário</span
+                                ></span
                             >
                             <button
                                 class="p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-full flex-shrink-0 hover:scale-110 transition-transform"
@@ -149,10 +147,9 @@
                         </div>
                     </div>
 
-                    <a
-                        href="#"
+                    <button
                         data-target="dados-pessoais"
-                        class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
+                        class="w-full flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
                     >
                         <div
                             class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
@@ -167,12 +164,11 @@
                             class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
                             >Dados pessoais</span
                         >
-                    </a>
+                    </button>
 
-                    <a
-                        href="#"
+                    <button
                         data-target="Endereco"
-                        class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
+                        class="w-full  flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
                     >
                         <div
                             class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
@@ -187,12 +183,11 @@
                             class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
                             >Endereço</span
                         >
-                    </a>
+                    </button>
 
-                    <a
-                        href="#"
+                    <button
                         data-target="dados-pet"
-                        class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none"
+                        class="w-full  flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none"
                     >
                         <div
                             class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
@@ -207,7 +202,7 @@
                             class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
                             >Pets</span
                         >
-                    </a>
+                    </button>
                 </section>
 
                 <!-- menu dados pessoais -->
@@ -258,8 +253,7 @@
                                     >
                                     <span data-info="email"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px] break-all"
-                                        >petshop@gmail.com</span
-                                    >
+                                        ></span>
                                 </div>
                             </div>
                             <a
@@ -295,7 +289,7 @@
                                     >
                                     <span data-info="telefone"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                        >(00) 00000-0000</span
+                                        ></span
                                     >
                                 </div>
                             </div>
@@ -332,7 +326,7 @@
                                     >
                                     <span data-info="senha"
                                         class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                        >*****************</span
+                                        ></span
                                     >
                                 </div>
                             </div>
@@ -773,14 +767,6 @@
                 </address>
             </footer>
         </div>
-        <script
-            type="module"
-            src="../javascript/menu-user/script-menu-user.js"
-        ></script>
-        <script
-            type="module"
-            src="../javascript/options-user/script-optionsUser.js"
-        ></script>
 
         <!-- pop-up pets -->
         <aside
@@ -852,17 +838,7 @@
             </button>
         </aside>
 
-        <aside
-            data-modal-info-menu="user"
-            class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"
-        ></aside>
-        <script
-            type="module"
-            src="../javascript/menu-user/script-menu-user.js"
-        ></script>
-
-
-        <!-- modal alterar email -->
+    <!-- modal alterar email -->
     <div data-modal="editEmail" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="editEmail" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
@@ -934,6 +910,10 @@
             </form>
         </div>
     </div>
-    
+
+    <aside data-modal-info-menu="user" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
+    <script src="../javascript/UserTabNav.js"></script>
+    <script type="module" src="../javascript/menu-user/script-menu-user.js"></script>
+    <script type="module" src="../javascript/options-user/script-optionsUser.js"></script>
     </body>
 </html>
