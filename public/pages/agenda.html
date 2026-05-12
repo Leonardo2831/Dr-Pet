@@ -69,27 +69,27 @@
 
                         <div data-button="selectService" class="relative w-full bg-white shadow-md rounded-[10px] flex flex-row justify-between items-center px-5 py-5 md:px-[50px] md:py-[30px] transition-all hover:shadow-lg focus-within:ring-2 focus-within:ring-green-400 cursor-pointer">
                             <div class="flex flex-row items-center gap-5 md:gap-[30px]">
-                                <img src="../images/services/banho-tosa.png" alt="Cachorro no serviço de Banho e Tosa"
+                                <img data-imgInfo="agenda-service-image" src="../images/services/banho-tosa.png" alt="Cachorro no serviço de Banho e Tosa"
                                     class="w-[80px] h-[56px] md:w-[106px] md:h-[74px] object-cover rounded-[5px]" />
                                 <div class="flex flex-col justify-center gap-1">
                                     <span
                                         class="text-sm md:text-base lg:text-[18px] leading-tight font-normal text-gray-900">
                                         Serviço selecionado
                                     </span>
-                                    <h2 class="text-gray-900 text-2xl font-semibold md:text-3xl">Banho e Tosa</h2>
+                                    <h2 data-textInfo="agenda-service" class="text-gray-900 text-2xl font-semibold md:text-3xl">Banho e Tosa</h2>
                                 </div>
                             </div>
 
                             <img src="../images/icons/arrow-down.svg" alt="Ícone seta" class="w-10 h-10 md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] pointer-events-none" />
 
                             <aside data-modal="serviceSelected" class="left-0 hidden absolute top-full w-full flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] z-50 animate-fadeTop">
-                                <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                <p data-filter-agenda="banho-tosa" class="activeOption flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
                                     Banho e Tosa
                                 </p>
-                                <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                <p data-filter-agenda="vacinacao" class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
                                     Vacinação
                                 </p>
-                                <p class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                <p data-filter-agenda="cirurgia" class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
                                     Cirurgia
                                 </p>
                             </aside>
@@ -304,7 +304,7 @@
 
                     <aside class="w-full flex-[3.5] flex flex-col shadow-xl bg-white rounded-b-[10px] mt-5 xl:mt-0 relative"
                         aria-label="Resumo do agendamento">
-                        <img src="../images/services/banho-tosa.png" alt="Serviço de Banho e tosa"
+                        <img data-imgInfo-service="completInfo" src="../images/services/banho-tosa.png" alt="Serviço de Banho e tosa"
                             class="w-full h-auto object-cover rounded-t-[10px]" />
 
                         <div
@@ -314,7 +314,7 @@
                                 <span
                                     class="text-[20px] md:text-[26px] leading-snug font-medium text-gray-800 tracking-wide">
                                     Serviço solicitado:
-                                    <strong class="text-[24px] md:text-[30px] leading-snug font-semibold text-green-500">
+                                    <strong data-textInfo-service="completInfo" class="text-[24px] md:text-[30px] leading-snug font-semibold text-green-500">
                                         Banho e tosa
                                     </strong>
                                 </span>
@@ -322,14 +322,14 @@
                                 <div class="flex flex-col gap-4 md:gap-5">
                                     <div class="flex flex-row items-center gap-3 md:gap-4">
                                         <img src="../images/icons/calender/hour.svg" alt="Horário">
-                                        <span class="text-xl md:text-[26px] font-medium text-gray-800">Tempo médio: <strong
-                                                class="font-semibold text-gray-800">1h 30min</strong></span>
+                                        <span class="text-xl md:text-[26px] font-medium text-gray-800">Tempo: <strong
+                                                data-time-service="completInfo" class="font-semibold text-gray-800">1h 30min</strong></span>
                                     </div>
 
                                     <div class="flex flex-row items-center gap-3 md:gap-4">
                                         <img src="../images/icons/calender/price.svg" alt="Preço">
-                                        <span class="text-xl md:text-[26px] font-medium text-gray-800">Preço estimado:
-                                            <strong class="font-semibold text-gray-800">R$ 90,00</strong></span>
+                                        <span class="text-xl md:text-[26px] font-medium text-gray-800">Preço:
+                                            <strong data-price-service="completInfo" class="font-semibold text-gray-800">R$ 90,00</strong></span>
                                     </div>
                                 </div>
                             </div>
