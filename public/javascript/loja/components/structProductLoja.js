@@ -2,7 +2,7 @@ export default function structProduct(product) {
     const a = document.createElement('a');
     a.className = "swiper-slide animate-fadeLeft !w-[160px] xs:!w-[180px] sm:!w-[220px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group"
     a.setAttribute('data-id', product.id);
-    a.setAttribute('href', `./produto.html`);
+    a.setAttribute('href', `./produto.html?id=${product.id}`);
 
     a.innerHTML = `
         <figure class="relative h-[160px] xs:h-[180px] sm:h-[220px] md:h-[300px] lg:h-[350px] overflow-hidden rounded-t-[10px]">
