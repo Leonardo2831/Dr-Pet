@@ -78,7 +78,7 @@ export default class Calender{
                     day: 'numeric'
                 }
 
-                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', options);
+                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', optionsStyleDate);
 
                 this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
             });
