@@ -163,25 +163,18 @@
     .agenda-day {
         @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full hover:bg-gray-100 flex items-center justify-center focus:ring-2 focus:ring-green-400 outline-none cursor-pointer text-lg md:text-2xl lg:text-[30px] font-medium text-gray-700 transition-colors;
     }
-    .agenda-day-active {
-        @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full bg-green-700 flex items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-green-400 outline-none cursor-pointer text-lg md:text-2xl lg:text-[30px] font-medium text-gray-100 transition-colors;
+    .agenda-day.today {
+        @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full bg-green-500 flex items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-green-400 outline-none cursor-pointer text-lg md:text-2xl lg:text-[30px] font-medium text-gray-100 transition-colors;
     }
-    .agenda-day-alert {
+    .agenda-day.not {
         @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full bg-red-alert flex items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-green-400 outline-none cursor-pointer text-lg md:text-2xl lg:text-[30px] font-medium text-gray-100 transition-colors;
     }
-    .agenda-day-inactive {
+    .agenda-day.inactive {
         @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full cursor-not-allowed flex items-center justify-center text-lg md:text-2xl lg:text-[30px] font-medium text-red-alert;
     }
-    .agenda-day-inactive-bg {
+    /* .agenda-day.inactive.bg {
         @apply w-8 h-8 md:w-12 md:h-12 lg:w-[60px] lg:h-[60px] rounded-full bg-gray-200 cursor-not-allowed flex items-center justify-center text-lg md:text-2xl lg:text-[30px] font-medium text-red-alert;
-    }
-
-    .day-not {
-        @apply bg-red-alert text-gray-200 !important;
-    }
-    .today {
-        @apply bg-green-700 text-gray-100 !important;
-    }
+    } */
     .open-hour {
         @apply text-green-600;
     }
