@@ -593,9 +593,6 @@ body{
 }
 
 .header{
-  position: sticky;
-  top: 0px;
-  z-index: 50;
   width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
@@ -1220,6 +1217,10 @@ aside p.activeOption{
   position: relative;
 }
 
+.sticky{
+  position: sticky;
+}
+
 .inset-0{
   inset: 0px;
 }
@@ -1446,10 +1447,6 @@ aside p.activeOption{
 
 .grid{
   display: grid;
-}
-
-.contents{
-  display: contents;
 }
 
 .hidden{
@@ -1966,10 +1963,6 @@ aside p.activeOption{
   animation: fade-top 0.5s forwards;
 }
 
-.cursor-not-allowed{
-  cursor: not-allowed;
-}
-
 .cursor-pointer{
   cursor: pointer;
 }
@@ -2415,11 +2408,6 @@ aside p.activeOption{
 .bg-green-600{
   --tw-bg-opacity: 1;
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
 }
 
 .bg-green-light{
@@ -2941,11 +2929,6 @@ aside p.activeOption{
 .text-green-700{
   --tw-text-opacity: 1;
   color: rgb(3 43 24 / var(--tw-text-opacity, 1));
-}
-
-.text-red-alert{
-  --tw-text-opacity: 1;
-  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
 }
 
 .text-white{
@@ -3989,10 +3972,6 @@ aside p.activeOption{
     height: 2.5rem;
   }
 
-  .md\:h-12{
-    height: 3rem;
-  }
-
   .md\:h-5{
     height: 1.25rem;
   }
@@ -4051,10 +4030,6 @@ aside p.activeOption{
 
   .md\:w-10{
     width: 2.5rem;
-  }
-
-  .md\:w-12{
-    width: 3rem;
   }
 
   .md\:w-5{

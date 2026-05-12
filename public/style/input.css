@@ -31,7 +31,7 @@
     }
 
     .header {
-        @apply w-full px-8 py-6 lg:px-12 lg:py-8 bg-green-600 sticky top-0 z-50;
+        @apply w-full px-8 py-6 lg:px-12 lg:py-8 bg-green-600;
     }
 
     .main {
