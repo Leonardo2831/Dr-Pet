@@ -1,10 +1,12 @@
 export default class Calender{
-    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender){
+    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, selectorInfoHourSchedule){
         this.monthInfo = document.querySelector(selectorMonthInfo);
         this.yearInfo = document.querySelector(selectorYearInfo);
         this.btnNext = document.querySelector(selectorBtnNext);
         this.btnPrev = document.querySelector(selectorBtnPrev);
         this.calenderContent = document.querySelector(selectorContainerCalender);
+        this.infoDaySchedule = document.querySelector(selectorInfoDaySchedule);
+        this.infoHourSchedule = document.querySelector(selectorInfoHourSchedule);
 
         this.date = new Date();
         this.month = this.date.getMonth();
@@ -64,6 +66,21 @@ export default class Calender{
             }
 
             dayCalender.textContent = i;
+
+            dayCalender.addEventListener('click', () => {
+                const activeDays = this.calenderContent.querySelectorAll('.agenda-day.active');
+                activeDays.forEach(day => day.classList.remove('active'));
+                dayCalender.classList.add('active');
+
+                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                this.infoDaySchedule.textContent = dateSelected;
+            });
+
             this.calenderContent.appendChild(dayCalender);
         }
     }
