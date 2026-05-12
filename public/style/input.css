@@ -252,7 +252,7 @@
         @apply border-red-alert bg-red-light;
     }
 
-    aside[data-modal="filtroLoja"] p.activeOption{
+    aside p.activeOption{
         @apply bg-gray-200;
     }
 }

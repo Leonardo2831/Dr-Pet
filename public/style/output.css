@@ -942,7 +942,7 @@ label.error, div.error{
   background-color: rgb(240 221 222 / var(--tw-bg-opacity, 1));
 }
 
-aside[data-modal="filtroLoja"] p.activeOption{
+aside p.activeOption{
   --tw-bg-opacity: 1;
   background-color: rgb(212 217 214 / var(--tw-bg-opacity, 1));
 }
@@ -1295,10 +1295,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   height: 400px;
 }
 
-.h-\[40px\]{
-  height: 40px;
-}
-
 .h-\[50px\]{
   height: 50px;
 }
@@ -1434,10 +1430,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .w-\[30px\]{
   width: 30px;
-}
-
-.w-\[40px\]{
-  width: 40px;
 }
 
 .w-\[45px\]{
@@ -2518,10 +2510,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   font-size: 28px;
 }
 
-.text-\[30px\]{
-  font-size: 30px;
-}
-
 .text-\[34px\]{
   font-size: 34px;
 }
@@ -2615,10 +2603,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   line-height: 32px;
 }
 
-.leading-\[37px\]{
-  line-height: 37px;
-}
-
 .leading-\[42px\]{
   line-height: 42px;
 }
@@ -2637,10 +2621,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .leading-tight{
   line-height: 1.25;
-}
-
-.tracking-\[0\.02em\]{
-  letter-spacing: 0.02em;
 }
 
 .tracking-\[0\.3px\]{
@@ -4364,6 +4344,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
     height: 3.5rem;
   }
 
+  .lg\:h-20{
+    height: 5rem;
+  }
+
   .lg\:h-24{
     height: 6rem;
   }
@@ -4410,10 +4394,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
   .lg\:h-auto{
     height: auto;
-  }
-
-  .lg\:h-20{
-    height: 5rem;
   }
 
   .lg\:max-h-\[600px\]{
