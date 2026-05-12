@@ -72,13 +72,15 @@ export default class Calender{
                 activeDays.forEach(day => day.classList.remove('active'));
                 dayCalender.classList.add('active');
 
-                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', {
+                const optionsStyleDate = {
                     weekday: 'long',
                     month: 'long',
                     day: 'numeric'
-                });
+                }
 
-                this.infoDaySchedule.textContent = dateSelected;
+                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', options);
+
+                this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
             });
 
             this.calenderContent.appendChild(dayCalender);
