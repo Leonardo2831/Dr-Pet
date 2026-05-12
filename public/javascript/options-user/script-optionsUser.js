@@ -3,6 +3,7 @@ import PopUp from "../Pop-up.js"
 import loadMenuUser from "./loadMenuUser.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    const menuMobileHeader = new PopUp('[data-button="menuUserMobile"]', '[data-menu="header"]').init();
     const menuOptionsPets = new MenuOptions('[data-button="options-pet"]', '[data-popup="options-pet"]');
     const menuOptionsAddress = new MenuOptions('[data-button="options-address"]', '[data-popup="options-address"]');
 
