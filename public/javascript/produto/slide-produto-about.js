@@ -1,6 +1,6 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-function slideProduto(){
+export default function slideProduto(){
   const productSwiper = new Swiper('.product-swiper', {
     direction: 'horizontal',
     loop: false,
@@ -28,10 +28,11 @@ function slideProduto(){
   });
 
   const productAboutThumbs = new Swiper('.product-about-thumbs', {
-    spaceBetween: 20,
-    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerView: 'auto',
     freeMode: true,
     watchSlidesProgress: true,
+    centerInsufficientSlides: true,
   });
 
   const productAboutGallery = new Swiper('.product-about-gallery', {
@@ -45,4 +46,3 @@ function slideProduto(){
     },
   });
 }
-slideProduto();
