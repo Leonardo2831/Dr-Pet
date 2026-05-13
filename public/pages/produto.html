@@ -107,25 +107,17 @@
         </div>
 
         <div class="bg-gray-50">
-            <main
-                class="main container flex flex-col gap-10 md:gap-14 px-4 md:px-8 lg:px-12 py-8 md:py-12"
-            >
+            <main class="main container flex flex-col gap-10 md:gap-14 px-4 md:px-8 lg:px-12 py-8 md:py-12">
                 <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 w-full">
-                    <section
-                        class="relative w-full lg:w-1/2 bg-gray-100 rounded-[10px] flex flex-col items-center justify-center py-10 px-6 md:px-[60px] gap-[60px] shadow-sm"
-                    >
-                        <button
-                            class="produto-about-swiper-button-prev hidden md:flex absolute left-10 md:left-12 lg:left-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 lg:w-[60px] lg:h-[60px] bg-white hover:bg-green-600 items-center justify-center rounded-full shadow hover:shadow-lg transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400 group"
-                        >
+                    <section class="relative w-full lg:w-1/2 bg-gray-100 rounded-[10px] flex flex-col items-center justify-center py-10 px-6 md:px-[60px] gap-[60px] shadow-sm">
+                        <button class="produto-about-swiper-button-prev hidden md:flex absolute left-10 md:left-12 lg:left-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 lg:w-[60px] lg:h-[60px] bg-white hover:bg-green-600 items-center justify-center rounded-full shadow hover:shadow-lg transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400 group">
                             <img
                                 src="../images/icons/slide/arrow-left.svg"
                                 alt="Próximo"
                                 class="w-6 h-6 lg:w-6 lg:h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
                             />
                         </button>
-                        <button
-                            class="produto-about-swiper-button-next hidden md:flex absolute right-10 md:right-12 lg:right-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 lg:w-[60px] lg:h-[60px] bg-white hover:bg-green-600 items-center justify-center rounded-full shadow hover:shadow-lg transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400 group"
-                        >
+                        <button class="produto-about-swiper-button-next hidden md:flex absolute right-10 md:right-12 lg:right-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 lg:w-[60px] lg:h-[60px] bg-white hover:bg-green-600 items-center justify-center rounded-full shadow hover:shadow-lg transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400 group">
                             <img
                                 src="../images/icons/slide/arrow-right.svg"
                                 alt="Próximo"
@@ -133,72 +125,12 @@
                             />
                         </button>
 
-                        <div
-                            class="swiper product-about-gallery w-full max-w-[488px]"
-                        >
-                            <div class="swiper-wrapper">
-                                <div
-                                    class="swiper-slide flex items-center justify-center"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSenior.png"
-                                        alt="Produto 1"
-                                        class="w-full object-contain max-h-[500px] lg:max-h-[600px]"
-                                    />
-                                </div>
-                                <div
-                                    class="swiper-slide flex items-center justify-center"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSpecial.png"
-                                        alt="Produto 2"
-                                        class="w-full object-contain max-h-[500px] lg:max-h-[600px]"
-                                    />
-                                </div>
-                                <div
-                                    class="swiper-slide flex items-center justify-center"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSpecial.png"
-                                        alt="Produto 3"
-                                        class="w-full object-contain max-h-[500px] lg:max-h-[600px]"
-                                    />
-                                </div>
-                            </div>
+                        <div class="swiper product-about-gallery w-full max-w-[488px]">
+                            <div data-content="galeryImagesSlideProduct" class="swiper-wrapper"></div>
                         </div>
 
-                        <div
-                            class="swiper product-about-thumbs w-full max-w-[350px] scroll px-2 py-4"
-                        >
-                            <div class="swiper-wrapper p-2">
-                                <div
-                                    class="swiper-slide !w-[100px] !h-[100px] rounded-[10px] cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white overflow-hidden transition-all duration-300 opacity-60 hover:opacity-100 [&.swiper-slide-thumb-active]:opacity-100 [&.swiper-slide-thumb-active]:shadow-md [&.swiper-slide-thumb-active]:ring-2 [&.swiper-slide-thumb-active]:ring-green-400"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSenior.png"
-                                        alt="Thumb 1"
-                                        class="w-full h-full object-contain p-2"
-                                    />
-                                </div>
-                                <div
-                                    class="swiper-slide !w-[100px] !h-[100px] rounded-[10px] cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white overflow-hidden transition-all duration-300 opacity-60 hover:opacity-100 [&.swiper-slide-thumb-active]:opacity-100 [&.swiper-slide-thumb-active]:shadow-md [&.swiper-slide-thumb-active]:ring-2 [&.swiper-slide-thumb-active]:ring-green-400"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSpecial.png"
-                                        alt="Thumb 2"
-                                        class="w-full h-full object-contain p-2"
-                                    />
-                                </div>
-                                <div
-                                    class="swiper-slide !w-[100px] !h-[100px] rounded-[10px] cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white overflow-hidden transition-all duration-300 opacity-60 hover:opacity-100 [&.swiper-slide-thumb-active]:opacity-100 [&.swiper-slide-thumb-active]:shadow-md [&.swiper-slide-thumb-active]:ring-2 [&.swiper-slide-thumb-active]:ring-green-400"
-                                >
-                                    <img
-                                        src="../images/products/GoldenSpecial.png"
-                                        alt="Thumb 3"
-                                        class="w-full h-full object-contain p-2"
-                                    />
-                                </div>
-                            </div>
+                        <div class="swiper product-about-thumbs w-full max-w-[350px] px-2 py-4">
+                            <div data-content="thumbsSlideProduct" class="swiper-wrapper p-2"></div>
                         </div>
                     </section>
 
@@ -670,12 +602,13 @@
 
         <aside
             data-modal-info-menu="user"
+            data-modal-info="product"
             class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"
         ></aside>
 
         <script
             type="module"
-            src="../javascript/produto/slide-produto-about.js"
+            src="../javascript/produto/script-product.js"
         ></script>
         <script
             type="module"
