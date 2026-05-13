@@ -37,6 +37,7 @@ export default function slideProduto(){
 
   const productAboutGallery = new Swiper('.product-about-gallery', {
     spaceBetween: 10,
+    loop: true,
     navigation: {
       nextEl: '.produto-about-swiper-button-next',
       prevEl: '.produto-about-swiper-button-prev',
