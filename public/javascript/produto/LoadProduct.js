@@ -24,21 +24,21 @@ export default class LoadProduct{
     renderInfoProduct(){
         if(this.title && this.description && this.price){
             this.title.textContent = this.product.name;
-            const htmlDescription =  this.converterMarkdown.makeHtml(this.product.longDescription)
-            const uls = htmlDescription.querySelectorAll('ul');
+
+            this.description.innerHTML = this.converterMarkdown.makeHtml(this.product.longDescription);
+            const uls = this.description.querySelectorAll('ul');
             if(uls.length) {
-                uls.map(ul => {
+                uls.forEach(ul => {
                     ul.className = "flex flex-col gap-3 md:gap-[15px] py-6 md:py-[30px] border-y border-green-300 *:text-gray-800 *:font-normal *:text-base *:md:text-[22px] *:md:leading-[27px]";
                 });
             }
-            const strongs = htmlDescription.querySelectorAll('strong');
+            const strongs = this.description.querySelectorAll('strong');
             if(strongs.length) {
-                strongs.map(strong => {
+                strongs.forEach(strong => {
                     strong.className = "font-medium text-gray-800";
                 });
             }
 
-            this.description.innerHTML = htmlDescription;
             this.price.textContent = 'R$ ' + parseFloat(this.product.price).toFixed(2).replace('.', ',');
         }
     }
