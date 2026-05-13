@@ -93,6 +93,11 @@ export default class Calender{
                 continue;
             }
 
+            if(dayCalender.classList.contains('beforeNow') || dayCalender.classList.contains('inactive')) {
+                this.calenderContent.appendChild(dayCalender);
+                continue
+            };
+
             dayCalender.addEventListener('click', () => {
                 this.formatScheduleInfos(dayCalender, new Date(this.year, this.month, i));
             });
