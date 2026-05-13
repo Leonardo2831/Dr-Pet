@@ -1336,19 +1336,18 @@ aside p.activeOption{
   margin-top: auto;
 }
 
-.-mt-3{
-  margin-top: -0.75rem;
-}
-
-.-mb-3{
-  margin-bottom: -0.75rem;
-}
-
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.line-clamp-3{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .block{
@@ -1504,16 +1503,12 @@ aside p.activeOption{
   max-height: 500px;
 }
 
-.max-h-\[90vh\]{
-  max-height: 90vh;
-}
-
-.max-h-\[800px\]{
-  max-height: 800px;
-}
-
 .max-h-\[700px\]{
   max-height: 700px;
+}
+
+.max-h-\[90vh\]{
+  max-height: 90vh;
 }
 
 .min-h-\[120px\]{
@@ -1538,6 +1533,14 @@ aside p.activeOption{
 
 .min-h-screen{
   min-height: 100vh;
+}
+
+.min-h-\[2rem\]{
+  min-height: 2rem;
+}
+
+.min-h-\[200px\]{
+  min-height: 200px;
 }
 
 .\!w-\[100px\]{
@@ -2061,28 +2064,6 @@ aside p.activeOption{
 
 .gap-y-3{
   row-gap: 0.75rem;
-}
-
-.space-x-4 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-10 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-6 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.overflow-auto{
-  overflow: auto;
 }
 
 .overflow-hidden{
@@ -2636,10 +2617,6 @@ aside p.activeOption{
   text-align: center;
 }
 
-.text-start{
-  text-align: start;
-}
-
 .font-sans{
   font-family: Montserrat, sans-serif;
 }
@@ -3092,6 +3069,11 @@ aside p.activeOption{
   padding-bottom: 1.25rem;
 }
 
+.\*\:text-base > *{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .\*\:text-lg > *{
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -3102,17 +3084,12 @@ aside p.activeOption{
   line-height: 1.25rem;
 }
 
-.\*\:text-base > *{
-  font-size: 1rem;
-  line-height: 1.5rem;
+.\*\:font-normal > *{
+  font-weight: 400;
 }
 
 .\*\:font-semibold > *{
   font-weight: 600;
-}
-
-.\*\:font-normal > *{
-  font-weight: 400;
 }
 
 .\*\:leading-\[32px\] > *{
@@ -4458,13 +4435,13 @@ aside p.activeOption{
     margin-right: 0px;
   }
 
+  .\*\:md\:text-\[22px\] > *{
+    font-size: 22px;
+  }
+
   .\*\:md\:text-lg > *{
     font-size: 1.125rem;
     line-height: 1.75rem;
-  }
-
-  .\*\:md\:text-\[22px\] > *{
-    font-size: 22px;
   }
 
   .\*\:md\:leading-\[27px\] > *{
