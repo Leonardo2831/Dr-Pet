@@ -50,37 +50,51 @@ export default class Calender{
         }
     }
 
+    formatScheduleInfos(dayCalender, date){
+        const activeDays = this.calenderContent.querySelectorAll('.agenda-day.active');
+        activeDays.forEach(day => day.classList.remove('active'));
+        dayCalender.classList.add('active');
+
+        const optionsStyleDate = {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric'
+        }
+
+        const dateSelected = date.toLocaleDateString('pt-BR', optionsStyleDate);
+        this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
+    }
+
     renderDaysOfCalendar(daysInMonth){
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
         for(let i = 1; i <= daysInMonth; i++){
             const dayCalender = document.createElement('button');
             dayCalender.classList.add('agenda-day', 'animate-fadeTop');
 
-            const today = new Date();
+            const currentIterationDate = new Date(this.year, this.month, i);
+
             if(i === today.getDate() && this.month === today.getMonth() && this.year === today.getFullYear()){
                 dayCalender.classList.add('today');
             }
 
-            if(new Date(this.year, this.month, i).getDay() == 0){
+            if(currentIterationDate.getDay() == 0){
                 dayCalender.classList.add('inactive');
                 dayCalender.disabled = true;
             }
 
             dayCalender.textContent = i;
 
+            if(currentIterationDate.getTime() < today.getTime()){
+                dayCalender.classList.add('beforeNow');
+                dayCalender.disabled = true;
+                this.calenderContent.appendChild(dayCalender);
+                continue;
+            }
+
             dayCalender.addEventListener('click', () => {
-                const activeDays = this.calenderContent.querySelectorAll('.agenda-day.active');
-                activeDays.forEach(day => day.classList.remove('active'));
-                dayCalender.classList.add('active');
-
-                const optionsStyleDate = {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric'
-                }
-
-                const dateSelected = new Date(this.year, this.month, i).toLocaleDateString('pt-BR', optionsStyleDate);
-
-                this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
+                this.formatScheduleInfos(dayCalender, new Date(this.year, this.month, i));
             });
 
             this.calenderContent.appendChild(dayCalender);
@@ -127,8 +141,8 @@ export default class Calender{
         if(this.monthInfo && this.yearInfo && this.btnNext && this.btnPrev){
             this.renderCalendar();
             this.addEvents();
+            this.formatScheduleInfos(this.calenderContent.querySelector('.agenda-day.today'), new Date());
         }
-        
         return this;
     }
 }
