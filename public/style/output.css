@@ -1336,6 +1336,14 @@ aside p.activeOption{
   margin-top: auto;
 }
 
+.-mt-3{
+  margin-top: -0.75rem;
+}
+
+.-mb-3{
+  margin-bottom: -0.75rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -1498,6 +1506,14 @@ aside p.activeOption{
 
 .max-h-\[90vh\]{
   max-height: 90vh;
+}
+
+.max-h-\[800px\]{
+  max-height: 800px;
+}
+
+.max-h-\[700px\]{
+  max-height: 700px;
 }
 
 .min-h-\[120px\]{
@@ -2620,6 +2636,10 @@ aside p.activeOption{
   text-align: center;
 }
 
+.text-start{
+  text-align: start;
+}
+
 .font-sans{
   font-family: Montserrat, sans-serif;
 }
@@ -3082,8 +3102,17 @@ aside p.activeOption{
   line-height: 1.25rem;
 }
 
+.\*\:text-base > *{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .\*\:font-semibold > *{
   font-weight: 600;
+}
+
+.\*\:font-normal > *{
+  font-weight: 400;
 }
 
 .\*\:leading-\[32px\] > *{
@@ -3093,6 +3122,11 @@ aside p.activeOption{
 .\*\:text-gray-700 > *{
   --tw-text-opacity: 1;
   color: rgb(69 74 71 / var(--tw-text-opacity, 1));
+}
+
+.\*\:text-gray-800 > *{
+  --tw-text-opacity: 1;
+  color: rgb(47 51 49 / var(--tw-text-opacity, 1));
 }
 
 .placeholder\:text-gray-400::-moz-placeholder{
@@ -4427,6 +4461,14 @@ aside p.activeOption{
   .\*\:md\:text-lg > *{
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .\*\:md\:text-\[22px\] > *{
+    font-size: 22px;
+  }
+
+  .\*\:md\:leading-\[27px\] > *{
+    line-height: 27px;
   }
 }
 
