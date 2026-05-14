@@ -1495,6 +1495,14 @@ aside p.activeOption{
   height: 100%;
 }
 
+.h-\[120px\]{
+  height: 120px;
+}
+
+.h-\[220px\]{
+  height: 220px;
+}
+
 .max-h-\[1000px\]{
   max-height: 1000px;
 }
@@ -2733,6 +2741,10 @@ aside p.activeOption{
   text-transform: capitalize;
 }
 
+.italic{
+  font-style: italic;
+}
+
 .not-italic{
   font-style: normal;
 }
@@ -3131,6 +3143,11 @@ aside p.activeOption{
   border-color: rgb(25 153 94 / var(--tw-border-opacity, 1));
 }
 
+.focus-within\:border-green-500:focus-within{
+  --tw-border-opacity: 1;
+  border-color: rgb(18 116 71 / var(--tw-border-opacity, 1));
+}
+
 .focus-within\:ring-2:focus-within{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -3150,6 +3167,10 @@ aside p.activeOption{
 
 .focus-within\:ring-green-400\/20:focus-within{
   --tw-ring-color: rgb(25 153 94 / 0.2);
+}
+
+.focus-within\:ring-green-500\/20:focus-within{
+  --tw-ring-color: rgb(18 116 71 / 0.2);
 }
 
 .hover\:scale-105:hover{
