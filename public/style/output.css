@@ -593,9 +593,6 @@ body{
 }
 
 .header{
-  position: sticky;
-  top: 0px;
-  z-index: 50;
   width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
@@ -746,12 +743,167 @@ body{
 
 /* scheduling days */
 
-.today{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1)) !important;
-  --tw-text-opacity: 1 !important;
-  color: rgb(232 235 233 / var(--tw-text-opacity, 1)) !important;
+.agenda-day-title{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(47 51 49 / var(--tw-text-opacity, 1));
 }
+
+@media (min-width: 830px){
+  .agenda-day-title{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 1024px){
+  .agenda-day-title{
+    font-size: 32px;
+  }
+}
+
+.agenda-day{
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(69 74 71 / var(--tw-text-opacity, 1));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.agenda-day:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(232 235 233 / var(--tw-bg-opacity, 1));
+}
+
+.agenda-day:focus{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(25 153 94 / var(--tw-ring-opacity, 1));
+}
+
+@media (min-width: 830px){
+  .agenda-day{
+    height: 3rem;
+    width: 3rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 1024px){
+  .agenda-day{
+    height: 60px;
+    width: 60px;
+    font-size: 30px;
+  }
+}
+
+.agenda-day.today{
+  cursor: pointer;
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 116 71 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(232 235 233 / var(--tw-text-opacity, 1));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.agenda-day.today:focus{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(25 153 94 / var(--tw-ring-opacity, 1));
+  --tw-ring-offset-width: 2px;
+}
+
+.agenda-day.active{
+  cursor: pointer;
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(232 235 233 / var(--tw-text-opacity, 1));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.agenda-day.active:focus{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(25 153 94 / var(--tw-ring-opacity, 1));
+  --tw-ring-offset-width: 2px;
+}
+
+.agenda-day.not{
+  cursor: pointer;
+  --tw-bg-opacity: 1;
+  background-color: rgb(128 0 32 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(232 235 233 / var(--tw-text-opacity, 1));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.agenda-day.not:focus{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(25 153 94 / var(--tw-ring-opacity, 1));
+  --tw-ring-offset-width: 2px;
+}
+
+.agenda-day.inactive{
+  cursor: not-allowed;
+  --tw-text-opacity: 1;
+  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
+}
+
+.agenda-day.inactive:hover{
+  background-color: transparent;
+}
+
+.agenda-day.beforeNow{
+  cursor: not-allowed;
+  --tw-text-opacity: 1;
+  color: rgb(135 140 137 / var(--tw-text-opacity, 1));
+  opacity: 0.5;
+}
+
+.agenda-day.beforeNow:hover{
+  background-color: transparent;
+}
+
+/* .agenda-day.inactive.bg {
+        @apply bg-gray-200 cursor-not-allowed text-red-alert;
+    } */
 
 .service-card{
   --tw-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -942,7 +1094,7 @@ label.error, div.error{
   background-color: rgb(240 221 222 / var(--tw-bg-opacity, 1));
 }
 
-aside[data-modal="filtroLoja"] p.activeOption{
+aside p.activeOption{
   --tw-bg-opacity: 1;
   background-color: rgb(212 217 214 / var(--tw-bg-opacity, 1));
 }
@@ -985,6 +1137,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .relative{
   position: relative;
+}
+
+.sticky{
+  position: sticky;
 }
 
 .inset-0{
@@ -1180,11 +1336,30 @@ aside[data-modal="filtroLoja"] p.activeOption{
   margin-top: auto;
 }
 
+.mb-3{
+  margin-bottom: 0.75rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
+}
+
+.mt-6{
+  margin-top: 1.5rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.line-clamp-3{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .block{
@@ -1295,10 +1470,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   height: 400px;
 }
 
-.h-\[40px\]{
-  height: 40px;
-}
-
 .h-\[50px\]{
   height: 50px;
 }
@@ -1336,12 +1507,24 @@ aside[data-modal="filtroLoja"] p.activeOption{
   height: 100%;
 }
 
+.h-\[120px\]{
+  height: 120px;
+}
+
+.h-\[220px\]{
+  height: 220px;
+}
+
 .max-h-\[1000px\]{
   max-height: 1000px;
 }
 
 .max-h-\[500px\]{
   max-height: 500px;
+}
+
+.max-h-\[700px\]{
+  max-height: 700px;
 }
 
 .max-h-\[90vh\]{
@@ -1370,6 +1553,14 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .min-h-screen{
   min-height: 100vh;
+}
+
+.min-h-\[2rem\]{
+  min-height: 2rem;
+}
+
+.min-h-\[200px\]{
+  min-height: 200px;
 }
 
 .\!w-\[100px\]{
@@ -1434,10 +1625,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .w-\[30px\]{
   width: 30px;
-}
-
-.w-\[40px\]{
-  width: 40px;
 }
 
 .w-\[45px\]{
@@ -1737,10 +1924,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   animation: fade-top 0.5s forwards;
 }
 
-.cursor-not-allowed{
-  cursor: not-allowed;
-}
-
 .cursor-pointer{
   cursor: pointer;
 }
@@ -1761,6 +1944,22 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .resize-y{
   resize: vertical;
+}
+
+.list-inside{
+  list-style-position: inside;
+}
+
+.list-outside{
+  list-style-position: outside;
+}
+
+.list-disc{
+  list-style-type: disc;
+}
+
+.list-decimal{
+  list-style-type: decimal;
 }
 
 .appearance-none{
@@ -2188,11 +2387,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
 }
 
-.bg-green-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
-}
-
 .bg-green-light{
   --tw-bg-opacity: 1;
   background-color: rgb(209 237 219 / var(--tw-bg-opacity, 1));
@@ -2518,10 +2712,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   font-size: 28px;
 }
 
-.text-\[30px\]{
-  font-size: 30px;
-}
-
 .text-\[34px\]{
   font-size: 34px;
 }
@@ -2579,6 +2769,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   text-transform: capitalize;
 }
 
+.italic{
+  font-style: italic;
+}
+
 .not-italic{
   font-style: normal;
 }
@@ -2615,10 +2809,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   line-height: 32px;
 }
 
-.leading-\[37px\]{
-  line-height: 37px;
-}
-
 .leading-\[42px\]{
   line-height: 42px;
 }
@@ -2637,10 +2827,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .leading-tight{
   line-height: 1.25;
-}
-
-.tracking-\[0\.02em\]{
-  letter-spacing: 0.02em;
 }
 
 .tracking-\[0\.3px\]{
@@ -2726,11 +2912,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
   color: rgb(3 43 24 / var(--tw-text-opacity, 1));
 }
 
-.text-red-alert{
-  --tw-text-opacity: 1;
-  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
-}
-
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(252 252 252 / var(--tw-text-opacity, 1));
@@ -2738,6 +2919,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .underline{
   text-decoration-line: underline;
+}
+
+.line-through{
+  text-decoration-line: line-through;
 }
 
 .antialiased{
@@ -2916,6 +3101,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
   margin-right: auto;
 }
 
+.\*\:ml-5 > *{
+  margin-left: 1.25rem;
+}
+
 .\*\:cursor-pointer > *{
   cursor: pointer;
 }
@@ -2928,6 +3117,11 @@ aside[data-modal="filtroLoja"] p.activeOption{
   padding-bottom: 1.25rem;
 }
 
+.\*\:text-base > *{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .\*\:text-lg > *{
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -2936,6 +3130,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 .\*\:text-sm > *{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.\*\:font-normal > *{
+  font-weight: 400;
 }
 
 .\*\:font-semibold > *{
@@ -2949,6 +3147,11 @@ aside[data-modal="filtroLoja"] p.activeOption{
 .\*\:text-gray-700 > *{
   --tw-text-opacity: 1;
   color: rgb(69 74 71 / var(--tw-text-opacity, 1));
+}
+
+.\*\:text-gray-800 > *{
+  --tw-text-opacity: 1;
+  color: rgb(47 51 49 / var(--tw-text-opacity, 1));
 }
 
 .placeholder\:text-gray-400::-moz-placeholder{
@@ -2976,6 +3179,11 @@ aside[data-modal="filtroLoja"] p.activeOption{
   border-color: rgb(25 153 94 / var(--tw-border-opacity, 1));
 }
 
+.focus-within\:border-green-500:focus-within{
+  --tw-border-opacity: 1;
+  border-color: rgb(18 116 71 / var(--tw-border-opacity, 1));
+}
+
 .focus-within\:ring-2:focus-within{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -2995,6 +3203,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
 .focus-within\:ring-green-400\/20:focus-within{
   --tw-ring-color: rgb(25 153 94 / 0.2);
+}
+
+.focus-within\:ring-green-500\/20:focus-within{
+  --tw-ring-color: rgb(18 116 71 / 0.2);
 }
 
 .hover\:scale-105:hover{
@@ -3772,10 +3984,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
     height: 2.5rem;
   }
 
-  .md\:h-12{
-    height: 3rem;
-  }
-
   .md\:h-5{
     height: 1.25rem;
   }
@@ -3836,10 +4044,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
     width: 2.5rem;
   }
 
-  .md\:w-12{
-    width: 3rem;
-  }
-
   .md\:w-5{
     width: 1.25rem;
   }
@@ -3854,10 +4058,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
   .md\:w-\[106px\]{
     width: 106px;
-  }
-
-  .md\:w-\[225px\]{
-    width: 225px;
   }
 
   .md\:w-\[30px\]{
@@ -3890,6 +4090,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
   .md\:w-auto{
     width: auto;
+  }
+
+  .md\:min-w-\[225px\]{
+    min-width: 225px;
   }
 
   .md\:min-w-\[400px\]{
@@ -4288,9 +4492,17 @@ aside[data-modal="filtroLoja"] p.activeOption{
     margin-right: 0px;
   }
 
+  .\*\:md\:text-\[22px\] > *{
+    font-size: 22px;
+  }
+
   .\*\:md\:text-lg > *{
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .\*\:md\:leading-\[27px\] > *{
+    line-height: 27px;
   }
 }
 
@@ -4364,6 +4576,10 @@ aside[data-modal="filtroLoja"] p.activeOption{
     height: 3.5rem;
   }
 
+  .lg\:h-20{
+    height: 5rem;
+  }
+
   .lg\:h-24{
     height: 6rem;
   }
@@ -4410,10 +4626,6 @@ aside[data-modal="filtroLoja"] p.activeOption{
 
   .lg\:h-auto{
     height: auto;
-  }
-
-  .lg\:h-20{
-    height: 5rem;
   }
 
   .lg\:max-h-\[600px\]{

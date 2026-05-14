@@ -2,7 +2,8 @@ import { clickOutside } from "../clickOutside.js";
 import Fetch from "../Fetch.js";
 export default class FormProduct {
     constructor(selectorModal, selectorForm, selectorButtonClose,
-        selectorInputName, selectorSelectCategory, selectorInputPrice, selectorAreaShortDescription, selectorAreaLongDescription,
+        selectorInputName, selectorSelectCategory, selectorInputPrice, selectorAreaShortDescription, selectorAreaLongDescription, 
+        selectorEditorLongDescription,
         selectorInputMainImage, selectorInputSlideImages, selectorInfoMainImage, selectorInfoSlideImages, selectorButtonCreateProduct) {
         this.modalProduct = document.querySelector(selectorModal);
         this.formProduct = document.querySelector(selectorForm);
@@ -14,6 +15,10 @@ export default class FormProduct {
         this.inputPrice = document.querySelector(selectorInputPrice);
         this.areaShortDescription = document.querySelector(selectorAreaShortDescription);
         this.areaLongDescription = document.querySelector(selectorAreaLongDescription);
+        this.editorLongDescription = document.querySelector(selectorEditorLongDescription);
+
+        this.quillLong = null;
+        this.longDescriptionMaxLength = 1000;
 
         this.inputMainImage = document.querySelector(selectorInputMainImage);
         this.inputSlideImages = document.querySelector(selectorInputSlideImages);
@@ -30,7 +35,52 @@ export default class FormProduct {
         this.initCreateProduct = this.initCreateProduct.bind(this);
     }
 
-    // Pega o label estilizado, pois o input do estilo file está escondido
+    handleEditorChange(quill, oldDelta, hiddenField, maxLength) {
+        if (!quill || !hiddenField) return;
+
+        if (quill.getLength() - 1 > maxLength) {
+            quill.updateContents(oldDelta); 
+        }
+
+        hiddenField.value = this.getEditorHtml(quill);
+    }
+
+    // validação para evitar que tenha quebra de linhas apenas no quill
+    getEditorHtml(quill) {
+        if (!quill) return '';
+        const html = quill.root.innerHTML.trim();
+        return html === '<p><br></p>' ? '' : html;
+    }
+
+    getEditorValue(quill, hiddenField) {
+        if (quill) {
+            return this.getEditorHtml(quill).trim();
+        }
+        return hiddenField?.value.trim() ?? '';
+    }
+
+    initEditor() {
+        if (!window.Quill) return;
+        
+        if (this.editorLongDescription) {
+            this.quillLong = new Quill(this.editorLongDescription, {
+                theme: 'snow',
+                placeholder: 'Digite uma descrição detalhada para o produto (máximo de 1000 caracteres)...',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ header: [1, 2, 3, false] }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        ['link']
+                    ]
+                }
+            });
+            this.quillLong.on('text-change', (delta, oldDelta) => {
+                this.handleEditorChange(this.quillLong, oldDelta, this.areaLongDescription, this.longDescriptionMaxLength);
+            });
+        }
+    }
+
     getLabelFile(input) {
         if (!input.id) return null;
         return this.formProduct?.querySelector(`label[for="${input.id}"].cursor-pointer`) ?? null;
@@ -62,12 +112,18 @@ export default class FormProduct {
             });
         }
         if (!this.areaLongDescription?.value.trim()) {
-            this.areaLongDescription?.classList.add('error');
-            this.areaLongDescription.addEventListener('click', () => {
-                this.areaLongDescription.classList.remove('error');
-            });
+            const longValue = this.getEditorValue(this.quillLong, this.areaLongDescription);
+            if (!longValue) {
+                this.areaLongDescription?.classList.add('error');
+                if (this.editorLongDescription) {
+                    this.editorLongDescription.classList.add('error');
+                    this.editorLongDescription.addEventListener('click', () => {
+                        this.editorLongDescription.classList.remove('error');
+                    });
+                }
+            }
         }
-
+            
         const labelMainImage = this.getLabelFile(this.inputMainImage);
         if (!(this.inputMainImage?.files.length > 0)) {
             labelMainImage?.classList.add('error');
@@ -89,7 +145,7 @@ export default class FormProduct {
         const hasCategory = this.selectCategory?.value !== '';
         const hasPrice = Number(this.inputPrice?.value.replace(',', '.').replace('R$', '')) > 0;
         const hasShortDescription = this.areaShortDescription?.value.trim() !== '';
-        const hasLongDescription = this.areaLongDescription?.value.trim() !== '';
+        const hasLongDescription = this.getEditorValue(this.quillLong, this.areaLongDescription) !== '';
         const hasMainImage = this.inputMainImage?.files.length > 0;
         const hasSlideImages = this.inputSlideImages?.files.length > 0;
 
@@ -133,7 +189,7 @@ export default class FormProduct {
             category: this.selectCategory.value,
             price: Number(this.inputPrice.value.replace(',', '.').replace('R$', '')),
             shortDescription: this.areaShortDescription.value.trim(),
-            longDescription: this.areaLongDescription.value.trim(),
+            longDescription:  this.getEditorValue(this.quillLong, this.areaLongDescription),
             imageMain: {
                 image: await this.transformOneImageBase64(this.inputMainImage.files[0]),
                 alt: this.inputMainImage.files[0].name
@@ -201,6 +257,14 @@ export default class FormProduct {
         if (this.formProduct) {
             this.formProduct.reset();
         }
+        if (this.quillShort) {
+            this.quillShort.setText('');
+            this.areaShortDescription.value = '';
+        }
+        if (this.quillLong) {
+            this.quillLong.setText('');
+            this.areaLongDescription.value = '';
+        }
         if (this.infoMainImage) {
             this.infoMainImage.textContent = '';
             this.infoMainImage.classList.add('hidden');
@@ -216,9 +280,19 @@ export default class FormProduct {
         this.buttonCreateProduct.querySelector('span').textContent = 'Atualizar Produto';
         this.inputName.value = product.name;
         this.selectCategory.value = product.category;
-        this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
-        this.areaShortDescription.value = product.shortDescription;
-        this.areaLongDescription.value = product.longDescription;
+            this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
+        if (this.quillShort) {
+            this.quillShort.root.innerHTML = product.shortDescription || '';
+            this.areaShortDescription.value = this.getEditorHtml(this.quillShort);
+        } else {
+            this.areaShortDescription.value = product.shortDescription;
+        }
+        if (this.quillLong) {
+            this.quillLong.root.innerHTML = product.longDescription || '';
+            this.areaLongDescription.value = this.getEditorHtml(this.quillLong);
+        } else {
+            this.areaLongDescription.value = product.longDescription;
+        }
     }
 
     openForm() {
@@ -240,6 +314,7 @@ export default class FormProduct {
     }
 
     init() {
+        this.initEditor();
         if (this.modalProduct && this.formProduct) {
             this.addEvents();
         }
