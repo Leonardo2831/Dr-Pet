@@ -24,8 +24,11 @@ export default class LoadProduct{
     renderInfoProduct(){
         if(this.title && this.description && this.price){
             this.title.textContent = this.product.name;
-
-            this.description.innerHTML = this.converterMarkdown.makeHtml(this.product.longDescription);
+            const longDescription = this.product.longDescription || '';
+            const isHtml = /<[^>]+>/.test(longDescription);
+            this.description.innerHTML = isHtml
+                ? longDescription
+                : this.converterMarkdown.makeHtml(longDescription);
             const uls = this.description.querySelectorAll('ul');
             if(uls.length) {
                 uls.forEach(ul => {
