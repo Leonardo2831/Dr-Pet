@@ -1,21 +1,45 @@
 import Fetch from '../Fetch.js';
 import getParamsURL from "../getParamsURL.js";
+import structProduct from './components/structProduct.js';
 import structSlide from './components/structSlide.js';
 import structThumb from './components/structThumb.js';
 import slideProduto from "./slide-produto-about.js";
 
 export default class LoadProduct{
     constructor(selectorContentThumbsSlide, selectorContentGaleryImagesSlide,
-        selectorTitle, selectorDescription, selectorPrice
+        selectorTitle, selectorDescription, selectorPrice, selectorContentSlideProducts, selectorButtonContact
     ){
         this.contentThumbsSlide = document.querySelector(selectorContentThumbsSlide);
         this.contentGaleryImagesSlide = document.querySelector(selectorContentGaleryImagesSlide);
         this.title = document.querySelector(selectorTitle);
         this.description = document.querySelector(selectorDescription);
         this.price = document.querySelector(selectorPrice);
+        this.contentSlideProducts = document.querySelector(selectorContentSlideProducts);
+        this.buttonContact = document.querySelector(selectorButtonContact);
 
         this.product = null;
+        this.allProducts = null;
         this.fetchProduct = new Fetch('produtos', '[data-modal-info="product"]');
+        
+        this.toContact = this.toContact.bind(this);
+    }
+
+    toContact(){
+        const phone = "5519993592253"; 
+        const text = encodeURIComponent(`Olá, gostaria de saber mais sobre o ${this.product.name}`);
+        const url = `https://wa.me/${phone}?text=${text}`;
+    
+        window.open(url, '_blank');
+    }
+
+    addEventButton(){
+        this.buttonContact.addEventListener('click', this.toContact);
+    }
+
+    renderSlide(){
+        this.allProducts.forEach(product => {
+            this.contentSlideProducts.appendChild(structProduct(product));
+        });
     }
 
     renderInfoProduct(){
@@ -86,12 +110,19 @@ export default class LoadProduct{
         slideProduto();
     }
 
+    async getAllProducts(){
+        this.allProducts = await this.fetchProduct.get();
+        this.renderSlide();
+    }
+
     async getProduct(){
         const id = getParamsURL('id');
         this.product = await  this.fetchProduct.get(id);
         
         this.renderProduct();
         this.renderInfoProduct();
+        this.getAllProducts();
+        this.addEventButton();
     }
 
     init(){
