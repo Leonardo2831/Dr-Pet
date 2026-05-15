@@ -3,7 +3,7 @@ import Fetch from "../Fetch.js";
 import UserInfosChange from "./UserInfosChange.js";
 
 export default async function loadMenuUser(){
-    const userId = Storage.getValueStorage('user-id');
+    const userId = Storage.get('user-id');
     const fetchUser = new Fetch('usuarios', '[data-modal-info-menu="user"]');
     await fetchUser.get(userId).then((userData) => {
         const nameUser = document.querySelector('[data-info="nameUser"]');

@@ -11,14 +11,14 @@ export default class MenuUserLoading{
 
     addEventLogout(){
         this.menuUserContent.querySelector('[data-button="logout"]').addEventListener('click', () => {
-            Storage.removeItemStorage('user-id');
+            Storage.delete('user-id');
             const isInPages = window.location.pathname.includes('/public/pages/');
             window.location.href = isInPages ? './login.html' : 'public/pages/login.html';
         });
     }
 
     lodingContent(){
-        const idUser = Storage.getValueStorage('user-id');
+        const idUser = Storage.get('user-id');
 
         if(idUser){
             this.fetchJson.get(idUser).then((user) => {

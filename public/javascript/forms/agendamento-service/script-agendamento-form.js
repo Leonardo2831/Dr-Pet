@@ -1,43 +1,38 @@
 import checkInputRadioParams from "./checkInputRadioParams.js";
+import Storage from "../../Storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     checkInputRadioParams();
     const form = document.querySelector('form');
+    const fetchSchedule = new Fetch('schedule', '[data-modal-info="formSchedule"]');
+    const infosSchedule = Storage.get('scheduleData');
 
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
 
-        const formData = new FormData(form);
+        const formDataObject = new FormData(form);
         const novoAgendamento = {
             user: {
-                username: formData.get('nome'),
-                phone: formData.get('telefone')
+                username: formDataObject.get('nome'),
+                phone: formDataObject.get('telefone')
             },
             petAgendado: {
-                name: formData.get('nomePet')
+                name: formDataObject.get('nomePet')
             },
             service: {
-                name: formData.get('servico'),
-                observations: formData.get('descricao')
+                name: infosSchedule.service,
+                observations: formDataObject.get('descricao')
             },
-            date: "2026-05-16",
-            hour: "10:00",
-            buscarResidencia: formData.get('buscarResidencia') === 'on'
+            date: infosSchedule.date,
+            hour: infosSchedule.hour,
+            buscarResidencia: formDataObject.get('buscarResidencia') === 'on'
         };
 
-        try {
-            const resposta = await fetch('http://localhost:3000/agenda', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(novoAgendamento)
-            });
+        const resposta = await fetchSchedule.post(novoAgendamento);
 
-            if (resposta.ok) {
-                alert('Agendamento realizado com sucesso!');
-                window.location.href = 'agenda.html';
-            }
-        } catch (erro) {
-            console.error('Erro ao salvar:', erro);
-        }
+        if (resposta.ok) {
+            window.location.href = 'agenda.html';
+        } else console.error('Erro ao salvar:', erro);
+
     });
 });

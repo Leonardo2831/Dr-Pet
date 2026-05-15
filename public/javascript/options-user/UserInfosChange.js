@@ -16,7 +16,7 @@ export default class UserInfosChange{
         this.savePhone = this.savePhone.bind(this);
         this.savePassword = this.savePassword.bind(this);
 
-        this.userId = Storage.getValueStorage('user-id');
+        this.userId = Storage.get('user-id');
         this.userData = userData;
         this.fetchUser = fetchUser;
     }

@@ -38,7 +38,7 @@ export default class Login{
         if (validUser) {
             this.fetchJson.showModalSuccess('Login realizado com sucesso!');
             if(validUser.typeUser == "comum"){
-                Storage.setValueStorage('user-id', validUser.id);
+                Storage.set('user-id', validUser.id);
                 window.location.href = '../../index.html';
             } else {
                 window.location.href = '../../public/pages/administrador.html';
