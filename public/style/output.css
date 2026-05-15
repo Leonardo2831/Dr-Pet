@@ -903,6 +903,7 @@ body{
 
 .button-hour{
   display: flex;
+  width: 110px;
   cursor: pointer;
   flex-direction: row;
   align-items: center;
