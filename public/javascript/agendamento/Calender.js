@@ -1,12 +1,11 @@
 export default class Calender{
-    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, selectorInfoHourSchedule, onDayClick = null){
+    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, onDayClick = null){
         this.monthInfo = document.querySelector(selectorMonthInfo);
         this.yearInfo = document.querySelector(selectorYearInfo);
         this.btnNext = document.querySelector(selectorBtnNext);
         this.btnPrev = document.querySelector(selectorBtnPrev);
         this.calenderContent = document.querySelector(selectorContainerCalender);
         this.infoDaySchedule = document.querySelector(selectorInfoDaySchedule);
-        this.infoHourSchedule = document.querySelector(selectorInfoHourSchedule);
         this.onDayClick = onDayClick;
 
         this.date = new Date();
@@ -64,6 +63,7 @@ export default class Calender{
 
         const dateSelected = date.toLocaleDateString('pt-BR', optionsStyleDate);
         this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
+        this.infoDaySchedule.setAttribute('data-day-schedule', dayCalender.dataset.day);
     }
 
     renderDaysOfCalendar(daysInMonth){
