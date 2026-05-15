@@ -181,9 +181,20 @@
     .agenda-day.beforeNow{
         @apply cursor-not-allowed opacity-50 text-gray-500 hover:bg-transparent;
     }
-    /* .agenda-day.inactive.bg {
-        @apply bg-gray-200 cursor-not-allowed text-red-alert;
-    } */
+
+    .button-hour {
+        @apply flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors cursor-pointer;
+    }
+    .button-hour span {
+        @apply text-base sm:text-xl md:text-[26px] font-semibold text-gray-800;
+    }
+    .button-hour.active {
+        @apply px-3 py-1 sm:px-4 sm:py-1.5 bg-green-400 border-green-600 focus:ring-green-600 hover:bg-green-500;
+    }
+    .button-hour.active span {
+        @apply text-gray-50;
+    }
+
     .open-hour {
         @apply text-green-600;
     }

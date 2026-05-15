@@ -59,7 +59,7 @@
 
     <div class="bg-gray-50 min-h-screen">
         <main class="main container w-full flex justify-center pb-20 md:pb-[120px]">
-            <section class="w-full flex flex-col gap-10 lg:gap-[80px]">
+            <section class="w-full flex flex-col gap-10 lg:gap-20">
                 <h1 class="text-4xl md:text-[52px] leading-snug md:leading-[64px] font-bold text-green-700 text-center">
                     Agendamento
                 </h1>
@@ -73,7 +73,7 @@
                             <div class="flex flex-row items-center gap-5 md:gap-[30px]">
                                 <img data-imgInfo="agenda-service-image" src="../images/services/banho-tosa.png"
                                     alt="Cachorro no serviço de Banho e Tosa"
-                                    class="w-[80px] h-[56px] md:w-[106px] md:h-[74px] object-cover rounded-[5px]" />
+                                    class="w-20 h-[56px] md:w-[106px] md:h-[74px] object-cover rounded-[5px]" />
                                 <div class="flex flex-col justify-center gap-1">
                                     <span
                                         class="text-sm md:text-base lg:text-[18px] leading-tight font-normal text-gray-900">
@@ -139,64 +139,12 @@
 
                                     <div class="flex flex-col gap-3">
                                         <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Manhã</h4>
-                                        <div class="flex flex-row flex-wrap items-center gap-3 md:gap-4">
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-red-alert border-2 border-red-alert rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-alert hover:opacity-90 transition-opacity">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-50">08:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">09:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-3 py-1 sm:px-4 sm:py-1.5 bg-green-400 border-2 border-green-600 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 hover:bg-green-500 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-50">10:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">11:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">11:30</span>
-                                            </button>
-                                        </div>
+                                        <div data-content="hours-morning" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
                                     </div>
 
                                     <div class="flex flex-col gap-3">
                                         <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Tarde</h4>
-                                        <div class="flex flex-row flex-wrap items-center gap-3 md:gap-4">
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-red-alert border-2 border-red-alert rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-alert hover:opacity-90 transition-opacity">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-50">13:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">14:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">15:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">16:00</span>
-                                            </button>
-                                            <button type="button"
-                                                class="flex flex-row justify-center items-center px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 border-2 border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 hover:bg-gray-300 transition-colors">
-                                                <span
-                                                    class="text-base sm:text-xl md:text-[26px] font-semibold text-gray-800">16:30</span>
-                                            </button>
-                                        </div>
+                                        <div data-content="hours-afternoon" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
                                     </div>
                                 </div>
                             </div>
@@ -339,7 +287,7 @@
                 </address>
             </footer>
         </div>
-        <aside data-modal-info-menu="user"
+        <aside data-modal-info-menu="user" data-modal-info="agenda"
             class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
         </aside>
 
