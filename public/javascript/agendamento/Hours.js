@@ -2,9 +2,10 @@ import Fetch from '../Fetch.js';
 import structHours from './components/structHours.js';
 
 export default class Hours{
-    constructor(selectorContentHoursMorning, selectorContentHoursAfternoon){
+    constructor(selectorContentHoursMorning, selectorContentHoursAfternoon, selectorInfoHour){
         this.contentHoursMorning = document.querySelector(selectorContentHoursMorning);
         this.contentHoursAfternoon = document.querySelector(selectorContentHoursAfternoon);
+        this.infoHour = document.querySelector(selectorInfoHour);
 
         this.currentDay = null;
 
@@ -17,6 +18,14 @@ export default class Hours{
     }
 
     renderHours(){
+        const grandParent = this.contentHoursMorning.parentElement.parentElement.parentElement;
+
+        if (grandParent) {
+            grandParent.classList.add('opacity-0');
+            grandParent.classList.remove('animate-fadeTop');
+        }
+
+        this.infoHour.textContent = '';
         this.contentHoursMorning.innerHTML = '';
         this.contentHoursAfternoon.innerHTML = '';
 
@@ -28,15 +37,26 @@ export default class Hours{
 
         this.allHours.forEach(hour => {
             const isOccupied = agendaHours.includes(hour);
-            const btn = isOccupied ? "" : structHours(hour);
-            if(btn && hour < "12:00"){
-                this.contentHoursMorning.appendChild(btn);
-            } else if(btn) {
-                this.contentHoursAfternoon.appendChild(btn);
+            const info = this.infoHour || { textContent: '' };
+            const period = hour < "12:00" ? "da manhã" : "da tarde";
+            const btn = isOccupied ? "" : structHours(hour, info, period);
+
+            if (btn) {
+                if (hour < "12:00") {
+                    this.contentHoursMorning.appendChild(btn);
+                } else {
+                    this.contentHoursAfternoon.appendChild(btn);
+                }
             }
         });
-        
-        
+
+        // o setTimeout é necessário para que a animação seja aplicada corretamente
+        setTimeout(() => {
+            if (grandParent) {
+                grandParent.classList.remove('opacity-0');
+                grandParent.classList.add('animate-fadeTop');
+            }
+        }, 50);
     }
 
     loadByDay(date){
