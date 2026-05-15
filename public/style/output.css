@@ -1395,6 +1395,10 @@ aside p.activeOption{
   margin-bottom: 0.75rem;
 }
 
+.mb-4{
+  margin-bottom: 1rem;
+}
+
 .mb-6{
   margin-bottom: 1.5rem;
 }
@@ -1623,12 +1627,12 @@ aside p.activeOption{
   min-height: 820px;
 }
 
-.min-h-screen{
-  min-height: 100vh;
-}
-
 .min-h-\[85px\]{
   min-height: 85px;
+}
+
+.min-h-screen{
+  min-height: 100vh;
 }
 
 .\!w-\[100px\]{
@@ -2950,6 +2954,11 @@ aside p.activeOption{
 .text-green-700{
   --tw-text-opacity: 1;
   color: rgb(3 43 24 / var(--tw-text-opacity, 1));
+}
+
+.text-red-alert{
+  --tw-text-opacity: 1;
+  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
 }
 
 .text-white{
