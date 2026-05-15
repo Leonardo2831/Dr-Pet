@@ -1,3 +1,5 @@
+import getParamsURL from '../getParamsURL.js';
+
 function changeValues(value){
     const textInfo = document.querySelector('[data-textInfo="agenda-service"]');
     const imgInfo = document.querySelector('[data-imgInfo="agenda-service-image"]');
@@ -46,6 +48,12 @@ function changeValues(value){
 
 export default function selectAgenda(PopUpConfig){
     const serviceOption = PopUpConfig.modal.querySelectorAll('[data-filter-agenda]');
+    
+    const itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${getParamsURL('service') || 'banho-tosa'}"]`);
+    const itemLastActive = PopUpConfig.modal.querySelector('.activeOption');
+    if(itemLastActive) itemLastActive.classList.remove('activeOption');
+    if(itemActive) itemActive.classList.add('activeOption');
+    changeValues(getParamsURL('service') || 'banho-tosa');
 
     serviceOption.forEach(option => {
         option.addEventListener('click', () => {
