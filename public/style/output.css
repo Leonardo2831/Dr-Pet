@@ -1627,6 +1627,10 @@ aside p.activeOption{
   min-height: 100vh;
 }
 
+.min-h-\[85px\]{
+  min-height: 85px;
+}
+
 .\!w-\[100px\]{
   width: 100px !important;
 }
