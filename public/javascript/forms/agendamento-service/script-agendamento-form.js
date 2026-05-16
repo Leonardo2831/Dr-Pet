@@ -1,9 +1,12 @@
 import checkInputRadioParams from "./checkInputRadioParams.js";
 import Storage from "../../Storage.js";
 import Fetch from "../../Fetch.js";
+import formatPhone from "../../formatPhone.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     checkInputRadioParams();
+    formatPhone('[data-input="formatPhone"]');
+    
     const form = document.querySelector('form');
     const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
     const infosSchedule = Storage.get('scheduleData');
