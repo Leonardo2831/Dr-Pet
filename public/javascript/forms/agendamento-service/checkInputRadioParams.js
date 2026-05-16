@@ -1,7 +1,7 @@
 import Storage from "../../Storage.js";
 
 export default function checkInputRadioParams(){
-    const servicoSelecionado = Storage.get('scheduleData').service;
+    const servicoSelecionado = Storage.get('scheduleData')?.service;
     if (servicoSelecionado) {
         const radioCorrespondente = document.querySelector(`input[name="servico"][value="${servicoSelecionado}"]`);
         if (radioCorrespondente) {
