@@ -56,11 +56,18 @@ export default class Fetch {
                 },
                 body: JSON.stringify(object),
             });
+
+            if (!response.ok) {
+                const error = new Error(`HTTP ${response.status} ${response.statusText}`);
+                this.showModalError(error, 'Houve um erro ao enviar os dados!');
+                throw error;
+            }
             
             this.showModalSuccess('Os dados foram enviados com sucesso!');
             return response;
         } catch(err) {
             this.showModalError(err, 'Houve um erro ao enviar os dados!');
+            throw err;
         } finally {
             setTimeout(() => {
                 if(this.modalInfo) {
