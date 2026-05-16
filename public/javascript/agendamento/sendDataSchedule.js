@@ -13,7 +13,7 @@ export default function sendDataSchedule(){
                 date: infoDate,
                 hour: infoHour
             };
-            Storage.set('scheduleData', JSON.stringify(data));
+            Storage.set('scheduleData', data);
             window.open('../pages/form-agendar.html', '_self');
         } else {
             if(buttonSubmitInfosSchedule.previousElementSibling) return;
