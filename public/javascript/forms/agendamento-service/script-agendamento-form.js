@@ -1,14 +1,20 @@
 import checkInputRadioParams from "./checkInputRadioParams.js";
 import Storage from "../../Storage.js";
+import Fetch from "../../Fetch.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     checkInputRadioParams();
     const form = document.querySelector('form');
-    const fetchSchedule = new Fetch('schedule', '[data-modal-info="formSchedule"]');
+    const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
     const infosSchedule = Storage.get('scheduleData');
 
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
+
+        if (!infosSchedule || !infosSchedule.date || !infosSchedule.hour) {
+            console.error('scheduleData ausente ou incompleto:', infosSchedule);
+            return;
+        }
 
         const formDataObject = new FormData(form);
         const novoAgendamento = {
@@ -28,11 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
             buscarResidencia: formDataObject.get('buscarResidencia') === 'on'
         };
 
-        const resposta = await fetchSchedule.post(novoAgendamento);
+        try {
+            const resposta = await fetchSchedule.post(novoAgendamento);
 
-        if (resposta.ok) {
-            window.location.href = 'agenda.html';
-        } else console.error('Erro ao salvar:', erro);
-
+            if (resposta && resposta.ok) {
+                Storage.delete('scheduleData');
+                window.location.href = 'agenda.html';
+            } else {
+                console.error('Erro ao salvar: resposta inválida', resposta);
+            }
+        } catch (erro) {
+            console.error('Erro ao salvar:', erro);
+        }
     });
 });
