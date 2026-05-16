@@ -1,3 +1,4 @@
+import Criptografia from '../../Criptografia.js';
 import Fetch from '../../Fetch.js';
 import toggleShowPassword from '../toggleShowPassword.js';
 
@@ -24,6 +25,7 @@ export default class Cadastrar {
         // deletando o atributo do objeto de confirmação de senha
         delete dadosUsuario.confirmPassword;
         dadosUsuario.id = crypto.randomUUID();
+        dadosUsuario.password = Criptografia.generateHash(dadosUsuario.password);
         dadosUsuario.pets = [];
         dadosUsuario.typeUser = 'comum';
 

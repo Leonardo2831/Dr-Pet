@@ -1,9 +1,10 @@
 import Fetch from '../../Fetch.js';
 import Storage from '../../Storage.js';
 import toggleShowPassword from '../toggleShowPassword.js';
+import Criptografia from '../../Criptografia.js';
 
-export default class Login{
-    constructor(selectorForm, selectorInputEmail, selectorInputPassword){
+export default class Login {
+    constructor(selectorForm, selectorInputEmail, selectorInputPassword) {
         this.form = document.querySelector(selectorForm);
         this.inputEmail = document.querySelector(selectorInputEmail);
         this.inputPassword = document.querySelector(selectorInputPassword);
@@ -32,7 +33,7 @@ export default class Login{
         // procura usuário válido
         const validUser = data.find(user =>
             user.email === this.inputEmail.value &&
-            user.password === this.inputPassword.value
+            Criptografia.checkHash(this.inputPassword.value, user.password)
         );
 
         if (validUser) {
