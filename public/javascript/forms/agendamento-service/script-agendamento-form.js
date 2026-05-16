@@ -8,6 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
     const infosSchedule = Storage.get('scheduleData');
 
+    // tempo definido em horas
+    const infosServiceAbout = {
+        'banho-tosa': {
+            time: 1.5,
+            price: 90.00
+        },
+        'vacinacao': {
+            time: 0.5,
+            price: 50.00
+        },
+        'cirurgia': {
+            time: 2,
+            price: 400.00
+        }
+    }
+
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
 
@@ -16,8 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const serviceInfo = infosServiceAbout[infosSchedule.service];
         const formDataObject = new FormData(form);
         const novoAgendamento = {
+            id: crypto.randomUUID(),
             user: {
                 username: formDataObject.get('nome'),
                 phone: formDataObject.get('telefone')
@@ -27,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             service: {
                 name: infosSchedule.service,
-                observations: formDataObject.get('descricao')
+                observations: formDataObject.get('descricao'),
+                duration: serviceInfo.time,
+                preco: serviceInfo.price,
             },
             date: infosSchedule.date,
             hour: infosSchedule.hour,
