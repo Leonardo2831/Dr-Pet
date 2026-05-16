@@ -66,7 +66,7 @@ export default class Hours{
 
     async getAgenda(){
         this.agenda = await this.fetchAgenda.get();
-        this.renderHours();
+        this.loadByDay(document.querySelector('.agenda-day.today')?.getAttribute('data-day'));
     }
 
     init(){
