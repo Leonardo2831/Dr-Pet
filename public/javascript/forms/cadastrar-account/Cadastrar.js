@@ -25,6 +25,7 @@ export default class Cadastrar {
         delete dadosUsuario.confirmPassword;
         dadosUsuario.id = crypto.randomUUID();
         dadosUsuario.pets = [];
+        dadosUsuario.address = [];
         dadosUsuario.typeUser = 'comum';
 
         const response = await this.api.post(dadosUsuario);

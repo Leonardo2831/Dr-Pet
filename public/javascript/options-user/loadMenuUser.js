@@ -1,6 +1,7 @@
 import Storage from "../Storage.js";
 import Fetch from "../Fetch.js";
 import UserInfosChange from "./UserInfosChange.js";
+import structAddress from "./components/structEndereço.js";
 
 export default async function loadMenuUser(){
     const userId = Storage.getValueStorage('user-id');
@@ -18,6 +19,12 @@ export default async function loadMenuUser(){
         if(userData.email) infoDataUser.email.textContent = userData.email;
         if(userData.phone) infoDataUser.phone.textContent = userData.phone;
         if(userData.password) infoDataUser.password.textContent = '*'.repeat(userData.password.length);
+
+        const addressContainer = document.querySelector('#address-container');
+        userData.address.forEach((address) => {
+            const addressElement = structAddress(address, userData, fetchUser);
+            addressContainer.appendChild(addressElement);
+        });
 
         const userInfosChange = new UserInfosChange(
             '[data-button="saveEmail"]',

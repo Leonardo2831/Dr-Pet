@@ -342,10 +342,7 @@
                 </section>
 
                 <!-- menu endereços -->
-                <section
-                    class="animate-fadeRight hidden w-full rounded-2xl shadow-sm"
-                    id="Endereco"
-                >
+                <section class="animate-fadeRight hidden w-full rounded-2xl shadow-sm" id="Endereco">
                     <nav
                         class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]"
                     >
@@ -361,134 +358,16 @@
                         >
                         <span aria-current="page">Endereços</span>
                     </nav>
-
-                    <div
-                        class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100"
-                    >
-                        <div
-                            class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50"
-                        >
-                            <div
-                                class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8"
-                            >
-                                <div
-                                    class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0"
-                                >
-                                    <img
-                                        src="../images/icons/options/endereco/house.svg"
-                                        alt="Ícone Casa"
-                                        class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[49px] lg:h-auto object-contain"
-                                    />
-                                </div>
-                                <div
-                                    class="flex flex-col gap-2 sm:gap-3 lg:gap-[15px]"
-                                >
-                                    <span
-                                        class="text-xl sm:text-2xl lg:text-[32px] font-bold text-gray-800 leading-tight lg:leading-[40px]"
-                                        >Rua do nada - 000</span
-                                    >
-                                    <div
-                                        class="flex flex-col gap-1 sm:gap-1.5 lg:gap-[10px]"
-                                    >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >CEP 0000000 - Cidade do nada -
-                                            Nada</span
-                                        >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >Usuário - (00) 00000-0000</span
-                                        >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >Bairro do nada</span
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <button
-                                data-button="options-address"
-                                class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                                aria-label="Opções de Endereço"
-                            >
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                            </button>
+                    <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
+                        
+                        <div id="address-container">
+                            <!-- endereços aparecem aqui dinamicamente -->
                         </div>
 
-                        <div
-                            class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px]"
-                        >
-                            <div
-                                class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8"
-                            >
-                                <div
-                                    class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0"
-                                >
-                                    <img
-                                        src="../images/icons/options/endereco/house.svg"
-                                        alt="Ícone Casa"
-                                        class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[49px] lg:h-auto object-contain"
-                                    />
-                                </div>
-                                <div
-                                    class="flex flex-col gap-2 sm:gap-3 lg:gap-[15px]"
-                                >
-                                    <span
-                                        class="text-xl sm:text-2xl lg:text-[32px] font-bold text-gray-800 leading-tight lg:leading-[40px]"
-                                        >Rua do nada - 000</span
-                                    >
-                                    <div
-                                        class="flex flex-col gap-1 sm:gap-1.5 lg:gap-[10px]"
-                                    >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >CEP 0000000 - Cidade do nada -
-                                            Nada</span
-                                        >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >Usuário - (00) 00000-0000</span
-                                        >
-                                        <span
-                                            class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                            >Bairro do nada</span
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <button
-                                data-button="options-address"
-                                class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                                aria-label="Opções de Endereço"
-                            >
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                                <div
-                                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"
-                                ></div>
-                            </button>
-                        </div>
-
-                        <div
-                            class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] border-t-[3px] border-gray-400 rounded-b-[10px]"
-                        >
-                            <a
-                                href="#"
+                        <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] border-t-[3px] border-gray-400 rounded-b-[10px]">
+                            <a data-button="address" href="#"
                                 class="inline-block text-lg sm:text-xl lg:text-2xl font-medium text-blue-link hover:text-blue-hover hover:scale-[1.02] active:scale-95 transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2"
-                                >Adicionar endereço</a
-                            >
+                                >Adicionar endereço</a>
                         </div>
                     </div>
                 </section>
@@ -773,7 +652,7 @@
             data-popup="options-pet"
             class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop"
         >
-            <button
+            <button data-button="editPet"
                 class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
                 aria-label="Editar pet"
             >
@@ -787,7 +666,7 @@
                     class="w-6 h-6 flex-shrink-0"
                 />
             </button>
-            <button
+            <button data-button="deletePet"
                 class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
                 aria-label="Excluir pet"
             >
@@ -808,11 +687,11 @@
             data-popup="options-address"
             class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop"
         >
-            <button
+            <button data-button="editAddress"
                 class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
-                aria-label="Editar pet"
+                aria-label="Editar endereco"
             >
-                <span
+                <span 
                     class="text-[22px] leading-[27px] font-medium text-green-400 whitespace-nowrap"
                     >Editar</span
                 >
@@ -822,7 +701,7 @@
                     class="w-6 h-6 flex-shrink-0"
                 />
             </button>
-            <button
+            <button data-button="deleteAddress"
                 class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
                 aria-label="Excluir pet"
             >
@@ -911,9 +790,123 @@
         </div>
     </div>
 
+    <!-- modal adicionar endereço -->
+    <div data-modal="addAddress" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="addAddress" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+
+                <button type="button" data-button="closeFormAddress" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar Endereço</h3>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-rua" class="font-sans font-semibold text-base md:text-lg text-gray-700">Rua</label>
+                        <input data-input="rua" id="input-rua" type="text" name="rua" placeholder="Ex: Rua das Flores" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[150px]">
+                        <label for="input-numero" class="font-sans font-semibold text-base md:text-lg text-gray-700">Número</label>
+                        <input data-input="numero" id="input-numero" type="text" name="numero" placeholder="Ex: 123" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] sm:w-[200px]">
+                        <label for="input-cep" class="font-sans font-semibold text-base md:text-lg text-gray-700">CEP</label>
+                        <input data-input="cep" id="input-cep" type="text" name="cep" placeholder="Ex: 00000-000" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-cidade" class="font-sans font-semibold text-base md:text-lg text-gray-700">Cidade</label>
+                        <input data-input="cidade" id="input-cidade" type="text" name="cidade" placeholder="Ex: São Paulo" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[100px]">
+                        <label for="input-estado" class="font-sans font-semibold text-base md:text-lg text-gray-700">Estado</label>
+                        <input data-input="estado" id="input-estado" type="text" name="estado" placeholder="Ex: SP" maxlength="2" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-bairro" class="font-sans font-semibold text-base md:text-lg text-gray-700">Bairro</label>
+                        <input data-input="bairro" id="input-bairro" type="text" name="bairro" placeholder="Ex: Centro" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-telefone-address" class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
+                        <input data-input="telefoneAddress" id="input-telefone-address" type="tel" name="telefone" placeholder="(00) 00000-0000" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <button data-button="saveAddress" type="button"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Endereço</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal de pets -->
+    <div data-modal="addPet" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="addPet" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+
+                <button type="button" data-button="closeFormPet" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar meu Pet</h3>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-name" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome</label>
+                        <input data-input="petName" id="input-name" type="text" name="name" placeholder="Nome do seu pet" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[150px]">
+                        <label for="input-race" class="font-sans font-semibold text-base md:text-lg text-gray-700">Raça</label>
+                        <input data-input="petRace" id="input-race" type="text" name="race" placeholder="Ex: Cachorro" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] sm:w-[200px]">
+                        <label for="input-gender" class="font-sans font-semibold text-base md:text-lg text-gray-700">Genero</label>
+                        <input data-input="petGender" id="input-gender" type="text" name="gender" placeholder="Ex: Macho" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-descriptionPet" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do pet</label>
+                        <textarea data-input="petDescription" id="input-descriptionPet" name="descriptionPet" placeholder="Ex: ele é muito legal" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea> 
+                    </div>
+                </div>
+
+                <button data-button="savePet" type="button"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar meu pet</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <aside data-modal-info-menu="user" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
     <script src="../javascript/UserTabNav.js"></script>
     <script type="module" src="../javascript/menu-user/script-menu-user.js"></script>
     <script type="module" src="../javascript/options-user/script-optionsUser.js"></script>
+    <script type="module" src="../javascript/options-user/components/structEndereço.js"></script>
+    <script type="module" src="../javascript/options-user/components/structPets.js"></script>
     </body>
 </html>
