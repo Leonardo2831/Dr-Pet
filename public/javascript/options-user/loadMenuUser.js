@@ -2,6 +2,7 @@ import Storage from "../Storage.js";
 import Fetch from "../Fetch.js";
 import UserInfosChange from "./UserInfosChange.js";
 import structAddress from "./components/structEndereço.js";
+import structPet from "./components/structPets.js";
 
 export default async function loadMenuUser(){
     const userId = Storage.get('user-id');
@@ -24,6 +25,12 @@ export default async function loadMenuUser(){
         userData.address.forEach((address) => {
             const addressElement = structAddress(address, userData, fetchUser);
             addressContainer.appendChild(addressElement);
+        });
+
+        const petsContainer = document.querySelector('#pet-container');
+        userData.pets.forEach((pet)=> {
+            const petElement = structPet(pet, userData, fetchUser);
+            petsContainer.appendChild(petElement);
         });
 
         const userInfosChange = new UserInfosChange(

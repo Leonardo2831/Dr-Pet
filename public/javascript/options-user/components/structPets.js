@@ -1,67 +1,7 @@
-import Fetch from "../../Fetch.js";
 import Storage from "../../Storage.js";
-import PopUp from "../../Pop-up.js";
-
-// estado compartilhado entre todos os pets (escopo do módulo)
-let selectedPet = null;
-let petListenersReady = false;
-
-function setupPetPopupListeners(userData, fetchUser) {
-    // garante que os listeners do popup sejam registrados UMA vez só
-    if (petListenersReady) return;
-    petListenersReady = true;
-
-    const popup = document.querySelector('[data-popup="options-pet"]');
-
-    // Editar
-    document.querySelector('[data-button="editPet"]').addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (!selectedPet) return;
-
-        const modal = document.querySelector('[data-modal="addPet"]');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-
-        document.querySelector('[data-input="petName"]').value = selectedPet.name;
-        document.querySelector('[data-input="petRace"]').value = selectedPet.race;
-        document.querySelector('[data-input="petDescription"]').value = selectedPet.descriptionPet;
-        document.querySelector('[data-input="petGender"]').value = selectedPet.gender;
-        document.querySelector('[data-button="savePet"]').dataset.editId = selectedPet.id;
-
-        // fecha o popup ao abrir o modal
-        popup.classList.add('hidden');
-        popup.classList.remove('flex');
-    });
-
-    // Excluir
-    document.querySelector('[data-button="deletePet"]').addEventListener('click', async (event) => {
-        event.stopPropagation();
-        if (!selectedPet) return;
-
-        const userId = Storage.getValueStorage('user-id').replace(/[^0-9]/g, '');
-        userData.pets = userData.pets.filter(p => p.id !== selectedPet.id);
-        await fetchUser.put(userId, userData);
-
-        document.querySelector(`[data-id="${selectedPet.id}"]`)?.remove();
-
-        popup.classList.add('hidden');
-        popup.classList.remove('flex');
-        selectedPet = null;
-    });
-
-    // fecha o popup ao clicar fora
-    document.addEventListener('click', (event) => {
-        if (popup && !popup.contains(event.target)) {
-            popup.classList.add('hidden');
-            popup.classList.remove('flex');
-        }
-    });
-}
 
 export default function structPet(object, userData, fetchUser) {
-    // registra os listeners do popup (só roda de fato na primeira chamada)
-    setupPetPopupListeners(userData, fetchUser);
-
+    let currentPetId = null;
     const div = document.createElement('div');
     div.className = "flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50";
     div.setAttribute('data-id', object.id);
@@ -80,8 +20,11 @@ export default function structPet(object, userData, fetchUser) {
                     <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
                         ${object.race}
                     </span>
+                    <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
+                        ${object.gender}
+                    </span>
                     <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
-                        ${object.descriptionPet}
+                        ${object.description}
                     </span>
                 </div>
             </div>
@@ -95,16 +38,44 @@ export default function structPet(object, userData, fetchUser) {
         </button>
     `;
 
-    // único listener por-pet: marca qual pet foi selecionado e abre o popup
     div.querySelector('[data-button="options-pet"]').addEventListener('click', (event) => {
-        selectedPet = object;
-        event.stopPropagation();
-
+        currentPetId = object.id;
         const popup = document.querySelector('[data-popup="options-pet"]');
+        popup.dataset.currentId = object.id;
+        event.stopPropagation();
         popup.classList.remove('hidden');
         popup.classList.add('flex');
         popup.style.top = `${event.pageY + 8}px`;
         popup.style.left = `${event.pageX - popup.offsetWidth}px`;
+    });
+
+    document.addEventListener('click', (event) => {
+        const popup = document.querySelector('[data-popup="options-pet"]');
+        if (!popup.contains(event.target)) {
+            popup.classList.add('hidden');
+            popup.classList.remove('flex');
+        }
+    });
+
+    document.querySelector('[data-button="editPet"]').addEventListener('click', async () => {
+        const modal = document.querySelector('[data-modal="addPet"]');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.querySelector('[data-input="petName"]').value = object.name;
+        document.querySelector('[data-input="petRace"]').value = object.race;
+        document.querySelector('[data-input="petDescription"]').value = object.description;
+        document.querySelector('[data-input="petGender"]').value = object.gender;
+        document.querySelector('[data-button="savePet"]').dataset.editId = object.id;
+    });
+
+    document.querySelector('[data-button="deletePet"]').addEventListener('click', async () => {
+        const popup = document.querySelector('[data-popup="options-pet"]');
+        const petId = popup.dataset.currentId;
+        const userId = Storage.get('user-id');
+        console.log(petId)
+        userData.pets = userData.pets.filter(p => p.id !== petId);
+        await fetchUser.put(userId, userData);
+        div.remove();
     });
 
     return div;

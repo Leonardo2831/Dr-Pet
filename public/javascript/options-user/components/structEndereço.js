@@ -44,6 +44,7 @@ export default function structAddress(object, userData, fetchUser) {
         currentAddressId = object.id;
         event.stopPropagation();
         const popup = document.querySelector('[data-popup="options-address"]');
+        popup.dataset.currentId = object.id;
         popup.classList.remove('hidden');
         popup.classList.add('flex');
         popup.style.top = `${event.pageY + 8}px`;
@@ -78,9 +79,11 @@ export default function structAddress(object, userData, fetchUser) {
     });
 
     document.querySelector('[data-button="deleteAddress"]').addEventListener('click', async () => {
-        userData.address = userData.address.filter(a => a.id !== currentAddressId);
+        const popup = document.querySelector('[data-popup="options-address"]');
+        const petId = popup.dataset.currentId;
+        userData.address = userData.address.filter(a => a.id !== petId);
 
-        const userId = Storage.getValueStorage('user-id');
+        const userId = Storage.get('user-id');
         await fetchUser.put(userId, userData);
 
         div.remove();
