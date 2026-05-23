@@ -103,7 +103,7 @@
         </div>
 
         <div class="bg-gray-50">
-            <main class="container w-full p-6 md:p-10 lg:p-20 flex flex-col">
+            <main class="container min-h-[calc(100vh_-_570px)] w-full p-6 md:p-10 lg:p-20 flex flex-col justify-center">
                 <!-- menu inicial, retirar hidden para ver -->
                 <section
                     class="animate-fadeTop w-full shadow-md rounded-2xl overflow-hidden bg-gray-100"
@@ -360,11 +360,11 @@
                     </nav>
                     <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
                         
-                        <div id="address-container">
+                        <div id="address-container" class="peer">
                             <!-- endereços aparecem aqui dinamicamente -->
                         </div>
 
-                        <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] border-t-[3px] border-gray-400 rounded-b-[10px]">
+                        <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
                             <a data-button="address" href="#"
                                 class="inline-block text-lg sm:text-xl lg:text-2xl font-medium text-blue-link hover:text-blue-hover hover:scale-[1.02] active:scale-95 transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2"
                                 >Adicionar endereço</a>
@@ -395,11 +395,11 @@
 
                     <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
                             
-                        <div id="pet-container">
+                        <div id="pet-container" class="peer">
                             <!-- pets aparecem aqui dinamicamente -->
                         </div>
 
-                        <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] border-t-[3px] border-gray-400 rounded-b-[10px]">
+                        <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
                             <a data-button="Pet" href="#"
                                 class="inline-block text-lg sm:text-xl lg:text-2xl font-medium text-blue-link hover:text-blue-hover hover:scale-[1.02] active:scale-95 transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2">
                                 Adicionar pet
