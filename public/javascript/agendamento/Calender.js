@@ -1,12 +1,12 @@
 export default class Calender{
-    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, selectorInfoHourSchedule){
+    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, onDayClick = null){
         this.monthInfo = document.querySelector(selectorMonthInfo);
         this.yearInfo = document.querySelector(selectorYearInfo);
         this.btnNext = document.querySelector(selectorBtnNext);
         this.btnPrev = document.querySelector(selectorBtnPrev);
         this.calenderContent = document.querySelector(selectorContainerCalender);
         this.infoDaySchedule = document.querySelector(selectorInfoDaySchedule);
-        this.infoHourSchedule = document.querySelector(selectorInfoHourSchedule);
+        this.onDayClick = onDayClick;
 
         this.date = new Date();
         this.month = this.date.getMonth();
@@ -63,6 +63,7 @@ export default class Calender{
 
         const dateSelected = date.toLocaleDateString('pt-BR', optionsStyleDate);
         this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
+        this.infoDaySchedule.setAttribute('data-day-schedule', dayCalender.dataset.day);
     }
 
     renderDaysOfCalendar(daysInMonth){
@@ -96,10 +97,14 @@ export default class Calender{
             if(dayCalender.classList.contains('beforeNow') || dayCalender.classList.contains('inactive')) {
                 this.calenderContent.appendChild(dayCalender);
                 continue
-            };
+            };            
+            
+            const [year, month, day] = currentIterationDate.toISOString().split('T')[0].split('-');
+            dayCalender.setAttribute('data-day', `${year}-${month}-${day}`);
 
             dayCalender.addEventListener('click', () => {
-                this.formatScheduleInfos(dayCalender, new Date(this.year, this.month, i));
+                this.formatScheduleInfos(dayCalender, currentIterationDate);
+                if(this.onDayClick) this.onDayClick(dayCalender.dataset.day);
             });
 
             this.calenderContent.appendChild(dayCalender);

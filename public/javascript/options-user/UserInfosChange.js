@@ -22,7 +22,7 @@ export default class UserInfosChange{
         this.savePassword = this.savePassword.bind(this);
         this.saveAddress = this.saveAddress.bind(this);
 
-        this.userId = Storage.getValueStorage('user-id');
+        this.userId = Storage.get('user-id');
         this.userData = userData;
         this.fetchUser = fetchUser;
     }

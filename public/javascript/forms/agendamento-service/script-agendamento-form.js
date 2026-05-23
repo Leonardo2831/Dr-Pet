@@ -1,40 +1,70 @@
 import checkInputRadioParams from "./checkInputRadioParams.js";
+import Storage from "../../Storage.js";
+import Fetch from "../../Fetch.js";
+import formatPhone from "../../formatPhone.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     checkInputRadioParams();
+    formatPhone('[data-input="formatPhone"]');
+    
     const form = document.querySelector('form');
+    const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
+    const infosSchedule = Storage.get('scheduleData');
+
+    // tempo definido em horas
+    const infosServiceAbout = {
+        'banho-tosa': {
+            time: 1.5,
+            price: 90.00
+        },
+        'vacinacao': {
+            time: 0.5,
+            price: 50.00
+        },
+        'cirurgia': {
+            time: 2,
+            price: 400.00
+        }
+    }
 
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
 
-        const formData = new FormData(form);
+        if (!infosSchedule || !infosSchedule.date || !infosSchedule.hour) {
+            console.error('scheduleData ausente ou incompleto:', infosSchedule);
+            return;
+        }
+
+        const serviceInfo = infosServiceAbout[infosSchedule.service];
+        const formDataObject = new FormData(form);
         const novoAgendamento = {
+            id: crypto.randomUUID(),
             user: {
-                username: formData.get('nome'),
-                phone: formData.get('telefone')
+                username: formDataObject.get('nome'),
+                phone: formDataObject.get('telefone')
             },
             petAgendado: {
-                name: formData.get('nomePet')
+                name: formDataObject.get('nomePet')
             },
             service: {
-                name: formData.get('servico'),
-                observations: formData.get('descricao')
+                name: infosSchedule.service,
+                observations: formDataObject.get('descricao'),
+                duration: serviceInfo.time,
+                preco: serviceInfo.price,
             },
-            date: "2026-05-16",
-            hour: "10:00",
-            buscarResidencia: formData.get('buscarResidencia') === 'on'
+            date: infosSchedule.date,
+            hour: infosSchedule.hour,
+            buscarResidencia: formDataObject.get('buscarResidencia') === 'on'
         };
 
         try {
-            const resposta = await fetch('http://localhost:3000/agenda', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(novoAgendamento)
-            });
+            const resposta = await fetchSchedule.post(novoAgendamento);
 
-            if (resposta.ok) {
-                alert('Agendamento realizado com sucesso!');
+            if (resposta && resposta.ok) {
+                Storage.delete('scheduleData');
                 window.location.href = 'agenda.html';
+            } else {
+                console.error('Erro ao salvar: resposta inválida', resposta);
             }
         } catch (erro) {
             console.error('Erro ao salvar:', erro);

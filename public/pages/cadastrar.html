@@ -137,6 +137,9 @@
                                     autocomplete="name"
                                     class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
                                     required
+                                    minlength="3"
+                                    maxlength="50"
+                                    pattern="^[a-zA-ZÀ-ÿ\s]+$"
                                 />
                             </div>
                         </div>
@@ -157,6 +160,8 @@
                                     autocomplete="email"
                                     class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
                                     required
+                                    minlength="5"
+                                    maxlength="80"
                                 />
                             </div>
                         </div>
@@ -171,10 +176,14 @@
                                 class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5"
                             >
                                 <input
+                                    data-input="formatPhone"
                                     type="tel"
                                     id="phone"
                                     name="phone"
                                     maxlength="15"
+                                    minlength="10"
+                                    pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
+                                    title="Digite um telefone válido com DDD. Ex: (11) 99999-9999 ou 11999999999"
                                     placeholder="(XX) XXXXX-XXXX"
                                     class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
                                     required
@@ -198,6 +207,8 @@
                                     autocomplete="new-password"
                                     class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
                                     required
+                                    minlength="8"
+                                    maxlength="60"
                                 />
                                 <button
                                     type="button"
@@ -230,6 +241,8 @@
                                     autocomplete="new-password"
                                     class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
                                     required
+                                    minlength="8"
+                                    maxlength="60"
                                 />
                                 <button
                                     type="button"
@@ -368,7 +381,7 @@
                                 <a
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    href="tel:+5519993592253"
+                                    href="https://wa.me/5519993592253"
                                     aria-label="Chamar no Whatsapp"
                                     class="hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded px-1 transition-colors"
                                 >
