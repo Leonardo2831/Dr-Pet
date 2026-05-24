@@ -100,6 +100,24 @@ export default class Fetch {
         }
     }
 
+    async patch(id, object){
+        try {
+            const response = await fetch(`${this.url}/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(object),
+            });
+            this.showModalSuccess('Os dados foram atualizados com sucesso!');
+            return response;
+        } catch(err) {
+            this.showModalError(err, 'Houve um erro ao atualizar os dados!');
+        } finally {
+            setTimeout(() => {
+                if(this.modalInfo) this.modalInfo.classList.remove(this.classModalErro, this.classModalSucess);
+            }, 1500);
+        }
+    }
+
     async delete(id){
         try{
             const response = await fetch(`${this.url}/${id}`, {

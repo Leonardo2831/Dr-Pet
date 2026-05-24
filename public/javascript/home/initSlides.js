@@ -22,6 +22,7 @@ export default function initSlides(){
     fetchJson.get().then((images) => {
         if(Array.isArray(images)) {
             contentSlide.innerHTML = "";
+            images.sort((a, b) => a.order - b.order);
             images.forEach((imgObject) => {
                 contentSlide.appendChild(createImage(imgObject));
             });

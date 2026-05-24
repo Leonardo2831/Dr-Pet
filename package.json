@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "tailwind": "tailwindcss -i ./public/style/input.css -o ./public/style/output.css --watch",
-    "server": "json-server ./src/database/db.json --port 3000"
+    "server": "json-server ./src/database/db.json --port 3000 --bodyLimit 50mb"
   },
   "devDependencies": {
     "json-server": "^0.17.4",
