@@ -1,7 +1,7 @@
 import checkInputRadioParams from "./checkInputRadioParams.js";
-import Storage from "../../Storage.js";
-import Fetch from "../../Fetch.js";
-import formatPhone from "../../formatPhone.js";
+import Storage from "../../utils/Storage.js";
+import Fetch from "../../utils/Fetch.js";
+import formatPhone from "../../utils/formatPhone.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     checkInputRadioParams();

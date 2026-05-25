@@ -1,4 +1,4 @@
-import Fetch from '../../Fetch.js';
+import Fetch from '../../utils/Fetch.js';
 
 export default function structProducts(object, formProduct) {
     const tr = document.createElement('tr');

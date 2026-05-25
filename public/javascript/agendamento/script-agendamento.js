@@ -1,4 +1,4 @@
-import PopUp from './../Pop-up.js';
+import PopUp from './../utils/Pop-up.js';
 import Calender from './Calender.js';
 import Hours from './Hours.js';
 import selectAgenda from './selectAgenda.js';

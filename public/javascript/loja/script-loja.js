@@ -1,5 +1,5 @@
 
-import PopUp from './../Pop-up.js';
+import PopUp from './../utils/Pop-up.js';
 import ProductsLoja from './ProductsLoja.js';
 
 document.addEventListener('DOMContentLoaded', () => {

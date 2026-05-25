@@ -1,4 +1,4 @@
-import Fetch from "../Fetch.js";
+import Fetch from "../utils/Fetch.js";
 import structSlide from "./components/structSlide.js";
 import Sortable from 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/modular/sortable.esm.js';
 

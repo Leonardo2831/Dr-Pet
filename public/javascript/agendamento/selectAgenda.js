@@ -1,5 +1,5 @@
-import getParamsURL from '../getParamsURL.js';
-import Fetch from '../Fetch.js';
+import getParamsURL from '../utils/getParamsURL.js';
+import Fetch from '../utils/Fetch.js';
 
 async function changeValues(value) {
     const textInfo = document.querySelector('[data-textInfo="agenda-service"]');

@@ -1,4 +1,4 @@
-import Storage from "../../Storage.js";
+import Storage from "../../utils/Storage.js";
 
 export default function structPet(object, userData, fetchUser) {
     let currentPetId = null;

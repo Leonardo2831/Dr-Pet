@@ -1,4 +1,4 @@
-import Storage from "../Storage.js";
+import Storage from "../utils/Storage.js";
 
 export default class UserInfosChange{
     constructor(selectorButtonSaveEmail, selectorButtonSavePhone, selectorButtonSavePassword,

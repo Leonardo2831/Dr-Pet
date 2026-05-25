@@ -1,4 +1,4 @@
-import Fetch from '../Fetch.js';
+import Fetch from '../utils/Fetch.js';
 import slidesHome from "./slides-home.js";
 
 function createImage(objectImage){

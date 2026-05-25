@@ -1,7 +1,7 @@
-import Fetch from '../Fetch.js';
-import Storage from '../Storage.js';
+import Fetch from '../utils/Fetch.js';
+import Storage from '../utils/Storage.js';
 import structMenuUser from './components/structMenuUser.js';
-import PopUp from '../Pop-up.js';
+import PopUp from '../utils/Pop-up.js';
 export default class MenuUserLoading{
     constructor(selectorMenuUserContent){
         this.menuUserContent = document.querySelector(selectorMenuUserContent);

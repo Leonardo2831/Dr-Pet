@@ -1,6 +1,6 @@
-import PopUp from "../../Pop-up.js";
-import Fetch from "../../Fetch.js";
-import Storage from "../../Storage.js";
+import PopUp from "../../utils/Pop-up.js";
+import Fetch from "../../utils/Fetch.js";
+import Storage from "../../utils/Storage.js";
 
 export default function structAddress(object, userData, fetchUser) {
     let currentAddressId = null;

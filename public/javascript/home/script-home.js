@@ -1,4 +1,4 @@
-import PopUp from "../Pop-up.js";
+import PopUp from "../utils/Pop-up.js";
 import initSlides from "./initSlides.js";
 
 document.addEventListener('DOMContentLoaded', () => {

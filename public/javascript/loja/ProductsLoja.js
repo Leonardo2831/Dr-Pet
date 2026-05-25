@@ -1,5 +1,5 @@
 import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/+esm';
-import Fetch from "../Fetch.js";
+import Fetch from "../utils/Fetch.js";
 import structProduct from "./components/structProductLoja.js";
 import slidesLojaConfig from "./slidesLojaConfig.js";
 

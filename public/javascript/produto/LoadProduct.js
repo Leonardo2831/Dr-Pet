@@ -1,5 +1,5 @@
-import Fetch from '../Fetch.js';
-import getParamsURL from "../getParamsURL.js";
+import Fetch from '../utils/Fetch.js';
+import getParamsURL from "../utils/getParamsURL.js";
 import structProduct from './components/structProduct.js';
 import structSlide from './components/structSlide.js';
 import structThumb from './components/structThumb.js';

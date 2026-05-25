@@ -1,4 +1,4 @@
-import Storage from "../Storage.js";
+import Storage from "../utils/Storage.js";
 
 export default function sendDataSchedule(){
     const buttonSubmitInfosSchedule = document.querySelector('[data-button="submitInfosSchedule"]');

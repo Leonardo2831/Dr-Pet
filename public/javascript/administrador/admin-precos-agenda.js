@@ -1,4 +1,4 @@
-import Fetch from '../Fetch.js'; // Ajuste o caminho se necessário
+import Fetch from '../utils/Fetch.js'; // Ajuste o caminho se necessário
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form-cadastrar-precos');

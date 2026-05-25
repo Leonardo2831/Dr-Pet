@@ -1,4 +1,4 @@
-import Fetch from "../Fetch.js";
+import Fetch from "../utils/Fetch.js";
 import structAgenda from "./components/structAgenda.js";
 
 export default class Agenda {

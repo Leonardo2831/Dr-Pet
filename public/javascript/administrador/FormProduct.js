@@ -1,5 +1,5 @@
-import { clickOutside } from "../clickOutside.js";
-import Fetch from "../Fetch.js";
+import { clickOutside } from "../utils/clickOutside.js";
+import Fetch from "../utils/Fetch.js";
 export default class FormProduct {
     constructor(selectorModal, selectorForm, selectorButtonClose,
         selectorInputName, selectorSelectCategory, selectorInputPrice, selectorAreaShortDescription, selectorAreaLongDescription, 

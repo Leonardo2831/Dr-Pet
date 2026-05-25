@@ -1,4 +1,4 @@
-import Fetch from "../../Fetch.js";
+import Fetch from "../../utils/Fetch.js";
 
 export default function structSlide(object){
     const figure = document.createElement('figure');

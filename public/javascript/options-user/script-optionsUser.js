@@ -1,5 +1,5 @@
 import MenuOptions from "./MenuOptions.js";
-import PopUp from "../Pop-up.js"
+import PopUp from "../utils/Pop-up.js"
 import loadMenuUser from "./loadMenuUser.js";
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,5 +1,5 @@
 import Cadastrar from "./Cadastrar.js";
-import formatPhone from "../../formatPhone.js";
+import formatPhone from "../../utils/formatPhone.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     formatPhone('[data-input="formatPhone"]');

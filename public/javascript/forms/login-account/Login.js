@@ -1,7 +1,7 @@
-import Fetch from '../../Fetch.js';
-import Storage from '../../Storage.js';
+import Fetch from '../../utils/Fetch.js';
+import Storage from '../../utils/Storage.js';
 import toggleShowPassword from '../toggleShowPassword.js';
-import Criptografia from '../../Criptografia.js';
+import Criptografia from '../../utils/Criptografia.js';
 
 export default class Login {
     constructor(selectorForm, selectorInputEmail, selectorInputPassword) {

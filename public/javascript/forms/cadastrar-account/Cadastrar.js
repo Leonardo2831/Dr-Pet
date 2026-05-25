@@ -1,5 +1,5 @@
-import Criptografia from '../../Criptografia.js';
-import Fetch from '../../Fetch.js';
+import Criptografia from '../../utils/Criptografia.js';
+import Fetch from '../../utils/Fetch.js';
 import toggleShowPassword from '../toggleShowPassword.js';
 
 export default class Cadastrar {

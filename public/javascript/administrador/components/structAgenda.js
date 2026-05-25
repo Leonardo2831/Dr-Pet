@@ -38,11 +38,11 @@ export default function structAgenda(object){
         </div>
 
         <div class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
-            <button type="button" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+            <button type="button" data-button="cancelSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
                 <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
                 <img src="../images/icons/administrador/cancel.svg" alt="Cancelar" class="w-4 h-4 md:w-5 md:h-5">
             </button>
-            <button type="button" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+            <button type="button" data-button="editSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
                 <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
                 <img src="../images/icons/administrador/edit-gray.svg" alt="Editar" class="w-4 h-4 md:w-5 md:h-5">
             </button>

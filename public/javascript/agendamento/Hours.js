@@ -1,4 +1,4 @@
-import Fetch from '../Fetch.js';
+import Fetch from '../utils/Fetch.js';
 import structHours from './components/structHours.js';
 
 export default class Hours{

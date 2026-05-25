@@ -1,5 +1,5 @@
-import Storage from "../Storage.js";
-import Fetch from "../Fetch.js";
+import Storage from "../utils/Storage.js";
+import Fetch from "../utils/Fetch.js";
 import UserInfosChange from "./UserInfosChange.js";
 import structAddress from "./components/structEndereço.js";
 import structPet from "./components/structPets.js";
