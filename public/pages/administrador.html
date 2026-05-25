@@ -371,9 +371,102 @@
         </div>
     </div>
 
-    <aside data-modal-info-menu="user" data-modal-info="adm"
-        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
-    </aside>
+    <!-- Modal de Edição de Agendamento -->
+    <div data-modal="editSchedule"
+        class="flex fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editSchedule" class="relative max-h-[95vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+                <button type="button" data-button="closeFormEditSchedule"
+                    class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">
+                    Editar Agendamento
+                </h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Dono</label>
+                    <input data-input="editScheduleName" id="input-edit-nome" type="text" name="nome"
+                        placeholder="Nome completo" required minlength="3" maxlength="50"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-edit-telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
+                        <input data-input="formatPhone" id="input-edit-telefone" type="tel" name="telefone"
+                            placeholder="(00) 00000-0000" required minlength="10" maxlength="15"
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-edit-nome-pet" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Pet</label>
+                        <input data-input="editSchedulePetName" id="input-edit-nome-pet" type="text" name="nomePet"
+                            placeholder="Nome do pet" required minlength="2" maxlength="50"
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-endereco" class="font-sans font-semibold text-base md:text-lg text-gray-700">Endereço</label>
+                    <input data-input="editScheduleAddress" id="input-edit-endereco" type="text" name="endereco"
+                        placeholder="Endereço completo" required minlength="3" maxlength="70"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="textarea-edit-descricao" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do Serviço</label>
+                    <textarea data-textarea="editScheduleDesc" id="textarea-edit-descricao" name="descricao"
+                        placeholder="Especificações sobre o serviço..." maxlength="250"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
+                </div>
+
+                <div class="flex flex-row items-center gap-[10px] mt-2">
+                    <input data-checkbox="editScheduleTransport" type="checkbox" id="checkbox-edit-buscar" name="buscarResidencia"
+                        class="w-6 h-6 border-[2px] border-gray-300 rounded-[6px] accent-green-600 cursor-pointer focus:ring-2 focus:ring-green-500 focus:ring-offset-2 bg-transparent" />
+                    <label for="checkbox-edit-buscar" class="font-sans font-medium text-base md:text-lg text-gray-700 cursor-pointer select-none hover:text-green-600 transition-colors">
+                        Buscar em residência?
+                    </label>
+                </div>
+
+                <button data-button="saveEditSchedule" type="submit"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Alterações</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Cancelamento de Agendamento -->
+    <div data-modal="cancelSchedule"
+        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
+            
+            <button type="button" data-button="closeCancelSchedule"
+                class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+            </button>
+
+            <h3 class="font-medium text-[22px] md:text-[32px] text-green-700">
+                Motivo do cancelamento:
+            </h3>
+
+            <textarea data-textarea="cancelReason" 
+                placeholder="Digite o motivo do cancelamento"
+                class="w-full h-[220px] px-6 py-5 border-2 border-green-800 rounded-lg font-medium text-lg md:text-2xl text-gray-600 outline-none resize-none focus:border-green-600 focus:ring-2 focus:ring-green-600 transition-all placeholder:text-gray-400"
+                required>
+            </textarea>
+
+            <button data-button="sendCancelSchedule" type="button"
+                class="w-full relative flex items-center justify-center gap-[15px] px-4 py-2 md:py-3 md:px-5 bg-red-alert rounded-[8px] hover:bg-red-alert/90 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-alert transition-all mt-2">
+                <span class="font-semibold text-lg md:text-[22px] text-white uppercase tracking-wide">Enviar Mensagem de Cancelamento</span>
+                <img src="../images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
+            </button>
+        </div>
+    </div>
+
+    <aside data-modal-info-menu="user" data-modal-info="adm" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
