@@ -3,12 +3,20 @@ import editSchedule from "../editSchedule.js";
 import Agenda from "../Agenda.js";
 
 export default function structAgenda(object){
+    const serviceNames = {
+        'banho-tosa': 'Banho e Tosa',
+        'vacinacao': 'Vacinação',
+        'cirurgia': 'Cirurgia'
+    };
+
     const div = document.createElement('div');
     div.className = "flex flex-col justify-between w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
     div.setAttribute('data-id', object.id);
 
     const [year, month, day] = object.date.split('-');
     const formatDate = `${day}/${month}/${year}`;
+
+    const serviceName = serviceNames[object.service.name] || object.service.name;
 
     div.innerHTML = `
         <div class="flex flex-row justify-between items-start pb-5 w-full">
@@ -23,7 +31,7 @@ export default function structAgenda(object){
                 </div>
                 <div class="flex flex-col">
                     <span class="font-normal text-base text-gray-700">
-                        <span class="font-medium">Serviço:</span> ${object.service.name}
+                        <span class="font-medium">Serviço:</span> ${serviceName}
                     </span>
                     ${
                         object.service.observations ? 

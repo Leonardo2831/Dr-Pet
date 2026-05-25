@@ -1447,6 +1447,10 @@ aside p.activeOption{
   margin-top: auto;
 }
 
+.ml-2{
+  margin-left: 0.5rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -5138,6 +5142,22 @@ aside p.activeOption{
 .\[\&\.swiper-slide-thumb-active\]\:ring-green-400.swiper-slide-thumb-active{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(25 153 94 / var(--tw-ring-opacity, 1));
+}
+
+.\[\&\:\:-webkit-calendar-picker-indicator\]\:absolute::-webkit-calendar-picker-indicator{
+  position: absolute;
+}
+
+.\[\&\:\:-webkit-calendar-picker-indicator\]\:right-0::-webkit-calendar-picker-indicator{
+  right: 0px;
+}
+
+.\[\&\:\:-webkit-calendar-picker-indicator\]\:h-full::-webkit-calendar-picker-indicator{
+  height: 100%;
+}
+
+.\[\&\:\:-webkit-calendar-picker-indicator\]\:w-full::-webkit-calendar-picker-indicator{
+  width: 100%;
 }
 
 .\[\&\:\:-webkit-calendar-picker-indicator\]\:cursor-pointer::-webkit-calendar-picker-indicator{

@@ -83,13 +83,13 @@
                                     <option value="all" selected>
                                         Todas as Opções
                                     </option>
-                                    <option value="Cirurgia">
+                                    <option value="cirurgia">
                                         Cirurgia
                                     </option>
-                                    <option value="Banho e tosa">
+                                    <option value="banho-tosa">
                                         Banho e tosa
                                     </option>
-                                    <option value="Exames">Exames</option>
+                                    <option value="vacinacao">Vacinação</option>
                                 </select>
                                 <img src="../images/icons/arrow-down.svg" alt="Seta"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none" />
@@ -112,6 +112,7 @@
                         Não há nenhum horário para esse dia e este serviço
                     </p>
                 </div>
+                
                 <div
                     class="mt-10 md:mt-16 flex flex-col p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
                     <h3 class="font-sans font-bold text-xl md:text-2xl leading-tight text-green-700 mb-8">
@@ -419,6 +420,30 @@
                         <input data-input="editSchedulePetName" id="input-edit-nome-pet" type="text" name="nomePet"
                             placeholder="Nome do pet" required minlength="2" maxlength="50"
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-data" class="font-sans font-semibold text-base md:text-lg text-gray-700">Data do Agendamento</label>
+                    <div class="relative w-full">
+                        <input type="date" id="input-edit-data" name="data" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full" />
+                        <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-[10px] w-full">
+                    <h3 class="font-sans font-semibold text-base md:text-lg text-gray-700">Horários Disponíveis: <span data-schedule-time="edit-agenda" class="font-medium text-green-600 transition-colors duration-200"></span></h3>
+                    <div class="w-full flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-sm font-medium text-green-500">Manhã</h4>
+                            <div data-content="edit-hours-morning" class="flex flex-row flex-wrap items-center gap-2"></div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-sm font-medium text-green-500">Tarde</h4>
+                            <div data-content="edit-hours-afternoon" class="flex flex-row flex-wrap items-center gap-2"></div>
+                        </div>
                     </div>
                 </div>
 
