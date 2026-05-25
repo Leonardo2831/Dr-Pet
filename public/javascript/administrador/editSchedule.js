@@ -157,17 +157,17 @@ export default async function editSchedule(modal, id) {
             const serviceFriendlyName = serviceNames[updatedData.service.name] || updatedData.service.name;
 
             const message = [
-                `🐾 *Dr.Pet - Agendamento Atualizado*`,
+                `*Dr.Pet - Agendamento alterado*`,
                 ``,
                 `Olá, *${updatedData.user.username}*! Seu agendamento foi atualizado com sucesso.`,
                 ``,
-                `📋 *Detalhes do agendamento:*`,
-                `🐶 Pet: *${updatedData.petAgendado.name}*`,
-                `🩺 Serviço: *${serviceFriendlyName}*`,
-                `📅 Data: *${formattedDate}*`,
-                `⏰ Horário: *${updatedData.hour}*`,
-                `📍 Endereço: *${updatedData.user.endereco}*`,
-                `🚗 Buscar em residência: *${updatedData.buscarResidencia ? 'Sim' : 'Não'}*`,
+                `*Detalhes do agendamento:*`,
+                `Pet: *${updatedData.petAgendado.name}*`,
+                `Serviço: *${serviceFriendlyName}*`,
+                `Data: *${formattedDate}*`,
+                `Horário: *${updatedData.hour}*`,
+                `Endereço: *${updatedData.user.endereco}*`,
+                `Buscar em residência: *${updatedData.buscarResidencia ? 'Sim' : 'Não'}*`,
                 updatedData.service.observations ? `📝 Observações: ${updatedData.service.observations}` : '',
                 ``,
                 `Qualquer dúvida, entre em contato conosco! 😊`
