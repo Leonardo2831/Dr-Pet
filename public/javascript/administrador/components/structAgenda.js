@@ -1,3 +1,7 @@
+import cancelSchedule from "../cancelSchedule.js";
+import editSchedule from "../editSchedule.js";
+import Agenda from "../Agenda.js";
+
 export default function structAgenda(object){
     const div = document.createElement('div');
     div.className = "flex flex-col justify-between w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
@@ -48,6 +52,14 @@ export default function structAgenda(object){
             </button>
         </div>
     `;
+
+    div.querySelector('[data-button="editSchedule"]').addEventListener('click', () => {
+        Agenda.openModal(document.querySelector('[data-modal="editSchedule"]'), editSchedule, object.id);
+    });
+
+    div.querySelector('[data-button="cancelSchedule"]').addEventListener('click', () => {
+        Agenda.openModal(document.querySelector('[data-modal="cancelSchedule"]'), cancelSchedule, object.id);
+    });
 
     return div;
 }

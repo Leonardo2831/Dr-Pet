@@ -263,7 +263,7 @@
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Produto</label>
                     <input data-input="product-name" id="input-product-name" type="text" name="name"
                         placeholder="Ex: Ração Golden Cães Adultos" maxlength="30" required
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-6">
@@ -273,7 +273,7 @@
                         <div class="relative">
                             <select data-select-new="productCategory" id="select-product-category" name="category"
                                 required
-                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all">
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all">
                                 <option value="" disabled selected>
                                     Selecione uma categoria
                                 </option>
@@ -299,7 +299,7 @@
                             class="font-sans font-semibold text-base md:text-lg text-gray-700">Preço (R$)</label>
                         <input data-input="priceProduct" id="input-product-price" type="text" name="price" min="0"
                             step="0.01" placeholder="R$ 0,00" maxlength="11" required
-                            class="appearance-none px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                            class="appearance-none px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
 
@@ -308,7 +308,7 @@
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Curta</label>
                     <textarea data-textarea="shortDescription" id="textarea-short-description" name="shortDescription"
                         maxlength="80" placeholder="Digite a descrição curta do produto..."
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[70px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[70px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"
                         required></textarea>
                 </div>
 
@@ -316,7 +316,7 @@
                     <label for="textarea-long-description"
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Longa</label>
                     <div
-                        class="rounded-[8px] border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white">
+                        class="rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white">
                         <div data-quill-editor="longDescription" class="h-[220px] overflow-y-auto"></div>
                     </div>
                     <p class="text-base">⚠ Use os controles de formatação para listas, negrito e links no editor de
@@ -373,7 +373,7 @@
 
     <!-- Modal de Edição de Agendamento -->
     <div data-modal="editSchedule"
-        class="flex fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeTop">
         <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="editSchedule" class="relative max-h-[95vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
                 <button type="button" data-button="closeFormEditSchedule"
@@ -389,7 +389,7 @@
                     <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Dono</label>
                     <input data-input="editScheduleName" id="input-edit-nome" type="text" name="nome"
                         placeholder="Nome completo" required minlength="3" maxlength="50"
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-6">
@@ -397,14 +397,14 @@
                         <label for="input-edit-telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
                         <input data-input="formatPhone" id="input-edit-telefone" type="tel" name="telefone"
                             placeholder="(00) 00000-0000" required minlength="10" maxlength="15"
-                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
 
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-edit-nome-pet" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Pet</label>
                         <input data-input="editSchedulePetName" id="input-edit-nome-pet" type="text" name="nomePet"
                             placeholder="Nome do pet" required minlength="2" maxlength="50"
-                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
 
@@ -412,14 +412,14 @@
                     <label for="input-edit-endereco" class="font-sans font-semibold text-base md:text-lg text-gray-700">Endereço</label>
                     <input data-input="editScheduleAddress" id="input-edit-endereco" type="text" name="endereco"
                         placeholder="Endereço completo" required minlength="3" maxlength="70"
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                 </div>
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="textarea-edit-descricao" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do Serviço</label>
                     <textarea data-textarea="editScheduleDesc" id="textarea-edit-descricao" name="descricao"
                         placeholder="Especificações sobre o serviço..." maxlength="250"
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
                 </div>
 
                 <div class="flex flex-row items-center gap-[10px] mt-2">
@@ -440,7 +440,7 @@
 
     <!-- Modal de Cancelamento de Agendamento -->
     <div data-modal="cancelSchedule"
-        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeTop">
         <div class="relative w-[95%] max-w-[720px] bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
             
             <button type="button" data-button="closeCancelSchedule"
@@ -452,14 +452,13 @@
                 Motivo do cancelamento:
             </h3>
 
-            <textarea data-textarea="cancelReason" 
+            <textarea data-textarea="cancelSchedule" 
                 placeholder="Digite o motivo do cancelamento"
                 class="w-full h-[220px] px-6 py-5 border-2 border-green-800 rounded-lg font-medium text-lg md:text-2xl text-gray-600 outline-none resize-none focus:border-green-600 focus:ring-2 focus:ring-green-600 transition-all placeholder:text-gray-400"
-                required>
-            </textarea>
+                required></textarea>
 
             <button data-button="sendCancelSchedule" type="button"
-                class="w-full relative flex items-center justify-center gap-[15px] px-4 py-2 md:py-3 md:px-5 bg-red-alert rounded-[8px] hover:bg-red-alert/90 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-alert transition-all mt-2">
+                class="w-full relative flex items-center justify-center gap-[15px] px-4 py-2 md:py-3 md:px-5 bg-red-alert rounded-lg hover:bg-red-alert/90 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-alert transition-all mt-2">
                 <span class="font-semibold text-lg md:text-[22px] text-white uppercase tracking-wide">Enviar Mensagem de Cancelamento</span>
                 <img src="../images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
             </button>

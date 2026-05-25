@@ -1,6 +1,28 @@
 import getParamsURL from '../utils/getParamsURL.js';
 import Fetch from '../utils/Fetch.js';
 
+const fetchPrecos = new Fetch('precos', '[data-modal-info="agenda"]');
+let infosService = null;
+
+try {
+    infosService = await fetchPrecos.get();
+} catch(error) {
+    console.error("Erro ao pegar o valor dos dados", error);
+}
+
+function changeValuesService(value){
+    const timeInfoService = document.querySelector('[data-time-service="completInfo"]');
+    const priceInfoService = document.querySelector('[data-price-service="completInfo"]');
+
+    if (infosService && infosService[value]) {
+        timeInfoService.textContent = infosService[value].time;
+        priceInfoService.textContent = `R$ ${infosService[value].price.toFixed(2).replace('.', ',')}`;
+    } else {
+        timeInfoService.textContent = "Erro";
+        priceInfoService.textContent = 'R$ 0,00';
+    }
+}
+
 async function changeValues(value) {
     const textInfo = document.querySelector('[data-textInfo="agenda-service"]');
     const imgInfo = document.querySelector('[data-imgInfo="agenda-service-image"]');
@@ -24,36 +46,14 @@ async function changeValues(value) {
     const textInfoService = document.querySelector('[data-textInfo-service="completInfo"]');
     textInfoService.textContent = textInfo.textContent;
 
-    const fetchPrecos = new Fetch('precos');
-    const infosService = {};
-
-    try {
-        infosService = await fetchPrecos.get();
-    } catch (error) {
-        console.error("erro", error);
-        infosService = {
-            'banho-tosa': { time: '1h 30min', price: 90.00 },
-            'vacinacao': { time: '30min', price: 50.00 },
-            'cirurgia': { time: '2h', price: 400.00 }
-        };
-    }
-
-
-    // teremos que fazer uma lógica no adm para fazer a mudança
-
-    const timeInfoService = document.querySelector('[data-time-service="completInfo"]');
-    const priceInfoService = document.querySelector('[data-price-service="completInfo"]');
-
-    if (infosService[value]) {
-        timeInfoService.textContent = infosService[value].time;
-        priceInfoService.textContent = `R$ ${infosService[value].price.toFixed(2).replace('.', ',')}`;
-    }
+    changeValuesService(value);
 }
 
 export default async function selectAgenda(PopUpConfig) {
     const serviceOption = PopUpConfig.modal.querySelectorAll('[data-filter-agenda]');
 
-    const itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${getParamsURL('service') || 'banho-tosa'}"]`);
+    const parametroServico = getParamsURL('service') || 'banho-tosa';
+    const itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${parametroServico}"]`);
     const itemLastActive = PopUpConfig.modal.querySelector('.activeOption');
     if (itemLastActive) itemLastActive.classList.remove('activeOption');
     if (itemActive) itemActive.classList.add('activeOption');

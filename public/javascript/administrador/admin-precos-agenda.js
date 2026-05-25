@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form-cadastrar-precos');
 
     form.addEventListener('submit', async (event) => {
-        
-
         const servicoSelecionado = document.getElementById('servico-select').value;
         const novoTempo = document.getElementById('tempo-input').value;
         const novoPreco = parseFloat(document.getElementById('preco-input').value);
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 time: novoTempo,
                 price: novoPreco
             };
-
 
             await fetch('http://localhost:3000/precos', {
                 method: 'PUT',

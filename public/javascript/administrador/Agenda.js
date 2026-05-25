@@ -16,6 +16,12 @@ export default class Agenda {
         this.filterSchedule = this.filterSchedule.bind(this);
     }
 
+    static openModal(modal, functionItem, id){
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        functionItem(modal, id);
+    }
+
     verifyIfHasSchedule(){
         if(!this.contentSchedule.children.length){
             const alert = document.createElement('p');
