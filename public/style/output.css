@@ -1314,6 +1314,10 @@ aside p.activeOption{
   right: 1.25rem;
 }
 
+.right-6{
+  right: 1.5rem;
+}
+
 .right-\[15px\]{
   right: 15px;
 }
@@ -1328,6 +1332,10 @@ aside p.activeOption{
 
 .top-4{
   top: 1rem;
+}
+
+.top-6{
+  top: 1.5rem;
 }
 
 .top-\[100\%\]{
@@ -1591,6 +1599,10 @@ aside p.activeOption{
   height: 100%;
 }
 
+.h-14{
+  height: 3.5rem;
+}
+
 .max-h-\[1000px\]{
   max-height: 1000px;
 }
@@ -1605,6 +1617,14 @@ aside p.activeOption{
 
 .max-h-\[90vh\]{
   max-height: 90vh;
+}
+
+.max-h-\[95vh\]{
+  max-height: 95vh;
+}
+
+.min-h-\[120px\]{
+  min-height: 120px;
 }
 
 .min-h-\[200px\]{
@@ -1631,12 +1651,12 @@ aside p.activeOption{
   min-height: 85px;
 }
 
-.min-h-screen{
-  min-height: 100vh;
-}
-
 .min-h-\[calc\(100vh_-_570px\)\]{
   min-height: calc(100vh - 570px);
+}
+
+.min-h-screen{
+  min-height: 100vh;
 }
 
 .\!w-\[100px\]{
@@ -1748,6 +1768,10 @@ aside p.activeOption{
   width: 100%;
 }
 
+.w-14{
+  width: 3.5rem;
+}
+
 .min-w-\[1200px\]{
   min-width: 1200px;
 }
@@ -1842,6 +1866,10 @@ aside p.activeOption{
   max-width: 627px;
 }
 
+.max-w-\[650px\]{
+  max-width: 650px;
+}
+
 .max-w-\[700px\]{
   max-width: 700px;
 }
@@ -1852,6 +1880,10 @@ aside p.activeOption{
 
 .max-w-\[760px\]{
   max-width: 760px;
+}
+
+.max-w-\[750px\]{
+  max-width: 750px;
 }
 
 .flex-1{
@@ -2152,6 +2184,10 @@ aside p.activeOption{
   gap: 70px;
 }
 
+.gap-\[15\B4px\]{
+  gap: 15´px;
+}
+
 .gap-x-1{
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -2244,6 +2280,10 @@ aside p.activeOption{
   border-radius: 9999px;
 }
 
+.rounded-lg{
+  border-radius: 0.5rem;
+}
+
 .rounded-md{
   border-radius: 0.375rem;
 }
@@ -2309,10 +2349,6 @@ aside p.activeOption{
 
 .border-t-4{
   border-top-width: 4px;
-}
-
-.border-t-\[3px\]{
-  border-top-width: 3px;
 }
 
 .border-t-\[4px\]{
@@ -2533,6 +2569,10 @@ aside p.activeOption{
   padding: 1.75rem;
 }
 
+.p-8{
+  padding: 2rem;
+}
+
 .p-\[10px\]{
   padding: 10px;
 }
@@ -2675,6 +2715,10 @@ aside p.activeOption{
 
 .pr-11{
   padding-right: 2.75rem;
+}
+
+.pr-12{
+  padding-right: 3rem;
 }
 
 .pr-14{
@@ -2995,6 +3039,10 @@ aside p.activeOption{
 
 .accent-green-500{
   accent-color: #127447;
+}
+
+.accent-green-600{
+  accent-color: #0B5030;
 }
 
 .opacity-0{
@@ -3334,6 +3382,10 @@ aside p.activeOption{
   background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-red-alert\/90:hover{
+  background-color: rgb(128 0 32 / 0.9);
+}
+
 .hover\:text-blue-hover:hover{
   --tw-text-opacity: 1;
   color: rgb(15 58 167 / var(--tw-text-opacity, 1));
@@ -3357,6 +3409,11 @@ aside p.activeOption{
 .hover\:text-green-700:hover{
   --tw-text-opacity: 1;
   color: rgb(3 43 24 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-red-alert:hover{
+  --tw-text-opacity: 1;
+  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover{
@@ -3492,6 +3549,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(11 80 48 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-green-600\/20:focus{
+  --tw-ring-color: rgb(11 80 48 / 0.2);
+}
+
 .focus\:ring-green-600\/30:focus{
   --tw-ring-color: rgb(11 80 48 / 0.3);
 }
@@ -3528,6 +3589,10 @@ aside p.activeOption{
 
 .focus\:ring-offset-green-500:focus{
   --tw-ring-offset-color: #127447;
+}
+
+.focus\:ring-offset-red-alert:focus{
+  --tw-ring-offset-color: #800020;
 }
 
 .active\:scale-95:active{
@@ -4218,6 +4283,10 @@ aside p.activeOption{
     padding: 2.5rem;
   }
 
+  .md\:p-12{
+    padding: 3rem;
+  }
+
   .md\:p-2{
     padding: 0.5rem;
   }
@@ -4357,6 +4426,11 @@ aside p.activeOption{
     padding-bottom: 60px;
   }
 
+  .md\:py-3{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
   .md\:pb-10{
     padding-bottom: 2.5rem;
   }
@@ -4458,6 +4532,11 @@ aside p.activeOption{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .md\:leading-10{
