@@ -469,6 +469,13 @@
                     </label>
                 </div>
 
+                <div class="flex flex-col gap-[10px]">
+                    <label for="textarea-edit-motivo" class="font-sans font-semibold text-base md:text-lg text-gray-700">Motivo da Atualização</label>
+                    <textarea data-textarea="editScheduleMotivo" id="textarea-edit-motivo" name="motivoAtualizacao"
+                        placeholder="Motivo da alteração do agendamento..." maxlength="250"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" required></textarea>
+                </div>
+
                 <button data-button="saveEditSchedule" type="submit"
                     class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Alterações</span>

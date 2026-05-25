@@ -20,10 +20,11 @@ export default async function editSchedule(modal, id) {
     const textareaDescricao = form.querySelector('[name="descricao"]');
     const checkboxBuscar = form.querySelector('[name="buscarResidencia"]');
     const inputDate = form.querySelector('[name="data"]');
+    const textareaMotivo = form.querySelector('[name="motivoAtualizacao"]');
     const infoHourElement = modal.querySelector('[data-schedule-time="edit-agenda"]');
     const submitBtn = form.querySelector('[type="submit"]');
 
-    const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco, selectServico, inputDate];
+    const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco, selectServico, inputDate, textareaMotivo];
     inputs.forEach(input => {
         if(input) input.addEventListener('input', () => input.classList.remove('error'));
     });
@@ -76,6 +77,7 @@ export default async function editSchedule(modal, id) {
                 textareaDescricao.value = schedule.service.observations || '';
             }
             
+            textareaMotivo.value = '';
             checkboxBuscar.checked = schedule.buscarResidencia || false;
 
             if(schedule.date) {
@@ -127,11 +129,15 @@ export default async function editSchedule(modal, id) {
         if (!updatedData.date) { 
             inputDate.classList.add('error'); hasError = true; 
         }
-        if (!updatedData.hour) { 
+            if (!updatedData.hour) { 
             infoHourElement.textContent = 'Nenhum horário selecionado';
             infoHourElement.classList.remove('text-green-600');
             infoHourElement.classList.add('text-red-500');
             hasError = true; 
+        }
+        if (!textareaMotivo.value.trim()) {
+            textareaMotivo.classList.add('error');
+            hasError = true;
         }
 
         if (hasError) return;
@@ -161,6 +167,9 @@ export default async function editSchedule(modal, id) {
                 ``,
                 `Olá, *${updatedData.user.username}*! Seu agendamento foi atualizado com sucesso.`,
                 ``,
+                `*Motivo da alteração:*`,
+                `_${textareaMotivo.value.trim()}_`,
+                ``,
                 `*Detalhes do agendamento:*`,
                 `Pet: *${updatedData.petAgendado.name}*`,
                 `Serviço: *${serviceFriendlyName}*`,
@@ -168,7 +177,7 @@ export default async function editSchedule(modal, id) {
                 `Horário: *${updatedData.hour}*`,
                 `Endereço: *${updatedData.user.endereco}*`,
                 `Buscar em residência: *${updatedData.buscarResidencia ? 'Sim' : 'Não'}*`,
-                updatedData.service.observations ? `📝 Observações: ${updatedData.service.observations}` : '',
+                updatedData.service.observations ? `* Observações: ${updatedData.service.observations}` : '',
                 ``,
                 `Qualquer dúvida, entre em contato conosco! 😊`
             ].filter(Boolean).join('\n');
