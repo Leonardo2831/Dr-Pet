@@ -14,25 +14,36 @@ export default async function editSchedule(modal, id) {
     const inputNome = form.querySelector('[name="nome"]');
     const inputTelefone = form.querySelector('[name="telefone"]');
     const inputNomePet = form.querySelector('[name="nomePet"]');
+    const selectServico = form.querySelector('[name="servico"]');
     const inputEndereco = form.querySelector('[name="endereco"]');
     const textareaDescricao = form.querySelector('[name="descricao"]');
     const checkboxBuscar = form.querySelector('[name="buscarResidencia"]');
     const submitBtn = form.querySelector('[type="submit"]');
 
-    const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco];
+    const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco, selectServico];
     inputs.forEach(input => {
-        input.addEventListener('input', () => input.classList.remove('error'));
+        if(input) input.addEventListener('input', () => input.classList.remove('error'));
     });
 
+    // Pega os preços para caso o admin altere o tipo de serviço
+    const fetchPrecos = new Fetch('precos', '[data-modal-info="adm"]');
+    let infosServiceAbout = null;
+
     try {
+        infosServiceAbout = await fetchPrecos.get() || null;
         const schedule = await fetchItem.get(id);
         
         if (schedule) {
-            inputNome.value = schedule.nome || '';
-            inputTelefone.value = schedule.telefone || '';
-            inputNomePet.value = schedule.nomePet || '';
-            inputEndereco.value = schedule.endereco || '';
-            textareaDescricao.value = schedule.descricao || '';
+            inputNome.value = schedule.user?.username || '';
+            inputTelefone.value = schedule.user?.phone || '';
+            inputEndereco.value = schedule.user?.endereco || '';
+            inputNomePet.value = schedule.petAgendado?.name || '';
+            
+            if (schedule.service) {
+                selectServico.value = schedule.service.name || 'banho-tosa';
+                textareaDescricao.value = schedule.service.observations || '';
+            }
+            
             checkboxBuscar.checked = schedule.buscarResidencia || false;
         }
     } catch (error) {
@@ -42,20 +53,32 @@ export default async function editSchedule(modal, id) {
     form.onsubmit = async (event) => {
         event.preventDefault();
 
+        const selectedService = selectServico.value;
+        const serviceInfo = infosServiceAbout[selectedService] || { time: '1h', price: 0 };
+
         const updatedData = {
-            nome: inputNome.value.trim(),
-            telefone: inputTelefone.value.trim(),
-            nomePet: inputNomePet.value.trim(),
-            endereco: inputEndereco.value.trim(),
-            descricao: textareaDescricao.value.trim(),
+            user: {
+                username: inputNome.value.trim(),
+                phone: inputTelefone.value.trim(),
+                endereco: inputEndereco.value.trim()
+            },
+            petAgendado: {
+                name: inputNomePet.value.trim()
+            },
+            service: {
+                name: selectedService,
+                observations: textareaDescricao.value.trim(),
+                duration: serviceInfo.time,
+                preco: serviceInfo.price
+            },
             buscarResidencia: checkboxBuscar.checked
         };
 
         let hasError = false;
-        if (!updatedData.nome) { inputNome.classList.add('error'); hasError = true; }
-        if (!updatedData.telefone) { inputTelefone.classList.add('error'); hasError = true; }
-        if (!updatedData.nomePet) { inputNomePet.classList.add('error'); hasError = true; }
-        if (!updatedData.endereco) { inputEndereco.classList.add('error'); hasError = true; }
+        if (!updatedData.user.username) { inputNome.classList.add('error'); hasError = true; }
+        if (!updatedData.user.phone) { inputTelefone.classList.add('error'); hasError = true; }
+        if (!updatedData.petAgendado.name) { inputNomePet.classList.add('error'); hasError = true; }
+        if (!updatedData.user.endereco) { inputEndereco.classList.add('error'); hasError = true; }
 
         if (hasError) return;
 
