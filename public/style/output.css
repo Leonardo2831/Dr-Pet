@@ -1314,10 +1314,6 @@ aside p.activeOption{
   right: 1.25rem;
 }
 
-.right-6{
-  right: 1.5rem;
-}
-
 .right-\[15px\]{
   right: 15px;
 }
@@ -1332,10 +1328,6 @@ aside p.activeOption{
 
 .top-4{
   top: 1rem;
-}
-
-.top-6{
-  top: 1.5rem;
 }
 
 .top-\[100\%\]{
@@ -1364,6 +1356,10 @@ aside p.activeOption{
 
 .z-50{
   z-index: 50;
+}
+
+.z-\[60\]{
+  z-index: 60;
 }
 
 .z-\[999\]{
@@ -1447,10 +1443,6 @@ aside p.activeOption{
   margin-top: auto;
 }
 
-.ml-2{
-  margin-left: 0.5rem;
-}
-
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -1522,6 +1514,10 @@ aside p.activeOption{
   height: 1.5rem;
 }
 
+.h-7{
+  height: 1.75rem;
+}
+
 .h-8{
   height: 2rem;
 }
@@ -1590,6 +1586,10 @@ aside p.activeOption{
   height: 69px;
 }
 
+.h-\[72px\]{
+  height: 72px;
+}
+
 .h-auto{
   height: auto;
 }
@@ -1603,8 +1603,8 @@ aside p.activeOption{
   height: 100%;
 }
 
-.h-14{
-  height: 3.5rem;
+.h-px{
+  height: 1px;
 }
 
 .max-h-\[1000px\]{
@@ -1699,6 +1699,10 @@ aside p.activeOption{
   width: 1.5rem;
 }
 
+.w-7{
+  width: 1.75rem;
+}
+
 .w-8{
   width: 2rem;
 }
@@ -1731,6 +1735,10 @@ aside p.activeOption{
   width: 30px;
 }
 
+.w-\[42px\]{
+  width: 42px;
+}
+
 .w-\[45px\]{
   width: 45px;
 }
@@ -1749,6 +1757,10 @@ aside p.activeOption{
 
 .w-\[65\%\]{
   width: 65%;
+}
+
+.w-\[72px\]{
+  width: 72px;
 }
 
 .w-\[730px\]{
@@ -1770,10 +1782,6 @@ aside p.activeOption{
 
 .w-full{
   width: 100%;
-}
-
-.w-14{
-  width: 3.5rem;
 }
 
 .min-w-\[1200px\]{
@@ -1850,8 +1858,16 @@ aside p.activeOption{
   max-width: 350px;
 }
 
+.max-w-\[360px\]{
+  max-width: 360px;
+}
+
 .max-w-\[400px\]{
   max-width: 400px;
+}
+
+.max-w-\[460px\]{
+  max-width: 460px;
 }
 
 .max-w-\[488px\]{
@@ -1870,10 +1886,6 @@ aside p.activeOption{
   max-width: 627px;
 }
 
-.max-w-\[650px\]{
-  max-width: 650px;
-}
-
 .max-w-\[700px\]{
   max-width: 700px;
 }
@@ -1884,10 +1896,6 @@ aside p.activeOption{
 
 .max-w-\[760px\]{
   max-width: 760px;
-}
-
-.max-w-\[750px\]{
-  max-width: 750px;
 }
 
 .flex-1{
@@ -2188,10 +2196,6 @@ aside p.activeOption{
   gap: 70px;
 }
 
-.gap-\[15\B4px\]{
-  gap: 15´px;
-}
-
 .gap-x-1{
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -2444,6 +2448,10 @@ aside p.activeOption{
   background-color: rgb(0 0 0 / 0.5);
 }
 
+.bg-black\/60{
+  background-color: rgb(0 0 0 / 0.6);
+}
+
 .bg-blue-light{
   --tw-bg-opacity: 1;
   background-color: rgb(209 216 237 / var(--tw-bg-opacity, 1));
@@ -2477,6 +2485,11 @@ aside p.activeOption{
 .bg-green-400{
   --tw-bg-opacity: 1;
   background-color: rgb(25 153 94 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-50{
+  --tw-bg-opacity: 1;
+  background-color: rgb(217 251 231 / var(--tw-bg-opacity, 1));
 }
 
 .bg-green-500{
@@ -2516,6 +2529,24 @@ aside p.activeOption{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(252 252 252 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 242 155 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(36 216 138 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-500\/80{
+  background-color: rgb(18 116 71 / 0.8);
+}
+
+.bg-green-500\/90{
+  background-color: rgb(18 116 71 / 0.9);
 }
 
 .bg-cover{
@@ -2665,6 +2696,11 @@ aside p.activeOption{
   padding-bottom: 1.5rem;
 }
 
+.py-7{
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -2678,6 +2714,11 @@ aside p.activeOption{
 .py-\[12px\]{
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.py-\[14px\]{
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .py-\[60px\]{
@@ -2705,6 +2746,10 @@ aside p.activeOption{
   padding-bottom: 1.25rem;
 }
 
+.pb-6{
+  padding-bottom: 1.5rem;
+}
+
 .pl-4{
   padding-left: 1rem;
 }
@@ -2719,10 +2764,6 @@ aside p.activeOption{
 
 .pr-11{
   padding-right: 2.75rem;
-}
-
-.pr-12{
-  padding-right: 3rem;
 }
 
 .pr-14{
@@ -2946,6 +2987,11 @@ aside p.activeOption{
 .text-gray-100{
   --tw-text-opacity: 1;
   color: rgb(232 235 233 / var(--tw-text-opacity, 1));
+}
+
+.text-gray-400{
+  --tw-text-opacity: 1;
+  color: rgb(168 173 170 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-50{
@@ -3367,6 +3413,16 @@ aside p.activeOption{
   background-color: rgb(31 190 117 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-green-400:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(25 153 94 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-green-50:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(217 251 231 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-green-50\/50:hover{
   background-color: rgb(217 251 231 / 0.5);
 }
@@ -3413,11 +3469,6 @@ aside p.activeOption{
 .hover\:text-green-700:hover{
   --tw-text-opacity: 1;
   color: rgb(3 43 24 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-red-alert:hover{
-  --tw-text-opacity: 1;
-  color: rgb(128 0 32 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover{
@@ -3551,10 +3602,6 @@ aside p.activeOption{
 .focus\:ring-green-600:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(11 80 48 / var(--tw-ring-opacity, 1));
-}
-
-.focus\:ring-green-600\/20:focus{
-  --tw-ring-color: rgb(11 80 48 / 0.2);
 }
 
 .focus\:ring-green-600\/30:focus{
@@ -4287,10 +4334,6 @@ aside p.activeOption{
     padding: 2.5rem;
   }
 
-  .md\:p-12{
-    padding: 3rem;
-  }
-
   .md\:p-2{
     padding: 0.5rem;
   }
@@ -4380,6 +4423,11 @@ aside p.activeOption{
     padding-bottom: 3rem;
   }
 
+  .md\:py-3{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
   .md\:py-4{
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -4428,11 +4476,6 @@ aside p.activeOption{
   .md\:py-\[60px\]{
     padding-top: 60px;
     padding-bottom: 60px;
-  }
-
-  .md\:py-3{
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
   }
 
   .md\:pb-10{
@@ -4536,11 +4579,6 @@ aside p.activeOption{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .md\:text-4xl{
-    font-size: 2.25rem;
-    line-height: 2.5rem;
   }
 
   .md\:leading-10{
