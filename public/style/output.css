@@ -1358,10 +1358,6 @@ aside p.activeOption{
   z-index: 50;
 }
 
-.z-\[60\]{
-  z-index: 60;
-}
-
 .z-\[999\]{
   z-index: 999;
 }
@@ -1372,6 +1368,11 @@ aside p.activeOption{
 
 .order-2{
   order: 2;
+}
+
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .mx-auto{
@@ -1586,10 +1587,6 @@ aside p.activeOption{
   height: 69px;
 }
 
-.h-\[72px\]{
-  height: 72px;
-}
-
 .h-auto{
   height: auto;
 }
@@ -1625,6 +1622,10 @@ aside p.activeOption{
 
 .max-h-\[95vh\]{
   max-height: 95vh;
+}
+
+.max-h-\[90svh\]{
+  max-height: 90svh;
 }
 
 .min-h-\[120px\]{
@@ -1735,8 +1736,8 @@ aside p.activeOption{
   width: 30px;
 }
 
-.w-\[42px\]{
-  width: 42px;
+.w-\[34px\]{
+  width: 34px;
 }
 
 .w-\[45px\]{
@@ -1757,10 +1758,6 @@ aside p.activeOption{
 
 .w-\[65\%\]{
   width: 65%;
-}
-
-.w-\[72px\]{
-  width: 72px;
 }
 
 .w-\[730px\]{
@@ -1820,6 +1817,10 @@ aside p.activeOption{
 .min-w-max{
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+.min-w-0{
+  min-width: 0px;
 }
 
 .max-w-0{
@@ -2487,11 +2488,6 @@ aside p.activeOption{
   background-color: rgb(25 153 94 / var(--tw-bg-opacity, 1));
 }
 
-.bg-green-50{
-  --tw-bg-opacity: 1;
-  background-color: rgb(217 251 231 / var(--tw-bg-opacity, 1));
-}
-
 .bg-green-500{
   --tw-bg-opacity: 1;
   background-color: rgb(18 116 71 / var(--tw-bg-opacity, 1));
@@ -2529,24 +2525,6 @@ aside p.activeOption{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(252 252 252 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-100{
-  --tw-bg-opacity: 1;
-  background-color: rgb(42 242 155 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-200{
-  --tw-bg-opacity: 1;
-  background-color: rgb(36 216 138 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-500\/80{
-  background-color: rgb(18 116 71 / 0.8);
-}
-
-.bg-green-500\/90{
-  background-color: rgb(18 116 71 / 0.9);
 }
 
 .bg-cover{
@@ -2696,11 +2674,6 @@ aside p.activeOption{
   padding-bottom: 1.5rem;
 }
 
-.py-7{
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
-}
-
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -2716,14 +2689,14 @@ aside p.activeOption{
   padding-bottom: 12px;
 }
 
-.py-\[14px\]{
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-
 .py-\[60px\]{
   padding-top: 60px;
   padding-bottom: 60px;
+}
+
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .pb-1{
@@ -2744,10 +2717,6 @@ aside p.activeOption{
 
 .pb-5{
   padding-bottom: 1.25rem;
-}
-
-.pb-6{
-  padding-bottom: 1.5rem;
 }
 
 .pl-4{
@@ -3748,6 +3717,37 @@ aside p.activeOption{
   }
 }
 
+@media (min-width: 400px){
+  .min-\[400px\]\:gap-4{
+    gap: 1rem;
+  }
+
+  .min-\[400px\]\:px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .min-\[400px\]\:px-5{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .min-\[400px\]\:py-3{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .min-\[400px\]\:py-5{
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .min-\[400px\]\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
 @media (min-width: 480px){
   .xs\:block{
     display: block;
@@ -3759,6 +3759,10 @@ aside p.activeOption{
 
   .xs\:h-9{
     height: 2.25rem;
+  }
+
+  .xs\:h-\[72px\]{
+    height: 72px;
   }
 
   .xs\:\!w-\[180px\]{
@@ -3781,8 +3785,24 @@ aside p.activeOption{
     width: 290px;
   }
 
+  .xs\:w-\[42px\]{
+    width: 42px;
+  }
+
+  .xs\:w-\[72px\]{
+    width: 72px;
+  }
+
+  .xs\:gap-3{
+    gap: 0.75rem;
+  }
+
   .xs\:gap-5{
     gap: 1.25rem;
+  }
+
+  .xs\:gap-6{
+    gap: 1.5rem;
   }
 
   .xs\:px-5{
@@ -3795,6 +3815,11 @@ aside p.activeOption{
     padding-right: 1.5rem;
   }
 
+  .xs\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .xs\:px-\[30px\]{
     padding-left: 30px;
     padding-right: 30px;
@@ -3803,6 +3828,26 @@ aside p.activeOption{
   .xs\:py-11{
     padding-top: 2.75rem;
     padding-bottom: 2.75rem;
+  }
+
+  .xs\:py-4{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .xs\:py-7{
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .xs\:py-8{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .xs\:py-\[14px\]{
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 
   .xs\:pr-20{
@@ -3833,6 +3878,11 @@ aside p.activeOption{
   .xs\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .xs\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .xs\:text-xl{
