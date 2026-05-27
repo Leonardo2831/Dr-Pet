@@ -42,6 +42,7 @@ export default class Login {
                 Storage.set('user-id', validUser.id);
                 window.location.href = '../../index.html';
             } else {
+                Storage.set('user-id', validUser.id);
                 window.location.href = '../../public/pages/administrador.html';
             }
         } else {
