@@ -1,6 +1,7 @@
 import MenuOptions from "./MenuOptions.js";
 import PopUp from "../utils/Pop-up.js"
 import loadMenuUser from "./loadMenuUser.js";
+import CheckLogin from "../utils/checkLogin.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuMobileHeader = new PopUp('[data-button="menuUserMobile"]', '[data-menu="header"]').init();
@@ -22,4 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadMenuUser();
+    new CheckLogin('[data-modal="loginRequired"]').init();
 });
