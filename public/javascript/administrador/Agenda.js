@@ -10,10 +10,13 @@ export default class Agenda {
         this.buttonSearchSchedule = document.querySelector(selectorButtonSearchSchedule);
 
         this.fetchJson = new Fetch('agenda', '[data-modal-info="adm"]');
-        // salvando dados do get para não ter que ficar fazendo get toda vez que buscar
+        this.fetchPrecos = new Fetch('precos', '[data-modal-info="adm"]');
+        
+
         this.schedules = null;
 
         this.filterSchedule = this.filterSchedule.bind(this);
+        this.savePrices = this.savePrices.bind(this); 
     }
 
     static openModal(modal, functionItem, id){
@@ -84,6 +87,48 @@ export default class Agenda {
         this.verifyIfHasSchedule();
     }
 
+    addPriceFormEvent(){
+        const form = document.getElementById('form-cadastrar-precos');
+        if(form) {
+            form.addEventListener('submit', this.savePrices);
+        }
+    }
+    async savePrices(event){
+        event.preventDefault();
+
+        const servicoSelecionado = document.getElementById('servico-select').value;
+        const novoTempo = parseInt(document.getElementById('tempo-input').value, 10);
+        const novoPreco = parseFloat(document.getElementById('preco-input').value);
+
+        try {
+
+            let precosAtuais = await this.fetchPrecos.get() || {};
+            
+        
+            precosAtuais[servicoSelecionado] = {
+                time: novoTempo,
+                price: novoPreco
+            };
+
+            await fetch('http://localhost:3000/precos', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(precosAtuais)
+            });
+
+            alert('Preço e tempo convertidos e salvos com sucesso!');
+
+            document.getElementById('tempo-input').value = '';
+            document.getElementById('preco-input').value = '';
+
+        } catch (error) {
+            console.error('Erro ao atualizar os dados de preço:', error);
+            alert('Houve um erro ao atualizar os preços.');
+        }
+    }
+
     addEvents(){
         this.buttonSearchSchedule.addEventListener('click', this.filterSchedule);
     }
@@ -102,6 +147,7 @@ export default class Agenda {
             this.inputInit();
             this.getSchedules();
             this.addEvents();
+            this.addPriceFormEvent();
         }
 
         return this;
