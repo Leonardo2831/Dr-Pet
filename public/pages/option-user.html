@@ -105,7 +105,6 @@
 
         <div class="bg-gray-50">
             <main class="container min-h-[calc(100vh_-_570px)] w-full p-6 md:p-10 lg:p-20 flex flex-col justify-center">
-                <!-- menu inicial, retirar hidden para ver -->
                 <section
                     class="animate-fadeTop w-full shadow-md rounded-2xl overflow-hidden bg-gray-100"
                     id="menu-inicial"
@@ -119,15 +118,17 @@
                                 alt="Foto do Usuário"
                                 class="w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-cover rounded-full"
                             />
-                            <button
-                                class="absolute bottom-0 right-0 outline-none focus:ring-2 focus:ring-green-400 rounded-full hover:scale-110 transition-transform"
+                            <label
+                                for="image-user"
+                                class="cursor-pointer absolute bottom-0 right-0 outline-none focus:ring-2 focus:ring-green-400 rounded-full hover:scale-110 transition-transform"
                             >
                                 <img
                                     src="../images/icons/options/edit-circle.svg"
                                     alt="Editar Foto"
                                     class="w-4 h-4 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-200 rounded-full"
                                 />
-                            </button>
+                                <input type="file" data-input="avatarUser" id="image-user" name="image-user" class="hidden" hidden>
+                            </label>
                         </figure>
                         <div
                             class="flex items-center gap-3 sm:gap-4 lg:gap-6 flex-wrap w-full"

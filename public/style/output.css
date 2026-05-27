@@ -5115,12 +5115,20 @@ aside p.activeOption{
     margin-top: 0px;
   }
 
+  .xl\:h-14{
+    height: 3.5rem;
+  }
+
   .xl\:w-\[30px\]{
     width: 30px;
   }
 
   .xl\:w-\[68px\]{
     width: 68px;
+  }
+
+  .xl\:w-14{
+    width: 3.5rem;
   }
 
   .xl\:min-w-\[1400px\]{
