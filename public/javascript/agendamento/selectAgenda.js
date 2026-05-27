@@ -1,6 +1,23 @@
 import getParamsURL from '../utils/getParamsURL.js';
 import Fetch from '../utils/Fetch.js';
 
+function formatarTempo(minutos) {
+
+    const numMinutos = parseInt(minutos, 10);
+    if (!numMinutos || isNaN(numMinutos)) return "Indefinido";
+    
+    const horas = Math.floor(numMinutos / 60);
+    const minutosRestantes = numMinutos % 60;
+    
+    if (horas > 0 && minutosRestantes > 0) {
+        return `${horas}h ${minutosRestantes}min`;
+    } else if (horas > 0) {
+        return `${horas}h`;
+    } else {
+        return `${minutosRestantes}min`;
+    }
+}
+
 const fetchPrecos = new Fetch('precos', '[data-modal-info="agenda"]');
 let infosService = null;
 
@@ -15,7 +32,8 @@ function changeValuesService(value){
     const priceInfoService = document.querySelector('[data-price-service="completInfo"]');
 
     if (infosService && infosService[value]) {
-        timeInfoService.textContent = infosService[value].time;
+        timeInfoService.textContent = formatarTempo(infosService[value].time);
+        
         priceInfoService.textContent = `R$ ${infosService[value].price.toFixed(2).replace('.', ',')}`;
     } else {
         timeInfoService.textContent = "Erro";
