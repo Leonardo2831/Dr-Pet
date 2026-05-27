@@ -21,6 +21,14 @@ export default async function loadMenuUser(){
         if(userData.phone) infoDataUser.phone.textContent = userData.phone;
         if(userData.password) infoDataUser.password.textContent = '*'.repeat(10);
 
+        if(userData.avatar) {
+            const avatarImg = document.querySelector('[data-input="avatarUser"]');
+            if(avatarImg) {
+                const imgElement = avatarImg.closest('figure').querySelector('img:first-of-type');
+                if (imgElement) imgElement.src = userData.avatar;
+            }
+        }
+
         const addressContainer = document.querySelector('#address-container');
         userData.address.forEach((address) => {
             const addressElement = structAddress(address, userData, fetchUser);

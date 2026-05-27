@@ -29,6 +29,7 @@ export default class Cadastrar {
         dadosUsuario.pets = [];
         dadosUsuario.address = [];
         dadosUsuario.typeUser = 'comum';
+        dadosUsuario.avatar = "";
 
         const response = await this.api.post(dadosUsuario);
 

@@ -7,7 +7,7 @@ export default function structMenuUser(user = null){
         return `
             <div class="flex flex-col w-[730px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] rounded-b-[10px] overflow-hidden">
                 <div class="flex items-center w-full gap-[30px] p-[30px] bg-gray-100">
-                    <img src="${imagePath}options/user-default.svg" alt="User Avatar" class="w-[60px] h-[60px] lg:w-20 lg:h-20" />
+                    <img src="${user.avatar || imagePath + 'options/user-default.svg'}" alt="User Avatar" class="w-[60px] h-[60px] lg:w-20 lg:h-20 object-cover rounded-full" />
                     <span class="font-semibold text-2xl text-gray-800 lg:text-3xl">
                         ${user.userName || "Minha Conta"}
                     </span>
