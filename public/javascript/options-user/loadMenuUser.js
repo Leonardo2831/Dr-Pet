@@ -19,7 +19,7 @@ export default async function loadMenuUser(){
         if(userData.userName) nameUser.textContent = userData.userName;
         if(userData.email) infoDataUser.email.textContent = userData.email;
         if(userData.phone) infoDataUser.phone.textContent = userData.phone;
-        if(userData.password) infoDataUser.password.textContent = '*'.repeat(userData.password.length);
+        if(userData.password) infoDataUser.password.textContent = '*'.repeat(10);
 
         const addressContainer = document.querySelector('#address-container');
         userData.address.forEach((address) => {
