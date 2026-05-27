@@ -20,6 +20,15 @@ export default function structMenuUser(user = null){
                     </span>
                 </a>
 
+                ${user.typeUser !== 'comum' ? `
+                    <a href="${basePath}administrador.html" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
+                        <img src="${imagePath}/menu-user/admin-panel-settings.svg" alt="Painel de aministração" class="w-10 h-10 lg:w-12 lg:h-12" />
+                        <span class="font-medium text-xl text-gray-800 lg:text-2xl">
+                            Painel de administrador
+                        </span>
+                    </a>
+                ` : ''}
+
                 <button data-button="logout" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
                     <img src="${imagePath}/menu-user/logout.svg" alt="Sair" class="w-10 h-10 lg:w-12 lg:h-12" />
                     <span class="font-medium text-xl text-gray-800 lg:text-2xl">
