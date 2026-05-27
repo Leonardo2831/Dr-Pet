@@ -1370,11 +1370,6 @@ aside p.activeOption{
   order: 2;
 }
 
-.mx-2{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -1624,10 +1619,6 @@ aside p.activeOption{
   max-height: 95vh;
 }
 
-.max-h-\[90svh\]{
-  max-height: 90svh;
-}
-
 .min-h-\[120px\]{
   min-height: 120px;
 }
@@ -1781,6 +1772,10 @@ aside p.activeOption{
   width: 100%;
 }
 
+.min-w-0{
+  min-width: 0px;
+}
+
 .min-w-\[1200px\]{
   min-width: 1200px;
 }
@@ -1817,10 +1812,6 @@ aside p.activeOption{
 .min-w-max{
   min-width: -moz-max-content;
   min-width: max-content;
-}
-
-.min-w-0{
-  min-width: 0px;
 }
 
 .max-w-0{
@@ -2604,6 +2595,11 @@ aside p.activeOption{
   padding-right: 0.5rem;
 }
 
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -2692,11 +2688,6 @@ aside p.activeOption{
 .py-\[60px\]{
   padding-top: 60px;
   padding-bottom: 60px;
-}
-
-.px-3{
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .pb-1{
@@ -3717,37 +3708,6 @@ aside p.activeOption{
   }
 }
 
-@media (min-width: 400px){
-  .min-\[400px\]\:gap-4{
-    gap: 1rem;
-  }
-
-  .min-\[400px\]\:px-4{
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .min-\[400px\]\:px-5{
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .min-\[400px\]\:py-3{
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .min-\[400px\]\:py-5{
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-  }
-
-  .min-\[400px\]\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-}
-
 @media (min-width: 480px){
   .xs\:block{
     display: block;
@@ -3878,11 +3838,6 @@ aside p.activeOption{
   .xs\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .xs\:text-lg{
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 
   .xs\:text-xl{

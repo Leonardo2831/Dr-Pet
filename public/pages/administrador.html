@@ -11,6 +11,53 @@
 </head>
 
 <body>
+    <div class="bg-green-600">
+        <header class="header container">
+            <div class="container flex items-center justify-between mx-auto">
+                <a href="../../index.html" class="flex items-center gap-[15px] md:gap-5 lg:gap-[25px] xl:gap-10">
+                    <img src="../images/logo.png" alt="Logo Dr. Pet"
+                        class="w-[45px] md:w-[50px] lg:w-[58px] xl:w-[68px] h-auto object-contain transition-all duration-300" />
+                    <span
+                        class="text-[26px] md:text-[28px] lg:text-[32px] font-semibold text-gray-50 tracking-wide transition-all duration-300 whitespace-nowrap">Dr.
+                        Pet</span>
+                </a>
+
+                <div id="nav-menu" data-menu="header"
+                    class="hidden animate-fadeTop absolute top-[100%] left-0 w-full bg-green-600 shadow-2xl md:shadow-none flex-col items-center gap-[30px] py-10 opacity-100 visible translate-y-0 pointer-events-auto transition-all duration-300 ease-out z-40 md:flex md:static md:w-auto md:bg-transparent md:flex-row md:py-0 md:gap-5 lg:gap-10 xl:gap-20">
+                    <nav class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10">
+                        <a href="../../index.html#servicos" class="nav-link whitespace-nowrap">Serviços
+                        </a>
+                        <a href="../../index.html#sobre" class="nav-link whitespace-nowrap">Sobre nós
+                        </a>
+                        <a href="loja.html" class="nav-link whitespace-nowrap">Pet shop
+                        </a>
+                        <a href="agenda.html" class="nav-link whitespace-nowrap">Agendamento
+                        </a>
+                        <a href="#contato" class="nav-link whitespace-nowrap">Contato
+                        </a>
+                    </nav>
+
+                    <button data-menuUser="false"
+                        class="outline-none focus:ring-4 focus:ring-green-400 rounded-full border-[3px] border-green-50 p-3 md:p-2 lg:p-2 xl:p-3 hover:bg-green-700 transition-all duration-300 shadow-sm flex items-center justify-center">
+                        <img src="../images/icons/user.svg" alt="Ícone de Usuário"
+                            class="w-6 md:w-5 lg:w-6 xl:w-[30px] h-auto transition-all duration-300" />
+                    </button>
+
+                    <aside data-modal="menuUser"
+                        class="md:mt-7 lg:mt-9 hidden absolute top-full mx-auto w-fit md:left-auto md:right-0 md:mx-0 md:w-auto flex-col bg-gray-50 rounded-b-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-[200px] z-50 animate-fadeTop">
+                    </aside>
+                </div>
+
+                <button data-button="menuUserMobile"
+                    class="md:hidden flex flex-col gap-[6px] p-[10px] items-center justify-center outline-none focus:ring-2 focus:ring-green-400 rounded-md">
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                    <div class="w-[30px] h-[3px] bg-gray-50 rounded-full"></div>
+                </button>
+            </div>
+        </header>
+    </div>
+
     <div class="bg-gray-50 min-h-screen">
         <main class="container px-4 md:px-20 py-10 md:py-[120px] flex flex-col items-center">
             <nav class="flex items-center justify-center flex-wrap gap-4 sm:gap-6 lg:gap-10 w-full max-w-[1288px]">
@@ -538,6 +585,6 @@
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
     <script type="module" src="../javascript/administrador/script-adm.js"></script>
     <script type="module" src="../javascript/administrador/admin-precos-agenda.js"></script>
+    <script type="module" src="../javascript/menu-user/script-menu-user.js"></script>
 </body>
-
 </html>
