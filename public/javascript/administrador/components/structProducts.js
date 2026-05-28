@@ -1,4 +1,7 @@
 import Fetch from '../../utils/Fetch.js';
+import CheckFunction from '../../utils/CheckFunction.js';
+
+const confirm = new CheckFunction();
 
 export default function structProducts(object, formProduct) {
     const tr = document.createElement('tr');
@@ -29,9 +32,11 @@ export default function structProducts(object, formProduct) {
     });
 
     tr.querySelector('[data-button="deleteProduct"]').addEventListener('click', () => {
-        const fetchAPI = new Fetch('produtos', '[data-modal-info="adm"]');
-        fetchAPI.delete(object.id);
-        tr.remove();
+        confirm.open(() => {
+            const fetchAPI = new Fetch('produtos', '[data-modal-info="adm"]');
+            fetchAPI.delete(object.id);
+            tr.remove();
+        });
     });
 
     return tr;

@@ -1,4 +1,7 @@
 import Fetch from "../../utils/Fetch.js";
+import CheckFunction from "../../utils/CheckFunction.js";
+
+const confirm = new CheckFunction();
 
 export default function structSlide(object){
     const figure = document.createElement('figure');
@@ -16,9 +19,11 @@ export default function structSlide(object){
 
     const button = figure.querySelector('button');
     button.addEventListener('click', () => {
-        const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
-        fetchAPI.delete(object.id);
-        figure.remove();
+        confirm.open(() => {
+            const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
+            fetchAPI.delete(object.id);
+            figure.remove();
+        });
     });
 
     return figure;

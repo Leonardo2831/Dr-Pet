@@ -2,11 +2,10 @@ import { clickOutside } from "./clickOutside.js";
 
 export default class CheckFunction {
     constructor() {
-        this.modal      = document.querySelector('[data-confirm-modal]');
-        this.card       = this.modal?.querySelector('[data-confirm-card]');
-        this.messageEl  = this.modal?.querySelector('[data-confirm-message]');
+        this.modal = document.querySelector('[data-confirm-modal]');
+        this.card = this.modal?.querySelector('[data-confirm-card]');
         this.confirmBtn = this.modal?.querySelector('[data-confirm-btn="confirm"]');
-        this.cancelBtn  = this.modal?.querySelector('[data-confirm-btn="cancel"]');
+        this.cancelBtn = this.modal?.querySelector('[data-confirm-btn="cancel"]');
     }
 
     close() {
@@ -23,22 +22,16 @@ export default class CheckFunction {
         this.cancelBtn.removeEventListener('click', handleCancel);
     }
 
-    /**
-     * Abre o mini modal de confirmação
-     * @param {Function} onConfirm - Função executada ao confirmar
-     */
     open(onConfirm) {
         if (!this.modal) return;
 
-        // Exibe o modal
         this.modal.classList.remove('hidden');
         this.modal.classList.add('flex');
 
-        // Animação de entrada
-        requestAnimationFrame(() => {
+        setTimeout(() => {
             this.card.classList.remove('scale-90', 'opacity-0');
             this.card.classList.add('scale-100', 'opacity-100');
-        });
+        }, 200);
 
         clickOutside(this.card, 'click', () => this.close());
 
