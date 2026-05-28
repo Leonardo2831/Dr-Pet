@@ -1,4 +1,7 @@
 import Storage from "../../utils/Storage.js";
+import CheckFunction from "../../utils/CheckFunction.js";
+
+const confirm = new CheckFunction();
 
 export default function structPet(object, userData, fetchUser) {
     let currentPetId = null;
@@ -73,9 +76,11 @@ export default function structPet(object, userData, fetchUser) {
         const petId = popup.dataset.currentId;
         const userId = Storage.get('user-id');
         console.log(petId)
-        userData.pets = userData.pets.filter(p => p.id !== petId);
-        await fetchUser.put(userId, userData);
-        div.remove();
+        confirm.open(async () => {
+            userData.pets = userData.pets.filter(p => p.id !== petId);
+            await fetchUser.put(userId, userData);
+            div.remove();
+        });
     });
 
     return div;

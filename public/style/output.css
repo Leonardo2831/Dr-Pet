@@ -1366,6 +1366,10 @@ aside p.activeOption{
   z-index: 999;
 }
 
+.z-\[1000\]{
+  z-index: 1000;
+}
+
 .order-1{
   order: 1;
 }

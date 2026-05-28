@@ -1,6 +1,9 @@
 import PopUp from "../../utils/Pop-up.js";
 import Fetch from "../../utils/Fetch.js";
 import Storage from "../../utils/Storage.js";
+import CheckFunction from "../../utils/CheckFunction.js";
+
+const confirm = new CheckFunction();
 
 export default function structAddress(object, userData, fetchUser) {
     let currentAddressId = null;
@@ -81,13 +84,14 @@ export default function structAddress(object, userData, fetchUser) {
     document.querySelector('[data-button="deleteAddress"]').addEventListener('click', async () => {
         const popup = document.querySelector('[data-popup="options-address"]');
         const petId = popup.dataset.currentId;
-        userData.address = userData.address.filter(a => a.id !== petId);
+        confirm.open(async () => {
+            userData.address = userData.address.filter(a => a.id !== petId);
 
-        const userId = Storage.get('user-id');
-        await fetchUser.put(userId, userData);
+            const userId = Storage.get('user-id');
+            await fetchUser.put(userId, userData);
 
-        div.remove();
-
+            div.remove();
+        });
     })
 
     return div;
