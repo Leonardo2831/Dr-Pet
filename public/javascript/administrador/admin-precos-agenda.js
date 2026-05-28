@@ -31,19 +31,25 @@ export default function adminPrecosAgenda() {
 
         event.preventDefault();
         let precosAtuais = await fetchPrecos.get();
+        const existePrecosAtuais = !!precosAtuais && Object.keys(precosAtuais).length > 0;
+
+        if (!precosAtuais) {
+            precosAtuais = {};
+        }
+
+        const id = (precosAtuais[servicoSelecionado] && precosAtuais[servicoSelecionado].id) || crypto.randomUUID();
 
         precosAtuais[servicoSelecionado] = {
+            id: id,
             time: novoTempo,
             price: novoPreco
         };
 
-        await fetch('http://localhost:3000/precos', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(precosAtuais)
-        });
+        if (existePrecosAtuais) {
+            await fetchPrecos.put('', precosAtuais);
+        } else {
+            await fetchPrecos.post(precosAtuais);
+        }
 
         inputTime.value = '';
         inputPrice.value = '';
