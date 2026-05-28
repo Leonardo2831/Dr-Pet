@@ -16,10 +16,18 @@ export default function structAgenda(object){
     const [year, month, day] = object.date.split('-');
     const formatDate = `${day}/${month}/${year}`;
 
+    const today = new Date();
+    const yearToday = today.getFullYear();
+    const monthToday = String(today.getMonth() + 1).padStart(2, '0');
+    const dayToday = String(today.getDate()).padStart(2, '0');
+    const formattedToday = `${yearToday}-${monthToday}-${dayToday}`;
+
+    const isFutureOrToday = object.date >= formattedToday;
+
     const serviceName = serviceNames[object.service.name] || object.service.name;
 
     div.innerHTML = `
-        <div class="flex flex-row justify-between items-start pb-5 w-full">
+        <div class="flex flex-row justify-between items-start ${isFutureOrToday ? 'pb-5' : ''} w-full">
             <div class="flex flex-col gap-2">
                 <div class="flex flex-col">
                     <span class="font-semibold text-base md:text-lg text-gray-800">
@@ -49,25 +57,31 @@ export default function structAgenda(object){
             </span>
         </div>
 
-        <div class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
-            <button type="button" data-button="cancelSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
-                <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
-                <img src="../images/icons/administrador/cancel.svg" alt="Cancelar" class="w-4 h-4 md:w-5 md:h-5">
-            </button>
-            <button type="button" data-button="editSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
-                <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
-                <img src="../images/icons/administrador/edit-gray.svg" alt="Editar" class="w-4 h-4 md:w-5 md:h-5">
-            </button>
-        </div>
+        ${
+            isFutureOrToday ? `
+            <div class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                <button type="button" data-button="cancelSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                    <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                    <img src="../images/icons/administrador/cancel.svg" alt="Cancelar" class="w-4 h-4 md:w-5 md:h-5">
+                </button>
+                <button type="button" data-button="editSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                    <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                    <img src="../images/icons/administrador/edit-gray.svg" alt="Editar" class="w-4 h-4 md:w-5 md:h-5">
+                </button>
+            </div>
+            ` : ''
+        }
     `;
 
-    div.querySelector('[data-button="editSchedule"]').addEventListener('click', () => {
-        Agenda.openModal(document.querySelector('[data-modal="editSchedule"]'), editSchedule, object.id);
-    });
+    if (isFutureOrToday) {
+        div.querySelector('[data-button="editSchedule"]').addEventListener('click', () => {
+            Agenda.openModal(document.querySelector('[data-modal="editSchedule"]'), editSchedule, object.id);
+        });
 
-    div.querySelector('[data-button="cancelSchedule"]').addEventListener('click', () => {
-        Agenda.openModal(document.querySelector('[data-modal="cancelSchedule"]'), cancelSchedule, object.id);
-    });
+        div.querySelector('[data-button="cancelSchedule"]').addEventListener('click', () => {
+            Agenda.openModal(document.querySelector('[data-modal="cancelSchedule"]'), cancelSchedule, object.id);
+        });
+    }
 
     return div;
 }
