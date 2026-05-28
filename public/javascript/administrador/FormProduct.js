@@ -1,5 +1,6 @@
 import { clickOutside } from "../utils/clickOutside.js";
 import Fetch from "../utils/Fetch.js";
+import formatPrice from "../utils/formatPrice.js";
 export default class FormProduct {
     constructor(selectorModal, selectorForm, selectorButtonClose,
         selectorInputName, selectorSelectCategory, selectorInputPrice, selectorAreaShortDescription, selectorAreaLongDescription, 
@@ -31,7 +32,6 @@ export default class FormProduct {
         this.closeForm = this.closeForm.bind(this);
         this.showNameFileMain = this.showNameFileMain.bind(this);
         this.showCountFilesSlide = this.showCountFilesSlide.bind(this);
-        this.formatInputPrice = this.formatInputPrice.bind(this);
         this.initCreateProduct = this.initCreateProduct.bind(this);
     }
 
@@ -223,11 +223,6 @@ export default class FormProduct {
         }
     }
 
-    formatInputPrice() {
-        const valueInput = this.inputPrice.value.replace(/\D/g, '');;
-        this.inputPrice.value = "R$ " + (Number(valueInput) / 100).toFixed(2).replace('.', ',');
-    }
-
     showCountFilesSlide() {
         const count = this.inputSlideImages.files.length;
         if (count > 0) {
@@ -280,7 +275,8 @@ export default class FormProduct {
         this.buttonCreateProduct.querySelector('span').textContent = 'Atualizar Produto';
         this.inputName.value = product.name;
         this.selectCategory.value = product.category;
-            this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
+        this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
+
         if (this.quillShort) {
             this.quillShort.root.innerHTML = product.shortDescription || '';
             this.areaShortDescription.value = this.getEditorHtml(this.quillShort);
@@ -309,7 +305,7 @@ export default class FormProduct {
         if (this.buttonCloseForm) this.buttonCloseForm.addEventListener('click', this.closeForm);
         if (this.inputMainImage && this.infoMainImage) this.inputMainImage.addEventListener('change', this.showNameFileMain);
         if (this.inputSlideImages && this.infoSlidesImages) this.inputSlideImages.addEventListener('change', this.showCountFilesSlide);
-        if (this.inputPrice) this.inputPrice.addEventListener('input', this.formatInputPrice);
+        if (this.inputPrice) this.inputPrice.addEventListener('input', () => formatPrice(this.inputPrice));
         if (this.buttonCreateProduct) this.buttonCreateProduct.addEventListener('click', this.initCreateProduct);
     }
 
