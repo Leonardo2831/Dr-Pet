@@ -1,5 +1,6 @@
 import Fetch from '../utils/Fetch.js';
 import Hours from '../agendamento/Hours.js';
+import { clickOutside } from '../utils/clickOutside.js';
 
 export default async function editSchedule(modal, id) {
     const fetchItem = new Fetch('agenda', '[data-modal-info="adm"]');
@@ -7,10 +8,13 @@ export default async function editSchedule(modal, id) {
     const form = modal.querySelector('[data-form="editSchedule"]');
     const buttonClose = modal.querySelector('[data-button="closeFormEditSchedule"]');
 
-    buttonClose.onclick = () => {
+    const closeModal = () => {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
     };
+
+    buttonClose.onclick = closeModal;
+    if (form) clickOutside(form, 'click', closeModal);
 
     const inputNome = form.querySelector('[name="nome"]');
     const inputTelefone = form.querySelector('[name="telefone"]');
@@ -185,8 +189,7 @@ export default async function editSchedule(modal, id) {
             const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
 
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            closeModal();
 
         } catch (error) {
             console.error("Erro ao atualizar o agendamento:", error);

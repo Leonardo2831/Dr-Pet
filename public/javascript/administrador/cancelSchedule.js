@@ -1,4 +1,5 @@
 import Fetch from '../utils/Fetch.js';
+import { clickOutside } from '../utils/clickOutside.js';
 
 export default function cancelSchedule(modal, id) {
     const fetchItem = new Fetch('agenda', '[data-modal-info="adm"]');
@@ -7,10 +8,15 @@ export default function cancelSchedule(modal, id) {
     const buttonSend = modal.querySelector('[data-button="sendCancelSchedule"]');
     const buttonClose = modal.querySelector('[data-button="closeCancelSchedule"]');
 
-    buttonClose.onclick = () => {
+    const closeModal = () => {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
     };
+
+    buttonClose.onclick = closeModal;
+    
+    const innerContainer = modal.querySelector('div');
+    if (innerContainer) clickOutside(innerContainer, 'click', closeModal);
 
     const removeError = () => textarea.classList.remove('error');
     textarea.addEventListener('click', removeError);
@@ -58,8 +64,7 @@ export default function cancelSchedule(modal, id) {
             await fetchItem.delete(id);
 
             textarea.value = '';
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            closeModal();
         } catch (error) {
             console.error('Erro ao cancelar agendamento:', error);
         }
