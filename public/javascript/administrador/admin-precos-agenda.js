@@ -1,40 +1,51 @@
-import Fetch from '../utils/Fetch.js'; // Ajuste o caminho se necessário
+import Fetch from '../utils/Fetch.js';
+import formatPrice from '../utils/formatPrice.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+function formatTime(input) {
+    const digits = input.value.replace(/\D/g, '');
+    if (!digits) {
+        input.value = '';
+        return;
+    }
+    input.value = digits + ' min';
+
+    // defini onde cursor vai estar
+    const cursorPosition = digits.length;
+    input.setSelectionRange(cursorPosition, cursorPosition);
+}
+
+export default function adminPrecosAgenda() {
     const form = document.getElementById('form-cadastrar-precos');
+    const selectService = document.getElementById('servico-select');
+    const inputTime = document.getElementById('tempo-input');
+    const inputPrice = document.getElementById('preco-input');
+    inputPrice.addEventListener('input', () => formatPrice(inputPrice));
+    inputTime.addEventListener('input', () => formatTime(inputTime));
 
     form.addEventListener('submit', async (event) => {
-        const servicoSelecionado = document.getElementById('servico-select').value;
-        const novoTempo = document.getElementById('tempo-input').value;
-        const novoPreco = parseFloat(document.getElementById('preco-input').value);
+        const servicoSelecionado = selectService.value;
+        const novoTempo = Number(inputTime.value.replace(' min', ''));
+        const novoPreco = Number(inputPrice.value.replace('R$', '').replace(',', '.').trim());
 
-        const fetchPrecos = new Fetch('precos');
+        const fetchPrecos = new Fetch('precos', '[data-modal-info-menu="user"]');
 
-        try {
-            event.preventDefault();
-            let precosAtuais = await fetchPrecos.get();
+        event.preventDefault();
+        let precosAtuais = await fetchPrecos.get();
 
-            precosAtuais[servicoSelecionado] = {
-                time: novoTempo,
-                price: novoPreco
-            };
+        precosAtuais[servicoSelecionado] = {
+            time: novoTempo,
+            price: novoPreco
+        };
 
-            await fetch('http://localhost:3000/precos', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(precosAtuais)
-            });
+        await fetch('http://localhost:3000/precos', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(precosAtuais)
+        });
 
-            alert('Preço e tempo atualizados com sucesso!');
-
-            document.getElementById('tempo-input').value = '';
-            document.getElementById('preco-input').value = '';
-            
-        } catch (error) {
-            console.error('Erro ao atualizar os dados:', error);
-            alert('Houve um erro ao atualizar os preços.');
-        }
+        inputTime.value = '';
+        inputPrice.value = '';
     });
-});
+}
