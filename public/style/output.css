@@ -3646,6 +3646,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(252 252 252 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-red-alert\/40:focus{
+  --tw-ring-color: rgb(128 0 32 / 0.4);
+}
+
 .focus\:ring-offset-2:focus{
   --tw-ring-offset-width: 2px;
 }
