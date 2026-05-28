@@ -1,9 +1,55 @@
 import Fetch from '../utils/Fetch.js';
 import { clickOutside } from '../utils/clickOutside.js';
+import CheckFunction from '../utils/CheckFunction.js';
+
+const confirm = new CheckFunction();
+const fetchItem = new Fetch('agenda', '[data-modal-info="adm"]');
+
+/**
+ * @param {string} id
+ * @param {string} message - texto digitado no textarea
+ * @param {HTMLTextAreaElement} textarea
+ * @param {Function} closeModal
+ */
+async function sendMessage(id, message, textarea, closeModal) {
+    try {
+        const schedule = await fetchItem.get(id);
+
+        if (schedule && schedule.user && schedule.user.phone) {
+            const phone = schedule.user.phone.replace(/[()\s\-a-zA-Z]/g, '');
+                    
+            if (phone.length < 10) {
+                fetchItem.showModalError(new Error('Telefone inválido'), 'O número da pessoa cadastrada é inválido.');
+                setTimeout(() => {
+                    if (fetchItem.modalInfo) {
+                        fetchItem.modalInfo.classList.remove(fetchItem.classModalErro, fetchItem.classModalSucess);
+                    }
+                }, 2500);
+                return;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/55${phone}?text=${encodedMessage}`, '_blank');
+        } else {
+            fetchItem.showModalError(new Error('Telefone inexistente'), 'Nenhum telefone encontrado para este usuário.');
+            setTimeout(() => {
+                if (fetchItem.modalInfo) {
+                    fetchItem.modalInfo.classList.remove(fetchItem.classModalErro, fetchItem.classModalSucess);
+                }
+            }, 2500);
+            return;
+        }
+
+        await fetchItem.delete(id);
+
+        textarea.value = '';
+        closeModal();
+    } catch (error) {
+        console.error('Erro ao cancelar agendamento:', error);
+    }
+}
 
 export default function cancelSchedule(modal, id) {
-    const fetchItem = new Fetch('agenda', '[data-modal-info="adm"]');
-    
     const textarea = modal.querySelector('[data-textarea="cancelSchedule"]');
     const buttonSend = modal.querySelector('[data-button="sendCancelSchedule"]');
     const buttonClose = modal.querySelector('[data-button="closeCancelSchedule"]');
@@ -25,7 +71,7 @@ export default function cancelSchedule(modal, id) {
     const newButtonSend = buttonSend.cloneNode(true);
     buttonSend.parentNode.replaceChild(newButtonSend, buttonSend);
 
-    newButtonSend.addEventListener('click', async () => {
+    newButtonSend.addEventListener('click', () => {
         const message = textarea.value.trim();
 
         if (!message) {
@@ -33,40 +79,6 @@ export default function cancelSchedule(modal, id) {
             return;
         }
 
-        try {
-            const schedule = await fetchItem.get(id);
-
-            if (schedule && schedule.user && schedule.user.phone) {
-                const phone = schedule.user.phone.replace(/[()\s\-a-zA-Z]/g, '');
-                
-                if (phone.length < 10) {
-                    fetchItem.showModalError(new Error('Telefone inválido'), 'O número da pessoa cadastrada é inválido.');
-                    setTimeout(() => {
-                        if (fetchItem.modalInfo) {
-                            fetchItem.modalInfo.classList.remove(fetchItem.classModalErro, fetchItem.classModalSucess);
-                        }
-                    }, 2500);
-                    return;
-                }
-
-                const encodedMessage = encodeURIComponent(message);
-                window.open(`https://wa.me/55${phone}?text=${encodedMessage}`, '_blank');
-            } else {
-                fetchItem.showModalError(new Error('Telefone inexistente'), 'Nenhum telefone encontrado para este usuário.');
-                setTimeout(() => {
-                    if (fetchItem.modalInfo) {
-                        fetchItem.modalInfo.classList.remove(fetchItem.classModalErro, fetchItem.classModalSucess);
-                    }
-                }, 2500);
-                return;
-            }
-
-            await fetchItem.delete(id);
-
-            textarea.value = '';
-            closeModal();
-        } catch (error) {
-            console.error('Erro ao cancelar agendamento:', error);
-        }
+        confirm.open(() => sendMessage(id, message, textarea, closeModal));
     });
 }

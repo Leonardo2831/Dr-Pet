@@ -577,6 +577,30 @@
         </div>
     </div>
 
+    <!-- Modal de Confirmação -->
+    <div data-confirm-modal
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/30">
+        <div data-confirm-card
+            class="flex flex-col items-center gap-4 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,0,0,0.14)] px-6 py-5 w-[90%] max-w-[260px] scale-90 opacity-0 transition-all duration-200 ease-out">
+
+            <p data-confirm-message
+                class="font-sans font-semibold text-sm text-gray-700 text-center leading-snug">
+                Tem certeza?
+            </p>
+
+            <div class="flex flex-row items-center gap-2 w-full">
+                <button type="button" data-confirm-btn="cancel"
+                    class="flex-1 flex items-center justify-center px-3 py-[7px] rounded-lg border border-gray-300 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300/50 transition-all font-semibold text-xs text-gray-500 uppercase tracking-wide">
+                    Cancelar
+                </button>
+                <button type="button" data-confirm-btn="confirm"
+                    class="flex-1 flex items-center justify-center px-3 py-[7px] rounded-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/40 transition-all font-semibold text-xs text-white uppercase tracking-wide">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <aside data-modal-info-menu="user" data-modal-info="adm"
         class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
     </aside>

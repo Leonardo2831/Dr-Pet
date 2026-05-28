@@ -2,6 +2,7 @@ import cancelSchedule from "../cancelSchedule.js";
 import editSchedule from "../editSchedule.js";
 import Agenda from "../Agenda.js";
 
+
 export default function structAgenda(object){
     const serviceNames = {
         'banho-tosa': 'Banho e Tosa',

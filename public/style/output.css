@@ -1358,6 +1358,10 @@ aside p.activeOption{
   z-index: 50;
 }
 
+.z-\[100\]{
+  z-index: 100;
+}
+
 .z-\[999\]{
   z-index: 999;
 }
@@ -1755,6 +1759,10 @@ aside p.activeOption{
   width: 730px;
 }
 
+.w-\[90\%\]{
+  width: 90%;
+}
+
 .w-\[95\%\]{
   width: 95%;
 }
@@ -1832,6 +1840,10 @@ aside p.activeOption{
 
 .max-w-\[1400px\]{
   max-width: 1400px;
+}
+
+.max-w-\[260px\]{
+  max-width: 260px;
 }
 
 .max-w-\[280px\]{
@@ -1951,6 +1963,18 @@ aside p.activeOption{
 
 .rotate-180{
   --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-100{
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-90{
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2302,6 +2326,10 @@ aside p.activeOption{
   border-top-right-radius: 10px;
 }
 
+.border{
+  border-width: 1px;
+}
+
 .border-2{
   border-width: 2px;
 }
@@ -2434,6 +2462,10 @@ aside p.activeOption{
 
 .bg-black\/25{
   background-color: rgb(0 0 0 / 0.25);
+}
+
+.bg-black\/30{
+  background-color: rgb(0 0 0 / 0.3);
 }
 
 .bg-black\/50{
@@ -2688,6 +2720,11 @@ aside p.activeOption{
 .py-\[60px\]{
   padding-top: 60px;
   padding-bottom: 60px;
+}
+
+.py-\[7px\]{
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 .pb-1{
@@ -3095,6 +3132,12 @@ aside p.activeOption{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-\[0px_4px_20px_0px_rgba\(0\2c 0\2c 0\2c 0\.14\)\]{
+  --tw-shadow: 0px 4px 20px 0px rgba(0,0,0,0.14);
+  --tw-shadow-colored: 0px 4px 20px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-\[0px_4px_20px_0px_rgba\(0\2c 0\2c 0\2c 0\.15\)\]{
   --tw-shadow: 0px 4px 20px 0px rgba(0,0,0,0.15);
   --tw-shadow-colored: 0px 4px 20px 0px var(--tw-shadow-color);
@@ -3368,6 +3411,11 @@ aside p.activeOption{
   background-color: rgb(195 199 197 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-gray-50:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-green-300:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(31 190 117 / var(--tw-bg-opacity, 1));
@@ -3522,6 +3570,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(195 199 197 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-gray-300\/50:focus{
+  --tw-ring-color: rgb(195 199 197 / 0.5);
+}
+
 .focus\:ring-gray-400:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(168 173 170 / var(--tw-ring-opacity, 1));
@@ -3553,6 +3605,10 @@ aside p.activeOption{
 
 .focus\:ring-green-500\/20:focus{
   --tw-ring-color: rgb(18 116 71 / 0.2);
+}
+
+.focus\:ring-green-500\/40:focus{
+  --tw-ring-color: rgb(18 116 71 / 0.4);
 }
 
 .focus\:ring-green-500\/50:focus{
