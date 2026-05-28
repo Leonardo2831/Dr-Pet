@@ -27,7 +27,7 @@ export default function adminPrecosAgenda() {
         const novoTempo = Number(inputTime.value.replace(' min', ''));
         const novoPreco = Number(inputPrice.value.replace('R$', '').replace(',', '.').trim());
 
-        const fetchPrecos = new Fetch('precos', '[data-modal-info-menu="user"]');
+        const fetchPrecos = new Fetch('service-infos', '[data-modal-info-menu="user"]');
 
         event.preventDefault();
         let precosAtuais = await fetchPrecos.get();

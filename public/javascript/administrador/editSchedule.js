@@ -3,7 +3,7 @@ import Hours from '../agendamento/Hours.js';
 
 export default async function editSchedule(modal, id) {
     const fetchItem = new Fetch('agenda', '[data-modal-info="adm"]');
-    
+
     const form = modal.querySelector('[data-form="editSchedule"]');
     const buttonClose = modal.querySelector('[data-button="closeFormEditSchedule"]');
 
@@ -11,7 +11,7 @@ export default async function editSchedule(modal, id) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
     };
-    
+
     const inputNome = form.querySelector('[name="nome"]');
     const inputTelefone = form.querySelector('[name="telefone"]');
     const inputNomePet = form.querySelector('[name="nomePet"]');
@@ -26,15 +26,15 @@ export default async function editSchedule(modal, id) {
 
     const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco, selectServico, inputDate, textareaMotivo];
     inputs.forEach(input => {
-        if(input) input.addEventListener('input', () => input.classList.remove('error'));
+        if (input) input.addEventListener('input', () => input.classList.remove('error'));
     });
 
     const minDate = new Date().toLocaleDateString('en-CA');
-    if(inputDate) inputDate.setAttribute('min', minDate);
+    if (inputDate) inputDate.setAttribute('min', minDate);
 
     const hours = new Hours('[data-content="edit-hours-morning"]', '[data-content="edit-hours-afternoon"]', '[data-schedule-time="edit-agenda"]');
-    
-    if(inputDate) {
+
+    if (inputDate) {
         inputDate.addEventListener('change', (e) => {
             hours.loadByDay(e.target.value);
         });
@@ -58,35 +58,35 @@ export default async function editSchedule(modal, id) {
     });
 
     // Pega os preços para caso o admin altere o tipo de serviço
-    const fetchPrecos = new Fetch('precos', '[data-modal-info="adm"]');
+    const fetchPrecos = new Fetch('service-infos', '[data-modal-info="adm"]');
     let infosServiceAbout = null;
 
     try {
         await hours.getAgenda();
         infosServiceAbout = await fetchPrecos.get() || null;
         const schedule = await fetchItem.get(id);
-        
+
         if (schedule) {
             inputNome.value = schedule.user?.username || '';
             inputTelefone.value = schedule.user?.phone || '';
             inputEndereco.value = schedule.user?.endereco || '';
             inputNomePet.value = schedule.petAgendado?.name || '';
-            
+
             if (schedule.service) {
                 selectServico.value = schedule.service.name || 'banho-tosa';
                 textareaDescricao.value = schedule.service.observations || '';
             }
-            
+
             textareaMotivo.value = '';
             checkboxBuscar.checked = schedule.buscarResidencia || false;
 
-            if(schedule.date) {
-                if(inputDate) inputDate.value = schedule.date;
+            if (schedule.date) {
+                if (inputDate) inputDate.value = schedule.date;
                 hours.loadByDay(schedule.date);
-                
+
                 setTimeout(() => {
                     const btnHour = modal.querySelector(`.button-hour[data-time-hour="${schedule.hour}"]`);
-                    if(btnHour) btnHour.click();
+                    if (btnHour) btnHour.click();
                 }, 150);
             }
         }
@@ -126,14 +126,14 @@ export default async function editSchedule(modal, id) {
         if (!updatedData.user.phone) { inputTelefone.classList.add('error'); hasError = true; }
         if (!updatedData.petAgendado.name) { inputNomePet.classList.add('error'); hasError = true; }
         if (!updatedData.user.endereco) { inputEndereco.classList.add('error'); hasError = true; }
-        if (!updatedData.date) { 
-            inputDate.classList.add('error'); hasError = true; 
+        if (!updatedData.date) {
+            inputDate.classList.add('error'); hasError = true;
         }
-            if (!updatedData.hour) { 
+        if (!updatedData.hour) {
             infoHourElement.textContent = 'Nenhum horário selecionado';
             infoHourElement.classList.remove('text-green-600');
             infoHourElement.classList.add('text-red-500');
-            hasError = true; 
+            hasError = true;
         }
         if (!textareaMotivo.value.trim()) {
             textareaMotivo.classList.add('error');
@@ -187,7 +187,7 @@ export default async function editSchedule(modal, id) {
 
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-            
+
         } catch (error) {
             console.error("Erro ao atualizar o agendamento:", error);
         } finally {

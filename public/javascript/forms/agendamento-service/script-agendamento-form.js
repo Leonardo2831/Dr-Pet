@@ -10,7 +10,7 @@ new CheckLogin('[data-modal="loginRequired"]').init();
 
 const form = document.querySelector('form');
 const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
-const fetchPrice = new Fetch('precos', '[data-modal-info="formSchedule"]');
+const fetchPrice = new Fetch('service-infos', '[data-modal-info="formSchedule"]');
 const infosSchedule = Storage.get('scheduleData');
 
 let infosServiceAbout = await fetchPrice.get() || null;

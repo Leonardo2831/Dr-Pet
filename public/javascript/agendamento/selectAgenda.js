@@ -5,10 +5,10 @@ function formatarTempo(minutos) {
 
     const numMinutos = parseInt(minutos, 10);
     if (!numMinutos || isNaN(numMinutos)) return "Indefinido";
-    
+
     const horas = Math.floor(numMinutos / 60);
     const minutosRestantes = numMinutos % 60;
-    
+
     if (horas > 0 && minutosRestantes > 0) {
         return `${horas}h ${minutosRestantes}min`;
     } else if (horas > 0) {
@@ -18,22 +18,22 @@ function formatarTempo(minutos) {
     }
 }
 
-const fetchPrecos = new Fetch('precos', '[data-modal-info="agenda"]');
+const fetchPrecos = new Fetch('service-infos', '[data-modal-info="agenda"]');
 let infosService = null;
 
 try {
     infosService = await fetchPrecos.get();
-} catch(error) {
+} catch (error) {
     console.error("Erro ao pegar o valor dos dados", error);
 }
 
-function changeValuesService(value){
+function changeValuesService(value) {
     const timeInfoService = document.querySelector('[data-time-service="completInfo"]');
     const priceInfoService = document.querySelector('[data-price-service="completInfo"]');
 
     if (infosService && infosService[value]) {
         timeInfoService.textContent = formatarTempo(infosService[value].time);
-        
+
         priceInfoService.textContent = `R$ ${infosService[value].price.toFixed(2).replace('.', ',')}`;
     } else {
         timeInfoService.textContent = "Erro";

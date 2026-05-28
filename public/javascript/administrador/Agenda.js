@@ -2,7 +2,7 @@ import Fetch from "../utils/Fetch.js";
 import structAgenda from "./components/structAgenda.js";
 
 export default class Agenda {
-    constructor(selectorContentSchedule, selectorInputDate, selectorSelectService, selectorButtonSearchSchedule){
+    constructor(selectorContentSchedule, selectorInputDate, selectorSelectService, selectorButtonSearchSchedule) {
         this.contentSchedule = document.querySelector(selectorContentSchedule);
         this.inputDate = document.querySelector(selectorInputDate);
 
@@ -10,23 +10,23 @@ export default class Agenda {
         this.buttonSearchSchedule = document.querySelector(selectorButtonSearchSchedule);
 
         this.fetchJson = new Fetch('agenda', '[data-modal-info="adm"]');
-        this.fetchPrecos = new Fetch('precos', '[data-modal-info="adm"]');
-        
+        this.fetchPrecos = new Fetch('service-infos', '[data-modal-info="adm"]');
+
 
         this.schedules = null;
 
         this.filterSchedule = this.filterSchedule.bind(this);
-        this.savePrices = this.savePrices.bind(this); 
+        this.savePrices = this.savePrices.bind(this);
     }
 
-    static openModal(modal, functionItem, id){
+    static openModal(modal, functionItem, id) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         functionItem(modal, id);
     }
 
-    verifyIfHasSchedule(){
-        if(!this.contentSchedule.children.length){
+    verifyIfHasSchedule() {
+        if (!this.contentSchedule.children.length) {
             const alert = document.createElement('p');
             alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center';
             alert.textContent = "Não há nenhum horário para esse dia e este serviço";
@@ -34,16 +34,16 @@ export default class Agenda {
         }
     }
 
-    createStructSchedule(scheduleObject){
+    createStructSchedule(scheduleObject) {
         const div = structAgenda(scheduleObject);
         this.contentSchedule.appendChild(div);
     }
 
-    scheduleInit(){
+    scheduleInit() {
         this.contentSchedule.innerHTML = "";
 
         this.schedules.forEach((scheduleObject) => {
-            if(scheduleObject.date == this.inputDate.value){
+            if (scheduleObject.date == this.inputDate.value) {
                 this.createStructSchedule(scheduleObject);
             }
         });
@@ -51,7 +51,7 @@ export default class Agenda {
         this.verifyIfHasSchedule();
     }
 
-    inputInit(){
+    inputInit() {
         const today = new Date();
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -60,8 +60,8 @@ export default class Agenda {
         this.inputDate.value = `${year}-${month}-${day}`;
     }
 
-    filterSchedule(){
-        if(!this.inputDate.value || this.inputDate.value < this.inputDate.min){
+    filterSchedule() {
+        if (!this.inputDate.value || this.inputDate.value < this.inputDate.min) {
             this.inputDate.classList.add('error');
             this.inputDate.addEventListener('click', () => {
                 this.inputDate.classList.remove('error');
@@ -70,13 +70,13 @@ export default class Agenda {
         }
 
         this.contentSchedule.innerHTML = "";
-        
-        if(this.inputDate.value && this.selectService.value){
+
+        if (this.inputDate.value && this.selectService.value) {
             this.schedules.forEach((scheduleObject) => {
                 const matchDate = scheduleObject.date == this.inputDate.value;
                 const matchService = this.selectService.value === 'all' || scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase();
-                
-                if(matchDate && matchService){
+
+                if (matchDate && matchService) {
                     this.createStructSchedule(scheduleObject);
                 }
             });
@@ -87,13 +87,13 @@ export default class Agenda {
         this.verifyIfHasSchedule();
     }
 
-    addPriceFormEvent(){
+    addPriceFormEvent() {
         const form = document.getElementById('form-cadastrar-precos');
-        if(form) {
+        if (form) {
             form.addEventListener('submit', this.savePrices);
         }
     }
-    async savePrices(event){
+    async savePrices(event) {
         event.preventDefault();
 
         const servicoSelecionado = document.getElementById('servico-select').value;
@@ -103,8 +103,8 @@ export default class Agenda {
         try {
 
             let precosAtuais = await this.fetchPrecos.get() || {};
-            
-        
+
+
             precosAtuais[servicoSelecionado] = {
                 time: novoTempo,
                 price: novoPreco
@@ -129,21 +129,21 @@ export default class Agenda {
         }
     }
 
-    addEvents(){
+    addEvents() {
         this.buttonSearchSchedule.addEventListener('click', this.filterSchedule);
     }
 
-    getSchedules(){
+    getSchedules() {
         this.fetchJson.get().then((schedules) => {
-            if(Array.isArray(schedules)) {
+            if (Array.isArray(schedules)) {
                 this.schedules = schedules;
                 this.scheduleInit();
             }
         });
     }
 
-    init(){
-        if(this.contentSchedule && this.inputDate && this.selectService && this.buttonSearchSchedule){
+    init() {
+        if (this.contentSchedule && this.inputDate && this.selectService && this.buttonSearchSchedule) {
             this.inputInit();
             this.getSchedules();
             this.addEvents();
