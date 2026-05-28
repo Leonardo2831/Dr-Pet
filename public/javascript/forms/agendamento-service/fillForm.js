@@ -15,8 +15,8 @@ export default async function fillForm(form) {
     const inputEndereco = form.querySelector('#endereco');
     const inputNomePet = form.querySelector('#nomePet');
 
-    if (inputNome && userData.username) {
-        inputNome.value = userData.username;
+    if (inputNome && userData.userName) {
+        inputNome.value = userData.userName;
     }
 
     if (inputTelefone && userData.phone) {

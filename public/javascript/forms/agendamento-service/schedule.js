@@ -1,7 +1,11 @@
 import Fetch from "../../utils/Fetch.js";
 import Storage from "../../utils/Storage.js";
 
-export default function schedule(form, infosSchedule, infosServiceAbout) {
+export default async function schedule(form) {
+    const infosSchedule = Storage.get('scheduleData');
+    const fetchPrice = new Fetch('service-infos', '[data-modal-info="formSchedule"]');
+    const infosServiceAbout = await fetchPrice.get() || null;
+
     const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
 
     form.addEventListener('submit', async (evento) => {
