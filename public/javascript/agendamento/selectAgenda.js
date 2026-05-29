@@ -67,7 +67,7 @@ async function changeValues(value) {
     changeValuesService(value);
 }
 
-export default async function selectAgenda(PopUpConfig) {
+export default async function selectAgenda(PopUpConfig, hoursInstance) {
     const serviceOption = PopUpConfig.modal.querySelectorAll('[data-filter-agenda]');
 
     const parametroServico = getParamsURL('service') || 'banho-tosa';
@@ -84,6 +84,10 @@ export default async function selectAgenda(PopUpConfig) {
             if (activeOption) activeOption.classList.remove('activeOption');
             option.classList.add('activeOption');
             await changeValues(option.dataset.filterAgenda);
+            
+            if (hoursInstance && hoursInstance.currentDay) {
+                hoursInstance.renderHours();
+            }
         });
     });
 }

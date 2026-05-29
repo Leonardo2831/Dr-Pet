@@ -1358,6 +1358,10 @@ aside p.activeOption{
   z-index: 50;
 }
 
+.z-\[1000\]{
+  z-index: 1000;
+}
+
 .z-\[100\]{
   z-index: 100;
 }
@@ -1366,16 +1370,16 @@ aside p.activeOption{
   z-index: 999;
 }
 
-.z-\[1000\]{
-  z-index: 1000;
-}
-
 .order-1{
   order: 1;
 }
 
 .order-2{
   order: 2;
+}
+
+.col-span-full{
+  grid-column: 1 / -1;
 }
 
 .mx-auto{
@@ -3611,10 +3615,6 @@ aside p.activeOption{
   --tw-ring-color: rgb(18 116 71 / 0.2);
 }
 
-.focus\:ring-green-500\/40:focus{
-  --tw-ring-color: rgb(18 116 71 / 0.4);
-}
-
 .focus\:ring-green-500\/50:focus{
   --tw-ring-color: rgb(18 116 71 / 0.5);
 }
@@ -3637,6 +3637,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(128 0 32 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-red-alert\/40:focus{
+  --tw-ring-color: rgb(128 0 32 / 0.4);
+}
+
 .focus\:ring-red-alert\/50:focus{
   --tw-ring-color: rgb(128 0 32 / 0.5);
 }
@@ -3644,10 +3648,6 @@ aside p.activeOption{
 .focus\:ring-white:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(252 252 252 / var(--tw-ring-opacity, 1));
-}
-
-.focus\:ring-red-alert\/40:focus{
-  --tw-ring-color: rgb(128 0 32 / 0.4);
 }
 
 .focus\:ring-offset-2:focus{
