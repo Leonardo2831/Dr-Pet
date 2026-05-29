@@ -9,6 +9,10 @@ const menuMobileHeader = new PopUp('[data-button="menuUserMobile"]', '[data-menu
 new CheckLogin('[data-modal="loginRequired"]').init();
 const selectService = new PopUp('[data-button="selectService"]', '[data-modal="serviceSelected"]').init();
 const hours = new Hours('[data-content="hours-morning"]', '[data-content="hours-afternoon"]', '[data-schedule-time="agenda"]').init();
+hours.setServiceSelectorCallback(() => {
+    const selectedServiceElem = document.querySelector('[data-filter-agenda].activeOption');
+    return selectedServiceElem ? selectedServiceElem.getAttribute('data-filter-agenda') : null;
+});
 selectAgenda(selectService, hours);
 const calender = new Calender('[data-calender-title="month"]', '[data-calender-title="year"]', '[data-button="next-month"]', '[data-button="prev-month"]', '[data-container="calender-days"]', '[data-schedule-date="agenda"]', (date) => hours.loadByDay(date)).init();
 sendDataSchedule();

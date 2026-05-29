@@ -8,6 +8,7 @@ export default class Hours{
         this.infoHour = document.querySelector(selectorInfoHour);
 
         this.currentDay = null;
+        this.ignoredAppointmentId = null;
 
         this.agenda = null;
         this.serviceInfos = null;
@@ -43,7 +44,7 @@ export default class Hours{
         this.contentHoursAfternoon.innerHTML = '';
 
         const agendaByDay = this.agenda.filter(hour => {
-            return hour.date === this.currentDay;
+            return hour.date === this.currentDay && hour.id !== this.ignoredAppointmentId;
         });
 
         let occupiedSlots = new Set();
@@ -63,8 +64,14 @@ export default class Hours{
             }
         });
 
-        const selectedServiceElem = document.querySelector('[data-filter-agenda].activeOption');
-        const selectedServiceName = selectedServiceElem ? selectedServiceElem.getAttribute('data-filter-agenda') : null;
+        let selectedServiceName = null;
+        if (this.getServiceName) {
+            selectedServiceName = this.getServiceName();
+        } else {
+            const selectedServiceElem = document.querySelector('[data-filter-agenda].activeOption');
+            selectedServiceName = selectedServiceElem ? selectedServiceElem.getAttribute('data-filter-agenda') : null;
+        }
+
         const selectedServiceInfo = selectedServiceName && this.serviceInfos ? this.serviceInfos[selectedServiceName] : null;
         const selectedServiceDuration = selectedServiceInfo ? selectedServiceInfo.time : 30;
 
@@ -120,6 +127,14 @@ export default class Hours{
     loadByDay(date){
         this.currentDay = date;
         this.renderHours();
+    }
+
+    setIgnoredAppointment(id){
+        this.ignoredAppointmentId = id;
+    }
+
+    setServiceSelectorCallback(callback) {
+        this.getServiceName = callback;
     }
 
     async getAgenda(){

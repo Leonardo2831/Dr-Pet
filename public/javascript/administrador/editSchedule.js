@@ -37,6 +37,19 @@ export default async function editSchedule(modal, id) {
     if (inputDate) inputDate.setAttribute('min', minDate);
 
     const hours = new Hours('[data-content="edit-hours-morning"]', '[data-content="edit-hours-afternoon"]', '[data-schedule-time="edit-agenda"]');
+    hours.setIgnoredAppointment(id);
+
+    hours.setServiceSelectorCallback(() => {
+        return selectServico ? selectServico.value : null;
+    });
+
+    if (selectServico) {
+        selectServico.addEventListener('change', () => {
+            if (hours.currentDay) {
+                hours.renderHours();
+            }
+        });
+    }
 
     if (inputDate) {
         inputDate.addEventListener('change', (e) => {
