@@ -31,8 +31,8 @@ export default async function schedule(form) {
             service: {
                 name: infosSchedule.service,
                 observations: formDataObject.get('descricao'),
-                duration: serviceInfo.time,
-                preco: serviceInfo.price,
+                duration: Number(serviceInfo.time),
+                preco: Number(serviceInfo.price),
             },
             date: infosSchedule.date,
             hour: infosSchedule.hour,
