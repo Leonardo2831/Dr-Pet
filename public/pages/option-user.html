@@ -137,7 +137,7 @@
                                 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 break-words line-clamp-2"
                                 ></span
                             >
-                            <button
+                            <button data-button="editarNome"
                                 class="p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-full flex-shrink-0 hover:scale-110 transition-transform"
                             >
                                 <img
@@ -672,6 +672,31 @@
                 </div>
 
                 <button data-button="saveSenha" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- modal trocar nome -->
+    <div data-modal="editName" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editName" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditName" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Nome</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Digite o seu nome:</label>
+                    <input data-input="editName" id="input-edit-Nome" type="text" name="Nome" placeholder="Seu nome completo" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveNome" type="button"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
                 </button>

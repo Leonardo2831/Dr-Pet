@@ -20,6 +20,12 @@ export default class UserInfosChange{
         this.buttonAddPets = document.querySelector('[data-button="Pet"]');
         this.modalAddPets = document.querySelector('[data-modal="addPet"]')
 
+        this.buttonSaveName = document.querySelector('[data-button="saveNome"]');
+        this.inputEditName = document.querySelector('[data-input="editName"]');
+        this.editNameButton = document.querySelector('[data-button="editarNome"]');
+        this.modalEditName = document.querySelector('[data-modal="editName"]');
+        this.saveName = this.saveName.bind(this);
+
 
         this.saveEmail = this.saveEmail.bind(this);
         this.savePhone = this.savePhone.bind(this);
@@ -52,6 +58,12 @@ export default class UserInfosChange{
         const newPassword = this.inputEditPassword.value;
         await this.fetchUser.put(this.userId, { ...this.userData, password: newPassword });
     }
+
+    async saveName(){
+        const newName = this.inputEditName.value;
+        await this.fetchUser.put(this.userId, { ...this.userData, userName: newName });
+        document.querySelector('[data-info="nameUser"]').textContent = newName;
+    }   
 
     async saveAddress() {
         const newStreet = document.querySelector('[data-input="rua"]').value;
@@ -142,6 +154,18 @@ export default class UserInfosChange{
             modal.classList.remove('flex');
         });
 
+        if(this.editNameButton) this.editNameButton.addEventListener('click', () => {
+            this.inputEditName.value = this.userData.userName;
+            this.modalEditName.classList.remove('hidden');
+            this.modalEditName.classList.add('flex');
+        });
+
+        if(this.buttonSaveName) this.buttonSaveName.addEventListener('click', this.saveName);
+
+        document.querySelector('[data-button="closeEditName"]').addEventListener('click', () => {
+            this.modalEditName.classList.add('hidden');
+            this.modalEditName.classList.remove('flex');
+        });
     }
 
 
