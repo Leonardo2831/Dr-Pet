@@ -10,4 +10,4 @@ new CheckLogin('[data-modal="loginRequired"]').init();
 
 const form = document.querySelector('form');
 fillForm(form);
-schedule(form, infosSchedule, infosServiceAbout);
+schedule(form);
