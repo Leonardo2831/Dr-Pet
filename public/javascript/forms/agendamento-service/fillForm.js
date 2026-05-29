@@ -1,4 +1,5 @@
 import Fetch from "../../utils/Fetch.js";
+import formatPhone from "../../utils/formatPhone.js";
 import Storage from "../../utils/Storage.js";
 
 export default async function fillForm(form) {
@@ -21,6 +22,7 @@ export default async function fillForm(form) {
 
     if (inputTelefone && userData.phone) {
         inputTelefone.value = userData.phone;
+        formatPhone('[data-input="formatPhone"]');
     }
 
     if (inputEndereco && userData.address?.length > 0) {

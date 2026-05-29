@@ -1,4 +1,6 @@
 import Storage from "../utils/Storage.js";
+import formatPhone from "../utils/formatPhone.js";
+import Criptografia from "../utils/Criptografia.js";
 
 export default class UserInfosChange{
     constructor(selectorButtonSaveEmail, selectorButtonSavePhone, selectorButtonSavePassword,
@@ -12,6 +14,7 @@ export default class UserInfosChange{
 
         this.inputEditEmail = document.querySelector(selectorInputEditEmail);
         this.inputEditPhone = document.querySelector(selectorInputEditPhone);
+        this.selectorInputEditPhone = selectorInputEditPhone;
         this.inputEditPassword = document.querySelector(selectorInputEditPassword);
 
         this.buttonAddAddress = document.querySelector('[data-button="address"]');
@@ -25,7 +28,6 @@ export default class UserInfosChange{
         this.editNameButton = document.querySelector('[data-button="editarNome"]');
         this.modalEditName = document.querySelector('[data-modal="editName"]');
         this.saveName = this.saveName.bind(this);
-
 
         this.saveEmail = this.saveEmail.bind(this);
         this.savePhone = this.savePhone.bind(this);
@@ -41,11 +43,11 @@ export default class UserInfosChange{
     loadDataUser(){
         this.inputEditEmail.value = this.userData.email;
         this.inputEditPhone.value = this.userData.phone;
-        this.inputEditPassword.value = this.userData.password;
+        formatPhone(this.selectorInputEditPhone);
     }
 
     async saveEmail(){
-        const newEmail = this.inputEditEmail.value;
+        const newEmail = this.inputEditEmail.value.replace(/\D/g, '');
         await this.fetchUser.put(this.userId, { ...this.userData, email: newEmail });
     }
 
@@ -56,7 +58,7 @@ export default class UserInfosChange{
 
     async savePassword(){
         const newPassword = this.inputEditPassword.value;
-        await this.fetchUser.put(this.userId, { ...this.userData, password: newPassword });
+        await this.fetchUser.put(this.userId, { ...this.userData, password: Criptografia.generateHash(newPassword) });
     }
 
     async saveName(){

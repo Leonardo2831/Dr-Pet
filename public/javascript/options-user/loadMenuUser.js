@@ -18,7 +18,7 @@ export default async function loadMenuUser(){
         if(!userData) return;
         if(userData.userName) nameUser.textContent = userData.userName;
         if(userData.email) infoDataUser.email.textContent = userData.email;
-        if(userData.phone) infoDataUser.phone.textContent = userData.phone;
+        if(userData.phone) infoDataUser.phone.textContent = `(${userData.phone.substring(0, 2)}) ${userData.phone.substring(2, 7)}-${userData.phone.substring(7)}`;
         if(userData.password) infoDataUser.password.textContent = '*'.repeat(10);
 
         if(userData.avatar) {
