@@ -278,4 +278,7 @@
     aside p.activeOption{
         @apply bg-gray-200;
     }
+    .ql-container.ql-snow, .ql-editor {
+        @apply text-lg
+    }
 }

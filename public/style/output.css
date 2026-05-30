@@ -1566,6 +1566,10 @@ aside p.activeOption{
   height: 400px;
 }
 
+.h-\[500px\]{
+  height: 500px;
+}
+
 .h-\[50px\]{
   height: 50px;
 }
@@ -1665,6 +1669,10 @@ aside p.activeOption{
 
 .min-h-screen{
   min-height: 100vh;
+}
+
+.min-h-\[100px\]{
+  min-height: 100px;
 }
 
 .\!w-\[100px\]{

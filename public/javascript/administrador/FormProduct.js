@@ -75,6 +75,7 @@ export default class FormProduct {
                     ]
                 }
             });
+            this.quillLong.root.style.fontSize = '1.125rem';
             this.quillLong.on('text-change', (delta, oldDelta) => {
                 this.handleEditorChange(this.quillLong, oldDelta, this.areaLongDescription, this.longDescriptionMaxLength);
             });
