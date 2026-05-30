@@ -11,7 +11,7 @@ export default function structAgenda(object){
     };
 
     const div = document.createElement('div');
-    div.className = "flex flex-col justify-between w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
+    div.className = "flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
     div.setAttribute('data-id', object.id);
 
     const [year, month, day] = object.date.split('-');
