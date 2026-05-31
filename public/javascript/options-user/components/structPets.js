@@ -67,7 +67,8 @@ export default function structPet(object, userData, fetchUser) {
         document.querySelector('[data-input="petName"]').value = object.name;
         document.querySelector('[data-input="petRace"]').value = object.race;
         document.querySelector('[data-input="petDescription"]').value = object.description;
-        document.querySelector('[data-input="petGender"]').value = object.gender;
+        const genderRadio = document.querySelector(`[data-input="petGender"][value="${object.gender}"]`);
+        if (genderRadio) genderRadio.checked = true;
         document.querySelector('[data-button="savePet"]').dataset.editId = object.id;
     });
 

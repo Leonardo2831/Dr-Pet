@@ -1,6 +1,7 @@
 import Storage from "../utils/Storage.js";
 import formatPhone from "../utils/formatPhone.js";
 import Criptografia from "../utils/Criptografia.js";
+import buscarCEP from "../utils/viaCEP.js";
 
 export default class UserInfosChange{
     constructor(selectorButtonSaveEmail, selectorButtonSavePhone, selectorButtonSavePassword,
@@ -102,7 +103,7 @@ export default class UserInfosChange{
     async savePets(){
         const newName = document.querySelector('[data-input="petName"]').value;
         const newRace = document.querySelector('[data-input="petRace"]').value;
-        const newGender = document.querySelector('[data-input="petGender"]').value;
+        const newGender = document.querySelector('[data-input="petGender"]:checked')?.value || '';
         const newDescription = document.querySelector('[data-input="petDescription"]').value;
 
         const newPet = {
@@ -127,7 +128,32 @@ export default class UserInfosChange{
 
 
 
+    initCEPLookup() {
+        const inputCEP = document.querySelector('[data-input="cep"]');
+        if (!inputCEP) return;
+
+        inputCEP.addEventListener('blur', async () => {
+            const address = await buscarCEP(inputCEP.value);
+            if (!address) return;
+
+            const fields = {
+                rua: document.querySelector('[data-input="rua"]'),
+                bairro: document.querySelector('[data-input="bairro"]'),
+                cidade: document.querySelector('[data-input="cidade"]'),
+                estado: document.querySelector('[data-input="estado"]'),
+            };
+
+            if (fields.rua && !fields.rua.value) fields.rua.value = address.rua;
+            if (fields.bairro && !fields.bairro.value) fields.bairro.value = address.bairro;
+            if (fields.cidade) fields.cidade.value = address.cidade;
+            if (fields.estado) fields.estado.value = address.estado;
+
+            document.querySelector('[data-input="numero"]')?.focus();
+        });
+    }
+
     addEventsSave(){
+        this.initCEPLookup();
         if(this.buttonSaveEmail) this.buttonSaveEmail.addEventListener('click', this.saveEmail);
         if(this.buttonSavePhone) this.buttonSavePhone.addEventListener('click', this.savePhone);
         if(this.buttonSavePassword) this.buttonSavePassword.addEventListener('click', this.savePassword);

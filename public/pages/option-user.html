@@ -793,10 +793,20 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-6">
-                    <div class="flex flex-col gap-[10px] sm:w-[200px]">
-                        <label for="input-gender" class="font-sans font-semibold text-base md:text-lg text-gray-700">Genero</label>
-                        <input data-input="petGender" id="input-gender" type="text" name="gender" placeholder="Ex: Macho" required
-                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    <div class="flex flex-col gap-[10px]">
+                        <span class="font-sans font-semibold text-base md:text-lg text-gray-700">Gênero</span>
+                        <div class="flex flex-row gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input data-input="petGender" type="radio" name="gender" value="Macho" required
+                                    class="w-4 h-4 accent-green-600" />
+                                <span class="font-medium text-base md:text-lg text-gray-600">Macho</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input data-input="petGender" type="radio" name="gender" value="Fêmea"
+                                    class="w-4 h-4 accent-green-600" />
+                                <span class="font-medium text-base md:text-lg text-gray-600">Fêmea</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
