@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/style/output.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
-    <title><%= tituloDaPagina %></title>
+    <title><%= locals.tituloDaPagina ? tituloDaPagina : 'Dr. Pet' %></title>
 </head>
 <body class="antialiased">
     <div class="bg-green-600 sticky top-0 z-50">

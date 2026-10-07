@@ -1,5 +1,141 @@
 <%- include('layouts/header') %>
 
+<div>
+            <main>
+            <figure>
+                <img
+                    src="../images/banner-loja.jpg"
+                    alt="Banner loja"
+                    class="w-full h-auto object-cover object-center"
+                />
+            </figure>
+
+            <section class="bg-gray-50">
+                <div
+                    class="container px-6 md:px-12 lg:px-20 py-10 md:py-[60px]"
+                >
+                    <nav>
+                        <h1
+                            class="text-gray-800 font-sans font-semibold text-[28px] md:text-[40px] lg:text-[52px] leading-[1.23] text-left md:text-center w-full mb-[30px]"
+                        >
+                            Nosso catalogo especialmente pensado para seu
+                            <span class="text-green-300">pet!</span>
+                        </h1>
+
+                        <div
+                            class="relative flex items-center gap-5 md:gap-[30px] lg:gap-10 xl:gap-[50px]"
+                        >
+                            <label
+                                for="search-input"
+                                class="relative w-full flex-grow"
+                            >
+                                <input
+                                    data-input="filterLojaProducts"
+                                    id="search-input"
+                                    type="text"
+                                    placeholder="Ração para Cachorros"
+                                    class="w-full bg-gray-100 border-[4px] border-gray-500 text-gray-700 placeholder-gray-400 rounded-[20px] py-4 md:py-6 pl-4 md:pl-12 pr-14 md:pr-24 text-lg md:text-xl lg:text-2xl font-sans font-semibold uppercase leading-[1.23] outline-none focus:border-green-400 transition-all duration-300 cursor-text"
+                                />
+                                <img
+                                    src="../images/icons/search.svg"
+                                    alt="Lupa de pesquisa"
+                                    class="absolute right-5 md:right-[30px] lg:right-[48px] top-1/2 -translate-y-1/2 w-8 h-8 md:w-[45px] md:h-[45px] pointer-events-none"
+                                />
+                            </label>
+
+                            <button
+                                type="button"
+                                data-button="filtro"
+                                class="p-3 flex-shrink-0 outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-4 focus:ring-offset-gray-50 rounded-[12px] transition-all duration-300 flex items-center justify-center cursor-pointer"
+                            >
+                                <img
+                                    src="../images/icons/loja-icons/filtro.svg"
+                                    alt="Ícone de Filtros"
+                                    class="outline-none w-12 h-12 md:w-[50px] md:h-[50px] lg:w-[64px] lg:h-[64px] object-contain"
+                                />
+                            </button>
+
+                            <aside
+                                data-modal="filtroLoja"
+                                class="mt-2 hidden overflow-hidden absolute top-full right-0 min-w-[250px] w-fit flex-col bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] z-50 animate-fadeTop *:cursor-pointer"
+                            >
+                                <p
+                                    data-filter="all"
+                                    class="activeOption flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Todos os produtos
+                                </p>
+                                <p
+                                    data-filter="Acessórios"
+                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Acessórios
+                                </p>
+                                <p
+                                    data-filter="brinquedos"
+                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Brinquedos
+                                </p>
+                                <p
+                                    data-filter="Ração"
+                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Rações
+                                </p>
+                                <p
+                                    data-filter="Higiene"
+                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Higiene
+                                </p>
+                                <p
+                                    data-filter="Medicamentos"
+                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap"
+                                >
+                                    Medicamentos
+                                </p>
+                            </aside>
+                        </div>
+                    </nav>
+
+                    <section
+                        class="mt-10 bg-gray-100 py-10 px-6 md:px-[60px] lg:px-[120px] md:py-[50px] rounded-[10px] relative w-full shadow-sm"
+                    >
+                        <div
+                            data-content-shop="products"
+                            class="swiper product-swiper w-full overflow-hidden pb-4"
+                        ></div>
+                        <button
+                            class="group loja-swiper-button-prev hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
+                        >
+                            <img
+                                src="../images/icons/slide/arrow-left.svg"
+                                alt="Anterior"
+                                class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                            />
+                        </button>
+                        <button
+                            class="group loja-swiper-button-next hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
+                        >
+                            <img
+                                src="../images/icons/slide/arrow-right.svg"
+                                alt="Próximo"
+                                class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                            />
+                        </button>
+                    </section>
+                    <!-- ver se irá precisar mesmo do botão ver mais -->
+                    <!-- <div class="flex justify-center mt-10">
+                    <button
+                        class="min-w-[350px] px-8 py-4 bg-green-600 hover:bg-green-500 text-xl md:text-2xl lg:text-3xl font-semibold text-gray-50 uppercase rounded-[12px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400">
+                        Veja mais...
+                    </button>
+                </div> -->
+                </div>
+            </section>
+        </main>
+</div>
 
 
 <%- include('layouts/footer', { scripts: [] }) %>
