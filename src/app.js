@@ -29,14 +29,18 @@ app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);
 
-db.connect((err) => {
-    if (err) {
-        console.log('Erro ao conectar ao banco de dados');
-        console.log(err);
-    } else {
-        console.log('Conectado ao banco de dados');
-        app.listen(port, () => {
-            console.log('Servidor rodando na porta ' + port);
-        });
-    }
-});
+try{
+    db.connect((err) => {
+        if (err) {
+            console.log('Erro ao conectar ao banco de dados');
+            console.log(err);
+        } else {
+            console.log('Conectado ao banco de dados');
+            app.listen(port, () => {
+                console.log('Servidor rodando na porta ' + port);
+            });
+        }
+    });
+} catch(err) {
+    console.log(err);
+}
