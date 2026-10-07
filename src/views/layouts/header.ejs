@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style/output.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- no ejs a variavel passada por include é salva no objeto locals -->
+    <% if (locals.swiper) { %>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <% } %>
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
     <title><%= locals.tituloDaPagina ? tituloDaPagina : 'Dr. Pet' %></title>
 </head>

@@ -1,5 +1,690 @@
-<%- include('layouts/header') %>
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Opções do Usuário' }) %>
 
 <!-- usar rotas para mostrar cada aba, como endereço... -->
 
-<%- include('layouts/footer', { scripts: [] }) %>
+    <div class="bg-gray-50">
+        <main class="container min-h-[calc(100vh_-_570px)] w-full p-6 md:p-10 lg:p-20 flex flex-col justify-center">
+            <section
+                class="animate-fadeTop w-full shadow-md rounded-2xl overflow-hidden bg-gray-100"
+                id="menu-inicial"
+            >
+                <div
+                    class="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 bg-gray-200"
+                >
+                    <figure class="relative flex-shrink-0">
+                        <img
+                            src="../images/icons/options/user-default.svg"
+                            alt="Foto do Usuário"
+                            class="w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-cover rounded-full"
+                        />
+                        <label
+                            for="image-user"
+                            class="cursor-pointer absolute bottom-0 right-0 outline-none focus:ring-2 focus:ring-green-400 rounded-full hover:scale-110 transition-transform"
+                        >
+                            <img
+                                src="../images/icons/options/edit-circle.svg"
+                                alt="Editar Foto"
+                                class="w-4 h-4 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-200 rounded-full"
+                            />
+                            <input type="file" data-input="avatarUser" id="image-user" name="image-user" class="hidden" hidden>
+                        </label>
+                    </figure>
+                    <div
+                        class="flex items-center gap-3 sm:gap-4 lg:gap-6 flex-wrap w-full"
+                    >
+                        <span data-info="nameUser"
+                            class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 break-words line-clamp-2"
+                            ></span
+                        >
+                        <button data-button="editarNome"
+                            class="p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-full flex-shrink-0 hover:scale-110 transition-transform"
+                        >
+                            <img
+                                src="../images/icons/options/edit.svg"
+                                alt="Editar Nome"
+                                class="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8"
+                            />
+                        </button>
+                    </div>
+                </div>
+
+                <button
+                    data-target="dados-pessoais"
+                    class="w-full flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
+                >
+                    <div
+                        class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
+                    >
+                        <img
+                            src="../images/icons/options/card-people.svg"
+                            alt="Ícone Dados Pessoais"
+                            class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                        />
+                    </div>
+                    <span
+                        class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
+                        >Dados pessoais</span
+                    >
+                </button>
+
+                <button
+                    data-target="Endereco"
+                    class="w-full  flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none border-b border-gray-200/50"
+                >
+                    <div
+                        class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
+                    >
+                        <img
+                            src="../images/icons/options/location.svg"
+                            alt="Ícone Endereço"
+                            class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                        />
+                    </div>
+                    <span
+                        class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
+                        >Endereço</span
+                    >
+                </button>
+
+                <button
+                    data-target="dados-pet"
+                    class="w-full  flex items-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 hover:bg-gray-200 transition-colors focus:bg-gray-200 outline-none"
+                >
+                    <div
+                        class="w-12 sm:w-16 lg:w-20 flex justify-center items-center flex-shrink-0"
+                    >
+                        <img
+                            src="../images/icons/options/pets.png"
+                            alt="Ícone Pets"
+                            class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-cover rounded-full"
+                        />
+                    </div>
+                    <span
+                        class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700"
+                        >Pets</span
+                    >
+                </button>
+            </section>
+
+            <!-- menu dados pessoais -->
+            <section
+                class="animate-fadeLeft hidden w-full rounded-2xl shadow-sm"
+                id="dados-pessoais"
+            >
+                <nav
+                    class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]"
+                >
+                    <span
+                        data-target="menu-inicial"
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer"
+                        >Menu</span
+                    >
+                    <span
+                        class="select-none text-[0.8em]"
+                        aria-hidden="true"
+                        >&gt;</span
+                    >
+                    <span aria-current="page">Dados Pessoais</span>
+                </nav>
+
+                <div
+                    class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100"
+                >
+                    <div
+                        class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:p-[30px] border-b border-gray-200/50"
+                    >
+                        <div
+                            class="flex flex-row items-center gap-4 sm:gap-5"
+                        >
+                            <figure
+                                class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0"
+                            >
+                                <img
+                                    src="../images/icons/options/dados-pesssoais/email.svg"
+                                    alt="Ícone Email"
+                                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[45px] lg:h-auto object-contain"
+                                />
+                            </figure>
+                            <div
+                                class="flex flex-col gap-1 sm:gap-2 lg:gap-[10px]"
+                            >
+                                <span
+                                    class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
+                                >Email</span
+                                >
+                                <span data-info="email"
+                                    class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px] break-all"
+                                ></span>
+                            </div>
+                        </div>
+                        <a
+                            href="#"
+                            class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                            data-button="openEditEmail"
+                        >
+                            Alterar Email
+                        </a>
+                    </div>
+
+                    <div
+                        class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:p-[30px] border-b border-gray-200/50"
+                    >
+                        <div
+                            class="flex flex-row items-center gap-4 sm:gap-5"
+                        >
+                            <figure
+                                class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0"
+                            >
+                                <img
+                                    src="../images/icons/options/dados-pesssoais/phone.svg"
+                                    alt="Ícone Telefone"
+                                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[50px] lg:h-auto object-contain"
+                                />
+                            </figure>
+                            <div
+                                class="flex flex-col gap-1 sm:gap-2 lg:gap-[10px]"
+                            >
+                                <span
+                                    class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
+                                >Telefone</span
+                                >
+                                <span data-info="telefone"
+                                    class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
+                                ></span>
+                            </div>
+                        </div>
+                        <a
+                            href="#"
+                            class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                            data-button="openEditTelefone"
+                        >
+                            Alterar telefone
+                        </a>
+                    </div>
+
+                    <div
+                        class="flex flex-row items-center justify-between p-4 sm:p-6 lg:p-[30px] flex-wrap gap-4"
+                    >
+                        <div
+                            class="flex flex-row items-center gap-4 sm:gap-5"
+                        >
+                            <div
+                                class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0"
+                            >
+                                <img
+                                    src="../images/icons/options/dados-pesssoais/key.svg"
+                                    alt="Ícone Senha"
+                                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[45px] lg:h-auto object-contain"
+                                />
+                            </div>
+                            <div
+                                class="flex flex-col gap-1 sm:gap-2 lg:gap-[10px]"
+                            >
+                                <span
+                                    class="text-xl sm:text-2xl lg:text-[32px] font-semibold text-gray-800 leading-tight lg:leading-[40px]"
+                                >Senha</span
+                                >
+                                <span data-info="senha"
+                                    class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
+                                ></span>
+                            </div>
+                        </div>
+                        <a
+                            href="#"
+                            class="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-blue-link underline hover:text-blue-hover transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2 mt-2 sm:mt-0"
+                            data-button="openEditSenha"
+                        >
+                            Alterar senha
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- menu endereços -->
+            <section class="animate-fadeRight hidden w-full rounded-2xl shadow-sm" id="Endereco">
+                <nav
+                    class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]"
+                >
+                    <span
+                        data-target="menu-inicial"
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer"
+                    >
+                        Menu
+                    </span>
+                    <span
+                        class="select-none text-[0.8em]"
+                        aria-hidden="true"
+                    >
+                        &gt;
+                    </span>
+                    <span aria-current="page">Endereços</span>
+                </nav>
+                <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
+                    <div id="address-container" class="peer">
+                        <!-- endereços aparecem aqui dinamicamente -->
+                    </div>
+                    <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
+                        <a data-button="address" href="#"
+                            class="inline-block text-lg sm:text-xl lg:text-2xl font-medium text-blue-link hover:text-blue-hover hover:scale-[1.02] active:scale-95 transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2"
+                        >Adicionar endereço</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- menu pets -->
+            <section
+                class="animate-fadeDown hidden w-full rounded-2xl shadow-sm"
+                id="dados-pet"
+            >
+                <nav
+                    class="mb-10 flex items-center gap-2 sm:gap-3 text-2xl sm:text-3xl lg:text-[40px] font-bold text-green-600 leading-tight lg:leading-[50px]"
+                >
+                    <span
+                        data-target="menu-inicial"
+                        class="hover:text-green-700 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded-md cursor-pointer"
+                    >
+                        Menu
+                    </span>
+                    <span
+                        class="select-none text-[0.8em]"
+                        aria-hidden="true"
+                    >
+                        &gt;
+                    </span>
+                    <span aria-current="page">Pets</span>
+                </nav>
+
+                <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
+                    <div id="pet-container" class="peer">
+                        <!-- pets aparecem aqui dinamicamente -->
+                    </div>
+                    <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
+                        <a data-button="Pet" href="#"
+                            class="inline-block text-lg sm:text-xl lg:text-2xl font-medium text-blue-link hover:text-blue-hover hover:scale-[1.02] active:scale-95 transition-all duration-300 outline-none focus:ring-2 focus:ring-blue-link rounded-md p-2">
+                            Adicionar pet
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- pop-up pets -->
+    <aside
+        data-popup="options-pet"
+        class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop"
+    >
+        <button data-button="editPet"
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
+            aria-label="Editar pet"
+        >
+            <span
+                class="text-[22px] leading-[27px] font-medium text-green-400 whitespace-nowrap"
+            >
+                Editar
+            </span>
+            <img
+                src="../images/icons/options/edit.svg"
+                alt="Ícone Editar"
+                class="w-6 h-6 flex-shrink-0"
+            />
+        </button>
+        <button data-button="deletePet"
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
+            aria-label="Excluir pet"
+        >
+            <span
+                class="text-[22px] leading-[27px] font-medium text-gray-800 whitespace-nowrap"
+            >
+                Excluir
+            </span>
+            <img
+                src="../images/icons/options/delete.svg"
+                alt="Ícone Excluir"
+                class="w-6 h-6 flex-shrink-0"
+            />
+        </button>
+    </aside>
+
+    <!-- pop up address -->
+    <aside
+        data-popup="options-address"
+        class="hidden fixed z-[999] flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-max overflow-hidden animate-fadeTop"
+    >
+        <button data-button="editAddress"
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-green-400"
+            aria-label="Editar endereco"
+        >
+            <span 
+                class="text-[22px] leading-[27px] font-medium text-green-400 whitespace-nowrap"
+            >
+                Editar
+            </span>
+            <img
+                src="../images/icons/options/edit.svg"
+                alt="Ícone Editar"
+                class="w-6 h-6 flex-shrink-0"
+            />
+        </button>
+        <button data-button="deleteAddress"
+            class="flex flex-row items-center justify-center gap-[30px] px-9 py-6 w-full bg-gray-100 hover:brightness-95 transition-all duration-200 outline-none focus:ring-2 focus:ring-red-alert"
+            aria-label="Excluir pet"
+        >
+            <span
+                class="text-[22px] leading-[27px] font-medium text-gray-800 whitespace-nowrap"
+            >
+                Excluir
+            </span>
+            <img
+                src="../images/icons/options/delete.svg"
+                alt="Ícone Excluir"
+                class="w-6 h-6 flex-shrink-0"
+            />
+        </button>
+    </aside>
+
+    <!-- modal alterar email -->
+    <aside data-modal="editEmail" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editEmail" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditEmail" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Email</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-email" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Email</label>
+                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" placeholder="seu@email.com" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveEmail" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <aside data-modal="editTelefone" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editTelefone" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditTelefone" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Telefone</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-Telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Telefone</label>
+                    <input data-input="editTelefone" data-input="formatPhone" id="input-edit-Telefone" type="tel" name="Telefone" placeholder="(XX) XX XXXX-XXXX" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveTelefone" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <aside data-modal="editSenha" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditSenha" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Senha</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
+                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="Senha" placeholder="Digite sua senha" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveSenha" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- modal trocar nome -->
+    <aside data-modal="editName" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="editName" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+
+                <button type="button" data-button="closeEditName" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar">
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Nome</h3>
+
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Digite o seu nome:</label>
+                    <input data-input="editName" id="input-edit-Nome" type="text" name="Nome" placeholder="Seu nome completo" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveNome" type="button"
+                    class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- modal adicionar endereço -->
+    <aside data-modal="addAddress" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="addAddress" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+
+                <button type="button" data-button="closeFormAddress" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar Endereço</h3>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-rua" class="font-sans font-semibold text-base md:text-lg text-gray-700">Rua</label>
+                        <input data-input="rua" id="input-rua" type="text" name="rua" placeholder="Ex: Rua das Flores" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[150px]">
+                        <label for="input-numero" class="font-sans font-semibold text-base md:text-lg text-gray-700">Número</label>
+                        <input data-input="numero" id="input-numero" type="text" name="numero" placeholder="Ex: 123" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] sm:w-[200px]">
+                        <label for="input-cep" class="font-sans font-semibold text-base md:text-lg text-gray-700">CEP</label>
+                        <input data-input="cep" id="input-cep" type="text" name="cep" placeholder="Ex: 00000-000" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-cidade" class="font-sans font-semibold text-base md:text-lg text-gray-700">Cidade</label>
+                        <input data-input="cidade" id="input-cidade" type="text" name="cidade" placeholder="Ex: São Paulo" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[100px]">
+                        <label for="input-estado" class="font-sans font-semibold text-base md:text-lg text-gray-700">Estado</label>
+                        <input data-input="estado" id="input-estado" type="text" name="estado" placeholder="Ex: SP" maxlength="2" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-bairro" class="font-sans font-semibold text-base md:text-lg text-gray-700">Bairro</label>
+                        <input data-input="bairro" id="input-bairro" type="text" name="bairro" placeholder="Ex: Centro" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-telefone-address" class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
+                        <input data-input="telefoneAddress" id="input-telefone-address" type="tel" name="telefone" placeholder="(00) 00000-0000" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <button data-button="saveAddress" type="button"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Endereço</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Modal de pets -->
+    <aside data-modal="addPet" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
+        <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
+            <form data-form="addPet" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+
+                <button type="button" data-button="closeFormPet" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                </button>
+
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar meu Pet</h3>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-name" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome</label>
+                        <input data-input="petName" id="input-name" type="text" name="name" placeholder="Nome do seu pet" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-[10px] sm:w-[150px]">
+                        <label for="input-race" class="font-sans font-semibold text-base md:text-lg text-gray-700">Raça</label>
+                        <input data-input="petRace" id="input-race" type="text" name="race" placeholder="Ex: Cachorro" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px]">
+                        <span class="font-sans font-semibold text-base md:text-lg text-gray-700">Gênero</span>
+                        <div class="flex flex-row gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input data-input="petGender" type="radio" name="gender" value="Macho" checked required
+                                    class="w-4 h-4 accent-green-600" />
+                                <span class="font-medium text-base md:text-lg text-gray-600">Macho</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input data-input="petGender" type="radio" name="gender" value="Fêmea"
+                                    class="w-4 h-4 accent-green-600" />
+                                <span class="font-medium text-base md:text-lg text-gray-600">Fêmea</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col gap-[10px] flex-1">
+                        <label for="input-descriptionPet" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do pet</label>
+                        <textarea data-input="petDescription" id="input-descriptionPet" name="descriptionPet" placeholder="Ex: ele é muito legal" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea> 
+                    </div>
+                </div>
+
+                <button data-button="savePet" type="button"
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar meu pet</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <aside data-modal-info-menu="user" class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"></aside>
+
+    <!-- Modal de checar login -->
+    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+        
+        <div data-login-overlay class="absolute inset-0 bg-black/60 opacity-0"></div>
+
+        <div data-login-content class="relative w-full max-w-[460px] bg-gray-50 rounded-2xl shadow-2xl overflow-hidden opacity-0">
+            <header class="bg-green-600 px-5 py-5 xs:px-8 xs:py-7 flex items-center justify-between">
+                <figure class="flex items-center gap-4">
+                    <img src="../images/logo.png" alt="Logo Dr. Pet" class="w-[34px] xs:w-[42px] h-auto object-contain" />
+                    <span class="text-lg xs:text-xl md:text-2xl font-semibold text-gray-50">Dr. Pet</span>
+                </figure>
+                <button data-login-close class="text-gray-50 hover:text-green-200 transition-colors duration-200 p-1 outline-none focus:ring-2 focus:ring-green-200 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </header>
+
+            <div class="px-5 py-5 xs:px-8 xs:py-8 flex flex-col items-center gap-4 xs:gap-6 text-center">
+                
+                <figure class="w-[56px] h-[56px] xs:w-[72px] xs:h-[72px] bg-green-500 rounded-full flex items-center justify-center shadow-sm">
+                    <img src="../images/icons/user.svg" alt="Criar Conta">
+                </figure>
+
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-xl xs:text-2xl md:text-[26px] font-bold text-gray-800 leading-tight">
+                        Acesse sua conta
+                    </h3>
+                    <p class="text-sm xs:text-base md:text-lg font-medium text-gray-500 leading-relaxed max-w-[360px]">
+                        Para agendar serviços para o seu pet, é necessário estar logado na sua conta.
+                    </p>
+                </div>
+
+                <a href="cadastrar.html"
+                    class="min-w-0 w-full flex items-center justify-center gap-2 xs:gap-3 px-3 xs:px-6 py-3 xs:py-4 bg-green-500 hover:bg-green-400 text-xs xs:text-base md:text-xl font-bold text-gray-50 uppercase rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
+                    <img src="../images/icons/user.svg" alt="Criar Conta" class="w-5 h-5 shrink-0">
+                    <span class="truncate">Criar minha conta</span>
+                </a>
+
+                <div class="flex items-center gap-4 w-full">
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-sm font-medium text-gray-400 uppercase tracking-wide">ou</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                <a href="login.html"
+                    class="min-w-0 w-full flex items-center justify-center gap-3 px-3 xs:px-6 py-3 xs:py-[14px] border-2 border-green-500 text-green-600 hover:bg-green-50 text-xs xs:text-base md:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
+                    <span class="truncate">Já tenho uma conta</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Modal de Confirmação -->
+    <aside data-confirm-modal
+        class="hidden fixed inset-0 z-[1000] items-center justify-center bg-black/30">
+        <div data-confirm-card
+            class="flex flex-col items-center gap-4 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,0,0,0.14)] px-6 py-5 w-[90%] max-w-[260px] scale-90 opacity-0 transition-all duration-200 ease-out">
+
+            <p data-confirm-message
+                class="font-sans font-semibold text-sm text-gray-700 text-center leading-snug">
+                Tem certeza?
+            </p>
+
+            <div class="flex flex-row items-center gap-2 w-full">
+                <button type="button" data-confirm-btn="cancel"
+                    class="flex-1 flex items-center justify-center px-3 py-[7px] rounded-lg border border-gray-300 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300/50 transition-all font-semibold text-xs text-gray-500 uppercase tracking-wide">
+                    Cancelar
+                </button>
+                <button type="button" data-confirm-btn="confirm"
+                    class="flex-1 flex items-center justify-center px-3 py-[7px] rounded-lg bg-red-alert hover:bg-red-alert/90 focus:outline-none focus:ring-2 focus:ring-red-alert/40 transition-all font-semibold text-xs text-white uppercase tracking-wide">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </aside>
+
+<%- include('layouts/footer', { scripts: [
+    { src: 'public/javascript/utils/UserTabNav.js', module: true },
+    { src: 'public/javascript/menu-user/script-menu-user.js', module: true },
+    { src: 'public/javascript/options-user/script-optionsUser.js', module: true },
+    { src: 'public/javascript/options-user/components/structEndereço.js', module: true },
+    { src: 'public/javascript/options-user/components/structPets.js', module: true }
+] }) %>
