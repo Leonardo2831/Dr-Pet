@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('./router/mysql');
+const db = require('./database/mysql');
 
 const homeRouter = require('./router/home');
 
