@@ -1,4 +1,4 @@
-import Criptografia from '../../utils/Criptografia.js';
+﻿import Criptografia from '../../utils/Criptografia.js';
 import Fetch from '../../utils/Fetch.js';
 import toggleShowPassword from '../toggleShowPassword.js';
 
@@ -14,15 +14,15 @@ export default class Cadastrar {
         event.preventDefault();
 
         const formData = new FormData(this.form);
-        // cria um objeto com os dados do formulário
+        // cria um objeto com os dados do formulÃ¡rio
         const dadosUsuario = Object.fromEntries(formData.entries());
 
         if (dadosUsuario.password !== dadosUsuario.confirmPassword) {
-            this.api.showModalError("Erro de autenticação, senhas diferentes", 'As senhas não são iguais');
+            this.api.showModalError("Erro de autenticaÃ§Ã£o, senhas diferentes", 'As senhas nÃ£o sÃ£o iguais');
             return;
         }
 
-        // deletando o atributo do objeto de confirmação de senha
+        // deletando o atributo do objeto de confirmaÃ§Ã£o de senha
         delete dadosUsuario.confirmPassword;
         dadosUsuario.id = crypto.randomUUID();
         dadosUsuario.password = Criptografia.generateHash(dadosUsuario.password);
@@ -35,7 +35,7 @@ export default class Cadastrar {
 
         if (response && response.ok) {
             this.api.showModalSuccess('Conta criada com sucesso!');
-            window.location.href = 'login.html';
+            window.location.href = '/login';
         }
     }
 

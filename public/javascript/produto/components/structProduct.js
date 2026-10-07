@@ -1,8 +1,8 @@
-export default function structProduct(productObject){
+﻿export default function structProduct(productObject){
     const a = document.createElement('a');
     a.className = "swiper-slide animate-fadeLeft !w-[160px] xs:!w-[180px] sm:!w-[220px] md:!w-[300px] lg:!w-[350px] h-auto cursor-pointer flex flex-col bg-white rounded-[10px] shadow transition-shadow group"
     a.setAttribute('data-id', productObject.id);
-    a.setAttribute('href', `./produto.html?id=${productObject.id}`);
+    a.setAttribute('href', `/produto?id=${productObject.id}`);
 
     a.innerHTML = `
         <figure class="relative aspect-square overflow-hidden shrink-0 rounded-t-[10px]">

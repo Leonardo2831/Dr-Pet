@@ -1,4 +1,4 @@
-import Storage from "../utils/Storage.js";
+﻿import Storage from "../utils/Storage.js";
 
 export default function sendDataSchedule(){
     const buttonSubmitInfosSchedule = document.querySelector('[data-button="submitInfosSchedule"]');
@@ -14,11 +14,11 @@ export default function sendDataSchedule(){
                 hour: infoHour
             };
             Storage.set('scheduleData', data);
-            window.open('../pages/form-agendar.html', '_self');
+            window.open('/form-agendar', '_self');
         } else {
             if(buttonSubmitInfosSchedule.previousElementSibling) return;
             const p = document.createElement('p');
-            p.textContent = 'Selecione serviço, um horário e uma data.';
+            p.textContent = 'Selecione serviÃ§o, um horÃ¡rio e uma data.';
             p.className = 'animate-fadeTop text-red-alert text-base mb-4 font-semibold';
             buttonSubmitInfosSchedule.insertAdjacentElement('beforebegin', p);
         }

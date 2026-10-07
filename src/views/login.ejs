@@ -1,4 +1,4 @@
-<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Login' }) %>
+﻿<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Login' }) %>
 
     <main class="flex flex-col lg:flex-row">
         <section
@@ -60,7 +60,7 @@
                         <span
                             class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Continuar</span>
                     </button>
-                    <a href="cadastrar.html"
+                    <a href="/cadastrar"
                         class="btn-create-account basis-full w-[280px] xs:w-[290px] sm:w-[300px] h-[69px] rounded-[10px] px-8 py-4 flex items-center justify-center outline-none focus:ring-2 focus:ring-green-300 mx-auto">
                         <span
                             class="font-semibold text-[22px] leading-[28px] text-green-700 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]">Criar
@@ -119,7 +119,7 @@
                     </p>
                 </div>
 
-                <a href="cadastrar.html"
+                <a href="/cadastrar"
                     class="min-w-0 w-full flex items-center justify-center gap-2 xs:gap-3 px-3 xs:px-6 py-3 xs:py-4 bg-green-500 hover:bg-green-400 text-xs xs:text-base md:text-xl font-bold text-gray-50 uppercase rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
                     <img src="/images/icons/user.svg" alt="Criar Conta" class="w-5 h-5 shrink-0">
                     <span class="truncate">Criar minha conta</span>
@@ -131,7 +131,7 @@
                     <div class="flex-1 h-px bg-gray-200"></div>
                 </div>
 
-                <a href="login.html"
+                <a href="/login"
                     class="min-w-0 w-full flex items-center justify-center gap-3 px-3 xs:px-6 py-3 xs:py-[14px] border-2 border-green-500 text-green-600 hover:bg-green-50 text-xs xs:text-base md:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
                     <span class="truncate">Já tenho uma conta</span>
                 </a>
@@ -143,3 +143,5 @@
     { src: '/javascript/menu-user/script-menu-user.js', module: true },
     { src: '/javascript/forms/login-account/script-login.js', module: true }
 ] }) %>
+
+

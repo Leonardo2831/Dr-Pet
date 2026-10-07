@@ -1,4 +1,4 @@
-import Fetch from '../utils/Fetch.js';
+﻿import Fetch from '../utils/Fetch.js';
 import Storage from '../utils/Storage.js';
 import structMenuUser from './components/structMenuUser.js';
 import PopUp from '../utils/Pop-up.js';
@@ -13,7 +13,7 @@ export default class MenuUserLoading{
         this.menuUserContent.querySelector('[data-button="logout"]').addEventListener('click', () => {
             Storage.delete('user-id');
             const isInPages = window.location.pathname.includes('/public/pages/');
-            window.location.href = isInPages ? './login.html' : 'public/pages/login.html';
+            window.location.href = '/login';
         });
     }
 

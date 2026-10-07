@@ -1,4 +1,4 @@
-import Fetch from '../../utils/Fetch.js';
+﻿import Fetch from '../../utils/Fetch.js';
 import Storage from '../../utils/Storage.js';
 import toggleShowPassword from '../toggleShowPassword.js';
 import Criptografia from '../../utils/Criptografia.js';
@@ -30,7 +30,7 @@ export default class Login {
         event.preventDefault();
 
         const data = await this.fetchJson.get();
-        // procura usuário válido
+        // procura usuÃ¡rio vÃ¡lido
         const validUser = data.find(user =>
             user.email === this.inputEmail.value &&
             Criptografia.checkHash(this.inputPassword.value, user.password)
@@ -40,10 +40,10 @@ export default class Login {
             this.fetchJson.showModalSuccess('Login realizado com sucesso!');
             if(validUser.typeUser == "comum"){
                 Storage.set('user-id', validUser.id);
-                window.location.href = '../../index.html';
+                window.location.href = '/';
             } else {
                 Storage.set('user-id', validUser.id);
-                window.location.href = '../../public/pages/administrador.html';
+                window.location.href = '/administrador';
             }
         } else {
             this.fetchJson.showModalError(null, 'E-mail ou senha incorretos');

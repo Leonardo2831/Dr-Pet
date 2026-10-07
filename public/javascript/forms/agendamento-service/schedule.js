@@ -1,4 +1,4 @@
-import Fetch from "../../utils/Fetch.js";
+﻿import Fetch from "../../utils/Fetch.js";
 import Storage from "../../utils/Storage.js";
 
 export default async function schedule(form) {
@@ -44,9 +44,9 @@ export default async function schedule(form) {
 
             if (resposta && resposta.ok) {
                 Storage.delete('scheduleData');
-                window.location.href = 'agenda.html';
+                window.location.href = '/agenda';
             } else {
-                console.error('Erro ao salvar: resposta inválida', resposta);
+                console.error('Erro ao salvar: resposta invÃ¡lida', resposta);
             }
         } catch (erro) {
             console.error('Erro ao salvar:', erro);

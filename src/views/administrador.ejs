@@ -1,4 +1,4 @@
-<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador' }) %>
+﻿<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador' }) %>
 
     <!-- transformar navegação em rotas -->
     <div class="bg-gray-50 min-h-screen">
@@ -34,7 +34,7 @@
                     class="mt-5 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
                     <label type="file" data-add-slide for="button-add-slide-file"
                         class="cursor-pointer max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
-                        <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10" />
+                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10" />
                         <span class="font-sans font-semibold text-[20px] leading-[25px] text-green-600">
                             Adicionar Slide
                         </span>
@@ -58,7 +58,7 @@
                             <div class="relative w-[220px]">
                                 <input type="date" data-input-date="adm" min="2026-01-01"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none cursor-pointer focus:ring-4 focus:ring-green-600/30 transition-all [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer" />
-                                <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
+                                <img src="/images/icons/administrador/calendar-plus.svg" alt="Calendário"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none" />
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     </option>
                                     <option value="vacinacao">Vacinação</option>
                                 </select>
-                                <img src="../images/icons/arrow-down.svg" alt="Seta"
+                                <img src="/images/icons/arrow-down.svg" alt="Seta"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none" />
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
                                 Filtrar Horários
                             </span>
-                            <img class="w-5 h-5" src="../images/icons/search-gray.svg" alt="Visualizar" />
+                            <img class="w-5 h-5" src="/images/icons/search-gray.svg" alt="Visualizar" />
                         </button>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                     <option value="vacinacao">Vacinação</option>
                                     <option value="cirurgia">Cirurgia</option>
                                 </select>
-                                <img src="../images/icons/arrow-down.svg"
+                                <img src="/images/icons/arrow-down.svg"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70"
                                     alt="Seta" />
                             </div>
@@ -167,7 +167,7 @@
                     </h2>
                     <button type="button" data-button="addProduct"
                         class="flex flex-row items-center gap-[10px] md:gap-[30px] px-5 py-3 md:px-[36px] md:py-[16px] bg-green-400 rounded-[15px] hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-400/50 transition-all shrink-0 shadow-sm">
-                        <img src="../images/icons/administrador/plus-product.svg" alt="Novo produto"
+                        <img src="/images/icons/administrador/plus-product.svg" alt="Novo produto"
                             class="w-6 h-6 md:w-[30px] md:h-[30px]" />
                         <span class="font-sans font-semibold text-lg md:text-2xl uppercase text-gray-50">
                             Novo produto
@@ -183,7 +183,7 @@
                             class="relative flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
                             <input data-input="filterProduct" type="text" placeholder="Busca por nome..."
                                 class="bg-transparent w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500" />
-                            <img src="../images/icons/search.svg" alt="Buscar"
+                            <img src="/images/icons/search.svg" alt="Buscar"
                                 class="w-6 h-6 md:w-[32px] md:h-[33px]" />
                         </div>
 
@@ -205,7 +205,7 @@
                                 </option>
                                 <option value="higiene">Higiene</option>
                             </select>
-                            <img src="../images/icons/arrow-down.svg" alt="Seta para baixo"
+                            <img src="/images/icons/arrow-down.svg" alt="Seta para baixo"
                                 class="hidden xs:block absolute right-5 top-1/2 -translate-y-1/2 w-10 pointer-events-none" />
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                 class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
                 <button type="button" data-button="closeFormProduct"
                     class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
-                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                    <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
                 </button>
 
                 <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">
@@ -280,7 +280,7 @@
                                 </option>
                                 <option value="Higiene">Higiene</option>
                             </select>
-                            <img src="../images/icons/arrow-down.svg" alt="Seta para baixo"
+                            <img src="/images/icons/arrow-down.svg" alt="Seta para baixo"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none" />
                         </div>
                     </div>
@@ -311,7 +311,7 @@
                         <div data-quill-editor="longDescription" class="min-h-[100px] overflow-y-auto"></div>
                     </div>
                     <p class="text-base">
-                        ⚠ Use os controles de formatação para listas, negrito e links no editor de texto.
+                        âš  Use os controles de formatação para listas, negrito e links no editor de texto.
                     </p>
                 </div>
 
@@ -320,7 +320,7 @@
                     </p>
                     <label for="input-main-image"
                         class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
-                        <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
                             class="w-8 h-8 opacity-60" />
                         <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar a
                             imagem principal</span>
@@ -335,7 +335,7 @@
                         Imagens do Slide</p>
                     <label for="input-slide-images"
                         class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
-                        <img src="../images/icons/administrador/plus-slide.svg" alt="Adicionar imagens"
+                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagens"
                             class="w-8 h-8 opacity-60" />
                         <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar as
                             imagens do
@@ -344,7 +344,7 @@
                     <input data-input="imageSlideProduct" id="input-slide-images" type="file" name="slideImages"
                         accept="image/*" multiple required class="hidden" />
                     <div class="font-sans text-xs md:text-sm text-amber-600 flex items-center gap-3">
-                        <span class="text-base">⚠</span>
+                        <span class="text-base">âš </span>
                         <p>
                             Selecione todas as imagens do slide de uma vez
                             (mantenha <b>Ctrl</b> ou
@@ -372,7 +372,7 @@
                 class="relative max-h-[95vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
                 <button type="button" data-button="closeFormEditSchedule"
                     class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
-                    <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                    <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
                 </button>
 
                 <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">
@@ -397,7 +397,7 @@
                             <option value="vacinacao">Vacinação</option>
                             <option value="cirurgia">Cirurgia</option>
                         </select>
-                        <img src="../images/icons/arrow-down.svg" alt="Seta"
+                        <img src="/images/icons/arrow-down.svg" alt="Seta"
                             class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-60" />
                     </div>
                 </div>
@@ -426,7 +426,7 @@
                     <div class="relative w-full">
                         <input type="date" id="input-edit-data" name="data" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full" />
-                        <img src="../images/icons/administrador/calendar-plus.svg" alt="Calendário"
+                        <img src="/images/icons/administrador/calendar-plus.svg" alt="Calendário"
                             class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none" />
                     </div>
                 </div>
@@ -501,7 +501,7 @@
 
             <button type="button" data-button="closeCancelSchedule"
                 class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
-                <img src="../images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
+                <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
             </button>
 
             <h3 class="font-medium text-[22px] md:text-[32px] text-green-700">
@@ -516,7 +516,7 @@
                 class="w-full relative flex items-center justify-center gap-[15px] px-4 py-2 md:py-3 md:px-5 bg-red-alert rounded-lg hover:bg-red-alert/90 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-alert transition-all mt-2">
                 <span class="font-semibold text-lg md:text-[22px] text-white uppercase tracking-wide">Enviar Mensagem de
                     Cancelamento</span>
-                <img src="../images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
+                <img src="/images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
             </button>
         </div>
     </aside>
@@ -551,7 +551,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-    <script type="module" src="public/javascript/administrador/script-adm.js"></script>
-    <script type="module" src="public/javascript/menu-user/script-menu-user.js"></script>
+    <script type="module" src="/javascript/administrador/script-adm.js"></script>
+    <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
 </body>
 </html>
+
+

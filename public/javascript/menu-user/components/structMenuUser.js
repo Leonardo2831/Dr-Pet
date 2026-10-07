@@ -1,4 +1,4 @@
-export default function structMenuUser(user = null){
+﻿export default function structMenuUser(user = null){
     const isInPages = window.location.pathname.includes('/public/pages/');
     const basePath = isInPages ? '' : 'public/pages/';
     const imagePath = isInPages ? '../images/icons/' : 'public/images/icons/';
@@ -13,16 +13,16 @@ export default function structMenuUser(user = null){
                     </span>
                 </div>
 
-                <a href="${basePath}option-user.html" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
-                    <img src="${imagePath}/menu-user/settings.svg" alt="Opções" class="w-10 h-10 lg:w-12 lg:h-12" />
+                <a href="/option-user" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
+                    <img src="${imagePath}/menu-user/settings.svg" alt="OpÃ§Ãµes" class="w-10 h-10 lg:w-12 lg:h-12" />
                     <span class="font-medium text-xl text-gray-800 lg:text-2xl">
-                        Opções
+                        OpÃ§Ãµes
                     </span>
                 </a>
 
                 ${user.typeUser !== 'comum' ? `
-                    <a href="${basePath}administrador.html" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
-                        <img src="${imagePath}/menu-user/admin-panel-settings.svg" alt="Painel de aministração" class="w-10 h-10 lg:w-12 lg:h-12" />
+                    <a href="/administrador" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
+                        <img src="${imagePath}/menu-user/admin-panel-settings.svg" alt="Painel de aministraÃ§Ã£o" class="w-10 h-10 lg:w-12 lg:h-12" />
                         <span class="font-medium text-xl text-gray-800 lg:text-2xl">
                             Painel de administrador
                         </span>
@@ -39,11 +39,11 @@ export default function structMenuUser(user = null){
         `;
     } else {
         return `
-            <a href="${basePath}cadastrar.html" 
+            <a href="/cadastrar" 
                 class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-blue-link font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
                 Criar uma conta
             </a>
-            <a href="${basePath}login.html"
+            <a href="/login"
                 class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
                 Entrar
             </a>

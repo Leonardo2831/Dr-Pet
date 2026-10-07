@@ -10,7 +10,7 @@
                 </h2>
                 <p class="text-lg md:text-[22px] font-medium text-gray-50 leading-relaxed max-w-[1000px]">
                     Nossa equipe está pronta para tirar suas dúvidas, oferecer informações adicionais e discutir como
-                    podemos atender às suas necessidades. Entre em contato conosco:
+                    podemos atender Ã s suas necessidades. Entre em contato conosco:
                 </p>
             </div>
 
@@ -20,7 +20,7 @@
                     class="flex flex-wrap *:mx-auto max-[550px]:*:min-w-[400px] md:*:mx-0 md:justify-between items-center gap-y-12 gap-x-6">
 
                     <li class="flex flex-row items-center gap-5 flex-1 min-w-[280px] max-w-[400px]">
-                        <img src="public/images/icons/foooter-icons/location.png"
+                        <img src="/images/icons/foooter-icons/location.png"
                             alt="Ícone de localização mapeamento geográfico"
                             class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
                         <a target="_blank" rel="noopener noreferrer"
@@ -32,7 +32,7 @@
 
                     <!-- Instagram -->
                     <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
-                        <img src="public/images/icons/foooter-icons/instagram.png" alt="Logo de botão do Instagram"
+                        <img src="/images/icons/foooter-icons/instagram.png" alt="Logo de botão do Instagram"
                             class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
                         <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/doutorpetmococa"
                             class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
@@ -42,7 +42,7 @@
 
                     <!-- Telefones -->
                     <li class="flex flex-row items-center gap-5 flex-1 min-w-[240px] max-w-[300px]">
-                        <img src="public/images/icons/foooter-icons/phone.png" alt="Ícone de Telefone Clássico"
+                        <img src="/images/icons/foooter-icons/phone.png" alt="Ícone de Telefone Clássico"
                             class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
                         <div class="flex flex-col gap-2 text-base md:text-lg font-medium text-gray-50">
                             <a target="_blank" rel="noopener noreferrer" href="tel:+551936656242"
@@ -60,7 +60,7 @@
 
                     <!-- Endereço de Email -->
                     <li class="flex flex-row items-center gap-5 flex-1 min-w-[250px] max-w-[320px]">
-                        <img src="public/images/icons/foooter-icons/email.png" alt="Ícone de Carta de Email"
+                        <img src="/images/icons/foooter-icons/email.png" alt="Ícone de Carta de Email"
                             class="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] object-cover flex-shrink-0" />
                         <a target="_blank" rel="noopener noreferrer" href="mailto:mvlucasvet@gmail.com"
                             class="text-base md:text-lg font-medium text-gray-50 leading-snug hover:text-green-200 hover:underline focus:outline-none focus:ring-2 focus:ring-green-200 rounded p-1 transition-colors break-words">
@@ -78,9 +78,12 @@
         const scriptsToLoad = scripts || [];
         scriptsToLoad.forEach(script => {
     %>
-        <script <%= script.module ? 'type="module"' : '' %> src="<%= script.src %>"></script>
+        <!-- Tem que usar o - por caracteres especiais -->
+        <script <%- script.module ? 'type="module"' : '' %> src="<%= script.src %>"></script>
     <% 
         }); 
     %>
 </body>
 </html>
+
+
