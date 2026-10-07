@@ -1,0 +1,220 @@
+<%- include('layouts/header') %>
+
+    <main class="flex flex-col lg:flex-row">
+        <section
+            class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]"
+        >
+            <form
+                action="#"
+                class="w-full flex flex-col gap-10 md:gap-[50px]"
+            >
+                <h1
+                    class="text-green-500 font-bold text-3xl md:text-[40px] md:leading-[50px]"
+                >
+                    Dados para o Agendamento
+                </h1>
+
+                <div class="flex flex-col gap-10 md:gap-[50px]">
+                    <fieldset class="flex flex-col gap-6 md:gap-[30px]">
+                        <legend class="sr-only">Dados do Dono</legend>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label
+                                for="nome"
+                                class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                >Nome</label
+                            >
+                            <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                placeholder="Seu nome completo"
+                                class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                required
+                                minlength="3"
+                                maxlength="50"
+                                pattern="^[a-zA-ZÀ-ÿ\s]+$"
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label
+                                for="telefone"
+                                class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                >Telefone</label
+                            >
+                            <input
+                                data-input="formatPhone"
+                                type="tel"
+                                id="telefone"
+                                name="telefone"
+                                placeholder="(00) 00000-0000"
+                                class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                required
+                                minlength="10"
+                                maxlength="15"
+                                pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
+                                title="Digite um telefone válido com DDD. Ex: (11) 99999-9999 ou 11999999999"
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label
+                                for="endereco"
+                                class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                >Endereço</label
+                            >
+                            <input
+                                type="text"
+                                id="endereco"
+                                name="endereco"
+                                placeholder="Ex: Rua do nada, bairro do nada, 100, na frente da pracinha"
+                                class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                required
+                                minlength="3"
+                                maxlength="70"
+                            />
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="flex flex-col gap-8 md:gap-[50px]">
+                        <legend
+                            class="text-green-500 font-semibold text-2xl md:text-[32px] md:leading-[40px] mb-6 w-full"
+                        >
+                            Dados do pet
+                        </legend>
+
+                        <div class="flex flex-col gap-8 md:gap-[30px]">
+                            <div class="flex flex-col gap-[15px]">
+                                <label
+                                    for="nomePet"
+                                    class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                >Nome do pet</label
+                                >
+                                <input
+                                    type="text"
+                                    id="nomePet"
+                                    name="nomePet"
+                                    placeholder="Nome do seu pet"
+                                    class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                    required
+                                    minlength="2"
+                                    maxlength="50"
+                                />
+                            </div>
+
+                            <!-- Descrição Serviço -->
+                            <div class="flex flex-col gap-[15px]">
+                                <label
+                                    for="descricao"
+                                    class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                >Descrição do serviço</label
+                                >
+                                <textarea
+                                    id="descricao"
+                                    name="descricao"
+                                    placeholder="Descreva alguma especificação sobre o serviço, como qual vacina deseja fazer em seu pet..."
+                                    class="w-full px-[15px] py-4 md:py-5 border-[3px] border-green-700 rounded-[10px] bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 resize-none h-[140px] transition-colors"
+                                    maxlength="250"
+                                ></textarea>
+                            </div>
+
+                            <div
+                                class="flex flex-row items-center gap-[10px] mt-2 w-fit"
+                            >
+                                <input
+                                    type="checkbox"
+                                    id="buscarResidencia"
+                                    name="buscarResidencia"
+                                    class="w-6 h-6 border-[2px] border-green-500 rounded-[6px] accent-green-500 cursor-pointer focus:ring-2 focus:ring-green-500 focus:ring-offset-2 bg-transparent"
+                                />
+                                <label
+                                    for="buscarResidencia"
+                                    class="text-gray-900 font-medium text-lg md:text-[22px] cursor-pointer select-none hover:text-green-500 transition-colors"
+                                >Buscar em residência?</label
+                                >
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-green-500 transition-colors outline-none focus:ring-4 focus:ring-green-600 mx-auto"
+                >
+                    <span
+                        class="font-semibold text-[22px] leading-[28px] text-gray-50 xs:text-[24px] xs:leading-[30px] sm:text-[26px] sm:leading-[33px] lg:text-[30px] lg:leading-[37px]"
+                        >Finalizar Agendamento</span
+                    >
+                </button>
+            </form>
+        </section>
+
+        <figure class="order-2 lg:order-1 flex-1 w-full relative min-h-[300px] lg:min-h-0">
+            <img
+                src="/images/forms-images/login.jpg"
+                alt="Dados do Agendamento"
+                class="lg:absolute lg:inset-0 w-full h-full object-cover"
+            />
+        </figure>
+    </main>
+
+    <aside
+        data-modal-info-menu="user"
+        data-modal-info="formSchedule"
+        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"
+    ></aside>
+
+    <!-- Modal de checar login -->
+    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+        
+        <div data-login-overlay class="absolute inset-0 bg-black/60 opacity-0"></div>
+
+        <div data-login-content class="relative w-full max-w-[460px] bg-gray-50 rounded-2xl shadow-2xl overflow-hidden opacity-0">
+            <header class="bg-green-600 px-5 py-5 xs:px-8 xs:py-7 flex items-center justify-between">
+                <figure class="flex items-center gap-4">
+                    <img src="/images/logo.png" alt="Logo Dr. Pet" class="w-[34px] xs:w-[42px] h-auto object-contain" />
+                    <span class="text-lg xs:text-xl md:text-2xl font-semibold text-gray-50">Dr. Pet</span>
+                </figure>
+                <button data-login-close class="text-gray-50 hover:text-green-200 transition-colors duration-200 p-1 outline-none focus:ring-2 focus:ring-green-200 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </header>
+
+            <div class="px-5 py-5 xs:px-8 xs:py-8 flex flex-col items-center gap-4 xs:gap-6 text-center">
+                <figure class="w-[56px] h-[56px] xs:w-[72px] xs:h-[72px] bg-green-500 rounded-full flex items-center justify-center shadow-sm">
+                    <img src="/images/icons/user.svg" alt="Criar Conta">
+                </figure>
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-xl xs:text-2xl md:text-[26px] font-bold text-gray-800 leading-tight">
+                        Acesse sua conta
+                    </h3>
+                    <p class="text-sm xs:text-base md:text-lg font-medium text-gray-500 leading-relaxed max-w-[360px]">
+                        Para agendar serviços para o seu pet, é necessário estar logado na sua conta.
+                    </p>
+                </div>
+
+                <a href="cadastrar.html" class="min-w-0 w-full flex items-center justify-center gap-2 xs:gap-3 px-3 xs:px-6 py-3 xs:py-4 bg-green-500 hover:bg-green-400 text-xs xs:text-base md:text-xl font-bold text-gray-50 uppercase rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
+                    <img src="/images/icons/user.svg" alt="Criar Conta" class="w-5 h-5 shrink-0">
+                    <span class="truncate">Criar minha conta</span>
+                </a>
+
+                <div class="flex items-center gap-4 w-full">
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-sm font-medium text-gray-400 uppercase tracking-wide">ou</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                <a href="login.html" class="min-w-0 w-full flex items-center justify-center gap-3 px-3 xs:px-6 py-3 xs:py-[14px] border-2 border-green-500 text-green-600 hover:bg-green-50 text-xs xs:text-base md:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
+                    <span class="truncate">Já tenho uma conta</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+<%- include('layouts/footer', { scripts: [
+    { src: '/javascript/menu-user/script-menu-user.js', module: true },
+    { src: '/javascript/forms/agendamento-service/script-agendamento-form.js', module: true }    
+] }) %>

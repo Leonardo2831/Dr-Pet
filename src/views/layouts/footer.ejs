@@ -78,7 +78,9 @@
         const scriptsToLoad = scripts || [];
         scriptsToLoad.forEach(script => {
     %>
-        <script type="module" src="<%= script %>"></script>
-    <% }); %>
+        <script <%= script.module ? 'type="module"' : '' %> src="<%= script.src %>"></script>
+    <% 
+        }); 
+    %>
 </body>
 </html>

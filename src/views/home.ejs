@@ -1,4 +1,4 @@
-<%- include('header') %>
+<%- include('layouts/header') %>
 
     <main>
         <section class="relative w-full h-[400px] md:h-[600px] lg:h-[800px] bg-gray-100">
@@ -7,7 +7,7 @@
 
                 <div data-content-imgs="slideHome" class="swiper-wrapper">
                     <figure class="swiper-slide w-full h-full">
-                        <img src="public/images/introduction.png" alt="introduction"
+                        <img src="/images/introduction.png" alt="introduction"
                             class="w-full h-full object-cover object-center">
                     </figure>
                 </div>
@@ -15,11 +15,11 @@
                 <div class="swiper-pagination custom-swiper-pagination"></div>
 
                 <div class="swiper-button-prev custom-swiper-button !left-4 lg:!left-10">
-                    <img src="public/images/icons/slide/arrow-left.svg" alt="Anterior"
+                    <img src="/images/icons/slide/arrow-left.svg" alt="Anterior"
                         class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
                 </div>
                 <div class="swiper-button-next custom-swiper-button !right-4 lg:!right-10">
-                    <img src="public/images/icons/slide/arrow-right.svg" alt="Próximo"
+                    <img src="/images/icons/slide/arrow-right.svg" alt="Próximo"
                         class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
                 </div>
             </div>
@@ -35,8 +35,8 @@
                     </h2>
 
                     <div class="flex flex-wrap items-center justify-center gap-[50px] w-full p-5">
-                        <a href="public/pages/agenda.html?service=vacinacao" data-login class="service-card flex flex-col">
-                            <img src="public/images/services/vacinacao.png" alt="Vacinação"
+                        <a href="/agenda?service=vacinacao" data-login class="service-card flex flex-col">
+                            <img src="/images/services/vacinacao.png" alt="Vacinação"
                                 class="w-full h-[300px] object-cover" />
                             <div class="p-[30px] flex flex-col gap-[10px]">
                                 <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
@@ -49,8 +49,8 @@
                             </div>
                         </a>
 
-                        <a href="public/pages/agenda.html?service=banho-tosa" data-login class="service-card flex flex-col">
-                            <img src="public/images/services/banho-tosa.png" alt="Banho e Tosa"
+                        <a href="/agenda?service=banho-tosa" data-login class="service-card flex flex-col">
+                            <img src="/images/services/banho-tosa.png" alt="Banho e Tosa"
                                 class="w-full h-[300px] object-cover" />
                             <div class="p-[30px] flex flex-col gap-[10px]">
                                 <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
@@ -63,8 +63,8 @@
                             </div>
                         </a>
 
-                        <a href="public/pages/agenda.html?service=cirurgia" data-login class="service-card flex flex-col">
-                            <img src="public/images/services/cirurgia.png" alt="Cirurgias"
+                        <a href="/agenda?service=cirurgia" data-login class="service-card flex flex-col">
+                            <img src="/images/services/cirurgia.png" alt="Cirurgias"
                                 class="w-full h-[300px] object-cover" />
                             <div class="p-[30px] flex flex-col gap-[10px]">
                                 <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
@@ -88,10 +88,10 @@
                         Gostou de nossos serviços?
                     </h3>
                     <div class="w-fit mx-auto md:mx-0">
-                        <a href="public/pages/agenda.html?service=banho-tosa" data-login
+                        <a href="/agenda?service=banho-tosa" data-login
                             class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-6 py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300">
                             AGENDE AGORA
-                            <img src="public/images/icons/calendar_clock.svg" alt="Agendamento"
+                            <img src="/images/icons/calendar_clock.svg" alt="Agendamento"
                                 class="w-6 h-6 md:w-[30px] md:h-[30px]" />
                         </a>
                     </div>
@@ -106,7 +106,7 @@
                     <figure
                         class="w-full sm:w-[80%] lg:flex-[1_1_350px] max-w-[500px] flex-shrink-0 group mx-auto lg:mx-0">
 
-                        <img src="public/images/imagem-sobre.jpg" alt="Veterinário Dr.Pet" class="w-full h-auto object-cover rounded-[10px] border-[2px] border-green-800 transition-all duration-300 
+                        <img src="/images/imagem-sobre.jpg" alt="Veterinário Dr.Pet" class="w-full h-auto object-cover rounded-[10px] border-[2px] border-green-800 transition-all duration-300 
                             shadow-[12px_12px_0_0_#2AF29B] 
                             md:shadow-[16px_16px_0_0_#2AF29B] 
                             lg:shadow-[20px_20px_0_0_#2AF29B] 
@@ -131,7 +131,7 @@
                             <ul class="flex flex-col gap-5">
 
                                 <li class="flex items-center gap-5 group">
-                                    <img src="public/images/icons/check-about.svg" alt="Check"
+                                    <img src="/images/icons/check-about.svg" alt="Check"
                                         class="w-6 h-6 md:w-8 md:h-8" />
                                     <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                         <strong
@@ -142,7 +142,7 @@
                                 </li>
 
                                 <li class="flex items-center gap-5 group">
-                                    <img src="public/images/icons/check-about.svg" alt="Check"
+                                    <img src="/images/icons/check-about.svg" alt="Check"
                                         class="w-6 h-6 md:w-8 md:h-8" />
                                     <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                         <strong
@@ -154,7 +154,7 @@
                                 </li>
 
                                 <li class="flex items-center gap-5 group">
-                                    <img src="public/images/icons/check-about.svg" alt="Check"
+                                    <img src="/images/icons/check-about.svg" alt="Check"
                                         class="w-6 h-6 md:w-8 md:h-8" />
                                     <p class="text-lg md:text-xl font-normal text-gray-900 leading-snug">
                                         <strong
@@ -201,7 +201,7 @@
                                 class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
                                 <figure
                                     class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-green-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
-                                    <img src="public/images/icons/petshop-section/bag.svg" alt="Acessórios"
+                                    <img src="/images/icons/petshop-section/bag.svg" alt="Acessórios"
                                         class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                 </figure>
                                 <span
@@ -212,7 +212,7 @@
                                 class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
                                 <figure
                                     class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-red-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
-                                    <img src="public/images/icons/petshop-section/toys.svg" alt="Brinquedos"
+                                    <img src="/images/icons/petshop-section/toys.svg" alt="Brinquedos"
                                         class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                 </figure>
                                 <span
@@ -223,7 +223,7 @@
                                 class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
                                 <figure
                                     class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-orange-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
-                                    <img src="public/images/icons/petshop-section/pet-food.svg" alt="Ração"
+                                    <img src="/images/icons/petshop-section/pet-food.svg" alt="Ração"
                                         class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                 </figure>
                                 <span
@@ -234,7 +234,7 @@
                                 class="flex flex-col items-center justify-center gap-2 p-2 hover:scale-105 transition-transform duration-300 min-w-[80px]">
                                 <figure
                                     class="flex items-center justify-center w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] bg-blue-light rounded-[14px] shrink-0 shadow-sm transition-all duration-300">
-                                    <img src="public/images/icons/petshop-section/hygiene.svg" alt="Higiene"
+                                    <img src="/images/icons/petshop-section/hygiene.svg" alt="Higiene"
                                         class="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] object-contain transition-all duration-300" />
                                 </figure>
                                 <span
@@ -243,10 +243,10 @@
                         </div>
 
                         <div class="mt-5 flex justify-center lg:justify-start">
-                            <a href="public/pages/loja.html"
+                            <a href="/loja"
                                 class="inline-flex items-center justify-center gap-4 px-8 py-4 bg-green-600 hover:bg-green-500 text-lg md:text-xl font-bold text-gray-50 uppercase rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 outline-none focus:ring-4 focus:ring-green-400 group">
                                 VEJA MAIS SOBRE
-                                <img src="public/images/icons/arrow.svg" alt="Seta Direita"
+                                <img src="/images/icons/arrow.svg" alt="Seta Direita"
                                     class="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300 invert brightness-0" />
                             </a>
                         </div>
@@ -254,9 +254,9 @@
 
                     <figure
                         class="w-full sm:w-[80%] lg:flex-[1_1_400px] xl:flex-[1_1_500px] min-w-[280px] max-w-[500px] flex-shrink-0 aspect-square relative mt-[50px] lg:mt-0 group mx-auto">
-                        <img src="public/images/icons/petshop-section/dog-petshop.png" alt="Cachorro Pet Shop"
+                        <img src="/images/icons/petshop-section/dog-petshop.png" alt="Cachorro Pet Shop"
                             class="absolute top-0 right-0 aspect-square rounded-2xl w-[65%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] group-hover:z-30 z-10" />
-                        <img src="public/images/icons/petshop-section/cat-petshop.png" alt="Gato Pet Shop"
+                        <img src="/images/icons/petshop-section/cat-petshop.png" alt="Gato Pet Shop"
                             class="absolute bottom-0 left-0 aspect-square rounded-2xl w-[65%] object-cover shadow-xl transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] z-20 group-hover:z-20" />
                     </figure>
 
@@ -277,7 +277,7 @@
         <div data-login-content class="relative w-full max-w-[460px] bg-gray-50 rounded-2xl shadow-2xl overflow-hidden opacity-0">
             <header class="bg-green-600 px-5 py-5 xs:px-8 xs:py-7 flex items-center justify-between">
                 <figure class="flex items-center gap-4">
-                    <img src="public/images/logo.png" alt="Logo Dr. Pet" class="w-[34px] xs:w-[42px] h-auto object-contain" />
+                    <img src="/images/logo.png" alt="Logo Dr. Pet" class="w-[34px] xs:w-[42px] h-auto object-contain" />
                     <span class="text-lg xs:text-xl md:text-2xl font-semibold text-gray-50">Dr. Pet</span>
                 </figure>
                 <button data-login-close class="text-gray-50 hover:text-green-200 transition-colors duration-200 p-1 outline-none focus:ring-2 focus:ring-green-200 rounded-md">
@@ -290,7 +290,7 @@
             <div class="px-5 py-5 xs:px-8 xs:py-8 flex flex-col items-center gap-4 xs:gap-6 text-center">
                 
                 <figure class="w-[56px] h-[56px] xs:w-[72px] xs:h-[72px] bg-green-500 rounded-full flex items-center justify-center shadow-sm">
-                    <img src="public/images/icons/user.svg" alt="Criar Conta">
+                    <img src="/images/icons/user.svg" alt="Criar Conta">
                 </figure>
 
                 <div class="flex flex-col gap-2">
@@ -302,9 +302,9 @@
                     </p>
                 </div>
 
-                <a href="public/pages/cadastrar.html"
+                <a href="/cadastrar"
                     class="min-w-0 w-full flex items-center justify-center gap-2 xs:gap-3 px-3 xs:px-6 py-3 xs:py-4 bg-green-500 hover:bg-green-400 text-xs xs:text-base md:text-xl font-bold text-gray-50 uppercase rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
-                    <img src="public/images/icons/user.svg" alt="Criar Conta" class="w-5 h-5 shrink-0">
+                    <img src="/images/icons/user.svg" alt="Criar Conta" class="w-5 h-5 shrink-0">
                     <span class="truncate">Criar minha conta</span>
                 </a>
 
@@ -314,7 +314,7 @@
                     <div class="flex-1 h-px bg-gray-200"></div>
                 </div>
 
-                <a href="public/pages/login.html"
+                <a href="/login"
                     class="min-w-0 w-full flex items-center justify-center gap-3 px-3 xs:px-6 py-3 xs:py-[14px] border-2 border-green-500 text-green-600 hover:bg-green-50 text-xs xs:text-base md:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300 overflow-hidden">
                     <span class="truncate">Já tenho uma conta</span>
                 </a>
@@ -323,7 +323,7 @@
     </aside>
 
 <!-- Dessa maneira passo textos específicos para o footer colocar as tag scripts no final do body para usar boas práticas de otimização de carregamento -->
-<%- include('footer', { scripts: [
-    'public/javascript/home/script-home.js',
-    'public/javascript/menu-user/script-menu-user.js'
+<%- include('layouts/footer', { scripts: [
+    { src: '/javascript/home/script-home.js', module: true },
+    { src: '/javascript/menu-user/script-menu-user.js', module: true }
 ] }) %>
