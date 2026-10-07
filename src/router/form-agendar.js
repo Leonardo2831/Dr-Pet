@@ -1,7 +1,7 @@
 ﻿const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/form-agendar', (req, res) => {
     res.render('form-agendar');
 });
 
