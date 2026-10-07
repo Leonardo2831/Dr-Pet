@@ -2,7 +2,7 @@
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('home');
+    res.render('agenda');
 });
 
 module.exports = router;
