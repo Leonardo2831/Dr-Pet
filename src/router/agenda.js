@@ -2,7 +2,7 @@
 const router = express.Router();
 
 router.get('/agenda', (req, res) => {
-    res.render('agenda');
+    res.render('agenda', {tituloDaPagina: 'Dr. Pet | Agendamento'});
 });
 
 module.exports = router;
