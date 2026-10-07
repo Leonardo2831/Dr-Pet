@@ -1566,10 +1566,6 @@ aside p.activeOption{
   height: 400px;
 }
 
-.h-\[500px\]{
-  height: 500px;
-}
-
 .h-\[50px\]{
   height: 50px;
 }
@@ -1635,6 +1631,10 @@ aside p.activeOption{
   max-height: 95vh;
 }
 
+.min-h-\[100px\]{
+  min-height: 100px;
+}
+
 .min-h-\[120px\]{
   min-height: 120px;
 }
@@ -1669,10 +1669,6 @@ aside p.activeOption{
 
 .min-h-screen{
   min-height: 100vh;
-}
-
-.min-h-\[100px\]{
-  min-height: 100px;
 }
 
 .\!w-\[100px\]{
@@ -1906,6 +1902,10 @@ aside p.activeOption{
   max-width: 627px;
 }
 
+.max-w-\[670px\]{
+  max-width: 670px;
+}
+
 .max-w-\[700px\]{
   max-width: 700px;
 }
@@ -1916,14 +1916,6 @@ aside p.activeOption{
 
 .max-w-\[760px\]{
   max-width: 760px;
-}
-
-.max-w-\[\]{
-  max-width: ;
-}
-
-.max-w-\[670px\]{
-  max-width: 670px;
 }
 
 .flex-1{
@@ -2252,10 +2244,6 @@ aside p.activeOption{
 
 .gap-y-3{
   row-gap: 0.75rem;
-}
-
-.justify-self-end{
-  justify-self: end;
 }
 
 .overflow-hidden{
@@ -3211,6 +3199,11 @@ aside p.activeOption{
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.blur{
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .brightness-0{
