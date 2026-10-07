@@ -1,8 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('loja');
+router.get('/loja', (req, res) => {
+    res.render('loja', {tituloDaPagina: 'Dr. Pet | Pet shop'});
 });
 
 module.exports = router;

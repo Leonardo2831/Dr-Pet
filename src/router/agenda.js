@@ -1,8 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('agenda');
+router.get('/agenda', (req, res) => {
+    res.render('agenda', {tituloDaPagina: 'Dr. Pet | Agendamento'});
 });
 
 module.exports = router;
