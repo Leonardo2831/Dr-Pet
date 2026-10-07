@@ -5,10 +5,16 @@
   "private": true,
   "scripts": {
     "tailwind": "tailwindcss -i ./public/style/input.css -o ./public/style/output.css --watch",
-    "server": "json-server ./src/database/db.json --port 3000 --bodyLimit 50mb"
+    "server": "json-server ./src/database/db.json --port 3000 --bodyLimit 50mb",
+    "node": "node --watch ./src/app.js"
   },
   "devDependencies": {
     "json-server": "^0.17.4",
     "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "ejs": "^7.0.1",
+    "express": "^5.2.1",
+    "mysql2": "^3.24.5"
   }
 }
