@@ -30,7 +30,7 @@ export default class Login {
         event.preventDefault();
 
         const data = await this.fetchJson.get();
-        // procura usuÃ¡rio vÃ¡lido
+        // procura usuário válido
         const validUser = data.find(user =>
             user.email === this.inputEmail.value &&
             Criptografia.checkHash(this.inputPassword.value, user.password)

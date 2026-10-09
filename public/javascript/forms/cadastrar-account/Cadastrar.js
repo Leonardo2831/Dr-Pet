@@ -14,15 +14,15 @@ export default class Cadastrar {
         event.preventDefault();
 
         const formData = new FormData(this.form);
-        // cria um objeto com os dados do formulÃ¡rio
+        // cria um objeto com os dados do formulário
         const dadosUsuario = Object.fromEntries(formData.entries());
 
         if (dadosUsuario.password !== dadosUsuario.confirmPassword) {
-            this.api.showModalError("Erro de autenticaÃ§Ã£o, senhas diferentes", 'As senhas nÃ£o sÃ£o iguais');
+            this.api.showModalError("Erro de autenticação, senhas diferentes", 'As senhas não são iguais');
             return;
         }
 
-        // deletando o atributo do objeto de confirmaÃ§Ã£o de senha
+        // deletando o atributo do objeto de confirmação de senha
         delete dadosUsuario.confirmPassword;
         dadosUsuario.id = crypto.randomUUID();
         dadosUsuario.password = Criptografia.generateHash(dadosUsuario.password);

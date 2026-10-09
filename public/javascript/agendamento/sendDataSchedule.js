@@ -18,7 +18,7 @@ export default function sendDataSchedule(){
         } else {
             if(buttonSubmitInfosSchedule.previousElementSibling) return;
             const p = document.createElement('p');
-            p.textContent = 'Selecione serviÃ§o, um horÃ¡rio e uma data.';
+            p.textContent = 'Selecione serviço, um horário e uma data.';
             p.className = 'animate-fadeTop text-red-alert text-base mb-4 font-semibold';
             buttonSubmitInfosSchedule.insertAdjacentElement('beforebegin', p);
         }

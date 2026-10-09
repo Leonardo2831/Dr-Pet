@@ -46,7 +46,7 @@ export default async function schedule(form) {
                 Storage.delete('scheduleData');
                 window.location.href = '/agenda';
             } else {
-                console.error('Erro ao salvar: resposta invÃ¡lida', resposta);
+                console.error('Erro ao salvar: resposta inválida', resposta);
             }
         } catch (erro) {
             console.error('Erro ao salvar:', erro);

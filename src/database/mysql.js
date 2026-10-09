@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 
 const db = mysql.createConnection({
     // porta padrão da faculdade é 3306, mas meu pc é 3308
-    port: 3308,
+    port: 3306,
     host: 'localhost',
     user: 'root',
     database: 'petshop',

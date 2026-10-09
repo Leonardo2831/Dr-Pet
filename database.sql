@@ -51,15 +51,14 @@ CREATE TABLE agenda (
     date_agendamento DATE NOT NULL,
     hour_agendamento TIME NOT NULL,
     buscarResidencia BOOLEAN NOT NULL DEFAULT FALSE,
-    observation TEXT,
+    observation VARCHAR(255),
+    endereco varchar(255),
     fk_user INTEGER NOT NULL,
     fk_pet INTEGER NOT NULL,
     fk_service INTEGER NOT NULL,
-    fk_endereco INTEGER NOT NULL,
     FOREIGN KEY(fk_user) REFERENCES usuario(id),
     FOREIGN KEY(fk_pet) REFERENCES pet(id),
     FOREIGN KEY(fk_service) REFERENCES service_infos(id),
-    FOREIGN KEY(fk_endereco) REFERENCES endereco(id),
     PRIMARY KEY(id)
 );
 
