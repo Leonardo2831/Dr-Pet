@@ -8,7 +8,7 @@
 
         <div
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[40px] lg:py-[50px] xl:px-[60px] xl:py-[60px]">
-            <form data-form="cadastrar" action="#" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+            <form data-form="cadastrar" action="/cadastrarAction" method="POST" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
                 <div id="modal-info" class="text-center font-bold p-2 hidden"></div>
                 <h1
                     class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">
@@ -17,14 +17,14 @@
 
                 <div class="flex flex-col gap-[30px]">
                     <div class="flex flex-col gap-[15px]">
-                        <label for="user-name"
+                        <label for="nome"
                             class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-gray-800 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]">Nome
                             do usuário</label>
                         <div
                             class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
                             <input type="text" id="user-name" name="userName" autocomplete="name"
                                 class="w-full bg-transparent text-[18px] leading-tight text-gray-800 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px]"
-                                required minlength="3" maxlength="50" pattern="^[a-zA-ZÀ-Ã¿\s]+$" />
+                                required minlength="3" maxlength="50" />
                         </div>
                     </div>
 
@@ -171,8 +171,7 @@
     </aside>
 
 <%- include('layouts/footer', { scripts: [
-    { src: '/javascript/menu-user/script-menu-user.js', module: true },
-    { src: '/javascript/forms/cadastrar-account/script-createAccount.js', module: true }
+    { src: '/src/router/cadastrar.js', module: true }
 ]}) %>
 
 
