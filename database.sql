@@ -53,6 +53,7 @@ CREATE TABLE agenda (
     buscarResidencia BOOLEAN NOT NULL DEFAULT FALSE,
     observation VARCHAR(255),
     endereco varchar(255),
+    pendente BOOLEAN NOT NULL DEFAULT TRUE,
     fk_user INTEGER NOT NULL,
     fk_pet INTEGER NOT NULL,
     fk_service INTEGER NOT NULL,
