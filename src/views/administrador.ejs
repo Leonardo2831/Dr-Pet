@@ -16,6 +16,12 @@
                         class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Agenda</span>
                 </button>
 
+                <button type="button" data-tab-btn data-target="section-agendamentos"
+                    class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
+                    <span
+                        class="font-sans font-semibold text-base xs:text-lg lg:text-2xl leading-snug lg:leading-10 text-green-700">Agendamentos</span>
+                </button>
+
                 <button type="button" data-tab-btn data-target="section-produtos"
                     class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
                     <span
@@ -155,6 +161,29 @@
                                 Alterações</span>
                         </button>
                     </form>
+                </div>
+            </section>
+
+            <section id="section-agendamentos" data-tab-content
+                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
+                <div class="flex flex-col gap-2">
+                    <h2
+                        class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700">
+                        Solicitações de agendamento
+                    </h2>
+                    <p class="font-sans font-medium text-base md:text-lg text-gray-600">
+                        Analise as solicitações recebidas e escolha entre aceitar ou recusar cada atendimento.
+                    </p>
+                </div>
+
+                <div data-content-appointment-requests
+                    class="mt-6 md:mt-10 grid grid-cols-1 gap-5 w-full"
+                    aria-live="polite">
+                    <div class="flex items-center justify-center p-8 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                        <p class="font-sans font-semibold text-lg text-gray-600 text-center">
+                            Carregando agendamentos...
+                        </p>
+                    </div>
                 </div>
             </section>
 
