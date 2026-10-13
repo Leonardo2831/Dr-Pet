@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style/output.css" />
-    <!-- no ejs a variavel passada por include é salva no objeto locals -->
     <% if (locals.swiper) { %>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <% } %>
@@ -30,7 +29,6 @@
                     <nav class="flex flex-col md:flex-row items-center gap-[25px] md:gap-[15px] lg:gap-5 xl:gap-10">
                         <a href="/#servicos" class="nav-link whitespace-nowrap">Serviços</a>
                         <a href="/#sobre" class="nav-link whitespace-nowrap">Sobre nós</a>
-                        <!-- Quando criar as rotas dessas páginas, aponte para elas! Ex: /loja -->
                         <a href="/loja" class="nav-link whitespace-nowrap">Pet shop</a>
                         <a href="/agenda" data-login class="nav-link whitespace-nowrap">Agendamento</a>
                         <a href="/#contato" class="nav-link whitespace-nowrap">Contato</a>
