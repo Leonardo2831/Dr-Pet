@@ -1,6 +1,8 @@
-﻿const express = require('express');
+const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql');
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
 // Middleware opcional para verificar se o usuário está logado em todas essas rotas
 function verificarLogin(req, res, next) {
@@ -234,5 +236,59 @@ router.post('/option-user/update-password', verificarLogin, (req,res) => {
         }
     )
 })
+
+router.post('/option-user/update-avatar', verificarLogin, upload.single('avatar'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('Nenhum arquivo enviado.');
+    }
+
+    const avatarBlob = req.file.buffer;
+    const userId = req.session.usuario.id;
+
+    db.query(
+        'UPDATE usuario SET avatar = ? WHERE id = ?',
+        [avatarBlob, userId],
+        (err) => {
+            if (err) {
+                console.error('Erro ao atualizar avatar no MySQL:', err);
+                return res.status(500).send('Erro ao salvar avatar.');
+            }
+            res.redirect('/option-user');
+        }
+    );
+});
+
+router.post('/option-user/remove-avatar', verificarLogin, (req, res) => {
+    const userId = req.session.usuario.id;
+
+    db.query(
+        'UPDATE usuario SET avatar = NULL WHERE id = ?',
+        [userId],
+        (err) => {
+            if (err) {
+                console.error('Erro ao remover avatar no MySQL:', err);
+                return res.status(500).send('Erro ao remover avatar.');
+            }
+            res.redirect('/option-user');
+        }
+    );
+});
+
+router.get('/usuario/avatar/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.query(
+        'SELECT avatar FROM usuario WHERE id = ?',
+        [id],
+        (err, results) => {
+            if (err || results.length === 0 || !results[0].avatar) {
+                return res.redirect('/images/icons/options/user-default.svg');
+            }
+
+            res.setHeader('Content-Type', 'image/jpeg');
+            res.send(results[0].avatar);
+        }
+    );
+});
 
 module.exports = router;

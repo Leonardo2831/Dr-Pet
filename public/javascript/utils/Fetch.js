@@ -3,7 +3,7 @@ export default class Fetch {
     classModalSucess = 'success';
 
     constructor(urlFinal, selectorModalInfo){
-        this.url = 'http://localhost:3000/' + urlFinal;
+        this.url = '/' + urlFinal.replace(/^\//, '');
         this.modalInfo = document.querySelector(selectorModalInfo);
     }
 
@@ -47,15 +47,21 @@ export default class Fetch {
         }
     }
 
-    async post(object){
+    async post(data){
         try{
-            const response = await fetch(this.url, {
+            const isFormData = data instanceof FormData;
+            const fetchOptions = {
                 method: "POST",
-                headers: {
+                body: isFormData ? data : JSON.stringify(data),
+            };
+
+            if (!isFormData) {
+                fetchOptions.headers = {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify(object),
-            });
+                };
+            }
+
+            const response = await fetch(this.url, fetchOptions);
 
             if (!response.ok) {
                 const error = new Error(`HTTP ${response.status} ${response.statusText}`);
@@ -77,15 +83,21 @@ export default class Fetch {
         }
     }
 
-    async put(id, object){
+    async put(id, data){
         try {
-            const response = await fetch(`${this.url}/${id}`, {
+            const isFormData = data instanceof FormData;
+            const fetchOptions = {
                 method: "PUT",
-                headers: {
+                body: isFormData ? data : JSON.stringify(data),
+            };
+
+            if (!isFormData) {
+                fetchOptions.headers = {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify(object),
-            });
+                };
+            }
+
+            const response = await fetch(`${this.url}/${id}`, fetchOptions);
             
             this.showModalSuccess('Os dados foram atualizados com sucesso!');
             return response;
@@ -100,13 +112,21 @@ export default class Fetch {
         }
     }
 
-    async patch(id, object){
+    async patch(id, data){
         try {
-            const response = await fetch(`${this.url}/${id}`, {
+            const isFormData = data instanceof FormData;
+            const fetchOptions = {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(object),
-            });
+                body: isFormData ? data : JSON.stringify(data),
+            };
+
+            if (!isFormData) {
+                fetchOptions.headers = {
+                    "Content-Type": "application/json"
+                };
+            }
+
+            const response = await fetch(`${this.url}/${id}`, fetchOptions);
             this.showModalSuccess('Os dados foram atualizados com sucesso!');
             return response;
         } catch(err) {

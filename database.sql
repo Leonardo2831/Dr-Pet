@@ -8,7 +8,7 @@ CREATE TABLE usuario (
     telefone CHAR(12) NOT NULL, 
     senha VARCHAR(255) NOT NULL,
     tipo_usuario ENUM('admin', 'comum') NOT NULL DEFAULT 'comum',
-    avatar BLOB,
+    avatar LONGBLOB,
     PRIMARY KEY(id)
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE agenda (
 
 CREATE TABLE slide_home (
     id INTEGER AUTO_INCREMENT,
-    image BLOB NOT NULL,
+    image LONGBLOB NOT NULL,
     alt VARCHAR(150) NOT NULL,
     ordem INTEGER NOT NULL DEFAULT 1 CHECK(ordem > 0),
     PRIMARY KEY(id)
@@ -74,10 +74,11 @@ CREATE TABLE slide_home (
 CREATE TABLE produto (
     id INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
+    categoria VARCHAR(100) DEFAULT 'geral',
     preco DECIMAL(10,2) NOT NULL,
     short_description VARCHAR(80) NOT NULL,
     long_description VARCHAR(1000) NOT NULL,
-    main_image BLOB NOT NULL,
+    main_image LONGBLOB NOT NULL,
     main_alt_image VARCHAR(100) NOT NULL,
     PRIMARY KEY(id)
 );
@@ -85,7 +86,7 @@ CREATE TABLE produto (
 CREATE TABLE produto_image (
     id INTEGER NOT NULL AUTO_INCREMENT,
     fk_produto INTEGER NOT NULL,
-    image BLOB NOT NULL,
+    image LONGBLOB NOT NULL,
     alt VARCHAR(100) NOT NULL,
     ordem INTEGER NOT NULL DEFAULT 1 CHECK (ordem > 0),
     PRIMARY KEY(id),

@@ -30,16 +30,20 @@ export default async function loadMenuUser(){
         }
 
         const addressContainer = document.querySelector('#address-container');
-        userData.address.forEach((address) => {
-            const addressElement = structAddress(address, userData, fetchUser);
-            addressContainer.appendChild(addressElement);
-        });
+        if (addressContainer && Array.isArray(userData.address)) {
+            userData.address.forEach((address) => {
+                const addressElement = structAddress(address, userData, fetchUser);
+                addressContainer.appendChild(addressElement);
+            });
+        }
 
         const petsContainer = document.querySelector('#pet-container');
-        userData.pets.forEach((pet)=> {
-            const petElement = structPet(pet, userData, fetchUser);
-            petsContainer.appendChild(petElement);
-        });
+        if (petsContainer && Array.isArray(userData.pets)) {
+            userData.pets.forEach((pet)=> {
+                const petElement = structPet(pet, userData, fetchUser);
+                petsContainer.appendChild(petElement);
+            });
+        }
 
         const userInfosChange = new UserInfosChange(
             '[data-button="saveEmail"]',

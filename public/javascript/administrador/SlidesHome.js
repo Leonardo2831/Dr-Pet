@@ -40,48 +40,29 @@ export default class SlidesHome{
         });
     }
 
-    readFile(inputFile){
-        return new Promise((resolve, reject) => {
-            try {
-                const reader = new FileReader();
-                
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = (err) => reject(err);
-
-                
-                reader.readAsDataURL(inputFile);
-            } catch (error) {
-                reject(error);
-            }
-        });
-    }
-
     async saveImage(){
-        // pego endereço do arquivo no computador
-        const inputFile = this.labelAdd.querySelector('input').files[0];
+        const input = this.labelAdd.querySelector('input');
+        const inputFile = input.files[0];
         if(!inputFile) {
             console.error('Nenhum arquivo selecionado!');
             return;
         }
 
-        const imageBase64 = await this.readFile(inputFile);
-        if(!imageBase64) {
-            console.error('Erro na leitura do arquivo!');
-            return;
-        }
-        
         const slides = await this.fetchJson.get();
-        const maxOrder = slides.length > 0 ? Math.max(...slides.map(s => s.order)) : 0;
-        
-        const objectImage = {
-            id: crypto.randomUUID(),
-            altImage: inputFile.name,
-            image: imageBase64,
-            order:  maxOrder + 1
-        };
+        const maxOrder = Array.isArray(slides) && slides.length > 0 ? Math.max(...slides.map(s => s.order || s.ordem || 0)) : 0;
 
-        this.fetchJson.post(objectImage);
-        structSlide(objectImage);
+        const formData = new FormData();
+        formData.append('image', inputFile);
+        formData.append('alt', inputFile.name);
+        formData.append('ordem', maxOrder + 1);
+
+        const response = await this.fetchJson.post(formData);
+        if (response && response.ok) {
+            const newSlide = await response.json();
+            const figure = structSlide(newSlide);
+            this.labelAdd.before(figure, this.labelAdd);
+        }
+        input.value = '';
     }
 
     addEvents(){

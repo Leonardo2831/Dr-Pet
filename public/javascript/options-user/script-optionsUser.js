@@ -1,7 +1,7 @@
 import MenuOptions from "./MenuOptions.js";
 import PopUp from "../utils/Pop-up.js"
 import loadMenuUser from "./loadMenuUser.js";
-import CheckLogin from "../utils/checkLogin.js";
+import CheckLogin from "../utils/CheckLogin.js";
 import ChangeAvatar from "./ChangeAvatar.js";
 
 document.addEventListener('DOMContentLoaded', () => {

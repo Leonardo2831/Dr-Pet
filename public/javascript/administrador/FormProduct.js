@@ -36,14 +36,14 @@ export default class FormProduct {
     }
 
     handleEditorChange(quill, oldDelta, hiddenField, maxLength) {
-        if (!quill || !hiddenField) return;
+     if (!quill || !hiddenField) return;
 
-        if (quill.getLength() - 1 > maxLength) {
-            quill.updateContents(oldDelta); 
-        }
+        if (quill.getLength() - 1 > maxLength) {
+            quill.updateContents(oldDelta); 
+        }
 
-        hiddenField.value = this.getEditorHtml(quill);
-    }
+        hiddenField.value = this.getEditorHtml(quill);
+    }
 
     // validação para evitar que tenha quebra de linhas apenas no quill
     getEditorHtml(quill) {
@@ -125,100 +125,73 @@ export default class FormProduct {
             }
         }
             
-        const labelMainImage = this.getLabelFile(this.inputMainImage);
-        if (!(this.inputMainImage?.files.length > 0)) {
-            labelMainImage?.classList.add('error');
-            labelMainImage?.addEventListener('click', () => {
-                labelMainImage.classList.remove('error');
-            });
-        }
-        const labelSlideImages = this.getLabelFile(this.inputSlideImages);
-        if (!(this.inputSlideImages?.files.length > 0)) {
-            labelSlideImages?.classList.add('error');
-            labelSlideImages?.addEventListener('click', () => {
-                labelSlideImages.classList.remove('error');
-            });
+        const isEditing = Boolean(this.buttonCreateProduct?.getAttribute('data-id'));
+        if (!isEditing) {
+            const labelMainImage = this.getLabelFile(this.inputMainImage);
+            if (!(this.inputMainImage?.files.length > 0)) {
+                labelMainImage?.classList.add('error');
+                labelMainImage?.addEventListener('click', () => {
+                    labelMainImage.classList.remove('error');
+                });
+            }
+            const labelSlideImages = this.getLabelFile(this.inputSlideImages);
+            if (!(this.inputSlideImages?.files.length > 0)) {
+                labelSlideImages?.classList.add('error');
+                labelSlideImages?.addEventListener('click', () => {
+                    labelSlideImages.classList.remove('error');
+                });
+            }
         }
     }
 
     verifyInputs() {
+        const isEditing = Boolean(this.buttonCreateProduct?.getAttribute('data-id'));
         const hasName = this.inputName?.value.trim() !== '';
         const hasCategory = this.selectCategory?.value !== '';
         const hasPrice = Number(this.inputPrice?.value.replace(',', '.').replace('R$', '')) > 0;
         const hasShortDescription = this.areaShortDescription?.value.trim() !== '';
         const hasLongDescription = this.getEditorValue(this.quillLong, this.areaLongDescription) !== '';
-        const hasMainImage = this.inputMainImage?.files.length > 0;
-        const hasSlideImages = this.inputSlideImages?.files.length > 0;
+        const hasMainImage = isEditing || (this.inputMainImage?.files.length > 0);
+        const hasSlideImages = isEditing || (this.inputSlideImages?.files.length > 0);
 
         return hasName && hasCategory && hasPrice && hasShortDescription && hasLongDescription && hasMainImage && hasSlideImages;
     }
 
-    transformImagesBase64(images) {
-        return Promise.all(
-            images.map(image => {
-                return new Promise((resolve, reject) => {
-                    try {
-                        const reader = new FileReader();
-                        reader.onload = () => resolve(reader.result);
-                        reader.onerror = (err) => reject(err);
-                        reader.readAsDataURL(image);
-                    } catch (error) {
-                        reject(error);
-                    }
-                });
-            })
-        );
-    }
+    createFormDataProduct() {
+        const formData = new FormData();
+        formData.append('name', this.inputName.value.trim());
+        formData.append('category', this.selectCategory.value);
+        formData.append('price', Number(this.inputPrice.value.replace(',', '.').replace('R$', '')));
+        formData.append('shortDescription', this.areaShortDescription.value.trim());
+        formData.append('longDescription', this.getEditorValue(this.quillLong, this.areaLongDescription));
 
-    transformOneImageBase64(image) {
-        return new Promise((resolve, reject) => {
-            try {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = (err) => reject(err);
-                reader.readAsDataURL(image);
-            } catch (error) {
-                reject(error);
-            }
-        });
-    }
+        if (this.inputMainImage?.files?.length > 0) {
+            formData.append('mainImage', this.inputMainImage.files[0]);
+            formData.append('mainAltImage', this.inputMainImage.files[0].name);
+        }
 
-    async createObjectProduct() {
-        return {
-            id: crypto.randomUUID(),
-            name: this.inputName.value.trim(),
-            category: this.selectCategory.value,
-            price: Number(this.inputPrice.value.replace(',', '.').replace('R$', '')),
-            shortDescription: this.areaShortDescription.value.trim(),
-            longDescription:  this.getEditorValue(this.quillLong, this.areaLongDescription),
-            imageMain: {
-                image: await this.transformOneImageBase64(this.inputMainImage.files[0]),
-                alt: this.inputMainImage.files[0].name
-            },
-            imagesSlide: [
-                ...(await this.transformImagesBase64(Array.from(this.inputSlideImages.files))).map((image, index) => {
-                    return {
-                        image,
-                        alt: this.inputSlideImages.files[index].name
-                    };
-                })
-            ]
-        };
+        if (this.inputSlideImages?.files?.length > 0) {
+            Array.from(this.inputSlideImages.files).forEach((file) => {
+                formData.append('slideImages', file);
+            });
+        }
+
+        return formData;
     }
 
     async initCreateProduct() {
         if (this.verifyInputs()) {
             const idProduct = this.buttonCreateProduct.getAttribute('data-id');
-            const createObject = await this.createObjectProduct();
+            const formData = this.createFormDataProduct();
 
             if (idProduct) {
-                createObject.id = idProduct;
-                await this.fetchJson.put(idProduct, createObject);
+                await this.fetchJson.put(idProduct, formData);
             } else {
-                await this.fetchJson.post(createObject);
+                await this.fetchJson.post(formData);
             }
 
             this.closeForm();
+            window.location.reload();
         } else {
             this.markErrors();
         }

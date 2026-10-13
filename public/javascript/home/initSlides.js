@@ -7,8 +7,9 @@ function createImage(objectImage){
 
     const img = document.createElement('img');
     img.className = "w-full h-full object-cover object-center";
-    img.setAttribute('src', objectImage.image);
-    img.setAttribute('alt', objectImage.altImage);
+    const imageSrc = objectImage.imageUrl || objectImage.image || `/slides-home/${objectImage.id}/image`;
+    img.setAttribute('src', imageSrc);
+    img.setAttribute('alt', objectImage.alt || objectImage.altImage || 'Slide');
     img.setAttribute('id', objectImage.id);
     figure.appendChild(img);
 
@@ -22,7 +23,7 @@ export default function initSlides(){
     fetchJson.get().then((images) => {
         if(Array.isArray(images)) {
             contentSlide.innerHTML = "";
-            images.sort((a, b) => a.order - b.order);
+            images.sort((a, b) => (a.order || a.ordem || 0) - (b.order || b.ordem || 0));
             images.forEach((imgObject) => {
                 contentSlide.appendChild(createImage(imgObject));
             });

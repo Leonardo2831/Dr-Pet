@@ -1,18 +1,13 @@
-import Fetch from '../utils/Fetch.js';
-import Storage from '../utils/Storage.js';
-
 export default class ChangeAvatar {
     constructor(selectorInput) {
         this.input = document.querySelector(selectorInput);
         if (this.input) {
             this.image = this.input.closest('figure').querySelector('img:first-of-type');
         }
-        this.fetchUser = new Fetch('usuarios', '[data-modal-info-menu="user"]');
-        this.userId = Storage.get('user-id');
         this.changeImage = this.changeImage.bind(this);
     }
 
-    changeImage(event) {
+    async changeImage(event) {
         const files = event.target.files;
         
         if (files && files.length > 0) {
@@ -24,22 +19,34 @@ export default class ChangeAvatar {
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                if (this.image) {
-                    this.image.src = e.target.result;
+            // Preview instantâneo via BLOB URL
+            if (this.image) {
+                this.image.src = URL.createObjectURL(file);
+            }
+
+            // Envio direto do arquivo como BLOB via FormData
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const response = await fetch('/option-user/update-avatar', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    console.error('Falha ao salvar avatar no servidor.');
                 }
-                if (this.userId) {
-                    await this.fetchUser.patch(this.userId, { avatar: e.target.result });
-                }
-            };
-            reader.readAsDataURL(file);
+            } catch (err) {
+                console.error('Erro ao atualizar avatar:', err);
+            }
         } else {
             if (this.image) {
-                this.image.src = "../images/icons/options/user-default.svg";
+                this.image.src = "/images/icons/options/user-default.svg";
             }
-            if (this.userId) {
-                this.fetchUser.patch(this.userId, { avatar: "" });
+            try {
+                await fetch('/option-user/remove-avatar', { method: 'POST' });
+            } catch (err) {
+                console.error('Erro ao remover avatar:', err);
             }
         }
     }

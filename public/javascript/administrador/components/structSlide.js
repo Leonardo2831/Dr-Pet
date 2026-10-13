@@ -6,9 +6,10 @@ const confirm = new CheckFunction();
 export default function structSlide(object){
     const figure = document.createElement('figure');
     figure.className = "animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat";
+    const imageSrc = object.imageUrl || object.image || `/slides-home/${object.id}/image`;
     figure.setAttribute('data-content-slides', object.id);
-    figure.setAttribute('aria-label', object.altImage || 'Slide image');
-    figure.style.backgroundImage = `url('${object.image}')`;
+    figure.setAttribute('aria-label', object.alt || object.altImage || 'Slide image');
+    figure.style.backgroundImage = `url('${imageSrc}')`;
 
     figure.innerHTML = `
         <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>

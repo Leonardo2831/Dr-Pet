@@ -33,22 +33,12 @@ export default function eventoSlides() {
   // --- 2. CRIAÇÃO DO PREVIEW E TORNAR ARRASTÁVEL ---
 
   function previewFile(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = document.createElement('img');
-      img.src = reader.result;
-      img.classList.add('slide-item');
-      
-      // Habilita o movimento nativo
-      img.draggable = true; 
-      
-      // Adiciona os eventos para permitir reordenar com o mouse
-      addReorderEvents(img);
-
-      gallery.appendChild(img);
-      console.log("Arquivo pronto para upload:", file.name);
-    };
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.classList.add('slide-item');
+    img.draggable = true;
+    addReorderEvents(img);
+    gallery.appendChild(img);
   }
 
   // --- 3. LÓGICA DE REORDENAÇÃO MANUAL (Move slides entre si) ---
