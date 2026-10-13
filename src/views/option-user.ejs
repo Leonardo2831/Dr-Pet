@@ -34,7 +34,7 @@
                     >
                         <span data-info="nameUser"
                             class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 break-words line-clamp-2"
-                            ><%= user.name || "Erro ao carregar nome" %></span
+                            ><%= user.nome || "Erro ao carregar nome" %></span
                         >
                         <button data-button="editarNome"
                             class="p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-full flex-shrink-0 hover:scale-110 transition-transform"
@@ -190,7 +190,7 @@
                                 >
                                 <span data-info="telefone"
                                     class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                ><%= user.phone || "Erro ao carregar telefone" %></span>
+                                ><%= user.telefone || "Erro ao carregar telefone" %></span>
                             </div>
                         </div>
                         <a
@@ -226,7 +226,7 @@
                                 >
                                 <span data-info="senha"
                                     class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]"
-                                ><%= user.password ? '**********' : "Erro ao carregar senha" %></span>
+                                ><%= user.senha ? '**********' : "Erro ao carregar senha" %></span>
                             </div>
                         </div>
                         <a
@@ -261,7 +261,43 @@
                 </nav>
                 <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
                     <div id="address-container" class="peer">
-                        <!-- endereços aparecem aqui dinamicamente -->
+                        <% if (enderecos && enderecos.length > 0) { %>
+                            <% enderecos.forEach(endereco => { %>
+                                <div data-id="<%= endereco.id %>" class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
+                                    <div class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8">
+                                        <div class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0">
+                                            <img src="/images/icons/options/endereco/house.svg" alt="Ícone Casa"
+                                                class="w-8 h-8 sm:w-10 sm:h-10 lg:w-[49px] lg:h-auto object-contain" />
+                                        </div>
+                                        <div class="flex flex-col gap-2 sm:gap-3 lg:gap-[15px]">
+                                            <span class="text-xl sm:text-2xl lg:text-[32px] font-bold text-gray-800 leading-tight lg:leading-[40px]">
+                                                <%= endereco.rua %><% if (endereco.numero) { %> - <%= endereco.numero %><% } %>
+                                            </span>
+                                            <div class="flex flex-col gap-1 sm:gap-1.5 lg:gap-[10px]">
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
+                                                    CEP <%= endereco.cep %> - <%= endereco.cidade %> - <%= endereco.estado %>
+                                                </span>
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
+                                                    <%= endereco.telefone_contato %>
+                                                </span>
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
+                                                    <%= endereco.bairro %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" data-button="options-address"
+                                        class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
+                                        aria-label="Opções de Endereço">
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                    </button>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <p class="p-4 sm:p-6 lg:p-[30px] text-base sm:text-lg text-gray-700">Nenhum endereço cadastrado.</p>
+                        <% } %>
                     </div>
                     <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
                         <a data-button="address" href="#"
@@ -296,40 +332,43 @@
 
                 <div class="flex flex-col w-full shadow-sm rounded-[10px] bg-gray-100">
                     <div id="pet-container" class="peer">
-                        <!-- pets aparecem aqui dinamicamente -->
-                         <%= 
-                            pets?.map(pet => `
-                                <div class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8">
-                                    <div class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0">
-                                        <img src="../images/icons/options/pets/dog.svg" alt="Ícone Pet"
-                                            class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-auto object-contain" />
-                                    </div>
-                                    <div class="flex flex-col gap-2 sm:gap-3 lg:gap-[15px]">
-                                        <span class="text-xl sm:text-2xl lg:text-[32px] font-bold text-gray-800 leading-tight lg:leading-10">
-                                            ${pet.nome}
-                                        </span>
-                                        <div class="flex flex-col gap-1 sm:gap-1.5 lg:gap-[10px]">
-                                            <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
-                                                ${pet.raca}
+                        <% if (pets && pets.length > 0) { %>
+                            <% pets.forEach(pet => { %>
+                                <div data-id="<%= pet.id %>" class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
+                                    <div class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8">
+                                        <div class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0">
+                                            <img src="/images/icons/options/pets/dog.svg" alt="Ícone Pet"
+                                                class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-auto object-contain" />
+                                        </div>
+                                        <div class="flex flex-col gap-2 sm:gap-3 lg:gap-[15px]">
+                                            <span class="text-xl sm:text-2xl lg:text-[32px] font-bold text-gray-800 leading-tight lg:leading-10">
+                                                <%= pet.nome %>
                                             </span>
-                                            <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
-                                                ${pet.genero}
-                                            </span>
-                                            <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
-                                                ${pet.descricao}
-                                            </span>
+                                            <div class="flex flex-col gap-1 sm:gap-1.5 lg:gap-[10px]">
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
+                                                    <%= pet.raca || 'Raça não informada' %>
+                                                </span>
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-medium text-gray-700 leading-snug lg:leading-[27px]">
+                                                    <%= pet.genero === 'femea' ? 'Fêmea' : 'Macho' %>
+                                                </span>
+                                                <span class="text-base sm:text-lg lg:text-[22px] font-normal text-gray-700 leading-snug lg:leading-[27px]">
+                                                    <%= pet.descricao || 'Sem descrição' %>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button type="button" data-button="options-pet"
+                                        class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
+                                        aria-label="Opções do Pet">
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
+                                    </button>
                                 </div>
-                                <button data-button="options-pet"
-                                    class="flex flex-col gap-1 sm:gap-1.5 items-center justify-center p-2 sm:p-3 outline-none focus:ring-2 focus:ring-green-400 rounded-md hover:bg-gray-200 transition-colors flex-shrink-0"
-                                    aria-label="Opções do Pet">
-                                    <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                                    <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                                    <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full"></div>
-                                </button>
-                            `).join('')
-                         %>
+                            <% }); %>
+                        <% } else { %>
+                            <p class="p-4 sm:p-6 lg:p-[30px] text-base sm:text-lg text-gray-700">Nenhum pet cadastrado.</p>
+                        <% } %>
                     </div>
                     <div class="flex flex-row items-center p-4 sm:p-6 lg:p-[30px] rounded-b-[10px] peer-has-[div]:border-t-[3px] peer-has-[div]:border-gray-400">
                         <a data-button="Pet" href="#"
@@ -419,7 +458,7 @@
     <!-- modal alterar email -->
     <aside data-modal="editEmail" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="editEmail" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+            <form method="post" action="/option-user/update-email" data-form="editEmail" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
 
                 <button type="button" data-button="closeEditEmail" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar">
@@ -429,11 +468,11 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-email" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Email</label>
-                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" placeholder="seu@email.com" required
+                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" value="<%= user.email || '' %>" placeholder="seu@email.com" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
-                <button data-button="saveEmail" type="button"
+                <button data-button="saveEmail" type="submit"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
                 </button>
@@ -443,7 +482,7 @@
 
     <aside data-modal="editTelefone" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="editTelefone" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+            <form method="post" action="/option-user/update-phone" data-form="editTelefone" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
 
                 <button type="button" data-button="closeEditTelefone" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar">
@@ -453,11 +492,11 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-Telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Telefone</label>
-                    <input data-input="editTelefone" data-input="formatPhone" id="input-edit-Telefone" type="tel" name="Telefone" placeholder="(XX) XX XXXX-XXXX" required
+                    <input data-input="editTelefone" id="input-edit-Telefone" type="tel" name="telefone" value="<%= user.telefone || '' %>" placeholder="(00) 00000-0000" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
-                <button data-button="saveTelefone" type="button"
+                <button data-button="saveTelefone" type="submit"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
                 </button>
@@ -467,7 +506,7 @@
 
     <aside data-modal="editSenha" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+            <form method="post" action="/option-user/update-password" data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
 
                 <button type="button" data-button="closeEditSenha" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar">
@@ -476,12 +515,18 @@
                 <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Senha</h3>
 
                 <div class="flex flex-col gap-[10px]">
-                    <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
-                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="Senha" placeholder="Digite sua senha" required
+                    <label for="input-current-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Senha atual</label>
+                    <input id="input-current-Senha" type="password" name="senhaAtual" placeholder="Digite sua senha atual" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
-                <button data-button="saveSenha" type="button"
+                <div class="flex flex-col gap-[10px]">
+                    <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
+                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="senha" placeholder="Digite sua nova senha" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                </div>
+
+                <button data-button="saveSenha" type="submit"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
                 </button>
@@ -492,7 +537,7 @@
     <!-- modal trocar nome -->
     <aside data-modal="editName" class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="editName" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+            <form method="post" action="/option-user/update-name" data-form="editName" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
 
                 <button type="button" data-button="closeEditName" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar">
@@ -501,12 +546,12 @@
                 <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Nome</h3>
 
                 <div class="flex flex-col gap-[10px]">
-                    <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Digite o seu nome:</label>
-                    <input data-input="editName" id="input-edit-Nome" type="text" name="Nome" placeholder="Seu nome completo" required
+                    <label for="input-edit-Nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Digite o seu nome:</label>
+                    <input data-input="editName" id="input-edit-Nome" type="text" name="nome" value="<%= user.nome || '' %>" placeholder="Seu nome completo" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
-                <button data-button="saveNome" type="button"
+                <button data-button="saveNome" type="submit"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
                 </button>
@@ -517,7 +562,7 @@
     <!-- modal adicionar endereço -->
     <aside data-modal="addAddress" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="addAddress" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+            <form method="POST" action="/option-user/create-address" data-form="addAddress" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
 
                 <button type="button" data-button="closeFormAddress" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
@@ -569,7 +614,7 @@
                     </div>
                 </div>
 
-                <button data-button="saveAddress" type="button"
+                <button data-button="saveAddress" type="submit"
                     class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Endereço</span>
                 </button>
@@ -580,7 +625,7 @@
     <!-- Modal de pets -->
     <aside data-modal="addPet" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form data-form="addPet" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+            <form method="post" action="/option-user/create-pet" data-form="addPet" class="relative max-h-[90vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6 md:gap-8">
 
                 <button type="button" data-button="closeFormPet" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
@@ -606,12 +651,12 @@
                         <span class="font-sans font-semibold text-base md:text-lg text-gray-700">Gênero</span>
                         <div class="flex flex-row gap-6">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input data-input="petGender" type="radio" name="gender" value="Macho" checked required
+                                <input data-input="petGender" type="radio" name="gender" value="macho" checked required
                                     class="w-4 h-4 accent-green-600" />
                                 <span class="font-medium text-base md:text-lg text-gray-600">Macho</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input data-input="petGender" type="radio" name="gender" value="Fêmea"
+                                <input data-input="petGender" type="radio" name="gender" value="femea"
                                     class="w-4 h-4 accent-green-600" />
                                 <span class="font-medium text-base md:text-lg text-gray-600">Fêmea</span>
                             </label>
@@ -627,7 +672,7 @@
                     </div>
                 </div>
 
-                <button data-button="savePet" type="button"
+                <button data-button="savePet" type="submit"
                     class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
                     <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar meu pet</span>
                 </button>
@@ -714,12 +759,75 @@
         </div>
     </aside>
 
+<script type="module">
+    import MenuOptions from '/javascript/options-user/MenuOptions.js';
+    import ChangeAvatar from '/javascript/options-user/ChangeAvatar.js';
+    import CheckLogin from '/javascript/utils/CheckLogin.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        new ChangeAvatar('[data-input="avatarUser"]').init();
+        new CheckLogin('[data-modal="loginRequired"]').init();
+
+        const modals = [
+            ['[data-button="address"]', '[data-modal="addAddress"]', '[data-button="closeFormAddress"]'],
+            ['[data-button="Pet"]', '[data-modal="addPet"]', '[data-button="closeFormPet"]'],
+            ['[data-button="openEditEmail"]', '[data-modal="editEmail"]', '[data-button="closeEditEmail"]'],
+            ['[data-button="openEditTelefone"]', '[data-modal="editTelefone"]', '[data-button="closeEditTelefone"]'],
+            ['[data-button="openEditSenha"]', '[data-modal="editSenha"]', '[data-button="closeEditSenha"]'],
+            ['[data-button="editarNome"]', '[data-modal="editName"]', '[data-button="closeEditName"]']
+        ];
+
+        modals.forEach(([openSelector, modalSelector, closeSelector]) => {
+            const openButton = document.querySelector(openSelector);
+            const modal = document.querySelector(modalSelector);
+            const closeButton = document.querySelector(closeSelector);
+            if (!openButton || !modal || !closeButton) return;
+
+            openButton.addEventListener('click', event => {
+                event.preventDefault();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            });
+            closeButton.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            modal.addEventListener('click', event => {
+                if (event.target === modal) closeButton.click();
+            });
+        });
+
+        new MenuOptions('[data-button="options-address"]', '[data-popup="options-address"]');
+        new MenuOptions('[data-button="options-pet"]', '[data-popup="options-pet"]');
+
+        const returnSection = sessionStorage.getItem('option-user-return-section');
+        if (returnSection) {
+            sessionStorage.removeItem('option-user-return-section');
+            document.querySelectorAll('main section[id]').forEach(section => section.classList.add('hidden'));
+            document.getElementById(returnSection)?.classList.remove('hidden');
+        }
+
+        document.querySelector('[data-form="addAddress"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'Endereco');
+        });
+        document.querySelector('[data-form="addPet"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'dados-pet');
+        });
+
+        ['editEmail', 'editTelefone', 'editSenha'].forEach(form => {
+            document.querySelector(`[data-form="${form}"]`)?.addEventListener('submit', () => {
+                sessionStorage.setItem('option-user-return-section', 'dados-pessoais');
+            });
+        });
+        document.querySelector('[data-form="editName"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'menu-inicial');
+        });
+    });
+</script>
+
 <%- include('layouts/footer', { scripts: [
     { src: '/javascript/utils/UserTabNav.js', module: true },
     { src: '/javascript/menu-user/script-menu-user.js', module: true },
-    { src: '/javascript/options-user/script-optionsUser.js', module: true },
-    { src: '/javascript/options-user/components/structEndereço.js', module: true },
-    { src: '/javascript/options-user/components/structPets.js', module: true }
 ] }) %>
 
 
