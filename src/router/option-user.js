@@ -2,8 +2,17 @@
 const router = express.Router();
 const db = require('../database/mysql');
 
-router.get('/option-user', (req, res) => {
-    const userId = 1;
+// Middleware opcional para verificar se o usuário está logado em todas essas rotas
+function verificarLogin(req, res, next) {
+    if (!req.session || !req.session.usuario) {
+        return res.redirect('/login');
+    }
+    next();
+}
+
+router.get('/option-user', verificarLogin, (req, res) => {
+
+    const userId = req.session.usuario.id;
 
     db.query(
         'SELECT * FROM usuario WHERE id = ?',
@@ -35,7 +44,7 @@ router.get('/option-user', (req, res) => {
                             }
                             const pets = petResult;
 
-                            res.render('option-user', {user,enderecos,pets})
+                            res.render('option-user', {user, enderecos, pets})
                         }
                     )
                 }
@@ -44,7 +53,7 @@ router.get('/option-user', (req, res) => {
     );
 });
 
-router.post('/option-user/create-address', (req,res) => {
+router.post('/option-user/create-address', verificarLogin, (req,res) => {
     const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body
     if(!rua || !numero || !cep || !cidade || !estado || !bairro || !telefone) {
         return res.status(400)
@@ -57,7 +66,9 @@ router.post('/option-user/create-address', (req,res) => {
     const cidadeLimpo = cidade.trim()
     const bairroLimpo = bairro.trim()
     const numeroLimpo = numero.trim()
-    const id = 1;
+    
+    const id = req.session.usuario.id;
+    
     db.query (
         'INSERT INTO endereco (usuario_id, rua, numero, cep, cidade, estado, bairro, telefone_contato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [id, ruaLimpo, numeroLimpo, cepRegex, cidadeLimpo, estadoRegex, bairroLimpo, phoneRegex],
@@ -67,14 +78,11 @@ router.post('/option-user/create-address', (req,res) => {
             } else {
                 res.redirect('/option-user')
             }
-
         }
-
     )
-
 })
 
-router.post('/option-user/create-pet', (req,res) => {
+router.post('/option-user/create-pet', verificarLogin, (req,res) => {
     const { name, race, gender, descriptionPet } = req.body
     if(!name || !race || !gender || !descriptionPet) {
         return res.status(400)
@@ -83,7 +91,8 @@ router.post('/option-user/create-pet', (req,res) => {
     const nome = name.trim()
     const raca = race.trim()
     const descricao = descriptionPet.trim()
-    const id = 1;
+    
+    const id = req.session.usuario.id;
     db.query (
         'INSERT INTO pet (usuario_id, nome, raca, genero, descricao) VALUES (?, ?, ?, ?, ?)',
         [id, nome, raca, gender, descricao ],
@@ -93,21 +102,19 @@ router.post('/option-user/create-pet', (req,res) => {
             } else {
                 res.redirect('/option-user')
             }
-
         }
-
     )
-
 })
 
-router.post('/option-user/update-name', (req,res) => {
+router.post('/option-user/update-name', verificarLogin, (req,res) => {
     const { nome } = req.body
     if(typeof nome !== 'string' || !nome.trim()) {
         return res.status(400).send('Preencha o nome e tente novamente.');
     }
 
     const nomeLimpo = nome.trim()
-    const id = 1;
+    const id = req.session.usuario.id;
+    
     db.query(
         'UPDATE usuario SET nome = ? WHERE id = ?',
         [nomeLimpo, id],
@@ -119,19 +126,23 @@ router.post('/option-user/update-name', (req,res) => {
             if(result.affectedRows === 0) {
                 return res.status(404).send('Usuário não encontrado');
             }
+
+            req.session.usuario.nome = nomeLimpo; 
+            
             res.redirect('/option-user')
         }
     )
 })
 
-router.post('/option-user/update-email', (req,res) => {
+router.post('/option-user/update-email', verificarLogin, (req,res) => {
     const { email } = req.body
     if(typeof email !== 'string' || !email.trim()) {
         return res.status(400).send('Preencha o email e tente novamente.');
     }
 
     const emailLimpo = email.trim()
-    const id = 1;
+    const id = req.session.usuario.id;
+    
     db.query(
         'UPDATE usuario SET email = ? WHERE id = ?',
         [emailLimpo, id],
@@ -146,12 +157,15 @@ router.post('/option-user/update-email', (req,res) => {
             if(result.affectedRows === 0) {
                 return res.status(404).send('Usuário não encontrado');
             }
+            
+            req.session.usuario.email = emailLimpo;
+            
             res.redirect('/option-user')
         }
     )
 })
 
-router.post('/option-user/update-phone', (req,res) => {
+router.post('/option-user/update-phone', verificarLogin, (req,res) => {
     const { telefone } = req.body
     if(typeof telefone !== 'string' || !telefone.trim()) {
         return res.status(400).send('Preencha o telefone e tente novamente.');
@@ -162,7 +176,8 @@ router.post('/option-user/update-phone', (req,res) => {
         return res.status(400).send('Preencha um telefone válido.');
     }
 
-    const id = 1;
+    const id = req.session.usuario.id; 
+    
     db.query(
         'UPDATE usuario SET telefone = ? WHERE id = ?',
         [telefoneLimpo, id],
@@ -174,18 +189,22 @@ router.post('/option-user/update-phone', (req,res) => {
             if(result.affectedRows === 0) {
                 return res.status(404).send('Usuário não encontrado');
             }
+            
+            req.session.usuario.telefone = telefoneLimpo;
+            
             res.redirect('/option-user')
         }
     )
 })
 
-router.post('/option-user/update-password', (req,res) => {
+router.post('/option-user/update-password', verificarLogin, (req,res) => {
     const { senhaAtual, senha } = req.body
     if(typeof senhaAtual !== 'string' || !senhaAtual || typeof senha !== 'string' || !senha.trim()) {
         return res.status(400).send('Preencha a senha atual e a nova senha.');
     }
 
-    const id = 1;
+    const id = req.session.usuario.id; 
+    
     db.query(
         'SELECT senha FROM usuario WHERE id = ?',
         [id],

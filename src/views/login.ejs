@@ -3,7 +3,7 @@
     <main class="flex flex-col lg:flex-row">
         <section
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
-            <form data-form="login" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+            <form data-form="login" action="/loginAction" method="POST" class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
                 <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]"
                     id="form-login">
                     Login
@@ -28,7 +28,7 @@
                             <div
                                 class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-[20px]">
                                 <input data-input="passwordLogin" type="password" id="current-password"
-                                    name="current-password" autocomplete="current-password"
+                                    name="password" autocomplete="current-password"
                                     class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none pr-11 xs:text-[19px] sm:text-[20px] lg:text-2xl"
                                     required minlength="8" maxlength="60" />
                                 <button data-toggle-password="current-password" type="button" id="toggle-password"
@@ -140,8 +140,7 @@
     </aside>
 
 <%- include('layouts/footer', { scripts: [
-    { src: '/javascript/menu-user/script-menu-user.js', module: true },
-    { src: '/javascript/forms/login-account/script-login.js', module: true }
+    { src: '/javascript/menu-user/script-menu-user.js', module: true }
 ] }) %>
 
 

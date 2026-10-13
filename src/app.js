@@ -1,4 +1,6 @@
 const express = require('express');
+//baixar quanto tentar rodar V
+const session = require('express-session');
 const db = require('./database/mysql');
 
 // rotas
@@ -20,6 +22,18 @@ app.set('views', './src/views');
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+
+app.use(session({
+    secret: 'chaveDrPet',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.usuario || null;
+    next();
+});
 
 app.use('/', homeRouter);
 app.use('/', administradorRouter);
