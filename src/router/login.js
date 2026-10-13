@@ -31,7 +31,7 @@ router.post('/loginAction', (req, res) => {
                 req.session.save((err) => {
                     if (err) console.log("Erro ao salvar sessão:", err);
                     console.log("Sessão salva! Redirecionando...", req.session.usuario);
-                    res.redirect('/');
+                    res.redirect('/option-user');
                 });
 
             } else {
