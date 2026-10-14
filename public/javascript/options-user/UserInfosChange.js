@@ -40,6 +40,9 @@ export default class UserInfosChange {
                 if (modal) {
                     modal.classList.add('hidden');
                     modal.classList.remove('flex');
+                    if (modal._cleanupClickOutside) {
+                        modal._cleanupClickOutside();
+                    }
                 }
                 return;
             }
@@ -47,6 +50,9 @@ export default class UserInfosChange {
             if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-modal')) {
                 event.target.classList.add('hidden');
                 event.target.classList.remove('flex');
+                if (event.target._cleanupClickOutside) {
+                    event.target._cleanupClickOutside();
+                }
             }
         });
 

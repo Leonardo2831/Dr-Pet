@@ -32,8 +32,13 @@ router.post('/loginAction', (req, res) => {
                     id: usuarioLogado.id,
                     nome: usuarioLogado.nome,
                     email: usuarioLogado.email,
-                    telefone: usuarioLogado.telefone
+                    telefone: usuarioLogado.telefone,
+                    tipoUsuario: usuarioLogado.tipo_usuario,
+                    avatar: usuarioLogado.avatar
                 };
+
+                console.log('Usuário: ' + req.session.usuario);
+                console.log('Tipo de usuário: ' + req.session.usuario.tipoUsuario);
 
                 req.session.save((err) => {
                     if (err) console.log("Erro ao salvar sessão:", err);

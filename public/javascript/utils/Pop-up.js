@@ -16,6 +16,9 @@ export default class PopUp {
         if (!this.modal) return;
         this.modal.classList.add('hidden');
         this.modal.classList.remove('flex');
+        if (this.modal._cleanupClickOutside) {
+            this.modal._cleanupClickOutside();
+        }
     }
 
     openModal(event){
