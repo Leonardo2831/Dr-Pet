@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
@@ -41,30 +41,53 @@
                     </button>
 
                     <aside data-modal="menuUser"
-                        class="overflow-hidden md:mt-7 lg:mt-9 hidden absolute top-full mx-auto w-fit md:left-auto md:right-0 md:mx-0 md:w-auto flex-col bg-gray-50 rounded-b-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] min-w-[200px] z-50 animate-fadeTop">
+                        class="overflow-hidden md:mt-7 lg:mt-9 hidden absolute top-full mx-auto w-fit md:left-auto md:right-0 md:mx-0 md:w-auto flex-col bg-gray-50 rounded-b-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] z-50 animate-fadeTop">
                         
 
                         <% if (locals.user) { %>
                             <!-- logado -->
-                            <div class="px-5 py-4 border-b border-gray-200 bg-gray-200/50">
-                                <p class="text-sm text-gray-500 font-medium">Bem-vindo(a),</p>
-                                <p class="font-bold text-green-700 truncate max-w-[180px]"><%= user.nome %></p>
+                            <div class="flex flex-col w-[320px] sm:w-[480px] md:w-[730px] max-w-[90vw] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] rounded-b-[10px] overflow-hidden">
+                                <div class="flex items-center w-full gap-[30px] p-[30px] bg-gray-100">
+                                    <img src="<%= (locals.user && locals.user.avatar) ? locals.user.avatar : '/images/icons/options/user-default.svg' %>" alt="User Avatar" class="w-[60px] h-[60px] lg:w-20 lg:h-20 object-cover rounded-full" />
+                                    <span class="font-semibold text-2xl text-gray-800 lg:text-3xl truncate">
+                                        <%= locals.user.nome || "Minha Conta" %>
+                                    </span>
+                                </div>
+
+                                <a href="/option-user" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
+                                    <img src="/images/icons/menu-user/settings.svg" alt="Opções" class="w-10 h-10 lg:w-12 lg:h-12" />
+                                    <span class="font-medium text-xl text-gray-800 lg:text-2xl">
+                                        Opções
+                                    </span>
+                                </a>
+
+                                <% if (locals.user.tipo && locals.user.tipo !== 'comum') { %>
+                                    <a href="/administrador" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer border-b border-gray-200">
+                                        <img src="/images/icons/menu-user/admin-panel-settings.svg" alt="Painel de administração" class="w-10 h-10 lg:w-12 lg:h-12" />
+                                        <span class="font-medium text-xl text-gray-800 lg:text-2xl">
+                                            Painel de administrador
+                                        </span>
+                                    </a>
+                                <% } %>
+
+                                <a href="/logout" class="flex items-center w-full gap-[20px] p-[30px] bg-gray-50 hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
+                                    <img src="/images/icons/menu-user/logout.svg" alt="Sair" class="w-10 h-10 lg:w-12 lg:h-12" />
+                                    <span class="font-medium text-xl text-gray-800 lg:text-2xl">
+                                        Sair
+                                    </span>
+                                </a>
                             </div>
-                            <a href="/option-user" class="flex items-center gap-3 px-5 py-4 text-gray-700 hover:bg-gray-200 hover:text-green-600 transition-colors outline-none focus:bg-gray-200">
-                                <span class="font-semibold text-base">Minha Conta</span>
-                            </a>
-                            <a href="/logout" class="flex items-center gap-3 px-5 py-4 text-red-500 hover:bg-red-50 hover:text-red-700 transition-colors outline-none focus:bg-red-50">
-                                <span class="font-semibold text-base">Sair</span>
-                            </a>
 
                         <% } else { %>
                             
                             <!-- nao logado -->
-                            <a href="/login" class="flex items-center gap-3 px-5 py-4 text-gray-700 hover:bg-gray-200 hover:text-green-600 transition-colors outline-none focus:bg-gray-200">
-                                <span class="font-semibold text-base">Fazer Login</span>
+                            <a href="/cadastrar" 
+                                class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-blue-link font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
+                                Criar uma conta
                             </a>
-                            <a href="/cadastrar" class="flex items-center gap-3 px-5 py-4 text-gray-700 hover:bg-gray-200 hover:text-green-600 transition-colors outline-none focus:bg-gray-200">
-                                <span class="font-semibold text-base">Criar Conta</span>
+                            <a href="/login"
+                                class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap border-t border-gray-100">
+                                Entrar
                             </a>
 
                         <% } %>
