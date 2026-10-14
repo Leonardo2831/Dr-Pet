@@ -1,6 +1,6 @@
-import bcrypt from 'https://esm.sh/bcryptjs';
+const bcrypt = require('bcryptjs');
 
-export default class Criptografia {
+module.exports = class Criptografia {
     static checkHash(password, hashUser) {
         return bcrypt.compareSync(password, hashUser);
     }

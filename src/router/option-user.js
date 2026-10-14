@@ -2,16 +2,9 @@
 const router = express.Router();
 const db = require('../database/mysql');
 
-// Middleware opcional para verificar se o usuário está logado em todas essas rotas
-function verificarLogin(req, res, next) {
-    if (!req.session || !req.session.usuario) {
-        return res.redirect('/login');
-    }
-    next();
-}
+const { verificarLogin } = require('./middlewares');
 
 router.get('/option-user', verificarLogin, (req, res) => {
-
     const userId = req.session.usuario.id;
 
     db.query(
