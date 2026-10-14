@@ -1,4 +1,4 @@
-﻿<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador' }) %>
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador', quill: true }) %>
 
     <!-- transformar navegação em rotas -->
     <div class="bg-gray-50 min-h-screen">
@@ -19,13 +19,19 @@
                 <button type="button" data-tab-btn data-target="section-agendamentos"
                     class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
                     <span
-                        class="font-sans font-semibold text-base xs:text-lg lg:text-2xl leading-snug lg:leading-10 text-green-700">Agendamentos</span>
+                        class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Solicitações</span>
                 </button>
 
                 <button type="button" data-tab-btn data-target="section-produtos"
                     class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
                     <span
                         class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Produtos</span>
+                </button>
+
+                <button type="button" data-tab-btn data-target="section-relatorios"
+                    class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
+                    <span
+                        class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Relatórios</span>
                 </button>
             </nav>
 
@@ -38,6 +44,21 @@
 
                 <picture data-content-slides
                     class="mt-5 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
+                    <% if(slides.length !== 0) { %> 
+                        <% slides.forEach(slide => { %>
+                            <figure 
+                                style="background-image: url('<%= slide.urlImage %>');"
+                                aria-label="<%= slide.altImage || 'Slide' %>"
+                                data-content-slides="<%= slide.id %>"
+                                class="animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
+                            >
+                                <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
+                                <button type="button" class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
+                                    <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5">
+                                </button>
+                            </figure>
+                        <% }) %>
+                    <% } %>
                     <label type="file" data-add-slide for="button-add-slide-file"
                         class="cursor-pointer max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
                         <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10" />
@@ -104,9 +125,75 @@
 
                 <div data-content-schedule
                     class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
-                    <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">
-                        Não há nenhum horário para esse dia e este serviço
-                    </p>
+                    <% 
+                        const serviceNames = {
+                            'banho-tosa': 'Banho e Tosa',
+                            'vacinacao': 'Vacinação',
+                            'cirurgia': 'Cirurgia'
+                        };
+                        const today = new Date();
+                        const yearToday = today.getFullYear();
+                        const monthToday = String(today.getMonth() + 1).padStart(2, '0');
+                        const dayToday = String(today.getDate()).padStart(2, '0');
+                        const formattedToday = `${yearToday}-${monthToday}-${dayToday}`;
+                    %>
+                    <% if (agendamentos.length > 0) { %>
+                        <% agendamentos.forEach(agendamento => { %>
+                            <% 
+                                const [year, month, day] = (agendamento.date ? agendamento.date.split('-') : ['', '', '']);
+                                const formatDate = (day && month && year) ? `${day}/${month}/${year}` : (agendamento.date || '');
+                                const isFutureOrToday = agendamento.date >= formattedToday;
+                                const serviceName = (agendamento.service && serviceNames[agendamento.service.name]) || (agendamento.service ? agendamento.service.name : '');
+                            %>
+                            <div data-id="<%= agendamento.id %>" class="flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                                <div class="flex flex-row justify-between items-start <%= isFutureOrToday ? 'pb-5' : '' %> w-full">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex flex-col">
+                                            <span class="font-semibold text-base md:text-lg text-gray-800">
+                                                <%= agendamento.user ? agendamento.user.username : '' %> - <span class="whitespace-nowrap"><%= formatDate %></span>
+                                            </span>
+                                            <span class="font-medium text-base text-gray-700">
+                                                Pet: <%= agendamento.petAgendado ? agendamento.petAgendado.name : '' %>
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-normal text-base text-gray-700">
+                                                <span class="font-medium">Serviço:</span> <%= serviceName %>
+                                            </span>
+                                            <% if (agendamento.service && agendamento.service.observations) { %>
+                                                <span class="font-normal text-base text-gray-700">
+                                                    <span class="font-medium">Descrição:</span> <%= agendamento.service.observations %>
+                                                </span>
+                                            <% } %>
+                                            <span class="font-normal text-base text-gray-700">
+                                                <span class="font-medium">Buscar em casa:</span> <%= agendamento.buscarResidencia ? "Sim" : "Não" %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
+                                        <%= agendamento.hour %>
+                                    </span>
+                                </div>
+
+                                <% if (isFutureOrToday) { %>
+                                    <div class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                                        <button type="button" data-button="cancelSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                                            <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar" class="w-4 h-4 md:w-5 md:h-5">
+                                        </button>
+                                        <button type="button" data-button="editSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                                            <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar" class="w-4 h-4 md:w-5 md:h-5">
+                                        </button>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">
+                            Não há nenhum horário para esse dia e este serviço.
+                        </p>
+                    <% } %>
                 </div>
 
                 <div
@@ -254,10 +341,41 @@
                                     <th class="text-center">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody data-content-products="table"></tbody>
+                            <tbody data-content-products="table">
+                                <% if (!locals.produtos || produtos.length === 0) { %>
+                                    <tr>
+                                        <td colspan="7" class="min-w-[1200px] xl:min-w-[1400px] text-center p-6 text-gray-500 font-medium text-lg">Nenhum produto encontrado.</td>
+                                    </tr>
+                                <% } else { %>
+                                   <% produtos.forEach(produto => { %>
+                                        <tr data-id="<%= produto.id %>" class="animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
+                                            <td class="max-w-0 truncate w-[25%]"><%= produto.nome %></td>
+                                            <td class="capitalize"><%= produto.categoria %></td>
+                                            <td><%= produto.preco %></td>
+                                            <td class="max-w-0 truncate w-[25%]"><%= produto.descricao_longa %></td>
+                                            <td class="max-w-0 truncate w-[25%]"><%= produto.descricao_curta %></td>
+                                            <td class="py-5 text-center">
+                                                <button data-button="editProduct" class="hover:opacity-80 transition-opacity mx-auto flex">
+                                                    <img src="../images/icons/administrador/edit-blue.svg" alt="Editar" class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                                </button>
+                                            </td>
+                                            <td class="py-5 text-center">
+                                                <button data-button="deleteProduct" class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                                    <img src="../images/icons/administrador/delete-product.svg" alt="Excluir" class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                <% } %>
+                            </tbody>
                         </table>
                     </div>
                 </div>
+            </section>
+
+            <section id="section-relatorios" data-tab-content
+                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
+                
             </section>
         </main>
     </div>
@@ -336,11 +454,12 @@
                     <label for="textarea-long-description"
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição Longa</label>
                     <div
-                        class="rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white">
-                        <div data-quill-editor="longDescription" class="min-h-[100px] overflow-y-auto"></div>
+                        class="quill-wrapper rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white overflow-hidden">
+                        <div data-quill-editor="longDescription" class="min-h-[120px]"></div>
                     </div>
-                    <p class="text-base">
-                        • Use os controles de formatação para listas, negrito e links no editor de texto.
+                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription" class="hidden"></textarea>
+                    <p class="font-sans text-xs md:text-sm text-gray-500">
+                        • Use os controles de formatação para títulos, negrito, listas e links no editor de texto.
                     </p>
                 </div>
 
@@ -584,5 +703,3 @@
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
 </body>
 </html>
-
-
