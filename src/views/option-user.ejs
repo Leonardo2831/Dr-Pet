@@ -1,4 +1,4 @@
-﻿<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Opções do Usuário' }) %>
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Opções do Usuário' }) %>
 
 <!-- usar rotas para mostrar cada aba, como endereço... -->
 
@@ -263,7 +263,15 @@
                     <div id="address-container" class="peer">
                         <% if (enderecos && enderecos.length > 0) { %>
                             <% enderecos.forEach(endereco => { %>
-                                <div data-id="<%= endereco.id %>" class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
+                                <div data-id="<%= endereco.id %>"
+                                    data-rua="<%= endereco.rua %>"
+                                    data-numero="<%= endereco.numero || '' %>"
+                                    data-cep="<%= endereco.cep %>"
+                                    data-cidade="<%= endereco.cidade %>"
+                                    data-estado="<%= endereco.estado %>"
+                                    data-bairro="<%= endereco.bairro %>"
+                                    data-telefone="<%= endereco.telefone_contato %>"
+                                    class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
                                     <div class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8">
                                         <div class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0">
                                             <img src="/images/icons/options/endereco/house.svg" alt="Ícone Casa"
@@ -334,7 +342,12 @@
                     <div id="pet-container" class="peer">
                         <% if (pets && pets.length > 0) { %>
                             <% pets.forEach(pet => { %>
-                                <div data-id="<%= pet.id %>" class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
+                                <div data-id="<%= pet.id %>"
+                                    data-nome="<%= pet.nome %>"
+                                    data-raca="<%= pet.raca || '' %>"
+                                    data-genero="<%= pet.genero %>"
+                                    data-descricao="<%= pet.descricao || '' %>"
+                                    class="flex flex-row items-center justify-between gap-3 p-4 sm:p-6 lg:px-10 lg:py-[30px] border-b border-gray-200/50">
                                     <div class="flex flex-row items-center gap-4 sm:gap-5 lg:gap-8">
                                         <div class="w-12 sm:w-16 lg:w-[81px] flex justify-center items-center flex-shrink-0">
                                             <img src="/images/icons/options/pets/dog.svg" alt="Ícone Pet"
@@ -568,7 +581,7 @@
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
                 </button>
 
-                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar Endereço</h3>
+                <h3 data-title="modalAddress" class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar Endereço</h3>
 
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
@@ -616,7 +629,7 @@
 
                 <button data-button="saveAddress" type="submit"
                     class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
-                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Endereço</span>
+                    <span data-button-text="saveAddress" class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Endereço</span>
                 </button>
             </form>
         </div>
@@ -631,7 +644,7 @@
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
                 </button>
 
-                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar meu Pet</h3>
+                <h3 data-title="modalPet" class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Adicionar meu Pet</h3>
 
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
@@ -674,7 +687,7 @@
 
                 <button data-button="savePet" type="submit"
                     class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
-                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar meu pet</span>
+                    <span data-button-text="savePet" class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar meu pet</span>
                 </button>
             </form>
         </div>
@@ -759,75 +772,8 @@
         </div>
     </aside>
 
-<script type="module">
-    import MenuOptions from '/javascript/options-user/MenuOptions.js';
-    import ChangeAvatar from '/javascript/options-user/ChangeAvatar.js';
-    import CheckLogin from '/javascript/utils/CheckLogin.js';
-
-    document.addEventListener('DOMContentLoaded', () => {
-        new ChangeAvatar('[data-input="avatarUser"]').init();
-        new CheckLogin('[data-modal="loginRequired"]').init();
-
-        const modals = [
-            ['[data-button="address"]', '[data-modal="addAddress"]', '[data-button="closeFormAddress"]'],
-            ['[data-button="Pet"]', '[data-modal="addPet"]', '[data-button="closeFormPet"]'],
-            ['[data-button="openEditEmail"]', '[data-modal="editEmail"]', '[data-button="closeEditEmail"]'],
-            ['[data-button="openEditTelefone"]', '[data-modal="editTelefone"]', '[data-button="closeEditTelefone"]'],
-            ['[data-button="openEditSenha"]', '[data-modal="editSenha"]', '[data-button="closeEditSenha"]'],
-            ['[data-button="editarNome"]', '[data-modal="editName"]', '[data-button="closeEditName"]']
-        ];
-
-        modals.forEach(([openSelector, modalSelector, closeSelector]) => {
-            const openButton = document.querySelector(openSelector);
-            const modal = document.querySelector(modalSelector);
-            const closeButton = document.querySelector(closeSelector);
-            if (!openButton || !modal || !closeButton) return;
-
-            openButton.addEventListener('click', event => {
-                event.preventDefault();
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            });
-            closeButton.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            });
-            modal.addEventListener('click', event => {
-                if (event.target === modal) closeButton.click();
-            });
-        });
-
-        new MenuOptions('[data-button="options-address"]', '[data-popup="options-address"]');
-        new MenuOptions('[data-button="options-pet"]', '[data-popup="options-pet"]');
-
-        const returnSection = sessionStorage.getItem('option-user-return-section');
-        if (returnSection) {
-            sessionStorage.removeItem('option-user-return-section');
-            document.querySelectorAll('main section[id]').forEach(section => section.classList.add('hidden'));
-            document.getElementById(returnSection)?.classList.remove('hidden');
-        }
-
-        document.querySelector('[data-form="addAddress"]')?.addEventListener('submit', () => {
-            sessionStorage.setItem('option-user-return-section', 'Endereco');
-        });
-        document.querySelector('[data-form="addPet"]')?.addEventListener('submit', () => {
-            sessionStorage.setItem('option-user-return-section', 'dados-pet');
-        });
-
-        ['editEmail', 'editTelefone', 'editSenha'].forEach(form => {
-            document.querySelector(`[data-form="${form}"]`)?.addEventListener('submit', () => {
-                sessionStorage.setItem('option-user-return-section', 'dados-pessoais');
-            });
-        });
-        document.querySelector('[data-form="editName"]')?.addEventListener('submit', () => {
-            sessionStorage.setItem('option-user-return-section', 'menu-inicial');
-        });
-    });
-</script>
-
 <%- include('layouts/footer', { scripts: [
     { src: '/javascript/utils/UserTabNav.js', module: true },
     { src: '/javascript/menu-user/script-menu-user.js', module: true },
+    { src: '/javascript/options-user/script-optionsUser.js', module: true },
 ] }) %>
-
-
