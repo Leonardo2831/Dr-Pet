@@ -91,3 +91,6 @@ CREATE TABLE produto_image (
     PRIMARY KEY(id),
     FOREIGN KEY(fk_produto) REFERENCES produto(id)
 );
+
+INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar)
+VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null);
