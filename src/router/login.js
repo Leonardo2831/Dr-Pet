@@ -12,8 +12,8 @@ router.post('/loginAction', (req, res) => {
     const { email, password } = req.body;
 
     db.query(
-        'SELECT * FROM usuario WHERE email = ? AND senha = ?',
-        [email, criptografia.generateHash(password)],
+        'SELECT * FROM usuario WHERE email = ?',
+        [email],
         (err, results) => {
             if (err) {
                 console.log(err);
@@ -22,7 +22,12 @@ router.post('/loginAction', (req, res) => {
 
             if (results.length > 0) {
                 const usuarioLogado = results[0];
-                
+                const senhaValida = criptografia.checkHash(password, usuarioLogado.senha);
+
+                if (!senhaValida) {
+                    return res.status(401).send("Email ou senha incorretos.");
+                }
+
                 req.session.usuario = {
                     id: usuarioLogado.id,
                     nome: usuarioLogado.nome,
