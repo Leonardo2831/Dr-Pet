@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const router = express.Router();
 
 // IMPORTANTE: Importa a conexão com o banco de dados
@@ -6,7 +6,13 @@ const db = require('../database/mysql');
 
 // Rota para renderizar a página do administrador
 router.get('/administrador', (req, res) => {
-    res.render('administrador');
+    // if(req.session.usuario && req.session.usuario.tipoUsuario == 'admin') {
+    //     res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
+    // } else {
+    //     res.redirect('/login');
+    // }
+
+    res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
 });
 
 // 1. LISTAR / BUSCAR PRODUTOS (GET /produtos)
