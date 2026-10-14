@@ -2,6 +2,8 @@
 const router = express.Router();
 const db = require('../database/mysql');
 
+const criptografia = require('../utils/Criptografia');
+
 router.get('/cadastrar', (req, res) => {
     res.render('cadastrar');
 });
@@ -11,7 +13,7 @@ router.post('/cadastrarAction', (req, res) => {
 
     db.query(
         'INSERT INTO usuario (nome, email, telefone, senha) VALUES (?, ?, ?, ?)',
-        [userName, email, phone, password],
+        [userName, email, phone.toString().replace(/[^\d]/g, ''), criptografia.generateHash(password)],
         (err) => {
             if (err) {
                 console.log(err);

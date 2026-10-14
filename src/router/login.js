@@ -2,6 +2,8 @@
 const router = express.Router();
 const db = require('../database/mysql'); 
 
+const criptografia = require('../utils/Criptografia');
+
 router.get('/login', (req, res) => {
     res.render('login');
 });
@@ -11,7 +13,7 @@ router.post('/loginAction', (req, res) => {
 
     db.query(
         'SELECT * FROM usuario WHERE email = ? AND senha = ?',
-        [email, password],
+        [email, criptografia.generateHash(password)],
         (err, results) => {
             if (err) {
                 console.log(err);
