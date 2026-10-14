@@ -1,14 +1,9 @@
-import Fetch from '../utils/Fetch.js';
-import Storage from '../utils/Storage.js';
-
 export default class ChangeAvatar {
     constructor(selectorInput) {
         this.input = document.querySelector(selectorInput);
         if (this.input) {
-            this.image = this.input.closest('figure').querySelector('img:first-of-type');
+            this.image = this.input.closest('figure')?.querySelector('img:first-of-type');
         }
-        this.fetchUser = new Fetch('usuarios', '[data-modal-info-menu="user"]');
-        this.userId = Storage.get('user-id');
         this.changeImage = this.changeImage.bind(this);
     }
 
@@ -26,20 +21,24 @@ export default class ChangeAvatar {
 
             const reader = new FileReader();
             reader.onload = async (e) => {
+                const dataUrl = e.target.result;
                 if (this.image) {
-                    this.image.src = e.target.result;
+                    this.image.src = dataUrl;
                 }
-                if (this.userId) {
-                    await this.fetchUser.patch(this.userId, { avatar: e.target.result });
+                try {
+                    await fetch('/option-user/update-avatar', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ avatar: dataUrl })
+                    });
+                } catch (err) {
+                    console.error('Erro ao atualizar avatar no servidor:', err);
                 }
             };
             reader.readAsDataURL(file);
         } else {
             if (this.image) {
-                this.image.src = "../images/icons/options/user-default.svg";
-            }
-            if (this.userId) {
-                this.fetchUser.patch(this.userId, { avatar: "" });
+                this.image.src = "/images/icons/options/user-default.svg";
             }
         }
     }

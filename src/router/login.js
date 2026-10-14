@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql'); 
 
@@ -38,7 +38,7 @@ router.post('/loginAction', (req, res) => {
                 req.session.save((err) => {
                     if (err) console.log("Erro ao salvar sessão:", err);
                     console.log("Sessão salva! Redirecionando...", req.session.usuario);
-                    res.redirect('/option-user');
+                    res.redirect('/');
                 });
 
             } else {
@@ -46,6 +46,14 @@ router.post('/loginAction', (req, res) => {
             }
         }
     );
+});
+
+router.get('/logout', (req, res) => {
+    // remove a session
+    req.session.destroy((err) => {
+        if (err) console.log("Erro ao encerrar sessão:", err);
+        res.redirect('/');
+    });
 });
 
 module.exports = router;

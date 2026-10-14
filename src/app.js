@@ -1,7 +1,7 @@
 const express = require('express');
 //baixar quanto tentar rodar V
 const session = require('express-session');
-const db = require('./database/mysql');
+const { loadUser } = require('./router/middlewares');
 
 // rotas
 const homeRouter = require('./router/home');
@@ -30,10 +30,7 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-app.use((req, res, next) => {
-    res.locals.user = req.session.usuario || null;
-    next();
-});
+app.use(loadUser);
 
 app.use('/', homeRouter);
 app.use('/', administradorRouter);

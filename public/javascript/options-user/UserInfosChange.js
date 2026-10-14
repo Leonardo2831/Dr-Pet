@@ -1,132 +1,288 @@
-import Storage from "../utils/Storage.js";
 import formatPhone from "../utils/formatPhone.js";
-import Criptografia from "../utils/Criptografia.js";
 import buscarCEP from "../utils/viaCEP.js";
+import PopUp from "../utils/Pop-up.js";
+import CheckFunction from "../utils/CheckFunction.js";
 
-export default class UserInfosChange{
-    constructor(selectorButtonSaveEmail, selectorButtonSavePhone, selectorButtonSavePassword,
-        selectorInputEditEmail, selectorInputEditPhone, selectorInputEditPassword, userData, fetchUser
-    ){
-        this.buttonSaveEmail = document.querySelector(selectorButtonSaveEmail);
-        this.buttonSavePhone = document.querySelector(selectorButtonSavePhone);
-        this.buttonSavePassword = document.querySelector(selectorButtonSavePassword);
-        this.buttonSaveAddress = document.querySelector('[data-button="saveAddress"]');
-        this.buttonSavePets = document.querySelector('[data-button="savePet"]');
+const confirm = new CheckFunction();
 
-        this.inputEditEmail = document.querySelector(selectorInputEditEmail);
-        this.inputEditPhone = document.querySelector(selectorInputEditPhone);
-        this.selectorInputEditPhone = selectorInputEditPhone;
-        this.inputEditPassword = document.querySelector(selectorInputEditPassword);
-
-        this.buttonAddAddress = document.querySelector('[data-button="address"]');
-        this.modalAddAddress = document.querySelector('[data-modal="addAddress"]');
-
-        this.buttonAddPets = document.querySelector('[data-button="Pet"]');
-        this.modalAddPets = document.querySelector('[data-modal="addPet"]')
-
-        this.buttonSaveName = document.querySelector('[data-button="saveNome"]');
-        this.inputEditName = document.querySelector('[data-input="editName"]');
-        this.editNameButton = document.querySelector('[data-button="editarNome"]');
-        this.modalEditName = document.querySelector('[data-modal="editName"]');
-        this.saveName = this.saveName.bind(this);
-
-        this.saveEmail = this.saveEmail.bind(this);
-        this.savePhone = this.savePhone.bind(this);
-        this.savePassword = this.savePassword.bind(this);
-        this.saveAddress = this.saveAddress.bind(this);
-        this.savePets = this.savePets.bind(this);
-
-        this.userId = Storage.get('user-id');
-        this.userData = userData;
-        this.fetchUser = fetchUser;
+export default class UserInfosChange {
+    constructor() {
+        this.popups = [];
     }
 
-    loadDataUser(){
-        this.inputEditEmail.value = this.userData.email;
-        this.inputEditPhone.value = this.userData.phone;
-        formatPhone(this.selectorInputEditPhone);
+    initModals() {
+        // Modais de dados pessoais
+        const personalModals = [
+            { button: '[data-button="openEditEmail"]', modal: '[data-modal="editEmail"]', close: '[data-button="closeEditEmail"]' },
+            { button: '[data-button="openEditTelefone"]', modal: '[data-modal="editTelefone"]', close: '[data-button="closeEditTelefone"]' },
+            { button: '[data-button="openEditSenha"]', modal: '[data-modal="editSenha"]', close: '[data-button="closeEditSenha"]' },
+            { button: '[data-button="editarNome"]', modal: '[data-modal="editName"]', close: '[data-button="closeEditName"]' }
+        ];
+
+        personalModals.forEach(config => {
+            const popup = new PopUp(config.button, config.modal, config.close).init();
+            this.popups.push(popup);
+
+            const closeBtn = document.querySelector(config.close);
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (event) => {
+                    if (event && event.preventDefault) event.preventDefault();
+                    popup.closeModal();
+                });
+            }
+        });
+
+        // Ouvinte global para qualquer botão de fechar (X) e clique fora
+        document.addEventListener('click', (event) => {
+            const closeBtn = event.target.closest('[data-button^="close"]');
+            if (closeBtn) {
+                const modal = closeBtn.closest('[data-modal]');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+                return;
+            }
+
+            if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-modal')) {
+                event.target.classList.add('hidden');
+                event.target.classList.remove('flex');
+            }
+        });
+
+        // Configuração dos modais de Endereço e Pet
+        this.initAddressModal();
+        this.initPetModal();
     }
 
-    async saveEmail(){
-        const newEmail = this.inputEditEmail.value.replace(/\D/g, '');
-        await this.fetchUser.put(this.userId, { ...this.userData, email: newEmail });
-    }
+    initAddressModal() {
+        const modalAddress = document.querySelector('[data-modal="addAddress"]');
+        const formAddress = document.querySelector('[data-form="addAddress"]');
+        const titleAddress = document.querySelector('[data-title="modalAddress"]') || modalAddress?.querySelector('h3');
+        const submitBtnText = document.querySelector('[data-button-text="saveAddress"]') || document.querySelector('[data-button="saveAddress"] span');
+        const btnAddAddress = document.querySelector('[data-button="address"]');
+        const btnCloseAddress = document.querySelector('[data-button="closeFormAddress"]');
+        const popupAddress = document.querySelector('[data-popup="options-address"]');
 
-    async savePhone(){
-        const newPhone = this.inputEditPhone.value;
-        await this.fetchUser.put(this.userId, { ...this.userData, phone: newPhone });
-    }
-
-    async savePassword(){
-        const newPassword = this.inputEditPassword.value;
-        await this.fetchUser.put(this.userId, { ...this.userData, password: Criptografia.generateHash(newPassword) });
-    }
-
-    async saveName(){
-        const newName = this.inputEditName.value;
-        await this.fetchUser.put(this.userId, { ...this.userData, userName: newName });
-        document.querySelector('[data-info="nameUser"]').textContent = newName;
-    }   
-
-    async saveAddress() {
-        const newStreet = document.querySelector('[data-input="rua"]').value;
-        const newNumber = document.querySelector('[data-input="numero"]').value;
-        const newCEP = document.querySelector('[data-input="cep"]').value;
-        const newCity = document.querySelector('[data-input="cidade"]').value;
-        const newState = document.querySelector('[data-input="estado"]').value;
-        const newHood = document.querySelector('[data-input="bairro"]').value;
-        const contact = document.querySelector('[data-input="telefoneAddress"]').value;
-
-        const newAddress = {
-            id: crypto.randomUUID(),
-            rua: newStreet,
-            numero: newNumber,
-            cep: newCEP,
-            cidade: newCity,
-            estado: newState,
-            bairro: newHood,
-            telefone: contact
+        const openModalAddress = () => {
+            if (!modalAddress) return;
+            modalAddress.classList.remove('hidden');
+            modalAddress.classList.add('flex');
         };
-        const editId = this.buttonSaveAddress.dataset.editId;
-    
-        if(editId) {
-            const index = this.userData.address.findIndex(a => a.id === editId);
-            this.userData.address[index] = { id: editId, rua: newStreet, numero: newNumber, cep: newCEP, cidade: newCity, estado: newState, bairro: newHood, telefone: contact};
-            await this.fetchUser.put(this.userId, this.userData);
-            delete this.buttonSaveAddress.dataset.editId;
-        } else {
-            this.userData.address.push(newAddress);
-            await this.fetchUser.put(this.userId, this.userData);
+
+        const closeModalAddress = () => {
+            if (!modalAddress) return;
+            modalAddress.classList.add('hidden');
+            modalAddress.classList.remove('flex');
+        };
+
+        // Botão "Adicionar endereço"
+        if (btnAddAddress && formAddress) {
+            btnAddAddress.addEventListener('click', (event) => {
+                event.preventDefault();
+                formAddress.reset();
+                formAddress.action = '/option-user/create-address';
+                if (titleAddress) titleAddress.textContent = 'Adicionar Endereço';
+                if (submitBtnText) submitBtnText.textContent = 'Salvar Endereço';
+                openModalAddress();
+            });
+        }
+
+        if (btnCloseAddress) {
+            btnCloseAddress.addEventListener('click', closeModalAddress);
+        }
+        if (modalAddress) {
+            modalAddress.addEventListener('click', (event) => {
+                if (event.target === modalAddress) closeModalAddress();
+            });
+        }
+
+        const btnEditAddress = document.querySelector('[data-button="editAddress"]');
+        if (btnEditAddress) {
+            btnEditAddress.addEventListener('click', () => {
+                const addressId = popupAddress?.dataset.currentId;
+                const card = document.querySelector(`#address-container [data-id="${addressId}"]`);
+                if (!card) return;
+
+                if (popupAddress) {
+                    popupAddress.classList.add('hidden');
+                    popupAddress.classList.remove('flex');
+                }
+
+                if (formAddress) {
+                    formAddress.action = `/option-user/update-address/${addressId}`;
+                }
+                if (titleAddress) titleAddress.textContent = 'Editar Endereço';
+                if (submitBtnText) submitBtnText.textContent = 'Salvar alterações';
+
+                const ruaInput = document.querySelector('[data-input="rua"]');
+                const numInput = document.querySelector('[data-input="numero"]');
+                const cepInput = document.querySelector('[data-input="cep"]');
+                const cidInput = document.querySelector('[data-input="cidade"]');
+                const estInput = document.querySelector('[data-input="estado"]');
+                const baiInput = document.querySelector('[data-input="bairro"]');
+                const telInput = document.querySelector('[data-input="telefoneAddress"]');
+
+                if (ruaInput) ruaInput.value = card.dataset.rua || '';
+                if (numInput) numInput.value = card.dataset.numero || '';
+                if (cepInput) cepInput.value = card.dataset.cep || '';
+                if (cidInput) cidInput.value = card.dataset.cidade || '';
+                if (estInput) estInput.value = card.dataset.estado || '';
+                if (baiInput) baiInput.value = card.dataset.bairro || '';
+                if (telInput) telInput.value = card.dataset.telefone || '';
+
+                openModalAddress();
+            });
+        }
+
+        const btnDeleteAddress = document.querySelector('[data-button="deleteAddress"]');
+        if (btnDeleteAddress) {
+            btnDeleteAddress.addEventListener('click', () => {
+                const addressId = popupAddress?.dataset.currentId;
+                const card = document.querySelector(`#address-container [data-id="${addressId}"]`);
+                if (!card) return;
+
+                if (popupAddress) {
+                    popupAddress.classList.add('hidden');
+                    popupAddress.classList.remove('flex');
+                }
+
+                confirm.open(async () => {
+                    try {
+                        const response = await fetch(`/option-user/delete-address/${addressId}`, {
+                            method: 'POST',
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            card.remove();
+                            const container = document.querySelector('#address-container');
+                            if (container && !container.querySelector('[data-id]')) {
+                                container.innerHTML = '<p class="p-4 sm:p-6 lg:p-[30px] text-base sm:text-lg text-gray-700">Nenhum endereço cadastrado.</p>';
+                            }
+                        } else {
+                            console.error('Erro ao excluir endereço.');
+                        }
+                    } catch (error) {
+                        console.error('Erro de conexão ao excluir endereço:', error);
+                    }
+                });
+            });
         }
     }
 
-    async savePets(){
-        const newName = document.querySelector('[data-input="petName"]').value;
-        const newRace = document.querySelector('[data-input="petRace"]').value;
-        const newGender = document.querySelector('[data-input="petGender"]:checked')?.value || '';
-        const newDescription = document.querySelector('[data-input="petDescription"]').value;
+    initPetModal() {
+        const modalPet = document.querySelector('[data-modal="addPet"]');
+        const formPet = document.querySelector('[data-form="addPet"]');
+        const titlePet = document.querySelector('[data-title="modalPet"]') || modalPet?.querySelector('h3');
+        const submitBtnText = document.querySelector('[data-button-text="savePet"]') || document.querySelector('[data-button="savePet"] span');
+        const btnAddPet = document.querySelector('[data-button="Pet"]');
+        const btnClosePet = document.querySelector('[data-button="closeFormPet"]');
+        const popupPet = document.querySelector('[data-popup="options-pet"]');
 
-        const newPet = {
-            id: crypto.randomUUID(),
-            name: newName,
-            race: newRace,
-            gender: newGender,
-            description: newDescription
+        const openModalPet = () => {
+            if (!modalPet) return;
+            modalPet.classList.remove('hidden');
+            modalPet.classList.add('flex');
         };
-        const editId = this.buttonSavePets.dataset.editId;
 
-        if(editId) {
-            const index = this.userData.pets.findIndex(a => a.id === editId);
-            this.userData.pets[index] = { id: editId, name: newName, race: newRace, gender: newGender, description: newDescription };
-            await this.fetchUser.put(this.userId, this.userData);
-            delete this.buttonSavePets.dataset.editId;
-        } else {
-            this.userData.pets.push(newPet);
-            await this.fetchUser.put(this.userId, this.userData);
+        const closeModalPet = () => {
+            if (!modalPet) return;
+            modalPet.classList.add('hidden');
+            modalPet.classList.remove('flex');
+        };
+
+        // Botão "Adicionar pet"
+        if (btnAddPet && formPet) {
+            btnAddPet.addEventListener('click', (event) => {
+                event.preventDefault();
+                formPet.reset();
+                formPet.action = '/option-user/create-pet';
+                if (titlePet) titlePet.textContent = 'Adicionar meu Pet';
+                if (submitBtnText) submitBtnText.textContent = 'Salvar meu pet';
+                const defaultGender = formPet.querySelector('[data-input="petGender"][value="macho"]');
+                if (defaultGender) defaultGender.checked = true;
+                openModalPet();
+            });
+        }
+
+        if (btnClosePet) {
+            btnClosePet.addEventListener('click', closeModalPet);
+        }
+        if (modalPet) {
+            modalPet.addEventListener('click', (event) => {
+                if (event.target === modalPet) closeModalPet();
+            });
+        }
+
+        const btnEditPet = document.querySelector('[data-button="editPet"]');
+        if (btnEditPet) {
+            btnEditPet.addEventListener('click', () => {
+                const petId = popupPet?.dataset.currentId;
+                const card = document.querySelector(`#pet-container [data-id="${petId}"]`);
+                if (!card) return;
+
+                if (popupPet) {
+                    popupPet.classList.add('hidden');
+                    popupPet.classList.remove('flex');
+                }
+
+                if (formPet) {
+                    formPet.action = `/option-user/update-pet/${petId}`;
+                }
+                if (titlePet) titlePet.textContent = 'Editar meu Pet';
+                if (submitBtnText) submitBtnText.textContent = 'Salvar alterações';
+
+                const nameInput = document.querySelector('[data-input="petName"]');
+                const raceInput = document.querySelector('[data-input="petRace"]');
+                const descInput = document.querySelector('[data-input="petDescription"]');
+
+                if (nameInput) nameInput.value = card.dataset.nome || '';
+                if (raceInput) raceInput.value = card.dataset.raca || '';
+                if (descInput) descInput.value = card.dataset.descricao || '';
+
+                const genderRadio = document.querySelector(`[data-input="petGender"][value="${card.dataset.genero}"]`);
+                if (genderRadio) genderRadio.checked = true;
+
+                openModalPet();
+            });
+        }
+
+        const btnDeletePet = document.querySelector('[data-button="deletePet"]');
+        if (btnDeletePet) {
+            btnDeletePet.addEventListener('click', () => {
+                const petId = popupPet?.dataset.currentId;
+                const card = document.querySelector(`#pet-container [data-id="${petId}"]`);
+                if (!card) return;
+
+                if (popupPet) {
+                    popupPet.classList.add('hidden');
+                    popupPet.classList.remove('flex');
+                }
+
+                confirm.open(async () => {
+                    try {
+                        const response = await fetch(`/option-user/delete-pet/${petId}`, {
+                            method: 'POST',
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            card.remove();
+                            const container = document.querySelector('#pet-container');
+                            if (container && !container.querySelector('[data-id]')) {
+                                container.innerHTML = '<p class="p-4 sm:p-6 lg:p-[30px] text-base sm:text-lg text-gray-700">Nenhum pet cadastrado.</p>';
+                            }
+                        } else {
+                            console.error('Erro ao excluir pet.');
+                        }
+                    } catch (error) {
+                        console.error('Erro de conexão ao excluir pet:', error);
+                    }
+                });
+            });
         }
     }
-
-
 
     initCEPLookup() {
         const inputCEP = document.querySelector('[data-input="cep"]');
@@ -152,61 +308,42 @@ export default class UserInfosChange{
         });
     }
 
-    addEventsSave(){
-        this.initCEPLookup();
-        if(this.buttonSaveEmail) this.buttonSaveEmail.addEventListener('click', this.saveEmail);
-        if(this.buttonSavePhone) this.buttonSavePhone.addEventListener('click', this.savePhone);
-        if(this.buttonSavePassword) this.buttonSavePassword.addEventListener('click', this.savePassword);
-        if(this.buttonAddAddress) this.buttonAddAddress.addEventListener('click', () => {
-            this.modalAddAddress.classList.remove('hidden');
-            this.modalAddAddress.classList.add('flex');
-        })
-
-        if(this.buttonSaveAddress) this.buttonSaveAddress.addEventListener('click', this.saveAddress);
-
-        if(this.buttonAddPets) this.buttonAddPets.addEventListener('click', () => {
-            this.modalAddPets.classList.remove('hidden');
-            this.modalAddPets.classList.add('flex');
-        });
-        if(this.buttonSavePets) this.buttonSavePets.addEventListener('click', this.savePets);
-
-        document.querySelector('[data-button="closeFormAddress"]').addEventListener('click', () => {
-            const modal = document.querySelector('[data-modal="addAddress"]');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-
-        document.querySelector('[data-button="closeFormPet"]').addEventListener('click', () => {
-            const modal = document.querySelector('[data-modal="addPet"]');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-
-        if(this.editNameButton) this.editNameButton.addEventListener('click', () => {
-            this.inputEditName.value = this.userData.userName;
-            this.modalEditName.classList.remove('hidden');
-            this.modalEditName.classList.add('flex');
-        });
-
-        if(this.buttonSaveName) this.buttonSaveName.addEventListener('click', this.saveName);
-
-        document.querySelector('[data-button="closeEditName"]').addEventListener('click', () => {
-            this.modalEditName.classList.add('hidden');
-            this.modalEditName.classList.remove('flex');
-        });
+    initPhoneMask() {
+        formatPhone('[data-input="editTelefone"]');
+        formatPhone('[data-input="telefoneAddress"]');
     }
 
-
-    init(){
-        if(this.inputEditEmail && this.inputEditPassword && this.inputEditPhone){
-            this.addEventsSave();
-            this.loadDataUser();
+    initTabPersistence() {
+        const returnSection = sessionStorage.getItem('option-user-return-section');
+        if (returnSection) {
+            sessionStorage.removeItem('option-user-return-section');
+            document.querySelectorAll('main section[id]').forEach(section => section.classList.add('hidden'));
+            document.getElementById(returnSection)?.classList.remove('hidden');
         }
 
-        return this;
+        document.querySelector('[data-form="addAddress"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'Endereco');
+        });
+        document.querySelector('[data-form="addPet"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'dados-pet');
+        });
+
+        ['editEmail', 'editTelefone', 'editSenha'].forEach(form => {
+            document.querySelector(`[data-form="${form}"]`)?.addEventListener('submit', () => {
+                sessionStorage.setItem('option-user-return-section', 'dados-pessoais');
+            });
+        });
+
+        document.querySelector('[data-form="editName"]')?.addEventListener('submit', () => {
+            sessionStorage.setItem('option-user-return-section', 'menu-inicial');
+        });
     }
 
-    
-
-
+    init() {
+        this.initModals();
+        this.initCEPLookup();
+        this.initPhoneMask();
+        this.initTabPersistence();
+        return this;
+    }
 }
