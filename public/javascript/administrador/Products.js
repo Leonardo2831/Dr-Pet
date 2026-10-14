@@ -1,6 +1,6 @@
-import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/+esm';
-import Fetch from "../utils/Fetch.js";
-import structProducts from './components/structProducts.js';
+import CheckFunction from '../utils/CheckFunction.js';
+
+const confirm = new CheckFunction();
 
 export default class Products {
     constructor(selectorContentProducts, selectorButtonNew, selectorInputSearchProduct, selectorSelectTypeProduct, formProduct) {
@@ -10,119 +10,89 @@ export default class Products {
         this.selectTypeProduct = document.querySelector(selectorSelectTypeProduct);
 
         this.formProduct = formProduct;
-
-        this.products = null;
-        this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
-
-        this.fuse = null;
     }
 
-    createStructRowTable(productObject) {
-        const tr = structProducts(productObject, this.formProduct);
-        this.contentProducts.appendChild(tr);
-    }
+    filterTable() {
+        const tableBody = this.contentProducts || document.querySelector('[data-content-products="table"]');
+        if (!tableBody) return;
 
-    filterProducts() {
-        const textInput = this.inputSearchProduct.value.trim();
-        const category = this.selectTypeProduct.value;
+        const searchTerm = (this.inputSearchProduct?.value || '').toLowerCase().trim();
+        const selectedCategory = (this.selectTypeProduct?.value || 'all').toLowerCase().trim();
 
-        let results = [];
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach(tr => {
+            const name = (tr.dataset.name || tr.dataset.nome || tr.children[0]?.textContent || '').toLowerCase();
+            const category = (tr.dataset.category || tr.dataset.categoria || tr.children[1]?.textContent || '').toLowerCase();
 
-        if (textInput) {
-            const fuseResult = this.fuse.search(textInput);
-            results = fuseResult.map(res => res.item);
-        } else {
-            // caso pesquisar sem texto no input mas com categoria definida
-            results = [...this.products];
-        }
+            const matchesSearch = !searchTerm || name.includes(searchTerm);
+            const matchesCategory = selectedCategory === 'all' || category.includes(selectedCategory);
 
-        if (category !== 'all') {
-            // filtra os produtos pela categoria
-            results = results.filter((product) => product.category.toLowerCase() === category.toLowerCase());
-        }
-
-        this.contentProducts.innerHTML = '';
-        results.forEach((product) => {
-            this.createStructRowTable(product);
+            if (matchesSearch && matchesCategory) {
+                tr.style.display = '';
+            } else {
+                tr.style.display = 'none';
+            }
         });
-    }
-
-    createInfoEnter() {
-        const p = document.createElement('p');
-        p.className = 'animate-fadeItem absolute font-medium text-sm md:text-base text-gray-500 -top-7 xl:top-auto xl:-bottom-8 right-1';
-        p.innerHTML = `Presione <b class="font-semibold text-gray-600">Enter</b> para Pesquisar`;
-
-        return p;
     }
 
     addEvents() {
-        this.inputSearchProduct.addEventListener('input', () => {
-            const textInput = this.inputSearchProduct.value.trim();
-
-            if (textInput) {
-                const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
-                if (!infoEnter) this.inputSearchProduct.after(this.createInfoEnter());
-            } else {
-                const infoEnter = this.inputSearchProduct.parentElement.querySelector('p');
-                if (infoEnter) infoEnter.remove();
-            }
-        });
-
-        this.inputSearchProduct.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
+        // 1. Botão "Novo Produto" abre o modal de cadastro
+        if (this.buttonNew && this.formProduct) {
+            this.buttonNew.addEventListener('click', (event) => {
                 event.preventDefault();
-                this.filterProducts();
-            }
-        });
-
-        this.selectTypeProduct.addEventListener('change', () => {
-            this.filterProducts();
-        });
-
-        this.selectTypeProduct.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                this.filterProducts();
-            }
-        });
-
-        if (this.formProduct) {
-            this.buttonNew.addEventListener('click', this.formProduct.openForm);
+                this.formProduct.openForm();
+            });
         }
-    };
 
-    initSearch() {
-        const configSearch = {
-            keys: ['name', 'category'],
-            threshold: 0.5
-        };
+        // 2. Delegação global de eventos para os botões Editar e Excluir na tabela
+        document.addEventListener('click', (event) => {
+            const editBtn = event.target.closest('[data-button="editProduct"]');
+            if (editBtn) {
+                event.preventDefault();
+                const tr = editBtn.closest('tr');
+                if (!tr || !this.formProduct) return;
 
-        this.fuse = new Fuse(this.products, configSearch);
+                const product = {
+                    id: tr.dataset.id || tr.getAttribute('data-id') || '',
+                    name: tr.dataset.name || tr.dataset.nome || tr.children[0]?.textContent?.trim() || '',
+                    category: tr.dataset.category || tr.dataset.categoria || tr.children[1]?.textContent?.trim() || '',
+                    price: tr.dataset.price || tr.dataset.preco || tr.children[2]?.textContent?.trim() || '',
+                    longDescription: tr.dataset.longDescription || tr.dataset.long || tr.dataset.descricaoLonga || tr.children[3]?.innerHTML?.trim() || tr.children[3]?.textContent?.trim() || '',
+                    shortDescription: tr.dataset.shortDescription || tr.dataset.short || tr.dataset.descricaoCurta || tr.children[4]?.textContent?.trim() || ''
+                };
 
-        this.addEvents();
-    }
+                this.formProduct.putValuesForm(product);
+                return;
+            }
 
-    initTable() {
-        this.products.forEach((productObject) => {
-            this.createStructRowTable(productObject);
-        });
-    }
+            const deleteBtn = event.target.closest('[data-button="deleteProduct"]');
+            if (deleteBtn) {
+                event.preventDefault();
+                const tr = deleteBtn.closest('tr');
+                const id = tr?.dataset.id || tr?.getAttribute('data-id');
+                if (!id) return;
 
-    getProducts() {
-        this.fetchJson.get().then((products) => {
-            if (Array.isArray(products)) {
-                this.products = products;
-                this.initTable();
-                this.initSearch();
+                confirm.open(() => {
+                    fetch(`/produtos/${id}`, { method: 'DELETE' })
+                        .then(() => tr.remove())
+                        .catch(err => console.error("Erro ao excluir produto:", err));
+                });
+                return;
             }
         });
+
+        // 3. Filtro em tempo real por busca de texto e categoria
+        if (this.inputSearchProduct) {
+            this.inputSearchProduct.addEventListener('input', () => this.filterTable());
+        }
+
+        if (this.selectTypeProduct) {
+            this.selectTypeProduct.addEventListener('change', () => this.filterTable());
+        }
     }
 
     init() {
-        if (this.contentProducts && this.buttonNew && this.inputSearchProduct && this.selectTypeProduct) {
-            this.getProducts();
-        }
-
+        this.addEvents();
         return this;
     }
 }
