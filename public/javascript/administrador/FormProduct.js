@@ -60,7 +60,7 @@ export default class FormProduct {
     }
 
     initEditor() {
-        if (!window.Quill) return;
+        if (!window.Quill || this.quillLong) return;
         
         if (this.editorLongDescription) {
             this.quillLong = new Quill(this.editorLongDescription, {
@@ -116,11 +116,16 @@ export default class FormProduct {
             const longValue = this.getEditorValue(this.quillLong, this.areaLongDescription);
             if (!longValue) {
                 this.areaLongDescription?.classList.add('error');
+                const editorWrapper = this.editorLongDescription?.closest('.quill-wrapper');
+                if (editorWrapper) editorWrapper.classList.add('error');
                 if (this.editorLongDescription) {
                     this.editorLongDescription.classList.add('error');
-                    this.editorLongDescription.addEventListener('click', () => {
+                    const clearError = () => {
                         this.editorLongDescription.classList.remove('error');
-                    });
+                        if (editorWrapper) editorWrapper.classList.remove('error');
+                    };
+                    this.editorLongDescription.addEventListener('click', clearError, { once: true });
+                    if (this.quillLong) this.quillLong.once('text-change', clearError);
                 }
             }
         }
@@ -250,15 +255,20 @@ export default class FormProduct {
         this.modalProduct.classList.add('hidden');
         this.modalProduct.classList.remove('flex');
 
+        if (this.modalProduct._cleanupClickOutside) {
+            this.modalProduct._cleanupClickOutside();
+        }
+        if (this.formProduct && this.formProduct._cleanupClickOutside) {
+            this.formProduct._cleanupClickOutside();
+        }
+
         if (this.formProduct) {
             this.formProduct.reset();
         }
-        if (this.quillShort) {
-            this.quillShort.setText('');
-            this.areaShortDescription.value = '';
-        }
         if (this.quillLong) {
             this.quillLong.setText('');
+        }
+        if (this.areaLongDescription) {
             this.areaLongDescription.value = '';
         }
         if (this.infoMainImage) {
@@ -269,32 +279,71 @@ export default class FormProduct {
             this.infoSlidesImages.textContent = '';
             this.infoSlidesImages.classList.add('hidden');
         }
+        const errorElements = this.formProduct?.querySelectorAll('.error');
+        if (errorElements) {
+            errorElements.forEach(el => el.classList.remove('error'));
+        }
     }
 
     putValuesForm(product) {
-        this.buttonCreateProduct.setAttribute('data-id', product.id);
-        this.buttonCreateProduct.querySelector('span').textContent = 'Atualizar Produto';
-        this.inputName.value = product.name;
-        this.selectCategory.value = product.category;
-        this.inputPrice.value = "R$ " + Number(product.price).toFixed(2).replace('.', ',');
+        if (!product) return;
 
-        if (this.quillShort) {
-            this.quillShort.root.innerHTML = product.shortDescription || '';
-            this.areaShortDescription.value = this.getEditorHtml(this.quillShort);
-        } else {
-            this.areaShortDescription.value = product.shortDescription;
+        if (this.buttonCreateProduct) {
+            this.buttonCreateProduct.setAttribute('data-id', product.id || '');
+            const span = this.buttonCreateProduct.querySelector('span');
+            if (span) span.textContent = 'Atualizar Produto';
         }
+
+        const modalTitle = this.modalProduct?.querySelector('h3');
+        if (modalTitle) modalTitle.textContent = 'Editar Produto';
+
+        if (this.inputName) this.inputName.value = product.name || '';
+        if (this.selectCategory) this.selectCategory.value = product.category || '';
+        
+        if (this.inputPrice) {
+            let preco = product.price;
+            if (typeof preco === 'string') {
+                preco = preco.replace('R$', '').trim();
+            }
+            const num = parseFloat(String(preco).replace(',', '.'));
+            this.inputPrice.value = !isNaN(num) ? "R$ " + num.toFixed(2).replace('.', ',') : (product.price || '');
+        }
+
+        if (this.areaShortDescription) {
+            this.areaShortDescription.value = product.shortDescription || '';
+        }
+
         if (this.quillLong) {
-            this.quillLong.root.innerHTML = product.longDescription || '';
-            this.areaLongDescription.value = this.getEditorHtml(this.quillLong);
-        } else {
-            this.areaLongDescription.value = product.longDescription;
+            if (product.longDescription && product.longDescription.trim() !== '') {
+                this.quillLong.root.innerHTML = product.longDescription;
+            } else {
+                this.quillLong.setText('');
+            }
+            if (this.areaLongDescription) {
+                this.areaLongDescription.value = this.getEditorHtml(this.quillLong);
+            }
+        } else if (this.areaLongDescription) {
+            this.areaLongDescription.value = product.longDescription || '';
         }
+
+        if (!this.modalProduct) return;
+        this.modalProduct.classList.remove('hidden');
+        this.modalProduct.classList.add('flex');
+
+        if (this.formProduct) clickOutside(this.formProduct, 'click', this.closeForm);
     }
 
     openForm() {
-        this.buttonCreateProduct.setAttribute('data-id', '');
-        this.buttonCreateProduct.querySelector('span').textContent = 'Cadastrar Produto';
+        this.closeForm();
+
+        if (this.buttonCreateProduct) {
+            this.buttonCreateProduct.setAttribute('data-id', '');
+            const span = this.buttonCreateProduct.querySelector('span');
+            if (span) span.textContent = 'Cadastrar Produto';
+        }
+        const modalTitle = this.modalProduct?.querySelector('h3');
+        if (modalTitle) modalTitle.textContent = 'Adicionar Novo Produto';
+
         if (!this.modalProduct) return;
         this.modalProduct.classList.remove('hidden');
         this.modalProduct.classList.add('flex');
@@ -303,7 +352,19 @@ export default class FormProduct {
     }
 
     addEvents() {
-        if (this.buttonCloseForm) this.buttonCloseForm.addEventListener('click', this.closeForm);
+        if (this.buttonCloseForm) {
+            this.buttonCloseForm.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.closeForm();
+            });
+        }
+        if (this.modalProduct) {
+            this.modalProduct.addEventListener('click', (event) => {
+                if (event.target === this.modalProduct) {
+                    this.closeForm();
+                }
+            });
+        }
         if (this.inputMainImage && this.infoMainImage) this.inputMainImage.addEventListener('change', this.showNameFileMain);
         if (this.inputSlideImages && this.infoSlidesImages) this.inputSlideImages.addEventListener('change', this.showCountFilesSlide);
         if (this.inputPrice) this.inputPrice.addEventListener('input', () => formatPrice(this.inputPrice));
