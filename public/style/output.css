@@ -569,6 +569,12 @@ body{
   background-color: rgb(252 252 252 / var(--tw-bg-opacity, 1));
 }
 
+.\!container{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1800px;
+}
+
 .container{
   margin-left: auto;
   margin-right: auto;
@@ -1198,6 +1204,75 @@ aside p.activeOption{
   background-color: rgb(212 217 214 / var(--tw-bg-opacity, 1));
 }
 
+.quill-wrapper .ql-toolbar.ql-snow {
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  background-color: #f9fafb !important;
+  padding: 8px 12px !important;
+  font-family: inherit;
+}
+
+.quill-wrapper .ql-container.ql-snow {
+  border: none !important;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.quill-wrapper .ql-editor {
+  min-height: 120px;
+  max-height: 250px;
+  overflow-y: auto;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.quill-wrapper .ql-editor.ql-blank::before {
+  font-style: normal;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.quill-wrapper .ql-snow.ql-toolbar button:hover,
+    .quill-wrapper .ql-snow .ql-toolbar button:hover,
+    .quill-wrapper .ql-snow.ql-toolbar button:focus,
+    .quill-wrapper .ql-snow .ql-toolbar button:focus,
+    .quill-wrapper .ql-snow.ql-toolbar button.ql-active,
+    .quill-wrapper .ql-snow .ql-toolbar button.ql-active,
+    .quill-wrapper .ql-snow.ql-toolbar .ql-picker-label:hover,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+    .quill-wrapper .ql-snow.ql-toolbar .ql-picker-item:hover,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  color: #16a34a !important;
+}
+
+.quill-wrapper .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .quill-wrapper .ql-snow .ql-toolbar button:hover .ql-stroke,
+    .quill-wrapper .ql-snow.ql-toolbar button:focus .ql-stroke,
+    .quill-wrapper .ql-snow .ql-toolbar button:focus .ql-stroke,
+    .quill-wrapper .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .quill-wrapper .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+    .quill-wrapper .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .quill-wrapper .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
+  stroke: #16a34a !important;
+}
+
+.quill-wrapper .ql-snow.ql-toolbar button:hover .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar button:hover .ql-fill,
+    .quill-wrapper .ql-snow.ql-toolbar button:focus .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar button:focus .ql-fill,
+    .quill-wrapper .ql-snow.ql-toolbar button.ql-active .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar button.ql-active .ql-fill,
+    .quill-wrapper .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+    .quill-wrapper .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill {
+  fill: #16a34a !important;
+}
+
 .sr-only{
   position: absolute;
   width: 1px;
@@ -1443,6 +1518,10 @@ aside p.activeOption{
   margin-top: 1.25rem;
 }
 
+.mt-6{
+  margin-top: 1.5rem;
+}
+
 .mt-\[50px\]{
   margin-top: 50px;
 }
@@ -1631,10 +1710,6 @@ aside p.activeOption{
   max-height: 95vh;
 }
 
-.min-h-\[100px\]{
-  min-height: 100px;
-}
-
 .min-h-\[120px\]{
   min-height: 120px;
 }
@@ -1743,6 +1818,10 @@ aside p.activeOption{
   width: 30px;
 }
 
+.w-\[320px\]{
+  width: 320px;
+}
+
 .w-\[34px\]{
   width: 34px;
 }
@@ -1765,10 +1844,6 @@ aside p.activeOption{
 
 .w-\[65\%\]{
   width: 65%;
-}
-
-.w-\[730px\]{
-  width: 730px;
 }
 
 .w-\[90\%\]{
@@ -1916,6 +1991,10 @@ aside p.activeOption{
 
 .max-w-\[760px\]{
   max-width: 760px;
+}
+
+.max-w-\[90vw\]{
+  max-width: 90vw;
 }
 
 .flex-1{
@@ -2092,6 +2171,10 @@ aside p.activeOption{
 
 .resize-none{
   resize: none;
+}
+
+.resize{
+  resize: both;
 }
 
 .list-inside{
@@ -4024,6 +4107,10 @@ aside p.activeOption{
     width: 300px;
   }
 
+  .sm\:w-\[480px\]{
+    width: 480px;
+  }
+
   .sm\:w-\[80\%\]{
     width: 80%;
   }
@@ -4311,6 +4398,10 @@ aside p.activeOption{
     width: 60px;
   }
 
+  .md\:w-\[730px\]{
+    width: 730px;
+  }
+
   .md\:w-auto{
     width: auto;
   }
@@ -4361,6 +4452,10 @@ aside p.activeOption{
 
   .md\:gap-5{
     gap: 1.25rem;
+  }
+
+  .md\:gap-6{
+    gap: 1.5rem;
   }
 
   .md\:gap-8{
@@ -4932,6 +5027,10 @@ aside p.activeOption{
     width: 81px;
   }
 
+  .lg\:w-auto{
+    width: auto;
+  }
+
   .lg\:flex-\[1_1_350px\]{
     flex: 1 1 350px;
   }
@@ -4946,6 +5045,10 @@ aside p.activeOption{
 
   .lg\:justify-start{
     justify-content: flex-start;
+  }
+
+  .lg\:justify-end{
+    justify-content: flex-end;
   }
 
   .lg\:gap-10{
@@ -5194,14 +5297,6 @@ aside p.activeOption{
 
   .xl\:mt-0{
     margin-top: 0px;
-  }
-
-  .xl\:h-14{
-    height: 3.5rem;
-  }
-
-  .xl\:w-14{
-    width: 3.5rem;
   }
 
   .xl\:w-\[30px\]{
