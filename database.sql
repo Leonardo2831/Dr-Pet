@@ -43,8 +43,15 @@ CREATE TABLE service_infos(
     nome VARCHAR(100) NOT NULL,
     duracao DECIMAL(10,2) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
+    descricao VARCHAR(500) NOT NULL,
+    imagem MEDIUMBLOB NOT NULL,
 	PRIMARY KEY(id)
 );
+
+-- Para bancos já criados, rode apenas o comando abaixo (descomente) em vez de recriar a tabela:
+-- ALTER TABLE service_infos
+--     ADD COLUMN descricao VARCHAR(500) NOT NULL,
+--     ADD COLUMN imagem MEDIUMBLOB NOT NULL;
 
 CREATE TABLE agenda (
     id INTEGER NOT NULL AUTO_INCREMENT,
