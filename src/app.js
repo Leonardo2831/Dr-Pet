@@ -41,6 +41,9 @@ app.use('/', loginRouter);
 app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);
+app.use((req, res) => {
+    res.status(404).render('404');
+});
 
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);

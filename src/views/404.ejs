@@ -1,15 +1,102 @@
-﻿<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style/output.css" />
-    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
-    <title>Dr. Pet | Erro 404</title>
-</head>
-<body>
-    
-</body>
-</html>
+<%- include('layouts/header', { tituloDaPagina: 'Dr. Pet | Página Não Encontrada (404)' }) %>
 
+    <main class="bg-gray-50 min-h-[calc(100vh-140px)] flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-red-100/60 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-green-200/30 rounded-full blur-3xl pointer-events-none"></div>
 
+        <div class="container mx-auto px-6 py-12 md:py-16 lg:py-20 relative z-10 flex flex-col items-center">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full max-w-[1350px]">
+                
+                <div class="lg:col-span-7 flex flex-col items-start text-left">
+                    
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-red-700 font-semibold text-xs sm:text-sm tracking-wide uppercase shadow-sm mb-6 animate-fadeTop">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                        </span>
+                        <span>Erro 404 • Página não encontrada</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="text-6xl sm:text-7xl lg:text-8xl font-black text-red-600 tracking-tighter drop-shadow-sm">404</span>
+                        <div class="h-12 w-[3px] bg-red-300 hidden sm:block rounded-full"></div>
+                        <div class="hidden sm:flex flex-col">
+                            <span class="text-xl sm:text-2xl font-bold text-red-700 leading-tight">Página não encontrada</span>
+                            <span class="text-sm font-medium text-gray-500">Endereço inexistente ou movido</span>
+                        </div>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+                        Au au! Parece que nos <span class="text-green-600">perdemos</span> pelo caminho.
+                    </h1>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 font-medium leading-relaxed mb-8 max-w-[620px]">
+                        Assim como um pet travesso que enterrou o brinquedo no quintal e não lembra onde deixou, não encontramos a página que você tentou acessar. Ela pode ter sido removida, alterada ou o link está incorreto.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 w-full">
+                        <a href="/"
+                           class="flex items-center justify-center gap-3 px-7 py-4 bg-green-600 hover:bg-green-500 text-white font-bold text-base md:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                            <span>Voltar para o Início</span>
+                        </a>
+
+                        <a href="/loja"
+                           class="flex items-center justify-center gap-3 px-7 py-4 bg-white hover:bg-green-50 border-2 border-green-600 text-green-700 font-bold text-base md:text-lg rounded-xl shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300">
+                            <img src="/images/icons/petshop-section/bag.svg" alt="Ícone Loja" class="w-5 h-5" />
+                            <span>Visitar Pet Shop</span>
+                        </a>
+
+                        <button
+                            type="button"
+                            onclick="window.history.length > 1 ? window.history.back() : window.location.href='/'"
+                            class="flex items-center justify-center gap-2 px-4 py-3 text-gray-600 hover:text-green-600 font-semibold text-base md:text-lg transition-colors underline decoration-2 underline-offset-4 cursor-pointer">
+                            <span>← Voltar à página anterior</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center items-center relative">
+                    <div class="relative w-full max-w-[460px] group">
+                        
+                        <div class="absolute -inset-3 bg-gradient-to-tr from-red-200/60 to-green-100 rounded-3xl blur-2xl opacity-70 group-hover:opacity-90 transition duration-500"></div>
+
+                        <div class="relative bg-white p-4 sm:p-5 rounded-3xl shadow-2xl border-4 border-white overflow-hidden transform transition duration-500 group-hover:-translate-y-2">
+                            <div class="overflow-hidden rounded-2xl relative bg-red-50/50">
+                                <img
+                                    src="/images/404-pet.jpg"
+                                    alt="Cachorrinho e gatinho detetives farejando a página perdida 404"
+                                    class="w-full h-auto aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                
+                                <div class="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-md border border-red-200 flex items-center gap-1.5 text-xs font-bold text-red-600">
+                                    <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                                    <span>Erro 404 • Página não encontrada</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex items-center justify-between px-2">
+                                <div class="flex items-center gap-2.5">
+                                    <img src="/images/logo.png" alt="Logo Dr. Pet" class="w-7 h-7 object-contain" />
+                                    <span class="font-bold text-sm text-gray-800">Equipe Dr. Pet</span>
+                                </div>
+                                <span class="text-xs font-bold text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full">
+                                    Status: Não localizada
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+<%- include('layouts/footer', { scripts: [
+    { src: '/javascript/menu-user/script-menu-user.js', module: true }
+] }) %>
