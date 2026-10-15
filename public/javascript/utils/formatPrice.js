@@ -1,4 +1,9 @@
 export default function formatPrice(input) {
-    const valueInput = input.value.replace(/\D/g, '');;
+    if (!input) return;
+    const valueInput = input.value.replace(/\D/g, '');
+    if (!valueInput) {
+        input.value = '';
+        return;
+    }
     input.value = "R$ " + (Number(valueInput) / 100).toFixed(2).replace('.', ',');
 }

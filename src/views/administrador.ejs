@@ -97,16 +97,18 @@
                             <div class="relative w-[280px]">
                                 <select data-select="service"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
-                                    <option value="all" selected>
-                                        Todas as Opções
-                                    </option>
-                                    <option value="cirurgia">
-                                        Cirurgia
-                                    </option>
-                                    <option value="banho-tosa">
-                                        Banho e tosa
-                                    </option>
-                                    <option value="vacinacao">Vacinação</option>
+                                    <% if (locals.servicos && servicos.length > 0) { %>
+                                        <option value="all" selected>
+                                            Todas as Opções
+                                        </option>
+                                        <% servicos.forEach(servico => { %>
+                                            <option value="<%= servico.id %>">
+                                                <%= servico.nome %>
+                                            </option>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <option value="" disabled selected>Nenhum Serviço</option>
+                                    <% } %>
                                 </select>
                                 <img src="/images/icons/arrow-down.svg" alt="Seta"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none" />
@@ -196,58 +198,124 @@
                     <% } %>
                 </div>
 
-                <div
-                    class="mt-10 md:mt-16 flex flex-col p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
-                    <h3 class="font-sans font-bold text-xl md:text-2xl leading-tight text-green-700 mb-8">
-                        Configuração de Serviços
-                    </h3>
+                <div class="mt-12 md:mt-20 flex flex-col gap-6 w-full">
+                    <div class="flex flex-col gap-2">
+                        <h2
+                            class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
+                            Seção de Serviços
+                        </h2>
+                        <p class="font-sans font-medium text-base md:text-lg text-gray-600">
+                            Cadastre novos serviços ou altere os valores e durações dos serviços existentes.
+                        </p>
+                    </div>
 
-                    <form id="form-cadastrar-precos" class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
+                    <div class="flex flex-col p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600 gap-10">
+                        <div class="flex flex-col gap-6">
+                            <h3 class="font-sans font-bold text-xl md:text-2xl leading-tight text-green-700">
+                                Criar Novo Serviço
+                            </h3>
 
-                        <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
-                            <label for="servico-select"
-                                class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                Serviço
-                            </label>
-                            <div class="relative">
-                                <select id="servico-select" required
-                                    class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="banho-tosa">Banho e Tosa</option>
-                                    <option value="vacinacao">Vacinação</option>
-                                    <option value="cirurgia">Cirurgia</option>
-                                </select>
-                                <img src="/images/icons/arrow-down.svg"
-                                    class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70"
-                                    alt="Seta" />
-                            </div>
+                            <form action="/administrador/servicos/criar" method="POST" class="flex flex-col md:flex-row flex-wrap items-end gap-6 w-full">
+                                
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
+                                    <label for="novo-servico-nome"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Nome do Serviço
+                                    </label>
+                                    <input type="text" maxlength="16" id="novo-servico-nome" name="nome" placeholder="Ex: Tosa Higiênica" required
+                                        class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="novo-servico-duracao"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Duração (min)
+                                    </label>
+                                    <input type="text" maxlength="8" id="novo-servico-duracao" name="duracao" placeholder="Ex: 60 min" required
+                                        class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="novo-servico-preco"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Preço (R$)
+                                    </label>
+                                    <input type="text" maxlength="11" id="novo-servico-preco" name="preco" placeholder="R$ 0,00" required
+                                        class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+
+                                <button type="submit"
+                                    class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto shrink-0">
+                                    <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
+                                        Cadastrar Serviço
+                                    </span>
+                                </button>
+                            </form>
                         </div>
 
-                        <div class="flex flex-col gap-[10px] flex-1 min-w-[200px]">
-                            <label for="tempo-input"
-                                class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                Duração (min)
-                            </label>
-                            <input type="text" id="tempo-input" min="1" maxlength="8" placeholder="90 min" required
-                                class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                        <!-- Divisória sutil entre as duas ações -->
+                        <div class="w-full h-px bg-gray-200"></div>
+
+                        <!-- PARTE 2 (ABAIXO): Atualizar Serviço Existente -->
+                        <div class="flex flex-col gap-6">
+                            <h3 class="font-sans font-bold text-xl md:text-2xl leading-tight text-green-700">
+                                Atualizar Serviço
+                            </h3>
+
+                            <form action="/administrador/servicos/atualizar" method="POST" class="flex flex-col md:flex-row flex-wrap items-end gap-6 w-full">
+                                
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
+                                    <label for="servico-select"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Escolha o Serviço
+                                    </label>
+                                    <div class="relative">
+                                        <select id="servico-select" name="servicoId" required
+                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
+                                            <option value="" disabled selected>Selecione um serviço...</option>
+                                            <% if (locals.servicos && servicos.length > 0) { %>
+                                                <% servicos.forEach(servico => { %>
+                                                    <option value="<%= servico.id %>">
+                                                        <%= servico.nome %>
+                                                    </option>
+                                                <% }) %>
+                                            <% } %>
+                                        </select>
+                                        <img src="/images/icons/arrow-down.svg"
+                                            class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70"
+                                            alt="Seta" />
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="tempo-input"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Nova Duração (min)
+                                    </label>
+                                    <input type="text" maxlength="8" id="tempo-input" name="duracao" placeholder="Ex: 90 min" required
+                                        class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="preco-input"
+                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
+                                        Novo Preço (R$)
+                                    </label>
+                                    <input type="text" maxlength="11" id="preco-input" name="preco" placeholder="R$ 0,00" required
+                                        class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+
+                                <button type="submit"
+                                    class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto shrink-0">
+                                    <span
+                                        class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
+                                        Atualizar Serviço
+                                    </span>
+                                </button>
+                            </form>
                         </div>
 
-                        <div class="flex flex-col gap-[10px] flex-1 min-w-[200px]">
-                            <label for="preco-input"
-                                class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                Preço (R$)
-                            </label>
-                            <input type="text" id="preco-input" step="0.01" min="0" maxlength="11" placeholder="90.00" required
-                                class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                        </div>
-
-                        <button type="submit"
-                            class="flex flex-row items-center justify-center md:self-end px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto">
-                            <span
-                                class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">Salvar
-                                Alterações</span>
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </section>
 

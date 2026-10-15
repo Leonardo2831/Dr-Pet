@@ -1,7 +1,7 @@
-import Fetch from '../utils/Fetch.js';
 import formatPrice from '../utils/formatPrice.js';
 
 function formatTime(input) {
+    if (!input) return;
     const digits = input.value.replace(/\D/g, '');
     if (!digits) {
         input.value = '';
@@ -9,49 +9,31 @@ function formatTime(input) {
     }
     input.value = digits + ' min';
 
-    // defini onde cursor vai estar
+    // define onde cursor vai estar antes de " min"
     const cursorPosition = digits.length;
     input.setSelectionRange(cursorPosition, cursorPosition);
 }
 
 export default function adminPrecosAgenda() {
-    const form = document.getElementById('form-cadastrar-precos');
-    const selectService = document.getElementById('servico-select');
-    const inputTime = document.getElementById('tempo-input');
-    const inputPrice = document.getElementById('preco-input');
-    inputPrice.addEventListener('input', () => formatPrice(inputPrice));
-    inputTime.addEventListener('input', () => formatTime(inputTime));
+    // Inputs da Atualização de Serviço
+    const inputPriceAtualizar = document.getElementById('preco-input');
+    const inputTimeAtualizar = document.getElementById('tempo-input');
 
-    form.addEventListener('submit', async (event) => {
-        const servicoSelecionado = selectService.value;
-        const novoTempo = Number(inputTime.value.replace(' min', ''));
-        const novoPreco = Number(inputPrice.value.replace('R$', '').replace(',', '.').trim());
+    // Inputs do Cadastro de Novo Serviço
+    const inputPriceNovo = document.getElementById('novo-servico-preco');
+    const inputTimeNovo = document.getElementById('novo-servico-duracao');
 
-        const fetchPrecos = new Fetch('service-infos', '[data-modal-info-menu="user"]');
+    if (inputPriceAtualizar) {
+        inputPriceAtualizar.addEventListener('input', () => formatPrice(inputPriceAtualizar));
+    }
+    if (inputTimeAtualizar) {
+        inputTimeAtualizar.addEventListener('input', () => formatTime(inputTimeAtualizar));
+    }
 
-        event.preventDefault();
-        let precosAtuais = await fetchPrecos.get();
-        const existePrecosAtuais = !!precosAtuais && Object.keys(precosAtuais).length > 0;
-
-        if (!precosAtuais) {
-            precosAtuais = {};
-        }
-
-        const id = (precosAtuais[servicoSelecionado] && precosAtuais[servicoSelecionado].id) || crypto.randomUUID();
-
-        precosAtuais[servicoSelecionado] = {
-            id: id,
-            time: novoTempo,
-            price: novoPreco
-        };
-
-        if (existePrecosAtuais) {
-            await fetchPrecos.put('', precosAtuais);
-        } else {
-            await fetchPrecos.post(precosAtuais);
-        }
-
-        inputTime.value = '';
-        inputPrice.value = '';
-    });
+    if (inputPriceNovo) {
+        inputPriceNovo.addEventListener('input', () => formatPrice(inputPriceNovo));
+    }
+    if (inputTimeNovo) {
+        inputTimeNovo.addEventListener('input', () => formatTime(inputTimeNovo));
+    }
 }
