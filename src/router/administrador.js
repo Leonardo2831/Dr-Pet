@@ -204,4 +204,23 @@ router.get('/slides-home', (req, res) => {
         return res.status(200).json(slides);
     });
 });
+
+router.patch('/slides-home/:id', (req, res) => {
+    const { id } = req.params;
+    const { ordem } = req.body;
+
+    if (ordem === undefined) {
+        return res.status(400).json({ message: 'O campo ordem é obrigatório.' });
+    }
+
+    const query = 'UPDATE slide_home SET ordem = ? WHERE id = ?';
+
+    db.query(query, [ordem, id], (err, result) => {
+        if (err) {
+            console.error('Erro ao atualizar ordem do slide:', err);
+            return res.status(500).json({ message: 'Erro no servidor ao atualizar ordem.' });
+        }
+        return res.status(200).json({ message: 'Ordem atualizada com sucesso!' });
+    });
+});
 module.exports = router;
