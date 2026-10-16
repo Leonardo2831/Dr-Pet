@@ -2,14 +2,21 @@
 
     <main>
         <section class="relative w-full h-[400px] md:h-[600px] lg:h-[800px] bg-gray-100">
-
             <div class="swiper w-full h-full">
-
                 <div data-content-imgs="slideHome" class="swiper-wrapper">
-                    <figure class="swiper-slide w-full h-full">
-                        <img src="/images/introduction.png" alt="introduction"
-                            class="w-full h-full object-cover object-center">
-                    </figure>
+                    <% if (locals.slides && slides.length > 0) { %>
+                        <% slides.forEach(slide => { %>
+                            <figure class="swiper-slide w-full h-full">
+                                <img src="/slides/imagem/<%= slide.id %>" alt="<%= slide.alt || 'Dr. Pet Slide' %>"
+                                    class="w-full h-full object-cover object-center">
+                            </figure>
+                        <% }) %>
+                    <% } else { %>
+                        <figure class="swiper-slide w-full h-full">
+                            <img src="/images/introduction.png" alt="introduction"
+                                class="w-full h-full object-cover object-center">
+                        </figure>
+                    <% } %>
                 </div>
 
                 <div class="swiper-pagination custom-swiper-pagination"></div>
