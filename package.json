@@ -18,6 +18,7 @@
     "express": "^5.2.1",
     "express-session": "^1.18.2",
     "install": "^0.13.0",
+    "multer": "^2.4.0",
     "mysql2": "^3.24.5",
     "npm": "^11.21.0"
   }
