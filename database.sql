@@ -72,7 +72,7 @@ CREATE TABLE agenda (
 
 CREATE TABLE slide_home (
     id INTEGER AUTO_INCREMENT,
-    image BLOB NOT NULL,
+    image LONGBLOB NOT NULL,
     alt VARCHAR(150) NOT NULL,
     ordem INTEGER NOT NULL DEFAULT 1 CHECK(ordem > 0),
     PRIMARY KEY(id)
@@ -101,3 +101,7 @@ CREATE TABLE produto_image (
 
 INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar)
 VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null);
+
+-- Para quem ja criou a database no computador
+
+ALTER TABLE slide_home MODIFY COLUMN image LONGBLOB NOT NULL;
