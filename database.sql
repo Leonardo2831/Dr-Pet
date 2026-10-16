@@ -48,11 +48,6 @@ CREATE TABLE service_infos(
 	PRIMARY KEY(id)
 );
 
--- Para bancos já criados, rode apenas o comando abaixo (descomente) em vez de recriar a tabela:
--- ALTER TABLE service_infos
---     ADD COLUMN descricao VARCHAR(500) NOT NULL,
---     ADD COLUMN imagem MEDIUMBLOB NOT NULL;
-
 CREATE TABLE agenda (
     id INTEGER NOT NULL AUTO_INCREMENT,
     date_agendamento DATE NOT NULL,
@@ -103,5 +98,8 @@ INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar)
 VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null);
 
 -- Para quem ja criou a database no computador
-
-ALTER TABLE slide_home MODIFY COLUMN image LONGBLOB NOT NULL;
+-- Para bancos já criados, rode apenas o comando abaixo (descomente) em vez de recriar a tabela:
+-- ALTER TABLE service_infos
+--     ADD COLUMN descricao VARCHAR(500) NOT NULL,
+--     ADD COLUMN imagem MEDIUMBLOB NOT NULL;
+-- ALTER TABLE slide_home MODIFY COLUMN image LONGBLOB NOT NULL;

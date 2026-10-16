@@ -14,12 +14,12 @@ export default function structSlide(object) {
 
     figure.innerHTML = `
         <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-        <button type="button" class="delete-btn absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm cursor-pointer">
+        <button type="button" data-id="${slideId}" class="delete-slide-btn delete-btn absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm cursor-pointer">
             <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5 pointer-events-none">
         </button>
     `;
 
-    const button = figure.querySelector('.delete-btn');
+    const button = figure.querySelector('.delete-slide-btn');
     
     button.addEventListener('click', (e) => {
         e.preventDefault();
@@ -28,8 +28,10 @@ export default function structSlide(object) {
         confirm.open(() => {
             const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
             
-            fetchAPI.delete(slideId).then(() => {
-                figure.remove();
+            fetchAPI.delete(slideId).then((response) => {
+                if (!response || response.ok) {
+                    figure.remove();
+                }
             }).catch(err => {
                 console.error('Erro ao deletar slide:', err);
             });

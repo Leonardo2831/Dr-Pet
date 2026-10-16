@@ -9,6 +9,7 @@ export default class CheckFunction {
     }
 
     close() {
+        if (!this.card || !this.modal) return;
         this.card.classList.remove('scale-100', 'opacity-100');
         this.card.classList.add('scale-90', 'opacity-0');
         setTimeout(() => {
@@ -18,8 +19,8 @@ export default class CheckFunction {
     }
 
     cleanup(handleConfirm, handleCancel) {
-        this.confirmBtn.removeEventListener('click', handleConfirm);
-        this.cancelBtn.removeEventListener('click', handleCancel);
+        if (this.confirmBtn) this.confirmBtn.removeEventListener('click', handleConfirm);
+        if (this.cancelBtn) this.cancelBtn.removeEventListener('click', handleCancel);
     }
 
     open(onConfirm) {

@@ -1,6 +1,9 @@
 import Fetch from "../utils/Fetch.js";
 import structSlide from "./components/structSlide.js";
 import Sortable from 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/modular/sortable.esm.js';
+import CheckFunction from "../utils/CheckFunction.js";
+
+const confirm = new CheckFunction();
 
 export default class SlidesHome {
     constructor(selectorLabelAdd, contentSlide) {
@@ -70,29 +73,28 @@ export default class SlidesHome {
         }
     }
 
-    async handleDeleteClick(e) {
-        const deleteBtn = e.target.closest('.delete-slide-btn');
+    handleDeleteClick(e) {
+        const deleteBtn = e.target.closest('.delete-slide-btn, .delete-btn');
         if (!deleteBtn) return;
 
-        const id = deleteBtn.getAttribute('data-id');
+        e.preventDefault();
+
+        const figure = deleteBtn.closest('figure[data-content-slides]') || deleteBtn.closest('[data-content-slides]');
+        const id = deleteBtn.getAttribute('data-id') || figure?.getAttribute('data-content-slides');
         if (!id) return;
 
-        try {
-            const response = await fetch(`/slides-home/${id}`, {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                const figure = deleteBtn.closest('[data-content-slides]');
-                if (figure) {
-                    figure.remove();
+        confirm.open(async () => {
+            try {
+                const response = await this.fetchJson.delete(id);
+                if (!response || response.ok) {
+                    if (figure) {
+                        figure.remove();
+                    }
                 }
-            } else {
-                console.error('Erro ao excluir slide no servidor');
+            } catch (error) {
+                console.error('Erro na requisição de exclusão:', error);
             }
-        } catch (error) {
-            console.error('Erro na requisição de exclusão:', error);
-        }
+        });
     }
 
     addEvents() {
