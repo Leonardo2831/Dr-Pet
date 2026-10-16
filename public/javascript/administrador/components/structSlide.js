@@ -3,26 +3,36 @@ import CheckFunction from "../../utils/CheckFunction.js";
 
 const confirm = new CheckFunction();
 
-export default function structSlide(object){
+export default function structSlide(object) {
     const figure = document.createElement('figure');
     figure.className = "animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat";
-    figure.setAttribute('data-content-slides', object.id);
-    figure.setAttribute('aria-label', object.altImage || 'Slide image');
-    figure.style.backgroundImage = `url('${object.image}')`;
+    
+    const slideId = object.id;
+    figure.setAttribute('data-content-slides', slideId);
+    figure.setAttribute('aria-label', object.alt || object.altImage || 'Slide image');
+    figure.style.backgroundImage = `url('/slides/imagem/${slideId}')`;
 
     figure.innerHTML = `
         <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-        <button type="button" class="absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm">
-            <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5">
+        <button type="button" class="delete-btn absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm cursor-pointer">
+            <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5 pointer-events-none">
         </button>
     `;
 
-    const button = figure.querySelector('button');
-    button.addEventListener('click', () => {
+    const button = figure.querySelector('.delete-btn');
+    
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         confirm.open(() => {
             const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
-            fetchAPI.delete(object.id);
-            figure.remove();
+            
+            fetchAPI.delete(slideId).then(() => {
+                figure.remove();
+            }).catch(err => {
+                console.error('Erro ao deletar slide:', err);
+            });
         });
     });
 

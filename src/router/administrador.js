@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const multer = require('multer');
 // IMPORTANTE: Importa a conexão com o banco de dados
 const db = require('../database/mysql');
 
@@ -12,7 +12,15 @@ router.get('/administrador', (req, res) => {
     //     res.redirect('/login');
     // }
 
-    res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
+    const query = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
+    
+    db.query(query, (err, slides) => {
+        if (err) {
+            console.error('Erro ao buscar slides:', err);
+            return res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
+        }
+        res.render('administrador', { slides: slides, agendamentos: [], produtos: [] });
+    });
 });
 
 // 1. LISTAR / BUSCAR PRODUTOS (GET /produtos)
@@ -129,7 +137,71 @@ router.delete('/produtos/:id', excluirProduto);
 router.delete('/administrador/produtos/:id', excluirProduto);
 
 
+const storageSlides = multer.memoryStorage()
+const uploadSlide = multer({ storage: storageSlides })
+
+router.get('/slides/imagem/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT image FROM slide_home WHERE id = ?';
+
+    db.query(query, [id], (err, results) => {
+        if (err || results.length === 0 || !results[0].image) {
+            return res.status(404).send('Imagem não encontrada');
+        }
+        res.setHeader('Content-Type', 'image/jpeg'); //aceita imagems/pngs/jpegs
+        res.send(results[0].image);
+    });
+});
+
+//adicionar slide
+router.post('/slides-home', uploadSlide.any(), (req, res) => {
+
+    const file = req.files && req.files[0];
+
+    if (!file) {
+        return res.status(400).json({ message: 'Nenhuma imagem foi enviada.' });
+    }
+    const imageBuffer = file.buffer;
+
+    const altText = req.body.alt || 'Slide Dr. Pet';
+    const ordem = req.body.ordem ? parseInt(req.body.ordem) : 1;
+
+    const query = 'INSERT INTO slide_home (image, alt, ordem) VALUES (?, ?, ?)';
+    
+    db.query(query, [imageBuffer, altText, ordem], (err, result) => {
+        if (err) {
+            console.error('Erro ao guardar slide BLOB na BD:', err);
+            return res.status(500).json({ message: 'Erro ao registar na base de dados.' });
+        }
+
+        return res.status(201).json({ 
+            message: 'Slide adicionado com sucesso!', 
+            id: result.insertId 
+        });
+    });
+});
+
+//deletar slides
+router.delete('/slides-home/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.query('DELETE FROM slide_home WHERE id = ?', [id], (err) => {
+        if (err) {
+            console.error('Erro ao excluir do banco:', err);
+            return res.status(500).json({ message: 'Erro ao excluir do banco.' });
+        }
+        return res.status(200).json({ message: 'Slide removido com sucesso!' });
+    });
+});
+
 router.get('/slides-home', (req, res) => {
-    return res.status(200).json([]);
+    const query = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
+    db.query(query, (err, slides) => {
+        if (err) {
+            console.error('Erro ao buscar slides:', err);
+            return res.status(500).json({ message: 'Erro ao buscar slides.' });
+        }
+        return res.status(200).json(slides);
+    });
 });
 module.exports = router;
