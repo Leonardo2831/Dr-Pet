@@ -341,4 +341,8 @@
     .quill-wrapper .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill {
         fill: #16a34a !important;
     }
+
+    .bg-row-zebra {
+        background-color: #E2EAE4 !important;
+    }
 }

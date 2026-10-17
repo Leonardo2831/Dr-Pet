@@ -7,19 +7,31 @@ const db = require('../database/mysql');
 // Rota para renderizar a página do administrador
 router.get('/administrador', (req, res) => {
     // if(req.session.usuario && req.session.usuario.tipoUsuario == 'admin') {
-    //     res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
+    //     res.render('administrador', { slides: [], agendamentos: [], produtos: [], usuarios: [] });
     // } else {
     //     res.redirect('/login');
     // }
 
-    const query = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
+    const querySlides = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
+    const queryUsers = 'SELECT id, nome, email, telefone, tipo_usuario, (avatar IS NOT NULL AND LENGTH(avatar) > 0) AS has_avatar FROM usuario ORDER BY id ASC';
     
-    db.query(query, (err, slides) => {
-        if (err) {
-            console.error('Erro ao buscar slides:', err);
-            return res.render('administrador', { slides: [], agendamentos: [], produtos: [] });
+    db.query(querySlides, (errSlides, slides) => {
+        if (errSlides) {
+            console.error('Erro ao buscar slides:', errSlides);
+            slides = [];
         }
-        res.render('administrador', { slides: slides, agendamentos: [], produtos: [] });
+        db.query(queryUsers, (errUsers, usuarios) => {
+            if (errUsers) {
+                console.error('Erro ao buscar usuários:', errUsers);
+                usuarios = [];
+            }
+            res.render('administrador', { 
+                slides: slides || [], 
+                agendamentos: [], 
+                produtos: [],
+                usuarios: usuarios || []
+            });
+        });
     });
 });
 
@@ -223,4 +235,57 @@ router.patch('/slides-home/:id', (req, res) => {
         return res.status(200).json({ message: 'Ordem atualizada com sucesso!' });
     });
 });
+
+// 6. RELATÓRIO DE USUÁRIOS - LISTAR E BUSCAR NO BANCO DE DADOS
+const listarUsuarios = (req, res) => {
+    const { busca, q } = req.query;
+    const termo = (busca || q || '').trim();
+
+    let query = 'SELECT id, nome, email, telefone, tipo_usuario, (avatar IS NOT NULL AND LENGTH(avatar) > 0) AS has_avatar FROM usuario';
+    let params = [];
+
+    if (termo) {
+        query += ' WHERE nome LIKE ? OR email LIKE ? OR telefone LIKE ?';
+        const likeTerm = `%${termo}%`;
+        params.push(likeTerm, likeTerm, likeTerm);
+    }
+
+    query += ' ORDER BY id ASC';
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar usuários no banco de dados:', err);
+            return res.status(500).json({ message: 'Erro no servidor ao buscar usuários.' });
+        }
+        return res.status(200).json(results);
+    });
+};
+
+router.get('/administrador/usuarios', listarUsuarios);
+router.get('/usuarios', listarUsuarios);
+
+// 7. SERVIR AVATAR DO USUÁRIO
+const getAvatarUsuario = (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT avatar FROM usuario WHERE id = ?';
+
+    db.query(query, [id], (err, results) => {
+        if (err || results.length === 0 || !results[0].avatar) {
+            return res.status(404).send('Avatar não encontrado');
+        }
+
+        const avatar = results[0].avatar;
+        // Se for uma string de URL ou base64
+        if (typeof avatar === 'string' && (avatar.startsWith('http') || avatar.startsWith('/'))) {
+            return res.redirect(avatar);
+        }
+
+        res.setHeader('Content-Type', 'image/jpeg');
+        return res.send(avatar);
+    });
+};
+
+router.get('/usuario/avatar/:id', getAvatarUsuario);
+router.get('/administrador/usuario/avatar/:id', getAvatarUsuario);
+
 module.exports = router;

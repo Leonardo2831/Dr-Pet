@@ -6,6 +6,7 @@ import FormProduct from "./FormProduct.js";
 import eventoSlides from "./eventoSlides.js";
 import adminPrecosAgenda from "./admin-precos-agenda.js";
 import AppointmentRequests from "./AppointmentRequests.js";
+import UserReports from "./UserReports.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     selectSectionAdm();
@@ -17,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '[data-quill-editor="longDescription"]',
         '[data-input="imageMainProduct"]', '[data-input="imageSlideProduct"]', '[data-info="mainImage"]', '[data-info="slideImages"]', '[data-button="createProduct"]').init();
     const productsConfig = new Products('[data-content-products="table"]', '[data-button="addProduct"]', '[data-input="filterProduct"]', '[data-select="typeProduct"]', formProduct).init();
+    const userReports = new UserReports({
+        sectionSelector: '#section-relatorios',
+        searchInputSelector: '[data-input="searchUsers"]',
+        tableBodySelector: '[data-content-users="table"]',
+        paginationSelector: '[data-pagination="users"]'
+    }).init();
     adminPrecosAgenda();
     eventoSlides();
 }); 

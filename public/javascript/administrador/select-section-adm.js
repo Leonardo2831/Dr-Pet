@@ -37,4 +37,11 @@ export default function selectSectionAdm() {
             }
         });
     });
+
+    
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+        const matchingBtn = document.querySelector(`[data-tab-btn][data-target="${hash}"]`);
+        if (matchingBtn) matchingBtn.click();
+    }
 }
