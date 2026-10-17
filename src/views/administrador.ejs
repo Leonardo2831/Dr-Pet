@@ -499,7 +499,7 @@
 
     <!-- form add product -->
     <div data-modal="addProduct"
-        class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeItem">
         <div
             class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="addProduct"
@@ -630,7 +630,7 @@
 
     <!-- Modal de Edição de Agendamento -->
     <aside data-modal="editSchedule"
-        class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeTop">
         <div
             class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="editSchedule"
@@ -658,9 +658,14 @@
                     <div class="relative w-full">
                         <select id="select-edit-servico" name="servico" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none bg-white appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all cursor-pointer">
-                            <option value="banho-tosa">Banho e Tosa</option>
-                            <option value="vacinacao">Vacinação</option>
-                            <option value="cirurgia">Cirurgia</option>
+                            <option value="" disabled selected>Selecione um serviço...</option>
+                            <% if (locals.servicos && servicos.length > 0) { %>
+                                <% servicos.forEach(servico => { %>
+                                    <option value="<%= servico.id %>">
+                                        <%= servico.nome %>
+                                    </option>
+                                <% }) %>
+                            <% } %>
                         </select>
                         <img src="/images/icons/arrow-down.svg" alt="Seta"
                             class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-60" />
@@ -760,7 +765,7 @@
 
     <!-- Modal de Cancelamento de Agendamento -->
     <aside data-modal="cancelSchedule"
-        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeTop">
         <div
             class="relative w-[95%] max-w-[720px] bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
 
@@ -788,7 +793,7 @@
 
     <!-- Modal de Confirmação -->
     <div data-confirm-modal
-        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/30">
+        class="hidden fixed inset-0 z-[1000] items-center justify-center bg-black/30">
         <div data-confirm-card
             class="flex flex-col items-center gap-4 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,0,0,0.14)] px-6 py-5 w-[90%] max-w-[260px] scale-90 opacity-0 transition-all duration-200 ease-out">
 
@@ -811,7 +816,7 @@
     </div>
 
     <aside data-modal-info-menu="user" data-modal-info="adm"
-        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
+        class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
     </aside>
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
