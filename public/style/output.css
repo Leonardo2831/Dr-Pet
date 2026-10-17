@@ -1570,6 +1570,10 @@ aside p.activeOption{
   margin-top: auto;
 }
 
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -1740,6 +1744,10 @@ aside p.activeOption{
 
 .h-px{
   height: 1px;
+}
+
+.h-16{
+  height: 4rem;
 }
 
 .max-h-\[1000px\]{
@@ -1943,6 +1951,10 @@ aside p.activeOption{
   width: 100%;
 }
 
+.w-16{
+  width: 4rem;
+}
+
 .min-w-0{
   min-width: 0px;
 }
@@ -2087,6 +2099,10 @@ aside p.activeOption{
 
 .max-w-\[90vw\]{
   max-width: 90vw;
+}
+
+.max-w-\[600px\]{
+  max-width: 600px;
 }
 
 .flex-1{
@@ -2815,6 +2831,11 @@ aside p.activeOption{
 
 .bg-white\/95{
   background-color: rgb(252 252 252 / 0.95);
+}
+
+.bg-green-50{
+  --tw-bg-opacity: 1;
+  background-color: rgb(217 251 231 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gradient-to-tr{

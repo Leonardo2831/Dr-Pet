@@ -19,16 +19,19 @@
                     <% } %>
                 </div>
 
-                <div class="swiper-pagination custom-swiper-pagination"></div>
+                <% if(slides.length > 1){ %>
+                    <div class="swiper-pagination custom-swiper-pagination"></div>
+                    <div class="swiper-button-prev custom-swiper-button !left-4 lg:!left-10">
+                        <img src="/images/icons/slide/arrow-left.svg" alt="Anterior"
+                            class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
+                    </div>
+                    <div class="swiper-button-next custom-swiper-button !right-4 lg:!right-10">
+                        <img src="/images/icons/slide/arrow-right.svg" alt="Próximo"
+                            class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
+                    </div>
+                <% } %>
 
-                <div class="swiper-button-prev custom-swiper-button !left-4 lg:!left-10">
-                    <img src="/images/icons/slide/arrow-left.svg" alt="Anterior"
-                        class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
-                </div>
-                <div class="swiper-button-next custom-swiper-button !right-4 lg:!right-10">
-                    <img src="/images/icons/slide/arrow-right.svg" alt="Próximo"
-                        class="w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] transition-all duration-300">
-                </div>
+
             </div>
         </section>
 
@@ -42,47 +45,45 @@
                     </h2>
 
                     <div class="flex flex-wrap items-center justify-center gap-[50px] w-full p-5">
-                        <a href="/agenda?service=vacinacao" data-login class="service-card flex flex-col">
-                            <img src="/images/services/vacinacao.png" alt="Vacinação"
-                                class="w-full h-[300px] object-cover" />
-                            <div class="p-[30px] flex flex-col gap-[10px]">
-                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
-                                    Vacinação
-                                </h3>
-                                <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
-                                    Proteção garantida contra doenças para que
-                                    seu pet viva mais e melhor.
+                        <% if (locals.servicos && servicos.length > 0) { %>
+                            <% servicos.forEach(servico => { %>
+                                <% 
+                                    const slug = (servico.nome || '')
+                                        .toLowerCase()
+                                        .normalize('NFD')
+                                        .replace(/[\u0300-\u036f]/g, '')
+                                        .replace(/\s+e\s+/g, '-')
+                                        .replace(/\s+/g, '-')
+                                        .replace(/[^a-z0-9-]/g, '');
+                                    const defaultImg = (slug === 'banho-tosa' || slug === 'vacinacao' || slug === 'cirurgia') 
+                                        ? `/images/services/${slug}.png` 
+                                        : '/images/services/banho-tosa.png';
+                                %>
+                                <a href="/agenda?service=<%= slug %>" <%= !locals.user ? 'data-login' : '' %> class="service-card flex flex-col">
+                                    <img src="/servicos/imagem/<%= servico.id %>"
+                                        onerror="this.onerror=null; this.src='<%= defaultImg %>';"
+                                        alt="<%= servico.nome || 'Serviço' %>"
+                                        class="w-full h-[300px] object-cover" />
+                                    <div class="p-[30px] flex flex-col gap-[10px]">
+                                        <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
+                                            <%= servico.nome %>
+                                        </h3>
+                                        <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
+                                            <%= servico.descricao %>
+                                        </p>
+                                    </div>
+                                </a>
+                            <% }) %>
+                        <% } else { %>
+                            <div class="flex flex-col items-center justify-center py-12 px-6 text-center max-w-[600px] mx-auto bg-white rounded-[15px] shadow-sm border border-gray-200">
+                                <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4">
+                                    <img src="/images/icons/calendar_clock_green.svg" alt="Sem serviços" class="w-8 h-8" />
+                                </div>
+                                <p class="text-xl md:text-2xl font-medium text-gray-700 mt-3">
+                                    Infelizmente ainda não temos serviço, volte mais tarde.
                                 </p>
                             </div>
-                        </a>
-
-                        <a href="/agenda?service=banho-tosa" data-login class="service-card flex flex-col">
-                            <img src="/images/services/banho-tosa.png" alt="Banho e Tosa"
-                                class="w-full h-[300px] object-cover" />
-                            <div class="p-[30px] flex flex-col gap-[10px]">
-                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
-                                    Banho e Tosa
-                                </h3>
-                                <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
-                                    Higiene e cuidados para manter seu bichinho
-                                    sempre limpo e saudável.
-                                </p>
-                            </div>
-                        </a>
-
-                        <a href="/agenda?service=cirurgia" data-login class="service-card flex flex-col">
-                            <img src="/images/services/cirurgia.png" alt="Cirurgias"
-                                class="w-full h-[300px] object-cover" />
-                            <div class="p-[30px] flex flex-col gap-[10px]">
-                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
-                                    Cirurgias
-                                </h3>
-                                <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
-                                    Procedimentos seguros, realizados por
-                                    especialistas com equipamentos de ponta.
-                                </p>
-                            </div>
-                        </a>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -95,7 +96,7 @@
                         Gostou de nossos serviços?
                     </h3>
                     <div class="w-fit mx-auto md:mx-0">
-                        <a href="/agenda?service=banho-tosa" data-login
+                        <a href="/agenda?service=banho-tosa" <%= !locals.user ? 'data-login' : '' %>
                             class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-6 py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300">
                             AGENDE AGORA
                             <img src="/images/icons/calendar_clock.svg" alt="Agendamento"
@@ -273,11 +274,12 @@
     </main>
 
     <aside data-modal-info-menu="user" data-modal-info="home"
-        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
+        class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
     </aside>
 
     <!-- Modal de checar login -->
-    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+    <% if (!locals.user) { %>
+    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-[100] items-center justify-center p-4">
         
         <div data-login-overlay class="absolute inset-0 bg-black/60 opacity-0"></div>
 
@@ -328,6 +330,7 @@
             </div>
         </div>
     </aside>
+    <% } %>
 
 <!-- Dessa maneira passo textos específicos para o footer colocar as tag scripts no final do body para usar boas práticas de otimização de carregamento -->
 <%- include('layouts/footer', { scripts: [

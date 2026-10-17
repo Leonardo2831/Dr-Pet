@@ -1,4 +1,4 @@
-﻿<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Loja', swiper: true }) %>
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Loja', swiper: true }) %>
 
     <main>
         <figure>
@@ -103,25 +103,52 @@
                     <div
                         data-content-shop="products"
                         class="swiper product-swiper w-full overflow-hidden pb-4"
-                    ></div>
-                    <button
-                        class="group loja-swiper-button-prev hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
                     >
-                        <img
-                            src="/images/icons/slide/arrow-left.svg"
-                            alt="Anterior"
-                            class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                        />
-                    </button>
-                    <button
-                        class="group loja-swiper-button-next hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
-                    >
-                        <img
-                            src="/images/icons/slide/arrow-right.svg"
-                            alt="Próximo"
-                            class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                        />
-                    </button>
+                        <% if(products.length > 0) { %>
+                            <% products.forEach(product => { %>
+                                <a href="/products/<%= product._id %>" class="group product">
+                                    <figure class="relative aspect-square overflow-hidden shrink-0 rounded-t-[10px]">
+                                        <img src="${product.imageMain.image}" alt="${product.imageMain.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    </figure>
+                                    <div class="min-h-[200px] flex flex-col flex-grow justify-between gap-2 bg-gray-200 p-3 sm:p-4 md:p-6 rounded-b-[10px] group-hover:bg-gray-300 transition-colors">
+                                        <article class="flex flex-col gap-1 sm:gap-2">
+                                            <h3 class="text-gray-700 font-medium text-[14px] sm:text-[16px] md:text-[20px] leading-tight">
+                                                ${product.name}
+                                            </h3>
+                                            <p class="text-gray-700 font-normal text-base leading-relaxed line-clamp-2">
+                                                ${product.shortDescription}
+                                            </p>
+                                        </article>
+                                        <span class="text-green-500 font-semibold uppercase text-[14px] sm:text-[16px] md:text-[20px] mt-1 sm:mt-0">
+                                            R$ ${Number(product.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                        </span>
+                                    </div>
+                                </a>
+                            <% }) %>
+                        <% } else { %>
+                            <p class="text-center text-xl text-gray-600 font-medium">Nenhum produto encontrado.</p>
+                        <% } %>
+                    </div>
+                    <% if(products.length > 0) { %>
+                        <button
+                            class="group loja-swiper-button-prev hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
+                        >
+                            <img
+                                src="/images/icons/slide/arrow-left.svg"
+                                alt="Anterior"
+                                class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                            />
+                        </button>
+                        <button
+                            class="group loja-swiper-button-next hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 bg-white hover:bg-green-600 items-center justify-center rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 outline-none focus:ring-4 focus:ring-green-400"
+                        >
+                            <img
+                                src="/images/icons/slide/arrow-right.svg"
+                                alt="Próximo"
+                                class="w-6 h-6 invert-[0.3] group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                            />
+                        </button>
+                    <% } %>
                 </section>
                 <!-- ver se irá precisar mesmo do botão ver mais -->
                 <!-- <div class="flex justify-center mt-10">
@@ -136,11 +163,11 @@
     <aside
         data-modal-info-menu="user"
         data-modal-info="adm"
-        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"
+        class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg"
     ></aside>
 
     <!-- Modal de checar login -->
-    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+    <aside data-modal="loginRequired" class="hidden fixed inset-0 z-[100] items-center justify-center p-4">
             
         <div data-login-overlay class="absolute inset-0 bg-black/60 opacity-0"></div>
 
