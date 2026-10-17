@@ -1,5 +1,4 @@
 import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/+esm';
-import Fetch from "../utils/Fetch.js";
 import structProduct from "./components/structProductLoja.js";
 import slidesLojaConfig from "./slidesLojaConfig.js";
 
@@ -9,7 +8,6 @@ export default class ProductsLoja {
         this.inputFilter = document.querySelector(selectorInputFilter);
         this.modalTypeFilter = document.querySelector(selectorModalTypeFilter);
 
-        this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
         this.products = null;
         this.fuse = null;
         this.swiper = null;
@@ -17,14 +15,43 @@ export default class ProductsLoja {
         this.filterProducts = this.filterProducts.bind(this);
     }
 
+    loadProductsFromDOM() {
+        const slides = this.contentProductsSlides?.querySelectorAll('.swiper-slide') || [];
+        if (slides.length > 0) {
+            this.products = Array.from(slides).map(slide => {
+                const id = slide.getAttribute('data-id') || slide.dataset.id;
+                const category = slide.getAttribute('data-category') || slide.dataset.category || '';
+                const titleEl = slide.querySelector('h3');
+                const descEl = slide.querySelector('p');
+                const priceEl = slide.querySelector('span');
+                const imgEl = slide.querySelector('img');
+
+                return {
+                    id,
+                    name: titleEl?.textContent?.trim() || '',
+                    category: category,
+                    shortDescription: descEl?.textContent?.trim() || '',
+                    price: priceEl?.textContent?.replace(/[^0-9,.]/g, '') || '',
+                    imageMain: {
+                        image: imgEl?.src || '',
+                        alt: imgEl?.alt || ''
+                    }
+                };
+            });
+            this.initSearch();
+        }
+    }
+
     filterProducts(){
+        if (!this.products) return;
+
         const activeOption = this.modalTypeFilter.querySelector('.activeOption');
         const category = activeOption?.dataset.filter || 'all';
         const searchText = this.inputFilter.value.trim();
 
         let filtered = [];
 
-        if (searchText) {
+        if (searchText && this.fuse) {
             const fuseResult = this.fuse.search(searchText);
             filtered = fuseResult.map(res => res.item);
         } else {
@@ -33,7 +60,7 @@ export default class ProductsLoja {
 
         if (category !== 'all') {
             filtered = filtered.filter((product) => 
-                product.category.toLowerCase() === category.toLowerCase()
+                product.category && product.category.toLowerCase() === category.toLowerCase()
             );
         }
 
@@ -81,6 +108,7 @@ export default class ProductsLoja {
 
     // O igual define um valor padrão para o argumento caso não for definido
     initProductsShop(products = this.products){
+        if (!products) return;
         this.contentProductsSlides.innerHTML = "";
 
         if (products.length === 0) {
@@ -104,6 +132,8 @@ export default class ProductsLoja {
     }
 
     initSearch() {
+        if (!this.products) return;
+
         const configSearch = {
             keys: ['name', 'category', 'shortDescription'],
             threshold: 0.5
@@ -112,19 +142,10 @@ export default class ProductsLoja {
         this.fuse = new Fuse(this.products, configSearch);
     }
 
-    getProducts(){
-        this.fetchJson.get().then((products) => {
-            if(Array.isArray(products)) {
-                this.products = products;
-                this.initProductsShop();
-                this.initSearch();
-            }
-        });
-    }
-
     init(){
         if(this.contentProductsSlides && this.inputFilter && this.modalTypeFilter){
-            this.getProducts();
+            this.loadProductsFromDOM();
+            this.swiper = slidesLojaConfig(this.swiper);
             this.addEvents();
         }
 

@@ -59,7 +59,7 @@
                                         ? `/images/services/${slug}.png` 
                                         : '/images/services/banho-tosa.png';
                                 %>
-                                <a href="/agenda?service=<%= slug %>" data-login class="service-card flex flex-col">
+                                <a href="/agenda?service=<%= slug %>" <%= !locals.user ? 'data-login' : '' %> class="service-card flex flex-col">
                                     <img src="/servicos/imagem/<%= servico.id %>"
                                         onerror="this.onerror=null; this.src='<%= defaultImg %>';"
                                         alt="<%= servico.nome || 'Serviço' %>"
@@ -96,7 +96,7 @@
                         Gostou de nossos serviços?
                     </h3>
                     <div class="w-fit mx-auto md:mx-0">
-                        <a href="/agenda?service=banho-tosa" data-login
+                        <a href="/agenda?service=banho-tosa" <%= !locals.user ? 'data-login' : '' %>
                             class="flex items-center gap-[10px] md:gap-[15px] px-5 md:px-6 py-[12px] bg-green-400 hover:bg-green-300 text-xl md:text-2xl font-semibold text-gray-50 uppercase rounded-[10px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 outline-none focus:ring-4 focus:ring-green-300">
                             AGENDE AGORA
                             <img src="/images/icons/calendar_clock.svg" alt="Agendamento"
@@ -278,6 +278,7 @@
     </aside>
 
     <!-- Modal de checar login -->
+    <% if (!locals.user) { %>
     <aside data-modal="loginRequired" class="hidden fixed inset-0 z-[100] items-center justify-center p-4">
         
         <div data-login-overlay class="absolute inset-0 bg-black/60 opacity-0"></div>
@@ -329,6 +330,7 @@
             </div>
         </div>
     </aside>
+    <% } %>
 
 <!-- Dessa maneira passo textos específicos para o footer colocar as tag scripts no final do body para usar boas práticas de otimização de carregamento -->
 <%- include('layouts/footer', { scripts: [

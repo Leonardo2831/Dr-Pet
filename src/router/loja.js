@@ -2,7 +2,7 @@
 const router = express.Router();
 
 router.get('/loja', (req, res) => {
-    res.render('loja', {tituloDaPagina: 'Dr. Pet | Pet shop'});
+    res.render('loja', {tituloDaPagina: 'Dr. Pet | Pet shop', products: []});
 });
 
 module.exports = router;
