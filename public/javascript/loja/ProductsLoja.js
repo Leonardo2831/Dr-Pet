@@ -145,7 +145,9 @@ export default class ProductsLoja {
     init(){
         if(this.contentProductsSlides && this.inputFilter && this.modalTypeFilter){
             this.loadProductsFromDOM();
-            this.swiper = slidesLojaConfig(this.swiper);
+            if (this.contentProductsSlides.querySelector('.swiper-wrapper')) {
+                this.swiper = slidesLojaConfig(this.swiper);
+            }
             this.addEvents();
         }
 
