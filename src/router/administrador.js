@@ -1,153 +1,131 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-// IMPORTANTE: Importa a conexão com o banco de dados
 const db = require('../database/mysql');
 
-// Rota para renderizar a página do administrador
-router.get('/administrador', (req, res) => {
-    // if(req.session.usuario && req.session.usuario.tipoUsuario == 'admin') {
-    //     res.render('administrador', { slides: [], agendamentos: [], produtos: [], usuarios: [] });
-    // } else {
-    //     res.redirect('/login');
-    // }
+// Configuração simples para upload de imagens
+const upload = multer({ dest: 'public/uploads/' });
+const uploadCampos = upload.fields([
+    { name: 'main_image', maxCount: 1 },
+    { name: 'slide_images', maxCount: 10 }
+]);
 
+// ==========================================
+// ROTA PRINCIPAL DO ADMINISTRADOR (GET /administrador)
+// ==========================================
+router.get('/administrador', (req, res) => {
     const querySlides = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
-    const queryUsers = 'SELECT id, nome, email, telefone, tipo_usuario, (avatar IS NOT NULL AND LENGTH(avatar) > 0) AS has_avatar FROM usuario ORDER BY id ASC';
-    
-    db.query(querySlides, (errSlides, slides) => {
-        if (errSlides) {
-            console.error('Erro ao buscar slides:', errSlides);
-            slides = [];
-        }
-        db.query(queryUsers, (errUsers, usuarios) => {
-            if (errUsers) {
-                console.error('Erro ao buscar usuários:', errUsers);
-                usuarios = [];
-            }
-            res.render('administrador', { 
-                slides: slides || [], 
-                agendamentos: [], 
-                produtos: [],
-                usuarios: usuarios || []
+    const queryUsers = 'SELECT id, nome, email, telefone, tipo_usuario FROM usuario ORDER BY id ASC';
+    const queryProdutos = 'SELECT id, nome, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produtos ORDER BY id ASC';
+
+    db.query(querySlides, (err, slides) => {
+        db.query(queryUsers, (err, usuarios) => {
+            db.query(queryProdutos, (err, produtos) => {
+                res.render('administrador', {
+                    slides: slides || [],
+                    agendamentos: [],
+                    produtos: produtos || [],
+                    usuarios: usuarios || []
+                });
             });
         });
     });
 });
 
-// 1. LISTAR / BUSCAR PRODUTOS (GET /produtos)
-const listarProdutos = (req, res) => {
-    const { nome, categoria } = req.query;
-    
-    let query = 'SELECT * FROM produtos WHERE 1=1';
-    let params = [];
-
-    // Filtra pelo campo "Busca por nome..."
-    if (nome) {
-        query += ' AND produto LIKE ?';
-        params.push(`%${nome}%`);
-    }
-
-    // Filtra pelo dropdown "TODAS AS CATEGORIAS"
-    if (categoria && categoria !== 'TODAS AS CATEGORIAS' && categoria !== 'TODAS') {
-        query += ' AND categoria = ?';
-        params.push(categoria);
-    }
-
-    db.query(query, params, (err, results) => {
-        if (err) {
-            console.error('Erro ao buscar produtos:', err);
-            return res.status(500).json({ message: 'Erro no servidor.' });
-        }
+// ==========================================
+// 1. LISTAR PRODUTOS (GET /produtos)
+// ==========================================
+router.get('/produtos', (req, res) => {
+    // Adicionado 'categoria' na listagem
+    const query = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produtos ORDER BY id ASC';
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).json({ erro: "Erro ao buscar produtos." });
         return res.status(200).json(results);
     });
-};
+});
 
-router.get('/produtos', listarProdutos);
-router.get('/administrador/produtos', listarProdutos); // Mantém compatibilidade com a URL antiga
+// ==========================================
+// 2. CADASTRAR PRODUTO (POST /produtos)
+// ==========================================
+router.post('/produtos', uploadCampos, (req, res) => {
+    console.log("--> REQ.BODY RECEBIDO:", req.body);
+    console.log("--> REQ.FILES RECEBIDOS:", req.files);
 
-// 2. BUSCAR UM ÚNICO PRODUTO POR ID (GET /produtos/:id)
-const buscarProdutoPorId = (req, res) => {
-    const { id } = req.params;
-    const query = 'SELECT * FROM produtos WHERE id = ?';
+    const nome = req.body.nome || req.body.produto || req.body.title || req.body.product_name || req.body.name || '';
+    
+    const categoria = req.body.categoria || req.body.category || '';
+    const precoBruto = req.body.preco || req.body.price || req.body.valor || 0;
+    const preco = parseFloat(precoBruto) || 0.00;
+    const short_description = req.body.short_description || req.body.descricao_curta || req.body.desc_curta || req.body.shortDescription || req.body.description_short || '';
+    const long_description = req.body.long_description || req.body.descricao_longa || req.body.desc_longa || req.body.longDescription || req.body.description_long || '';
 
-    db.query(query, [id], (err, result) => {
+    let main_image = '';
+    if (req.files && req.files['main_image']) {
+        main_image = '/uploads/' + req.files['main_image'][0].filename;
+    } else if (req.body.main_image || req.body.image) {
+        main_image = req.body.main_image || req.body.image;
+    }
+    
+    const query = 'INSERT INTO produtos (nome, categoria, preco, short_description, long_description, main_image, main_alt_image) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    
+    db.query(query, [nome, categoria, preco, short_description, long_description, main_image, nome], (err, results) => {
         if (err) {
-            console.error('Erro ao buscar produto:', err);
-            return res.status(500).json({ message: 'Erro no servidor.' });
+            console.error("Erro ao cadastrar produto no MySQL:", err);
+            return res.status(500).json({ erro: "Erro ao cadastrar produto." });
         }
-        if (result.length === 0) {
-            return res.status(404).json({ message: 'Produto não encontrado.' });
-        }
-        return res.status(200).json(result[0]);
+        return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: results.insertId });
     });
-};
+});
 
-router.get('/produtos/:id', buscarProdutoPorId);
-router.get('/administrador/produtos/:id', buscarProdutoPorId);
+// ==========================================
+// 3. EDITAR PRODUTO (PUT /produtos/:id)
+// ==========================================
+router.put('/produtos/:id', uploadCampos, (req, res) => {
+    const { id } = req.params;
 
-// 3. ADICIONAR PRODUTO (POST /produtos)
-const salvarProduto = (req, res) => {
-    const { produto, categoria, preco, descricao_longa, descricao_curta } = req.body;
-
-    const query = 'INSERT INTO produtos (produto, categoria, preco, descricao_longa, descricao_curta) VALUES (?, ?, ?, ?, ?)';
-
-    db.query(query, [produto, categoria, preco, descricao_longa, descricao_curta], (erro, resultado) => {
-        if (erro) {
-            console.error('Erro ao CADASTRAR produto:', erro);
-            return res.status(500).json({ message: 'Erro no servidor.' });
+    // Busca o produto atual na base de dados para preservar o que não foi enviado
+    db.query('SELECT * FROM produtos WHERE id = ?', [id], (err, rows) => {
+        if (err || rows.length === 0) {
+            return res.status(404).json({ erro: "Produto não encontrado." });
         }
-        
-        console.log('Produto inserido com sucesso:', resultado);
-        return res.status(201).json({ 
-            message: 'Produto cadastrado com sucesso!', 
-            id: resultado.insertId 
+
+        const produtoAtual = rows[0];
+
+        const nome = req.body.nome || req.body.produto || req.body.name || produtoAtual.nome;
+        const categoria = req.body.categoria || req.body.category || produtoAtual.categoria;
+        const preco = req.body.preco !== undefined && req.body.preco !== '' ? req.body.preco : produtoAtual.preco;
+        const short_description = req.body.short_description || req.body.descricao_curta || produtoAtual.short_description;
+        const long_description = req.body.long_description || req.body.descricao_longa || produtoAtual.long_description;
+
+        const query = `
+            UPDATE produtos 
+            SET nome = ?, categoria = ?, preco = ?, short_description = ?, long_description = ? 
+            WHERE id = ?
+        `;
+
+        db.query(query, [nome, categoria, preco, short_description, long_description, id], (err, results) => {
+            if (err) {
+                console.error("Erro ao atualizar produto:", err);
+                return res.status(500).json({ erro: "Erro ao atualizar produto." });
+            }
+            return res.status(200).json({ mensagem: "Produto atualizado com sucesso!" });
         });
     });
-};
+});
 
-router.post('/produtos', salvarProduto);
-router.post('/administrador/produtos', salvarProduto);
-
-// 4. EDITAR PRODUTO (PUT /produtos/:id)
-const editarProduto = (req, res) => {
+// ==========================================
+// 4. EXCLUIR PRODUTO (DELETE /produtos/:id)
+// ==========================================
+router.delete('/produtos/:id', (req, res) => {
     const { id } = req.params;
-    const { produto, categoria, preco, descricao_longa, descricao_curta } = req.body;
-
-    const query = 'UPDATE produtos SET produto = ?, categoria = ?, preco = ?, descricao_longa = ?, descricao_curta = ? WHERE id = ?';
-
-    db.query(query, [produto, categoria, preco, descricao_longa, descricao_curta, id], (erro, resultado) => {
-        if (erro) {
-            console.error('Erro ao EDITAR produto:', erro);
-            return res.status(500).json({ message: 'Erro no servidor.' });
-        }
-
-        console.log(`Produto ID ${id} atualizado com sucesso!`, resultado);
-        return res.status(200).json({ message: 'Produto atualizado com sucesso!' });
+    
+    db.query('DELETE FROM produto_image WHERE fk_produto = ?', [id], () => {
+        db.query('DELETE FROM produtos WHERE id = ?', [id], (err, results) => {
+            if (err) return res.status(500).json({ erro: "Erro ao excluir produto." });
+            return res.status(200).json({ mensagem: "Produto excluído com sucesso!" });
+        });
     });
-};
-
-router.put('/produtos/:id', editarProduto);
-router.put('/administrador/produtos/:id', editarProduto);
-
-// 5. EXCLUIR PRODUTO (DELETE /produtos/:id)
-const excluirProduto = (req, res) => {
-    const { id } = req.params;
-    const query = 'DELETE FROM produtos WHERE id = ?';
-
-    db.query(query, [id], (err, result) => {
-        if (err) {
-            console.error('Erro ao excluir produto:', err);
-            return res.status(500).json({ message: 'Erro no Servidor.' });
-        }
-        console.log(`Produto ID ${id} excluído com sucesso!`, result);
-        return res.status(200).json({ message: 'Produto excluído!' });
-    });
-};
-
-router.delete('/produtos/:id', excluirProduto);
-router.delete('/administrador/produtos/:id', excluirProduto);
-
+});
 
 const storageSlides = multer.memoryStorage()
 const uploadSlide = multer({ storage: storageSlides })

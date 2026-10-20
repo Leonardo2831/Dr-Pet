@@ -77,6 +77,7 @@ CREATE TABLE produto (
     id INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
+    categoria VARCHAR (100) NOT NULL,
     short_description VARCHAR(80) NOT NULL,
     long_description VARCHAR(1000) NOT NULL,
     main_image BLOB NOT NULL,

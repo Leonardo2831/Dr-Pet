@@ -505,7 +505,7 @@
                                                     <%= produto.preco %>
                                                 </td>
                                                 <td class="max-w-0 truncate w-[25%]">
-                                                    <%= produto.descricao_longa %>
+                                                    <%- produto.descricao_longa %>
                                                 </td>
                                                 <td class="max-w-0 truncate w-[25%]">
                                                     <%= produto.descricao_curta %>
@@ -648,22 +648,13 @@
                         <label for="select-product-category"
                             class="font-sans font-semibold text-base md:text-lg text-gray-700">Categoria</label>
                         <div class="relative">
-                            <select data-select-new="productCategory" id="select-product-category" name="category"
-                                required
-                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all">
-                                <option value="" disabled selected>
-                                    Selecione uma categoria
-                                </option>
+                           <select data-select-new="productCategory" id="select-product-category" name="categoria" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600">
+                                <option value="" disabled selected>Selecione uma categoria</option>
                                 <option value="Ração">Ração</option>
-                                <option value="Brinquedos">
-                                    Brinquedos
-                                </option>
-                                <option value="Medicamentos">
-                                    Medicamentos
-                                </option>
-                                <option value="Acessórios">
-                                    Acessórios
-                                </option>
+                                <option value="Brinquedos">Brinquedos</option>
+                                <option value="Medicamentos">Medicamentos</option>
+                                <option value="Acessórios">Acessórios</option>
                                 <option value="Higiene">Higiene</option>
                             </select>
                             <img src="/images/icons/arrow-down.svg" alt="Seta para baixo"
