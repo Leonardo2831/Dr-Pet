@@ -187,6 +187,29 @@ export default class AppointmentRequests {
             .forEach(schedule => this.content.appendChild(this.createCard(schedule)));
     }
 
+    addEvents() {
+        if (!this.content) return;
+
+        this.content.addEventListener('click', (event) => {
+            const button = event.target.closest('[data-appointment-action], [data-button="acceptAppointment"], [data-button="refuseAppointment"]');
+            if (!button) return;
+
+            const isAccept = button.matches('[data-button="acceptAppointment"]') || button.getAttribute('data-appointment-action') === 'accepted';
+            const type = isAccept ? 'accepted' : 'rejected';
+            const card = button.closest('[data-id]') || button.closest('article');
+            const id = card?.getAttribute('data-id');
+            const actions = button.closest('[data-appointment-actions]') || button.parentElement;
+
+            if (id && actions) {
+                this.saveStatus(id, type);
+                this.renderStatus(actions, type);
+                card.classList.remove('border-gray-200', 'border-green-400');
+                card.style.borderTopColor = isAccept ? '' : '#800020';
+                if (isAccept) card.classList.add('border-green-400');
+            }
+        });
+    }
+
     async loadAppointments() {
         const schedules = await this.fetchAgenda.get();
 
@@ -199,7 +222,9 @@ export default class AppointmentRequests {
     }
 
     init() {
-        if (this.content) this.loadAppointments();
+        if (this.content) {
+            this.addEvents();
+        }
         return this;
     }
 }

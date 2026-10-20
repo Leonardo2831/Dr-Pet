@@ -57,7 +57,7 @@ export default class Agenda {
         this.inputDate.value = `${year}-${month}-${day}`;
     }
 
-    filterSchedule() {
+    async filterSchedule() {
         if (!this.inputDate.value || this.inputDate.value < this.inputDate.min) {
             this.inputDate.classList.add('error');
             this.inputDate.addEventListener('click', () => {
@@ -66,12 +66,21 @@ export default class Agenda {
             return;
         }
 
+        if (!this.schedules) {
+            const schedules = await this.fetchJson.get();
+            if (Array.isArray(schedules)) {
+                this.schedules = schedules;
+            } else {
+                this.schedules = [];
+            }
+        }
+
         this.contentSchedule.innerHTML = "";
 
         if (this.inputDate.value && this.selectService.value) {
             this.schedules.forEach((scheduleObject) => {
                 const matchDate = scheduleObject.date == this.inputDate.value;
-                const matchService = this.selectService.value === 'all' || scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase();
+                const matchService = this.selectService.value === 'all' || (scheduleObject.service && scheduleObject.service.name && scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase());
 
                 if (matchDate && matchService) {
                     this.createStructSchedule(scheduleObject);
@@ -89,18 +98,18 @@ export default class Agenda {
     }
 
     getSchedules() {
-        this.fetchJson.get().then((schedules) => {
+        return this.fetchJson.get().then((schedules) => {
             if (Array.isArray(schedules)) {
                 this.schedules = schedules;
                 this.scheduleInit();
             }
+            return schedules;
         });
     }
 
     init() {
         if (this.contentSchedule && this.inputDate && this.selectService && this.buttonSearchSchedule) {
             this.inputInit();
-            this.getSchedules();
             this.addEvents();
         }
 

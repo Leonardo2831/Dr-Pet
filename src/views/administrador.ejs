@@ -1,4 +1,4 @@
-<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador', quill: true }) %>
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Administrador' , quill: true }) %>
 
     <!-- transformar navegação em rotas -->
     <div class="bg-gray-50 min-h-screen">
@@ -38,32 +38,32 @@
             <section id="section-slides" data-tab-content
                 class="animate-fadeLeft opacity-0 w-full max-w-[1400px] mt-10 md:mt-20">
                 <picture data-content-slides
-                class="mt-5 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
-                    <% if(slides.length !== 0) { %> 
-                        <% slides.forEach(slide => { %>
-                            <figure 
-                                style="background-image: url('/slides/imagem/<%= slide.id %>');"
-                                aria-label="<%= slide.alt || 'Slide' %>"
-                                data-content-slides="<%= slide.id %>"
-                                class="animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat"
-                            >
+                    class="mt-5 md:mt-10 flex items-center gap-10 py-5 w-full overflow-x-auto flex-nowrap md:flex-wrap md:overflow-visible">
+                    <% if(slides.length !==0) { %>
+                        <% slides.forEach(slide=> { %>
+                            <figure style="background-image: url('/slides/imagem/<%= slide.id %>');"
+                                aria-label="<%= slide.alt || 'Slide' %>" data-content-slides="<%= slide.id %>"
+                                class="animate-fadeLeft relative w-[280px] h-[148px] rounded-[10px] shrink-0 bg-cover bg-center bg-no-repeat">
                                 <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
-                                
-                                <button type="button" data-id="<%= slide.id %>" class="delete-slide-btn absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm cursor-pointer">
-                                    <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide" class="w-5 h-5 pointer-events-none">
+
+                                <button type="button" data-id="<%= slide.id %>"
+                                    class="delete-slide-btn absolute -top-[12px] -right-[12px] flex items-center justify-center p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors z-10 shadow-sm cursor-pointer">
+                                    <img src="../images/icons/administrador/delete-slide.svg" alt="Remover slide"
+                                        class="w-5 h-5 pointer-events-none">
                                 </button>
                             </figure>
-                        <% }) %>
-                    <% } %>
+                            <% }) %>
+                                <% } %>
 
-                    <label type="file" data-add-slide for="button-add-slide-file"
-                        class="cursor-pointer max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
-                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar" class="w-10 h-10" />
-                        <span class="font-sans font-semibold text-[20px] leading-[25px] text-green-600">
-                            Adicionar Slide
-                        </span>
-                        <input type="file" class="hidden overflow-hidden" id="button-add-slide-file" />
-                    </label>
+                                    <label type="file" data-add-slide for="button-add-slide-file"
+                                        class="cursor-pointer max-w-[280px] min-w-[200px] h-[148px] w-full flex flex-col items-center justify-center gap-5 px-[30px] py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:bg-gray-200 transition-colors shrink-0">
+                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar"
+                                            class="w-10 h-10" />
+                                        <span class="font-sans font-semibold text-[20px] leading-[25px] text-green-600">
+                                            Adicionar Slide
+                                        </span>
+                                        <input type="file" class="hidden overflow-hidden" id="button-add-slide-file" />
+                                    </label>
                 </picture>
             </section>
 
@@ -94,18 +94,18 @@
                             <div class="relative w-[280px]">
                                 <select data-select="service"
                                     class="px-5 py-[10px] w-full border-2 border-green-600 rounded-[5px] shadow-sm font-medium text-lg md:text-[22px] leading-[27px] text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
-                                    <% if (locals.servicos && servicos.length > 0) { %>
+                                    <% if (locals.servicos && servicos.length> 0) { %>
                                         <option value="all" selected>
                                             Todas as Opções
                                         </option>
-                                        <% servicos.forEach(servico => { %>
+                                        <% servicos.forEach(servico=> { %>
                                             <option value="<%= servico.id %>">
                                                 <%= servico.nome %>
                                             </option>
-                                        <% }) %>
-                                    <% } else { %>
-                                        <option value="" disabled selected>Nenhum Serviço</option>
-                                    <% } %>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <option value="" disabled selected>Nenhum Serviço</option>
+                                                    <% } %>
                                 </select>
                                 <img src="/images/icons/arrow-down.svg" alt="Seta"
                                     class="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none" />
@@ -124,75 +124,85 @@
 
                 <div data-content-schedule
                     class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
-                    <% 
-                        const serviceNames = {
-                            'banho-tosa': 'Banho e Tosa',
-                            'vacinacao': 'Vacinação',
-                            'cirurgia': 'Cirurgia'
-                        };
-                        const today = new Date();
-                        const yearToday = today.getFullYear();
-                        const monthToday = String(today.getMonth() + 1).padStart(2, '0');
-                        const dayToday = String(today.getDate()).padStart(2, '0');
-                        const formattedToday = `${yearToday}-${monthToday}-${dayToday}`;
-                    %>
-                    <% if (agendamentos.length > 0) { %>
-                        <% agendamentos.forEach(agendamento => { %>
-                            <% 
-                                const [year, month, day] = (agendamento.date ? agendamento.date.split('-') : ['', '', '']);
-                                const formatDate = (day && month && year) ? `${day}/${month}/${year}` : (agendamento.date || '');
-                                const isFutureOrToday = agendamento.date >= formattedToday;
-                                const serviceName = (agendamento.service && serviceNames[agendamento.service.name]) || (agendamento.service ? agendamento.service.name : '');
-                            %>
-                            <div data-id="<%= agendamento.id %>" class="flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
-                                <div class="flex flex-row justify-between items-start <%= isFutureOrToday ? 'pb-5' : '' %> w-full">
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex flex-col">
-                                            <span class="font-semibold text-base md:text-lg text-gray-800">
-                                                <%= agendamento.user ? agendamento.user.username : '' %> - <span class="whitespace-nowrap"><%= formatDate %></span>
-                                            </span>
-                                            <span class="font-medium text-base text-gray-700">
-                                                Pet: <%= agendamento.petAgendado ? agendamento.petAgendado.name : '' %>
+                    <% const serviceNames={ 'banho-tosa' : 'Banho e Tosa' , 'vacinacao' : 'Vacinação' , 'cirurgia'
+                        : 'Cirurgia' }; const today=new Date(); const yearToday=today.getFullYear(); const
+                        monthToday=String(today.getMonth() + 1).padStart(2, '0' ); const
+                        dayToday=String(today.getDate()).padStart(2, '0' ); const
+                        formattedToday=`${yearToday}-${monthToday}-${dayToday}`; %>
+                        <% if (agendamentos.length> 0) { %>
+                            <% agendamentos.forEach(agendamento=> { %>
+                                <% const [year, month, day]=(agendamento.date ? agendamento.date.split('-') : ['', ''
+                                    , '' ]); const formatDate=(day && month && year) ? `${day}/${month}/${year}` :
+                                    (agendamento.date || '' ); const isFutureOrToday=agendamento.date>= formattedToday;
+                                    const serviceName = (agendamento.service && serviceNames[agendamento.service.name])
+                                    || (agendamento.service ? agendamento.service.name : '');
+                                    %>
+                                    <div data-id="<%= agendamento.id %>"
+                                        class="flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                                        <div
+                                            class="flex flex-row justify-between items-start <%= isFutureOrToday ? 'pb-5' : '' %> w-full">
+                                            <div class="flex flex-col gap-2">
+                                                <div class="flex flex-col">
+                                                    <span class="font-semibold text-base md:text-lg text-gray-800">
+                                                        <%= agendamento.user ? agendamento.user.username : '' %> - <span
+                                                                class="whitespace-nowrap">
+                                                                <%= formatDate %>
+                                                            </span>
+                                                    </span>
+                                                    <span class="font-medium text-base text-gray-700">
+                                                        Pet: <%= agendamento.petAgendado ? agendamento.petAgendado.name
+                                                            : '' %>
+                                                    </span>
+                                                </div>
+                                                <div class="flex flex-col">
+                                                    <span class="font-normal text-base text-gray-700">
+                                                        <span class="font-medium">Serviço:</span>
+                                                        <%= serviceName %>
+                                                    </span>
+                                                    <% if (agendamento.service && agendamento.service.observations) { %>
+                                                        <span class="font-normal text-base text-gray-700">
+                                                            <span class="font-medium">Descrição:</span>
+                                                            <%= agendamento.service.observations %>
+                                                        </span>
+                                                        <% } %>
+                                                            <span class="font-normal text-base text-gray-700">
+                                                                <span class="font-medium">Buscar em casa:</span>
+                                                                <%= agendamento.buscarResidencia ? "Sim" : "Não" %>
+                                                            </span>
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
+                                                <%= agendamento.hour %>
                                             </span>
                                         </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-normal text-base text-gray-700">
-                                                <span class="font-medium">Serviço:</span> <%= serviceName %>
-                                            </span>
-                                            <% if (agendamento.service && agendamento.service.observations) { %>
-                                                <span class="font-normal text-base text-gray-700">
-                                                    <span class="font-medium">Descrição:</span> <%= agendamento.service.observations %>
-                                                </span>
-                                            <% } %>
-                                            <span class="font-normal text-base text-gray-700">
-                                                <span class="font-medium">Buscar em casa:</span> <%= agendamento.buscarResidencia ? "Sim" : "Não" %>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <span class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
-                                        <%= agendamento.hour %>
-                                    </span>
-                                </div>
 
-                                <% if (isFutureOrToday) { %>
-                                    <div class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
-                                        <button type="button" data-button="cancelSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
-                                            <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
-                                            <img src="../images/icons/administrador/cancel.svg" alt="Cancelar" class="w-4 h-4 md:w-5 md:h-5">
-                                        </button>
-                                        <button type="button" data-button="editSchedule" class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
-                                            <span class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
-                                            <img src="../images/icons/administrador/edit-gray.svg" alt="Editar" class="w-4 h-4 md:w-5 md:h-5">
-                                        </button>
+                                        <% if (isFutureOrToday) { %>
+                                            <div
+                                                class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
+                                                <button type="button" data-button="cancelSchedule"
+                                                    class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
+                                                    <span
+                                                        class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
+                                                    <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
+                                                        class="w-4 h-4 md:w-5 md:h-5">
+                                                </button>
+                                                <button type="button" data-button="editSchedule"
+                                                    class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
+                                                    <span
+                                                        class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
+                                                    <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
+                                                        class="w-4 h-4 md:w-5 md:h-5">
+                                                </button>
+                                            </div>
+                                            <% } %>
                                     </div>
-                                <% } %>
-                            </div>
-                        <% }) %>
-                    <% } else { %>
-                        <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">
-                            Não há nenhum horário para esse dia e este serviço.
-                        </p>
-                    <% } %>
+                                    <% }) %>
+                                        <% } else { %>
+                                            <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">
+                                                Não há nenhum horário para esse dia e este serviço.
+                                            </p>
+                                            <% } %>
                 </div>
 
                 <div class="mt-12 md:mt-20 flex flex-col gap-6 w-full">
@@ -206,10 +216,13 @@
                         </p>
                     </div>
 
-                    <div class="relative grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-8 p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
+                    <div
+                        class="relative grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-8 p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
 
-                        <input type="radio" name="servico-modo" id="servico-modo-criar" value="criar" class="peer/criar sr-only" checked />
-                        <input type="radio" name="servico-modo" id="servico-modo-atualizar" value="atualizar" class="peer/atualizar sr-only" />
+                        <input type="radio" name="servico-modo" id="servico-modo-criar" value="criar"
+                            class="peer/criar sr-only" checked />
+                        <input type="radio" name="servico-modo" id="servico-modo-atualizar" value="atualizar"
+                            class="peer/atualizar sr-only" />
 
                         <label for="servico-modo-criar"
                             class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/criar:bg-green-600 peer-checked/criar:text-gray-50 peer-checked/criar:hover:bg-green-700 peer-checked/criar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/criar:ring-4 peer-focus-visible/criar:ring-green-600/50">
@@ -221,7 +234,8 @@
                         </label>
 
                         <div class="hidden col-span-2 flex-col gap-6 peer-checked/criar:flex animate-fadeItem">
-                            <form action="/administrador/servicos/criar" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6 w-full">
+                            <form action="/administrador/servicos/criar" method="POST" enctype="multipart/form-data"
+                                class="flex flex-col gap-6 w-full">
 
                                 <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
                                     <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
@@ -229,7 +243,8 @@
                                             class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                             Nome do Serviço
                                         </label>
-                                        <input type="text" maxlength="16" id="novo-servico-nome" name="nome" placeholder="Ex: Tosa Higiênica" required
+                                        <input type="text" maxlength="16" id="novo-servico-nome" name="nome"
+                                            placeholder="Ex: Tosa Higiênica" required
                                             class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
                                     </div>
 
@@ -238,7 +253,8 @@
                                             class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                             Duração (min)
                                         </label>
-                                        <input type="text" maxlength="8" id="novo-servico-duracao" name="duracao" placeholder="Ex: 60 min" required
+                                        <input type="text" maxlength="8" id="novo-servico-duracao" name="duracao"
+                                            placeholder="Ex: 60 min" required
                                             class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
                                     </div>
 
@@ -247,7 +263,8 @@
                                             class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                             Preço (R$)
                                         </label>
-                                        <input type="text" maxlength="11" id="novo-servico-preco" name="preco" placeholder="R$ 0,00" required
+                                        <input type="text" maxlength="11" id="novo-servico-preco" name="preco"
+                                            placeholder="R$ 0,00" required
                                             class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
                                     </div>
                                 </div>
@@ -257,8 +274,8 @@
                                         class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                         Descrição
                                     </label>
-                                    <textarea id="novo-servico-descricao" name="descricao" maxlength="500" rows="4" required
-                                        placeholder="Descreva o que está incluso neste serviço..."
+                                    <textarea id="novo-servico-descricao" name="descricao" maxlength="500" rows="4"
+                                        required placeholder="Descreva o que está incluso neste serviço..."
                                         class="px-5 py-3 w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none resize-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400"></textarea>
                                 </div>
 
@@ -266,11 +283,14 @@
                                     <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                         Imagem do Serviço
                                     </span>
-                                    <input type="file" id="novo-servico-imagem" name="imagem" accept="image/*" required class="peer sr-only" />
+                                    <input type="file" id="novo-servico-imagem" name="imagem" accept="image/*" required
+                                        class="peer sr-only" />
                                     <label for="novo-servico-imagem"
                                         class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-colors">
-                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem" class="w-8 h-8 opacity-60" />
-                                        <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
+                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                                            class="w-8 h-8 opacity-60" />
+                                        <span
+                                            class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
                                             Clique para selecionar a imagem do serviço
                                         </span>
                                     </label>
@@ -278,7 +298,8 @@
 
                                 <button type="submit"
                                     class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto md:self-end">
-                                    <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
+                                    <span
+                                        class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
                                         Cadastrar Serviço
                                     </span>
                                 </button>
@@ -286,7 +307,8 @@
                         </div>
 
                         <div class="hidden col-span-2 flex-col gap-6 peer-checked/atualizar:flex animate-fadeItem">
-                            <form action="/administrador/servicos/atualizar" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6 w-full">
+                            <form action="/administrador/servicos/atualizar" method="POST" enctype="multipart/form-data"
+                                class="flex flex-col gap-6 w-full">
 
                                 <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
                                     <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
@@ -298,13 +320,13 @@
                                             <select id="servico-select" name="servicoId" required
                                                 class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
                                                 <option value="" disabled selected>Selecione um serviço...</option>
-                                                <% if (locals.servicos && servicos.length > 0) { %>
-                                                    <% servicos.forEach(servico => { %>
+                                                <% if (locals.servicos && servicos.length> 0) { %>
+                                                    <% servicos.forEach(servico=> { %>
                                                         <option value="<%= servico.id %>">
                                                             <%= servico.nome %>
                                                         </option>
-                                                    <% }) %>
-                                                <% } %>
+                                                        <% }) %>
+                                                            <% } %>
                                             </select>
                                             <img src="/images/icons/arrow-down.svg"
                                                 class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70"
@@ -317,7 +339,8 @@
                                             class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                             Nova Duração (min)
                                         </label>
-                                        <input type="text" maxlength="8" id="tempo-input" name="duracao" placeholder="Ex: 90 min" required
+                                        <input type="text" maxlength="8" id="tempo-input" name="duracao"
+                                            placeholder="Ex: 90 min" required
                                             class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
                                     </div>
 
@@ -326,7 +349,8 @@
                                             class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                             Novo Preço (R$)
                                         </label>
-                                        <input type="text" maxlength="11" id="preco-input" name="preco" placeholder="R$ 0,00" required
+                                        <input type="text" maxlength="11" id="preco-input" name="preco"
+                                            placeholder="R$ 0,00" required
                                             class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
                                     </div>
                                 </div>
@@ -345,11 +369,14 @@
                                     <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
                                         Nova Imagem do Serviço
                                     </span>
-                                    <input type="file" id="atualizar-servico-imagem" name="imagem" accept="image/*" class="peer sr-only" />
+                                    <input type="file" id="atualizar-servico-imagem" name="imagem" accept="image/*"
+                                        class="peer sr-only" />
                                     <label for="atualizar-servico-imagem"
                                         class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-colors">
-                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem" class="w-8 h-8 opacity-60" />
-                                        <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
+                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                                            class="w-8 h-8 opacity-60" />
+                                        <span
+                                            class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
                                             Clique para trocar a imagem (opcional, mantém a atual se vazio)
                                         </span>
                                     </label>
@@ -357,7 +384,8 @@
 
                                 <button type="submit"
                                     class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto md:self-end">
-                                    <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
+                                    <span
+                                        class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
                                         Atualizar Serviço
                                     </span>
                                 </button>
@@ -371,8 +399,7 @@
             <section id="section-agendamentos" data-tab-content
                 class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
                 <div class="flex flex-col gap-2">
-                    <h2
-                        class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700">
+                    <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700">
                         Solicitações de agendamento
                     </h2>
                     <p class="font-sans font-medium text-base md:text-lg text-gray-600">
@@ -380,10 +407,10 @@
                     </p>
                 </div>
 
-                <div data-content-appointment-requests
-                    class="mt-6 md:mt-10 grid grid-cols-1 gap-5 w-full"
+                <div data-content-appointment-requests class="mt-6 md:mt-10 grid grid-cols-1 gap-5 w-full"
                     aria-live="polite">
-                    <div class="flex items-center justify-center p-8 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
+                    <div
+                        class="flex items-center justify-center p-8 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
                         <p class="font-sans font-semibold text-lg text-gray-600 text-center">
                             Carregando agendamentos...
                         </p>
@@ -416,8 +443,7 @@
                             class="relative flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
                             <input data-input="filterProduct" type="text" placeholder="Busca por nome..."
                                 class="bg-transparent w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500" />
-                            <img src="/images/icons/search.svg" alt="Buscar"
-                                class="w-6 h-6 md:w-[32px] md:h-[33px]" />
+                            <img src="/images/icons/search.svg" alt="Buscar" class="w-6 h-6 md:w-[32px] md:h-[33px]" />
                         </div>
 
                         <div class="relative shrink-0 min-w-fit md:min-w-[400px] w-full md:w-auto">
@@ -459,31 +485,48 @@
                                 </tr>
                             </thead>
                             <tbody data-content-products="table">
-                                <% if (!locals.produtos || produtos.length === 0) { %>
+                                <% if (!locals.produtos || produtos.length===0) { %>
                                     <tr>
-                                        <td colspan="7" class="min-w-[1200px] xl:min-w-[1400px] text-center p-6 text-gray-500 font-medium text-lg">Nenhum produto encontrado.</td>
+                                        <td colspan="7"
+                                            class="min-w-[1200px] xl:min-w-[1400px] text-center p-6 text-gray-500 font-medium text-lg">
+                                            Nenhum produto encontrado.</td>
                                     </tr>
-                                <% } else { %>
-                                   <% produtos.forEach(produto => { %>
-                                        <tr data-id="<%= produto.id %>" class="animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
-                                            <td class="max-w-0 truncate w-[25%]"><%= produto.nome %></td>
-                                            <td class="capitalize"><%= produto.categoria %></td>
-                                            <td><%= produto.preco %></td>
-                                            <td class="max-w-0 truncate w-[25%]"><%= produto.descricao_longa %></td>
-                                            <td class="max-w-0 truncate w-[25%]"><%= produto.descricao_curta %></td>
-                                            <td class="py-5 text-center">
-                                                <button data-button="editProduct" class="hover:opacity-80 transition-opacity mx-auto flex">
-                                                    <img src="../images/icons/administrador/edit-blue.svg" alt="Editar" class="w-6 h-6 md:w-[35px] md:h-[38px]">
-                                                </button>
-                                            </td>
-                                            <td class="py-5 text-center">
-                                                <button data-button="deleteProduct" class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
-                                                    <img src="../images/icons/administrador/delete-product.svg" alt="Excluir" class="w-6 h-6 md:w-[37px] md:h-[38px]">
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <% }) %>
-                                <% } %>
+                                    <% } else { %>
+                                        <% produtos.forEach(produto=> { %>
+                                            <tr data-id="<%= produto.id %>"
+                                                class="animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
+                                                <td class="max-w-0 truncate w-[25%]">
+                                                    <%= produto.nome %>
+                                                </td>
+                                                <td class="capitalize">
+                                                    <%= produto.categoria %>
+                                                </td>
+                                                <td>
+                                                    <%= produto.preco %>
+                                                </td>
+                                                <td class="max-w-0 truncate w-[25%]">
+                                                    <%- produto.descricao_longa %>
+                                                </td>
+                                                <td class="max-w-0 truncate w-[25%]">
+                                                    <%= produto.descricao_curta %>
+                                                </td>
+                                                <td class="py-5 text-center">
+                                                    <button data-button="editProduct"
+                                                        class="hover:opacity-80 transition-opacity mx-auto flex">
+                                                        <img src="../images/icons/administrador/edit-blue.svg"
+                                                            alt="Editar" class="w-6 h-6 md:w-[35px] md:h-[38px]">
+                                                    </button>
+                                                </td>
+                                                <td class="py-5 text-center">
+                                                    <button data-button="deleteProduct"
+                                                        class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                                        <img src="../images/icons/administrador/delete-product.svg"
+                                                            alt="Excluir" class="w-6 h-6 md:w-[37px] md:h-[38px]">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                                <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -492,14 +535,93 @@
 
             <section id="section-relatorios" data-tab-content
                 class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
-                
+                <div class="w-full flex flex-col sm:flex-row items-start sm:items-center w-full gap-6">
+                    <h2 class="font-sans font-bold text-2xl md:text-3xl text-gray-900 whitespace-nowrap">
+                        Gestão de Usuários
+                    </h2>
+
+                    <div
+                        class="relative flex items-center w-full bg-white border border-gray-300 rounded-[8px] px-3.5 py-2 focus-within:border-green-600 focus-within:ring-2 focus-within:ring-green-600/20 transition-all shadow-xs">
+                        <svg class="w-4 h-4 text-gray-400 mr-2.5 shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input data-input="searchUsers" type="text" placeholder="Pesquisar usuários..."
+                            class="w-full bg-transparent outline-none font-sans text-sm md:text-base text-gray-700 placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="mt-4 w-full bg-white rounded-[12px] border border-gray-300 overflow-hidden shadow-sm">
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px] animate-fadeLeft">
+                            <thead>
+                                <tr class="border-b border-gray-300 bg-white">
+                                    <th
+                                        class="py-3.5 px-6 font-sans font-bold text-base md:text-lg text-gray-900 w-[90px] text-center">
+                                        Foto</th>
+                                    <th class="py-3.5 px-6 font-sans font-bold text-base md:text-lg text-gray-900">Nome
+                                        Completo</th>
+                                    <th class="py-3.5 px-6 font-sans font-bold text-base md:text-lg text-gray-900">
+                                        E-mail</th>
+                                    <th class="py-3.5 px-6 font-sans font-bold text-base md:text-lg text-gray-900">
+                                        Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody data-content-users="table">
+                                <% if (locals.usuarios && usuarios.length > 0) { %>
+                                    <% usuarios.slice(0, 10).forEach((user, index) => { %>
+                                        <% 
+                                            const cleanPhone = String(user.telefone || '').replace(/\D/g, '');
+                                            const formattedPhone = cleanPhone.length === 11 ? `(${cleanPhone.slice(0, 2)}) ${cleanPhone.slice(2, 7)}-${cleanPhone.slice(7)}` : (cleanPhone.length === 10 ? `(${cleanPhone.slice(0, 2)}) ${cleanPhone.slice(2, 6)}-${cleanPhone.slice(6)}` : user.telefone);
+                                        %>
+                                        <tr class="<%= index % 2 === 1 ? 'bg-row-zebra' : 'bg-white' %> hover:opacity-90 transition-colors"
+                                            style="<%= index % 2 === 1 ? 'background-color: #E2EAE4;' : '' %>">
+                                            <td class="py-3 px-6 text-center w-[90px]">
+                                                <img src="<%= user.has_avatar ? `/usuario/avatar/${user.id}` : '/images/icons/options/user-default.svg' %>"
+                                                    alt="<%= user.nome %>"
+                                                    class="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover mx-auto"
+                                                    onerror="this.src='/images/icons/options/user-default.svg';" />
+                                            </td>
+                                            <td class="py-3 px-6 font-medium text-gray-900 text-base md:text-lg">
+                                                <%= user.nome %>
+                                            </td>
+                                            <td class="py-3 px-6 text-gray-800 text-base md:text-lg">
+                                                <%= user.email %>
+                                            </td>
+                                            <td class="py-3 px-6 text-gray-800 text-base md:text-lg whitespace-nowrap">
+                                                <%= formattedPhone %>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="4"
+                                            class="text-center py-10 text-gray-500 font-medium text-base">
+                                            Carregando usuários...
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div data-pagination="users" class="<%= (locals.usuarios && usuarios.length > 10) ? 'flex' : 'hidden' %> items-center justify-center gap-1.5 mt-5 mb-2">
+                    <button type="button" data-action="prev"
+                        class="px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded transition-colors disabled:opacity-40 disabled:cursor-not-allowed">Anterior</button>
+                    <button type="button" data-page="1"
+                        class="px-3 py-1 text-sm font-semibold text-white bg-green-700 rounded transition-all">1</button>
+                    <button type="button" data-action="next"
+                        class="px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded transition-colors disabled:opacity-40 disabled:cursor-not-allowed">Próximo</button>
+                </div>
             </section>
         </main>
     </div>
 
     <!-- form add product -->
     <div data-modal="addProduct"
-        class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeItem">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeItem">
         <div
             class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="addProduct"
@@ -526,22 +648,13 @@
                         <label for="select-product-category"
                             class="font-sans font-semibold text-base md:text-lg text-gray-700">Categoria</label>
                         <div class="relative">
-                            <select data-select-new="productCategory" id="select-product-category" name="category"
-                                required
-                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all">
-                                <option value="" disabled selected>
-                                    Selecione uma categoria
-                                </option>
+                           <select data-select-new="productCategory" id="select-product-category" name="categoria" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600">
+                                <option value="" disabled selected>Selecione uma categoria</option>
                                 <option value="Ração">Ração</option>
-                                <option value="Brinquedos">
-                                    Brinquedos
-                                </option>
-                                <option value="Medicamentos">
-                                    Medicamentos
-                                </option>
-                                <option value="Acessórios">
-                                    Acessórios
-                                </option>
+                                <option value="Brinquedos">Brinquedos</option>
+                                <option value="Medicamentos">Medicamentos</option>
+                                <option value="Acessórios">Acessórios</option>
                                 <option value="Higiene">Higiene</option>
                             </select>
                             <img src="/images/icons/arrow-down.svg" alt="Seta para baixo"
@@ -574,7 +687,8 @@
                         class="quill-wrapper rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white overflow-hidden">
                         <div data-quill-editor="longDescription" class="min-h-[120px]"></div>
                     </div>
-                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription" class="hidden"></textarea>
+                    <textarea data-textarea="longDescription" id="textarea-long-description" name="longDescription"
+                        class="hidden"></textarea>
                     <p class="font-sans text-xs md:text-sm text-gray-500">
                         • Use os controles de formatação para títulos, negrito, listas e links no editor de texto.
                     </p>
@@ -630,7 +744,7 @@
 
     <!-- Modal de Edição de Agendamento -->
     <aside data-modal="editSchedule"
-        class="hidden fixed inset-0 z-20 items-center justify-center bg-black/50 animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeTop">
         <div
             class="relative w-[95%] max-w-[720px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
             <form data-form="editSchedule"
@@ -658,9 +772,14 @@
                     <div class="relative w-full">
                         <select id="select-edit-servico" name="servico" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none bg-white appearance-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all cursor-pointer">
-                            <option value="banho-tosa">Banho e Tosa</option>
-                            <option value="vacinacao">Vacinação</option>
-                            <option value="cirurgia">Cirurgia</option>
+                            <option value="" disabled selected>Selecione um serviço...</option>
+                            <% if (locals.servicos && servicos.length > 0) { %>
+                                <% servicos.forEach(servico => { %>
+                                    <option value="<%= servico.id %>">
+                                        <%= servico.nome %>
+                                    </option>
+                                <% }) %>
+                            <% } %>
                         </select>
                         <img src="/images/icons/arrow-down.svg" alt="Seta"
                             class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-60" />
@@ -760,7 +879,7 @@
 
     <!-- Modal de Cancelamento de Agendamento -->
     <aside data-modal="cancelSchedule"
-        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeTop">
         <div
             class="relative w-[95%] max-w-[720px] bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
 
@@ -792,8 +911,7 @@
         <div data-confirm-card
             class="flex flex-col items-center gap-4 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,0,0,0.14)] px-6 py-5 w-[90%] max-w-[260px] scale-90 opacity-0 transition-all duration-200 ease-out">
 
-            <p data-confirm-message
-                class="font-sans font-semibold text-sm text-gray-700 text-center leading-snug">
+            <p data-confirm-message class="font-sans font-semibold text-sm text-gray-700 text-center leading-snug">
                 Tem certeza?
             </p>
 
@@ -811,7 +929,7 @@
     </div>
 
     <aside data-modal-info-menu="user" data-modal-info="adm"
-        class="hidden z-30 animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
+        class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
     </aside>
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
@@ -819,5 +937,6 @@
     <script type="module" src="/javascript/administrador/script-adm.js"></script>
     <script type="module" src="/src/router/administrador.js"></script>
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
-</body>
-</html>
+    </body>
+
+    </html>
