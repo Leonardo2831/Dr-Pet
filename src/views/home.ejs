@@ -44,7 +44,7 @@
                         Nossos Serviços
                     </h2>
 
-                    <div class="flex flex-wrap items-center justify-center gap-[50px] w-full p-5">
+                    <div class="flex flex-wrap items-stretch justify-center gap-[50px] w-full p-5">
                         <% if (locals.servicos && servicos.length > 0) { %>
                             <% servicos.forEach(servico => { %>
                                 <% 
@@ -64,7 +64,7 @@
                                         onerror="this.onerror=null; this.src='<%= defaultImg %>';"
                                         alt="<%= servico.nome || 'Serviço' %>"
                                         class="w-full h-[300px] object-cover" />
-                                    <div class="p-[30px] flex flex-col gap-[10px]">
+                                    <div class="p-[30px] flex-1 flex flex-col gap-[10px]">
                                         <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
                                             <%= servico.nome %>
                                         </h3>
