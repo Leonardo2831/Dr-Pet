@@ -13,6 +13,7 @@ const loginRouter = require('./router/login');
 const lojaRouter = require('./router/loja');
 const optionUserRouter = require('./router/option-user');
 const produtoRouter = require('./router/produto');
+const servicosRouter = require('./router/servicos');
 
 const app = express();
 const port = 3000;
@@ -41,6 +42,7 @@ app.use('/', loginRouter);
 app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);
+app.use('/', servicosRouter);
 app.use((req, res) => {
     res.status(404).render('404');
 });

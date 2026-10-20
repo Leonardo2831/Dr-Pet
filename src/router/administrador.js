@@ -21,11 +21,14 @@ router.get('/administrador', (req, res) => {
     db.query(querySlides, (err, slides) => {
         db.query(queryUsers, (err, usuarios) => {
             db.query(queryProdutos, (err, produtos) => {
-                res.render('administrador', {
-                    slides: slides || [],
-                    agendamentos: [],
-                    produtos: produtos || [],
-                    usuarios: usuarios || []
+                db.query('SELECT id, nome FROM service_infos ORDER BY nome ASC', (err, servicos) => {
+                    res.render('administrador', {
+                        slides: slides || [],
+                        agendamentos: [],
+                        produtos: produtos || [],
+                        usuarios: usuarios || [],
+                        servicos: servicos || []
+                    });
                 });
             });
         });
