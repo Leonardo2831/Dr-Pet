@@ -12,7 +12,12 @@ export default class CheckLogin {
     }
 
     isLogged() {
-        // Se existir o link de logout no menu, o usuário está com sessão ativa
+        // Estado de sessão renderizado pelo servidor no <body> (header.ejs)
+        const loggedAttr = document.body?.dataset?.userLogged;
+        if (loggedAttr === 'true') return true;
+        if (loggedAttr === 'false') return false;
+
+        // Fallback: se existir o link de logout no menu, o usuário está com sessão ativa
         if (document.querySelector('a[href="/logout"]')) {
             return true;
         }
