@@ -6,7 +6,7 @@ const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database: 'petshop',
-    password: '1234',
+    password: '2726'
 });
 
 module.exports = db;

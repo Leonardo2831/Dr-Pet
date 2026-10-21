@@ -228,4 +228,73 @@ router.post('/option-user/update-password', verificarLogin, (req,res) => {
     )
 })
 
+router.post('/option-user/update-address/:id', verificarLogin, (req,res) => {
+    const idAddress = req.params.id;
+    const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body
+    const idUser = req.session.usuario.id
+
+    db.query(
+        'UPDATE endereco SET rua = ?, numero = ?, cep = ?, cidade = ?, estado = ?, bairro = ?, telefone_contato = ? WHERE id = ? AND usuario_id = ?', [rua, numero, cep, cidade, estado, bairro, telefone, idAddress, idUser ],
+        (err) => {
+            if(err) {
+                return res.status(500).send('Erro ao alterar os dados do endereço! Tente novamente.')
+            } else {
+                res.redirect('/option-user')
+            }
+        }
+    )
+})
+
+router.post('/option-user/update-pet/:id', verificarLogin, (req,res) => {
+    const {name, race, gender, descriptionPet} = req.body;
+    const idPet = req.params.id;
+    const idUser = req.session.usuario.id;
+
+    db.query(
+        'UPDATE pet SET nome = ?, raca = ?, genero = ?, descricao = ? WHERE id = ? AND usuario_id = ?', [name, race, gender, descriptionPet, idPet, idUser],
+        (err) => {
+            if(err) {
+                return res.status(500).send("Ocorreu um erro ao tentar atualizar os dados do seu pet! Tente novamente.")
+            } else {
+                res.redirect("/option-user")
+            }
+        }
+    )
+})
+
+router.post('/option-user/delete-pet/:id', verificarLogin, (req,res) => {
+    const idPet = req.params.id
+    
+    db.query(
+        'DELETE FROM pet WHERE id = ?', 
+        [idPet],
+        (err) => {
+            if(err) {
+                console.log(err)
+            } else {
+                return res.status(204).end()
+            }
+        }
+    )
+})
+
+router.post('/option-user/delete-address/:id', verificarLogin, (req,res) => {
+    const idAddress = req.params.id
+    const userId = req.session.usuario.id;
+    
+    db.query(
+        'DELETE FROM endereco WHERE id = ? AND usuario_id = ?', 
+        [idAddress, userId],
+        (err) => {
+            if(err) {
+                console.log(err)
+            } else {
+                return res.status(204).end()
+            }
+        }
+    )
+})
+
+
+
 module.exports = router;

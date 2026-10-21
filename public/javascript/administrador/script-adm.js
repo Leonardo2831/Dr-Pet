@@ -7,12 +7,14 @@ import eventoSlides from "./eventoSlides.js";
 import adminPrecosAgenda from "./admin-precos-agenda.js";
 import AppointmentRequests from "./AppointmentRequests.js";
 import UserReports from "./UserReports.js";
+import Services from "./Services.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     selectSectionAdm();
     const slidesConfig = new SlidesHome('[data-add-slide]', '[data-content-slides]').init();
     const scheduleConfig = new Agenda('[data-content-schedule]', '[data-input-date="adm"]', '[data-select="service"]', '[data-button="searchSchedule"]').init();
     const appointmentRequests = new AppointmentRequests('[data-content-appointment-requests]').init();
+    const services = new Services('[data-content-services-delete]').init();
     const formProduct = new FormProduct('[data-modal="addProduct"]', '[data-form="addProduct"]', '[data-button="closeFormProduct"]', 
         '[data-input="product-name"]', '[data-select-new="productCategory"]', '[data-input="priceProduct"]', '[data-textarea="shortDescription"]', '[data-textarea="longDescription"]',
         '[data-quill-editor="longDescription"]',
