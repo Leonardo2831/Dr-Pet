@@ -1481,10 +1481,6 @@ aside p.activeOption{
   order: 2;
 }
 
-.col-span-2{
-  grid-column: span 2 / span 2;
-}
-
 .col-span-full{
   grid-column: 1 / -1;
 }
@@ -1540,10 +1536,6 @@ aside p.activeOption{
 
 .mt-10{
   margin-top: 2.5rem;
-}
-
-.mt-12{
-  margin-top: 3rem;
 }
 
 .mt-2{
@@ -2181,6 +2173,12 @@ aside p.activeOption{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.scale-95{
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -2271,6 +2269,10 @@ aside p.activeOption{
   cursor: text;
 }
 
+.cursor-wait{
+  cursor: wait;
+}
+
 .select-none{
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2305,10 +2307,6 @@ aside p.activeOption{
 
 .grid-cols-1{
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.grid-cols-2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-7{
@@ -2694,6 +2692,11 @@ aside p.activeOption{
 .border-red-200{
   --tw-border-opacity: 1;
   border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));
+}
+
+.border-red-light{
+  --tw-border-opacity: 1;
+  border-color: rgb(240 221 222 / var(--tw-border-opacity, 1));
 }
 
 .border-white{
@@ -3475,6 +3478,10 @@ aside p.activeOption{
   opacity: 1;
 }
 
+.opacity-50{
+  opacity: 0.5;
+}
+
 .opacity-60{
   opacity: 0.6;
 }
@@ -3881,6 +3888,11 @@ aside p.activeOption{
   background-color: rgb(128 0 32 / 0.9);
 }
 
+.hover\:bg-red-light:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 221 222 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:text-blue-hover:hover{
   --tw-text-opacity: 1;
   color: rgb(15 58 167 / var(--tw-text-opacity, 1));
@@ -4067,6 +4079,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(128 0 32 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-red-alert\/30:focus{
+  --tw-ring-color: rgb(128 0 32 / 0.3);
+}
+
 .focus\:ring-red-alert\/40:focus{
   --tw-ring-color: rgb(128 0 32 / 0.4);
 }
@@ -4207,6 +4223,10 @@ aside p.activeOption{
   display: flex;
 }
 
+.peer\/deletar:checked ~ .peer-checked\/deletar\:flex{
+  display: flex;
+}
+
 .peer\/atualizar:checked ~ .peer-checked\/atualizar\:bg-green-600{
   --tw-bg-opacity: 1;
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
@@ -4217,12 +4237,22 @@ aside p.activeOption{
   background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
 }
 
+.peer\/deletar:checked ~ .peer-checked\/deletar\:bg-green-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(11 80 48 / var(--tw-bg-opacity, 1));
+}
+
 .peer\/atualizar:checked ~ .peer-checked\/atualizar\:text-gray-50{
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity, 1));
 }
 
 .peer\/criar:checked ~ .peer-checked\/criar\:text-gray-50{
+  --tw-text-opacity: 1;
+  color: rgb(245 245 245 / var(--tw-text-opacity, 1));
+}
+
+.peer\/deletar:checked ~ .peer-checked\/deletar\:text-gray-50{
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity, 1));
 }
@@ -4239,12 +4269,23 @@ aside p.activeOption{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.peer\/deletar:checked ~ .peer-checked\/deletar\:shadow-\[3px_3px_8px_0px_rgba\(0\2c 0\2c 0\2c 0\.1\)\]{
+  --tw-shadow: 3px 3px 8px 0px rgba(0,0,0,0.1);
+  --tw-shadow-colored: 3px 3px 8px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .peer\/atualizar:checked ~ .peer-checked\/atualizar\:hover\:bg-green-700:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
 }
 
 .peer\/criar:checked ~ .peer-checked\/criar\:hover\:bg-green-700:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
+}
+
+.peer\/deletar:checked ~ .peer-checked\/deletar\:hover\:bg-green-700:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(3 43 24 / var(--tw-bg-opacity, 1));
 }
@@ -4266,6 +4307,12 @@ aside p.activeOption{
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.peer\/deletar:focus-visible ~ .peer-focus-visible\/deletar\:ring-4{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .peer:focus-visible ~ .peer-focus-visible\:ring-4{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -4277,6 +4324,10 @@ aside p.activeOption{
 }
 
 .peer\/criar:focus-visible ~ .peer-focus-visible\/criar\:ring-green-600\/50{
+  --tw-ring-color: rgb(11 80 48 / 0.5);
+}
+
+.peer\/deletar:focus-visible ~ .peer-focus-visible\/deletar\:ring-green-600\/50{
   --tw-ring-color: rgb(11 80 48 / 0.5);
 }
 
@@ -4459,6 +4510,10 @@ aside p.activeOption{
 }
 
 @media (min-width: 640px){
+  .sm\:col-span-3{
+    grid-column: span 3 / span 3;
+  }
+
   .sm\:mt-0{
     margin-top: 0px;
   }
@@ -4557,6 +4612,10 @@ aside p.activeOption{
 
   .sm\:w-\[80\%\]{
     width: 80%;
+  }
+
+  .sm\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:flex-row{
@@ -4745,6 +4804,10 @@ aside p.activeOption{
     top: 1.5rem;
   }
 
+  .md\:col-span-2{
+    grid-column: span 2 / span 2;
+  }
+
   .md\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -4888,6 +4951,10 @@ aside p.activeOption{
 
   .md\:min-w-\[400px\]{
     min-width: 400px;
+  }
+
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-\[repeat\(auto-fit\2c minmax\(340px\2c 1fr\)\)\]{
@@ -5812,6 +5879,10 @@ aside p.activeOption{
     top: auto;
   }
 
+  .xl\:col-span-3{
+    grid-column: span 3 / span 3;
+  }
+
   .xl\:mt-0{
     margin-top: 0px;
   }
@@ -5830,6 +5901,10 @@ aside p.activeOption{
 
   .xl\:flex-\[1_1_500px\]{
     flex: 1 1 500px;
+  }
+
+  .xl\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .xl\:flex-row{

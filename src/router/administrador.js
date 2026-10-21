@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const db = require('../database/mysql');
+const { verificarAdmin } = require('./middlewares');
 
 // Configuração simples para upload de imagens
 const upload = multer({ dest: 'public/uploads/' });
@@ -265,6 +266,22 @@ const getAvatarUsuario = (req, res) => {
         return res.send(avatar);
     });
 };
+
+router.delete('/administrador/servicos/:id', verificarAdmin, (req,res) => {
+    const idService = req.params.id;
+
+    db.query(
+        'DELETE FROM service_infos WHERE id = ?',
+        [idService],
+        (err) => {
+            if(err) {
+                return res.status(500).send("Não foi possível continuar com a exclusão! Tente novamente.")
+            } else {
+                return res.status(200).end()
+            }
+        }
+    )
+})
 
 router.get('/usuario/avatar/:id', getAvatarUsuario);
 router.get('/administrador/usuario/avatar/:id', getAvatarUsuario);

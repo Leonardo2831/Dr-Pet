@@ -16,6 +16,12 @@
                         class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Agenda</span>
                 </button>
 
+                <button type="button" data-tab-btn data-target="section-servicos"
+                    class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
+                    <span
+                        class="font-sans font-semibold text-lg xs:text-xl lg:text-3xl leading-snug lg:leading-10 text-green-700">Serviços</span>
+                </button>
+
                 <button type="button" data-tab-btn data-target="section-agendamentos"
                     class="flex justify-center items-center px-4 py-3 md:py-4 w-[140px] xs:w-[160px] sm:w-[180px] lg:w-[270px] bg-gray-200 rounded-[10px] hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-green-600/50 transition-all shrink-0">
                     <span
@@ -205,24 +211,30 @@
                                             <% } %>
                 </div>
 
-                <div class="mt-12 md:mt-20 flex flex-col gap-6 w-full">
+            </section>
+
+            <section id="section-servicos" data-tab-content
+                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
+                <div class="flex flex-col gap-6 w-full">
                     <div class="flex flex-col gap-2">
                         <h2
                             class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
-                            Seção de Serviços
+                            Serviços
                         </h2>
                         <p class="font-sans font-medium text-base md:text-lg text-gray-600">
-                            Cadastre novos serviços ou altere os valores e durações dos serviços existentes.
+                            Cadastre, atualize ou remova os serviços oferecidos pela Dr.Pet.
                         </p>
                     </div>
 
                     <div
-                        class="relative grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-8 p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
+                        class="relative grid grid-cols-1 sm:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-8 p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
 
                         <input type="radio" name="servico-modo" id="servico-modo-criar" value="criar"
                             class="peer/criar sr-only" checked />
                         <input type="radio" name="servico-modo" id="servico-modo-atualizar" value="atualizar"
                             class="peer/atualizar sr-only" />
+                        <input type="radio" name="servico-modo" id="servico-modo-deletar" value="deletar"
+                            class="peer/deletar sr-only" />
 
                         <label for="servico-modo-criar"
                             class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/criar:bg-green-600 peer-checked/criar:text-gray-50 peer-checked/criar:hover:bg-green-700 peer-checked/criar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/criar:ring-4 peer-focus-visible/criar:ring-green-600/50">
@@ -232,8 +244,12 @@
                             class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/atualizar:bg-green-600 peer-checked/atualizar:text-gray-50 peer-checked/atualizar:hover:bg-green-700 peer-checked/atualizar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/atualizar:ring-4 peer-focus-visible/atualizar:ring-green-600/50">
                             Atualizar Serviço
                         </label>
+                        <label for="servico-modo-deletar"
+                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/deletar:bg-green-600 peer-checked/deletar:text-gray-50 peer-checked/deletar:hover:bg-green-700 peer-checked/deletar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/deletar:ring-4 peer-focus-visible/deletar:ring-green-600/50">
+                            Deletar Serviços
+                        </label>
 
-                        <div class="hidden col-span-2 flex-col gap-6 peer-checked/criar:flex animate-fadeItem">
+                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/criar:flex animate-fadeItem">
                             <form action="/administrador/servicos/criar" method="POST" enctype="multipart/form-data"
                                 class="flex flex-col gap-6 w-full">
 
@@ -306,7 +322,7 @@
                             </form>
                         </div>
 
-                        <div class="hidden col-span-2 flex-col gap-6 peer-checked/atualizar:flex animate-fadeItem">
+                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/atualizar:flex animate-fadeItem">
                             <form action="/administrador/servicos/atualizar" method="POST" enctype="multipart/form-data"
                                 class="flex flex-col gap-6 w-full">
 
@@ -390,6 +406,72 @@
                                     </span>
                                 </button>
                             </form>
+                        </div>
+
+                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/deletar:flex animate-fadeItem">
+                            <div class="flex flex-col gap-2">
+                                <h3 class="font-sans font-semibold text-xl md:text-2xl text-gray-800">
+                                    Selecione o serviço que deseja deletar
+                                </h3>
+                                <p class="font-sans font-medium text-sm md:text-base text-gray-600">
+                                    Clique no ícone vermelho no canto do card para remover um serviço.
+                                </p>
+                            </div>
+
+                            <div data-content-services-delete
+                                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
+                                <% if (locals.servicos && servicos.length > 0) { %>
+                                    <% servicos.forEach(servico => { %>
+                                        <%
+                                            const serviceSlug = (servico.nome || '')
+                                                .toLowerCase()
+                                                .normalize('NFD')
+                                                .replace(/[\u0300-\u036f]/g, '')
+                                                .replace(/\s+e\s+/g, '-')
+                                                .replace(/\s+/g, '-')
+                                                .replace(/[^a-z0-9-]/g, '');
+                                            const serviceDefaultImg = (serviceSlug === 'banho-tosa' || serviceSlug === 'vacinacao' || serviceSlug === 'cirurgia')
+                                                ? `/images/services/${serviceSlug}.png`
+                                                : '/images/services/banho-tosa.png';
+                                        %>
+                                        <article data-service-card
+                                            class="service-card relative flex flex-col overflow-hidden transition-all duration-300">
+                                            <button type="button" data-button="deleteService"
+                                                data-service-id="<%= servico.id %>"
+                                                data-service-name="<%= servico.nome %>"
+                                                aria-label="Deletar serviço <%= servico.nome %>"
+                                                title="Deletar serviço"
+                                                class="absolute top-4 left-4 z-10 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md border border-red-light hover:bg-red-light focus:outline-none focus:ring-4 focus:ring-red-alert/30 transition-colors">
+                                                <img src="/images/icons/administrador/delete-slide.svg" alt=""
+                                                    class="w-4 h-4" />
+                                            </button>
+
+                                            <img src="/servicos/imagem/<%= servico.id %>"
+                                                onerror="this.onerror=null; this.src='<%= serviceDefaultImg %>';"
+                                                alt="<%= servico.nome || 'Serviço' %>"
+                                                class="w-full h-[300px] object-cover" />
+
+                                            <div class="p-[30px] flex-1 flex flex-col gap-[10px]">
+                                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
+                                                    <%= servico.nome %>
+                                                </h3>
+                                                <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
+                                                    <%= servico.descricao || 'Descrição do serviço.' %>
+                                                </p>
+                                            </div>
+                                        </article>
+                                    <% }) %>
+                                <% } else { %>
+                                    <div class="md:col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-12 px-6 text-center bg-gray-50 rounded-[15px] border border-gray-200">
+                                        <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4">
+                                            <img src="/images/icons/calendar_clock_green.svg" alt="" class="w-8 h-8" />
+                                        </div>
+                                        <p class="text-xl md:text-2xl font-medium text-gray-700">
+                                            Nenhum serviço cadastrado para deletar.
+                                        </p>
+                                    </div>
+                                <% } %>
+                            </div>
                         </div>
 
                     </div>
