@@ -1,55 +1,68 @@
-﻿import Fetch from "../../utils/Fetch.js";
 import Storage from "../../utils/Storage.js";
 
 export default async function schedule(form) {
+    if (!form) return;
     const infosSchedule = Storage.get('scheduleData');
-    const fetchPrice = new Fetch('service-infos', '[data-modal-info="formSchedule"]');
-    const infosServiceAbout = await fetchPrice.get() || null;
+    const modalInfo = document.querySelector('[data-modal-info="formSchedule"]');
 
-    const fetchSchedule = new Fetch('agenda', '[data-modal-info="formSchedule"]');
+    function showFeedback(message, isError = false) {
+        if (!modalInfo) return;
+        modalInfo.textContent = message;
+        modalInfo.className = `z-[1000] animate-fadeItem fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg rounded-[10px] shadow-lg ${
+            isError ? 'bg-red-500 text-white' : 'bg-green-600 text-white'
+        }`;
+        modalInfo.classList.remove('hidden', 'opacity-0');
+
+        setTimeout(() => {
+            modalInfo.classList.add('opacity-0');
+            setTimeout(() => modalInfo.classList.add('hidden'), 300);
+        }, 2500);
+    }
 
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
 
         if (!infosSchedule || !infosSchedule.date || !infosSchedule.hour) {
+            showFeedback('Dados do agendamento incompletos. Volte e selecione um serviço, data e horário.', true);
             console.error('scheduleData ausente ou incompleto:', infosSchedule);
             return;
         }
 
-        const serviceInfo = infosServiceAbout[infosSchedule.service];
         const formDataObject = new FormData(form);
         const novoAgendamento = {
-            id: crypto.randomUUID(),
-            user: {
-                username: formDataObject.get('nome'),
-                phone: formDataObject.get('telefone'),
-                endereco: formDataObject.get('endereco')
-            },
-            petAgendado: {
-                name: formDataObject.get('nomePet')
-            },
-            service: {
-                name: infosSchedule.service,
-                observations: formDataObject.get('descricao'),
-                duration: Number(serviceInfo.time),
-                preco: Number(serviceInfo.price),
-            },
+            fk_service: infosSchedule.service,
             date: infosSchedule.date,
             hour: infosSchedule.hour,
+            petNome: formDataObject.get('nomePet'),
+            observation: formDataObject.get('descricao') || '',
+            endereco: formDataObject.get('endereco') || '',
             buscarResidencia: formDataObject.get('buscarResidencia') === 'on'
         };
 
         try {
-            const resposta = await fetchSchedule.post(novoAgendamento);
+            const resposta = await fetch('/agenda', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(novoAgendamento)
+            });
 
-            if (resposta && resposta.ok) {
+            const data = await resposta.json().catch(() => ({}));
+
+            if (resposta.ok) {
+                showFeedback('Agendamento realizado com sucesso!', false);
                 Storage.delete('scheduleData');
-                window.location.href = '/agenda';
+                setTimeout(() => {
+                    window.location.href = '/agenda';
+                }, 1200);
             } else {
-                console.error('Erro ao salvar: resposta inválida', resposta);
+                showFeedback(data.erro || 'Houve um erro ao realizar o agendamento.', true);
+                console.error('Erro ao salvar agendamento:', data);
             }
         } catch (erro) {
-            console.error('Erro ao salvar:', erro);
+            showFeedback('Erro de conexão ao salvar agendamento.', true);
+            console.error('Erro na requisição:', erro);
         }
     });
 }

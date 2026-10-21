@@ -1,5 +1,5 @@
-export default class Calender{
-    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, onDayClick = null){
+export default class Calender {
+    constructor(selectorMonthInfo, selectorYearInfo, selectorBtnNext, selectorBtnPrev, selectorContainerCalender, selectorInfoDaySchedule, onDayClick = null) {
         this.monthInfo = document.querySelector(selectorMonthInfo);
         this.yearInfo = document.querySelector(selectorYearInfo);
         this.btnNext = document.querySelector(selectorBtnNext);
@@ -19,38 +19,37 @@ export default class Calender{
         this.nextMonth = this.nextMonth.bind(this);
     }
 
-    prevMonth(){
-        // salva novo valor de mês para data, voltando 1 mês
+    prevMonth() {
         this.date.setMonth(this.month - 1);
         this.month = this.date.getMonth();
         this.year = this.date.getFullYear();
         this.renderCalendar();
     }
 
-    nextMonth(){
+    nextMonth() {
         this.date.setMonth(this.month + 1);
         this.month = this.date.getMonth();
         this.year = this.date.getFullYear();
         this.renderCalendar();
     }
 
-    addEvents(){
-        this.btnNext.addEventListener('click', this.nextMonth);
-        this.btnPrev.addEventListener('click', this.prevMonth);
+    addEvents() {
+        if (this.btnNext) this.btnNext.addEventListener('click', this.nextMonth);
+        if (this.btnPrev) this.btnPrev.addEventListener('click', this.prevMonth);
     }
 
-    spaceDaysEndMonth(firstDay, daysInMonth){
-        // como são 42 espaços no calendário, para não ficar desproporcional, a gente faz os calculos dos espaços iniciais, que seria o dia da semana do primeiro dia do mês, porém em númeração não nome, mais os dias do mês atual. Com este total, tiramos de 42 essa soma, tendo os dias faltantes.
+    spaceDaysEndMonth(firstDay, daysInMonth) {
         const totalDiasRenderizados = firstDay + daysInMonth;
         const diasFaltantes = 42 - totalDiasRenderizados;
 
-        for(let i = 1; i <= diasFaltantes; i++){
+        for (let i = 1; i <= diasFaltantes; i++) {
             const spaceCalender = document.createElement('div');
             this.calenderContent.appendChild(spaceCalender);
         }
     }
 
-    formatScheduleInfos(dayCalender, date){
+    formatScheduleInfos(dayCalender, date) {
+        if (!dayCalender) return;
         const activeDays = this.calenderContent.querySelectorAll('.agenda-day.active');
         activeDays.forEach(day => day.classList.remove('active'));
         dayCalender.classList.add('active');
@@ -59,66 +58,82 @@ export default class Calender{
             weekday: 'long',
             month: 'long',
             day: 'numeric'
-        }
+        };
 
         const dateSelected = date.toLocaleDateString('pt-BR', optionsStyleDate);
-        this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
-        this.infoDaySchedule.setAttribute('data-day-schedule', dayCalender.dataset.day);
+        if (this.infoDaySchedule) {
+            this.infoDaySchedule.textContent = dateSelected.charAt(0).toUpperCase() + dateSelected.slice(1);
+            this.infoDaySchedule.setAttribute('data-day-schedule', dayCalender.dataset.day);
+
+            // Reinicia a animação animate-fadeTop para criar transição suave
+            this.infoDaySchedule.classList.remove('animate-fadeItem');
+            void this.infoDaySchedule.offsetWidth;
+            this.infoDaySchedule.classList.add('animate-fadeItem');
+
+            const parentContainer = this.infoDaySchedule.parentElement;
+            if (parentContainer) {
+                parentContainer.classList.remove('animate-fadeItem');
+                void parentContainer.offsetWidth;
+                parentContainer.classList.add('animate-fadeItem');
+            }
+        }
     }
 
-    renderDaysOfCalendar(daysInMonth){
+    renderDaysOfCalendar(daysInMonth) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        for(let i = 1; i <= daysInMonth; i++){
+        for (let i = 1; i <= daysInMonth; i++) {
             const dayCalender = document.createElement('button');
+            dayCalender.setAttribute('type', 'button');
             dayCalender.classList.add('agenda-day', 'animate-fadeTop');
 
             const currentIterationDate = new Date(this.year, this.month, i);
+            currentIterationDate.setHours(0, 0, 0, 0);
 
-            if(i === today.getDate() && this.month === today.getMonth() && this.year === today.getFullYear()){
+            if (i === today.getDate() && this.month === today.getMonth() && this.year === today.getFullYear()) {
                 dayCalender.classList.add('today');
             }
 
-            if(currentIterationDate.getDay() == 0){
+            if (currentIterationDate.getDay() === 0) {
                 dayCalender.classList.add('inactive');
                 dayCalender.disabled = true;
             }
 
             dayCalender.textContent = i;
 
-            if(currentIterationDate.getTime() < today.getTime()){
+            if (currentIterationDate.getTime() < today.getTime()) {
                 dayCalender.classList.add('beforeNow');
                 dayCalender.disabled = true;
                 this.calenderContent.appendChild(dayCalender);
                 continue;
             }
 
-            if(dayCalender.classList.contains('beforeNow') || dayCalender.classList.contains('inactive')) {
+            if (dayCalender.classList.contains('beforeNow') || dayCalender.classList.contains('inactive')) {
                 this.calenderContent.appendChild(dayCalender);
-                continue
-            };            
+                continue;
+            }            
             
             const [year, month, day] = currentIterationDate.toISOString().split('T')[0].split('-');
             dayCalender.setAttribute('data-day', `${year}-${month}-${day}`);
 
             dayCalender.addEventListener('click', () => {
                 this.formatScheduleInfos(dayCalender, currentIterationDate);
-                if(this.onDayClick) this.onDayClick(dayCalender.dataset.day);
+                if (this.onDayClick) this.onDayClick(dayCalender.dataset.day);
             });
 
             this.calenderContent.appendChild(dayCalender);
         }
     }
 
-    spaceDaysInitMonth(firstDay){
-        for(let i = firstDay; i > 0; i--){
+    spaceDaysInitMonth(firstDay) {
+        for (let i = firstDay; i > 0; i--) {
             const spaceCalender = document.createElement('div');
             this.calenderContent.appendChild(spaceCalender);
         }
     }
 
-    renderTitleDays(){
+    renderTitleDays() {
         this.calenderContent.innerHTML = '';
         this.daysWeek.forEach(day => {
             const span = document.createElement('span');
@@ -128,18 +143,16 @@ export default class Calender{
         });
     }
 
-    renderMonthAndYear(){
-        this.monthInfo.textContent = this.months[this.month];
-        this.yearInfo.textContent = this.year;
+    renderMonthAndYear() {
+        if (this.monthInfo) this.monthInfo.textContent = this.months[this.month];
+        if (this.yearInfo) this.yearInfo.textContent = this.year;
     }
 
-    renderCalendar(){
+    renderCalendar() {
         this.renderTitleDays();
         this.renderMonthAndYear();
 
-        // Pega qual dia da semana o mês começou de 0 a 6
         const firstDay = new Date(this.year, this.month, 1).getDay();
-        // Passar o dia como 0 o computador entende que você quer o ultimo dia do mês passado, como soma 1 ao mês, pega o ultimo dia do mês atual
         const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
         this.spaceDaysInitMonth(firstDay);
@@ -147,11 +160,40 @@ export default class Calender{
         this.spaceDaysEndMonth(firstDay, daysInMonth);
     }
 
-    init(){
-        if(this.monthInfo && this.yearInfo && this.btnNext && this.btnPrev){
-            this.renderCalendar();
+    attachEventsToExistingDays() {
+        if (!this.calenderContent) return;
+        const days = this.calenderContent.querySelectorAll('.agenda-day:not(.inactive):not(.beforeNow)');
+        
+        days.forEach(dayBtn => {
+            dayBtn.addEventListener('click', () => {
+                const dayString = dayBtn.getAttribute('data-day');
+                if (dayString) {
+                    const [y, m, d] = dayString.split('-').map(Number);
+                    const dateObj = new Date(y, m - 1, d);
+                    this.formatScheduleInfos(dayBtn, dateObj);
+                    if (this.onDayClick) this.onDayClick(dayString);
+                }
+            });
+        });
+    }
+
+    init() {
+        if (this.calenderContent && this.btnNext && this.btnPrev) {
             this.addEvents();
-            this.formatScheduleInfos(this.calenderContent.querySelector('.agenda-day.today'), new Date());
+            
+            // Se já existem botões renderizados pelo EJS, apenas anexa eventos
+            const existingDays = this.calenderContent.querySelectorAll('.agenda-day');
+            if (existingDays.length > 0) {
+                this.attachEventsToExistingDays();
+                const todayBtn = this.calenderContent.querySelector('.agenda-day.today') 
+                              || this.calenderContent.querySelector('.agenda-day.active');
+                if (todayBtn) {
+                    this.formatScheduleInfos(todayBtn, new Date());
+                }
+            } else {
+                this.renderCalendar();
+                this.formatScheduleInfos(this.calenderContent.querySelector('.agenda-day.today'), new Date());
+            }
         }
         return this;
     }

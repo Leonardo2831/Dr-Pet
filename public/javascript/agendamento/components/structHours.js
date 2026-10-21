@@ -2,7 +2,7 @@ export default function structHours(hour, infoHour, period){
     const button = document.createElement('button');
     const span = document.createElement('span');
     button.setAttribute('type', 'button');
-    button.classList.add('button-hour');
+    button.classList.add('button-hour', 'animate-fadeTop');
     button.setAttribute('data-time-hour', hour);
     span.textContent = hour;
 
@@ -12,8 +12,15 @@ export default function structHours(hour, infoHour, period){
             buttonActive.classList.remove('active');
         }
         button.classList.add('active');
-        infoHour.textContent = `${button.getAttribute('data-time-hour')} ${period}`;
-        infoHour.setAttribute('data-time-schedule', button.getAttribute('data-time-hour'));
+
+        if (infoHour) {
+            infoHour.textContent = `${button.getAttribute('data-time-hour')} ${period}`;
+            infoHour.setAttribute('data-time-schedule', button.getAttribute('data-time-hour'));
+
+            infoHour.classList.remove('animate-fadeTop');
+            void infoHour.offsetWidth;
+            infoHour.classList.add('animate-fadeTop');
+        }
     });
     
     button.appendChild(span);

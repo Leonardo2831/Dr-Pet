@@ -1,8 +1,6 @@
 import getParamsURL from '../utils/getParamsURL.js';
-import Fetch from '../utils/Fetch.js';
 
 function formatarTempo(minutos) {
-
     const numMinutos = parseInt(minutos, 10);
     if (!numMinutos || isNaN(numMinutos)) return "Indefinido";
 
@@ -18,73 +16,136 @@ function formatarTempo(minutos) {
     }
 }
 
-const fetchPrecos = new Fetch('service-infos', '[data-modal-info="agenda"]');
-let infosService = null;
-
-try {
-    infosService = await fetchPrecos.get();
-} catch (error) {
-    console.error("Erro ao pegar o valor dos dados", error);
+function getServiceDefaultImg(slug) {
+    if (slug === 'banho-tosa' || slug === 'vacinacao' || slug === 'cirurgia') {
+        return `/images/services/${slug}.png`;
+    }
+    return '/images/services/banho-tosa.png';
 }
 
-function changeValuesService(value) {
+// Carregar serviços embutidos pelo EJS no HTML
+function loadServerServices() {
+    try {
+        const el = document.getElementById('server-servicos');
+        if (el && el.textContent) {
+            return JSON.parse(el.textContent);
+        }
+    } catch (error) {
+        console.error("Erro ao obter dados de serviços do servidor:", error);
+    }
+    return [];
+}
+
+const serverServices = loadServerServices();
+const servicesMap = {};
+
+serverServices.forEach(s => {
+    const serviceObj = {
+        id: String(s.id),
+        name: s.nome,
+        time: Number(s.duracao) || 30,
+        price: Number(s.preco) || 0,
+        desc: s.descricao,
+        slug: s.slug || String(s.id),
+        img: s.has_imagem ? `/servicos/imagem/${s.id}` : getServiceDefaultImg(s.slug)
+    };
+    servicesMap[String(s.id)] = serviceObj;
+    if (s.slug) {
+        servicesMap[s.slug] = serviceObj;
+    }
+});
+
+function changeValues(serviceKey) {
+    const service = servicesMap[String(serviceKey)];
     const timeInfoService = document.querySelector('[data-time-service="completInfo"]');
     const priceInfoService = document.querySelector('[data-price-service="completInfo"]');
-
-    if (infosService && infosService[value]) {
-        timeInfoService.textContent = formatarTempo(infosService[value].time);
-
-        priceInfoService.textContent = `R$ ${infosService[value].price.toFixed(2).replace('.', ',')}`;
-    } else {
-        timeInfoService.textContent = "Erro";
-        priceInfoService.textContent = 'R$ 0,00';
-    }
-}
-
-async function changeValues(value) {
     const textInfo = document.querySelector('[data-textInfo="agenda-service"]');
     const imgInfo = document.querySelector('[data-imgInfo="agenda-service-image"]');
+    const imgInfoService = document.querySelector('[data-imgInfo-service="completInfo"]');
+    const textInfoService = document.querySelector('[data-textInfo-service="completInfo"]');
 
-    imgInfo.src = `../images/services/${value}.png`;
-    if (value === 'banho-tosa') {
-        imgInfo.alt = 'Cachorro no serviço de Banho e Tosa';
-        textInfo.textContent = 'Banho e Tosa';
-    } else if (value === 'vacinacao') {
-        imgInfo.alt = 'Cachorro no serviço de Vacinação';
-        textInfo.textContent = 'Vacinação';
-    } else if (value === 'cirurgia') {
-        imgInfo.alt = 'Cachorro no serviço de Cirurgia';
-        textInfo.textContent = 'Cirurgia';
+    if (!service) {
+        if (timeInfoService) timeInfoService.textContent = "--";
+        if (priceInfoService) priceInfoService.textContent = "R$ 0,00";
+        if (textInfoService) textInfoService.textContent = "Nenhum";
+        return;
     }
 
-    const imgInfoService = document.querySelector('[data-imgInfo-service="completInfo"]');
-    imgInfoService.src = imgInfo.src;
-    imgInfoService.alt = imgInfo.alt;
+    if (textInfo) textInfo.textContent = service.name;
+    if (imgInfo) {
+        imgInfo.src = service.img;
+        imgInfo.alt = service.name;
+    }
 
-    const textInfoService = document.querySelector('[data-textInfo-service="completInfo"]');
-    textInfoService.textContent = textInfo.textContent;
+    if (imgInfoService) {
+        imgInfoService.src = service.img;
+        imgInfoService.alt = service.name;
+    }
+    if (textInfoService) {
+        textInfoService.textContent = service.name;
+    }
 
-    changeValuesService(value);
+    if (timeInfoService) {
+        timeInfoService.textContent = formatarTempo(service.time);
+    }
+    if (priceInfoService) {
+        priceInfoService.textContent = `R$ ${service.price.toFixed(2).replace('.', ',')}`;
+    }
+
+    // Animar elementos com fade ao trocar de serviço
+    [textInfo, textInfoService, timeInfoService, priceInfoService].forEach(elem => {
+        if (elem) {
+            elem.classList.remove('animate-fadeTop');
+            void elem.offsetWidth;
+            elem.classList.add('animate-fadeTop');
+        }
+    });
 }
 
 export default async function selectAgenda(PopUpConfig, hoursInstance) {
-    const serviceOption = PopUpConfig.modal.querySelectorAll('[data-filter-agenda]');
+    if (!PopUpConfig || !PopUpConfig.modal) return;
+    const serviceOptions = PopUpConfig.modal.querySelectorAll('[data-filter-agenda]');
 
-    const parametroServico = getParamsURL('service') || 'banho-tosa';
-    const itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${parametroServico}"]`);
-    const itemLastActive = PopUpConfig.modal.querySelector('.activeOption');
-    if (itemLastActive) itemLastActive.classList.remove('activeOption');
-    if (itemActive) itemActive.classList.add('activeOption');
+    // Se não houver opções de serviço (sistema em manutenção)
+    if (serviceOptions.length === 0) {
+        changeValues(null);
+        return;
+    }
 
-    await changeValues(parametroServico);
+    const parametroServico = getParamsURL('service');
+    let itemActive = null;
 
-    serviceOption.forEach(option => {
-        option.addEventListener('click', async () => {
-            const activeOption = document.querySelector('.activeOption');
-            if (activeOption) activeOption.classList.remove('activeOption');
+    if (parametroServico) {
+        itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${parametroServico}"]`);
+        if (!itemActive && servicesMap[parametroServico]) {
+            itemActive = PopUpConfig.modal.querySelector(`[data-filter-agenda="${servicesMap[parametroServico].id}"]`);
+        }
+    }
+
+    if (!itemActive) {
+        itemActive = PopUpConfig.modal.querySelector('.activeOption') || serviceOptions[0];
+    }
+
+    serviceOptions.forEach(opt => opt.classList.remove('activeOption'));
+    if (itemActive) {
+        itemActive.classList.add('activeOption');
+        changeValues(itemActive.dataset.filterAgenda);
+    }
+
+    serviceOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            serviceOptions.forEach(opt => opt.classList.remove('activeOption'));
             option.classList.add('activeOption');
-            await changeValues(option.dataset.filterAgenda);
             
+            const serviceId = option.dataset.filterAgenda;
+            changeValues(serviceId);
+
+            if (PopUpConfig.closePopUp) {
+                PopUpConfig.closePopUp();
+            } else if (PopUpConfig.modal) {
+                PopUpConfig.modal.classList.add('hidden');
+            }
+
             if (hoursInstance && hoursInstance.currentDay) {
                 hoursInstance.renderHours();
             }

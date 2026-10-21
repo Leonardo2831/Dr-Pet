@@ -1,54 +1,159 @@
 <%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Agenda' }) %>
 
+<%
+    const servicosLista = locals.servicos || [];
+    const agendamentosLista = locals.agendamentos || [];
+    const hasServices = servicosLista.length > 0;
+
+    function formatarTempo(minutos) {
+        const numMinutos = parseInt(minutos, 10);
+        if (!numMinutos || isNaN(numMinutos)) return "Indefinido";
+        const horas = Math.floor(numMinutos / 60);
+        const minutosRestantes = numMinutos % 60;
+        if (horas > 0 && minutosRestantes > 0) return `${horas}h ${minutosRestantes}min`;
+        if (horas > 0) return `${horas}h`;
+        return `${minutosRestantes}min`;
+    }
+
+    function getServiceDefaultImg(slug) {
+        if (slug === 'banho-tosa' || slug === 'vacinacao' || slug === 'cirurgia') {
+            return `/images/services/${slug}.png`;
+        }
+        return '/images/services/banho-tosa.png';
+    }
+
+    // Identificar serviço inicial selecionado
+    let activeService = null;
+    if (hasServices) {
+        const param = (locals.selectedServiceParam || '').toLowerCase();
+        if (param) {
+            activeService = servicosLista.find(s => s.slug === param || String(s.id) === param);
+        }
+        if (!activeService) {
+            activeService = servicosLista[0];
+        }
+    }
+
+    // Variáveis do Calendário para o mês atual
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0 a 11
+    const currentDay = today.getDate();
+
+    const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    const daysWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const daysWeekFull = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+    const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const totalRendered = firstDayOfWeek + daysInMonth;
+    const remainingDays = 42 - totalRendered;
+
+    const pad = n => String(n).padStart(2, '0');
+    const todayFormatted = `${currentYear}-${pad(currentMonth + 1)}-${pad(currentDay)}`;
+    const todayFullPt = `${daysWeekFull[today.getDay()]}, ${currentDay} de ${monthNames[currentMonth].toLowerCase()}`;
+%>
+
     <div class="bg-gray-50 min-h-screen">
         <main class="main container w-full flex justify-center pb-20 md:pb-[120px]">
-            <section class="w-full flex flex-col gap-10 lg:gap-20">
+            <section class="w-full flex flex-col gap-10 lg:gap-14">
                 <h1 class="text-4xl md:text-[52px] leading-snug md:leading-[64px] font-bold text-green-700 text-center">
                     Agendamento
                 </h1>
+
+                <% if (!hasServices) { %>
+                    <!-- Aviso de Sistema em Manutenção caso não haja serviços cadastrados -->
+                    <div class="w-full bg-green-50/60 border border-green-200 border-l-[6px] border-l-green-600 px-8 py-6 md:px-10 md:py-8 rounded-[10px] shadow-sm flex flex-col md:flex-row items-center md:items-start gap-4 animate-fadeTop">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center shrink-0 shadow-sm">
+                            <img src="/images/icons/calendar_clock_green.svg" alt="Aviso Manutenção" class="w-7 h-7" />
+                        </div>
+                        <div class="flex flex-col gap-1 text-center md:text-left">
+                            <h2 class="text-xl md:text-2xl font-bold text-green-900">
+                                Sistema em Manutenção
+                            </h2>
+                            <p class="text-base md:text-lg text-gray-800 font-medium leading-relaxed">
+                                No momento não há serviços disponíveis para agendamento. Nossa equipe está em processo de manutenção e novos serviços serão adicionados assim que possível. O agendamento está temporariamente desabilitado.
+                            </p>
+                        </div>
+                    </div>
+                <% } %>
 
                 <div class="w-full flex flex-col xl:flex-row justify-between items-start gap-10">
 
                     <div class="w-full flex-[5] flex flex-col items-center gap-10">
 
+                        <!-- Seletor de Serviços com Modal -->
                         <div data-button="selectService"
-                            class="relative w-full bg-white shadow-md rounded-[10px] flex flex-row justify-between items-center px-5 py-5 md:px-[50px] md:py-[30px] transition-all hover:shadow-lg focus-within:ring-2 focus-within:ring-green-400 cursor-pointer">
+                            class="relative w-full bg-white shadow-md rounded-[10px] flex flex-row justify-between items-center px-5 py-5 md:px-[50px] md:py-[30px] transition-all <%= hasServices ? 'hover:shadow-lg focus-within:ring-2 focus-within:ring-green-400 cursor-pointer' : 'hover:shadow-md cursor-pointer' %>">
+                            
                             <div class="flex flex-row items-center gap-5 md:gap-[30px]">
-                                <img data-imgInfo="agenda-service-image" src="/images/services/banho-tosa.png"
-                                    alt="Cachorro no serviço de Banho e Tosa"
-                                    class="w-20 h-[56px] md:w-[106px] md:h-[74px] object-cover rounded-[5px]" />
-                                <div class="flex flex-col justify-center gap-1">
-                                    <span
-                                        class="text-sm md:text-base lg:text-[18px] leading-tight font-normal text-gray-900">
-                                        Serviço selecionado
-                                    </span>
-                                    <h2 data-textInfo="agenda-service"
-                                        class="text-gray-900 text-2xl font-semibold md:text-3xl">Banho e Tosa</h2>
-                                </div>
+                                <% if (hasServices && activeService) { %>
+                                    <img data-imgInfo="agenda-service-image" 
+                                         src="<%= activeService.has_imagem ? '/servicos/imagem/' + activeService.id : getServiceDefaultImg(activeService.slug) %>"
+                                         onerror="this.onerror=null; this.src='<%= getServiceDefaultImg(activeService.slug) %>';"
+                                         alt="<%= activeService.nome %>"
+                                         class="w-20 h-[56px] md:w-[106px] md:h-[74px] object-cover rounded-[5px]" />
+                                    <div class="flex flex-col justify-center gap-1">
+                                        <span class="text-sm md:text-base lg:text-[18px] leading-tight font-normal text-gray-900">
+                                            Serviço selecionado
+                                        </span>
+                                        <h2 data-textInfo="agenda-service" class="text-gray-900 text-2xl font-semibold md:text-3xl">
+                                            <%= activeService.nome %>
+                                        </h2>
+                                    </div>
+                                <% } else { %>
+                                    <div class="w-20 h-[56px] md:w-[106px] md:h-[74px] rounded-[5px] flex items-center justify-center">
+                                        <img src="/images/icons/calendar_clock_green.svg" alt="Sem Serviço" class="w-12 h-12 opacity-70" />
+                                    </div>
+                                    <div class="flex flex-col justify-center gap-1">
+                                        <span class="text-sm md:text-base lg:text-[18px] leading-tight font-normal text-gray-500">
+                                            Serviço selecionado
+                                        </span>
+                                        <h2 data-textInfo="agenda-service" class="text-gray-500 text-2xl font-semibold md:text-3xl">
+                                            Em manutenção
+                                        </h2>
+                                    </div>
+                                <% } %>
                             </div>
 
                             <img src="/images/icons/arrow-down.svg" alt="Ícone seta"
-                                class="w-10 h-10 md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] pointer-events-none" />
+                                class="w-10 h-10 md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] pointer-events-none <%= hasServices ? '' : 'opacity-40' %>" />
 
+                            <!-- Modal de Seleção de Serviços -->
                             <aside data-modal="serviceSelected"
-                                class="left-0 hidden absolute top-full w-full flex-col bg-gray-50 rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] z-50 animate-fadeTop">
-                                <p data-filter-agenda="banho-tosa"
-                                    class="activeOption flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
-                                    Banho e Tosa
-                                </p>
-                                <p data-filter-agenda="vacinacao"
-                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
-                                    Vacinação
-                                </p>
-                                <p data-filter-agenda="cirurgia"
-                                    class="flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap">
-                                    Cirurgia
-                                </p>
+                                class="left-0 hidden absolute top-full mt-1 w-full flex-col bg-gray-50 rounded-[10px] shadow-[0px_4px_16px_rgba(0,0,0,0.15)] border border-gray-100 z-50 animate-fadeTop overflow-hidden">
+                                <% if (hasServices) { %>
+                                    <% servicosLista.forEach((servico) => { 
+                                        const isSelected = activeService && activeService.id === servico.id;
+                                        const imgUrl = servico.has_imagem ? `/servicos/imagem/${servico.id}` : getServiceDefaultImg(servico.slug);
+                                    %>
+                                        <p data-filter-agenda="<%= servico.id %>"
+                                           data-service-name="<%= servico.nome %>"
+                                           data-service-duration="<%= servico.duracao %>"
+                                           data-service-price="<%= servico.preco %>"
+                                           data-service-img="<%= imgUrl %>"
+                                           class="<%= isSelected ? 'activeOption' : '' %> flex items-center justify-center gap-[10px] py-6 px-9 w-full text-gray-950 font-medium text-[22px] leading-[27px] hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap cursor-pointer">
+                                            <%= servico.nome %>
+                                        </p>
+                                    <% }) %>
+                                <% } else { %>
+                                    <div class="py-8 px-6 text-center flex flex-col items-center gap-2">
+                                        <p class="text-gray-600 font-semibold text-lg md:text-xl">
+                                            Nenhum serviço disponível no momento.
+                                        </p>
+                                        <span class="text-sm text-gray-500">
+                                            Novos serviços serão adicionados assim que possível.
+                                        </span>
+                                    </div>
+                                <% } %>
                             </aside>
                         </div>
 
+                        <!-- Card do Calendário com Geração Automática dos Dias via EJS -->
                         <div class="w-full bg-white shadow-md rounded-[10px] flex flex-col gap-8 p-5 md:pt-[30px] md:px-[30px] md:pb-10">
 
+                            <!-- Cabeçalho do Calendário (Mês e Ano gerados via EJS) -->
                             <div class="w-full flex flex-row justify-between md:justify-center items-center gap-2 md:gap-[100px] h-auto md:h-[70px]">
                                 <button data-button="prev-month" type="button" aria-label="Mês anterior"
                                     class="hover:bg-gray-100 p-2 rounded-full transition-colors focus:ring-2 focus:ring-green-400 outline-none group">
@@ -57,8 +162,8 @@
                                 </button>
                                 <div class="flex justify-center items-center p-2 w-auto md:min-w-[225px]">
                                     <h2 class="flex flex-wrap justify-center gap-3 md:gap-4 text-2xl md:text-[40px] leading-tight md:leading-[50px] font-semibold text-gray-800">
-                                        <span data-calender-title="month">Abril</span> 
-                                        <span data-calender-title="year">2025</span>
+                                        <span data-calender-title="month"><%= monthNames[currentMonth] %></span> 
+                                        <span data-calender-title="year"><%= currentYear %></span>
                                     </h2>
                                 </div>
                                 <button data-button="next-month" type="button" aria-label="Próximo mês"
@@ -68,37 +173,103 @@
                                 </button>
                             </div>
 
+                            <!-- Botões de Dias do Calendário gerados automaticamente via EJS -->
                             <div class="w-full flex flex-col p-2 md:p-4">
                                 <div data-container="calender-days" class="grid grid-cols-7 gap-x-1 gap-y-3 md:gap-x-4 md:gap-y-6 lg:gap-x-[42px] lg:gap-y-[30px] place-items-center w-full">
+                                    
+                                    <!-- Nomes dos dias da semana -->
+                                    <% daysWeek.forEach(dw => { %>
+                                        <span class="agenda-day-title animate-fadeTop"><%= dw %></span>
+                                    <% }) %>
+
+                                    <!-- Espaços vazios no início do mês -->
+                                    <% for (let i = 0; i < firstDayOfWeek; i++) { %>
+                                        <div></div>
+                                    <% } %>
+
+                                    <!-- Botões dos dias do mês gerados pelo EJS -->
+                                    <% for (let d = 1; d <= daysInMonth; d++) { 
+                                        const loopDate = new Date(currentYear, currentMonth, d);
+                                        loopDate.setHours(0, 0, 0, 0);
+                                        const loopDayFormatted = `${currentYear}-${pad(currentMonth + 1)}-${pad(d)}`;
+                                        const isSunday = loopDate.getDay() === 0;
+                                        const isPast = loopDate.getTime() < today.getTime();
+                                        const isToday = (d === currentDay);
+
+                                        let dayClass = 'agenda-day animate-fadeTop';
+                                        let disabledAttr = '';
+
+                                        if (isToday) {
+                                            dayClass += ' today active';
+                                        }
+                                        if (isSunday) {
+                                            dayClass += ' inactive';
+                                            disabledAttr = 'disabled';
+                                        } else if (isPast) {
+                                            dayClass += ' beforeNow';
+                                            disabledAttr = 'disabled';
+                                        }
+                                    %>
+                                        <button type="button"
+                                                class="<%= dayClass %>"
+                                                <%= disabledAttr %>
+                                                data-day="<%= loopDayFormatted %>">
+                                            <%= d %>
+                                        </button>
+                                    <% } %>
+
+                                    <!-- Espaços vazios no final do mês para compor a grade de 42 posições -->
+                                    <% for (let j = 0; j < remainingDays; j++) { %>
+                                        <div></div>
+                                    <% } %>
+
                                 </div>
                             </div>
 
+                            <!-- Horários Disponíveis -->
                             <div class="w-full flex flex-col gap-5 animate-fadeTop">
                                 <h3 class="text-[22px] md:text-[26px] leading-[28px] md:leading-[32px] font-semibold text-gray-900">
                                     Horários Disponíveis:
                                 </h3>
 
-                                <div class="w-full flex flex-col gap-5 md:gap-8">
+                                <% if (hasServices) { %>
+                                    <div class="w-full flex flex-col gap-5 md:gap-8">
+                                        <div class="flex flex-col gap-3">
+                                            <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Manhã</h4>
+                                            <div data-content="hours-morning" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
+                                        </div>
 
-                                    <div class="flex flex-col gap-3">
-                                        <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Manhã</h4>
-                                        <div data-content="hours-morning" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
+                                        <div class="flex flex-col gap-3">
+                                            <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Tarde</h4>
+                                            <div data-content="hours-afternoon" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
+                                        </div>
                                     </div>
-
-                                    <div class="flex flex-col gap-3">
-                                        <h4 class="text-[18px] md:text-[22px] font-medium text-green-400">Tarde</h4>
-                                        <div data-content="hours-afternoon" class="flex flex-row flex-wrap items-center gap-3 md:gap-4"></div>
+                                <% } else { %>
+                                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-[8px] text-gray-500 font-medium text-center">
+                                        Não há horários disponíveis no momento devido à manutenção dos serviços.
                                     </div>
-                                </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Resumo Lateral do Agendamento -->
                     <aside
                         class="w-full flex-[3.5] flex flex-col shadow-xl bg-white rounded-b-[10px] mt-5 xl:mt-0 relative"
                         aria-label="Resumo do agendamento">
-                        <img data-imgInfo-service="completInfo" src="/images/services/banho-tosa.png"
-                            alt="Serviço de Banho e tosa" class="w-full h-auto object-cover rounded-t-[10px]" />
+                        
+                        <% if (hasServices && activeService) { %>
+                            <img data-imgInfo-service="completInfo" 
+                                 src="<%= activeService.has_imagem ? '/servicos/imagem/' + activeService.id : getServiceDefaultImg(activeService.slug) %>"
+                                 onerror="this.onerror=null; this.src='<%= getServiceDefaultImg(activeService.slug) %>';"
+                                 alt="<%= activeService.nome %>" 
+                                 class="w-full h-auto object-cover rounded-t-[10px]" />
+                        <% } else { %>
+                            <div class="w-full h-[220px] bg-green-50/60 border-b border-green-100 flex flex-col items-center justify-center gap-2 rounded-t-[10px]">
+                                <img src="/images/icons/calendar_clock_green.svg" alt="Manutenção" class="w-12 h-12 opacity-75" />
+                                <span class="text-green-800 font-semibold text-lg">Em Manutenção</span>
+                            </div>
+                        <% } %>
 
                         <div
                             class="w-full h-fit -mt-1 bg-white border-t-4 border-green-400 rounded-b-[10px] p-5 md:p-[30px] flex flex-col gap-5 md:gap-10 z-10">
@@ -108,8 +279,8 @@
                                     class="text-[20px] md:text-[26px] leading-snug font-medium text-gray-800 tracking-wide">
                                     Serviço solicitado:
                                     <strong data-textInfo-service="completInfo"
-                                        class="text-[24px] md:text-[30px] leading-snug font-semibold text-green-500">
-                                        Banho e tosa
+                                        class="text-[24px] md:text-[30px] leading-snug font-semibold <%= hasServices ? 'text-green-500' : 'text-gray-400' %>">
+                                        <%= (hasServices && activeService) ? activeService.nome : 'Nenhum' %>
                                     </strong>
                                 </span>
 
@@ -119,7 +290,7 @@
                                         <span class="text-xl md:text-[26px] font-medium text-gray-800">
                                             Tempo: 
                                             <strong data-time-service="completInfo" class="font-semibold text-gray-800">
-                                                1h 30min
+                                                <%= (hasServices && activeService) ? formatarTempo(activeService.duracao) : '--' %>
                                             </strong>
                                         </span>
                                     </div>
@@ -128,25 +299,34 @@
                                         <img src="/images/icons/calender/price.svg" alt="Preço">
                                         <span class="text-xl md:text-[26px] font-medium text-gray-800">
                                             Preço:
-                                            <strong data-price-service="completInfo" class="font-semibold text-gray-800"></strong>
+                                            <strong data-price-service="completInfo" class="font-semibold text-gray-800">
+                                                <%= (hasServices && activeService) ? 'R$ ' + activeService.preco.toFixed(2).replace('.', ',') : 'R$ 0,00' %>
+                                            </strong>
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <p class="min-h-[85px] flex flex-col gap-2 text-2xl md:text-[30px] leading-tight font-semibold text-gray-800">
-                                <span data-schedule-date="agenda"></span>
-                                <span data-schedule-time="agenda"></span>
+                            <p class="min-h-[85px] flex flex-col gap-2 text-2xl md:text-[30px] leading-tight font-semibold text-gray-800 animate-fadeTop">
+                                <span data-schedule-date="agenda" data-day-schedule="<%= todayFormatted %>" class="animate-fadeItem inline-block"><%= todayFullPt %></span>
+                                <span data-schedule-time="agenda" class="inline-block"></span>
                             </p>
 
                             <div>
-                                <button data-button="submitInfosSchedule" type="button"
-                                class="w-full flex flex-row justify-center items-center gap-4 md:gap-5 py-4 md:py-6 px-5 md:px-9 bg-green-500 rounded-[10px] shadow-md hover:bg-green-600 transition-colors focus:ring-4 focus:ring-green-400 focus:outline-none focus:ring-offset-2">
-                                    <span
-                                        class="text-[22px] md:text-[30px] font-semibold text-gray-50 uppercase text-center">Avançar</span>
-                                    <img src="/images/icons/calendar_clock.svg" alt="Confirme"
-                                        class="w-8 h-8 md:w-10 md:h-10">
-                                </button>
+                                <% if (hasServices) { %>
+                                    <button data-button="submitInfosSchedule" type="button"
+                                        class="w-full flex flex-row justify-center items-center gap-4 md:gap-5 py-4 md:py-6 px-5 md:px-9 bg-green-500 rounded-[10px] shadow-md hover:bg-green-600 transition-colors focus:ring-4 focus:ring-green-400 focus:outline-none focus:ring-offset-2 cursor-pointer">
+                                        <span class="text-[22px] md:text-[30px] font-semibold text-gray-50 uppercase text-center">Avançar</span>
+                                        <img src="/images/icons/calendar_clock.svg" alt="Confirme" class="w-8 h-8 md:w-10 md:h-10">
+                                    </button>
+                                <% } else { %>
+                                    <button data-button="submitInfosSchedule" type="button" disabled
+                                        title="Agendamento indisponível pois não há serviços cadastrados"
+                                        class="w-full flex flex-row justify-center items-center gap-4 md:gap-5 py-4 md:py-6 px-5 md:px-9 bg-gray-400 opacity-60 rounded-[10px] shadow-sm cursor-not-allowed">
+                                        <span class="text-[20px] md:text-[26px] font-semibold text-gray-50 uppercase text-center">Agendamento Indisponível</span>
+                                        <img src="/images/icons/calendar_clock.svg" alt="Indisponível" class="w-8 h-8 md:w-10 md:h-10 opacity-70">
+                                    </button>
+                                <% } %>
                             </div>
                         </div>
                     </aside>
@@ -154,6 +334,14 @@
             </section>
         </main>
     </div>
+
+    <!-- Scripts de dados renderizados pelo servidor (EJS) - Evita Fetch inicial para json-server -->
+    <script id="server-servicos" type="application/json">
+        <%- JSON.stringify(servicosLista) %>
+    </script>
+    <script id="server-agenda" type="application/json">
+        <%- JSON.stringify(agendamentosLista) %>
+    </script>
 
     <aside data-modal-info-menu="user" data-modal-info="agenda"
         class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
@@ -164,5 +352,3 @@
     { src: '/javascript/agendamento/script-agendamento.js', module: true },
     { src: '/javascript/menu-user/script-menu-user.js', module: true }    
 ] }) %>
-
-

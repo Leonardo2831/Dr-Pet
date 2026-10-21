@@ -10,13 +10,23 @@ const uploadCampos = upload.fields([
     { name: 'slide_images', maxCount: 10 }
 ]);
 
-// ==========================================
-// ROTA PRINCIPAL DO ADMINISTRADOR (GET /administrador)
-// ==========================================
+function extractImageBuffer(imgData) {
+    if (!imgData) return null;
+    if (Buffer.isBuffer(imgData)) return imgData;
+    if (typeof imgData === 'string' && imgData.startsWith('data:image/')) {
+        const base64Data = imgData.replace(/^data:image\/\w+;base64,/, '');
+        return Buffer.from(base64Data, 'base64');
+    }
+    if (typeof imgData === 'object' && imgData.image) {
+        return extractImageBuffer(imgData.image);
+    }
+    return null;
+}
+
 router.get('/administrador', (req, res) => {
     const querySlides = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
     const queryUsers = 'SELECT id, nome, email, telefone, tipo_usuario FROM usuario ORDER BY id ASC';
-    const queryProdutos = 'SELECT id, nome, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produtos ORDER BY id ASC';
+    const queryProdutos = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produto ORDER BY id ASC';
 
     db.query(querySlides, (err, slides) => {
         db.query(queryUsers, (err, usuarios) => {
@@ -35,48 +45,115 @@ router.get('/administrador', (req, res) => {
     });
 });
 
-// ==========================================
-// 1. LISTAR PRODUTOS (GET /produtos)
-// ==========================================
 router.get('/produtos', (req, res) => {
-    // Adicionado 'categoria' na listagem
-    const query = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produtos ORDER BY id ASC';
+    const query = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produto ORDER BY id ASC';
     db.query(query, (err, results) => {
         if (err) return res.status(500).json({ erro: "Erro ao buscar produtos." });
         return res.status(200).json(results);
     });
 });
 
-// ==========================================
-// 2. CADASTRAR PRODUTO (POST /produtos)
-// ==========================================
+// Buscar dados completos de 1 produto para edição (incluindo imagens do slide)
+router.get('/produtos/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('SELECT id, nome, categoria, preco, short_description, long_description FROM produto WHERE id = ?', [id], (err, rows) => {
+        if (err || rows.length === 0) {
+            return res.status(404).json({ erro: "Produto não encontrado." });
+        }
+        const prod = rows[0];
+        db.query('SELECT id, alt, ordem FROM produto_image WHERE fk_produto = ? ORDER BY ordem ASC', [id], (errImg, imgRows) => {
+            const imagesSlide = (imgRows || []).map(r => ({
+                id: r.id,
+                alt: r.alt,
+                ordem: r.ordem,
+                url: `/produtos/slide-imagem/${r.id}`
+            }));
+            return res.status(200).json({
+                id: prod.id,
+                name: prod.nome,
+                category: prod.categoria,
+                price: prod.preco,
+                shortDescription: prod.short_description,
+                longDescription: prod.long_description,
+                mainImage: `/produtos/imagem/${prod.id}`,
+                imagesSlide: imagesSlide
+            });
+        });
+    });
+});
+
+// Servir imagem principal do produto
+router.get('/produtos/imagem/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('SELECT main_image FROM produto WHERE id = ?', [id], (err, results) => {
+        if (err || results.length === 0 || !results[0].main_image) {
+            return res.status(404).send('Imagem não encontrada');
+        }
+        res.setHeader('Content-Type', 'image/jpeg');
+        res.send(results[0].main_image);
+    });
+});
+
+// Servir imagem de slide do produto
+router.get('/produtos/slide-imagem/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('SELECT image FROM produto_image WHERE id = ?', [id], (err, results) => {
+        if (err || results.length === 0 || !results[0].image) {
+            return res.status(404).send('Imagem não encontrada');
+        }
+        res.setHeader('Content-Type', 'image/jpeg');
+        res.send(results[0].image);
+    });
+});
+
 router.post('/produtos', uploadCampos, (req, res) => {
-    console.log("--> REQ.BODY RECEBIDO:", req.body);
-    console.log("--> REQ.FILES RECEBIDOS:", req.files);
+    const nome = (req.body.nome || req.body.name || req.body.produto || '').trim();
+    const categoria = (req.body.categoria || req.body.category || '').trim();
+    const preco = parseFloat(req.body.preco || req.body.price || 0) || 0.00;
+    const short_description = (req.body.short_description || req.body.shortDescription || '').trim();
+    const long_description = (req.body.long_description || req.body.longDescription || '').trim();
 
-    const nome = req.body.nome || req.body.produto || req.body.title || req.body.product_name || req.body.name || '';
-    
-    const categoria = req.body.categoria || req.body.category || '';
-    const precoBruto = req.body.preco || req.body.price || req.body.valor || 0;
-    const preco = parseFloat(precoBruto) || 0.00;
-    const short_description = req.body.short_description || req.body.descricao_curta || req.body.desc_curta || req.body.shortDescription || req.body.description_short || '';
-    const long_description = req.body.long_description || req.body.descricao_longa || req.body.desc_longa || req.body.longDescription || req.body.description_long || '';
-
-    let main_image = '';
+    let mainBuffer = null;
     if (req.files && req.files['main_image']) {
-        main_image = '/uploads/' + req.files['main_image'][0].filename;
-    } else if (req.body.main_image || req.body.image) {
-        main_image = req.body.main_image || req.body.image;
+        mainBuffer = require('fs').readFileSync(req.files['main_image'][0].path);
+    } else {
+        mainBuffer = extractImageBuffer(req.body.imageMain || req.body.main_image);
     }
-    
-    const query = 'INSERT INTO produtos (nome, categoria, preco, short_description, long_description, main_image, main_alt_image) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    
-    db.query(query, [nome, categoria, preco, short_description, long_description, main_image, nome], (err, results) => {
+
+    if (!nome || !categoria || !mainBuffer) {
+        return res.status(400).json({ erro: "Nome, categoria e imagem principal são obrigatórios." });
+    }
+
+    const query = 'INSERT INTO produto (nome, categoria, preco, short_description, long_description, main_image, main_alt_image) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    db.query(query, [nome, categoria, preco, short_description, long_description, mainBuffer, nome], (err, results) => {
         if (err) {
             console.error("Erro ao cadastrar produto no MySQL:", err);
             return res.status(500).json({ erro: "Erro ao cadastrar produto." });
         }
-        return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: results.insertId });
+
+        const newProductId = results.insertId;
+        const slides = req.body.imagesSlide || req.body.slide_images || [];
+
+        if (Array.isArray(slides) && slides.length > 0) {
+            const slideInserts = slides.map((s, idx) => {
+                const sBuf = extractImageBuffer(s.image || s);
+                const alt = s.alt || `${nome} - Slide ${idx + 1}`;
+                const ordem = s.ordem || (idx + 1);
+                return [newProductId, sBuf, alt, ordem];
+            }).filter(row => row[1] !== null);
+
+            if (slideInserts.length > 0) {
+                db.query('INSERT INTO produto_image (fk_produto, image, alt, ordem) VALUES ?', [slideInserts], (errSlide) => {
+                    if (errSlide) {
+                        console.error("Erro ao inserir imagens de slide:", errSlide);
+                    }
+                    return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: newProductId });
+                });
+                return;
+            }
+        }
+
+        return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: newProductId });
     });
 });
 
@@ -86,44 +163,93 @@ router.post('/produtos', uploadCampos, (req, res) => {
 router.put('/produtos/:id', uploadCampos, (req, res) => {
     const { id } = req.params;
 
-    // Busca o produto atual na base de dados para preservar o que não foi enviado
-    db.query('SELECT * FROM produtos WHERE id = ?', [id], (err, rows) => {
+    db.query('SELECT * FROM produto WHERE id = ?', [id], (err, rows) => {
         if (err || rows.length === 0) {
             return res.status(404).json({ erro: "Produto não encontrado." });
         }
 
         const produtoAtual = rows[0];
-
-        const nome = req.body.nome || req.body.produto || req.body.name || produtoAtual.nome;
+        const nome = req.body.nome || req.body.name || produtoAtual.nome;
         const categoria = req.body.categoria || req.body.category || produtoAtual.categoria;
-        const preco = req.body.preco !== undefined && req.body.preco !== '' ? req.body.preco : produtoAtual.preco;
-        const short_description = req.body.short_description || req.body.descricao_curta || produtoAtual.short_description;
-        const long_description = req.body.long_description || req.body.descricao_longa || produtoAtual.long_description;
+        const preco = req.body.preco !== undefined && req.body.preco !== '' ? parseFloat(req.body.preco) : produtoAtual.preco;
+        const short_description = req.body.short_description || req.body.shortDescription || produtoAtual.short_description;
+        const long_description = req.body.long_description || req.body.longDescription || produtoAtual.long_description;
 
-        const query = `
-            UPDATE produtos 
-            SET nome = ?, categoria = ?, preco = ?, short_description = ?, long_description = ? 
-            WHERE id = ?
-        `;
+        let mainBuffer = null;
+        if (req.files && req.files['main_image']) {
+            mainBuffer = require('fs').readFileSync(req.files['main_image'][0].path);
+        } else {
+            mainBuffer = extractImageBuffer(req.body.imageMain || req.body.main_image);
+        }
 
-        db.query(query, [nome, categoria, preco, short_description, long_description, id], (err, results) => {
-            if (err) {
-                console.error("Erro ao atualizar produto:", err);
+        const updateFields = ['nome = ?', 'categoria = ?', 'preco = ?', 'short_description = ?', 'long_description = ?'];
+        const updateValues = [nome, categoria, preco, short_description, long_description];
+
+        if (mainBuffer) {
+            updateFields.push('main_image = ?');
+            updateValues.push(mainBuffer);
+        }
+
+        updateValues.push(id);
+
+        const query = `UPDATE produto SET ${updateFields.join(', ')} WHERE id = ?`;
+        db.query(query, updateValues, (errUpdate) => {
+            if (errUpdate) {
+                console.error("Erro ao atualizar produto:", errUpdate);
                 return res.status(500).json({ erro: "Erro ao atualizar produto." });
             }
-            return res.status(200).json({ mensagem: "Produto atualizado com sucesso!" });
+
+            const slides = req.body.imagesSlide;
+            if (Array.isArray(slides)) {
+                db.query('SELECT id FROM produto_image WHERE fk_produto = ?', [id], (errSelect, existingRows) => {
+                    const existingIds = (existingRows || []).map(r => r.id);
+                    const incomingIds = slides.filter(s => s.id).map(s => Number(s.id));
+
+                    // Deleta os slides que foram removidos
+                    const toDelete = existingIds.filter(oldId => !incomingIds.includes(oldId));
+                    const deletePromise = toDelete.length > 0 
+                        ? new Promise(resolve => db.query('DELETE FROM produto_image WHERE id IN (?)', [toDelete], resolve))
+                        : Promise.resolve();
+
+                    deletePromise.then(() => {
+                        // Atualiza a ordem dos slides existentes e insere novos
+                        const tasks = slides.map((s, idx) => {
+                            const ordem = idx + 1;
+                            const alt = s.alt || `${nome} - Slide ${ordem}`;
+                            const newBuf = extractImageBuffer(s.image || s);
+
+                            if (s.id && existingIds.includes(Number(s.id))) {
+                                if (newBuf) {
+                                    return new Promise(resolve => db.query('UPDATE produto_image SET image = ?, alt = ?, ordem = ? WHERE id = ?', [newBuf, alt, ordem, s.id], resolve));
+                                } else {
+                                    return new Promise(resolve => db.query('UPDATE produto_image SET ordem = ? WHERE id = ?', [ordem, s.id], resolve));
+                                }
+                            } else if (newBuf) {
+                                return new Promise(resolve => db.query('INSERT INTO produto_image (fk_produto, image, alt, ordem) VALUES (?, ?, ?, ?)', [id, newBuf, alt, ordem], resolve));
+                            }
+                            return Promise.resolve();
+                        });
+
+                        Promise.all(tasks).then(() => {
+                            return res.status(200).json({ mensagem: "Produto atualizado com sucesso!" });
+                        }).catch(errTasks => {
+                            console.error("Erro ao atualizar slides:", errTasks);
+                            return res.status(200).json({ mensagem: "Produto atualizado com sucesso!" });
+                        });
+                    });
+                });
+            } else {
+                return res.status(200).json({ mensagem: "Produto atualizado com sucesso!" });
+            }
         });
     });
 });
 
-// ==========================================
-// 4. EXCLUIR PRODUTO (DELETE /produtos/:id)
-// ==========================================
 router.delete('/produtos/:id', (req, res) => {
     const { id } = req.params;
     
     db.query('DELETE FROM produto_image WHERE fk_produto = ?', [id], () => {
-        db.query('DELETE FROM produtos WHERE id = ?', [id], (err, results) => {
+        db.query('DELETE FROM produto WHERE id = ?', [id], (err, results) => {
             if (err) return res.status(500).json({ erro: "Erro ao excluir produto." });
             return res.status(200).json({ mensagem: "Produto excluído com sucesso!" });
         });

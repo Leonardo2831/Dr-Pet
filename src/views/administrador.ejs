@@ -286,14 +286,39 @@
                                     <input type="file" id="novo-servico-imagem" name="imagem" accept="image/*" required
                                         class="peer sr-only" />
                                     <label for="novo-servico-imagem"
-                                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-colors">
-                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
-                                            class="w-8 h-8 opacity-60" />
-                                        <span
-                                            class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
-                                            Clique para selecionar a imagem do serviço
-                                        </span>
+                                        class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
+                                        
+                                        <!-- Estado Inicial: Sem imagem selecionada -->
+                                        <div data-placeholder="novo-servico" class="flex flex-col items-center justify-center gap-3">
+                                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                                                class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                            <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
+                                                Clique para selecionar a imagem do serviço
+                                            </span>
+                                        </div>
+
+                                        <!-- Estado com Preview: Imagem selecionada -->
+                                        <div data-preview-wrapper="novo-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
+                                            <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
+                                                <img data-preview-img="novo-servico" src="" alt="Preview da imagem"
+                                                    class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
+                                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">
+                                                    Clique para trocar a imagem
+                                                </div>
+                                            </div>
+                                            <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
+                                        </div>
                                     </label>
+
+                                    <!-- Confere com o nome do arquivo (estilo Adicionar Produto) e opção de remover -->
+                                    <div data-info-wrapper="novo-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
+                                        <span data-info="novo-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5">
+                                        </span>
+                                        <button type="button" data-remove-img="novo-servico"
+                                            class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">
+                                            Remover
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <button type="submit"
@@ -372,14 +397,39 @@
                                     <input type="file" id="atualizar-servico-imagem" name="imagem" accept="image/*"
                                         class="peer sr-only" />
                                     <label for="atualizar-servico-imagem"
-                                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-colors">
-                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
-                                            class="w-8 h-8 opacity-60" />
-                                        <span
-                                            class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
-                                            Clique para trocar a imagem (opcional, mantém a atual se vazio)
-                                        </span>
+                                        class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
+                                        
+                                        <!-- Estado Inicial: Sem imagem selecionada -->
+                                        <div data-placeholder="atualizar-servico" class="flex flex-col items-center justify-center gap-3">
+                                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                                                class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                            <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
+                                                Clique para trocar a imagem (opcional, mantém a atual se vazio)
+                                            </span>
+                                        </div>
+
+                                        <!-- Estado com Preview: Imagem selecionada -->
+                                        <div data-preview-wrapper="atualizar-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
+                                            <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
+                                                <img data-preview-img="atualizar-servico" src="" alt="Preview da imagem"
+                                                    class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
+                                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">
+                                                    Clique para trocar a imagem
+                                                </div>
+                                            </div>
+                                            <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
+                                        </div>
                                     </label>
+
+                                    <!-- Confere com o nome do arquivo (estilo Adicionar Produto) e opção de remover -->
+                                    <div data-info-wrapper="atualizar-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
+                                        <span data-info="atualizar-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5">
+                                        </span>
+                                        <button type="button" data-remove-img="atualizar-servico"
+                                            class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">
+                                            Remover
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <button type="submit"
@@ -694,43 +744,92 @@
                     </p>
                 </div>
 
-                <div class="flex flex-col gap-[10px]">
-                    <p class="font-sans font-semibold text-base md:text-lg text-gray-700">Imagem Principal
-                    </p>
+                <!-- Imagem Principal -->
+                <div class="flex flex-col gap-[10px]" data-image-box="product-main-image">
+                    <p class="font-sans font-semibold text-base md:text-lg text-gray-700">Imagem Principal</p>
                     <label for="input-main-image"
-                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
-                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
-                            class="w-8 h-8 opacity-60" />
-                        <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar a
-                            imagem principal</span>
+                        class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-all overflow-hidden group">
+                        
+                        <!-- Estado Inicial: Sem imagem -->
+                        <div data-placeholder="product-main-image" class="flex flex-col items-center justify-center gap-3">
+                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
+                                class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
+                            <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
+                                Clique para selecionar a imagem principal
+                            </span>
+                        </div>
+
+                        <!-- Estado com Preview: Imagem selecionada -->
+                        <div data-preview-wrapper="product-main-image" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
+                            <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
+                                <img data-preview-img="product-main-image" src="" alt="Preview da imagem principal"
+                                    class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">
+                                    Clique para trocar a imagem
+                                </div>
+                            </div>
+                            <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
+                        </div>
                     </label>
                     <input data-input="imageMainProduct" id="input-main-image" type="file" name="mainImage"
-                        accept="image/*" required class="hidden" />
-                    <span data-info="mainImage" class="font-sans text-sm text-green-600 truncate hidden"></span>
+                        accept="image/*" class="peer sr-only" />
+
+                    <!-- Confere com o nome do arquivo (estilo Adicionar Produto) e opção de remover -->
+                    <div data-info-wrapper="product-main-image" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
+                        <span data-info="mainImage" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5"></span>
+                        <button type="button" data-remove-img="product-main-image"
+                            class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">
+                            Remover
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex flex-col gap-[10px]">
-                    <p for="input-slide-images" class="font-sans font-semibold text-base md:text-lg text-gray-700">
-                        Imagens do Slide</p>
+                <!-- Imagens do Slide (Galeria Reordenável Visualmente) -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <p class="font-sans font-semibold text-base md:text-lg text-gray-700">Imagens do Slide</p>
+                        <span data-slide-count-badge class="text-xs font-semibold px-2.5 py-1 bg-green-100 text-green-800 rounded-full hidden">
+                            0 slides
+                        </span>
+                    </div>
+
+                    <!-- Botão/Área para adicionar imagens ao slide -->
                     <label for="input-slide-images"
-                        class="cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-colors">
-                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagens"
-                            class="w-8 h-8 opacity-60" />
-                        <span class="font-sans font-medium text-sm md:text-base text-gray-500">Clique para selecionar as
-                            imagens do
-                            slide</span>
+                        class="cursor-pointer flex flex-col items-center justify-center gap-2 px-4 py-5 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 transition-all group">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagens"
+                                class="w-6 h-6 opacity-60 group-hover:opacity-100 transition-opacity" />
+                            <span class="font-sans font-medium text-sm md:text-base text-gray-600 group-hover:text-green-700 transition-colors">
+                                Clique ou arraste para adicionar fotos ao slide
+                            </span>
+                        </div>
+                        <span class="font-sans text-xs text-gray-400">
+                            Selecione uma ou mais fotos (mantenha Ctrl ou Shift para escolher várias de uma vez)
+                        </span>
                     </label>
                     <input data-input="imageSlideProduct" id="input-slide-images" type="file" name="slideImages"
-                        accept="image/*" multiple required class="hidden" />
-                    <div class="font-sans text-xs md:text-sm text-amber-600 flex items-center gap-3">
-                        <span class="text-base">• </span>
-                        <p>
-                            Selecione todas as imagens do slide de uma vez
-                            (mantenha <b>Ctrl</b> ou
-                            <b>Shift</b> pressionado ao selecionar).
-                        </p>
+                        accept="image/*" multiple class="peer sr-only" />
+
+                    <!-- Galeria Interativa com Reordenação -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs md:text-sm font-semibold text-gray-600 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                                </svg>
+                                Ordem de exibição dos slides (use as setas ou arraste para mudar a ordem):
+                            </span>
+                            <span data-info="slideImages" class="font-sans text-xs font-semibold text-green-600 truncate hidden"></span>
+                        </div>
+
+                        <!-- Lista visual de slides horizontal/scroll -->
+                        <div data-slide-gallery
+                            class="min-h-[140px] p-3 rounded-[10px] bg-gray-50 border border-gray-200 flex flex-row flex-wrap sm:flex-nowrap sm:overflow-x-auto gap-3 items-center scroll">
+                            <p data-slide-empty class="text-sm text-gray-400 mx-auto text-center py-4">
+                                Nenhum slide adicionado ainda. Adicione fotos acima para montar o slide do produto.
+                            </p>
+                        </div>
                     </div>
-                    <span data-info="slideImages" class="font-sans text-sm text-green-600 truncate hidden"></span>
                 </div>
 
                 <button data-button="createProduct" type="button"

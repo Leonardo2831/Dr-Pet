@@ -44,7 +44,7 @@ CREATE TABLE service_infos(
     duracao DECIMAL(10,2) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
     descricao VARCHAR(500) NOT NULL,
-    imagem MEDIUMBLOB NOT NULL,
+    imagem MEDIUMBLOB NULL,
 	PRIMARY KEY(id)
 );
 
@@ -98,9 +98,15 @@ CREATE TABLE produto_image (
 INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar)
 VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null);
 
+-- Exemplos opcionais de inserção de serviços (caso queira adicionar serviços para agendamento):
+-- INSERT INTO service_infos (nome, duracao, preco, descricao, imagem) VALUES
+-- ('Banho e Tosa', 90.00, 100.00, 'Banho completo e tosa especializada com profissionais dedicados.', NULL),
+-- ('Vacinação', 30.00, 50.00, 'Vacinação segura com acompanhamento e carteirinha em dia.', NULL),
+-- ('Cirurgia', 150.00, 200.00, 'Procedimentos cirúrgicos veterinários com ambiente esterilizado.', NULL);
+
 -- Para quem ja criou a database no computador
 -- Para bancos já criados, rode apenas o comando abaixo (descomente) em vez de recriar a tabela:
 -- ALTER TABLE service_infos
 --     ADD COLUMN descricao VARCHAR(500) NOT NULL,
---     ADD COLUMN imagem MEDIUMBLOB NOT NULL;
+--     ADD COLUMN imagem MEDIUMBLOB NULL;
 -- ALTER TABLE slide_home MODIFY COLUMN image LONGBLOB NOT NULL;
