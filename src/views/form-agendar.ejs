@@ -34,6 +34,7 @@
                                 minlength="3"
                                 maxlength="50"
                                 pattern="^[a-zA-ZÀ-Ã¿\s]+$"
+                                value="<%= (locals.user && locals.user.nome) ? locals.user.nome : '' %>"
                             />
                         </div>
 
@@ -55,6 +56,7 @@
                                 maxlength="15"
                                 pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
                                 title="Digite um telefone válido com DDD. Ex: (11) 99999-9999 ou 11999999999"
+                                value="<%= (locals.user && locals.user.telefone) ? locals.user.telefone : '' %>"
                             />
                         </div>
 
@@ -72,7 +74,8 @@
                                 class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
                                 required
                                 minlength="3"
-                                maxlength="70"
+                                maxlength="255"
+                                value="<%= locals.enderecoFormatado || (locals.user && locals.user.endereco) || '' %>"
                             />
                         </div>
                     </fieldset>
@@ -169,5 +172,3 @@
     { src: '/javascript/menu-user/script-menu-user.js', module: true },
     { src: '/javascript/forms/agendamento-service/script-agendamento-form.js', module: true }    
 ] }) %>
-
-

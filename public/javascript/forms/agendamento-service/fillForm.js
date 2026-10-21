@@ -16,16 +16,16 @@ export default async function fillForm(form) {
     const inputEndereco = form.querySelector('#endereco');
     const inputNomePet = form.querySelector('#nomePet');
 
-    if (inputNome && userData.userName) {
+    if (inputNome && !inputNome.value.trim() && userData.userName) {
         inputNome.value = userData.userName;
     }
 
-    if (inputTelefone && userData.phone) {
+    if (inputTelefone && !inputTelefone.value.trim() && userData.phone) {
         inputTelefone.value = userData.phone;
         formatPhone('[data-input="formatPhone"]');
     }
 
-    if (inputEndereco && userData.address?.length > 0) {
+    if (inputEndereco && !inputEndereco.value.trim() && userData.address?.length > 0) {
         const addr = userData.address[0];
         const parts = [addr.rua, addr.numero, addr.bairro, addr.cidade, addr.estado].filter(Boolean);
         inputEndereco.value = parts.join(', ');
