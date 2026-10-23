@@ -9,6 +9,8 @@ router.get('/form-agendar', verificarLogin, (req, res) => {
     if (!userId) {
         return res.render('form-agendar', { enderecoFormatado: '' });
     }
+
+    return res.render('form-agendar', {});
 });
 
 module.exports = router;
