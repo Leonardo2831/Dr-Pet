@@ -34,6 +34,7 @@ export default async function schedule(form) {
             date: infosSchedule.date,
             hour: infosSchedule.hour,
             petNome: formDataObject.get('nomePet'),
+            fk_pet: formDataObject.get('petId') || null,
             observation: formDataObject.get('descricao') || '',
             endereco: formDataObject.get('endereco') || '',
             buscarResidencia: formDataObject.get('buscarResidencia') === 'on'

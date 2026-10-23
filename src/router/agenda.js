@@ -64,7 +64,6 @@ router.get('/servicos/imagem/:id', (req, res) => {
     });
 });
 
-// SALVAR AGENDAMENTO (POST /agenda)
 router.post('/agenda', verificarLogin, (req, res) => {
     const userId = req.session.usuario.id;
 
@@ -72,32 +71,32 @@ router.post('/agenda', verificarLogin, (req, res) => {
         return res.status(400).json({ erro: 'Data, horário e serviço são obrigatórios.' });
     }
 
-    const query = `
-                INSERT INTO agenda 
-                (date_agendamento, hour_agendamento, buscarResidencia, observation, endereco, pendente, fk_user, fk_pet, fk_service) 
-                VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)
-            `;
+        const query = `
+            INSERT INTO agenda 
+            (date_agendamento, hour_agendamento, buscarResidencia, observation, endereco, pendente, fk_user, fk_pet, fk_service) 
+            VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)
+        `;
 
-            db.query(
-        query,
-                [
-                    date,
-                    hour,
-                    buscarResidencia ? 1 : 0,
-            observation || null,
-            endereco || null,
-                    userId,
+        db.query(
+            query,
+            [
+                date,
+                hour,
+                buscarResidencia ? 1 : 0,
+                observation || null,
+                endereco || null,
+                userId,
             fk_pet || null,
-            fk_service
-                ],
-        (err, result) => {
-            if (err) {
-                console.error('Erro ao salvar agendamento no MySQL:', err);
-                return res.status(500).json({ erro: 'Erro ao salvar agendamento.' });
-                    }
-            return res.status(201).json({ mensagem: 'Agendamento realizado com sucesso!', id: result.insertId });
+                fk_service
+            ],
+            (err, result) => {
+                if (err) {
+                    console.error('Erro ao salvar agendamento no MySQL:', err);
+                    return res.status(500).json({ erro: 'Erro ao salvar agendamento.' });
                 }
-    );
+                return res.status(201).json({ mensagem: 'Agendamento realizado com sucesso!', id: result.insertId });
+            }
+        );
 });
 
 module.exports = router;

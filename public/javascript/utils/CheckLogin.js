@@ -1,10 +1,9 @@
 import Storage from './Storage.js';
-import { clickOutside } from './clickOutside.js';
 
 export default class CheckLogin {
-    constructor(selectorModal) {
+    constructor(selectorModal = '[data-modal="loginRequired"]') {
+        this.selectorModal = selectorModal;
         this.modal = document.querySelector(selectorModal);
-        this.loginElements = document.querySelectorAll('[data-login]');
 
         this.handleClick = this.handleClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -31,21 +30,27 @@ export default class CheckLogin {
     }
 
     openModal() {
+        if (!this.modal) {
+            this.modal = document.querySelector(this.selectorModal || '[data-modal="loginRequired"]');
+        }
         if (!this.modal) return;
+
         this.modal.classList.remove('hidden');
         this.modal.classList.add('flex');
 
-        requestAnimationFrame(() => {
-            this.modal.querySelector('[data-login-content]')
-                ?.classList.add('animate-fadeItem');
-            this.modal.querySelector('[data-login-overlay]')
-                ?.classList.add('animate-fadeItem');
-        });
-
         const content = this.modal.querySelector('[data-login-content]');
-        if (content) {
-            clickOutside(content, 'click', this.closeModal);
-        }
+        const overlay = this.modal.querySelector('[data-login-overlay]');
+
+        requestAnimationFrame(() => {
+            if (overlay) {
+                overlay.classList.remove('opacity-0');
+                overlay.classList.add('opacity-100');
+            }
+            if (content) {
+                content.classList.remove('opacity-0', 'scale-95');
+                content.classList.add('opacity-100', 'scale-100');
+            }
+        });
     }
 
     closeModal() {
@@ -53,17 +58,25 @@ export default class CheckLogin {
         const content = this.modal.querySelector('[data-login-content]');
         const overlay = this.modal.querySelector('[data-login-overlay]');
 
-        content?.classList.remove('animate-fadeItem');
-        overlay?.classList.remove('animate-fadeItem');
+        if (overlay) {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+        }
+        if (content) {
+            content.classList.remove('opacity-100', 'scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+        }
 
         setTimeout(() => {
             this.modal.classList.add('hidden');
             this.modal.classList.remove('flex');
-        }, 150);
+        }, 250);
     }
 
     handleClick(event) {
-        if (this.isLogged()) return;
+        if (this.isLogged()) {
+            return;
+        }
 
         event.preventDefault();
         event.stopPropagation();
@@ -71,18 +84,51 @@ export default class CheckLogin {
     }
 
     addEventListeners() {
-        this.loginElements.forEach(element => {
-            if (element._checkLoginAttached) return;
-            element._checkLoginAttached = true;
-            element.addEventListener('click', this.handleClick);
+        if (CheckLogin._listenersAttached) return;
+        CheckLogin._listenersAttached = true;
+
+        // Delegação global: captura qualquer clique em [data-login] ou nos cards de serviço .service-card
+        document.addEventListener('click', (event) => {
+            // Ignora se o clique veio de dentro do próprio modal
+            if (event.target.closest('[data-modal="loginRequired"]')) {
+                return;
+            }
+
+            const trigger = event.target.closest('[data-login], .service-card');
+            if (trigger) {
+                this.handleClick(event);
+            }
         });
 
-        // Botão de fechar do modal
-        const closeButton = this.modal?.querySelector('[data-login-close]');
-        if (closeButton && !closeButton._checkLoginAttached) {
-            closeButton._checkLoginAttached = true;
-            closeButton.addEventListener('click', this.closeModal);
-        }
+        // Fechar ao clicar no botão de fechar
+        document.addEventListener('click', (event) => {
+            const closeBtn = event.target.closest('[data-login-close]');
+            if (closeBtn) {
+                event.preventDefault();
+                event.stopPropagation();
+                this.closeModal();
+            }
+        });
+
+        // Click outside: fecha ao clicar no overlay/backdrop fora do card de conteúdo
+        document.addEventListener('click', (event) => {
+            if (!this.modal || this.modal.classList.contains('hidden')) {
+                return;
+            }
+
+            const content = this.modal.querySelector('[data-login-content]');
+            if (this.modal.contains(event.target) && content && !content.contains(event.target)) {
+                event.preventDefault();
+                this.closeModal();
+            }
+        });
+
+        // Tecla ESC para fechar
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
+                this.closeModal();
+            }
+        });
     }
 
     init() {
@@ -90,10 +136,7 @@ export default class CheckLogin {
             Storage.delete('user-id');
         }
 
-        if (this.modal && this.loginElements.length > 0) {
-            this.addEventListeners();
-        }
-
+        this.addEventListeners();
         return this;
     }
 }

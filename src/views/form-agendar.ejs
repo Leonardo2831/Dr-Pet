@@ -1,5 +1,12 @@
 <%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Agendamento' }) %>
 
+<%
+    const end = (locals.dataUser && dataUser.endereco) || {};
+    const enderecoFormatado = end && end.rua
+        ? [end.rua, end.numero ? `nº ${end.numero}` : '', end.bairro, end.cidade, end.estado].filter(Boolean).join(', ') + (end.complemento ? ` (${end.complemento})` : '')
+        : '';
+%>
+
     <main class="flex flex-col lg:flex-row">
         <section
             class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]"
@@ -34,7 +41,7 @@
                                 minlength="3"
                                 maxlength="50"
                                 pattern="^[a-zA-ZÀ-Ã¿\s]+$"
-                                value="<%= (locals.user && locals.user.nome) ? locals.user.nome : '' %>"
+                                value="<%= (locals.dataUser && dataUser.usuario && (dataUser.usuario.nome || dataUser.usuario.name)) || '' %>"
                             />
                         </div>
 
@@ -56,16 +63,70 @@
                                 maxlength="15"
                                 pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
                                 title="Digite um telefone válido com DDD. Ex: (11) 99999-9999 ou 11999999999"
-                                value="<%= (locals.user && locals.user.telefone) ? locals.user.telefone : '' %>"
+                                value="<%= (locals.dataUser && dataUser.usuario && dataUser.usuario.telefone) || '' %>"
                             />
                         </div>
 
                         <div class="flex flex-col gap-[15px]">
-                            <label
-                                for="endereco"
-                                class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
-                                >Endereço</label
-                            >
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                                <label
+                                    for="endereco"
+                                    class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                    >Endereço</label
+                                >
+                                <% if (locals.dataUser && dataUser.length > 0 && dataUser[0].endereco && dataUser[0].endereco.id) { %>
+                                    <span class="text-xs md:text-sm text-gray-500 font-normal">
+                                        Escolha um endereço salvo ou digite outro
+                                    </span>
+                                <% } %>
+                            </div>
+
+                            <% if (locals.dataUser && dataUser.length > 0 && dataUser[0].endereco && dataUser[0].endereco.id) { %>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-semibold text-gray-700">Selecione um endereço salvo:</span>
+                                    <div class="flex flex-wrap gap-2.5" id="container-botoes-endereco">
+                                        <% 
+                                        const enderecosRenderizados = [];
+                                        dataUser.forEach((item, idx) => { 
+                                            const endItem = item.endereco;
+                                            if (!endItem || !endItem.id || enderecosRenderizados.includes(endItem.id)) return;
+                                            enderecosRenderizados.push(endItem.id);
+
+                                            const partes = [
+                                                endItem.rua,
+                                                endItem.numero ? `nº ${endItem.numero}` : '',
+                                                endItem.bairro,
+                                                endItem.cidade,
+                                                endItem.estado
+                                            ].filter(Boolean).join(', ') + (endItem.complemento ? ` (${endItem.complemento})` : '');
+                                            const isPrimeiro = enderecosRenderizados.length === 1;
+                                        %>
+                                            <button
+                                                type="button"
+                                                class="btn-escolha-endereco flex items-center gap-2 px-3.5 py-2 rounded-lg border text-sm md:text-base font-medium transition-all duration-200 cursor-pointer <%= isPrimeiro ? 'bg-green-600 text-white border-green-600 shadow-sm' : 'bg-white text-gray-700 border-gray-300 hover:border-green-500 hover:bg-green-50/50' %>"
+                                                data-endereco-completo="<%= partes %>"
+                                                data-index="<%= enderecosRenderizados.length - 1 %>"
+                                                title="<%= partes %>"
+                                            >
+                                                <span>🏠</span>
+                                                <span class="font-semibold">Endereço <%= enderecosRenderizados.length %></span>
+                                                <% if (endItem.bairro) { %>
+                                                    <span class="text-xs opacity-80">(<%= endItem.bairro %>)</span>
+                                                <% } %>
+                                            </button>
+                                        <% }) %>
+
+                                        <button
+                                            type="button"
+                                            id="btn-outro-endereco"
+                                            class="btn-escolha-endereco flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-dashed border-gray-400 bg-white text-gray-600 hover:border-green-600 hover:text-green-700 hover:bg-green-50 text-sm md:text-base font-medium transition-all duration-200 cursor-pointer"
+                                        >
+                                            <span> + Outro endereço</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            <% } %>
+
                             <input
                                 type="text"
                                 id="endereco"
@@ -75,7 +136,7 @@
                                 required
                                 minlength="3"
                                 maxlength="255"
-                                value="<%= locals.enderecoFormatado || (locals.user && locals.user.endereco) || '' %>"
+                                value="<%= enderecoFormatado || (locals.dataUser && dataUser.endereco && dataUser.endereco.rua) || '' %>"
                             />
                         </div>
                     </fieldset>
@@ -89,11 +150,68 @@
 
                         <div class="flex flex-col gap-8 md:gap-[30px]">
                             <div class="flex flex-col gap-[15px]">
-                                <label
-                                    for="nomePet"
-                                    class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
-                                >Nome do pet</label
-                                >
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                                    <label
+                                        for="nomePet"
+                                        class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
+                                    >Nome do pet</label
+                                    >
+                                    <% if (locals.dataUser && dataUser.length > 0 && dataUser[0].pet && dataUser[0].pet.id) { %>
+                                        <span class="text-xs md:text-sm text-gray-500 font-normal">
+                                            Escolha um pet cadastrado ou digite outro
+                                        </span>
+                                    <% } %>
+                                </div>
+
+                                <% if (locals.dataUser && dataUser.length > 0 && dataUser[0].pet && dataUser[0].pet.id) { %>
+                                    <div class="flex flex-col gap-2">
+                                        <span class="text-sm font-semibold text-gray-700">Selecione um dos seus pets:</span>
+                                        <div class="flex flex-wrap gap-2.5" id="container-botoes-pet">
+                                            <% 
+                                            const petsRenderizados = [];
+                                            dataUser.forEach((item, idx) => { 
+                                                const petItem = item.pet;
+                                                if (!petItem || !petItem.id || petsRenderizados.includes(petItem.id)) return;
+                                                petsRenderizados.push(petItem.id);
+
+                                                const isPrimeiro = petsRenderizados.length === 1;
+                                                const icone = petItem.genero === 'femea' ? '🎀' : '🐾';
+                                            %>
+                                                <button
+                                                    type="button"
+                                                    class="btn-escolha-pet flex items-center gap-2 px-3.5 py-2 rounded-lg border text-sm md:text-base font-medium transition-all duration-200 cursor-pointer <%= isPrimeiro ? 'bg-green-600 text-white border-green-600 shadow-sm' : 'bg-white text-gray-700 border-gray-300 hover:border-green-500 hover:bg-green-50/50' %>"
+                                                    data-pet-id="<%= petItem.id %>"
+                                                    data-pet-nome="<%= petItem.nome || petItem.name %>"
+                                                    data-pet-raca="<%= petItem.raca || '' %>"
+                                                    data-pet-genero="<%= petItem.genero || '' %>"
+                                                    data-index="<%= petsRenderizados.length - 1 %>"
+                                                >
+                                                    <span><%= icone %></span>
+                                                    <span class="font-semibold">Pet <%= petsRenderizados.length %>: <%= petItem.nome || petItem.name %></span>
+                                                    <% if (petItem.raca) { %>
+                                                        <span class="text-xs opacity-80">(<%= petItem.raca %>)</span>
+                                                    <% } %>
+                                                </button>
+                                            <% }) %>
+
+                                            <button
+                                                type="button"
+                                                id="btn-outro-pet"
+                                                class="btn-escolha-pet flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-dashed border-gray-400 bg-white text-gray-600 hover:border-green-600 hover:text-green-700 hover:bg-green-50 text-sm md:text-base font-medium transition-all duration-200 cursor-pointer"
+                                            >
+                                                <span> + Outro pet</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <input
+                                    type="hidden"
+                                    id="petId"
+                                    name="petId"
+                                    value="<%= (locals.dataUser && dataUser.pet && dataUser.pet.id) || '' %>"
+                                />
+
                                 <input
                                     type="text"
                                     id="nomePet"
@@ -103,6 +221,7 @@
                                     required
                                     minlength="2"
                                     maxlength="50"
+                                    value="<%= (locals.dataUser && dataUser.pet && (dataUser.pet.nome || dataUser.pet.name)) || '' %>"
                                 />
                             </div>
 
