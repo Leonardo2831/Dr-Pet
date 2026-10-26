@@ -16,9 +16,10 @@ function getServiceSlug(nome) {
 }
 
 // ROTA PRINCIPAL DA AGENDA (GET /agenda)
-router.get('/agenda', verificarLogin, (req, res) => {
+// router.get('/agenda', verificarLogin, (req, res) => {
+router.get('/agenda', (req, res) => {
     const queryServicos = 'SELECT id, nome, duracao, preco, descricao, (imagem IS NOT NULL AND LENGTH(imagem) > 0) AS has_imagem FROM service_infos ORDER BY id ASC';
-    const queryAgenda = "SELECT id, DATE_FORMAT(date_agendamento, '%Y-%m-%d') AS date, TIME_FORMAT(hour_agendamento, '%H:%i') AS hour, fk_service FROM agenda WHERE date_agendamento >= CURDATE()";
+    const queryAgenda = "SELECT id, DATE_FORMAT(dateAgendamento, '%Y-%m-%d') AS date, TIME_FORMAT(hourAgendamento, '%H:%i') AS hour, fk_service FROM agenda WHERE dateAgendamento >= CURDATE()";
 
     db.query(queryServicos, (errServicos, servicosResults) => {
         if (errServicos) {

@@ -1,4 +1,3 @@
-CREATE DATABASE petshop;
 USE petshop;
 
 CREATE TABLE usuario (
@@ -50,17 +49,18 @@ CREATE TABLE service_infos(
 
 CREATE TABLE agenda (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    date_agendamento DATE NOT NULL,
-    hour_agendamento TIME NOT NULL,
+    dateAgendamento DATE NOT NULL,
+    hourAgendamento TIME NOT NULL,
     buscarResidencia BOOLEAN NOT NULL DEFAULT FALSE,
     observation VARCHAR(255),
-    endereco varchar(255),
+    endereco VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    telefone CHAR(12) NOT NULL,
     pendente BOOLEAN NOT NULL DEFAULT TRUE,
+    nomePet VARCHAR(100) NOT NULL,
     fk_user INTEGER NOT NULL,
-    fk_pet INTEGER NOT NULL,
     fk_service INTEGER NOT NULL,
     FOREIGN KEY(fk_user) REFERENCES usuario(id),
-    FOREIGN KEY(fk_pet) REFERENCES pet(id),
     FOREIGN KEY(fk_service) REFERENCES service_infos(id),
     PRIMARY KEY(id)
 );
