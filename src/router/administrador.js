@@ -25,25 +25,31 @@ function extractImageBuffer(imgData) {
 }
 
 router.get('/administrador', (req, res) => {
-    const querySlides = 'SELECT id, alt, ordem FROM slide_home ORDER BY ordem ASC';
-    const queryUsers = 'SELECT id, nome, email, telefone, tipo_usuario FROM usuario ORDER BY id ASC';
-    const queryProdutos = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produto ORDER BY id ASC';
+    const querySlides = 'SELECT * FROM slide_home ORDER BY ordem ASC';
+    const queryUsers = 'SELECT id, nome, email, telefone FROM usuario';
+    const queryProdutos = 'SELECT * FROM produto';
+    const queryAgendamento = 'SELECT * FROM agendamentos';
+    const queryServicos = 'SELECT * FROM service_infos';
 
-    db.query(querySlides, (err, slides) => {
-        db.query(queryUsers, (err, usuarios) => {
-            db.query(queryProdutos, (err, produtos) => {
-                db.query('SELECT id, nome FROM service_infos ORDER BY nome ASC', (err, servicos) => {
-                    res.render('administrador', {
-                        slides: slides || [],
-                        agendamentos: [],
-                        produtos: produtos || [],
-                        usuarios: usuarios || [],
-                        servicos: servicos || []
-                    });
-                });
-            });
+    try {
+        const [slides, produtos, usuarios, agendamentos, servicos] = Promise.all([
+            db.query(querySlides, (err) => err ? console.log("Erro ao buscar slides.") : slides),
+            db.query(queryProdutos, (err) => err ? console.log("Erro ao buscar produtos.") : produtos),
+            db.query(queryUsers, (err) => err ? console.log("Erro ao buscar usuários.") : usuarios),
+            db.query(queryAgendamento, (err) => err ? console.log("Erro ao buscar agendamentos.") : agendamentos),
+            db.query(queryServicos, (err) => err ? console.log("Erro ao buscar serviços.") : servicos)
+        ]);
+    } catch (err) {
+        console.log("Erro ao fazer as requisições necessárias: " + err);
+    } finally {
+        res.render('administrador', {
+            slides: slides || [],
+            produtos: produtos || [],
+            usuarios: usuarios || [],
+            agendamentos: agendamentos || [],
+            servicos: servicos || []
         });
-    });
+    }
 });
 
 router.get('/produtos', (req, res) => {
