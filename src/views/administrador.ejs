@@ -533,17 +533,49 @@
             </section>
 
             <section id="section-agendamentos" data-tab-content
-                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
-                <div class="flex flex-col gap-2">
-                    <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700">
-                        Solicitações de agendamento
-                    </h2>
-                    <p class="font-sans font-medium text-base md:text-lg text-gray-600">
-                        Analise as solicitações recebidas e escolha entre aceitar ou recusar cada atendimento.
-                    </p>
+                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20 flex-col gap-8">
+                
+                <!-- Cabeçalho da Seção com Ação Global -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 w-full">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3.5 h-3.5 rounded-full bg-green-600"></span>
+                            <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700">
+                                Solicitações de Agendamento
+                            </h2>
+                        </div>
+                        <p class="font-sans font-medium text-base md:text-lg text-gray-600 max-w-2xl">
+                            Analise as solicitações pendentes e escolha entre aceitar com o 
+                            (<strong class="text-green-700">✔</strong>) 
+                            ou recusar com o (<strong class="text-red-alert">✖</strong>). 
+                            Ao confirmar, um e-mail personalizado com o editor Quill é enviado ao cliente.
+                        </p>
+                    </div>
+
+                    <!-- Botão: Aceitar Todos os Pendentes -->
+                    <button type="button" data-button="acceptAllAppointments"
+                        class="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-[10px] font-sans font-semibold text-base md:text-lg shadow-sm hover:shadow transition-all focus:outline-none focus:ring-4 focus:ring-green-500/30 shrink-0 cursor-pointer">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Aceitar Todos os Pendentes</span>
+                    </button>
                 </div>
 
-                <div data-content-appointment-requests class="mt-6 md:mt-10 grid grid-cols-1 gap-5 w-full"
+                <!-- Barra de Busca e Filtros de Status -->
+                <div class="my-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.1)] w-full">
+                    <div class="relative flex-1 min-w-[240px]">
+                        <input data-input="searchAppointments" type="text"
+                            placeholder="Buscar por cliente, pet, serviço ou e-mail..."
+                            class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-[8px] font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-600 focus:ring-4 focus:ring-green-600/20 transition-all placeholder:text-gray-400" />
+                        <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Container onde os cards de agendamento são inseridos dinamicamente -->
+                <div data-content-appointment-requests class="flex flex-col gap-5 w-full"
                     aria-live="polite">
                     <div
                         class="flex items-center justify-center p-8 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
@@ -671,7 +703,7 @@
 
             <section id="section-relatorios" data-tab-content
                 class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
-                <div class="w-full flex flex-col sm:flex-row items-start sm:items-center w-full gap-6">
+                <div class="w-full flex flex-col sm:flex-row items-start sm:items-center gap-6">
                     <h2 class="font-sans font-bold text-2xl md:text-3xl text-gray-900 whitespace-nowrap">
                         Gestão de Usuários
                     </h2>
@@ -1064,9 +1096,9 @@
 
     <!-- Modal de Cancelamento de Agendamento -->
     <aside data-modal="cancelSchedule"
-        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-4 overflow-y-auto animate-fadeTop">
         <div
-            class="relative w-[95%] max-w-[720px] bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
+            class="relative w-[95%] max-w-[720px] my-auto bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
 
             <button type="button" data-button="closeCancelSchedule"
                 class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
@@ -1087,6 +1119,139 @@
                     Cancelamento</span>
                 <img src="/images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
             </button>
+        </div>
+    </aside>
+
+    <!-- Modal de Envio de E-mail com Quill para Solicitações de Agendamento -->
+    <aside data-modal="emailAppointment"
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-3 sm:p-4 md:p-6 overflow-y-auto animate-fadeTop">
+        <div
+            class="relative w-full max-w-[760px] my-auto rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.25)]">
+            <form data-form="emailAppointment"
+                class="relative max-h-[92vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6">
+                
+                <button type="button" data-button="closeEmailModal"
+                    class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none cursor-pointer">
+                    <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Modal" />
+                </button>
+
+                <div class="flex flex-col gap-1 pr-8">
+                    <div class="flex items-center gap-2">
+                        <span data-email-action-badge class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-green-100 text-green-700 border border-green-300">
+                            Aceitar Agendamento
+                        </span>
+                        <span class="text-xs text-gray-400 font-medium">Notificação por E-mail</span>
+                    </div>
+                    <h3 data-email-modal-title class="font-sans font-bold text-xl md:text-2xl text-green-700 mt-1">
+                        Confirmar e Enviar E-mail ao Cliente
+                    </h3>
+                    <p class="font-sans text-xs md:text-sm text-gray-500">
+                        O cliente receberá o e-mail formatado com a atualização de seu agendamento. Você pode personalizar todo o texto antes de enviar.
+                    </p>
+                </div>
+
+                <!-- Resumo do Agendamento Selecionado -->
+                <div data-email-summary class="p-4 rounded-[10px] bg-gray-50 border border-gray-200 flex flex-col gap-2 text-xs md:text-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-gray-700 font-semibold flex items-center gap-1.5">
+                            <span class="text-gray-400">Cliente:</span>
+                            <strong data-email-summary-name class="text-gray-900">Mariana Silva</strong>
+                        </span>
+                        <span class="text-gray-700 flex items-center gap-1.5">
+                            <span class="text-gray-400">Pet:</span>
+                            <strong data-email-summary-pet class="text-green-700">Pipoca</strong>
+                        </span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-t border-gray-200/60 pt-2 text-gray-600">
+                        <span><strong>Serviço:</strong> <span data-email-summary-service>Banho e Tosa</span></span>
+                        <span><strong>Data:</strong> <span data-email-summary-date>28/10/2026 às 14:00</span></span>
+                    </div>
+                </div>
+
+                <!-- Campo E-mail do Destinatário (Agendamento Individual) -->
+                <div data-email-single-container class="flex flex-col gap-2">
+                    <label for="input-appointment-email-to" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                        E-mail do Destinatário
+                    </label>
+                    <input data-input="appointmentEmailTo" id="input-appointment-email-to" type="email" name="destinatarioEmail"
+                        placeholder="cliente@exemplo.com" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+
+                <!-- Campo de Destinatários estilo Gmail com Tags (Aceitar Todos os Pendentes) -->
+                <div data-email-tags-container class="hidden flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <label class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            Destinatários dos E-mails
+                        </label>
+                        <span data-email-tags-count class="text-xs font-semibold text-green-700 bg-green-50 px-2.5 py-0.5 rounded-full border border-green-200">
+                            0 destinatários
+                        </span>
+                    </div>
+
+                    <!-- Caixa estilo Gmail: "Para:" + Tags com Avatares + Input com cursor -->
+                    <div data-email-tags-box
+                        class="relative flex flex-wrap items-center gap-2 p-2.5 min-h-[52px] bg-white border-2 border-gray-300 rounded-lg focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all cursor-text">
+                        
+                        <span class="text-xs md:text-sm font-semibold text-gray-500 select-none px-1">
+                            Para:
+                        </span>
+
+                        <!-- Onde as tags geradas são inseridas -->
+                        <div data-email-tags-list class="flex flex-wrap items-center gap-2"></div>
+
+                        <!-- Input para digitar novos e-mails -->
+                        <input data-input="emailTagInput" type="text"
+                            placeholder="Digite um e-mail e pressione Enter..."
+                            class="flex-1 min-w-[200px] bg-transparent outline-none font-medium text-xs md:text-sm text-gray-800 placeholder:text-gray-400 py-1 px-1" />
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-gray-500 px-1">
+                        <span>Pressione <kbd class="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-[11px] font-semibold text-gray-700">Enter</kbd> ou <kbd class="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-[11px] font-semibold text-gray-700">,</kbd> para gerar a tag. Clique no <strong class="text-gray-700">✕</strong> para excluir.</span>
+                    </div>
+                </div>
+
+                <!-- Campo Assunto -->
+                <div class="flex flex-col gap-2">
+                    <label for="input-appointment-email-subject" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                        Assunto do E-mail
+                    </label>
+                    <input data-input="appointmentEmailSubject" id="input-appointment-email-subject" type="text" name="assuntoEmail"
+                        placeholder="Assunto da mensagem" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+
+                <!-- Editor Quill -->
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <label class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            Mensagem do E-mail
+                        </label>
+                        <span class="text-xs text-gray-400">Editor Rich Text (Quill)</span>
+                    </div>
+                    <div class="quill-wrapper rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white overflow-hidden">
+                        <div data-quill-editor="appointmentEmail" class="min-h-[160px]"></div>
+                    </div>
+                    <p class="font-sans text-xs text-gray-500">
+                        • Use a barra de ferramentas para formatar o texto do e-mail com negrito, listas e links.
+                    </p>
+                </div>
+
+                <!-- Botões de Ação do Modal -->
+                <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+                    <button type="button" data-button="cancelEmailModal"
+                        class="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-gray-300 hover:bg-gray-100 font-sans font-semibold text-sm md:text-base text-gray-600 transition-colors cursor-pointer">
+                        Cancelar
+                    </button>
+                    <button type="button" data-button="sendAppointmentEmail"
+                        class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-sans font-semibold text-sm md:text-base text-white shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-green-500/30 cursor-pointer">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.5 16.6666V3.33325L18.3333 9.99992L2.5 16.6666ZM4.16667 14.1666L14.0417 9.99992L4.16667 5.83325V8.74992L9.16667 9.99992L4.16667 11.2499V14.1666Z" fill="currentColor"/>
+                        </svg>
+                        <span data-button-text="sendAppointmentEmail">Enviar E-mail e Salvar</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </aside>
 
