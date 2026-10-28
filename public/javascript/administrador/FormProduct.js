@@ -106,22 +106,19 @@ export default class FormProduct {
     // --- GERENCIAMENTO DA IMAGEM PRINCIPAL ---
     handleMainImageFile(file) {
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
+        if (!file.type || !file.type.startsWith('image/')) {
             alert('Por favor, selecione um arquivo de imagem válido (PNG, JPG, WEBP).');
             return;
         }
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            this.mainImageState = {
-                file,
-                base64: e.target.result,
-                name: file.name,
-                isExisting: false
-            };
-            this.renderMainImagePreview();
+        const blobUrl = URL.createObjectURL(file);
+        this.mainImageState = {
+            file,
+            blobUrl,
+            name: file.name,
+            isExisting: false
         };
-        reader.readAsDataURL(file);
+        this.renderMainImagePreview();
     }
 
     handleMainImageChange() {
@@ -138,9 +135,10 @@ export default class FormProduct {
     }
 
     renderMainImagePreview() {
-        if (this.mainImageState && (this.mainImageState.base64 || this.mainImageState.url)) {
+        const imgSrc = this.mainImageState?.blobUrl || this.mainImageState?.url;
+        if (this.mainImageState && imgSrc) {
             if (this.previewImgMain) {
-                this.previewImgMain.src = this.mainImageState.base64 || this.mainImageState.url;
+                this.previewImgMain.src = imgSrc;
             }
             if (this.placeholderMain) {
                 this.placeholderMain.classList.add('hidden');
@@ -178,7 +176,7 @@ export default class FormProduct {
     }
 
     // --- GERENCIAMENTO DE SLIDES (MÚLTIPLAS IMAGENS + REORDENAÇÃO) ---
-    async handleSlideFiles(files) {
+    handleSlideFiles(files) {
         if (!files || files.length === 0) return;
 
         const validFiles = Array.from(files).filter(f => f.type && f.type.startsWith('image/'));
@@ -188,20 +186,13 @@ export default class FormProduct {
         }
 
         for (const file of validFiles) {
-            await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.slideImagesList.push({
-                        id: null,
-                        file,
-                        base64: e.target.result,
-                        alt: file.name,
-                        isExisting: false
-                    });
-                    resolve();
-                };
-                reader.onerror = () => resolve();
-                reader.readAsDataURL(file);
+            const blobUrl = URL.createObjectURL(file);
+            this.slideImagesList.push({
+                id: null,
+                file,
+                blobUrl,
+                alt: file.name,
+                isExisting: false
             });
         }
 
@@ -272,7 +263,7 @@ export default class FormProduct {
             card.draggable = true;
             card.dataset.slideIndex = String(index);
 
-            const imgSrc = slide.base64 || slide.url || '';
+            const imgSrc = slide.blobUrl || slide.url || '';
             const isFirst = index === 0;
             const isLast = index === count - 1;
 
@@ -379,7 +370,7 @@ export default class FormProduct {
         }
             
         const labelMainImage = this.getLabelFile(this.inputMainImage);
-        const hasMain = this.mainImageState && (this.mainImageState.base64 || this.mainImageState.url);
+        const hasMain = this.mainImageState && (this.mainImageState.file || this.mainImageState.blobUrl || this.mainImageState.url);
         if (!hasMain) {
             labelMainImage?.classList.add('error');
             labelMainImage?.addEventListener('click', () => labelMainImage.classList.remove('error'));
@@ -398,63 +389,65 @@ export default class FormProduct {
         const hasPrice = Number(this.inputPrice?.value.replace(',', '.').replace('R$', '')) > 0;
         const hasShortDescription = this.areaShortDescription?.value.trim() !== '';
         const hasLongDescription = this.getEditorValue(this.quillLong, this.areaLongDescription) !== '';
-        const hasMainImage = Boolean(this.mainImageState && (this.mainImageState.base64 || this.mainImageState.url));
+        const hasMainImage = Boolean(this.mainImageState && (this.mainImageState.file || this.mainImageState.blobUrl || this.mainImageState.url));
         const hasSlideImages = this.slideImagesList.length > 0;
 
         return hasName && hasCategory && hasPrice && hasShortDescription && hasLongDescription && hasMainImage && hasSlideImages;
     }
 
-    async createObjectProduct() {
-        let imageMainData = null;
-        if (this.mainImageState) {
-            if (this.mainImageState.base64) {
-                imageMainData = {
-                    image: this.mainImageState.base64,
-                    alt: this.inputName.value.trim()
-                };
-            } else if (this.mainImageState.isExisting) {
-                imageMainData = {
-                    isExisting: true,
-                    url: this.mainImageState.url,
-                    alt: this.inputName.value.trim()
-                };
-            }
-        }
-
-        const slidesData = this.slideImagesList.map((item, index) => ({
-            id: item.id || null,
-            image: item.base64 || item.url,
-            alt: item.alt || `${this.inputName.value.trim()} - Slide ${index + 1}`,
-            ordem: index + 1
-        }));
-
-        return {
-            name: this.inputName.value.trim(),
-            category: this.selectCategory.value,
-            price: Number(this.inputPrice.value.replace(',', '.').replace('R$', '')),
-            shortDescription: this.areaShortDescription.value.trim(),
-            longDescription: this.getEditorValue(this.quillLong, this.areaLongDescription),
-            imageMain: imageMainData,
-            imagesSlide: slidesData
-        };
-    }
-
     async initCreateProduct() {
         if (this.verifyInputs()) {
             const idProduct = this.buttonCreateProduct.getAttribute('data-id');
-            const createObject = await this.createObjectProduct();
+            const formData = new FormData();
 
-            if (idProduct) {
-                createObject.id = idProduct;
-                await this.fetchJson.put(idProduct, createObject);
-            } else {
-                await this.fetchJson.post(createObject);
+            formData.append('nome', this.inputName.value.trim());
+            formData.append('categoria', this.selectCategory.value);
+            formData.append('preco', Number(this.inputPrice.value.replace(',', '.').replace('R$', '')));
+            formData.append('short_description', this.areaShortDescription.value.trim());
+            formData.append('long_description', this.getEditorValue(this.quillLong, this.areaLongDescription));
+
+            if (this.mainImageState && this.mainImageState.file) {
+                formData.append('main_image', this.mainImageState.file);
             }
 
-            this.closeForm();
-            setTimeout(() => {
-                window.location.reload();
-            }, 600);
+            const slidesMeta = [];
+            this.slideImagesList.forEach((item, index) => {
+                if (item.file) {
+                    formData.append('slide_images', item.file);
+                }
+                slidesMeta.push({
+                    id: item.id || null,
+                    alt: item.alt || `${this.inputName.value.trim()} - Slide ${index + 1}`,
+                    ordem: index + 1,
+                    hasNewFile: Boolean(item.file),
+                    isNew: !item.id
+                });
+            });
+
+            formData.append('slides_meta', JSON.stringify(slidesMeta));
+
+            const url = idProduct ? `/produtos/${idProduct}` : '/produtos';
+            const method = idProduct ? 'PUT' : 'POST';
+
+            try {
+                const response = await fetch(url, {
+                    method,
+                    body: formData
+                });
+
+                if (response.ok) {
+                    this.closeForm();
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                } else {
+                    const errData = await response.json().catch(() => ({}));
+                    alert(errData.erro || errData.message || 'Erro ao salvar produto.');
+                }
+            } catch (err) {
+                console.error('Erro na requisição:', err);
+                alert('Erro ao se comunicar com o servidor.');
+            }
         } else {
             this.markErrors();
         }
@@ -551,6 +544,29 @@ export default class FormProduct {
                 const response = await fetch(`/produtos/${product.id}`);
                 if (response.ok) {
                     const data = await response.json();
+
+                    // Preenche campos de texto com dados originais da API
+                    if (data.name && this.inputName) this.inputName.value = data.name;
+                    if (data.category && this.selectCategory) this.selectCategory.value = data.category;
+                    if (data.price !== undefined && this.inputPrice) {
+                        const num = parseFloat(String(data.price).replace(',', '.'));
+                        this.inputPrice.value = !isNaN(num) ? "R$ " + num.toFixed(2).replace('.', ',') : data.price;
+                    }
+                    if (data.shortDescription !== undefined && this.areaShortDescription) {
+                        this.areaShortDescription.value = data.shortDescription;
+                    }
+                    if (data.longDescription !== undefined) {
+                        if (this.quillLong) {
+                            if (data.longDescription && data.longDescription.trim() !== '') {
+                                this.quillLong.root.innerHTML = data.longDescription;
+                            } else {
+                                this.quillLong.setText('');
+                            }
+                        }
+                        if (this.areaLongDescription) {
+                            this.areaLongDescription.value = data.longDescription || '';
+                        }
+                    }
 
                     // Preenche imagem principal existente
                     if (data.mainImage) {

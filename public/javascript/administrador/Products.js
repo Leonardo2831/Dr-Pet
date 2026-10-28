@@ -57,8 +57,8 @@ export default class Products {
                     name: tr.dataset.name || tr.dataset.nome || tr.children[0]?.textContent?.trim() || '',
                     category: tr.dataset.category || tr.dataset.categoria || tr.children[1]?.textContent?.trim() || '',
                     price: tr.dataset.price || tr.dataset.preco || tr.children[2]?.textContent?.trim() || '',
-                    longDescription: tr.dataset.longDescription || tr.dataset.long || tr.dataset.descricaoLonga || tr.children[3]?.innerHTML?.trim() || tr.children[3]?.textContent?.trim() || '',
-                    shortDescription: tr.dataset.shortDescription || tr.dataset.short || tr.dataset.descricaoCurta || tr.children[4]?.textContent?.trim() || ''
+                    longDescription: tr.dataset.longDescription || tr.getAttribute('data-long-description') || tr.children[3]?.textContent?.trim() || '',
+                    shortDescription: tr.dataset.shortDescription || tr.getAttribute('data-short-description') || tr.children[4]?.textContent?.trim() || ''
                 };
 
                 this.formProduct.putValuesForm(product);

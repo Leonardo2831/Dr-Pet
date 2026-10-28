@@ -7,7 +7,7 @@ CREATE TABLE usuario (
     telefone CHAR(12) NOT NULL, 
     senha VARCHAR(255) NOT NULL,
     tipo_usuario ENUM('admin', 'comum') NOT NULL DEFAULT 'comum',
-    avatar BLOB,
+    avatar LONGBLOB,
     PRIMARY KEY(id)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE service_infos(
     duracao DECIMAL(10,2) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
     descricao VARCHAR(500) NOT NULL,
-    imagem MEDIUMBLOB NULL,
+    imagem LONGBLOB NULL,
 	PRIMARY KEY(id)
 );
 
@@ -80,7 +80,7 @@ CREATE TABLE produto (
     categoria VARCHAR (100) NOT NULL,
     short_description VARCHAR(80) NOT NULL,
     long_description VARCHAR(1000) NOT NULL,
-    main_image BLOB NOT NULL,
+    main_image LONGBLOB NOT NULL,
     main_alt_image VARCHAR(100) NOT NULL,
     PRIMARY KEY(id)
 );
@@ -88,7 +88,7 @@ CREATE TABLE produto (
 CREATE TABLE produto_image (
     id INTEGER NOT NULL AUTO_INCREMENT,
     fk_produto INTEGER NOT NULL,
-    image BLOB NOT NULL,
+    image LONGBLOB NOT NULL,
     alt VARCHAR(100) NOT NULL,
     ordem INTEGER NOT NULL DEFAULT 1 CHECK (ordem > 0),
     PRIMARY KEY(id),

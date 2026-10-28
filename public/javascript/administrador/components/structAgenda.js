@@ -3,10 +3,12 @@ import editSchedule from "../editSchedule.js";
 import Agenda from "../Agenda.js";
 
 
-export default function structAgenda(object){
+export default function structAgenda(object) {
     const serviceNames = {
         'banho-tosa': 'Banho e Tosa',
+        'banho e tosa': 'Banho e Tosa',
         'vacinacao': 'Vacinação',
+        'vacinação': 'Vacinação',
         'cirurgia': 'Cirurgia'
     };
 
@@ -14,8 +16,8 @@ export default function structAgenda(object){
     div.className = "flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
     div.setAttribute('data-id', object.id);
 
-    const [year, month, day] = object.date.split('-');
-    const formatDate = `${day}/${month}/${year}`;
+    const [year, month, day] = object.date ? object.date.split('-') : ['', '', ''];
+    const formatDate = (day && month && year) ? `${day}/${month}/${year}` : (object.date || '');
 
     const today = new Date();
     const yearToday = today.getFullYear();
@@ -23,19 +25,27 @@ export default function structAgenda(object){
     const dayToday = String(today.getDate()).padStart(2, '0');
     const formattedToday = `${yearToday}-${monthToday}-${dayToday}`;
 
-    const isFutureOrToday = object.date >= formattedToday;
+    const isFutureOrToday = (object.date || '') >= formattedToday;
 
-    const serviceName = serviceNames[object.service.name] || object.service.name;
+    const rawService = (object.service && (object.service.name || object.service.nome)) || '';
+    const serviceKey = rawService.toLowerCase().trim();
+    const serviceName = serviceNames[serviceKey] || rawService || 'Serviço Veterinário';
+
+    const clientName = (object.user && (object.user.username || object.user.nome)) || object.nome || 'Cliente';
+    const petName = (object.petAgendado && object.petAgendado.name) || object.nomePet || 'Pet';
+    const hour = object.hour ? object.hour.slice(0, 5) : '';
+    const observations = (object.service && object.service.observations) || object.observation || '';
+    const buscarResidencia = Boolean(object.buscarResidencia);
 
     div.innerHTML = `
         <div class="flex flex-row justify-between items-start ${isFutureOrToday ? 'pb-5' : ''} w-full">
             <div class="flex flex-col gap-2">
                 <div class="flex flex-col">
                     <span class="font-semibold text-base md:text-lg text-gray-800">
-                        ${object.user.username} - <span class="whitespace-nowrap">${formatDate}</span>
+                        ${clientName} - <span class="whitespace-nowrap">${formatDate}</span>
                     </span>
                     <span class="font-medium text-base text-gray-700">
-                        Pet: ${object.petAgendado.name}
+                        Pet: ${petName}
                     </span>
                 </div>
                 <div class="flex flex-col">
@@ -43,18 +53,18 @@ export default function structAgenda(object){
                         <span class="font-medium">Serviço:</span> ${serviceName}
                     </span>
                     ${
-                        object.service.observations ? 
+                        observations ? 
                         `<span class="font-normal text-base text-gray-700">
-                            <span class="font-medium">Descrição:</span> ${object.service.observations}
+                            <span class="font-medium">Descrição:</span> ${observations}
                         </span>` : ""
                     }
                     <span class="font-normal text-base text-gray-700">
-                        <span class="font-medium">Buscar em casa:</span> ${object.buscarResidencia ? "Sim" : "Não"}
+                        <span class="font-medium">Buscar em casa:</span> ${buscarResidencia ? "Sim" : "Não"}
                     </span>
                 </div>
             </div>
             <span class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
-                ${object.hour}
+                ${hour}
             </span>
         </div>
 

@@ -5,12 +5,7 @@ export default class AppointmentRequests {
     constructor(selectorContent) {
         this.content = document.querySelector(selectorContent);
         this.section = document.getElementById('section-agendamentos');
-        this.fetchAgenda = new Fetch('agenda', '[data-modal-info="adm"]');
         this.fetchEmail = new Fetch('administrador/agendamentos/status', '[data-modal-info="adm"]');
-        this.storageKey = 'drpet-appointment-request-status';
-        this.statuses = this.getStoredStatuses();
-
-        this.appointments = [];
         this.currentFilter = 'all'; // 'all' | 'pending' | 'accepted' | 'rejected'
         this.searchQuery = '';
         this.currentSchedule = null;
@@ -58,22 +53,33 @@ export default class AppointmentRequests {
         this.quill = null;
     }
 
-    getStoredStatuses() {
-        try {
-            return JSON.parse(localStorage.getItem(this.storageKey)) || {};
-        } catch (error) {
-            console.error('Não foi possível carregar os status dos agendamentos.', error);
-            return {};
-        }
+    getCardData(card) {
+        if (!card) return null;
+        return {
+            id: card.getAttribute('data-appointment-id'),
+            clientName: card.getAttribute('data-client-name') || 'Cliente',
+            email: card.getAttribute('data-email') || '',
+            telefone: card.getAttribute('data-phone') || '',
+            petName: card.getAttribute('data-pet') || 'Pet',
+            service: card.getAttribute('data-service') || 'Serviço',
+            date: card.getAttribute('data-date') || '',
+            hour: card.getAttribute('data-hour') || '',
+            buscarResidencia: card.getAttribute('data-translado') === 'true',
+            isPending: card.getAttribute('data-pending') === 'true'
+        };
     }
 
-    saveStatus(id, status) {
-        this.statuses[id] = status;
-        try {
-            localStorage.setItem(this.storageKey, JSON.stringify(this.statuses));
-        } catch (error) {
-            console.error('Não foi possível salvar o status do agendamento.', error);
-        }
+    updateCounters() {
+        if (!this.content) return;
+        const cards = this.content.querySelectorAll('[data-appointment-card]');
+        const total = cards.length;
+        const pending = this.content.querySelectorAll('[data-appointment-card][data-pending="true"]').length;
+        const accepted = total - pending;
+
+        if (this.statTotal) this.statTotal.textContent = total;
+        if (this.statPending) this.statPending.textContent = pending;
+        if (this.statAccepted) this.statAccepted.textContent = accepted;
+        if (this.statRejected) this.statRejected.textContent = 0;
     }
 
     getServiceName(schedule) {
@@ -307,8 +313,8 @@ export default class AppointmentRequests {
 
         // Resumo do agendamento e alternância de campo de e-mail
         if (isAcceptAll) {
-            const pendingSchedules = this.appointments.filter(a => this.statuses[a.id] !== 'accepted' && this.statuses[a.id] !== 'rejected');
-            const pendingCount = pendingSchedules.length;
+            const pendingCards = Array.from(this.content.querySelectorAll('[data-appointment-card][data-pending="true"]'));
+            const pendingCount = pendingCards.length;
             if (this.summaryName) this.summaryName.textContent = `${pendingCount} cliente(s) com agendamentos pendentes`;
             if (this.summaryPet) this.summaryPet.textContent = 'Múltiplos pets';
             if (this.summaryService) this.summaryService.textContent = 'Serviços correspondentes';
@@ -323,8 +329,8 @@ export default class AppointmentRequests {
 
             // Popula as tags com os e-mails dos clientes pendentes
             this.emailTags = [];
-            pendingSchedules.forEach(s => {
-                const email = (s.email || s.user?.email || '').trim().toLowerCase();
+            pendingCards.forEach(c => {
+                const email = (c.getAttribute('data-email') || '').trim().toLowerCase();
                 if (email && !this.emailTags.includes(email)) {
                     this.emailTags.push(email);
                 }
@@ -482,7 +488,6 @@ export default class AppointmentRequests {
             return;
         }
 
-        // Desabilitar botão durante envio
         if (this.btnSendEmail) {
             this.btnSendEmail.disabled = true;
             this.btnSendEmail.classList.add('opacity-70', 'cursor-wait');
@@ -490,14 +495,11 @@ export default class AppointmentRequests {
 
         try {
             if (this.currentAction === 'accept_all') {
-                const pendingSchedules = this.appointments.filter(
-                    a => this.statuses[a.id] !== 'accepted' && this.statuses[a.id] !== 'rejected'
-                );
-
+                const pendingCards = Array.from(this.content.querySelectorAll('[data-appointment-card][data-pending="true"]'));
                 const payload = {
                     action: 'accept_all',
                     status: 'accepted',
-                    ids: pendingSchedules.map(s => s.id),
+                    ids: pendingCards.map(c => c.getAttribute('data-appointment-id')),
                     destinatarios: this.emailTags,
                     assunto: subject,
                     mensagemHtml: messageHtml,
@@ -505,13 +507,7 @@ export default class AppointmentRequests {
                     totalNotificados: this.emailTags.length
                 };
 
-                // Envia dados para o backend via classe @Fetch
                 await this.fetchEmail.post(payload);
-
-                // Atualiza localmente todos para aceitos
-                pendingSchedules.forEach(schedule => {
-                    this.saveStatus(schedule.id, 'accepted');
-                });
             } else if (this.currentSchedule) {
                 const payload = {
                     id: this.currentSchedule.id,
@@ -519,40 +515,30 @@ export default class AppointmentRequests {
                     action: this.currentAction,
                     destinatario: {
                         email: email,
-                        nome: this.currentSchedule.clientName || this.currentSchedule.nome || 'Cliente'
+                        nome: this.currentSchedule.clientName || 'Cliente'
                     },
                     assunto: subject,
                     mensagemHtml: messageHtml,
                     mensagemTexto: messageText,
                     agendamento: {
                         id: this.currentSchedule.id,
-                        pet: this.currentSchedule.petName || this.currentSchedule.nomePet,
-                        servico: this.getServiceName(this.currentSchedule),
-                        data: this.currentSchedule.date || this.currentSchedule.dateAgendamento,
-                        horario: this.currentSchedule.hour || this.currentSchedule.hourAgendamento,
+                        pet: this.currentSchedule.petName,
+                        servico: this.currentSchedule.service,
+                        data: this.currentSchedule.date,
+                        horario: this.currentSchedule.hour,
                         buscarResidencia: Boolean(this.currentSchedule.buscarResidencia)
                     }
                 };
 
-                // Envia dados para o backend via classe @Fetch
                 await this.fetchEmail.post(payload);
-
-                // Salva status local
-                this.saveStatus(this.currentSchedule.id, this.currentAction);
             }
 
             this.closeEmailModal();
-            this.render();
+            window.location.reload();
         } catch (error) {
             console.error('Erro ao processar envio de e-mail e agendamento:', error);
-            // Mesmo em caso de endpoint backend pendente, atualiza o status na interface para testabilidade
-            if (this.currentAction === 'accept_all') {
-                this.appointments.forEach(s => this.saveStatus(s.id, 'accepted'));
-            } else if (this.currentSchedule) {
-                this.saveStatus(this.currentSchedule.id, this.currentAction);
-            }
             this.closeEmailModal();
-            this.render();
+            window.location.reload();
         } finally {
             if (this.btnSendEmail) {
                 this.btnSendEmail.disabled = false;
@@ -561,320 +547,85 @@ export default class AppointmentRequests {
         }
     }
 
-    createCard(schedule) {
-        const card = document.createElement('article');
-        const status = this.statuses[schedule.id];
-        const clientName = schedule.clientName || schedule.user?.username || schedule.nome || 'Cliente não informado';
-        const email = schedule.email || schedule.user?.email || 'email@exemplo.com';
-        const telefone = schedule.telefone || schedule.phone || 'Telefone não informado';
-        const petName = schedule.petName || schedule.nomePet || schedule.petAgendado?.name || 'Pet';
-        const raca = schedule.raca || schedule.pet?.race || schedule.petAgendado?.raca || '';
-        const serviceName = this.getServiceName(schedule);
-        const dateStr = this.formatDate(schedule.date || schedule.dateAgendamento);
-        const hourStr = schedule.hour || schedule.hourAgendamento || '';
-        const translado = Boolean(schedule.buscarResidencia);
-        const endereco = schedule.endereco || 'Atendimento presencial na clínica';
-        const observation = schedule.observation || schedule.observacao || '';
-
-        const isAccepted = status === 'accepted';
-        const isRejected = status === 'rejected';
-
-        let borderColor = 'border-gray-300';
-        if (isAccepted) borderColor = 'border-green-500';
-        if (isRejected) borderColor = 'border-red-alert';
-
-        card.className = `animate-fadeItem flex flex-col justify-between gap-5 w-full p-5 sm:p-7 bg-white rounded-[12px] border-l-[6px] ${borderColor} shadow-[0px_2px_8px_0px_rgba(0,0,0,0.06)] hover:shadow-md transition-all`;
-        card.dataset.appointmentId = schedule.id;
-
-        // Cabeçalho do Card
-        const header = document.createElement('div');
-        header.className = 'flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4';
-
-        const clientInfo = document.createElement('div');
-        clientInfo.className = 'flex items-center gap-3.5';
-
-        const avatar = document.createElement('span');
-        avatar.className = 'flex items-center justify-center shrink-0 w-12 h-12 rounded-full bg-green-50 text-green-700 border border-green-200 font-sans font-bold text-xl uppercase';
-        avatar.textContent = clientName.charAt(0);
-
-        const clientDetails = document.createElement('div');
-        clientDetails.className = 'flex flex-col';
-
-        const clientTitle = document.createElement('h3');
-        clientTitle.className = 'font-sans font-bold text-lg md:text-xl text-gray-800 leading-tight';
-        clientTitle.textContent = clientName;
-
-        const clientContacts = document.createElement('div');
-        clientContacts.className = 'flex flex-wrap items-center gap-x-3 gap-y-1 text-xs md:text-sm text-gray-500 mt-0.5';
-        clientContacts.innerHTML = `
-            <span class="flex items-center gap-1 font-medium text-gray-600">✉ ${email}</span>
-            <span>•</span>
-            <span>📞 ${telefone}</span>
-        `;
-
-        clientDetails.append(clientTitle, clientContacts);
-        clientInfo.append(avatar, clientDetails);
-
-        // Status Badge
-        const statusBadge = document.createElement('div');
-        statusBadge.className = 'shrink-0';
-        if (isAccepted) {
-            statusBadge.innerHTML = `
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold bg-green-100 text-green-700 border border-green-300">
-                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Aceito • E-mail Enviado
-                </span>
-            `;
-        } else if (isRejected) {
-            statusBadge.innerHTML = `
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold bg-red-light text-red-alert border border-red-300">
-                    <svg class="w-4 h-4 text-red-alert" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                    Recusado • E-mail Enviado
-                </span>
-            `;
-        } else {
-            statusBadge.innerHTML = `
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold bg-orange-light text-orange border border-orange/30">
-                    <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
-                    Pendente de Avaliação
-                </span>
-            `;
-        }
-
-        header.append(clientInfo, statusBadge);
-
-        // Corpo com Grid de Informações
-        const bodyGrid = document.createElement('div');
-        bodyGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm';
-        bodyGrid.innerHTML = `
-            <div class="flex flex-col">
-                <span class="text-xs text-gray-400 uppercase font-semibold">Pet & Raça</span>
-                <span class="text-gray-800 font-bold flex items-center gap-1.5 mt-0.5">
-                    <img src="/images/icons/options/pets/dog.svg" alt="Pet" class="w-4 h-4" />
-                    ${petName} ${raca ? `<span class="text-xs text-gray-500 font-normal">(${raca})</span>` : ''}
-                </span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-xs text-gray-400 uppercase font-semibold">Serviço</span>
-                <span class="text-gray-800 font-semibold mt-0.5">${serviceName}</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-xs text-gray-400 uppercase font-semibold">Data & Horário</span>
-                <span class="text-gray-800 font-bold flex items-center gap-1 mt-0.5">
-                    <img src="/images/icons/calender/hour.svg" alt="Horário" class="w-4 h-4 opacity-75" />
-                    ${dateStr} às ${hourStr}
-                </span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-xs text-gray-400 uppercase font-semibold">Transporte</span>
-                <span class="text-gray-800 font-medium mt-0.5">
-                    ${translado ? '🚐 Buscar na residência' : '🏥 Na clínica'}
-                </span>
-            </div>
-            ${translado ? `
-            <div class="flex flex-col sm:col-span-2 lg:col-span-4 bg-gray-50 p-2.5 rounded-lg border border-gray-200">
-                <span class="text-xs text-gray-500 font-semibold">Endereço de Busca:</span>
-                <span class="text-gray-700 text-xs sm:text-sm font-medium mt-0.5 flex items-center gap-1">
-                    <img src="/images/icons/options/endereco/house.svg" class="w-3.5 h-3.5" alt="Casa" />
-                    ${endereco}
-                </span>
-            </div>` : ''}
-            ${observation ? `
-            <div class="flex flex-col sm:col-span-2 lg:col-span-4 text-xs sm:text-sm">
-                <span class="text-xs text-gray-400 uppercase font-semibold">Observações do Cliente:</span>
-                <span class="text-gray-700 italic mt-0.5">"${observation}"</span>
-            </div>` : ''}
-        `;
-
-        // Rodapé com Ações
-        const footer = document.createElement('div');
-        footer.className = 'flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-gray-100';
-
-        const idInfo = document.createElement('span');
-        idInfo.className = 'text-xs text-gray-400 font-medium';
-        idInfo.textContent = `Solicitação ID: #${schedule.id}`;
-
-        const actions = document.createElement('div');
-        actions.className = 'flex items-center gap-3 w-full sm:w-auto justify-end';
-
-        if (status) {
-            const renotifyBtn = document.createElement('button');
-            renotifyBtn.type = 'button';
-            renotifyBtn.className = 'text-xs font-semibold text-green-600 hover:text-green-700 hover:underline outline-none';
-            renotifyBtn.textContent = 'Enviar novo e-mail ao cliente';
-            renotifyBtn.addEventListener('click', () => {
-                this.openEmailModal(schedule, status);
-            });
-            actions.appendChild(renotifyBtn);
-        } else {
-            // Botão X: Recusar com X
-            const btnRefuse = document.createElement('button');
-            btnRefuse.type = 'button';
-            btnRefuse.className = 'flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 bg-red-alert hover:opacity-90 text-white rounded-lg font-sans font-semibold text-sm shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-red-alert/40';
-            btnRefuse.innerHTML = `
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                <span>Recusar</span>
-            `;
-            btnRefuse.addEventListener('click', () => {
-                this.openEmailModal(schedule, 'rejected');
-            });
-
-            // Botão Confere: Aceitar com confere ✔
-            const btnAccept = document.createElement('button');
-            btnAccept.type = 'button';
-            btnAccept.className = 'flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-sans font-semibold text-sm shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-green-500/40';
-            btnAccept.innerHTML = `
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Aceitar</span>
-            `;
-            btnAccept.addEventListener('click', () => {
-                this.openEmailModal(schedule, 'accepted');
-            });
-
-            actions.append(btnRefuse, btnAccept);
-        }
-
-        footer.append(idInfo, actions);
-        card.append(header, bodyGrid, footer);
-
-        return card;
-    }
-
     render() {
         if (!this.content) return;
 
         // Atualizar Contadores
-        const total = this.appointments.length;
-        const accepted = this.appointments.filter(a => this.statuses[a.id] === 'accepted').length;
-        const rejected = this.appointments.filter(a => this.statuses[a.id] === 'rejected').length;
-        const pending = total - (accepted + rejected);
+        this.updateCounters();
 
-        if (this.statTotal) this.statTotal.textContent = total;
-        if (this.statPending) this.statPending.textContent = pending;
-        if (this.statAccepted) this.statAccepted.textContent = accepted;
-        if (this.statRejected) this.statRejected.textContent = rejected;
+        const cards = this.content.querySelectorAll('[data-appointment-card]');
+        const emptyState = this.content.querySelector('[data-appointment-empty]');
+        let visibleCount = 0;
 
-        // Filtragem
-        let filtered = [...this.appointments];
+        cards.forEach(card => {
+            const isPending = card.getAttribute('data-pending') === 'true';
 
-        if (this.currentFilter === 'pending') {
-            filtered = filtered.filter(a => this.statuses[a.id] !== 'accepted' && this.statuses[a.id] !== 'rejected');
-        } else if (this.currentFilter === 'accepted') {
-            filtered = filtered.filter(a => this.statuses[a.id] === 'accepted');
-        } else if (this.currentFilter === 'rejected') {
-            filtered = filtered.filter(a => this.statuses[a.id] === 'rejected');
+            let matchesFilter = true;
+            if (this.currentFilter === 'pending') {
+                matchesFilter = isPending;
+            } else if (this.currentFilter === 'accepted') {
+                matchesFilter = !isPending;
+            } else if (this.currentFilter === 'rejected') {
+                matchesFilter = false;
+            }
+
+            let matchesSearch = true;
+            if (this.searchQuery) {
+                const query = this.searchQuery.toLowerCase();
+                const name = (card.getAttribute('data-client-name') || '').toLowerCase();
+                const email = (card.getAttribute('data-email') || '').toLowerCase();
+                const pet = (card.getAttribute('data-pet') || '').toLowerCase();
+                const service = (card.getAttribute('data-service') || '').toLowerCase();
+                matchesSearch = name.includes(query) || email.includes(query) || pet.includes(query) || service.includes(query);
+            }
+
+            const visible = matchesFilter && matchesSearch;
+            card.classList.toggle('hidden', !visible);
+            if (visible) visibleCount++;
+        });
+
+        if (emptyState) {
+            emptyState.classList.toggle('hidden', visibleCount > 0);
         }
+    }
 
-        if (this.searchQuery) {
-            const query = this.searchQuery.toLowerCase();
-            filtered = filtered.filter(a => {
-                const name = (a.clientName || a.nome || a.user?.username || '').toLowerCase();
-                const pet = (a.petName || a.nomePet || '').toLowerCase();
-                const email = (a.email || a.user?.email || '').toLowerCase();
-                const service = this.getServiceName(a).toLowerCase();
-                return name.includes(query) || pet.includes(query) || email.includes(query) || service.includes(query);
-            });
-        }
+    bindCardEvents() {
+        if (!this.content) return;
+        const cards = this.content.querySelectorAll('[data-appointment-card]');
+        cards.forEach(card => {
+            const schedule = this.getCardData(card);
 
-        this.content.innerHTML = '';
+            const btnAccept = card.querySelector('[data-action="accept"]');
+            if (btnAccept) {
+                btnAccept.onclick = () => this.openEmailModal(schedule, 'accepted');
+            }
 
-        if (filtered.length === 0) {
-            const emptyDiv = document.createElement('div');
-            emptyDiv.className = 'flex flex-col items-center justify-center p-12 bg-white rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] text-center gap-3 animate-fadeItem';
-            emptyDiv.innerHTML = `
-                <img src="/images/icons/calendar_clock.svg" alt="Sem agendamentos" class="w-12 h-12 opacity-40" />
-                <h4 class="font-sans font-bold text-lg text-gray-700">Nenhuma solicitação encontrada</h4>
-                <p class="font-sans text-sm text-gray-500 max-w-sm">
-                    ${this.searchQuery ? 'Nenhum resultado corresponde à sua pesquisa.' : 'Não há solicitações para o filtro selecionado.'}
-                </p>
-            `;
-            this.content.appendChild(emptyDiv);
-            return;
-        }
+            const btnReject = card.querySelector('[data-action="reject"]');
+            if (btnReject) {
+                btnReject.onclick = () => this.openEmailModal(schedule, 'rejected');
+            }
 
-        filtered.forEach(schedule => {
-            this.content.appendChild(this.createCard(schedule));
+            const btnRenotify = card.querySelector('[data-action="renotify"]');
+            if (btnRenotify) {
+                btnRenotify.onclick = () => {
+                    const currentStatus = card.getAttribute('data-pending') === 'true' ? 'pending' : 'accepted';
+                    this.openEmailModal(schedule, currentStatus);
+                };
+            }
         });
     }
 
-    async loadAppointments() {
-        try {
-            const schedules = await this.fetchAgenda.get();
-            if (Array.isArray(schedules) && schedules.length > 0) {
-                this.appointments = schedules;
-                this.render();
-                return;
-            }
-        } catch (error) {
-            console.warn('Backend de agenda não retornou dados no momento. Carregando dados modelo para frontend.', error);
-        }
-
-        // Dados padrão para visualização imediata da interface de solicitações pendentes
-        this.appointments = [
-            {
-                id: 1,
-                clientName: 'Mariana Silva',
-                email: 'mariana.silva@email.com',
-                telefone: '(11) 98765-4321',
-                petName: 'Pipoca',
-                raca: 'Poodle Toy',
-                service: 'Banho e Tosa Completa',
-                date: '2026-10-28',
-                hour: '14:00',
-                buscarResidencia: true,
-                endereco: 'Rua das Palmeiras, 452 - Apto 31',
-                observation: 'Pipoca é dócil, mas fica assustada com barulho de secador forte.'
-            },
-            {
-                id: 2,
-                clientName: 'Carlos Eduardo Santos',
-                email: 'carlos.santos@email.com',
-                telefone: '(11) 99123-4567',
-                petName: 'Thor',
-                raca: 'Golden Retriever',
-                service: 'Vacinação V10 + Antirrábica',
-                date: '2026-10-30',
-                hour: '10:30',
-                buscarResidencia: false,
-                endereco: 'Atendimento presencial na clínica',
-                observation: 'Trazer carteirinha física de vacinação para anotação.'
-            },
-            {
-                id: 3,
-                clientName: 'Fernanda Lima',
-                email: 'fernanda.lima@email.com',
-                telefone: '(11) 97788-9900',
-                petName: 'Luna',
-                raca: 'Siamês',
-                service: 'Consulta de Rotina',
-                date: '2026-11-03',
-                hour: '15:30',
-                buscarResidencia: false,
-                endereco: 'Atendimento presencial na clínica',
-                observation: 'Primeira consulta de rotina da gatinha na clínica Dr.Pet.'
-            }
-        ];
-
-        this.render();
+    loadAppointments() {
+        this.updateCounters();
+        this.bindCardEvents();
     }
 
     addEvents() {
         // Ação em lote: Aceitar todos os pendentes
         if (this.btnAcceptAll) {
             this.btnAcceptAll.addEventListener('click', () => {
-                const pendingCount = this.appointments.filter(
-                    a => this.statuses[a.id] !== 'accepted' && this.statuses[a.id] !== 'rejected'
-                ).length;
-
-                if (pendingCount === 0) {
+                const pendingCards = this.content.querySelectorAll('[data-appointment-card][data-pending="true"]');
+                if (pendingCards.length === 0) {
                     alert('Não há solicitações pendentes para aceitar no momento.');
                     return;
                 }

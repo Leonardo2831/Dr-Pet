@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const db = require('../database/mysql');
-const { verificarAdmin } = require('./middlewares');
+const db = require('../../database/mysql');
+const { verificarAdmin } = require('../middlewares');
 
-// Configuração simples para upload de imagens
-const upload = multer({ dest: 'public/uploads/' });
+// Configuração para upload de imagens diretamente em memória (BLOB)
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 20 * 1024 * 1024 }
+});
+
 const uploadCampos = upload.fields([
     { name: 'main_image', maxCount: 1 },
     { name: 'slide_images', maxCount: 10 }
@@ -14,46 +18,143 @@ const uploadCampos = upload.fields([
 function extractImageBuffer(imgData) {
     if (!imgData) return null;
     if (Buffer.isBuffer(imgData)) return imgData;
-    if (typeof imgData === 'string' && imgData.startsWith('data:image/')) {
-        const base64Data = imgData.replace(/^data:image\/\w+;base64,/, '');
-        return Buffer.from(base64Data, 'base64');
-    }
-    if (typeof imgData === 'object' && imgData.image) {
-        return extractImageBuffer(imgData.image);
+    if (typeof imgData === 'object' && imgData.buffer && Buffer.isBuffer(imgData.buffer)) {
+        return imgData.buffer;
     }
     return null;
 }
-
-router.get('/administrador', (req, res) => {
+router.get('/administrador', async (req, res) => {
     const querySlides = 'SELECT * FROM slide_home ORDER BY ordem ASC';
-    const queryUsers = 'SELECT id, nome, email, telefone FROM usuario';
+    const queryUsers = 'SELECT id, nome, email, telefone, avatar FROM usuario';
     const queryProdutos = 'SELECT * FROM produto';
-    const queryAgendamento = 'SELECT * FROM agendamentos';
+    const queryAgendamento = `
+        SELECT 
+            JSON_OBJECT(
+                'id', a.id,
+                'dateAgendamento', a.dateAgendamento,
+                'hourAgendamento', a.hourAgendamento,
+                'buscarResidencia', a.buscarResidencia,
+                'observation', a.observation,
+                'endereco', a.endereco,
+                'nome', a.nome,
+                'telefone', a.telefone,
+                'pendente', a.pendente,
+                'nomePet', a.nomePet,
+                'fk_user', a.fk_user,
+                'fk_service', a.fk_service
+            ) AS agenda,
+            JSON_OBJECT(
+                'id', u.id,
+                'nome', u.nome,
+                'email', u.email,
+                'telefone', u.telefone,
+                'senha', u.senha,
+                'tipo_usuario', u.tipo_usuario,
+                'avatar', u.avatar
+            ) AS usuario,
+            JSON_OBJECT(
+                'id', s.id,
+                'nome', s.nome,
+                'duracao', s.duracao,
+                'preco', s.preco,
+                'descricao', s.descricao
+            ) AS service_infos
+        FROM agenda a
+        JOIN usuario u ON a.fk_user = u.id
+        JOIN service_infos s ON a.fk_service = s.id;
+    `;
     const queryServicos = 'SELECT * FROM service_infos';
 
+    let slides = [];
+    let produtos = [];
+    let usuarios = [];
+    let agendamentos = [];
+    let servicos = [];
+
     try {
-        const [slides, produtos, usuarios, agendamentos, servicos] = Promise.all([
-            db.query(querySlides, (err) => err ? console.log("Erro ao buscar slides.") : slides),
-            db.query(queryProdutos, (err) => err ? console.log("Erro ao buscar produtos.") : produtos),
-            db.query(queryUsers, (err) => err ? console.log("Erro ao buscar usuários.") : usuarios),
-            db.query(queryAgendamento, (err) => err ? console.log("Erro ao buscar agendamentos.") : agendamentos),
-            db.query(queryServicos, (err) => err ? console.log("Erro ao buscar serviços.") : servicos)
+        const results = await Promise.all([
+            db.promise().query(querySlides).catch(err => { console.log("Erro ao buscar slides:", err); return [[]]; }),
+            db.promise().query(queryProdutos).catch(err => { console.log("Erro ao buscar produtos:", err); return [[]]; }),
+            db.promise().query(queryUsers).catch(err => { console.log("Erro ao buscar usuários:", err); return [[]]; }),
+            db.promise().query(queryAgendamento).catch(err => { console.log("Erro ao buscar agendamentos:", err); return [[]]; }),
+            db.promise().query(queryServicos).catch(err => { console.log("Erro ao buscar serviços:", err); return [[]]; })
         ]);
+
+        slides = results[0][0] || [];
+        produtos = results[1][0] || [];
+        usuarios = results[2][0] || [];
+        const rawAgendamentos = results[3][0] || [];
+        servicos = results[4][0] || [];
+
+        agendamentos = rawAgendamentos.map(row => {
+            let ag = row.agenda;
+            let usr = row.usuario;
+            let srv = row.service_infos;
+            ag = JSON.parse(ag);
+            usr = JSON.parse(usr);
+            srv = JSON.parse(srv);
+            ag = ag || {};
+            usr = usr || {};
+            srv = srv || {};
+
+            let dateStr = '';
+            if (ag.dateAgendamento) {
+                dateStr = String(ag.dateAgendamento).split('T')[0];
+            }
+
+            let hourStr = '';
+            if (ag.hourAgendamento) {
+                hourStr = String(ag.hourAgendamento).slice(0, 5);
+            }
+
+            return {
+                id: ag.id,
+                date: dateStr,
+                hour: hourStr,
+                buscarResidencia: Boolean(ag.buscarResidencia),
+                observation: ag.observation || '',
+                endereco: ag.endereco || '',
+                pendente: ag.pendente,
+                nomePet: ag.nomePet || '',
+                nome: ag.nome || usr.nome || '',
+                telefone: ag.telefone || usr.telefone || '',
+                fk_service: ag.fk_service,
+                fk_user: ag.fk_user,
+                user: {
+                    id: usr.id,
+                    username: ag.nome || usr.nome || 'Cliente',
+                    phone: ag.telefone || usr.telefone || '',
+                    endereco: ag.endereco || ''
+                },
+                petAgendado: {
+                    name: ag.nomePet || 'Pet'
+                },
+                service: {
+                    id: srv.id || ag.fk_service,
+                    name: srv.nome || '',
+                    nome: srv.nome || '',
+                    observations: ag.observation || ''
+                },
+                agenda: ag,
+                usuario: usr,
+                service_infos: srv
+            };
+        });
     } catch (err) {
         console.log("Erro ao fazer as requisições necessárias: " + err);
-    } finally {
-        res.render('administrador', {
-            slides: slides || [],
-            produtos: produtos || [],
-            usuarios: usuarios || [],
-            agendamentos: agendamentos || [],
-            servicos: servicos || []
-        });
     }
+
+    res.render('administrador', {
+        slides: slides || [],
+        produtos: produtos || [],
+        usuarios: usuarios || [],
+        agendamentos: agendamentos || [],
+        servicos: servicos || []
+    });
 });
 
 router.get('/produtos', (req, res) => {
-    const query = 'SELECT id, nome, categoria, preco, short_description AS descricao_curta, long_description AS descricao_longa FROM produto ORDER BY id ASC';
+    const query = 'SELECT id, nome, categoria, preco, short_description, long_description FROM produto ORDER BY id ASC';
     db.query(query, (err, results) => {
         if (err) return res.status(500).json({ erro: "Erro ao buscar produtos." });
         return res.status(200).json(results);
@@ -121,8 +222,8 @@ router.post('/produtos', uploadCampos, (req, res) => {
     const long_description = (req.body.long_description || req.body.longDescription || '').trim();
 
     let mainBuffer = null;
-    if (req.files && req.files['main_image']) {
-        mainBuffer = require('fs').readFileSync(req.files['main_image'][0].path);
+    if (req.files && req.files['main_image'] && req.files['main_image'][0]) {
+        mainBuffer = req.files['main_image'][0].buffer;
     } else {
         mainBuffer = extractImageBuffer(req.body.imageMain || req.body.main_image);
     }
@@ -139,25 +240,34 @@ router.post('/produtos', uploadCampos, (req, res) => {
         }
 
         const newProductId = results.insertId;
-        const slides = req.body.imagesSlide || req.body.slide_images || [];
-
-        if (Array.isArray(slides) && slides.length > 0) {
-            const slideInserts = slides.map((s, idx) => {
-                const sBuf = extractImageBuffer(s.image || s);
-                const alt = s.alt || `${nome} - Slide ${idx + 1}`;
-                const ordem = s.ordem || (idx + 1);
-                return [newProductId, sBuf, alt, ordem];
-            }).filter(row => row[1] !== null);
-
-            if (slideInserts.length > 0) {
-                db.query('INSERT INTO produto_image (fk_produto, image, alt, ordem) VALUES ?', [slideInserts], (errSlide) => {
-                    if (errSlide) {
-                        console.error("Erro ao inserir imagens de slide:", errSlide);
-                    }
-                    return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: newProductId });
-                });
-                return;
+        const slideFiles = (req.files && req.files['slide_images']) || [];
+        let slidesMeta = [];
+        if (req.body.slides_meta) {
+            try {
+                slidesMeta = typeof req.body.slides_meta === 'string' ? JSON.parse(req.body.slides_meta) : req.body.slides_meta;
+            } catch (e) {
+                slidesMeta = [];
             }
+        }
+
+        let slideInserts = [];
+        if (slideFiles.length > 0) {
+            slideInserts = slideFiles.map((f, idx) => {
+                const meta = slidesMeta[idx] || {};
+                const alt = meta.alt || `${nome} - Slide ${idx + 1}`;
+                const ordem = meta.ordem || (idx + 1);
+                return [newProductId, f.buffer, alt, ordem];
+            });
+        }
+
+        if (slideInserts.length > 0) {
+            db.query('INSERT INTO produto_image (fk_produto, image, alt, ordem) VALUES ?', [slideInserts], (errSlide) => {
+                if (errSlide) {
+                    console.error("Erro ao inserir imagens de slide:", errSlide);
+                }
+                return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: newProductId });
+            });
+            return;
         }
 
         return res.status(201).json({ mensagem: "Produto cadastrado com sucesso!", id: newProductId });
@@ -183,8 +293,8 @@ router.put('/produtos/:id', uploadCampos, (req, res) => {
         const long_description = req.body.long_description || req.body.longDescription || produtoAtual.long_description;
 
         let mainBuffer = null;
-        if (req.files && req.files['main_image']) {
-            mainBuffer = require('fs').readFileSync(req.files['main_image'][0].path);
+        if (req.files && req.files['main_image'] && req.files['main_image'][0]) {
+            mainBuffer = req.files['main_image'][0].buffer;
         } else {
             mainBuffer = extractImageBuffer(req.body.imageMain || req.body.main_image);
         }
@@ -206,11 +316,23 @@ router.put('/produtos/:id', uploadCampos, (req, res) => {
                 return res.status(500).json({ erro: "Erro ao atualizar produto." });
             }
 
-            const slides = req.body.imagesSlide;
-            if (Array.isArray(slides)) {
+            let slidesMeta = [];
+            if (req.body.slides_meta) {
+                try {
+                    slidesMeta = typeof req.body.slides_meta === 'string' ? JSON.parse(req.body.slides_meta) : req.body.slides_meta;
+                } catch (e) {
+                    slidesMeta = [];
+                }
+            } else if (Array.isArray(req.body.imagesSlide)) {
+                slidesMeta = req.body.imagesSlide;
+            }
+
+            const slideFiles = (req.files && req.files['slide_images']) || [];
+
+            if (slidesMeta.length > 0 || slideFiles.length > 0) {
                 db.query('SELECT id FROM produto_image WHERE fk_produto = ?', [id], (errSelect, existingRows) => {
                     const existingIds = (existingRows || []).map(r => r.id);
-                    const incomingIds = slides.filter(s => s.id).map(s => Number(s.id));
+                    const incomingIds = slidesMeta.filter(s => s.id).map(s => Number(s.id));
 
                     // Deleta os slides que foram removidos
                     const toDelete = existingIds.filter(oldId => !incomingIds.includes(oldId));
@@ -219,17 +341,24 @@ router.put('/produtos/:id', uploadCampos, (req, res) => {
                         : Promise.resolve();
 
                     deletePromise.then(() => {
-                        // Atualiza a ordem dos slides existentes e insere novos
-                        const tasks = slides.map((s, idx) => {
+                        let fileIdx = 0;
+                        const tasks = slidesMeta.map((s, idx) => {
                             const ordem = idx + 1;
                             const alt = s.alt || `${nome} - Slide ${ordem}`;
-                            const newBuf = extractImageBuffer(s.image || s);
+                            let newBuf = null;
+
+                            if ((s.hasNewFile || s.isNew) && slideFiles[fileIdx]) {
+                                newBuf = slideFiles[fileIdx].buffer;
+                                fileIdx++;
+                            } else if (s.image && Buffer.isBuffer(s.image)) {
+                                newBuf = s.image;
+                            }
 
                             if (s.id && existingIds.includes(Number(s.id))) {
                                 if (newBuf) {
                                     return new Promise(resolve => db.query('UPDATE produto_image SET image = ?, alt = ?, ordem = ? WHERE id = ?', [newBuf, alt, ordem, s.id], resolve));
                                 } else {
-                                    return new Promise(resolve => db.query('UPDATE produto_image SET ordem = ? WHERE id = ?', [ordem, s.id], resolve));
+                                    return new Promise(resolve => db.query('UPDATE produto_image SET alt = ?, ordem = ? WHERE id = ?', [alt, ordem, s.id], resolve));
                                 }
                             } else if (newBuf) {
                                 return new Promise(resolve => db.query('INSERT INTO produto_image (fk_produto, image, alt, ordem) VALUES (?, ?, ?, ?)', [id, newBuf, alt, ordem], resolve));
@@ -389,7 +518,7 @@ const getAvatarUsuario = (req, res) => {
         }
 
         const avatar = results[0].avatar;
-        // Se for uma string de URL ou base64
+        // Se for uma URL externa ou caminho relativo
         if (typeof avatar === 'string' && (avatar.startsWith('http') || avatar.startsWith('/'))) {
             return res.redirect(avatar);
         }

@@ -25,8 +25,8 @@ export default class Agenda {
     verifyIfHasSchedule() {
         if (!this.contentSchedule.children.length) {
             const alert = document.createElement('p');
-            alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center';
-            alert.textContent = "Não há nenhum horário para esse dia e este serviço";
+            alert.className = 'animate-fadeItem text-lg font-semibold text-gray-700 text-center col-span-full py-8';
+            alert.textContent = "Não há nenhum agendamento para este dia e serviço selecionados.";
             this.contentSchedule.appendChild(alert);
         }
     }
@@ -39,11 +39,13 @@ export default class Agenda {
     scheduleInit() {
         this.contentSchedule.innerHTML = "";
 
-        this.schedules.forEach((scheduleObject) => {
-            if (scheduleObject.date == this.inputDate.value) {
-                this.createStructSchedule(scheduleObject);
-            }
-        });
+        if (Array.isArray(this.schedules)) {
+            this.schedules.forEach((scheduleObject) => {
+                if (scheduleObject.date == this.inputDate.value) {
+                    this.createStructSchedule(scheduleObject);
+                }
+            });
+        }
 
         this.verifyIfHasSchedule();
     }
@@ -58,46 +60,73 @@ export default class Agenda {
     }
 
     async filterSchedule() {
-        if (!this.inputDate.value || this.inputDate.value < this.inputDate.min) {
+        if (!this.inputDate.value) {
             this.inputDate.classList.add('error');
             this.inputDate.addEventListener('click', () => {
                 this.inputDate.classList.remove('error');
-            });
+            }, { once: true });
             return;
         }
 
         if (!this.schedules) {
-            const schedules = await this.fetchJson.get();
-            if (Array.isArray(schedules)) {
-                this.schedules = schedules;
+            if (window.initialAgendamentos && Array.isArray(window.initialAgendamentos)) {
+                this.schedules = window.initialAgendamentos;
             } else {
-                this.schedules = [];
+                try {
+                    const schedules = await this.fetchJson.get();
+                    if (Array.isArray(schedules)) {
+                        this.schedules = schedules;
+                    } else {
+                        this.schedules = [];
+                    }
+                } catch (e) {
+                    this.schedules = [];
+                }
             }
         }
 
         this.contentSchedule.innerHTML = "";
 
-        if (this.inputDate.value && this.selectService.value) {
+        const selectedDate = this.inputDate.value;
+        const selectedService = this.selectService ? this.selectService.value : 'all';
+
+        if (Array.isArray(this.schedules)) {
             this.schedules.forEach((scheduleObject) => {
-                const matchDate = scheduleObject.date == this.inputDate.value;
-                const matchService = this.selectService.value === 'all' || (scheduleObject.service && scheduleObject.service.name && scheduleObject.service.name.toLowerCase() == this.selectService.value.toLowerCase());
+                const matchDate = scheduleObject.date == selectedDate;
+                const serviceId = scheduleObject.service?.id || scheduleObject.fk_service;
+                const serviceName = scheduleObject.service?.name || scheduleObject.service?.nome || '';
+
+                const matchService = selectedService === 'all' || 
+                    String(serviceId) === String(selectedService) ||
+                    (serviceName && serviceName.toLowerCase() === selectedService.toLowerCase());
 
                 if (matchDate && matchService) {
                     this.createStructSchedule(scheduleObject);
                 }
             });
-        } else {
-            this.scheduleInit();
         }
 
         this.verifyIfHasSchedule();
     }
 
     addEvents() {
-        this.buttonSearchSchedule.addEventListener('click', this.filterSchedule);
+        if (this.buttonSearchSchedule) {
+            this.buttonSearchSchedule.addEventListener('click', this.filterSchedule);
+        }
+        if (this.inputDate) {
+            this.inputDate.addEventListener('change', this.filterSchedule);
+        }
+        if (this.selectService) {
+            this.selectService.addEventListener('change', this.filterSchedule);
+        }
     }
 
     getSchedules() {
+        if (window.initialAgendamentos && Array.isArray(window.initialAgendamentos)) {
+            this.schedules = window.initialAgendamentos;
+            this.scheduleInit();
+            return Promise.resolve(this.schedules);
+        }
         return this.fetchJson.get().then((schedules) => {
             if (Array.isArray(schedules)) {
                 this.schedules = schedules;
@@ -111,6 +140,10 @@ export default class Agenda {
         if (this.contentSchedule && this.inputDate && this.selectService && this.buttonSearchSchedule) {
             this.inputInit();
             this.addEvents();
+            if (window.initialAgendamentos && Array.isArray(window.initialAgendamentos)) {
+                this.schedules = window.initialAgendamentos;
+            }
+            this.filterSchedule();
         }
 
         return this;

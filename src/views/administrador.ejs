@@ -134,85 +134,9 @@
 
                 <div data-content-schedule
                     class="mt-10 grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-[30px] md:gap-[50px] w-full overflow-y-auto max-h-[1000px] scroll pb-2 pr-2">
-                    <% const serviceNames={ 'banho-tosa' : 'Banho e Tosa' , 'vacinacao' : 'Vacinação' , 'cirurgia'
-                        : 'Cirurgia' }; const today=new Date(); const yearToday=today.getFullYear(); const
-                        monthToday=String(today.getMonth() + 1).padStart(2, '0' ); const
-                        dayToday=String(today.getDate()).padStart(2, '0' ); const
-                        formattedToday=`${yearToday}-${monthToday}-${dayToday}`; %>
-                        <% if (agendamentos.length> 0) { %>
-                            <% agendamentos.forEach(agendamento=> { %>
-                                <% const [year, month, day]=(agendamento.date ? agendamento.date.split('-') : ['', ''
-                                    , '' ]); const formatDate=(day && month && year) ? `${day}/${month}/${year}` :
-                                    (agendamento.date || '' ); const isFutureOrToday=agendamento.date>= formattedToday;
-                                    const serviceName = (agendamento.service && serviceNames[agendamento.service.name])
-                                    || (agendamento.service ? agendamento.service.name : '');
-                                    %>
-                                    <div data-id="<%= agendamento.id %>"
-                                        class="flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
-                                        <div
-                                            class="flex flex-row justify-between items-start <%= isFutureOrToday ? 'pb-5' : '' %> w-full">
-                                            <div class="flex flex-col gap-2">
-                                                <div class="flex flex-col">
-                                                    <span class="font-semibold text-base md:text-lg text-gray-800">
-                                                        <%= agendamento.user ? agendamento.user.username : '' %> - <span
-                                                                class="whitespace-nowrap">
-                                                                <%= formatDate %>
-                                                            </span>
-                                                    </span>
-                                                    <span class="font-medium text-base text-gray-700">
-                                                        Pet: <%= agendamento.petAgendado ? agendamento.petAgendado.name
-                                                            : '' %>
-                                                    </span>
-                                                </div>
-                                                <div class="flex flex-col">
-                                                    <span class="font-normal text-base text-gray-700">
-                                                        <span class="font-medium">Serviço:</span>
-                                                        <%= serviceName %>
-                                                    </span>
-                                                    <% if (agendamento.service && agendamento.service.observations) { %>
-                                                        <span class="font-normal text-base text-gray-700">
-                                                            <span class="font-medium">Descrição:</span>
-                                                            <%= agendamento.service.observations %>
-                                                        </span>
-                                                        <% } %>
-                                                            <span class="font-normal text-base text-gray-700">
-                                                                <span class="font-medium">Buscar em casa:</span>
-                                                                <%= agendamento.buscarResidencia ? "Sim" : "Não" %>
-                                                            </span>
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
-                                                <%= agendamento.hour %>
-                                            </span>
-                                        </div>
-
-                                        <% if (isFutureOrToday) { %>
-                                            <div
-                                                class="flex flex-row flex-wrap items-center justify-between pt-5 border-t border-green-500 w-full gap-5">
-                                                <button type="button" data-button="cancelSchedule"
-                                                    class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-red-alert rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-red-alert/50 transition-all">
-                                                    <span
-                                                        class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-50">Cancelar</span>
-                                                    <img src="../images/icons/administrador/cancel.svg" alt="Cancelar"
-                                                        class="w-4 h-4 md:w-5 md:h-5">
-                                                </button>
-                                                <button type="button" data-button="editSchedule"
-                                                    class="flex flex-row justify-center items-center gap-2 md:gap-[10px] py-[10px] px-2 md:px-5 bg-green-500 rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] flex-1 basis-[150px] hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all">
-                                                    <span
-                                                        class="font-semibold text-sm md:text-base leading-[20px] uppercase text-gray-100">Editar</span>
-                                                    <img src="../images/icons/administrador/edit-gray.svg" alt="Editar"
-                                                        class="w-4 h-4 md:w-5 md:h-5">
-                                                </button>
-                                            </div>
-                                            <% } %>
-                                    </div>
-                                    <% }) %>
-                                        <% } else { %>
-                                            <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center">
-                                                Não há nenhum horário para esse dia e este serviço.
-                                            </p>
-                                            <% } %>
+                    <p class="animate-fadeItem text-lg font-semibold text-gray-700 text-center col-span-full py-8">
+                        Não há nenhum agendamento para este dia e serviço selecionados.
+                    </p>
                 </div>
 
             </section>
@@ -577,12 +501,239 @@
                 <!-- Container onde os cards de agendamento são inseridos dinamicamente -->
                 <div data-content-appointment-requests class="flex flex-col gap-5 w-full"
                     aria-live="polite">
-                    <div
-                        class="flex items-center justify-center p-8 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
-                        <p class="font-sans font-semibold text-lg text-gray-600 text-center">
-                            Carregando agendamentos...
-                        </p>
-                    </div>
+                    <%
+                        function formatarDataBR(dataVal) {
+                            if (!dataVal) return 'Data não informada';
+                            if (dataVal instanceof Date) {
+                                const d = String(dataVal.getDate()).padStart(2, '0');
+                                const m = String(dataVal.getMonth() + 1).padStart(2, '0');
+                                const y = dataVal.getFullYear();
+                                return `${d}/${m}/${y}`;
+                            }
+                            const str = String(dataVal).split('T')[0];
+                            const partes = str.split('-');
+                            if (partes.length === 3) {
+                                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+                            }
+                            return str;
+                        }
+
+                        function formatarHoraBR(horaVal) {
+                            if (!horaVal) return 'Horário a definir';
+                            const partes = String(horaVal).split(':');
+                            if (partes.length >= 2) {
+                                return `${partes[0]}:${partes[1]}`;
+                            }
+                            return horaVal;
+                        }
+
+                        function formatarTelefoneBR(tel) {
+                            if (!tel) return 'Telefone não informado';
+                            const clean = String(tel).replace(/\D/g, '');
+                            if (clean.length === 11) {
+                                return `(${clean.slice(0, 2)}) ${clean.slice(2, 7)}-${clean.slice(7)}`;
+                            }
+                            if (clean.length === 10) {
+                                return `(${clean.slice(0, 2)}) ${clean.slice(2, 6)}-${clean.slice(6)}`;
+                            }
+                            return tel;
+                        }
+
+                        const listaAgendamentos = (locals.agendamentos && Array.isArray(agendamentos)) ? agendamentos : [];
+                    %>
+
+                    <% if (listaAgendamentos.length > 0) { %>
+                        <% listaAgendamentos.forEach(item => { 
+                            const ag = item.agenda || item;
+                            const usr = item.usuario || {};
+                            const srv = item.service_infos || {};
+
+                            const id = ag.id;
+                            const isPending = (ag.pendente === true || ag.pendente === 1 || ag.pendente === '1' || ag.pendente === 'true');
+                            const clientName = ag.nome || usr.nome || 'Cliente não informado';
+                            const email = usr.email || '';
+                            const telefone = ag.telefone || usr.telefone || '';
+                            const petName = ag.nomePet || 'Pet';
+                            const raca = ag.raca || '';
+                            const serviceName = srv.nome || 'Serviço Veterinário';
+                            const dateFormatted = formatarDataBR(ag.dateAgendamento);
+                            const hourFormatted = formatarHoraBR(ag.hourAgendamento);
+                            const hasTranslado = Boolean(ag.buscarResidencia);
+                            const enderecoBusca = ag.endereco || 'Atendimento presencial na clínica';
+                            const observation = ag.observation || '';
+                            const userId = usr.id || ag.fk_user;
+                            const hasAvatar = Boolean(usr.avatar);
+                        %>
+                            <article
+                                data-appointment-card
+                                data-appointment-id="<%= id %>"
+                                data-client-name="<%= clientName %>"
+                                data-email="<%= email %>"
+                                data-phone="<%= telefone %>"
+                                data-pet="<%= petName %>"
+                                data-service="<%= serviceName %>"
+                                data-date="<%= dateFormatted %>"
+                                data-hour="<%= hourFormatted %>"
+                                data-translado="<%= hasTranslado ? 'true' : 'false' %>"
+                                data-pending="<%= isPending ? 'true' : 'false' %>"
+                                class="animate-fadeItem flex flex-col justify-between gap-5 w-full p-5 sm:p-7 bg-white rounded-[12px] border-l-[6px] <%= isPending ? 'border-orange' : 'border-green-500' %> shadow-[0px_2px_8px_0px_rgba(0,0,0,0.06)] hover:shadow-md transition-all"
+                            >
+                                <!-- Cabeçalho do Card -->
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                                    <div class="flex items-center gap-3.5">
+                                        <% if (hasAvatar && userId) { %>
+                                            <img
+                                                src="/usuario/avatar/<%= userId %>"
+                                                alt="<%= clientName %>"
+                                                class="w-12 h-12 rounded-full object-cover shrink-0 border border-green-200"
+                                                onerror="this.onerror=null; this.src='/images/icons/options/user-default.svg';"
+                                            />
+                                        <% } else { %>
+                                            <span class="flex items-center justify-center shrink-0 w-12 h-12 rounded-full bg-green-50 text-green-700 border border-green-200 font-sans font-bold text-xl uppercase select-none">
+                                                <%= clientName.charAt(0) %>
+                                            </span>
+                                        <% } %>
+
+                                        <div class="flex flex-col">
+                                            <h3 class="font-sans font-bold text-lg md:text-xl text-gray-800 leading-tight">
+                                                <%= clientName %>
+                                            </h3>
+                                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs md:text-sm text-gray-500 mt-0.5">
+                                                <% if (email) { %>
+                                                    <span class="flex items-center gap-1 font-medium text-gray-600">✉ <%= email %></span>
+                                                <% } %>
+                                                <% if (email && telefone) { %>
+                                                    <span>•</span>
+                                                <% } %>
+                                                <% if (telefone) { %>
+                                                    <span>📞 <%= formatarTelefoneBR(telefone) %></span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Status Badge -->
+                                    <div class="shrink-0" data-status-container="<%= id %>">
+                                        <% if (!isPending) { %>
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold bg-green-100 text-green-700 border border-green-300">
+                                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Aceito • E-mail Enviado
+                                            </span>
+                                        <% } else { %>
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold bg-orange-light text-orange border border-orange/30">
+                                                <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+                                                Pendente de Avaliação
+                                            </span>
+                                        <% } %>
+                                    </div>
+                                </div>
+
+                                <!-- Corpo com Grid de Informações -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 uppercase font-semibold">Pet & Raça</span>
+                                        <span class="text-gray-800 font-bold flex items-center gap-1.5 mt-0.5">
+                                            <img src="/images/icons/options/pets/dog.svg" alt="Pet" class="w-4 h-4" />
+                                            <%= petName %> <% if (raca) { %><span class="text-xs text-gray-500 font-normal">(<%= raca %>)</span><% } %>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 uppercase font-semibold">Serviço</span>
+                                        <span class="text-gray-800 font-semibold mt-0.5"><%= serviceName %></span>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 uppercase font-semibold">Data & Horário</span>
+                                        <span class="text-gray-800 font-bold flex items-center gap-1 mt-0.5">
+                                            <img src="/images/icons/calender/hour.svg" alt="Horário" class="w-4 h-4 opacity-75" />
+                                            <%= dateFormatted %> às <%= hourFormatted %>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 uppercase font-semibold">Transporte</span>
+                                        <span class="text-gray-800 font-medium mt-0.5">
+                                            <%= hasTranslado ? '🚐 Buscar na residência' : '🏥 Na clínica' %>
+                                        </span>
+                                    </div>
+
+                                    <% if (hasTranslado) { %>
+                                        <div class="flex flex-col sm:col-span-2 lg:col-span-4 bg-gray-50 p-2.5 rounded-lg border border-gray-200">
+                                            <span class="text-xs text-gray-500 font-semibold">Endereço de Busca:</span>
+                                            <span class="text-gray-700 text-xs sm:text-sm font-medium mt-0.5 flex items-center gap-1">
+                                                <img src="/images/icons/options/endereco/house.svg" class="w-3.5 h-3.5" alt="Casa" />
+                                                <%= enderecoBusca %>
+                                            </span>
+                                        </div>
+                                    <% } %>
+
+                                    <% if (observation) { %>
+                                        <div class="flex flex-col sm:col-span-2 lg:col-span-4 text-xs sm:text-sm">
+                                            <span class="text-xs text-gray-400 uppercase font-semibold">Observações do Cliente:</span>
+                                            <span class="text-gray-700 italic mt-0.5">"<%= observation %>"</span>
+                                        </div>
+                                    <% } %>
+                                </div>
+
+                                <!-- Rodapé com Ações -->
+                                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-gray-100">
+                                    <span class="text-xs text-gray-400 font-medium">
+                                        Solicitação ID: #<%= id %>
+                                    </span>
+
+                                    <div class="flex items-center gap-3 w-full sm:w-auto justify-end" data-actions-container="<%= id %>">
+                                        <% if (!isPending) { %>
+                                            <button
+                                                type="button"
+                                                data-action="renotify"
+                                                data-id="<%= id %>"
+                                                class="text-xs font-semibold text-green-600 hover:text-green-700 hover:underline outline-none cursor-pointer"
+                                            >
+                                                Enviar novo e-mail ao cliente
+                                            </button>
+                                        <% } else { %>
+                                            <!-- Botão Recusar (X) -->
+                                            <button
+                                                type="button"
+                                                data-action="reject"
+                                                data-id="<%= id %>"
+                                                class="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 bg-red-alert hover:opacity-90 text-white rounded-lg font-sans font-semibold text-sm shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-red-alert/40 cursor-pointer"
+                                            >
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                                <span>Recusar</span>
+                                            </button>
+
+                                            <!-- Botão Aceitar (Confere ✔) -->
+                                            <button
+                                                type="button"
+                                                data-action="accept"
+                                                data-id="<%= id %>"
+                                                class="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-sans font-semibold text-sm shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-green-500/40 cursor-pointer"
+                                            >
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                <span>Aceitar</span>
+                                            </button>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }); %>
+                    <% } else { %>
+                        <div data-appointment-empty class="flex flex-col items-center justify-center p-12 bg-white rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] text-center gap-3 animate-fadeItem">
+                            <img src="/images/icons/calendar_clock.svg" alt="Sem agendamentos" class="w-12 h-12 opacity-40" />
+                            <h4 class="font-sans font-bold text-lg text-gray-700">Nenhuma solicitação encontrada</h4>
+                            <p class="font-sans text-sm text-gray-500 max-w-sm">
+                                Não há solicitações de agendamento registradas no momento.
+                            </p>
+                        </div>
+                    <% } %>
                 </div>
             </section>
 
@@ -662,39 +813,48 @@
                                     <% } else { %>
                                         <% produtos.forEach(produto=> { %>
                                             <tr data-id="<%= produto.id %>"
+                                                data-name="<%= produto.nome %>"
+                                                data-category="<%= produto.categoria %>"
+                                                data-price="<%= produto.preco %>"
+                                                data-short-description="<%= produto.short_description || '' %>"
+                                                data-long-description="<%- (produto.long_description || '').replace(/"/g, '&quot;') %>"
                                                 class="animate-fadeItem border-b-[3px] border-gray-100 *:text-lg *:leading-[32px] *:text-gray-700 transition-colors">
-                                                <td class="max-w-0 truncate w-[25%]">
+                                                <td class="max-w-0 truncate w-[20%]">
                                                     <%= produto.nome %>
                                                 </td>
                                                 <td class="capitalize">
                                                     <%= produto.categoria %>
                                                 </td>
-                                                <td>
-                                                    <%= produto.preco %>
+                                                <td class="whitespace-nowrap font-medium text-green-700">
+                                                    <%= "R$ " + Number(produto.preco || 0).toFixed(2).replace('.', ',') %>
                                                 </td>
-                                                <td class="max-w-0 truncate w-[25%]">
-                                                    <%- produto.descricao_longa %>
+                                                <td class="w-[25%] max-w-[240px] xl:max-w-[320px]">
+                                                    <div class="truncate" title="<%= (produto.long_description || '').replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim() %>">
+                                                        <%= (produto.long_description || '').replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim() %>
+                                                    </div>
                                                 </td>
-                                                <td class="max-w-0 truncate w-[25%]">
-                                                    <%= produto.descricao_curta %>
+                                                <td class="w-[25%] max-w-[200px] xl:max-w-[260px]">
+                                                    <div class="truncate" title="<%= produto.short_description || '' %>">
+                                                        <%= produto.short_description || '' %>
+                                                    </div>
                                                 </td>
                                                 <td class="py-5 text-center">
-                                                    <button data-button="editProduct"
-                                                        class="hover:opacity-80 transition-opacity mx-auto flex">
+                                                    <button type="button" data-button="editProduct"
+                                                        class="hover:opacity-80 transition-opacity mx-auto flex cursor-pointer">
                                                         <img src="../images/icons/administrador/edit-blue.svg"
                                                             alt="Editar" class="w-6 h-6 md:w-[35px] md:h-[38px]">
                                                     </button>
                                                 </td>
                                                 <td class="py-5 text-center">
-                                                    <button data-button="deleteProduct"
-                                                        class="p-4 hover:opacity-80 transition-opacity mx-auto flex">
+                                                    <button type="button" data-button="deleteProduct"
+                                                        class="p-4 hover:opacity-80 transition-opacity mx-auto flex cursor-pointer">
                                                         <img src="../images/icons/administrador/delete-product.svg"
                                                             alt="Excluir" class="w-6 h-6 md:w-[37px] md:h-[38px]">
                                                     </button>
                                                 </td>
                                             </tr>
                                             <% }) %>
-                                                <% } %>
+                                        <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -1284,9 +1444,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+    <script>
+        window.initialAgendamentos = <%- JSON.stringify(agendamentos || []) %>;
+    </script>
     <script type="module" src="/javascript/administrador/script-adm.js"></script>
-    <script type="module" src="/src/router/administrador.js"></script>
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
     </body>
-
-    </html>
+</html>
