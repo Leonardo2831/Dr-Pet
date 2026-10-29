@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-export default function sendEmail(html, subject, to){
+function sendEmail(html, subject, to){
     const transporter = nodemailer.createTestAccount({
         host: 'smtp.gmail.com',
         port: 465,
@@ -30,3 +30,5 @@ export default function sendEmail(html, subject, to){
 
     send();
 }
+
+module.exports = sendEmail;

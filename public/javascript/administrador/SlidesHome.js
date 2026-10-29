@@ -13,11 +13,10 @@ export default class SlidesHome {
         this.saveImage = this.saveImage.bind(this);
         this.handleDeleteClick = this.handleDeleteClick.bind(this);
 
-        this.fetchJson = new Fetch('slides-home', '[data-modal-info="adm"]');
+        this.fetchJson = new Fetch('administrador/slide-home', '[data-modal-info="adm"]');
     }
 
     slidesInit() {
-        
         this.contentSlide.addEventListener('drop', (e) => {
             e.preventDefault();
         });
@@ -29,7 +28,11 @@ export default class SlidesHome {
                 const figures = this.contentSlide.querySelectorAll('[data-content-slides]');
                 for (const [index, figure] of [...figures].entries()) {
                     const id = figure.getAttribute('data-content-slides');
-                    await this.fetchJson.patch(id, { ordem: index + 1 });
+                    await fetch(`/administrador/slide-home/ordem/${id}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ordem: index + 1 })
+                    });
                 }
             }
         });
@@ -50,7 +53,7 @@ export default class SlidesHome {
         formData.append('ordem', maxOrder + 1);
 
         try {
-            const response = await fetch('/slides-home', {
+            const response = await fetch('/administrador/slide-home', {
                 method: 'POST',
                 body: formData
             });

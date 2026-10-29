@@ -10,7 +10,7 @@ export default function structSlide(object) {
     const slideId = object.id;
     figure.setAttribute('data-content-slides', slideId);
     figure.setAttribute('aria-label', object.alt || object.altImage || 'Slide image');
-    figure.style.backgroundImage = `url('/slides/imagem/${slideId}')`;
+    figure.style.backgroundImage = `url('/administrador/slide-home/imagem/${slideId}')`;
 
     figure.innerHTML = `
         <div class="absolute inset-0 bg-black/25 rounded-[10px]"></div>
@@ -26,7 +26,7 @@ export default function structSlide(object) {
         e.stopPropagation();
 
         confirm.open(() => {
-            const fetchAPI = new Fetch('slides-home', '[data-modal-info="adm"]');
+            const fetchAPI = new Fetch('administrador/slide-home', '[data-modal-info="adm"]');
             
             fetchAPI.delete(slideId).then((response) => {
                 if (!response || response.ok) {

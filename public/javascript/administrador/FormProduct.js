@@ -43,7 +43,7 @@ export default class FormProduct {
         this.slideImagesList = []; 
         this.draggedSlideIndex = null;
 
-        this.fetchJson = new Fetch('produtos', '[data-modal-info="adm"]');
+        this.fetchJson = new Fetch('administrador/produtos', '[data-modal-info="adm"]');
 
         this.openForm = this.openForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
@@ -426,8 +426,8 @@ export default class FormProduct {
 
             formData.append('slides_meta', JSON.stringify(slidesMeta));
 
-            const url = idProduct ? `/produtos/${idProduct}` : '/produtos';
-            const method = idProduct ? 'PUT' : 'POST';
+            const url = idProduct ? `/administrador/produtos/update/${idProduct}` : '/administrador/produtos/insert';
+            const method = 'POST';
 
             try {
                 const response = await fetch(url, {
@@ -541,7 +541,7 @@ export default class FormProduct {
         // Carrega os dados detalhados do produto (imagens e slides) via API
         if (product.id) {
             try {
-                const response = await fetch(`/produtos/${product.id}`);
+                const response = await fetch(`/administrador/produtos/${product.id}`);
                 if (response.ok) {
                     const data = await response.json();
 

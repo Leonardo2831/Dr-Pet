@@ -12,7 +12,7 @@ router.get('/option-user', verificarLogin, (req, res) => {
         [userId],
         (err, userResults) => {
             if (err) {
-                console.log(err)
+                console.log(err);
             }
             if (userResults.length === 0) {
                 return res.status(404).send('Usuário não encontrado');
@@ -25,7 +25,7 @@ router.get('/option-user', verificarLogin, (req, res) => {
                 [userId],
                 (err, addressResults) => {
                     if (err) {
-                        console.log(err)
+                        console.log(err);
                     }
                     const enderecos = addressResults;
                     db.query(
@@ -33,13 +33,13 @@ router.get('/option-user', verificarLogin, (req, res) => {
                         [userId],
                         (err, petResult) => {
                             if(err) {
-                                console.log(err)
+                                console.log(err);
                             }
                             const pets = petResult;
 
-                            res.render('option-user', {user, enderecos, pets})
+                            res.render('option-user', {user, enderecos, pets});
                         }
-                    )
+                    );
                 }
             );
         }
@@ -47,7 +47,7 @@ router.get('/option-user', verificarLogin, (req, res) => {
 });
 
 router.post('/option-user/create-address', verificarLogin, (req,res) => {
-    const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body
+    const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body;
     if(!rua || !numero || !cep || !cidade || !estado || !bairro || !telefone) {
         return res.status(400)
         .send('Não foram preenchidos todos os campos obrigatórios! Preencha todos e tente novamente.');
@@ -55,10 +55,10 @@ router.post('/option-user/create-address', verificarLogin, (req,res) => {
     const cepRegex = cep.replace(/\D/g, "");
     const phoneRegex = telefone.replace(/\D/g, "");
     const estadoRegex = estado.trim().toUpperCase();
-    const ruaLimpo = rua.trim()
-    const cidadeLimpo = cidade.trim()
-    const bairroLimpo = bairro.trim()
-    const numeroLimpo = numero.trim()
+    const ruaLimpo = rua.trim();
+    const cidadeLimpo = cidade.trim();
+    const bairroLimpo = bairro.trim();
+    const numeroLimpo = numero.trim();
     
     const id = req.session.usuario.id;
     
@@ -67,23 +67,23 @@ router.post('/option-user/create-address', verificarLogin, (req,res) => {
         [id, ruaLimpo, numeroLimpo, cepRegex, cidadeLimpo, estadoRegex, bairroLimpo, phoneRegex],
         (err) => {
             if(err){
-                console.log(err)
+                console.log(err);
             } else {
-                res.redirect('/option-user')
+                res.redirect('/option-user');
             }
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/create-pet', verificarLogin, (req,res) => {
-    const { name, race, gender, descriptionPet } = req.body
+    const { name, race, gender, descriptionPet } = req.body;
     if(!name || !race || !gender || !descriptionPet) {
         return res.status(400)
         .send('Não foram preenchidos todos os campos obrigatórios! Preencha todos e tente novamente.');
     }
-    const nome = name.trim()
-    const raca = race.trim()
-    const descricao = descriptionPet.trim()
+    const nome = name.trim();
+    const raca = race.trim();
+    const descricao = descriptionPet.trim();
     
     const id = req.session.usuario.id;
     db.query (
@@ -91,21 +91,21 @@ router.post('/option-user/create-pet', verificarLogin, (req,res) => {
         [id, nome, raca, gender, descricao ],
         (err) => {
             if(err){
-                console.log(err)
+                console.log(err);
             } else {
-                res.redirect('/option-user')
+                res.redirect('/option-user');
             }
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-name', verificarLogin, (req,res) => {
-    const { nome } = req.body
+    const { nome } = req.body;
     if(typeof nome !== 'string' || !nome.trim()) {
         return res.status(400).send('Preencha o nome e tente novamente.');
     }
 
-    const nomeLimpo = nome.trim()
+    const nomeLimpo = nome.trim();
     const id = req.session.usuario.id;
     
     db.query(
@@ -113,7 +113,7 @@ router.post('/option-user/update-name', verificarLogin, (req,res) => {
         [nomeLimpo, id],
         (err, result) => {
             if(err) {
-                console.log(err)
+                console.log(err);
                 return res.status(500).send('Erro ao atualizar o nome.');
             }
             if(result.affectedRows === 0) {
@@ -122,18 +122,18 @@ router.post('/option-user/update-name', verificarLogin, (req,res) => {
 
             req.session.usuario.nome = nomeLimpo; 
             
-            res.redirect('/option-user')
+            res.redirect('/option-user');
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-email', verificarLogin, (req,res) => {
-    const { email } = req.body
+    const { email } = req.body;
     if(typeof email !== 'string' || !email.trim()) {
         return res.status(400).send('Preencha o email e tente novamente.');
     }
 
-    const emailLimpo = email.trim()
+    const emailLimpo = email.trim();
     const id = req.session.usuario.id;
     
     db.query(
@@ -141,7 +141,7 @@ router.post('/option-user/update-email', verificarLogin, (req,res) => {
         [emailLimpo, id],
         (err, result) => {
             if(err) {
-                console.log(err)
+                console.log(err);
                 if(err.code === 'ER_DUP_ENTRY') {
                     return res.status(409).send('Este email já está cadastrado.');
                 }
@@ -153,18 +153,18 @@ router.post('/option-user/update-email', verificarLogin, (req,res) => {
             
             req.session.usuario.email = emailLimpo;
             
-            res.redirect('/option-user')
+            res.redirect('/option-user');
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-phone', verificarLogin, (req,res) => {
-    const { telefone } = req.body
+    const { telefone } = req.body;
     if(typeof telefone !== 'string' || !telefone.trim()) {
         return res.status(400).send('Preencha o telefone e tente novamente.');
     }
 
-    const telefoneLimpo = telefone.replace(/\D/g, '')
+    const telefoneLimpo = telefone.replace(/\D/g, '');
     if(telefoneLimpo.length !== 10 && telefoneLimpo.length !== 11) {
         return res.status(400).send('Preencha um telefone válido.');
     }
@@ -176,7 +176,7 @@ router.post('/option-user/update-phone', verificarLogin, (req,res) => {
         [telefoneLimpo, id],
         (err, result) => {
             if(err) {
-                console.log(err)
+                console.log(err);
                 return res.status(500).send('Erro ao atualizar o telefone.');
             }
             if(result.affectedRows === 0) {
@@ -185,13 +185,13 @@ router.post('/option-user/update-phone', verificarLogin, (req,res) => {
             
             req.session.usuario.telefone = telefoneLimpo;
             
-            res.redirect('/option-user')
+            res.redirect('/option-user');
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-password', verificarLogin, (req,res) => {
-    const { senhaAtual, senha } = req.body
+    const { senhaAtual, senha } = req.body;
     if(typeof senhaAtual !== 'string' || !senhaAtual || typeof senha !== 'string' || !senha.trim()) {
         return res.status(400).send('Preencha a senha atual e a nova senha.');
     }
@@ -203,7 +203,7 @@ router.post('/option-user/update-password', verificarLogin, (req,res) => {
         [id],
         (err, userResults) => {
             if(err) {
-                console.log(err)
+                console.log(err);
                 return res.status(500).send('Erro ao verificar a senha.');
             }
             if(userResults.length === 0) {
@@ -218,32 +218,32 @@ router.post('/option-user/update-password', verificarLogin, (req,res) => {
                 [senha, id],
                 (err) => {
                     if(err) {
-                        console.log(err)
+                        console.log(err);
                         return res.status(500).send('Erro ao atualizar a senha.');
                     }
-                    res.redirect('/option-user')
+                    res.redirect('/option-user');
                 }
-            )
+            );
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-address/:id', verificarLogin, (req,res) => {
     const idAddress = req.params.id;
-    const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body
-    const idUser = req.session.usuario.id
+    const { rua, numero, cep, cidade, estado, bairro, telefone} = req.body;
+    const idUser = req.session.usuario.id;
 
     db.query(
         'UPDATE endereco SET rua = ?, numero = ?, cep = ?, cidade = ?, estado = ?, bairro = ?, telefone_contato = ? WHERE id = ? AND usuario_id = ?', [rua, numero, cep, cidade, estado, bairro, telefone, idAddress, idUser ],
         (err) => {
             if(err) {
-                return res.status(500).send('Erro ao alterar os dados do endereço! Tente novamente.')
+                return res.status(500).send('Erro ao alterar os dados do endereço! Tente novamente.');
             } else {
-                res.redirect('/option-user')
+                res.redirect('/option-user');
             }
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/update-pet/:id', verificarLogin, (req,res) => {
     const {name, race, gender, descriptionPet} = req.body;
@@ -254,32 +254,32 @@ router.post('/option-user/update-pet/:id', verificarLogin, (req,res) => {
         'UPDATE pet SET nome = ?, raca = ?, genero = ?, descricao = ? WHERE id = ? AND usuario_id = ?', [name, race, gender, descriptionPet, idPet, idUser],
         (err) => {
             if(err) {
-                return res.status(500).send("Ocorreu um erro ao tentar atualizar os dados do seu pet! Tente novamente.")
+                return res.status(500).send("Ocorreu um erro ao tentar atualizar os dados do seu pet! Tente novamente.");
             } else {
-                res.redirect("/option-user")
+                res.redirect("/option-user");
             }
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/delete-pet/:id', verificarLogin, (req,res) => {
-    const idPet = req.params.id
+    const idPet = req.params.id;
     
     db.query(
         'DELETE FROM pet WHERE id = ?', 
         [idPet],
         (err) => {
             if(err) {
-                console.log(err)
+                console.log(err);
             } else {
-                return res.status(204).end()
+                return res.status(204).end();
             }
         }
-    )
-})
+    );
+});
 
 router.post('/option-user/delete-address/:id', verificarLogin, (req,res) => {
-    const idAddress = req.params.id
+    const idAddress = req.params.id;
     const userId = req.session.usuario.id;
     
     db.query(
@@ -287,14 +287,38 @@ router.post('/option-user/delete-address/:id', verificarLogin, (req,res) => {
         [idAddress, userId],
         (err) => {
             if(err) {
-                console.log(err)
+                console.log(err);
             } else {
-                return res.status(204).end()
+                return res.status(204).end();
             }
         }
-    )
-})
+    );
+});
 
+router.post('/option-user/update-avatar', verificarLogin, (req, res) => {
+    const userId = req.session.usuario.id;
+    const { avatar } = req.body;
+    let avatarBuffer = null;
 
+    if (avatar && typeof avatar === 'string' && avatar.startsWith('data:image')) {
+        const base64Data = avatar.replace(/^data:image\/\w+;base64,/, '');
+        avatarBuffer = Buffer.from(base64Data, 'base64');
+    }
+
+    if (!avatarBuffer) {
+        return res.status(400).send('Imagem inválida.');
+    }
+
+    db.query('UPDATE usuario SET avatar = ? WHERE id = ?', [avatarBuffer, userId], (err) => {
+        if (err) {
+            console.error('Erro ao atualizar avatar do usuário:', err);
+            return res.status(500).send('Erro ao atualizar avatar.');
+        }
+        if (req.session.usuario) {
+            req.session.usuario.avatar = avatarBuffer;
+        }
+        return res.status(200).json({ mensagem: 'Avatar atualizado com sucesso!' });
+    });
+});
 
 module.exports = router;

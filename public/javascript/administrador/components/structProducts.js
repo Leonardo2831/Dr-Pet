@@ -33,7 +33,7 @@ export default function structProducts(object, formProduct) {
 
     tr.querySelector('[data-button="deleteProduct"]').addEventListener('click', () => {
         confirm.open(() => {
-            const fetchAPI = new Fetch('produtos', '[data-modal-info="adm"]');
+            const fetchAPI = new Fetch('administrador/produtos', '[data-modal-info="adm"]');
             fetchAPI.delete(object.id);
             tr.remove();
         });

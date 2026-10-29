@@ -56,8 +56,8 @@ export default class Services {
         this.setLoading(button, true);
 
         try {
-            const response = await fetch(`/administrador/servicos/${encodeURIComponent(id)}`, {
-                method: 'DELETE',
+            const response = await fetch(`/administrador/servicos/delete/${encodeURIComponent(id)}`, {
+                method: 'POST',
                 headers: {
                     Accept: 'application/json'
                 }

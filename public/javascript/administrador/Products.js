@@ -73,7 +73,7 @@ export default class Products {
                 if (!id) return;
 
                 confirm.open(() => {
-                    fetch(`/produtos/${id}`, { method: 'DELETE' })
+                    fetch(`/administrador/produtos/delete/${id}`, { method: 'POST' })
                         .then(() => tr.remove())
                         .catch(err => console.error("Erro ao excluir produto:", err));
                 });

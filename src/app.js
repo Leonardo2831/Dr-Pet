@@ -1,9 +1,8 @@
 const express = require('express');
-//baixar quanto tentar rodar V
 const session = require('express-session');
 const { loadUser } = require('./router/middlewares');
 
-// rotas
+// Rotas
 const homeRouter = require('./router/home');
 const administradorRouter = require('./router/administrador/administrador');
 const agendaRouter = require('./router/agenda');
@@ -33,8 +32,13 @@ app.use(session({
 
 app.use(loadUser);
 
+// Roteador Home
 app.use('/', homeRouter);
+
+// Rotas administrador
 app.use('/', administradorRouter);
+
+// Demais módulos
 app.use('/', agendaRouter);
 app.use('/', cadastrarRouter);
 app.use('/', formAgendarRouter);

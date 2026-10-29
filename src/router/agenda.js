@@ -17,59 +17,6 @@ function getServiceSlug(nome) {
 
 // ROTA PRINCIPAL DA AGENDA (GET /agenda)
 router.get('/agenda', verificarLogin, (req, res) => {
-        const query = `
-            SELECT 
-                a.id,
-                DATE_FORMAT(a.dateAgendamento, '%Y-%m-%d') AS date,
-                TIME_FORMAT(a.hourAgendamento, '%H:%i') AS hour,
-                a.buscarResidencia,
-                a.observation,
-                a.endereco,
-                a.nome,
-                a.telefone,
-                a.pendente,
-                a.nomePet,
-                a.fk_user,
-                a.fk_service,
-                u.nome AS usuario_nome,
-                u.telefone AS usuario_telefone,
-                u.email AS usuario_email,
-                s.id AS service_id,
-                s.nome AS service_nome
-            FROM agenda a
-            LEFT JOIN usuario u ON a.fk_user = u.id
-            LEFT JOIN service_infos s ON a.fk_service = s.id
-            ORDER BY a.dateAgendamento ASC, a.hourAgendamento ASC
-        `;
-        db.query(query, (err, rows) => {
-            if (err) return res.status(500).json({ erro: 'Erro ao buscar agendamentos.' });
-            const result = (rows || []).map(a => ({
-                id: a.id,
-                date: a.date,
-                hour: a.hour,
-                buscarResidencia: Boolean(a.buscarResidencia),
-                observation: a.observation || '',
-                endereco: a.endereco || '',
-                pendente: a.pendente,
-                nomePet: a.nomePet || '',
-                user: {
-                    username: a.nome || a.usuario_nome || 'Cliente',
-                    phone: a.telefone || a.usuario_telefone || '',
-                    endereco: a.endereco || ''
-                },
-                petAgendado: {
-                    name: a.nomePet || 'Pet'
-                },
-                service: {
-                    id: a.service_id || a.fk_service,
-                    name: a.service_nome || '',
-                    nome: a.service_nome || '',
-                    observations: a.observation || ''
-                }
-            }));
-            return res.json(result);
-        });
-
     const queryServicos = 'SELECT id, nome, duracao, preco, descricao, (imagem IS NOT NULL AND LENGTH(imagem) > 0) AS has_imagem FROM service_infos ORDER BY id ASC';
     const queryAgenda = "SELECT id, DATE_FORMAT(dateAgendamento, '%Y-%m-%d') AS date, TIME_FORMAT(hourAgendamento, '%H:%i') AS hour, fk_service FROM agenda WHERE dateAgendamento >= CURDATE()";
 
@@ -142,13 +89,19 @@ router.get('/agenda/:id', (req, res) => {
     });
 });
 
-router.delete('/agenda/:id', (req, res) => {
+// CANCELAR / DELETAR AGENDAMENTO (POST /agenda/delete/:id ou POST /agenda/:id)
+const deletarAgendamento = (req, res) => {
     const { id } = req.params;
     db.query('DELETE FROM agenda WHERE id = ?', [id], (err) => {
         if (err) return res.status(500).json({ erro: 'Erro ao deletar agendamento.' });
         res.status(200).json({ mensagem: 'Agendamento cancelado com sucesso.' });
     });
-});
+};
+
+router.post('/agenda/delete/:id', deletarAgendamento);
+router.post('/agenda/:id/delete', deletarAgendamento);
+router.post('/agenda/:id', deletarAgendamento);
+router.delete('/agenda/:id', deletarAgendamento); // compatibilidade
 
 router.patch('/agenda/:id', (req, res) => {
     const { id } = req.params;
@@ -188,37 +141,37 @@ router.get('/servicos/imagem/:id', (req, res) => {
 
 router.post('/agenda', verificarLogin, (req, res) => {
     const userId = req.session.usuario.id;
+    const { date, hour, buscarResidencia, observation, endereco, fk_pet, fk_service } = req.body;
 
     if (!date || !hour || !fk_service) {
         return res.status(400).json({ erro: 'Data, horário e serviço são obrigatórios.' });
     }
 
-        const query = `
-            INSERT INTO agenda 
-            (date_agendamento, hour_agendamento, buscarResidencia, observation, endereco, pendente, fk_user, fk_pet, fk_service) 
-            VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)
-        `;
+    const query = `
+        INSERT INTO agenda 
+        (dateAgendamento, hourAgendamento, buscarResidencia, observation, endereco, pendente, fk_user, fk_service) 
+        VALUES (?, ?, ?, ?, ?, 1, ?, ?)
+    `;
 
-        db.query(
-            query,
-            [
-                date,
-                hour,
-                buscarResidencia ? 1 : 0,
-                observation || null,
-                endereco || null,
-                userId,
-            fk_pet || null,
-                fk_service
-            ],
-            (err, result) => {
-                if (err) {
-                    console.error('Erro ao salvar agendamento no MySQL:', err);
-                    return res.status(500).json({ erro: 'Erro ao salvar agendamento.' });
-                }
-                return res.status(201).json({ mensagem: 'Agendamento realizado com sucesso!', id: result.insertId });
+    db.query(
+        query,
+        [
+            date,
+            hour,
+            buscarResidencia ? 1 : 0,
+            observation || null,
+            endereco || null,
+            userId,
+            fk_service
+        ],
+        (err, result) => {
+            if (err) {
+                console.error('Erro ao salvar agendamento no MySQL:', err);
+                return res.status(500).json({ erro: 'Erro ao salvar agendamento.' });
             }
-        );
+            return res.status(201).json({ mensagem: 'Agendamento realizado com sucesso!', id: result.insertId });
+        }
+    );
 });
 
 module.exports = router;

@@ -90,7 +90,7 @@ export default class UserReports {
             const phone = this.formatPhone(user.telefone);
 
             const avatarSrc = user.has_avatar
-                ? `/usuario/avatar/${user.id}`
+                ? `/administrador/usuarios/avatar/${user.id}`
                 : '/images/icons/options/user-default.svg';
 
             const avatarHtml = `<img src="${avatarSrc}" alt="${user.nome}" class="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover mx-auto" onerror="this.src='/images/icons/options/user-default.svg';" />`;

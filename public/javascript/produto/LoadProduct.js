@@ -19,7 +19,7 @@ export default class LoadProduct{
 
         this.product = null;
         this.allProducts = null;
-        this.fetchProduct = new Fetch('produtos', '[data-modal-info="product"]');
+        this.fetchProduct = new Fetch('administrador/produtos', '[data-modal-info="product"]');
         
         this.toContact = this.toContact.bind(this);
     }

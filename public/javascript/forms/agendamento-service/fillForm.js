@@ -6,7 +6,7 @@ export default async function fillForm(form) {
     const userId = Storage.get('user-id');
     if (!userId) return;
 
-    const fetchUser = new Fetch('usuarios', null);
+    const fetchUser = new Fetch('administrador/usuarios', null);
 
     const userData = await fetchUser.get(userId);
     if (!userData) return;

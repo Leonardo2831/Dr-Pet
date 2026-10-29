@@ -120,8 +120,8 @@ export default class Fetch {
 
     async delete(id){
         try{
-            const response = await fetch(`${this.url}/${id}`, {
-                method: "DELETE",
+            const response = await fetch(`${this.url}/delete/${id}`, {
+                method: "POST",
             });
             
             this.showModalSuccess('Os dados foram deletados com sucesso!');
