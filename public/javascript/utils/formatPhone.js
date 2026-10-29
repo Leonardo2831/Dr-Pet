@@ -1,5 +1,10 @@
-function applyPhoneMask(value) {
-    value = value.replace(/\D/g, '').substring(0, 11);
+export function applyPhoneMask(value) {
+    if (!value) return '';
+    value = String(value).replace(/\D/g, '');
+    if (value.length > 11 && value.startsWith('55')) {
+        value = value.substring(2);
+    }
+    value = value.substring(0, 11);
 
     if (value.length > 2) {
         let formatted = `(${value.substring(0, 2)}) `;
@@ -25,7 +30,9 @@ function changePhone(event) {
 }
 
 export default function formatPhone(selector) {
-    const inputs = document.querySelectorAll(selector);
+    const inputs = typeof selector === 'string' 
+        ? document.querySelectorAll(selector) 
+        : (selector instanceof HTMLElement ? [selector] : []);
 
     if (inputs.length === 0) return;
 
@@ -34,6 +41,8 @@ export default function formatPhone(selector) {
             input.value = applyPhoneMask(input.value);
         }
 
+        input.removeEventListener('input', changePhone);
+        input.removeEventListener('change', changePhone);
         input.addEventListener('input', changePhone);
         input.addEventListener('change', changePhone);
     });

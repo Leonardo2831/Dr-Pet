@@ -18,6 +18,11 @@ export default function sendFormAgendar(form) {
 
         const scheduleData = Storage.get('scheduleData') || {};
 
+        if (!scheduleData.service || !scheduleData.date || !scheduleData.hour) {
+            alert('Dados do agendamento incompletos no seu navegador. Por favor, volte para a página de serviços e selecione data, hora e serviço novamente.');
+            return;
+        }
+
         const data = {
             nome: formElement.querySelector('#nome')?.value || '',
             telefone: formElement.querySelector('#telefone')?.value || '',
@@ -32,17 +37,32 @@ export default function sendFormAgendar(form) {
         const endpoint = action.replace(/^\/+/, '');
         const fetchService = new Fetch(endpoint, '[data-modal-info="formSchedule"]');
 
-        if (fetchService.modalInfo) {
-            fetchService.modalInfo.classList.remove('hidden', 'opacity-0');
-            setTimeout(() => {
-                fetchService.modalInfo?.classList.add('hidden', 'opacity-0');
-            }, 2000);
-        }
-
         try {
+            buttonSubmit.disabled = true;
+            buttonSubmit.classList.add('opacity-70', 'cursor-wait');
+
             const response = await fetchService.post(data);
+
+            // Limpa dados temporários salvos no navegador
+            Storage.delete('scheduleData');
+
+            let redirectUrl = '/';
+            try {
+                const resJson = await response.clone().json();
+                if (resJson && resJson.redirect) {
+                    redirectUrl = resJson.redirect;
+                }
+            } catch (_) {}
+
+            // Aguarda o feedback visual de sucesso e redireciona para a home ('/')
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 1000);
+
             return response;
         } catch (error) {
+            buttonSubmit.disabled = false;
+            buttonSubmit.classList.remove('opacity-70', 'cursor-wait');
             console.error('Erro ao enviar formulário de agendamento:', error);
         }
     });

@@ -6,13 +6,15 @@ const produtosRouter = require('./produtos');
 const slideHomeRouter = require('./slide-home');
 const usuariosRouter = require('./usuarios');
 const servicosRouter = require('./servicos');
-const agendaRouter = require('./agenda');
+const agendaRouter = require('./agendamentos');
+const acceptRouter  = require('./acceptAppointment');
 
 router.use(produtosRouter);
 router.use(slideHomeRouter);
 router.use(usuariosRouter);
 router.use(servicosRouter);
 router.use(agendaRouter);
+router.use(acceptRouter);
 
 function executarQuery(sql, params = []) {
     return new Promise((resolve) => {
@@ -35,6 +37,8 @@ router.get('/administrador', async (req, res) => {
     const queryAgendamento = `
         SELECT 
             a.id,
+            DATE_FORMAT(a.dateAgendamento, '%Y-%m-%d') AS date_formatted,
+            TIME_FORMAT(a.hourAgendamento, '%H:%i') AS hour_formatted,
             a.dateAgendamento,
             a.hourAgendamento,
             a.buscarResidencia,
@@ -70,15 +74,8 @@ router.get('/administrador', async (req, res) => {
         ]);
 
         const agendamentos = (rawAgendamentos || []).map(a => {
-            let dateStr = '';
-            if (a.dateAgendamento) {
-                dateStr = String(a.dateAgendamento).split('T')[0];
-            }
-
-            let hourStr = '';
-            if (a.hourAgendamento) {
-                hourStr = String(a.hourAgendamento).slice(0, 5);
-            }
+            const dateStr = a.date_formatted || (a.dateAgendamento ? new Date(a.dateAgendamento).toLocaleDateString('en-CA') : '');
+            const hourStr = a.hour_formatted || (a.hourAgendamento ? String(a.hourAgendamento).slice(0, 5) : '');
 
             const agObj = {
                 id: a.id,
@@ -122,12 +119,14 @@ router.get('/administrador', async (req, res) => {
                 nomePet: a.nomePet || '',
                 nome: a.nome || a.usuario_nome || '',
                 telefone: a.telefone || a.usuario_telefone || '',
+                email: a.usuario_email || '',
                 fk_service: a.fk_service,
                 fk_user: a.fk_user,
                 user: {
                     id: a.fk_user,
                     username: a.nome || a.usuario_nome || 'Cliente',
                     phone: a.telefone || a.usuario_telefone || '',
+                    email: a.usuario_email || '',
                     endereco: a.endereco || ''
                 },
                 petAgendado: {

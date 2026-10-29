@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const { loadUser } = require('./router/middlewares');
@@ -50,7 +51,10 @@ app.use('/', servicosRouter);
 app.use((req, res) => {
     res.status(404).render('404');
 });
+// App loaded - updated admin agendamentos routes
+
 
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);
 });
+// App loaded - updated admin agendamentos routes

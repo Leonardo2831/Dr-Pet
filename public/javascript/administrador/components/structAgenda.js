@@ -86,11 +86,11 @@ export default function structAgenda(object) {
 
     if (isFutureOrToday) {
         div.querySelector('[data-button="editSchedule"]').addEventListener('click', () => {
-            Agenda.openModal(document.querySelector('[data-modal="editSchedule"]'), editSchedule, object.id);
+            Agenda.openModal(document.querySelector('[data-modal="editSchedule"]'), editSchedule, object.id, object);
         });
 
         div.querySelector('[data-button="cancelSchedule"]').addEventListener('click', () => {
-            Agenda.openModal(document.querySelector('[data-modal="cancelSchedule"]'), cancelSchedule, object.id);
+            Agenda.openModal(document.querySelector('[data-modal="cancelSchedule"]'), cancelSchedule, object.id, object);
         });
     }
 

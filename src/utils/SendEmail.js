@@ -1,20 +1,24 @@
+require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 function sendEmail(html, subject, to){
-    const transporter = nodemailer.createTestAccount({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+    const transporter = nodemailer.createTransport({
+        host: process.env.HOST_EMAIL,
+        port: process.env.PORT_EMAIL,
+        secure: false,
         auth: {
-            user: 'SEU_EMAIL',
-            pass: 'SUA_SENHA'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
         }
     });
 
     async function send(){
-        try{
-            const info = await transporter.sendMail({
-                from: '"Meu App" <[EMAIL_ADDRESS]>',
+        try {
+            await transporter.sendMail({
+                from: `"Dr. Pet" <${process.env.EMAIL_USER}>`,
                 to,
                 subject,
                 html,
@@ -28,7 +32,7 @@ function sendEmail(html, subject, to){
         }
     }
 
-    send();
+    return send();
 }
 
 module.exports = sendEmail;

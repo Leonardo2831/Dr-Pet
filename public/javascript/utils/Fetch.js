@@ -3,7 +3,8 @@ export default class Fetch {
     classModalSucess = 'success';
 
     constructor(urlFinal, selectorModalInfo){
-        this.url = 'http://localhost:3000/' + urlFinal;
+        const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+        this.url = `${base}/${urlFinal.replace(/^\/+/, '')}`;
         this.modalInfo = document.querySelector(selectorModalInfo);
     }
 

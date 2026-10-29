@@ -739,7 +739,7 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-email" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Email</label>
-                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" value="<%= user.email || '' %>" placeholder="seu@email.com" required
+                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" value="<%= user.email || '' %>" placeholder="seu@email.com" minlength="5" maxlength="50" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
@@ -763,7 +763,7 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-Telefone" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Telefone</label>
-                    <input data-input="editTelefone" id="input-edit-Telefone" type="tel" name="telefone" value="<%= user.telefone || '' %>" placeholder="(00) 00000-0000" required
+                    <input data-input="editTelefone" id="input-edit-Telefone" type="tel" name="telefone" value="<%= user.telefone || '' %>" placeholder="(00) 00000-0000" minlength="14" maxlength="15" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
@@ -787,13 +787,13 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-current-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Senha atual</label>
-                    <input id="input-current-Senha" type="password" name="senhaAtual" placeholder="Digite sua senha atual" required
+                    <input id="input-current-Senha" type="password" name="senhaAtual" placeholder="Digite sua senha atual" minlength="8" maxlength="60" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
-                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="senha" placeholder="Digite sua nova senha" required
+                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="senha" placeholder="Digite sua nova senha" minlength="8" maxlength="60" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
@@ -818,7 +818,7 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-Nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Digite o seu nome:</label>
-                    <input data-input="editName" id="input-edit-Nome" type="text" name="nome" value="<%= user.nome || '' %>" placeholder="Seu nome completo" required
+                    <input data-input="editName" id="input-edit-Nome" type="text" name="nome" value="<%= user.nome || '' %>" placeholder="Seu nome completo" minlength="3" maxlength="50" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
@@ -844,12 +844,12 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-rua" class="font-sans font-semibold text-base md:text-lg text-gray-700">Rua</label>
-                        <input data-input="rua" id="input-rua" type="text" name="rua" placeholder="Ex: Rua das Flores" required
+                        <input data-input="rua" id="input-rua" type="text" name="rua" placeholder="Ex: Rua das Flores" minlength="3" maxlength="80" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                     <div class="flex flex-col gap-[10px] sm:w-[150px]">
                         <label for="input-numero" class="font-sans font-semibold text-base md:text-lg text-gray-700">Número</label>
-                        <input data-input="numero" id="input-numero" type="text" name="numero" placeholder="Ex: 123" required
+                        <input data-input="numero" id="input-numero" type="text" name="numero" placeholder="Ex: 123" minlength="1" maxlength="10" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -857,17 +857,17 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] sm:w-[200px]">
                         <label for="input-cep" class="font-sans font-semibold text-base md:text-lg text-gray-700">CEP</label>
-                        <input data-input="cep" id="input-cep" type="text" name="cep" placeholder="Ex: 00000-000" required
+                        <input data-input="cep" id="input-cep" type="text" name="cep" placeholder="Ex: 00000-000" minlength="8" maxlength="9" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-cidade" class="font-sans font-semibold text-base md:text-lg text-gray-700">Cidade</label>
-                        <input data-input="cidade" id="input-cidade" type="text" name="cidade" placeholder="Ex: São Paulo" required
+                        <input data-input="cidade" id="input-cidade" type="text" name="cidade" placeholder="Ex: São Paulo" minlength="2" maxlength="50" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                     <div class="flex flex-col gap-[10px] sm:w-[100px]">
                         <label for="input-estado" class="font-sans font-semibold text-base md:text-lg text-gray-700">Estado</label>
-                        <input data-input="estado" id="input-estado" type="text" name="estado" placeholder="Ex: SP" maxlength="2" required
+                        <input data-input="estado" id="input-estado" type="text" name="estado" placeholder="Ex: SP" minlength="2" maxlength="2" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -875,12 +875,12 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-bairro" class="font-sans font-semibold text-base md:text-lg text-gray-700">Bairro</label>
-                        <input data-input="bairro" id="input-bairro" type="text" name="bairro" placeholder="Ex: Centro" required
+                        <input data-input="bairro" id="input-bairro" type="text" name="bairro" placeholder="Ex: Centro" minlength="2" maxlength="50" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-telefone-address" class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
-                        <input data-input="telefoneAddress" id="input-telefone-address" type="tel" name="telefone" placeholder="(00) 00000-0000" required
+                        <input data-input="telefoneAddress" id="input-telefone-address" type="tel" name="telefone" placeholder="(00) 00000-0000" minlength="14" maxlength="15" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -907,12 +907,12 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-name" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome</label>
-                        <input data-input="petName" id="input-name" type="text" name="name" placeholder="Nome do seu pet" required
+                        <input data-input="petName" id="input-name" type="text" name="name" placeholder="Nome do seu pet" minlength="2" maxlength="40" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                     <div class="flex flex-col gap-[10px] sm:w-[150px]">
                         <label for="input-race" class="font-sans font-semibold text-base md:text-lg text-gray-700">Raça</label>
-                        <input data-input="petRace" id="input-race" type="text" name="race" placeholder="Ex: Cachorro" required
+                        <input data-input="petRace" id="input-race" type="text" name="race" placeholder="Ex: Cachorro" minlength="2" maxlength="40" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -938,7 +938,7 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-descriptionPet" class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do pet</label>
-                        <textarea data-input="petDescription" id="input-descriptionPet" name="descriptionPet" placeholder="Ex: ele é muito legal" required
+                        <textarea data-input="petDescription" id="input-descriptionPet" name="descriptionPet" placeholder="Ex: ele é muito legal" minlength="2" maxlength="200" required
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea> 
                     </div>
                 </div>

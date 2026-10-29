@@ -8,9 +8,11 @@ import adminPrecosAgenda from "./admin-precos-agenda.js";
 import AppointmentRequests from "./AppointmentRequests.js";
 import UserReports from "./UserReports.js";
 import Services from "./Services.js";
+import formatPhone from "../utils/formatPhone.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     selectSectionAdm();
+    formatPhone('[data-input="formatPhone"], [data-input="cancelSchedulePhone"], [data-input="appointmentPhone"]');
     const slidesConfig = new SlidesHome('[data-add-slide]', '[data-content-slides]').init();
     const scheduleConfig = new Agenda('[data-content-schedule]', '[data-input-date="adm"]', '[data-select="service"]', '[data-button="searchSchedule"]').init();
     const appointmentRequests = new AppointmentRequests('[data-content-appointment-requests]').init();
@@ -28,4 +30,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }).init();
     adminPrecosAgenda();
     eventoSlides();
-}); 
+});

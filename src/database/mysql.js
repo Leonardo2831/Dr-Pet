@@ -1,12 +1,12 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
 const db = mysql.createPool({
-    // porta padrão da faculdade é 3306, mas meu pc é 3308
-    port: 3308,
-    host: 'localhost',
-    user: 'root',
-    database: 'petshop',
-    password: '1234'
+    port: Number(process.env.DB_PORT),
+    host: process.env.DB_HOST.toString(),
+    user: process.env.DB_USER.toString(),
+    database: process.env.DB_NAME.toString(),
+    password: process.env.DB_PASSWORD.toString()
 });
 
 module.exports = db;

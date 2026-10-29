@@ -34,34 +34,53 @@ export default class Hours {
             const agendaEl = document.getElementById('server-agenda');
             if (agendaEl && agendaEl.textContent) {
                 this.agenda = JSON.parse(agendaEl.textContent) || [];
+            } else if (window.initialAgendamentos && Array.isArray(window.initialAgendamentos)) {
+                this.agenda = window.initialAgendamentos;
             }
         } catch (error) {
             console.error("Erro ao carregar dados da agenda:", error);
-            this.agenda = [];
+            this.agenda = window.initialAgendamentos || [];
         }
 
         try {
             const servicosEl = document.getElementById('server-servicos');
+            let list = [];
             if (servicosEl && servicosEl.textContent) {
-                const list = JSON.parse(servicosEl.textContent) || [];
-                this.serviceInfos = {};
-                list.forEach(s => {
-                    const obj = {
-                        id: String(s.id),
-                        name: s.nome,
-                        time: Number(s.duracao) || 30,
-                        price: Number(s.preco) || 0
-                    };
-                    this.serviceInfos[String(s.id)] = obj;
-                    if (s.slug) {
-                        this.serviceInfos[s.slug] = obj;
-                    }
+                list = JSON.parse(servicosEl.textContent) || [];
+            } else if (window.initialServicos && Array.isArray(window.initialServicos)) {
+                list = window.initialServicos;
+            } else {
+                const selectOptions = document.querySelectorAll('#select-edit-servico option[value]:not([value=""])');
+                selectOptions.forEach(opt => {
+                    list.push({ id: opt.value, nome: opt.textContent.trim(), duracao: 30, preco: 0 });
                 });
             }
+
+            this.serviceInfos = {};
+            list.forEach(s => {
+                const obj = {
+                    id: String(s.id),
+                    name: s.nome,
+                    time: Number(s.duracao) || 30,
+                    price: Number(s.preco) || 0
+                };
+                this.serviceInfos[String(s.id)] = obj;
+                if (s.slug) {
+                    this.serviceInfos[s.slug] = obj;
+                }
+                if (s.nome) {
+                    this.serviceInfos[s.nome] = obj;
+                }
+            });
         } catch (error) {
             console.error("Erro ao carregar dados dos serviços:", error);
             this.serviceInfos = {};
         }
+    }
+
+    async getAgenda() {
+        this.loadServerData();
+        return this.agenda;
     }
 
     renderHours() {
@@ -78,7 +97,12 @@ export default class Hours {
         this.contentHoursMorning.innerHTML = '';
         this.contentHoursAfternoon.innerHTML = '';
 
-        // Se não houver serviços cadastrados
+        // Se não houver serviços carregados ainda, tenta carregar
+        if (!this.serviceInfos || Object.keys(this.serviceInfos).length === 0) {
+            this.loadServerData();
+        }
+
+        // Se ainda não houver serviços cadastrados
         if (!this.serviceInfos || Object.keys(this.serviceInfos).length === 0) {
             const p = document.createElement('p');
             p.textContent = 'Agendamento indisponível: nenhum serviço cadastrado no momento.';
@@ -92,14 +116,14 @@ export default class Hours {
         }
 
         const agendaByDay = (this.agenda || []).filter(item => {
-            return item.date === this.currentDay && item.id !== this.ignoredAppointmentId;
+            return item.date === this.currentDay && String(item.id) !== String(this.ignoredAppointmentId);
         });
 
         let occupiedSlots = new Set();
 
         agendaByDay.forEach(appointment => {
             const startHour = appointment.hour;
-            const serviceKey = appointment.fk_service || (appointment.service ? appointment.service.name : null);
+            const serviceKey = appointment.fk_service || (appointment.service ? (appointment.service.id || appointment.service.name) : null);
             const serviceInfo = this.serviceInfos ? this.serviceInfos[String(serviceKey)] : null;
             
             const duration = serviceInfo ? serviceInfo.time : 30; 

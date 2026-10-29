@@ -1,5 +1,6 @@
 import Fetch from '../utils/Fetch.js';
 import getParamsURL from "../utils/getParamsURL.js";
+import toContactWhatsapp from "../utils/toContactWhatsapp.js";
 import structProduct from './components/structProduct.js';
 import structSlide from './components/structSlide.js';
 import structThumb from './components/structThumb.js';
@@ -26,10 +27,8 @@ export default class LoadProduct{
 
     toContact(){
         const phone = "5519993592253"; 
-        const text = encodeURIComponent(`Olá, gostaria de saber mais sobre o ${this.product.name}`);
-        const url = `https://wa.me/${phone}?text=${text}`;
-    
-        window.open(url, '_blank');
+        const text = `Olá, gostaria de saber mais sobre o ${this.product ? this.product.name : 'produto'}`;
+        toContactWhatsapp(phone, text);
     }
 
     addEventButton(){

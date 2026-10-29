@@ -122,13 +122,6 @@
                             </div>
                         </div>
 
-                        <button type="button" data-button="searchSchedule"
-                            class="flex flex-row items-center justify-center gap-[15px] px-7 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
-                            <span class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
-                                Filtrar Horários
-                            </span>
-                            <img class="w-5 h-5" src="/images/icons/search-gray.svg" alt="Visualizar" />
-                        </button>
                     </div>
                 </div>
 
@@ -475,21 +468,12 @@
                             Ao confirmar, um e-mail personalizado com o editor Quill é enviado ao cliente.
                         </p>
                     </div>
-
-                    <!-- Botão: Aceitar Todos os Pendentes -->
-                    <button type="button" data-button="acceptAllAppointments"
-                        class="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-[10px] font-sans font-semibold text-base md:text-lg shadow-sm hover:shadow transition-all focus:outline-none focus:ring-4 focus:ring-green-500/30 shrink-0 cursor-pointer">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Aceitar Todos os Pendentes</span>
-                    </button>
                 </div>
 
                 <!-- Barra de Busca e Filtros de Status -->
                 <div class="my-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.1)] w-full">
                     <div class="relative flex-1 min-w-[240px]">
-                        <input data-input="searchAppointments" type="text"
+                        <input data-input="searchAppointments" type="text" maxlength="60"
                             placeholder="Buscar por cliente, pet, serviço ou e-mail..."
                             class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-[8px] font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-600 focus:ring-4 focus:ring-green-600/20 transition-all placeholder:text-gray-400" />
                         <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -539,14 +523,19 @@
                             return tel;
                         }
 
-                        const listaAgendamentos = (locals.agendamentos && Array.isArray(agendamentos)) ? agendamentos : [];
+                        const listaAgendamentos = (locals.agendamentos && Array.isArray(agendamentos))
+                            ? agendamentos.filter(item => {
+                                const ag = item.agenda || item;
+                                return ag.pendente === true || ag.pendente === 1 || ag.pendente === '1' || ag.pendente === 'true';
+                            })
+                            : [];
                     %>
 
                     <% if (listaAgendamentos.length > 0) { %>
                         <% listaAgendamentos.forEach(item => { 
                             const ag = item.agenda || item;
                             const usr = item.usuario || {};
-                            const srv = item.service_infos || {};
+                            const srv = item.service_infos || item.service || {};
 
                             const id = ag.id;
                             const isPending = (ag.pendente === true || ag.pendente === 1 || ag.pendente === '1' || ag.pendente === 'true');
@@ -555,7 +544,7 @@
                             const telefone = ag.telefone || usr.telefone || '';
                             const petName = ag.nomePet || 'Pet';
                             const raca = ag.raca || '';
-                            const serviceName = srv.nome || 'Serviço Veterinário';
+                            const serviceName = srv.nome || srv.name || item.service_nome || 'Serviço Veterinário';
                             const dateFormatted = formatarDataBR(ag.dateAgendamento);
                             const hourFormatted = formatarHoraBR(ag.hourAgendamento);
                             const hasTranslado = Boolean(ag.buscarResidencia);
@@ -572,6 +561,7 @@
                                 data-phone="<%= telefone %>"
                                 data-pet="<%= petName %>"
                                 data-service="<%= serviceName %>"
+                                data-service-id="<%= srv.id || ag.fk_service || '' %>"
                                 data-date="<%= dateFormatted %>"
                                 data-hour="<%= hourFormatted %>"
                                 data-translado="<%= hasTranslado ? 'true' : 'false' %>"
@@ -727,7 +717,7 @@
                         <% }); %>
                     <% } else { %>
                         <div data-appointment-empty class="flex flex-col items-center justify-center p-12 bg-white rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] text-center gap-3 animate-fadeItem">
-                            <img src="/images/icons/calendar_clock.svg" alt="Sem agendamentos" class="w-12 h-12 opacity-40" />
+                            <img src="/images/icons/calendar_clock_green.svg" alt="Sem agendamentos" class="w-12 h-12" />
                             <h4 class="font-sans font-bold text-lg text-gray-700">Nenhuma solicitação encontrada</h4>
                             <p class="font-sans text-sm text-gray-500 max-w-sm">
                                 Não há solicitações de agendamento registradas no momento.
@@ -760,7 +750,7 @@
                         class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-3 xl:gap-10 w-full">
                         <div
                             class="relative flex flex-row justify-between items-center px-4 py-2 md:px-[36px] md:py-[12px] bg-white border-4 border-gray-300 focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-400/20 transition-all rounded-[10px] w-full flex-1">
-                            <input data-input="filterProduct" type="text" placeholder="Busca por nome..."
+                            <input data-input="filterProduct" type="text" maxlength="50" placeholder="Busca por nome..."
                                 class="bg-transparent w-full outline-none font-medium text-base md:text-2xl text-gray-500 placeholder:text-gray-500" />
                             <img src="/images/icons/search.svg" alt="Buscar" class="w-6 h-6 md:w-[32px] md:h-[33px]" />
                         </div>
@@ -875,7 +865,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
-                        <input data-input="searchUsers" type="text" placeholder="Pesquisar usuários..."
+                        <input data-input="searchUsers" type="text" maxlength="50" placeholder="Pesquisar usuários..."
                             class="w-full bg-transparent outline-none font-sans text-sm md:text-base text-gray-700 placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -1131,9 +1121,29 @@
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
                 </button>
 
-                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">
-                    Editar Agendamento
-                </h3>
+                <!-- Overlay de Loading na Edição -->
+                <div data-loading-edit
+                    class="hidden absolute inset-0 z-50 bg-white/95 backdrop-blur-xs flex-col items-center justify-center gap-4 transition-all">
+                    <div class="relative flex items-center justify-center">
+                        <svg class="w-14 h-14 text-green-600 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="#bbf7d0" stroke-width="4"></circle>
+                            <path class="opacity-90" fill="#16a34a" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="font-sans font-bold text-lg text-gray-800">Salvando alterações...</span>
+                        <span class="font-sans text-sm text-gray-500">Atualizando agendamento, enviando e-mail e preparando WhatsApp</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-1 pr-10">
+                    <h3 class="font-sans font-bold text-xl md:text-2xl text-green-700 mt-1">
+                        Editar Agendamento e Notificar Cliente
+                    </h3>
+                    <p class="font-sans text-xs md:text-sm text-gray-500">
+                        Os dados antigos são carregados abaixo para você editar apenas o necessário. O cliente será notificado por e-mail e WhatsApp sobre as alterações.
+                    </p>
+                </div>
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-nome" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome
@@ -1166,9 +1176,9 @@
                 <div class="flex flex-col sm:flex-row gap-6">
                     <div class="flex flex-col gap-[10px] flex-1">
                         <label for="input-edit-telefone"
-                            class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone</label>
+                            class="font-sans font-semibold text-base md:text-lg text-gray-700">Telefone / WhatsApp</label>
                         <input data-input="formatPhone" id="input-edit-telefone" type="tel" name="telefone"
-                            placeholder="(00) 00000-0000" required minlength="10" maxlength="15"
+                            placeholder="(00) 00000-0000" required minlength="14" maxlength="15"
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
 
@@ -1176,7 +1186,7 @@
                         <label for="input-edit-nome-pet"
                             class="font-sans font-semibold text-base md:text-lg text-gray-700">Nome do Pet</label>
                         <input data-input="editSchedulePetName" id="input-edit-nome-pet" type="text" name="nomePet"
-                            placeholder="Nome do pet" required minlength="2" maxlength="50"
+                            placeholder="Nome do pet" required minlength="2" maxlength="40"
                             class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
@@ -1214,7 +1224,7 @@
                     <label for="input-edit-endereco"
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Endereço</label>
                     <input data-input="editScheduleAddress" id="input-edit-endereco" type="text" name="endereco"
-                        placeholder="Endereço completo" required minlength="3" maxlength="70"
+                        placeholder="Endereço completo" required minlength="3" maxlength="100"
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                 </div>
 
@@ -1222,7 +1232,7 @@
                     <label for="textarea-edit-descricao"
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Descrição do Serviço</label>
                     <textarea data-textarea="editScheduleDesc" id="textarea-edit-descricao" name="descricao"
-                        placeholder="Especificações sobre o serviço..." maxlength="250"
+                        placeholder="Especificações sobre o serviço..." maxlength="200"
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
                 </div>
 
@@ -1240,45 +1250,159 @@
                     <label for="textarea-edit-motivo"
                         class="font-sans font-semibold text-base md:text-lg text-gray-700">Motivo da Atualização</label>
                     <textarea data-textarea="editScheduleMotivo" id="textarea-edit-motivo" name="motivoAtualizacao"
-                        placeholder="Motivo da alteração do agendamento..." maxlength="250"
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[120px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"
-                        required></textarea>
+                        placeholder="Descreva o motivo da alteração..." maxlength="150"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none resize-none min-h-[80px] focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400"></textarea>
+                </div>
+
+                <!-- E-mail e Assunto para Notificação do Cliente -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label for="input-edit-email" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            E-mail do Cliente
+                        </label>
+                        <input data-input="editScheduleEmail" id="input-edit-email" type="email" name="email"
+                            placeholder="cliente@exemplo.com" minlength="5" maxlength="50" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="input-edit-subject" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            Assunto do E-mail
+                        </label>
+                        <input data-input="editScheduleSubject" id="input-edit-subject" type="text" name="assunto"
+                            placeholder="Dr.Pet - Agendamento Atualizado" minlength="3" maxlength="70" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <!-- Quill Editor para Mensagem de Atualização -->
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <label class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            Mensagem para o Cliente (Quill)
+                        </label>
+                        <span class="text-xs text-gray-400">Editor Rich Text</span>
+                    </div>
+                    <div class="quill-wrapper rounded-lg border-2 border-gray-300 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all bg-white overflow-hidden">
+                        <div data-quill-editor="editScheduleEmail" class="min-h-[160px]"></div>
+                    </div>
                 </div>
 
                 <button data-button="saveEditSchedule" type="submit"
-                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
-                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar
-                        Alterações</span>
+                    class="mt-2 w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 rounded-[10px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all cursor-pointer">
+                    <span data-button-text="saveEditSchedule" class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar Alterações e Notificar</span>
                 </button>
             </form>
         </div>
     </aside>
 
-    <!-- Modal de Cancelamento de Agendamento -->
+    <!-- Modal de Cancelamento de Agendamento com Quill e Notificação -->
     <aside data-modal="cancelSchedule"
-        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-4 overflow-y-auto animate-fadeTop">
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-3 sm:p-4 md:p-6 overflow-y-auto animate-fadeTop">
         <div
-            class="relative w-[95%] max-w-[720px] my-auto bg-white rounded-[10px] p-8 md:p-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] flex flex-col gap-6">
+            class="relative w-full max-w-[760px] my-auto bg-white rounded-[15px] p-6 md:p-8 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.25)] flex flex-col gap-6 overflow-hidden">
+
+            <!-- Overlay de Loading -->
+            <div data-loading-cancel
+                class="hidden absolute inset-0 z-50 bg-white/95 backdrop-blur-xs flex-col items-center justify-center gap-4 transition-all">
+                <div class="relative flex items-center justify-center">
+                    <svg class="w-14 h-14 text-red-600 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="#fecaca" stroke-width="4"></circle>
+                        <path class="opacity-90" fill="#dc2626" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <span class="font-sans font-bold text-lg text-gray-800">Cancelando agendamento...</span>
+                    <span class="font-sans text-sm text-gray-500">Enviando e-mail e preparando WhatsApp</span>
+                </div>
+            </div>
 
             <button type="button" data-button="closeCancelSchedule"
-                class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
+                class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none cursor-pointer">
                 <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar Formulário" />
             </button>
 
-            <h3 class="font-medium text-[22px] md:text-[32px] text-green-700">
-                Motivo do cancelamento:
-            </h3>
+            <div class="flex flex-col gap-1 pr-10">
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-red-alert mt-1">
+                    Cancelar Agendamento e Notificar Cliente
+                </h3>
+                <p class="font-sans text-xs md:text-sm text-gray-500">
+                    O agendamento será excluído do sistema. O cliente receberá o e-mail de justificativa e o WhatsApp será aberto com a mensagem pronta.
+                </p>
+            </div>
 
-            <textarea data-textarea="cancelSchedule" placeholder="Digite o motivo do cancelamento"
-                class="w-full h-[220px] px-6 py-5 border-2 border-green-800 rounded-lg font-medium text-lg md:text-2xl text-gray-600 outline-none resize-none focus:border-green-600 focus:ring-2 focus:ring-green-600 transition-all placeholder:text-gray-400"
-                required></textarea>
+            <!-- Resumo do Agendamento -->
+            <div class="p-4 rounded-[10px] bg-gray-50 border border-gray-200 flex flex-col gap-2 text-xs md:text-sm">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-gray-700 font-semibold flex items-center gap-1.5">
+                        <span class="text-gray-400">Cliente:</span>
+                        <strong data-cancel-summary-name class="text-gray-900">Cliente</strong>
+                    </span>
+                    <span class="text-gray-700 flex items-center gap-1.5">
+                        <span class="text-gray-400">Pet:</span>
+                        <strong data-cancel-summary-pet class="text-red-700">Pet</strong>
+                    </span>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 border-t border-gray-200/60 pt-2 text-gray-600">
+                    <span><strong>Serviço:</strong> <span data-cancel-summary-service>Banho e Tosa</span></span>
+                    <span><strong>Data/Hora:</strong> <span data-cancel-summary-date>29/10/2026 às 14:00</span></span>
+                    <span><strong>WhatsApp:</strong> <span data-cancel-summary-phone class="text-green-700 font-semibold">--</span></span>
+                </div>
+            </div>
 
-            <button data-button="sendCancelSchedule" type="button"
-                class="w-full relative flex items-center justify-center gap-[15px] px-4 py-2 md:py-3 md:px-5 bg-red-alert rounded-lg hover:bg-red-alert/90 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-alert transition-all mt-2">
-                <span class="font-semibold text-lg md:text-[22px] text-white uppercase tracking-wide">Enviar Mensagem de
-                    Cancelamento</span>
-                <img src="/images/icons/administrador/send.svg" alt="Enviar" class="w-6 h-6 md:w-8 md:h-8" />
-            </button>
+            <!-- Campos de Contato -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-2">
+                    <label for="input-cancel-email" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                        E-mail do Destinatário
+                    </label>
+                    <input data-input="cancelScheduleEmail" id="input-cancel-email" type="email" placeholder="cliente@exemplo.com" minlength="5" maxlength="50" required
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="input-cancel-phone" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                        WhatsApp do Cliente
+                    </label>
+                    <input data-input="cancelSchedulePhone" id="input-cancel-phone" type="tel" placeholder="(19) 99999-9999" minlength="14" maxlength="15"
+                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all placeholder:text-gray-400" />
+                </div>
+            </div>
+
+            <!-- Assunto -->
+            <div class="flex flex-col gap-2">
+                <label for="input-cancel-subject" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                    Assunto do E-mail
+                </label>
+                <input data-input="cancelScheduleSubject" id="input-cancel-subject" type="text" placeholder="Assunto do cancelamento" minlength="3" maxlength="70" required
+                    class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all placeholder:text-gray-400" />
+            </div>
+
+            <!-- Editor Quill para Cancelamento -->
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <label class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                        Mensagem de Cancelamento
+                    </label>
+                    <span class="text-xs text-gray-400">Editor Rich Text (Quill)</span>
+                </div>
+                <div class="quill-wrapper rounded-lg border-2 border-gray-300 focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-500/20 transition-all bg-white overflow-hidden">
+                    <div data-quill-editor="cancelScheduleEmail" class="min-h-[160px]"></div>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+                <button type="button" data-button="cancelModalCloseBtn"
+                    class="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-gray-300 hover:bg-gray-100 font-sans font-semibold text-sm md:text-base text-gray-600 transition-colors cursor-pointer">
+                    Voltar
+                </button>
+                <button type="button" data-button="sendCancelSchedule"
+                    class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-red-alert hover:opacity-90 rounded-lg font-sans font-semibold text-sm md:text-base text-white shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-red-alert/30 cursor-pointer">
+                    <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 16.6666V3.33325L18.3333 9.99992L2.5 16.6666ZM4.16667 14.1666L14.0417 9.99992L4.16667 5.83325V8.74992L9.16667 9.99992L4.16667 11.2499V14.1666Z" fill="currentColor"/>
+                    </svg>
+                    <span data-button-text="sendCancelSchedule">Confirmar Cancelamento e Notificar</span>
+                </button>
+            </div>
         </div>
     </aside>
 
@@ -1287,6 +1411,24 @@
         class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-3 sm:p-4 md:p-6 overflow-y-auto animate-fadeTop">
         <div
             class="relative w-full max-w-[760px] my-auto rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.25)]">
+            <!-- Overlay com Ícone de Loading durante o envio de E-mail -->
+            <div data-loading-email
+                class="hidden absolute inset-0 z-50 bg-white/95 backdrop-blur-xs flex-col items-center justify-center gap-4 transition-all">
+                <div class="relative flex items-center justify-center">
+                    <svg class="w-14 h-14 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="animation: spinEmail 0.9s linear infinite;">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="#bbf7d0" stroke-width="4"></circle>
+                        <path class="opacity-90" fill="#16a34a" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 text-center px-4">
+                    <span class="font-sans font-bold text-xl text-green-700">Enviando e-mail...</span>
+                    <span class="font-sans font-medium text-sm text-gray-500">Aguarde um momento enquanto processamos e enviamos a confirmação.</span>
+                </div>
+                <style>
+                    @keyframes spinEmail { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                </style>
+            </div>
+
             <form data-form="emailAppointment"
                 class="relative max-h-[92vh] overflow-y-auto scroll bg-white p-6 md:p-10 flex flex-col gap-6">
                 
@@ -1325,49 +1467,28 @@
                     <div class="flex flex-wrap items-center justify-between gap-2 border-t border-gray-200/60 pt-2 text-gray-600">
                         <span><strong>Serviço:</strong> <span data-email-summary-service>Banho e Tosa</span></span>
                         <span><strong>Data:</strong> <span data-email-summary-date>28/10/2026 às 14:00</span></span>
+                        <span><strong>WhatsApp:</strong> <span data-email-summary-phone class="text-green-700 font-semibold">(19) 99359-2253</span></span>
                     </div>
                 </div>
 
-                <!-- Campo E-mail do Destinatário (Agendamento Individual) -->
-                <div data-email-single-container class="flex flex-col gap-2">
-                    <label for="input-appointment-email-to" class="font-sans font-semibold text-sm md:text-base text-gray-700">
-                        E-mail do Destinatário
-                    </label>
-                    <input data-input="appointmentEmailTo" id="input-appointment-email-to" type="email" name="destinatarioEmail"
-                        placeholder="cliente@exemplo.com" required
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
-                </div>
-
-                <!-- Campo de Destinatários estilo Gmail com Tags (Aceitar Todos os Pendentes) -->
-                <div data-email-tags-container class="hidden flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <label class="font-sans font-semibold text-sm md:text-base text-gray-700">
-                            Destinatários dos E-mails
+                <!-- Campos E-mail e WhatsApp do Destinatário -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label for="input-appointment-email-to" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            E-mail do Destinatário
                         </label>
-                        <span data-email-tags-count class="text-xs font-semibold text-green-700 bg-green-50 px-2.5 py-0.5 rounded-full border border-green-200">
-                            0 destinatários
-                        </span>
+                        <input data-input="appointmentEmailTo" id="input-appointment-email-to" type="email" name="destinatarioEmail"
+                            placeholder="cliente@exemplo.com" minlength="5" maxlength="50" required
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
 
-                    <!-- Caixa estilo Gmail: "Para:" + Tags com Avatares + Input com cursor -->
-                    <div data-email-tags-box
-                        class="relative flex flex-wrap items-center gap-2 p-2.5 min-h-[52px] bg-white border-2 border-gray-300 rounded-lg focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/20 transition-all cursor-text">
-                        
-                        <span class="text-xs md:text-sm font-semibold text-gray-500 select-none px-1">
-                            Para:
-                        </span>
-
-                        <!-- Onde as tags geradas são inseridas -->
-                        <div data-email-tags-list class="flex flex-wrap items-center gap-2"></div>
-
-                        <!-- Input para digitar novos e-mails -->
-                        <input data-input="emailTagInput" type="text"
-                            placeholder="Digite um e-mail e pressione Enter..."
-                            class="flex-1 min-w-[200px] bg-transparent outline-none font-medium text-xs md:text-sm text-gray-800 placeholder:text-gray-400 py-1 px-1" />
-                    </div>
-
-                    <div class="flex items-center justify-between text-xs text-gray-500 px-1">
-                        <span>Pressione <kbd class="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-[11px] font-semibold text-gray-700">Enter</kbd> ou <kbd class="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-[11px] font-semibold text-gray-700">,</kbd> para gerar a tag. Clique no <strong class="text-gray-700">✕</strong> para excluir.</span>
+                    <div class="flex flex-col gap-2">
+                        <label for="input-appointment-phone" class="font-sans font-semibold text-sm md:text-base text-gray-700">
+                            WhatsApp do Cliente
+                        </label>
+                        <input data-input="appointmentPhone" id="input-appointment-phone" type="tel" name="destinatarioTelefone"
+                            placeholder="(19) 99999-9999" minlength="14" maxlength="15"
+                            class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                     </div>
                 </div>
 
@@ -1377,7 +1498,7 @@
                         Assunto do E-mail
                     </label>
                     <input data-input="appointmentEmailSubject" id="input-appointment-email-subject" type="text" name="assuntoEmail"
-                        placeholder="Assunto da mensagem" required
+                        placeholder="Assunto da mensagem" minlength="3" maxlength="70" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-sm md:text-base text-gray-700 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
                 </div>
 
@@ -1446,6 +1567,7 @@
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
     <script>
         window.initialAgendamentos = <%- JSON.stringify(agendamentos || []) %>;
+        window.initialServicos = <%- JSON.stringify(servicos || []) %>;
     </script>
     <script type="module" src="/javascript/administrador/script-adm.js"></script>
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
