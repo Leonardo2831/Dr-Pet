@@ -4,11 +4,27 @@ CREATE TABLE usuario (
     id INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(150) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    telefone CHAR(12) NOT NULL, 
-    senha VARCHAR(255) NOT NULL,
+    telefone CHAR(12) NULL,
+    senha VARCHAR(255) NULL,
     tipo_usuario ENUM('admin', 'comum') NOT NULL DEFAULT 'comum',
     avatar LONGBLOB,
+    google_id VARCHAR(64) NULL UNIQUE,
+    email_verificado BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY(id)
+);
+
+CREATE TABLE codigo_verificacao (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    usuario_id INTEGER NOT NULL,
+    tipo ENUM('verificar_email', 'recuperar_senha') NOT NULL,
+    codigo_hash VARCHAR(255) NOT NULL,
+    expira_em DATETIME NOT NULL,
+    tentativas INTEGER NOT NULL DEFAULT 0,
+    usado BOOLEAN NOT NULL DEFAULT FALSE,
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(id),
+    INDEX idx_codigo_usuario_tipo (usuario_id, tipo),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE endereco (
@@ -95,8 +111,8 @@ CREATE TABLE produto_image (
     FOREIGN KEY(fk_produto) REFERENCES produto(id)
 );
 
-INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar)
-VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null);
+INSERT INTO usuario(nome, email, telefone, senha, tipo_usuario, avatar, email_verificado)
+VALUES('Administrador', 'adm@hotmail.com', '11999999999', '$2b$10$kLXdP/Dtm.XdFh1PzcvGH.bh0e1OwFBnYEJrbhXKYoN4qbo23HSqy', 'admin', null, TRUE);
 
 -- Exemplos opcionais de inserção de serviços (caso queira adicionar serviços para agendamento):
 -- INSERT INTO service_infos (nome, duracao, preco, descricao, imagem) VALUES

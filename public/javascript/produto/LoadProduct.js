@@ -20,7 +20,7 @@ export default class LoadProduct{
 
         this.product = null;
         this.allProducts = null;
-        this.fetchProduct = new Fetch('administrador/produtos', '[data-modal-info="product"]');
+        this.fetchProduct = new Fetch('api/produtos', '[data-modal-info="product"]');
         
         this.toContact = this.toContact.bind(this);
     }
@@ -110,13 +110,20 @@ export default class LoadProduct{
     }
 
     async getAllProducts(){
-        this.allProducts = await this.fetchProduct.get();
+        this.allProducts = (await this.fetchProduct.get()) || [];
+        // não repete o produto que já está aberto
+        this.allProducts = this.allProducts.filter(p => String(p.id) !== String(this.product.id));
         this.renderSlide();
     }
 
     async getProduct(){
         const id = getParamsURL('id');
-        this.product = await  this.fetchProduct.get(id);
+        this.product = await this.fetchProduct.get(id);
+
+        if (!this.product || !this.product.imagesSlide) {
+            window.location.href = '/loja';
+            return;
+        }
         
         this.renderProduct();
         this.renderInfoProduct();

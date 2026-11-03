@@ -23,15 +23,14 @@ export default class ProductsLoja {
                 const category = slide.getAttribute('data-category') || slide.dataset.category || '';
                 const titleEl = slide.querySelector('h3');
                 const descEl = slide.querySelector('p');
-                const priceEl = slide.querySelector('span');
-                const imgEl = slide.querySelector('img');
+                                const imgEl = slide.querySelector('img');
 
                 return {
                     id,
                     name: titleEl?.textContent?.trim() || '',
                     category: category,
                     shortDescription: descEl?.textContent?.trim() || '',
-                    price: priceEl?.textContent?.replace(/[^0-9,.]/g, '') || '',
+                    price: Number(slide.dataset.price) || 0,
                     imageMain: {
                         image: imgEl?.src || '',
                         alt: imgEl?.alt || ''
@@ -52,7 +51,7 @@ export default class ProductsLoja {
         let filtered = [];
 
         if (searchText && this.fuse) {
-            const fuseResult = this.fuse.search(searchText);
+            const fuseResult = this.fuse.search(this.normalize(searchText));
             filtered = fuseResult.map(res => res.item);
         } else {
             filtered = [...this.products];
@@ -60,11 +59,15 @@ export default class ProductsLoja {
 
         if (category !== 'all') {
             filtered = filtered.filter((product) => 
-                product.category && product.category.toLowerCase() === category.toLowerCase()
+                product.category && this.normalize(product.category) === this.normalize(category)
             );
         }
 
         this.initProductsShop(filtered);
+    }
+
+    normalize(text) {
+        return String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
     }
 
     createInfoEnter() {
@@ -109,6 +112,10 @@ export default class ProductsLoja {
     // O igual define um valor padrão para o argumento caso não for definido
     initProductsShop(products = this.products){
         if (!products) return;
+        if (this.swiper) {
+            this.swiper.destroy(true, true);
+            this.swiper = null;
+        }
         this.contentProductsSlides.innerHTML = "";
 
         if (products.length === 0) {
@@ -119,14 +126,10 @@ export default class ProductsLoja {
             return;
         }
 
-        products.forEach((product, index) => {
-            if(index === 0 || (index + 1) % 10 === 0){
-                const div = document.createElement('div');
-                div.className = "swiper-wrapper animate-fadeItem";
-                this.contentProductsSlides.appendChild(div);
-            }
-            this.contentProductsSlides?.children[this.contentProductsSlides.children.length - 1]?.appendChild(structProduct(product));
-        });
+        const wrapper = document.createElement('div');
+        wrapper.className = 'swiper-wrapper animate-fadeItem';
+        products.forEach((product) => wrapper.appendChild(structProduct(product)));
+        this.contentProductsSlides.appendChild(wrapper);
 
         this.swiper = slidesLojaConfig(this.swiper);
     }
@@ -135,9 +138,16 @@ export default class ProductsLoja {
         if (!this.products) return;
 
         const configSearch = {
-            keys: ['name', 'category', 'shortDescription'],
-            threshold: 0.5
+            keys: ['searchName', 'searchCategory', 'searchDescription'],
+            threshold: 0.2
         };
+
+        // campos sem acento/maiúsculas, só para a busca (a exibição usa os originais)
+        this.products.forEach((p) => {
+            p.searchName = this.normalize(p.name);
+            p.searchCategory = this.normalize(p.category);
+            p.searchDescription = this.normalize(p.shortDescription);
+        });
 
         this.fuse = new Fuse(this.products, configSearch);
     }

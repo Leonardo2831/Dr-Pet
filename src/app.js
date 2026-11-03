@@ -13,10 +13,13 @@ const loginRouter = require('./router/login');
 const lojaRouter = require('./router/loja');
 const optionUserRouter = require('./router/option-user');
 const produtoRouter = require('./router/produto');
+const apiProdutosRouter = require('./router/api-produtos');
+const verificacaoRouter = require('./router/verificacao');
+const googleAuthRouter = require('./router/google-auth');
 const servicosRouter = require('./router/servicos');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
@@ -25,7 +28,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.json({ limit: '50mb' }));
 
 app.use(session({
-    secret: 'chaveDrPet',
+    secret: process.env.SESSION_SECRET || 'chaveDrPet',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false }
@@ -44,9 +47,12 @@ app.use('/', agendaRouter);
 app.use('/', cadastrarRouter);
 app.use('/', formAgendarRouter);
 app.use('/', loginRouter);
+app.use('/', verificacaoRouter);
+app.use('/', googleAuthRouter);
 app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);
+app.use('/', apiProdutosRouter);
 app.use('/', servicosRouter);
 app.use((req, res) => {
     res.status(404).render('404');

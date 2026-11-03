@@ -125,20 +125,6 @@ router.patch('/agenda/:id', (req, res) => {
     });
 });
 
-// SERVIR IMAGEM DO SERVIÇO (GET /servicos/imagem/:id)
-router.get('/servicos/imagem/:id', (req, res) => {
-    const { id } = req.params;
-    const query = 'SELECT imagem FROM service_infos WHERE id = ?';
-
-    db.query(query, [id], (err, results) => {
-        if (err || results.length === 0 || !results[0].imagem) {
-            return res.status(404).send('Imagem do serviço não encontrada');
-        }
-        res.setHeader('Content-Type', 'image/jpeg');
-        return res.send(results[0].imagem);
-    });
-});
-
 router.post('/agenda', verificarLogin, (req, res) => {
     const userId = req.session.usuario.id;
     const { date, hour, buscarResidencia, observation, endereco, fk_pet, fk_service } = req.body;

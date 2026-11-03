@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql');
+const criptografia = require('../utils/Criptografia');
 
 const { verificarLogin } = require('./middlewares');
 
@@ -192,8 +193,8 @@ router.post('/option-user/update-phone', verificarLogin, (req,res) => {
 
 router.post('/option-user/update-password', verificarLogin, (req,res) => {
     const { senhaAtual, senha } = req.body;
-    if(typeof senhaAtual !== 'string' || !senhaAtual || typeof senha !== 'string' || !senha.trim()) {
-        return res.status(400).send('Preencha a senha atual e a nova senha.');
+    if(typeof senha !== 'string' || senha.length < 8 || senha.length > 60) {
+        return res.status(400).send('A nova senha deve ter de 8 a 60 caracteres.');
     }
 
     const id = req.session.usuario.id; 
@@ -209,13 +210,15 @@ router.post('/option-user/update-password', verificarLogin, (req,res) => {
             if(userResults.length === 0) {
                 return res.status(404).send('Usuário não encontrado');
             }
-            if(userResults[0].senha !== senhaAtual) {
+            // Contas criadas com o Google não têm senha: podem definir uma sem informar a atual
+            const temSenha = Boolean(userResults[0].senha);
+            if(temSenha && (typeof senhaAtual !== 'string' || !criptografia.checkHash(senhaAtual, userResults[0].senha))) {
                 return res.status(400).send('A senha atual está incorreta.');
             }
 
             db.query(
                 'UPDATE usuario SET senha = ? WHERE id = ?',
-                [senha, id],
+                [criptografia.generateHash(senha), id],
                 (err) => {
                     if(err) {
                         console.log(err);

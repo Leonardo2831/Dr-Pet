@@ -1,0 +1,79 @@
+<%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | ' + titulo }) %>
+
+    <main class="flex flex-col lg:flex-row">
+        <section
+            class="order-1 lg:order-2 flex-1 flex items-center justify-center bg-gray-50 px-5 py-10 xs:px-6 xs:py-11 sm:px-8 sm:py-12 lg:px-[60px] lg:py-[60px]">
+            <div class="w-full max-w-[760px] flex flex-col gap-8 lg:gap-[30px]">
+                <h1 class="text-green-600 font-semibold text-[34px] leading-[42px] xs:text-[38px] xs:leading-[46px] sm:text-[42px] sm:leading-[50px] lg:text-[52px] lg:leading-[64px]">
+                    <%= titulo %>
+                </h1>
+
+                <% if (locals.descricao) { %>
+                    <p class="font-medium text-[18px] leading-[24px] text-gray-700 sm:text-[20px] lg:text-[22px] lg:leading-[28px]">
+                        <%= descricao %>
+                    </p>
+                <% } %>
+
+                <% if (locals.erro) { %>
+                    <p data-alert="erro" role="alert" class="bg-red-light text-red-alert font-semibold text-[16px] sm:text-[18px] rounded-[10px] px-4 py-3"><%= erro %></p>
+                <% } %>
+                <% if (locals.info) { %>
+                    <p data-alert="info" role="status" class="bg-green-light text-green-600 font-semibold text-[16px] sm:text-[18px] rounded-[10px] px-4 py-3"><%= info %></p>
+                <% } %>
+
+                <form action="<%= acao %>" method="POST" class="flex flex-col gap-8 lg:gap-[30px]">
+                    <div class="flex flex-col gap-[30px]">
+                        <% campos.forEach(campo => { %>
+                            <div class="flex flex-col gap-[15px]">
+                                <label for="<%= campo.name %>"
+                                    class="font-medium text-[19px] leading-[24px] tracking-[0.3px] text-green-700 xs:text-[20px] xs:leading-[25px] sm:text-[22px] sm:leading-[28px] lg:text-[26px] lg:leading-[32px]"><%= campo.label %></label>
+                                <div class="relative flex items-center border-b-2 border-green-700 h-[62px] px-[15px] py-4 sm:h-[66px] lg:h-[70px] lg:py-5">
+                                    <input id="<%= campo.name %>" name="<%= campo.name %>" type="<%= campo.type || 'text' %>"
+                                        <% if (campo.autocomplete) { %>autocomplete="<%= campo.autocomplete %>"<% } %>
+                                        <% if (campo.inputmode) { %>inputmode="<%= campo.inputmode %>"<% } %>
+                                        <% if (campo.pattern) { %>pattern="<%= campo.pattern %>"<% } %>
+                                        <% if (campo.minlength) { %>minlength="<%= campo.minlength %>"<% } %>
+                                        maxlength="<%= campo.maxlength || 60 %>"
+                                        value="<%= campo.value || '' %>"
+                                        class="w-full bg-transparent text-[18px] leading-tight text-green-700 outline-none xs:text-[19px] sm:text-[20px] lg:text-[24px] <%= campo.extraClass || '' %>"
+                                        required />
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full max-w-[300px] h-[69px] rounded-[10px] bg-green-600 px-8 py-4 flex items-center justify-center hover:bg-green-500 transition-colors outline-none focus:ring-4 focus:ring-green-600 mx-auto">
+                        <span class="font-semibold text-[22px] leading-[28px] text-gray-50 sm:text-[26px] lg:text-[30px]"><%= botao %></span>
+                    </button>
+                </form>
+
+                <% if (locals.reenviar) { %>
+                    <form action="<%= reenviar %>" method="POST" class="flex justify-center">
+                        <button type="submit"
+                            class="font-semibold text-[18px] leading-[22px] text-green-700 underline hover:text-green-600 transition-colors sm:text-[20px] outline-none focus:ring-2 focus:ring-green-300">
+                            Reenviar código
+                        </button>
+                    </form>
+                <% } %>
+
+                <a href="<%= locals.voltarHref || '/login' %>"
+                    class="font-semibold text-[18px] leading-[22px] text-green-700 underline w-fit mx-auto hover:text-green-600 transition-colors sm:text-[20px]">
+                    <%= locals.voltarTexto || 'Voltar para o login' %>
+                </a>
+            </div>
+        </section>
+
+        <figure class="order-2 lg:order-1 flex-1 w-full h-full flex">
+            <img src="/images/forms-images/login.jpg" alt="Dr. Pet"
+                class="w-full h-full object-contain lg:object-cover" />
+        </figure>
+    </main>
+
+    <aside data-modal-info-menu="user" data-modal-info="auth"
+        class="hidden z-[1000] animate-fadeItem opacity-0 fixed bottom-8 left-1/2 -translate-x-1/2 p-4 text-center font-semibold text-lg">
+    </aside>
+
+<%- include('layouts/footer', { scripts: [
+    { src: '/javascript/menu-user/script-menu-user.js', module: true }
+] }) %>

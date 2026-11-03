@@ -9,6 +9,14 @@
                     Login
                 </h1>
 
+                <% if (locals.erro) { %>
+                    <p data-alert="erro" role="alert" class="bg-red-light text-red-alert font-semibold text-[16px] sm:text-[18px] rounded-[10px] px-4 py-3"><%= erro %></p>
+                <% } %>
+                <% if (locals.info) { %>
+                    <p data-alert="info" role="status" class="bg-green-light text-green-600 font-semibold text-[16px] sm:text-[18px] rounded-[10px] px-4 py-3"><%= info %></p>
+                <% } %>
+
+
                 <div class="flex flex-col gap-[30px]">
                     <div class="flex flex-col gap-[15px]">
                         <label for="email"
@@ -38,21 +46,21 @@
                                 </button>
                             </div>
                         </div>
-                        <a href="#"
+                        <a href="/recuperar-senha"
                             class="font-semibold text-[18px] leading-[22px] text-green-700 underline w-fit hover:text-green-600 transition-colors xs:text-[19px] xs:leading-[23px] sm:text-[20px] sm:leading-[24px] lg:text-[22px] lg:leading-[27px]">
                             Esqueceu a senha?
                         </a>
                     </div>
                 </div>
 
-                <button type="button"
+                <a href="/auth/google" data-button="google"
                     class="w-full h-[64px] rounded-[10px] bg-gray-300 px-4 xs:px-5 sm:px-6 py-3 flex items-center justify-center gap-3 xs:gap-5 sm:gap-8 lg:gap-[50px] hover:bg-gray-200 transition-colors outline-none focus:ring-4 focus:ring-gray-300">
                     <span
                         class="font-semibold text-lg leading-[22px] text-gray-800 xs:text-2xl sm:text-[26px] lg:text-[26px] lg:leading-[32px]">Login
                         com Google</span>
                     <img src="/images/icons/forms/google-icon.svg" alt="Ícone Google"
                         class="w-8 h-8 xs:w-9 xs:h-9 sm:w-9 sm:h-9 lg:w-10 lg:h-10" />
-                </button>
+                </a>
 
                 <div class="w-full flex flex-wrap justify-center gap-5">
                     <button type="submit"

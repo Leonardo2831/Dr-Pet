@@ -786,9 +786,13 @@
                 <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Senha</h3>
 
                 <div class="flex flex-col gap-[10px]">
+                    <% if (user.senha) { %>
                     <label for="input-current-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Senha atual</label>
                     <input id="input-current-Senha" type="password" name="senhaAtual" placeholder="Digite sua senha atual" minlength="8" maxlength="60" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
+                    <% } else { %>
+                    <p class="font-sans font-medium text-base text-gray-600">Sua conta foi criada com o Google e ainda não tem senha. Defina uma abaixo para também poder entrar com e-mail e senha.</p>
+                    <% } %>
                 </div>
 
                 <div class="flex flex-col gap-[10px]">
