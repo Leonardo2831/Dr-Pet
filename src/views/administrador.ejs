@@ -134,12 +134,11 @@
 
             </section>
 
-            <section id="section-servicos" data-tab-content
-                class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20">
-                <div class="flex flex-col gap-6 w-full">
-                    <div class="flex flex-col gap-2">
-                        <h2
-                            class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
+                        <section id="section-servicos" class="w-full max-w-[1400px] mt-10 md:mt-20">
+                        <div class="flex flex-col gap-6 w-full">
+                    <!-- Cabeçalho da Seção -->
+                        <div class="flex flex-col gap-2">
+                        <h2 class="font-sans font-bold text-xl md:text-3xl leading-tight md:leading-[40px] text-green-700 whitespace-nowrap">
                             Serviços
                         </h2>
                         <p class="font-sans font-medium text-base md:text-lg text-gray-600">
@@ -147,307 +146,217 @@
                         </p>
                     </div>
 
-                    <div
-                        class="relative grid grid-cols-1 sm:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-8 p-7 md:p-[40px] bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] w-full border-t-[6px] border-green-600">
-
-                        <input type="radio" name="servico-modo" id="servico-modo-criar" value="criar"
-                            class="peer/criar sr-only" checked />
-                        <input type="radio" name="servico-modo" id="servico-modo-atualizar" value="atualizar"
-                            class="peer/atualizar sr-only" />
-                        <input type="radio" name="servico-modo" id="servico-modo-deletar" value="deletar"
-                            class="peer/deletar sr-only" />
-
-                        <label for="servico-modo-criar"
-                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/criar:bg-green-600 peer-checked/criar:text-gray-50 peer-checked/criar:hover:bg-green-700 peer-checked/criar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/criar:ring-4 peer-focus-visible/criar:ring-green-600/50">
-                            Criar Novo Serviço
-                        </label>
-                        <label for="servico-modo-atualizar"
-                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/atualizar:bg-green-600 peer-checked/atualizar:text-gray-50 peer-checked/atualizar:hover:bg-green-700 peer-checked/atualizar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/atualizar:ring-4 peer-focus-visible/atualizar:ring-green-600/50">
-                            Atualizar Serviço
-                        </label>
-                        <label for="servico-modo-deletar"
-                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] cursor-pointer font-sans font-semibold text-base xs:text-lg md:text-2xl text-center text-green-700 hover:bg-gray-300 transition-all peer-checked/deletar:bg-green-600 peer-checked/deletar:text-gray-50 peer-checked/deletar:hover:bg-green-700 peer-checked/deletar:shadow-[3px_3px_8px_0px_rgba(0,0,0,0.1)] peer-focus-visible/deletar:ring-4 peer-focus-visible/deletar:ring-green-600/50">
-                            Deletar Serviços
-                        </label>
-
-                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/criar:flex animate-fadeItem">
-                            <form action="/administrador/servicos/criar" method="POST" enctype="multipart/form-data"
-                                class="flex flex-col gap-6 w-full">
-
-                                <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
-                                        <label for="novo-servico-nome"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Nome do Serviço
-                                        </label>
-                                        <input type="text" maxlength="16" id="novo-servico-nome" name="nome"
-                                            placeholder="Ex: Tosa Higiênica" required
-                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                                    </div>
-
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
-                                        <label for="novo-servico-duracao"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Duração (min)
-                                        </label>
-                                        <input type="text" maxlength="8" id="novo-servico-duracao" name="duracao"
-                                            placeholder="Ex: 60 min" required
-                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                                    </div>
-
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
-                                        <label for="novo-servico-preco"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Preço (R$)
-                                        </label>
-                                        <input type="text" maxlength="11" id="novo-servico-preco" name="preco"
-                                            placeholder="R$ 0,00" required
-                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col gap-[10px]">
-                                    <label for="novo-servico-descricao"
-                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                        Descrição
-                                    </label>
-                                    <textarea id="novo-servico-descricao" name="descricao" maxlength="500" rows="4"
-                                        required placeholder="Descreva o que está incluso neste serviço..."
-                                        class="px-5 py-3 w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none resize-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400"></textarea>
-                                </div>
-
-                                <div class="flex flex-col gap-[10px]">
-                                    <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                        Imagem do Serviço
-                                    </span>
-                                    <input type="file" id="novo-servico-imagem" name="imagem" accept="image/*" required
-                                        class="peer sr-only" />
-                                    <label for="novo-servico-imagem"
-                                        class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
-                                        
-                                        <!-- Estado Inicial: Sem imagem selecionada -->
-                                        <div data-placeholder="novo-servico" class="flex flex-col items-center justify-center gap-3">
-                                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
-                                                class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
-                                            <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
-                                                Clique para selecionar a imagem do serviço
-                                            </span>
-                                        </div>
-
-                                        <!-- Estado com Preview: Imagem selecionada -->
-                                        <div data-preview-wrapper="novo-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
-                                            <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
-                                                <img data-preview-img="novo-servico" src="" alt="Preview da imagem"
-                                                    class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
-                                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">
-                                                    Clique para trocar a imagem
-                                                </div>
-                                            </div>
-                                            <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
-                                        </div>
-                                    </label>
-
-                                    <!-- Confere com o nome do arquivo (estilo Adicionar Produto) e opção de remover -->
-                                    <div data-info-wrapper="novo-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
-                                        <span data-info="novo-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5">
-                                        </span>
-                                        <button type="button" data-remove-img="novo-servico"
-                                            class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">
-                                            Remover
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <button type="submit"
-                                    class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto md:self-end">
-                                    <span
-                                        class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
-                                        Cadastrar Serviço
-                                    </span>
-                                </button>
-                            </form>
-                        </div>
-
-                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/atualizar:flex animate-fadeItem">
-                            <form action="/administrador/servicos/atualizar" method="POST" enctype="multipart/form-data"
-                                class="flex flex-col gap-6 w-full">
-
-                                <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
-                                        <label for="servico-select"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Escolha o Serviço
-                                        </label>
-                                        <div class="relative">
-                                            <select id="servico-select" name="servicoId" required
-                                                class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
-                                                <option value="" disabled selected>Selecione um serviço...</option>
-                                                <% if (locals.servicos && servicos.length> 0) { %>
-                                                    <% servicos.forEach(servico=> { %>
-                                                        <option value="<%= servico.id %>">
-                                                            <%= servico.nome %>
-                                                        </option>
-                                                        <% }) %>
-                                                            <% } %>
-                                            </select>
-                                            <img src="/images/icons/arrow-down.svg"
-                                                class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70"
-                                                alt="Seta" />
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
-                                        <label for="tempo-input"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Nova Duração (min)
-                                        </label>
-                                        <input type="text" maxlength="8" id="tempo-input" name="duracao"
-                                            placeholder="Ex: 90 min" required
-                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                                    </div>
-
-                                    <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
-                                        <label for="preco-input"
-                                            class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                            Novo Preço (R$)
-                                        </label>
-                                        <input type="text" maxlength="11" id="preco-input" name="preco"
-                                            placeholder="R$ 0,00" required
-                                            class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col gap-[10px]">
-                                    <label for="atualizar-servico-descricao"
-                                        class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                        Nova Descrição
-                                    </label>
-                                    <textarea id="atualizar-servico-descricao" name="descricao" maxlength="500" rows="4"
-                                        placeholder="Deixe em branco para manter a descrição atual..."
-                                        class="px-5 py-3 w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none resize-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400"></textarea>
-                                </div>
-
-                                <div class="flex flex-col gap-[10px]">
-                                    <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">
-                                        Nova Imagem do Serviço
-                                    </span>
-                                    <input type="file" id="atualizar-servico-imagem" name="imagem" accept="image/*"
-                                        class="peer sr-only" />
-                                    <label for="atualizar-servico-imagem"
-                                        class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
-                                        
-                                        <!-- Estado Inicial: Sem imagem selecionada -->
-                                        <div data-placeholder="atualizar-servico" class="flex flex-col items-center justify-center gap-3">
-                                            <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem"
-                                                class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
-                                            <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">
-                                                Clique para trocar a imagem (opcional, mantém a atual se vazio)
-                                            </span>
-                                        </div>
-
-                                        <!-- Estado com Preview: Imagem selecionada -->
-                                        <div data-preview-wrapper="atualizar-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
-                                            <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
-                                                <img data-preview-img="atualizar-servico" src="" alt="Preview da imagem"
-                                                    class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
-                                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">
-                                                    Clique para trocar a imagem
-                                                </div>
-                                            </div>
-                                            <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
-                                        </div>
-                                    </label>
-
-                                    <!-- Confere com o nome do arquivo (estilo Adicionar Produto) e opção de remover -->
-                                    <div data-info-wrapper="atualizar-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
-                                        <span data-info="atualizar-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5">
-                                        </span>
-                                        <button type="button" data-remove-img="atualizar-servico"
-                                            class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">
-                                            Remover
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <button type="submit"
-                                    class="flex flex-row items-center justify-center px-8 py-[10px] h-[52px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all w-full md:w-auto md:self-end">
-                                    <span
-                                        class="font-sans font-semibold text-lg md:text-[22px] leading-[27px] text-white">
-                                        Atualizar Serviço
-                                    </span>
-                                </button>
-                            </form>
-                        </div>
-
-                        <div class="hidden sm:col-span-3 flex-col gap-6 peer-checked/deletar:flex animate-fadeItem">
-                            <div class="flex flex-col gap-2">
-                                <h3 class="font-sans font-semibold text-xl md:text-2xl text-gray-800">
-                                    Selecione o serviço que deseja deletar
-                                </h3>
-                                <p class="font-sans font-medium text-sm md:text-base text-gray-600">
-                                    Clique no ícone vermelho no canto do card para remover um serviço.
-                                </p>
-                            </div>
-
-                            <div data-content-services-delete
-                                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
-                                <% if (locals.servicos && servicos.length > 0) { %>
-                                    <% servicos.forEach(servico => { %>
-                                        <%
-                                            const serviceSlug = (servico.nome || '')
-                                                .toLowerCase()
-                                                .normalize('NFD')
-                                                .replace(/[\u0300-\u036f]/g, '')
-                                                .replace(/\s+e\s+/g, '-')
-                                                .replace(/\s+/g, '-')
-                                                .replace(/[^a-z0-9-]/g, '');
-                                            const serviceDefaultImg = (serviceSlug === 'banho-tosa' || serviceSlug === 'vacinacao' || serviceSlug === 'cirurgia')
-                                                ? `/images/services/${serviceSlug}.png`
-                                                : '/images/services/banho-tosa.png';
-                                        %>
-                                        <article data-service-card
-                                            class="service-card relative flex flex-col overflow-hidden transition-all duration-300">
-                                            <button type="button" data-button="deleteService"
-                                                data-service-id="<%= servico.id %>"
-                                                data-service-name="<%= servico.nome %>"
-                                                aria-label="Deletar serviço <%= servico.nome %>"
-                                                title="Deletar serviço"
-                                                class="absolute top-4 left-4 z-10 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md border border-red-light hover:bg-red-light focus:outline-none focus:ring-4 focus:ring-red-alert/30 transition-colors">
-                                                <img src="/images/icons/administrador/delete-slide.svg" alt=""
-                                                    class="w-4 h-4" />
-                                            </button>
-
-                                            <img src="/servicos/imagem/<%= servico.id %>"
-                                                onerror="this.onerror=null; this.src='<%= serviceDefaultImg %>';"
-                                                alt="<%= servico.nome || 'Serviço' %>"
-                                                class="w-full h-[300px] object-cover" />
-
-                                            <div class="p-[30px] flex-1 flex flex-col gap-[10px]">
-                                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800">
-                                                    <%= servico.nome %>
-                                                </h3>
-                                                <p class="text-lg md:text-[22px] font-normal leading-snug text-gray-700">
-                                                    <%= servico.descricao || 'Descrição do serviço.' %>
-                                                </p>
-                                            </div>
-                                        </article>
-                                    <% }) %>
-                                <% } else { %>
-                                    <div class="md:col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-12 px-6 text-center bg-gray-50 rounded-[15px] border border-gray-200">
-                                        <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4">
-                                            <img src="/images/icons/calendar_clock_green.svg" alt="" class="w-8 h-8" />
-                                        </div>
-                                        <p class="text-xl md:text-2xl font-medium text-gray-700">
-                                            Nenhum serviço cadastrado para deletar.
-                                        </p>
-                                    </div>
-                                <% } %>
-                            </div>
-                        </div>
-
+                    <!-- Botões para abrir os Modais -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 p-7 md:p-[40px] bg-white rounded-[10px] shadow-sm border-t-[6px] border-green-600">
+                        <button onclick="openModal('modal-criar-servico')" type="button"
+                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] font-sans font-semibold text-base xs:text-lg md:text-xl text-center text-green-700 hover:bg-green-600 hover:text-white hover:shadow-md transition-all">
+                            + Criar Novo Serviço
+                        </button>
+                        
+                        <button onclick="openModal('modal-atualizar-servico')" type="button"
+                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] font-sans font-semibold text-base xs:text-lg md:text-xl text-center text-green-700 hover:bg-green-600 hover:text-white hover:shadow-md transition-all">
+                            ✎ Atualizar Serviço
+                        </button>
+                        
+                        <button onclick="openModal('modal-deletar-servico')" type="button"
+                            class="flex justify-center items-center px-4 py-3 md:py-4 bg-gray-200 rounded-[10px] font-sans font-semibold text-base xs:text-lg md:text-xl text-center text-green-700 hover:bg-red-600 hover:text-white hover:shadow-md transition-all">
+                            🗑 Deletar Serviços
+                        </button>
                     </div>
                 </div>
             </section>
+
+            <!-- MODAL criar -->
+            <div id="modal-criar-servico" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeItem">
+                <div class="bg-white rounded-[10px] shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+                        <h3 class="text-2xl font-bold text-green-700">Criar Novo Serviço</h3>
+                        <button onclick="closeModal('modal-criar-servico')" class="text-gray-500 hover:text-red-500 text-2xl font-bold leading-none">&times;</button>
+                    </div>
+                    <div class="p-6">
+                        <!-- Seu Formulário de Criação -->
+                        <form action="/administrador/servicos/criar" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6 w-full">
+                            <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
+                                    <label for="novo-servico-nome" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Nome do Serviço</label>
+                                    <input type="text" maxlength="16" id="novo-servico-nome" name="nome" placeholder="Ex: Tosa Higiênica" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="novo-servico-duracao" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Duração (min)</label>
+                                    <input type="text" maxlength="8" id="novo-servico-duracao" name="duracao" placeholder="Ex: 60 min" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="novo-servico-preco" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Preço (R$)</label>
+                                    <input type="text" maxlength="11" id="novo-servico-preco" name="preco" placeholder="R$ 0,00" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[10px]">
+                                <label for="novo-servico-descricao" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Descrição</label>
+                                <textarea id="novo-servico-descricao" name="descricao" maxlength="500" rows="4" required placeholder="Descreva o que está incluso neste serviço..." class="px-5 py-3 w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none resize-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400"></textarea>
+                            </div>
+                            <div class="flex flex-col gap-[10px]">
+                                <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Imagem do Serviço</span>
+                                <input type="file" id="novo-servico-imagem" name="imagem" accept="image/*" required class="peer sr-only" />
+                                <label for="novo-servico-imagem" class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
+                                    <div data-placeholder="novo-servico" class="flex flex-col items-center justify-center gap-3">
+                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem" class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                        <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">Clique para selecionar a imagem do serviço</span>
+                                    </div>
+                                    <div data-preview-wrapper="novo-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
+                                        <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
+                                            <img data-preview-img="novo-servico" src="" alt="Preview da imagem" class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
+                                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">Clique para trocar a imagem</div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
+                                    </div>
+                                </label>
+                                <div data-info-wrapper="novo-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
+                                    <span data-info="novo-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5"></span>
+                                    <button type="button" data-remove-img="novo-servico" class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">Remover</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-end gap-4 mt-4">
+                                <button type="button" onclick="closeModal('modal-criar-servico')" class="px-6 py-[10px] font-semibold text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[5px] transition-all">Cancelar</button>
+                                <button type="submit" class="flex flex-row items-center justify-center px-8 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                                    <span class="font-sans font-semibold text-lg text-white">Cadastrar Serviço</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL atualizacao -->
+            <div id="modal-atualizar-servico" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeItem">
+                <div class="bg-white rounded-[10px] shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+                        <h3 class="text-2xl font-bold text-green-700">Atualizar Serviço Existente</h3>
+                        <button onclick="closeModal('modal-atualizar-servico')" class="text-gray-500 hover:text-red-500 text-2xl font-bold leading-none">&times;</button>
+                    </div>
+                    <div class="p-6">
+
+                        <form action="/administrador/servicos/atualizar" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6 w-full">
+                            <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[250px]">
+                                    <label for="servico-select" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Escolha o Serviço</label>
+                                    <div class="relative">
+                                        <select id="servico-select" name="servicoId" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none bg-white cursor-pointer appearance-none focus:ring-4 focus:ring-green-600/30 transition-all">
+                                            <option value="" disabled selected>Selecione um serviço...</option>
+                                            <% if (locals.servicos && servicos.length > 0) { %>
+                                                <% servicos.forEach(servico => { %>
+                                                    <option value="<%= servico.id %>"><%= servico.nome %></option>
+                                                <% }) %>
+                                            <% } %>
+                                        </select>
+                                        <img src="/images/icons/arrow-down.svg" class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 pointer-events-none opacity-70" alt="Seta" />
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="tempo-input" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Nova Duração (min)</label>
+                                    <input type="text" maxlength="8" id="tempo-input" name="duracao" placeholder="Ex: 90 min" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+                                <div class="flex flex-col gap-[10px] flex-1 min-w-[180px]">
+                                    <label for="preco-input" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Novo Preço (R$)</label>
+                                    <input type="text" maxlength="11" id="preco-input" name="preco" placeholder="R$ 0,00" required class="px-5 py-[10px] w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400" />
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[10px]">
+                                <label for="atualizar-servico-descricao" class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Nova Descrição</label>
+                                <textarea id="atualizar-servico-descricao" name="descricao" maxlength="500" rows="4" placeholder="Deixe em branco para manter a descrição atual..." class="px-5 py-3 w-full border-2 border-gray-300 focus:border-green-600 rounded-[5px] shadow-sm font-medium text-lg text-gray-600 outline-none resize-none focus:ring-4 focus:ring-green-600/30 transition-all placeholder:text-gray-400"></textarea>
+                            </div>
+                            <div class="flex flex-col gap-[10px]">
+                                <span class="font-sans font-semibold text-lg md:text-[22px] text-gray-700">Nova Imagem do Serviço</span>
+                                <input type="file" id="atualizar-servico-imagem" name="imagem" accept="image/*" class="peer sr-only" />
+                                <label for="atualizar-servico-imagem" class="cursor-pointer relative flex flex-col items-center justify-center min-h-[140px] px-4 py-6 border-2 border-dashed border-gray-400 rounded-[10px] hover:border-green-500 hover:bg-green-50/50 peer-focus-visible:border-green-500 peer-focus-visible:ring-4 peer-focus-visible:ring-green-600/30 transition-all overflow-hidden group">
+                                    <div data-placeholder="atualizar-servico" class="flex flex-col items-center justify-center gap-3">
+                                        <img src="/images/icons/administrador/plus-slide.svg" alt="Adicionar imagem" class="w-8 h-8 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                        <span class="font-sans font-medium text-sm md:text-base text-gray-500 text-center">Clique para trocar a imagem (opcional, mantém a atual se vazio)</span>
+                                    </div>
+                                    <div data-preview-wrapper="atualizar-servico" class="hidden flex-col items-center justify-center gap-2 w-full animate-fadeItem">
+                                        <div class="relative rounded-[8px] overflow-hidden shadow-sm border border-gray-200 bg-gray-50 max-w-full">
+                                            <img data-preview-img="atualizar-servico" src="" alt="Preview da imagem" class="max-h-[180px] w-auto max-w-full object-contain mx-auto block" />
+                                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs md:text-sm font-semibold p-2 text-center">Clique para trocar a imagem</div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 font-medium">Clique para escolher outra imagem</span>
+                                    </div>
+                                </label>
+                                <div data-info-wrapper="atualizar-servico" class="hidden flex-row items-center justify-between gap-3 px-1 animate-fadeItem">
+                                    <span data-info="atualizar-servico-imagem" class="font-sans text-sm font-semibold text-green-600 truncate flex items-center gap-1.5"></span>
+                                    <button type="button" data-remove-img="atualizar-servico" class="text-xs font-semibold text-red-500 hover:text-red-700 hover:underline shrink-0">Remover</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-end gap-4 mt-4">
+                                <button type="button" onclick="closeModal('modal-atualizar-servico')" class="px-6 py-[10px] font-semibold text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[5px] transition-all">Cancelar</button>
+                                <button type="submit" class="flex flex-row items-center justify-center px-8 py-[10px] bg-green-600 rounded-[5px] shadow-sm hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
+                                    <span class="font-sans font-semibold text-lg text-white">Atualizar Serviço</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL deletar -->
+            <div id="modal-deletar-servico" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeItem">
+                <!-- Modal mais largo por causa do grid de cards -->
+                <div class="bg-white rounded-[10px] shadow-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto flex flex-col">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+                        <div class="flex flex-col">
+                            <h3 class="text-2xl font-bold text-red-600">Deletar Serviço</h3>
+                            <p class="font-sans font-medium text-sm text-gray-600 mt-1">Clique no ícone vermelho no canto do card para remover um serviço.</p>
+                        </div>
+                        <button onclick="closeModal('modal-deletar-servico')" class="text-gray-500 hover:text-red-500 text-2xl font-bold leading-none">&times;</button>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                    
+                        <div data-content-services-delete class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                            <% if (locals.servicos && servicos.length > 0) { %>
+                                <% servicos.forEach(servico => { %>
+                                    <%
+                                        const serviceSlug = (servico.nome || '')
+                                            .toLowerCase()
+                                            .normalize('NFD')
+                                            .replace(/[\u0300-\u036f]/g, '')
+                                            .replace(/\s+e\s+/g, '-')
+                                            .replace(/\s+/g, '-')
+                                            .replace(/[^a-z0-9-]/g, '');
+                                        const serviceDefaultImg = (serviceSlug === 'banho-tosa' || serviceSlug === 'vacinacao' || serviceSlug === 'cirurgia')
+                                            ? `/images/services/${serviceSlug}.png`
+                                            : '/images/services/banho-tosa.png';
+                                    %>
+                                    <article data-service-card class="service-card relative flex flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+                                        <button type="button" data-button="deleteService"
+                                            data-service-id="<%= servico.id %>"
+                                            data-service-name="<%= servico.nome %>"
+                                            aria-label="Deletar serviço <%= servico.nome %>"
+                                            title="Deletar serviço"
+                                            class="absolute top-3 left-3 z-10 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md border border-red-200 hover:bg-red-50 hover:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/30 transition-colors group">
+                                            <img src="/images/icons/administrador/delete-slide.svg" alt="" class="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        </button>
+
+                                        <img src="/servicos/imagem/<%= servico.id %>"
+                                            onerror="this.onerror=null; this.src='<%= serviceDefaultImg %>';"
+                                            alt="<%= servico.nome || 'Serviço' %>"
+                                            class="w-full h-[200px] object-cover" />
+
+                                        <div class="p-5 flex-1 flex flex-col gap-2">
+                                            <h3 class="text-xl font-semibold text-gray-800"><%= servico.nome %></h3>
+                                            <p class="text-sm font-normal leading-snug text-gray-600 line-clamp-3"><%= servico.descricao || 'Descrição do serviço.' %></p>
+                                        </div>
+                                    </article>
+                                <% }) %>
+                            <% } else { %>
+                                <div class="sm:col-span-2 lg:col-span-3 flex flex-col items-center justify-center py-12 px-6 text-center bg-white rounded-[15px] border border-gray-200">
+                                    <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4">
+                                        <img src="/images/icons/calendar_clock_green.svg" alt="" class="w-8 h-8" />
+                                    </div>
+                                    <p class="text-xl md:text-2xl font-medium text-gray-700">Nenhum serviço cadastrado para deletar.</p>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <section id="section-agendamentos" data-tab-content
                 class="animate-fadeLeft opacity-0 hidden w-full max-w-[1400px] mt-10 md:mt-20 flex-col gap-8">
@@ -1826,5 +1735,75 @@
     </script>
     <script type="module" src="/javascript/administrador/script-adm.js"></script>
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>
+    <script>
+    // --- logica modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal-backdrop')) {
+                event.target.classList.add('hidden');
+                event.target.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteButtons = document.querySelectorAll('[data-button="deleteService"]');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const serviceId = this.getAttribute('data-service-id');
+                    const serviceName = this.getAttribute('data-service-name');
+
+                    const confirmacao = confirm(`Tem certeza que deseja excluir o serviço "${serviceName}"? Esta ação não pode ser desfeita.`);
+
+                    if (confirmacao) {
+                        try {
+                            const response = await fetch(`/administrador/servicos/delete/${serviceId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (response.ok) {
+                                const serviceCard = this.closest('article.service-card');
+                                if (serviceCard) {
+                                    serviceCard.remove();
+                                }
+                                
+                                alert(`Serviço "${serviceName}" excluído com sucesso!`);
+                                
+                                window.location.reload(); 
+                            } else {
+                                const errorText = await response.text();
+                                alert(`Erro ao excluir: ${errorText}`);
+                            }
+                        } catch (error) {
+                            console.error('Erro na requisição:', error);
+                            alert('Ocorreu um erro ao tentar excluir o serviço. Verifique sua conexão e tente novamente.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     </body>
 </html>
