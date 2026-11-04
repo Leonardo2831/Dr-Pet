@@ -1,0 +1,18 @@
+<%
+    // Foto do usuário, ou a letra inicial num círculo colorido (como o Google faz) quando não há foto.
+    // Parâmetros: nome, id, temAvatar, versao, classes (tamanho, ex: "w-12 h-12"), fonte (ex: "text-xl")
+    const _nome = String(locals.nome || '').trim();
+    const _letra = (_nome.match(/[A-Za-zÀ-ÿ0-9]/) || ['?'])[0].toUpperCase();
+    const _cores = ['#8e24aa', '#1e88e5', '#00897b', '#e53935', '#f4511e', '#6d4c41', '#3949ab', '#d81b60', '#039be5', '#7cb342'];
+    let _hash = 0;
+    for (const ch of _nome.toLowerCase()) _hash = (_hash * 31 + ch.charCodeAt(0)) >>> 0;
+    const _cor = _cores[_hash % _cores.length];
+%>
+<img data-avatar-img
+    <% if (locals.temAvatar) { %>src="/avatar/<%= id %>?v=<%= locals.versao || 0 %>"<% } %>
+    alt="Foto de <%= _nome %>"
+    class="<%= classes %> object-cover rounded-full <%= locals.temAvatar ? '' : 'hidden' %>"
+    onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" />
+<span data-avatar-letter aria-hidden="true"
+    class="<%= classes %> <%= locals.fonte || 'text-xl' %> rounded-full flex items-center justify-center font-semibold text-white select-none <%= locals.temAvatar ? 'hidden' : '' %>"
+    style="background-color: <%= _cor %>; color: #fff;"><%= _letra %></span>

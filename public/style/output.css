@@ -1556,10 +1556,6 @@ aside p.activeOption{
   margin-bottom: 30px;
 }
 
-.ml-0\.5{
-  margin-left: 0.125rem;
-}
-
 .mr-2\.5{
   margin-right: 0.625rem;
 }
@@ -1657,6 +1653,10 @@ aside p.activeOption{
 
 .h-12{
   height: 3rem;
+}
+
+.h-14{
+  height: 3.5rem;
 }
 
 .h-16{
@@ -1788,10 +1788,6 @@ aside p.activeOption{
   height: 1px;
 }
 
-.h-14{
-  height: 3.5rem;
-}
-
 .max-h-\[1000px\]{
   max-height: 1000px;
 }
@@ -1844,12 +1840,12 @@ aside p.activeOption{
   min-height: 350px;
 }
 
-.min-h-\[52px\]{
-  min-height: 52px;
-}
-
 .min-h-\[70px\]{
   min-height: 70px;
+}
+
+.min-h-\[80px\]{
+  min-height: 80px;
 }
 
 .min-h-\[820px\]{
@@ -1872,10 +1868,6 @@ aside p.activeOption{
   min-height: 100vh;
 }
 
-.min-h-\[80px\]{
-  min-height: 80px;
-}
-
 .\!w-\[100px\]{
   width: 100px !important;
 }
@@ -1894,6 +1886,10 @@ aside p.activeOption{
 
 .w-12{
   width: 3rem;
+}
+
+.w-14{
+  width: 3.5rem;
 }
 
 .w-16{
@@ -2035,10 +2031,6 @@ aside p.activeOption{
 
 .w-full{
   width: 100%;
-}
-
-.w-14{
-  width: 3.5rem;
 }
 
 .min-w-0{
@@ -2403,12 +2395,6 @@ aside p.activeOption{
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-}
-
-.select-text{
-  -webkit-user-select: text;
-     -moz-user-select: text;
-          user-select: text;
 }
 
 .resize-none{
@@ -3074,11 +3060,6 @@ aside p.activeOption{
   background-color: rgb(252 252 252 / 0.95);
 }
 
-.bg-red-100{
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
-}
-
 .bg-gradient-to-tr{
   background-image: linear-gradient(to top right, var(--tw-gradient-stops));
 }
@@ -3124,6 +3105,10 @@ aside p.activeOption{
      object-position: center;
 }
 
+.p-0{
+  padding: 0px;
+}
+
 .p-1{
   padding: 0.25rem;
 }
@@ -3162,10 +3147,6 @@ aside p.activeOption{
 
 .p-7{
   padding: 1.75rem;
-}
-
-.p-8{
-  padding: 2rem;
 }
 
 .p-\[10px\]{
@@ -3351,10 +3332,6 @@ aside p.activeOption{
   padding-bottom: 1.25rem;
 }
 
-.pl-1{
-  padding-left: 0.25rem;
-}
-
 .pl-10{
   padding-left: 2.5rem;
 }
@@ -3453,6 +3430,10 @@ aside p.activeOption{
 
 .text-\[14px\]{
   font-size: 14px;
+}
+
+.text-\[16px\]{
+  font-size: 16px;
 }
 
 .text-\[18px\]{
@@ -3777,6 +3758,10 @@ aside p.activeOption{
   opacity: 1;
 }
 
+.opacity-25{
+  opacity: 0.25;
+}
+
 .opacity-40{
   opacity: 0.4;
 }
@@ -3799,10 +3784,6 @@ aside p.activeOption{
 
 .opacity-80{
   opacity: 0.8;
-}
-
-.opacity-25{
-  opacity: 0.25;
 }
 
 .opacity-90{
@@ -4013,12 +3994,6 @@ aside p.activeOption{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-.hover\:shadow:hover{
-  --tw-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  --tw-shadow-colored: 0 1px 2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .\*\:mx-auto > *{
   margin-left: auto;
   margin-right: auto;
@@ -4174,11 +4149,6 @@ aside p.activeOption{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:border-gray-400:hover{
-  --tw-border-opacity: 1;
-  border-color: rgb(168 173 170 / var(--tw-border-opacity, 1));
-}
-
 .hover\:border-green-500:hover{
   --tw-border-opacity: 1;
   border-color: rgb(18 116 71 / var(--tw-border-opacity, 1));
@@ -4276,11 +4246,6 @@ aside p.activeOption{
   color: rgb(15 58 167 / var(--tw-text-opacity, 1));
 }
 
-.hover\:text-gray-800:hover{
-  --tw-text-opacity: 1;
-  color: rgb(47 51 49 / var(--tw-text-opacity, 1));
-}
-
 .hover\:text-green-200:hover{
   --tw-text-opacity: 1;
   color: rgb(36 216 138 / var(--tw-text-opacity, 1));
@@ -4330,12 +4295,6 @@ aside p.activeOption{
 
 .hover\:opacity-90:hover{
   opacity: 0.9;
-}
-
-.hover\:shadow:hover{
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .hover\:shadow-lg:hover{
@@ -4490,6 +4449,10 @@ aside p.activeOption{
   --tw-ring-color: rgb(11 80 48 / 0.5);
 }
 
+.focus\:ring-red-500\/20:focus{
+  --tw-ring-color: rgb(239 68 68 / 0.2);
+}
+
 .focus\:ring-red-alert:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(128 0 32 / var(--tw-ring-opacity, 1));
@@ -4512,10 +4475,6 @@ aside p.activeOption{
   --tw-ring-color: rgb(252 252 252 / var(--tw-ring-opacity, 1));
 }
 
-.focus\:ring-red-500\/20:focus{
-  --tw-ring-color: rgb(239 68 68 / 0.2);
-}
-
 .focus\:ring-offset-2:focus{
   --tw-ring-offset-width: 2px;
 }
@@ -4530,10 +4489,6 @@ aside p.activeOption{
 
 .focus\:ring-offset-green-500:focus{
   --tw-ring-offset-color: #127447;
-}
-
-.focus\:ring-offset-red-alert:focus{
-  --tw-ring-offset-color: #800020;
 }
 
 .active\:scale-95:active{
@@ -5227,6 +5182,10 @@ aside p.activeOption{
     font-size: 16px;
   }
 
+  .sm\:text-\[18px\]{
+    font-size: 18px;
+  }
+
   .sm\:text-\[20px\]{
     font-size: 20px;
   }
@@ -5358,6 +5317,10 @@ aside p.activeOption{
     height: 2rem;
   }
 
+  .md\:h-9{
+    height: 2.25rem;
+  }
+
   .md\:h-\[30px\]{
     height: 30px;
   }
@@ -5412,6 +5375,10 @@ aside p.activeOption{
 
   .md\:w-8{
     width: 2rem;
+  }
+
+  .md\:w-9{
+    width: 2.25rem;
   }
 
   .md\:w-\[106px\]{
@@ -5583,6 +5550,10 @@ aside p.activeOption{
     padding: 1.5rem;
   }
 
+  .md\:p-8{
+    padding: 2rem;
+  }
+
   .md\:p-\[30px\]{
     padding: 30px;
   }
@@ -5593,10 +5564,6 @@ aside p.activeOption{
 
   .md\:p-\[60px\]{
     padding: 60px;
-  }
-
-  .md\:p-8{
-    padding: 2rem;
   }
 
   .md\:px-10{
@@ -5667,11 +5634,6 @@ aside p.activeOption{
   .md\:py-16{
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  .md\:py-3{
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
   }
 
   .md\:py-4{
@@ -6376,6 +6338,10 @@ aside p.activeOption{
     line-height: 27px;
   }
 
+  .lg\:leading-\[28px\]{
+    line-height: 28px;
+  }
+
   .lg\:leading-\[32px\]{
     line-height: 32px;
   }
@@ -6425,8 +6391,16 @@ aside p.activeOption{
     margin-top: 0px;
   }
 
+  .xl\:h-\[54px\]{
+    height: 54px;
+  }
+
   .xl\:w-\[30px\]{
     width: 30px;
+  }
+
+  .xl\:w-\[54px\]{
+    width: 54px;
   }
 
   .xl\:w-\[68px\]{
@@ -6485,6 +6459,11 @@ aside p.activeOption{
   .xl\:py-\[60px\]{
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+
+  .xl\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 }
 

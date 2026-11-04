@@ -38,7 +38,7 @@ router.get('/option-user', verificarLogin, (req, res) => {
                             }
                             const pets = petResult;
 
-                            res.render('option-user', {user, enderecos, pets});
+                            res.render('option-user', {user, enderecos, pets, avatarV: req.session.usuario.avatarV});
                         }
                     );
                 }
@@ -318,7 +318,8 @@ router.post('/option-user/update-avatar', verificarLogin, (req, res) => {
             return res.status(500).send('Erro ao atualizar avatar.');
         }
         if (req.session.usuario) {
-            req.session.usuario.avatar = avatarBuffer;
+            req.session.usuario.temAvatar = true;
+            req.session.usuario.avatarV = Date.now();
         }
         return res.status(200).json({ mensagem: 'Avatar atualizado com sucesso!' });
     });

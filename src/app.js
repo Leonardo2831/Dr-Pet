@@ -17,6 +17,7 @@ const apiProdutosRouter = require('./router/api-produtos');
 const verificacaoRouter = require('./router/verificacao');
 const googleAuthRouter = require('./router/google-auth');
 const completarCadastroRouter = require('./router/completar-cadastro');
+const avatarRouter = require('./router/avatar');
 const servicosRouter = require('./router/servicos');
 
 const app = express();
@@ -52,6 +53,7 @@ app.use('/', loginRouter);
 app.use('/', verificacaoRouter);
 app.use('/', googleAuthRouter);
 app.use('/', completarCadastroRouter);
+app.use('/', avatarRouter);
 app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);

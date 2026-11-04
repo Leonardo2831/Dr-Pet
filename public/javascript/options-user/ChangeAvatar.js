@@ -22,9 +22,12 @@ export default class ChangeAvatar {
             const reader = new FileReader();
             reader.onload = async (e) => {
                 const dataUrl = e.target.result;
-                if (this.image) {
-                    this.image.src = dataUrl;
-                }
+                // atualiza todos os avatares da página (botão do topo, menu e "Minha conta")
+                document.querySelectorAll('[data-avatar-img]').forEach((img) => {
+                    img.src = dataUrl;
+                    img.classList.remove('hidden');
+                    img.nextElementSibling?.classList.add('hidden');
+                });
                 try {
                     await fetch('/option-user/update-avatar', {
                         method: 'POST',

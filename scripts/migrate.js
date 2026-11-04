@@ -1,6 +1,7 @@
 // Migração idempotente do banco (pode rodar várias vezes): npm run migrate
 require('dotenv').config();
 const db = require('../src/database/mysql').promise();
+const { baixarFoto } = require('../src/utils/fotoGoogle');
 
 async function colunaExiste(tabela, coluna) {
     const [rows] = await db.query(
@@ -80,6 +81,18 @@ async function main() {
             )
         `);
         console.log('~ agenda recriada com o schema atual (estava vazia)');
+    }
+
+    // --- avatar: versão antiga guardava só o link da foto do Google como texto; troca pela imagem de verdade ---
+    const prefixoHttps = Buffer.from('https://').toString('hex').toUpperCase();
+    const [legados] = await db.query(
+        'SELECT id, avatar FROM usuario WHERE avatar IS NOT NULL AND LENGTH(avatar) < 600 AND HEX(LEFT(avatar, 8)) = ?',
+        [prefixoHttps]
+    );
+    for (const usuario of legados) {
+        const foto = await baixarFoto(usuario.avatar.toString('utf8'));
+        await db.query('UPDATE usuario SET avatar = ? WHERE id = ?', [foto, usuario.id]); // sem foto => NULL => letra inicial
+        console.log(`~ avatar do usuário ${usuario.id}: ${foto ? 'imagem baixada' : 'sem foto (será usada a letra inicial)'}`);
     }
 
     console.log('Migração concluída.');

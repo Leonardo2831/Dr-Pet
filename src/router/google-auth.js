@@ -5,6 +5,7 @@ const { OAuth2Client } = require('google-auth-library');
 const router = express.Router();
 const db = require('../database/mysql').promise();
 const { iniciarSessao } = require('../utils/sessao');
+const { baixarFoto, semFoto } = require('../utils/fotoGoogle');
 
 function googleConfigurado() {
     return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.GOOGLE_REDIRECT_URI);
@@ -24,7 +25,7 @@ function criarCliente() {
  *  2. existe conta com o mesmo e-mail        -> vincula o google_id (o Google garante o e-mail)
  *  3. não existe                             -> cria conta sem senha e sem telefone
  */
-async function resolverUsuarioGoogle({ sub, email, nome, picture }) {
+async function resolverUsuarioGoogle({ sub, email, nome }) {
     const emailNormalizado = String(email).trim().toLowerCase();
 
     const [porGoogle] = await db.query('SELECT * FROM usuario WHERE google_id = ?', [sub]);
@@ -42,14 +43,9 @@ async function resolverUsuarioGoogle({ sub, email, nome, picture }) {
     }
 
     const nomeFinal = String(nome || emailNormalizado.split('@')[0]).trim().slice(0, 150);
-    // A foto do Google é guardada como URL (o header e "Minha conta" exibem user.avatar direto no <img src>)
-    const avatar = typeof picture === 'string' && picture.startsWith('https://') && picture.length <= 500
-        ? Buffer.from(picture)
-        : null;
-
     const [resultado] = await db.query(
-        'INSERT INTO usuario (nome, email, google_id, email_verificado, avatar) VALUES (?, ?, ?, TRUE, ?)',
-        [nomeFinal, emailNormalizado, sub, avatar]
+        'INSERT INTO usuario (nome, email, google_id, email_verificado) VALUES (?, ?, ?, TRUE)',
+        [nomeFinal, emailNormalizado, sub]
     );
     const [novo] = await db.query('SELECT * FROM usuario WHERE id = ?', [resultado.insertId]);
     return novo[0];
@@ -64,6 +60,25 @@ function lerCookie(req, nome) {
         if (chave === nome) return decodeURIComponent(resto.join('='));
     }
     return undefined;
+}
+
+/**
+ * Importa a foto do Google SOMENTE se o usuário ainda não tem foto.
+ * Nunca sobrescreve uma foto enviada ou alterada pelo usuário. Se não conseguir baixar, fica sem foto
+ * (e a tela mostra a letra inicial do nome).
+ */
+async function completarAvatar(usuario, picture) {
+    if (!semFoto(usuario.avatar)) return;
+
+    const foto = await baixarFoto(picture);
+    if (!foto) return;
+
+    // A condição no WHERE protege contra o usuário ter enviado uma foto enquanto baixávamos
+    const [resultado] = await db.query(
+        'UPDATE usuario SET avatar = ? WHERE id = ? AND (avatar IS NULL OR LENGTH(avatar) = 0 OR (LENGTH(avatar) < 600 AND HEX(LEFT(avatar, 8)) = ?))',
+        [foto, usuario.id, Buffer.from('https://').toString('hex').toUpperCase()]
+    );
+    if (resultado.affectedRows > 0) usuario.avatar = foto;
 }
 
 router.get('/auth/google', (req, res) => {
@@ -114,7 +129,13 @@ router.get('/auth/google/callback', async (req, res) => {
             return res.redirect('/login?msg=google-email-nao-verificado');
         }
 
-        const usuario = await resolverUsuarioGoogle({ sub: payload.sub, email: payload.email, nome: payload.name, picture: payload.picture });
+        const usuario = await resolverUsuarioGoogle({ sub: payload.sub, email: payload.email, nome: payload.name });
+
+        try {
+            await completarAvatar(usuario, payload.picture);
+        } catch (errFoto) {
+            console.error('Erro ao importar a foto do Google:', errFoto.message); // não impede o login
+        }
 
         iniciarSessao(req, usuario, (err) => {
             if (err) {
@@ -132,3 +153,4 @@ router.get('/auth/google/callback', async (req, res) => {
 
 module.exports = router;
 module.exports.resolverUsuarioGoogle = resolverUsuarioGoogle;
+module.exports.completarAvatar = completarAvatar;

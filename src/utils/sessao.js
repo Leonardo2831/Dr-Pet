@@ -1,3 +1,5 @@
+const { semFoto } = require('./fotoGoogle');
+
 // Cria a sessão de login com o mesmo formato usado em toda a aplicação
 function iniciarSessao(req, usuario, callback) {
     req.session.regenerate((errRegen) => {
@@ -9,7 +11,9 @@ function iniciarSessao(req, usuario, callback) {
             email: usuario.email,
             telefone: usuario.telefone,
             tipoUsuario: usuario.tipo_usuario,
-            avatar: usuario.avatar,
+            // a imagem não vai para a sessão: é servida por /avatar/:id
+            temAvatar: !semFoto(usuario.avatar),
+            avatarV: Date.now(),
             // Contas criadas pelo Google chegam sem telefone e sem senha
             perfilIncompleto: !usuario.telefone || !usuario.senha
         };
