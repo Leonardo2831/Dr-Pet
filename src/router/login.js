@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../database/mysql').promise();
 
 const criptografia = require('../utils/Criptografia');
-const { enviarCodigo } = require('../utils/enviarCodigo');
+const { enviarCodigo, AVISO_DEV } = require('../utils/enviarCodigo');
 const { iniciarSessao } = require('../utils/sessao');
 
 const MENSAGENS_GOOGLE = {
@@ -47,6 +47,8 @@ router.post('/loginAction', async (req, res) => {
             req.session.verificacaoPendente = { usuarioId: usuario.id, email: usuario.email };
             if (!envio.ok && envio.erro === 'aguarde') {
                 req.session.verificacaoInfo = 'Use o código que já enviamos para o seu e-mail.';
+            } else if (envio.dev) {
+                req.session.verificacaoInfo = AVISO_DEV;
             }
             return req.session.save(() => res.redirect('/verificar-email'));
         }

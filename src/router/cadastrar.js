@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../database/mysql').promise();
 
 const criptografia = require('../utils/Criptografia');
-const { enviarCodigo } = require('../utils/enviarCodigo');
+const { enviarCodigo, AVISO_DEV } = require('../utils/enviarCodigo');
 const { senhaValida, emailValido } = require('../utils/sessao');
 
 router.get('/cadastrar', (req, res) => {
@@ -35,9 +35,10 @@ router.post('/cadastrarAction', async (req, res) => {
             [userName, email, phone, criptografia.generateHash(password)]
         );
 
-        await enviarCodigo({ id: resultado.insertId, nome: userName, email }, 'verificar_email');
+        const envio = await enviarCodigo({ id: resultado.insertId, nome: userName, email }, 'verificar_email');
 
         req.session.verificacaoPendente = { usuarioId: resultado.insertId, email };
+        if (envio.dev) req.session.verificacaoInfo = AVISO_DEV;
         req.session.save(() => res.redirect('/verificar-email'));
     } catch (err) {
         console.error('Erro ao cadastrar usuário:', err);

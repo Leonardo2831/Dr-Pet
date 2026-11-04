@@ -4,8 +4,8 @@ const db = require('../database/mysql').promise();
 
 const codigos = require('../utils/codigos');
 const criptografia = require('../utils/Criptografia');
-const { enviarCodigo, mascararEmail } = require('../utils/enviarCodigo');
-const { iniciarSessao, senhaValida, emailValido } = require('../utils/sessao');
+const { enviarCodigo, enviarLinkRecuperacao, mascararEmail, AVISO_DEV } = require('../utils/enviarCodigo');
+const { iniciarSessao, senhaValida } = require('../utils/sessao');
 
 const CAMPO_CODIGO = {
     name: 'codigo', label: 'Código de 6 dígitos', type: 'text', inputmode: 'numeric',
@@ -110,7 +110,7 @@ router.post('/verificar-email/reenviar', exigirPendente, async (req, res) => {
             });
         }
 
-        req.session.verificacaoInfo = 'Enviamos um novo código para o seu e-mail.';
+        req.session.verificacaoInfo = resultado.dev ? AVISO_DEV : 'Enviamos um novo código para o seu e-mail.';
         salvarSessao(req, res, '/verificar-email');
     } catch (err) {
         erroInterno(res, 'reenviar código de verificação', err);
@@ -118,115 +118,102 @@ router.post('/verificar-email/reenviar', exigirPendente, async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// Recuperação de senha
+// Recuperação de senha (por link enviado ao e-mail)
 // ---------------------------------------------------------------------------
+
+// Formato básico: algo@algo (sem espaços). Se o e-mail existir ou não é decidido na consulta ao banco.
+const FORMATO_EMAIL = /^[^\s@]+@[^\s@]+$/;
 
 function telaPedirEmail(res, extra = {}) {
     res.render('auth-simples', {
         titulo: 'Recuperar senha',
-        descricao: 'Informe o e-mail da sua conta. Enviaremos um código de 6 dígitos para você criar uma nova senha.',
+        descricao: 'Informe o e-mail da sua conta. Enviaremos um link para você criar uma nova senha.',
         acao: '/recuperar-senha',
-        campos: [{ name: 'email', label: 'E-mail', type: 'email', autocomplete: 'email', minlength: 5, maxlength: 255, value: extra.email || '' }],
-        botao: 'Enviar código',
+        semValidacaoNavegador: true,
+        campos: [{ name: 'email', label: 'E-mail', type: 'email', autocomplete: 'email', maxlength: 255, value: extra.email || '' }],
+        botao: 'Enviar link',
         ...extra
     });
-}
-
-function telaCodigoRecuperacao(req, res, extra = {}) {
-    res.render('auth-simples', {
-        titulo: 'Digite o código',
-        descricao: `Se existir uma conta com o e-mail ${mascararEmail(req.session.recuperacao.email)}, enviamos um código de 6 dígitos para ele.`,
-        acao: '/recuperar-senha/codigo',
-        reenviar: '/recuperar-senha/reenviar',
-        campos: [CAMPO_CODIGO],
-        botao: 'Continuar',
-        voltarHref: '/recuperar-senha',
-        voltarTexto: 'Usar outro e-mail',
-        ...extra
-    });
-}
-
-function exigirRecuperacao(req, res, next) {
-    if (!req.session.recuperacao) return res.redirect('/recuperar-senha');
-    next();
 }
 
 router.get('/recuperar-senha', (req, res) => telaPedirEmail(res));
 
-// Resposta sempre igual, exista a conta ou não (não revela quais e-mails estão cadastrados)
 router.post('/recuperar-senha', async (req, res) => {
     const email = String(req.body.email || '').trim().toLowerCase();
-    if (!emailValido(email)) {
-        res.status(400);
-        return telaPedirEmail(res, { erro: 'Informe um e-mail válido.', email });
-    }
+
+    const falhar = (status, erro) => {
+        res.status(status);
+        return telaPedirEmail(res, { erro, email: req.body.email });
+    };
+
+    if (!email) return falhar(400, 'Informe o e-mail da sua conta.');
+    if (email.length > 255 || !FORMATO_EMAIL.test(email)) return falhar(400, 'Formato de e-mail inválido.');
+
     try {
         const [rows] = await db.query('SELECT id, nome, email FROM usuario WHERE email = ?', [email]);
-        const usuario = rows[0] || null;
+        if (rows.length === 0) return falhar(404, 'E-mail não cadastrado.');
 
-        if (usuario) {
-            const resultado = await enviarCodigo(usuario, 'recuperar_senha');
-            if (!resultado.ok && resultado.erro === 'aguarde') {
-                // já existe um código recente: segue para a tela do código sem revelar nada
-            } else if (!resultado.ok) {
-                console.error('Falha ao enviar código de recuperação para', email);
+        const resultado = await enviarLinkRecuperacao(rows[0]);
+
+        if (!resultado.ok) {
+            if (resultado.erro === 'aguarde') {
+                return falhar(429, `Já enviamos um link para esse e-mail. Aguarde ${resultado.segundos}s para solicitar outro.`);
             }
+            return falhar(500, 'Não foi possível enviar o e-mail agora. Tente novamente em instantes.');
         }
 
-        req.session.recuperacao = { email, usuarioId: usuario ? usuario.id : null, validado: false };
-        salvarSessao(req, res, '/recuperar-senha/codigo');
+        if (resultado.dev) {
+            // o e-mail NÃO saiu: não dizer que foi enviado
+            return telaPedirEmail(res, { email: req.body.email, info: AVISO_DEV });
+        }
+
+        telaPedirEmail(res, {
+            email: req.body.email,
+            info: `Enviamos um link para ${mascararEmail(rows[0].email)}. Ele vale por ${codigos.VALIDADE_LINK_MIN} minutos. Confira também a caixa de spam.`
+        });
     } catch (err) {
         erroInterno(res, 'pedir recuperação de senha', err);
     }
 });
 
-router.get('/recuperar-senha/codigo', exigirRecuperacao, (req, res) => {
-    const info = req.session.recuperacaoInfo;
-    delete req.session.recuperacaoInfo;
-    telaCodigoRecuperacao(req, res, info ? { info } : {});
-});
-
-router.post('/recuperar-senha/codigo', exigirRecuperacao, async (req, res) => {
+// Link recebido por e-mail: valida o token e leva para a tela da nova senha (sem deixar o token na URL)
+router.get('/recuperar-senha/redefinir', async (req, res) => {
     try {
-        const { usuarioId } = req.session.recuperacao;
-        const resultado = usuarioId
-            ? await codigos.validar(usuarioId, 'recuperar_senha', req.body.codigo)
-            : { ok: false, motivo: 'invalido' };
+        const usuarioId = await codigos.usuarioDoToken(req.query.token);
 
-        if (!resultado.ok) {
-            res.status(400);
-            return telaCodigoRecuperacao(req, res, { erro: MENSAGENS_CODIGO[resultado.motivo] });
+        if (!usuarioId) {
+            return res.status(400).render('auth-simples', {
+                titulo: 'Link inválido',
+                descricao: 'Este link de recuperação é inválido, expirou ou já foi usado. Solicite um novo link.',
+                semFormulario: true,
+                voltarHref: '/recuperar-senha',
+                voltarTexto: 'Solicitar novo link'
+            });
         }
 
-        req.session.recuperacao.validado = true;
+        req.session.recuperacao = { usuarioId, token: req.query.token };
         salvarSessao(req, res, '/recuperar-senha/nova');
     } catch (err) {
-        erroInterno(res, 'validar código de recuperação', err);
+        erroInterno(res, 'validar link de recuperação', err);
     }
 });
 
-router.post('/recuperar-senha/reenviar', exigirRecuperacao, async (req, res) => {
-    try {
-        const { usuarioId } = req.session.recuperacao;
-        if (usuarioId) {
-            const [rows] = await db.query('SELECT id, nome, email FROM usuario WHERE id = ?', [usuarioId]);
-            if (rows.length) {
-                const resultado = await enviarCodigo(rows[0], 'recuperar_senha');
-                if (!resultado.ok && resultado.erro === 'aguarde') {
-                    res.status(429);
-                    return telaCodigoRecuperacao(req, res, { erro: mensagemEnvio(resultado) });
-                }
-            }
-        }
-        req.session.recuperacaoInfo = 'Se a conta existir, enviamos um novo código.';
-        salvarSessao(req, res, '/recuperar-senha/codigo');
-    } catch (err) {
-        erroInterno(res, 'reenviar código de recuperação', err);
-    }
-});
+// A sessão precisa ter vindo de um link válido, e o token ainda precisa valer (não usado nem expirado)
+async function exigirLinkValido(req, res, next) {
+    const recuperacao = req.session.recuperacao;
+    if (!recuperacao || !recuperacao.token) return res.redirect('/recuperar-senha');
 
-function exigirCodigoValidado(req, res, next) {
-    if (!req.session.recuperacao || !req.session.recuperacao.validado) return res.redirect('/recuperar-senha');
+    const usuarioId = await codigos.usuarioDoToken(recuperacao.token);
+    if (!usuarioId || usuarioId !== recuperacao.usuarioId) {
+        delete req.session.recuperacao;
+        return res.status(400).render('auth-simples', {
+            titulo: 'Link inválido',
+            descricao: 'Este link de recuperação expirou ou já foi usado. Solicite um novo link.',
+            semFormulario: true,
+            voltarHref: '/recuperar-senha',
+            voltarTexto: 'Solicitar novo link'
+        });
+    }
     next();
 }
 
@@ -244,9 +231,9 @@ function telaNovaSenha(res, extra = {}) {
     });
 }
 
-router.get('/recuperar-senha/nova', exigirCodigoValidado, (req, res) => telaNovaSenha(res));
+router.get('/recuperar-senha/nova', exigirLinkValido, (req, res) => telaNovaSenha(res));
 
-router.post('/recuperar-senha/nova', exigirCodigoValidado, async (req, res) => {
+router.post('/recuperar-senha/nova', exigirLinkValido, async (req, res) => {
     const { password, confirmPassword } = req.body;
 
     if (!senhaValida(password)) {
@@ -260,14 +247,18 @@ router.post('/recuperar-senha/nova', exigirCodigoValidado, async (req, res) => {
 
     try {
         const { usuarioId } = req.session.recuperacao;
-        // Quem recebeu o código no e-mail provou ser dono dele, então o e-mail também fica verificado
+        // Quem recebeu o link no e-mail provou ser dono dele, então o e-mail também fica verificado
         await db.query('UPDATE usuario SET senha = ?, email_verificado = TRUE WHERE id = ?', [criptografia.generateHash(password), usuarioId]);
-        await db.query("UPDATE codigo_verificacao SET usado = TRUE WHERE usuario_id = ? AND tipo = 'recuperar_senha'", [usuarioId]);
+        await codigos.consumirTokens(usuarioId); // o link não pode ser usado de novo
 
-        // Encerra a sessão atual: a pessoa precisa entrar com a nova senha
-        req.session.regenerate((err) => {
-            if (err) return erroInterno(res, 'regenerar sessão', err);
-            res.redirect('/login?msg=senha-alterada');
+        // Deixa a pessoa logada: ela acabou de provar que é dona da conta (link do e-mail) e de definir a senha.
+        // iniciarSessao troca o id da sessão, então nada do fluxo de recuperação fica para trás.
+        const [rows] = await db.query('SELECT * FROM usuario WHERE id = ?', [usuarioId]);
+        if (rows.length === 0) return res.redirect('/login');
+
+        iniciarSessao(req, rows[0], (err) => {
+            if (err) return erroInterno(res, 'iniciar sessão após redefinir senha', err);
+            res.redirect('/'); // conta sem telefone (criada pelo Google) segue para /completar-cadastro
         });
     } catch (err) {
         erroInterno(res, 'salvar nova senha', err);

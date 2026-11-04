@@ -9,6 +9,7 @@ Site de petshop (Node.js + Express + EJS + MySQL + Tailwind).
 3. Crie o banco: `CREATE DATABASE petshop;` e importe `database.sql`.
    - Se o banco já existia de versões antigas, rode `npm run migrate` (idempotente).
 4. Inicie: `npm run node` (auto-reload) ou `npm start` em http://localhost:3000
+   - `npm run node` reinicia sozinho só quando o código muda (`src/router`, `src/utils`, `src/database`, `src/app.js`). Mudanças no `.env` exigem parar e iniciar de novo; views (`.ejs`), CSS e JS do navegador não precisam de reinício.
    - `npm run tailwind` recompila o CSS ao editar as classes.
 
 ## Variáveis de ambiente
@@ -20,8 +21,9 @@ Site de petshop (Node.js + Express + EJS + MySQL + Tailwind).
 | `HOST_EMAIL`, `PORT_EMAIL`, `EMAIL_USER`, `EMAIL_PASS` | SMTP para códigos e avisos (Gmail: use senha de app, porta 587) |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI` | Login/cadastro com Google |
 | `PORT` | Porta do servidor (padrão 3000) |
+| `APP_URL` | Endereço público do site, usado nos links enviados por e-mail (ex.: recuperação de senha) |
 
-**Sem SMTP configurado**, fora de produção, os códigos de verificação/recuperação são impressos no console do servidor (`[DEV] ... Código ...`).
+**Sem SMTP configurado**, fora de produção, o código de verificação de e-mail e o link de recuperação de senha são impressos no console do servidor (`[DEV] ...`).
 
 ## Login com Google
 
