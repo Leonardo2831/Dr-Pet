@@ -1,10 +1,15 @@
 <%- include('layouts/header', { tituloDaPagina: 'Dr.Pet | Agendamento' }) %>
 
 <%
-    const enderecoFormatado = endereco && endereco.rua
-        ? [endereco.rua, endereco.numero ? `nº ${endereco.numero}` : '', 
-        endereco.bairro, endereco.cidade, endereco.estado].filter(Boolean).join(', ') 
-            + (endereco.complemento ? ` (${endereco.complemento})` : '') : '';
+    const enderecosSalvos = locals.enderecos || [];
+    const enderecoInicial = enderecosSalvos[0] || {};
+
+    const formatarCep = (cep) => {
+        const d = String(cep || '').replace(/\D/g, '');
+        return d.length === 8 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+    };
+    const resumoEndereco = (e) => [e.rua, e.numero ? `nº ${e.numero}` : '', e.bairro, e.cidade, e.estado].filter(Boolean).join(', ')
+        + (e.complemento ? ` (${e.complemento})` : '');
 %>
 
     <main class="flex flex-col lg:flex-row">
@@ -70,35 +75,43 @@
 
                         <div class="flex flex-col gap-[15px]">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                                <label
-                                    for="endereco"
-                                    class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]"
-                                    >Endereço</label
-                                >
-                                <% if (endereco) { %>
+                                <span class="text-gray-900 font-medium text-xl md:text-[26px] md:leading-[32px]">Endereço</span>
+                                <% if (enderecosSalvos.length > 0) { %>
                                     <span class="text-xs md:text-sm text-gray-500 font-normal">
-                                        Escolha um endereço salvo ou digite outro
+                                        Escolha um endereço salvo ou informe outro
+                                    </span>
+                                <% } else { %>
+                                    <span class="text-xs md:text-sm text-gray-500 font-normal">
+                                        Digite o CEP e preenchemos o restante para você
                                     </span>
                                 <% } %>
                             </div>
 
-                            <% if (endereco) { %>
+                            <% if (enderecosSalvos.length > 0) { %>
                                 <div class="flex flex-col gap-2">
                                     <span class="text-sm font-semibold text-gray-700">Selecione um endereço salvo:</span>
                                     <div class="flex flex-wrap gap-2.5" id="container-botoes-endereco">
-                                        <button
-                                            type="button"
-                                            class="btn-escolha-endereco flex items-center gap-2 px-3.5 py-2 rounded-lg border text-sm md:text-base font-medium transition-all duration-200 cursor-pointer bg-green-600 text-white border-green-600 shadow-sm"
-                                            data-endereco-completo="<%= enderecoFormatado %>"
-                                            data-index="0"
-                                            title="<%= enderecoFormatado %>"
-                                        >
-                                            <span>🏠</span>
-                                            <span class="font-semibold">Endereço 1</span>
-                                            <% if (endereco.bairro) { %>
-                                                <span class="text-xs opacity-80">(<%= endereco.bairro %>)</span>
-                                            <% } %>
-                                        </button>
+                                        <% enderecosSalvos.forEach((e, i) => { %>
+                                            <button
+                                                type="button"
+                                                class="btn-escolha-endereco flex items-center gap-2 px-3.5 py-2 rounded-lg border text-sm md:text-base font-medium transition-all duration-200 cursor-pointer <%= i === 0 ? 'bg-green-600 text-white border-green-600 shadow-sm' : 'bg-white text-gray-700 border-gray-300 hover:border-green-500 hover:bg-green-50/50' %>"
+                                                data-cep="<%= e.cep || '' %>"
+                                                data-rua="<%= e.rua || '' %>"
+                                                data-numero="<%= e.numero || '' %>"
+                                                data-bairro="<%= e.bairro || '' %>"
+                                                data-cidade="<%= e.cidade || '' %>"
+                                                data-estado="<%= e.estado || '' %>"
+                                                data-complemento="<%= e.complemento || '' %>"
+                                                data-index="<%= i %>"
+                                                title="<%= resumoEndereco(e) %>"
+                                            >
+                                                <span>🏠</span>
+                                                <span class="font-semibold">Endereço <%= i + 1 %></span>
+                                                <% if (e.bairro) { %>
+                                                    <span class="text-xs opacity-80">(<%= e.bairro %>)</span>
+                                                <% } %>
+                                            </button>
+                                        <% }) %>
 
                                         <button
                                             type="button"
@@ -111,17 +124,133 @@
                                 </div>
                             <% } %>
 
-                            <input
-                                type="text"
-                                id="endereco"
-                                name="endereco"
-                                placeholder="Ex: Rua do nada, bairro do nada, 100, na frente da pracinha"
-                                class="w-full px-[15px] py-3 md:py-5 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
-                                required
-                                minlength="3"
-                                maxlength="100"
-                                value="<%= enderecoFormatado %>"
-                            />
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6 md:gap-y-8">
+                                <div class="flex flex-col gap-2 sm:col-span-5">
+                                    <label for="endereco-cep" class="text-gray-900 font-medium text-base md:text-xl">CEP</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-cep"
+                                        name="cep"
+                                        data-address="cep"
+                                        inputmode="numeric"
+                                        autocomplete="postal-code"
+                                        placeholder="00000-000"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        maxlength="9"
+                                        pattern="\d{5}-?\d{3}"
+                                        title="Digite um CEP com 8 dígitos. Ex: 13733-130"
+                                        value="<%= formatarCep(enderecoInicial.cep) %>"
+                                    />
+                                </div>
+
+                                <p
+                                    data-address-status
+                                    role="status"
+                                    aria-live="polite"
+                                    class="sm:col-span-7 sm:self-end text-sm md:text-base text-gray-600 min-h-[1.5rem]"
+                                ></p>
+
+                                <div class="flex flex-col gap-2 sm:col-span-8">
+                                    <label for="endereco-rua" class="text-gray-900 font-medium text-base md:text-xl">Rua</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-rua"
+                                        name="rua"
+                                        data-address="rua"
+                                        autocomplete="address-line1"
+                                        placeholder="Nome da rua"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        minlength="3"
+                                        maxlength="70"
+                                        value="<%= enderecoInicial.rua || '' %>"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-2 sm:col-span-4">
+                                    <label for="endereco-numero" class="text-gray-900 font-medium text-base md:text-xl">Número</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-numero"
+                                        name="numero"
+                                        data-address="numero"
+                                        placeholder="Ex: 100 ou S/N"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        maxlength="10"
+                                        value="<%= enderecoInicial.numero || '' %>"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-2 sm:col-span-12">
+                                    <label for="endereco-bairro" class="text-gray-900 font-medium text-base md:text-xl">Bairro</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-bairro"
+                                        name="bairro"
+                                        data-address="bairro"
+                                        placeholder="Nome do bairro"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        minlength="2"
+                                        maxlength="40"
+                                        value="<%= enderecoInicial.bairro || '' %>"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-2 sm:col-span-8">
+                                    <label for="endereco-cidade" class="text-gray-900 font-medium text-base md:text-xl">Cidade</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-cidade"
+                                        name="cidade"
+                                        data-address="cidade"
+                                        autocomplete="address-level2"
+                                        placeholder="Nome da cidade"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        minlength="2"
+                                        maxlength="40"
+                                        value="<%= enderecoInicial.cidade || '' %>"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-2 sm:col-span-4">
+                                    <label for="endereco-estado" class="text-gray-900 font-medium text-base md:text-xl">Estado</label>
+                                    <input
+                                        type="text"
+                                        id="endereco-estado"
+                                        name="estado"
+                                        data-address="estado"
+                                        autocomplete="address-level1"
+                                        placeholder="UF"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 uppercase placeholder:text-gray-500 placeholder:normal-case focus:outline-none focus:border-green-500 transition-colors"
+                                        required
+                                        minlength="2"
+                                        maxlength="2"
+                                        pattern="[A-Za-z]{2}"
+                                        title="Informe a sigla do estado com 2 letras. Ex: SP"
+                                        value="<%= enderecoInicial.estado || '' %>"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-2 sm:col-span-12">
+                                    <label for="endereco-complemento" class="text-gray-900 font-medium text-base md:text-xl">
+                                        Complemento <span class="text-sm md:text-base text-gray-500 font-normal">(opcional)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="endereco-complemento"
+                                        name="complemento"
+                                        data-address="complemento"
+                                        placeholder="Ex: apto 12, na frente da pracinha"
+                                        class="w-full px-[15px] py-3 md:py-4 border-b-[2px] border-green-700 bg-transparent text-lg md:text-[22px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-green-500 transition-colors"
+                                        maxlength="40"
+                                        value="<%= enderecoInicial.complemento || '' %>"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
 

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql');
 const { verificarLogin } = require('./middlewares');
+const { montarEndereco } = require('../utils/endereco');
 
 function cleanPhoneForDatabase(rawPhone) {
     let digits = String(rawPhone || '').replace(/\D/g, '');
@@ -43,45 +44,38 @@ function horarioDisponivel(date, hour, serviceId, callback) {
     });
 }
 
-router.get('/form-agendar', verificarLogin, (req, res) => {
+router.get('/form-agendar', verificarLogin, async (req, res) => {
     const userId = req.session && req.session.usuario ? req.session.usuario.id : null;
 
     if (!userId) {
-        return res.render('form-agendar', { usuario: {}, pet: {}, endereco: {} });
+        return res.render('form-agendar', { usuario: {}, pet: {}, enderecos: [] });
     }
 
-    // transforma os resultados dos join em objeto
-    const query = `
-        SELECT 
-            JSON_OBJECT(
-                'id', u.id, 'nome', u.nome, 'email', u.email, 
-                'telefone', u.telefone, 'avatar', u.avatar
-            ) AS usuario,
-            JSON_OBJECT(
-                'id', p.id, 'nome', p.nome, 'raca', p.raca, 
-                'genero', p.genero, 'descricao', p.descricao
-            ) AS pet,
-            JSON_OBJECT(
-                'id', e.id, 'rua', e.rua,
-                'numero', e.numero, 'cep', e.cep,
-                'cidade', e.cidade, 'estado', e.estado, 'bairro', e.bairro,
-                'telefone-contato', e.telefone_contato,
-                'complemento', e.complemento
-            ) AS endereco
-        FROM usuario u
-        LEFT JOIN pet p ON u.id = p.usuario_id
-        LEFT JOIN endereco e ON u.id = e.usuario_id
-        WHERE u.id = ?;
-    `;
+    const dbp = db.promise();
 
-    db.query(query, [userId], (err, results) => {
-        if (err) {
-            console.error('Erro ao buscar dados do usuário:', err);
-            return res.status(500).send('Erro ao buscar dados do usuário.');
-        }
-        const { usuario, pet, endereco } = results[0] || {};
-        return res.render('form-agendar', { usuario, pet, endereco });
-    });
+    try {
+        const [[dados], [enderecos]] = await Promise.all([
+            dbp.query(`
+                SELECT
+                    JSON_OBJECT('id', u.id, 'nome', u.nome, 'email', u.email, 'telefone', u.telefone) AS usuario,
+                    JSON_OBJECT('id', p.id, 'nome', p.nome, 'raca', p.raca,
+                                'genero', p.genero, 'descricao', p.descricao) AS pet
+                FROM usuario u
+                LEFT JOIN pet p ON u.id = p.usuario_id
+                WHERE u.id = ?
+                ORDER BY p.id
+                LIMIT 1`, [userId]),
+            dbp.query(
+                'SELECT id, rua, numero, cep, cidade, estado, bairro, complemento FROM endereco WHERE usuario_id = ? ORDER BY id',
+                [userId])
+        ]);
+
+        const { usuario, pet } = dados[0] || {};
+        return res.render('form-agendar', { usuario, pet, enderecos });
+    } catch (err) {
+        console.error('Erro ao buscar dados do usuário:', err);
+        return res.status(500).send('Erro ao buscar dados do usuário.');
+    }
 });
 
 router.post('/form-agendar/send', verificarLogin, (req, res) => {
@@ -98,7 +92,6 @@ router.post('/form-agendar/send', verificarLogin, (req, res) => {
     const { 
         nome, 
         telefone, 
-        endereco, 
         nomePet, 
         descricao, 
         buscarResidencia,
@@ -110,7 +103,8 @@ router.post('/form-agendar/send', verificarLogin, (req, res) => {
     const serviceId = service || req.body.serviceId || req.body.fk_service;
     const telLimpo = cleanPhoneForDatabase(telefone);
     const nomeLimpo = String(nome || '').trim().slice(0, 255);
-    const enderecoLimpo = String(endereco || '').trim().slice(0, 255);
+    const resultadoEndereco = montarEndereco(req.body);
+    const enderecoLimpo = resultadoEndereco.endereco;
     const nomePetLimpo = String(nomePet || '').trim().slice(0, 100);
     const descricaoLimpa = descricao ? String(descricao).trim().slice(0, 255) : null;
     const translado = Boolean(
@@ -130,6 +124,10 @@ router.post('/form-agendar/send', verificarLogin, (req, res) => {
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date)) || !/^\d{2}:\d{2}$/.test(String(hour))) {
         return res.status(400).json({ erro: 'Data ou horário em formato inválido.' });
+    }
+
+    if (resultadoEndereco.erro) {
+        return res.status(400).json({ erro: resultadoEndereco.erro });
     }
 
     if (telLimpo.length < 10 || telLimpo.length > 11) {

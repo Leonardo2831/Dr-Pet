@@ -1,5 +1,6 @@
 import Storage from "../../utils/Storage.js";
 import Fetch from "../../utils/Fetch.js";
+import { lerEndereco } from "../../utils/enderecoCEP.js";
 
 export default function sendFormAgendar(form) {
     const formElement = form || document.querySelector('form');
@@ -26,7 +27,7 @@ export default function sendFormAgendar(form) {
         const data = {
             nome: formElement.querySelector('#nome')?.value || '',
             telefone: formElement.querySelector('#telefone')?.value || '',
-            endereco: formElement.querySelector('#endereco')?.value || '',
+            ...lerEndereco(), // cep, rua, numero, bairro, cidade, estado, complemento
             nomePet: formElement.querySelector('#nomePet')?.value || '',
             descricao: formElement.querySelector('#descricao')?.value || '',
             buscarResidencia: formElement.querySelector('#buscarResidencia')?.checked || false,

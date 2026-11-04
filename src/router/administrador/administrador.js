@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../database/mysql');
 const { verificarAdmin } = require('../middlewares');
+const { separarEndereco } = require('../../utils/endereco');
 
 const produtosRouter = require('./produtos');
 const slideHomeRouter = require('./slide-home');
@@ -122,6 +123,7 @@ router.get('/administrador', async (req, res) => {
                 buscarResidencia: Boolean(a.buscarResidencia),
                 observation: a.observation || '',
                 endereco: a.endereco || '',
+                enderecoCampos: separarEndereco(a.endereco),
                 pendente: a.pendente,
                 nomePet: a.nomePet || '',
                 nome: a.nome || a.usuario_nome || '',

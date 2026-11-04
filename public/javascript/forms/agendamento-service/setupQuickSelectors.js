@@ -1,5 +1,6 @@
+import { lerEndereco, preencherEndereco, limparEndereco, aoAlterarEndereco } from '../../utils/enderecoCEP.js';
+
 export default function setupQuickSelectors() {
-    const enderecoInput = document.getElementById('endereco');
     const nomePetInput = document.getElementById('nomePet');
     const petIdInput = document.getElementById('petId');
 
@@ -30,42 +31,32 @@ export default function setupQuickSelectors() {
     }
 
     // === Lógica dos Botões de Endereço ===
-    if (enderecoButtons.length > 0 && enderecoInput) {
+    if (enderecoButtons.length > 0) {
+        const CAMPOS_SALVOS = ['cep', 'rua', 'numero', 'bairro', 'cidade', 'estado', 'complemento'];
+        const doBotao = (btn) => Object.fromEntries(CAMPOS_SALVOS.map((c) => [c, btn.dataset[c] || '']));
+        const normalizar = (campo, valor) => (campo === 'cep' ? String(valor).replace(/\D/g, '') : String(valor).trim().toLowerCase());
+
         enderecoButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn === outroEnderecoBtn) {
-                    activateButton(btn, enderecoButtons);
-                    enderecoInput.value = '';
-                    enderecoInput.placeholder = 'Digite o endereço completo...';
-                    enderecoInput.focus();
+                    limparEndereco();
                 } else {
-                    const enderecoCompleto = btn.getAttribute('data-endereco-completo');
-                    if (enderecoCompleto) {
-                        enderecoInput.value = enderecoCompleto;
-                    }
-                    activateButton(btn, enderecoButtons);
+                    preencherEndereco(doBotao(btn));
                 }
+                activateButton(btn, enderecoButtons);
             });
         });
 
-        // Sincronizar ao digitar manualmente no campo de endereço
-        enderecoInput.addEventListener('input', () => {
-            const currentVal = enderecoInput.value.trim().toLowerCase();
-            let matched = false;
-
-            enderecoButtons.forEach(btn => {
-                if (btn !== outroEnderecoBtn) {
-                    const endComp = (btn.getAttribute('data-endereco-completo') || '').trim().toLowerCase();
-                    if (endComp && endComp === currentVal) {
-                        activateButton(btn, enderecoButtons);
-                        matched = true;
-                    }
-                }
+        // Se o usuário editar os campos, destaca o endereço salvo que ainda for igual (ou "Outro endereço")
+        aoAlterarEndereco(() => {
+            const atual = lerEndereco();
+            const salvoIgual = enderecoButtons.find((btn) => {
+                if (btn === outroEnderecoBtn) return false;
+                const salvo = doBotao(btn);
+                return CAMPOS_SALVOS.every((c) => normalizar(c, atual[c]) === normalizar(c, salvo[c]));
             });
 
-            if (!matched && outroEnderecoBtn) {
-                activateButton(outroEnderecoBtn, enderecoButtons);
-            }
+            activateButton(salvoIgual || outroEnderecoBtn, enderecoButtons);
         });
     }
 

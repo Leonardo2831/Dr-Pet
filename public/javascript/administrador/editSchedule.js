@@ -3,6 +3,7 @@ import Hours from '../agendamento/Hours.js';
 import { clickOutside } from '../utils/clickOutside.js';
 import toContactWhatsapp from '../utils/toContactWhatsapp.js';
 import formatPhone, { applyPhoneMask } from '../utils/formatPhone.js';
+import { lerEndereco, preencherEndereco, limparEndereco } from '../utils/enderecoCEP.js';
 
 let editQuill = null;
 
@@ -63,7 +64,10 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
     const inputTelefone = form.querySelector('[name="telefone"]');
     const inputNomePet = form.querySelector('[name="nomePet"]');
     const selectServico = form.querySelector('[name="servico"]');
-    const inputEndereco = form.querySelector('[name="endereco"]');
+    const camposEndereco = [...form.querySelectorAll('[data-address]')];
+    const avisoEnderecoAntigo = form.querySelector('[data-edit-address-legacy]');
+    const textoEnderecoAntigo = form.querySelector('[data-edit-address-legacy-text]');
+    let enderecoAntigo = ''; // texto livre de agendamentos antigos que não dá para separar em campos
     const textareaDescricao = form.querySelector('[name="descricao"]');
     const checkboxBuscar = form.querySelector('[name="buscarResidencia"]');
     const inputDate = form.querySelector('[name="data"]');
@@ -77,7 +81,7 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
         formatPhone(inputTelefone);
     }
 
-    const inputs = [inputNome, inputTelefone, inputNomePet, inputEndereco, selectServico, inputDate, textareaMotivo, inputEmail];
+    const inputs = [inputNome, inputTelefone, inputNomePet, ...camposEndereco, selectServico, inputDate, textareaMotivo, inputEmail];
     inputs.forEach(input => {
         if (input) input.addEventListener('input', () => input.classList.remove('error'));
     });
@@ -190,12 +194,39 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
     if (checkboxBuscar) checkboxBuscar.onchange = updateQuillTemplate;
     if (textareaMotivo) textareaMotivo.oninput = updateQuillTemplate;
 
+    function mostrarEndereco(campos, texto) {
+        if (campos) {
+            enderecoAntigo = '';
+            avisoEnderecoAntigo?.classList.add('hidden');
+            preencherEndereco(campos);
+            return;
+        }
+
+        limparEndereco(false);
+        enderecoAntigo = String(texto || '').trim();
+        if (textoEnderecoAntigo) textoEnderecoAntigo.textContent = enderecoAntigo;
+        avisoEnderecoAntigo?.classList.toggle('hidden', !enderecoAntigo);
+    }
+
+    // nomes dos campos do endereço que estão inválidos (mesmas regras do servidor)
+    function enderecoInvalido(end) {
+        const invalidos = [];
+        if (end.cep.length !== 8) invalidos.push('cep');
+        if (end.rua.length < 3) invalidos.push('rua');
+        if (end.numero.length < 1) invalidos.push('numero');
+        if (end.bairro.length < 2) invalidos.push('bairro');
+        if (end.cidade.length < 2) invalidos.push('cidade');
+        if (!/^[A-Za-z]{2}$/.test(end.estado)) invalidos.push('estado');
+        return invalidos;
+    }
+
     function populateFields(schedule) {
         if (!schedule) return;
 
         const clientName = schedule.nome || schedule.user?.username || schedule.usuario?.nome || schedule.agenda?.nome || '';
         const rawPhone = schedule.telefone || schedule.user?.phone || schedule.usuario?.telefone || schedule.agenda?.telefone || '';
         const address = schedule.endereco || schedule.user?.endereco || schedule.agenda?.endereco || '';
+        const addressFields = schedule.enderecoCampos || schedule.agenda?.enderecoCampos || null;
         const petName = schedule.nomePet || schedule.petAgendado?.name || schedule.agenda?.nomePet || '';
         const email = schedule.email || schedule.usuario?.email || schedule.user?.email || '';
         const observation = schedule.observation || schedule.service?.observations || schedule.agenda?.observation || '';
@@ -203,7 +234,7 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
 
         if (inputNome) inputNome.value = clientName;
         if (inputTelefone) inputTelefone.value = applyPhoneMask(rawPhone);
-        if (inputEndereco) inputEndereco.value = address;
+        mostrarEndereco(addressFields, address);
         if (inputNomePet) inputNomePet.value = petName;
         if (inputEmail) inputEmail.value = email;
         if (textareaDescricao) textareaDescricao.value = observation;
@@ -298,11 +329,19 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
         const messageHtml = editQuill ? editQuill.root.innerHTML : '';
         const messageText = editQuill ? editQuill.getText().trim() : '';
 
+        const enderecoForm = lerEndereco();
+        const mantemEnderecoAntigo = Boolean(enderecoAntigo) && Object.values(enderecoForm).every((v) => !v);
+
         let hasError = false;
         if (!inputNome.value.trim()) { inputNome.classList.add('error'); hasError = true; }
         if (!destPhone) { inputTelefone.classList.add('error'); hasError = true; }
         if (!inputNomePet.value.trim()) { inputNomePet.classList.add('error'); hasError = true; }
-        if (!inputEndereco.value.trim()) { inputEndereco.classList.add('error'); hasError = true; }
+        if (!mantemEnderecoAntigo) {
+            enderecoInvalido(enderecoForm).forEach((nome) => {
+                form.querySelector('[data-address="' + nome + '"]')?.classList.add('error');
+                hasError = true;
+            });
+        }
         if (!inputDate.value) { inputDate.classList.add('error'); hasError = true; }
         if (!selectedHour || selectedHour === 'Nenhum horário selecionado') {
             infoHourElement.textContent = 'Selecione um horário';
@@ -332,7 +371,7 @@ export default async function editSchedule(modal, id, scheduleObj = null) {
                 serviceId: selectedServiceId,
                 date: inputDate.value,
                 hour: selectedHour,
-                endereco: inputEndereco.value.trim(),
+                ...(mantemEnderecoAntigo ? { endereco: enderecoAntigo } : enderecoForm), // cep, rua, numero, bairro, cidade, estado, complemento
                 descricao: textareaDescricao ? textareaDescricao.value.trim() : '',
                 buscarResidencia: checkboxBuscar ? checkboxBuscar.checked : false,
                 motivoAtualizacao: textareaMotivo ? textareaMotivo.value.trim() : '',

@@ -337,10 +337,10 @@
 
     <!-- Scripts de dados renderizados pelo servidor (EJS) - Evita Fetch inicial para json-server -->
     <script id="server-servicos" type="application/json">
-        <%- JSON.stringify(servicosLista) %>
+        <%- JSON.stringify(servicosLista).replace(/</g, '\\u003c') %>
     </script>
     <script id="server-agenda" type="application/json">
-        <%- JSON.stringify(agendamentosLista) %>
+        <%- JSON.stringify(agendamentosLista).replace(/</g, '\\u003c') %>
     </script>
 
     <aside data-modal-info-menu="user" data-modal-info="agenda"

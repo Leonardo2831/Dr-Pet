@@ -1,6 +1,8 @@
 import cancelSchedule from "../cancelSchedule.js";
 import editSchedule from "../editSchedule.js";
 import Agenda from "../Agenda.js";
+import openScheduleDetails from "../scheduleDetails.js";
+import esc from "../../utils/escapeHtml.js";
 
 
 export default function structAgenda(object) {
@@ -13,8 +15,11 @@ export default function structAgenda(object) {
     };
 
     const div = document.createElement('div');
-    div.className = "flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]";
+    div.className = "flex flex-col justify-between max-w-[670px] w-full px-5 sm:px-[30px] py-5 bg-white rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] cursor-pointer hover:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.25)] transition-shadow outline-none focus-visible:ring-4 focus-visible:ring-green-500/50";
     div.setAttribute('data-id', object.id);
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('title', 'Ver detalhes do agendamento');
 
     const [year, month, day] = object.date ? object.date.split('-') : ['', '', ''];
     const formatDate = (day && month && year) ? `${day}/${month}/${year}` : (object.date || '');
@@ -42,20 +47,20 @@ export default function structAgenda(object) {
             <div class="flex flex-col gap-2">
                 <div class="flex flex-col">
                     <span class="font-semibold text-base md:text-lg text-gray-800">
-                        ${clientName} - <span class="whitespace-nowrap">${formatDate}</span>
+                        ${esc(clientName)} - <span class="whitespace-nowrap">${esc(formatDate)}</span>
                     </span>
                     <span class="font-medium text-base text-gray-700">
-                        Pet: ${petName}
+                        Pet: ${esc(petName)}
                     </span>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-normal text-base text-gray-700">
-                        <span class="font-medium">Serviço:</span> ${serviceName}
+                        <span class="font-medium">Serviço:</span> ${esc(serviceName)}
                     </span>
                     ${
                         observations ? 
                         `<span class="font-normal text-base text-gray-700">
-                            <span class="font-medium">Descrição:</span> ${observations}
+                            <span class="font-medium">Descrição:</span> ${esc(observations)}
                         </span>` : ""
                     }
                     <span class="font-normal text-base text-gray-700">
@@ -64,7 +69,7 @@ export default function structAgenda(object) {
                 </div>
             </div>
             <span class="font-medium text-lg md:text-[22px] leading-[27px] text-green-600">
-                ${hour}
+                ${esc(hour)}
             </span>
         </div>
 
@@ -83,6 +88,19 @@ export default function structAgenda(object) {
             ` : ''
         }
     `;
+
+    // Clicar no card (fora dos botões Editar/Cancelar) abre o popup com os detalhes
+    div.addEventListener('click', (evento) => {
+        if (evento.target.closest('[data-button]')) return;
+        openScheduleDetails(object, div);
+    });
+    div.addEventListener('keydown', (evento) => {
+        if (evento.target !== div) return; // Enter/Espaço nos botões internos continuam funcionando normalmente
+        if (evento.key === 'Enter' || evento.key === ' ') {
+            evento.preventDefault();
+            openScheduleDetails(object, div);
+        }
+    });
 
     if (isFutureOrToday) {
         div.querySelector('[data-button="editSchedule"]').addEventListener('click', () => {

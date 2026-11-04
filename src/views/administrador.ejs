@@ -1328,12 +1328,69 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-[10px]">
-                    <label for="input-edit-endereco"
-                        class="font-sans font-semibold text-base md:text-lg text-gray-700">Endereço</label>
-                    <input data-input="editScheduleAddress" id="input-edit-endereco" type="text" name="endereco"
-                        placeholder="Endereço completo" required minlength="3" maxlength="100"
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                <div class="flex flex-col gap-3" data-edit-address>
+                    <span class="font-sans font-semibold text-base md:text-lg text-gray-700">Endereço</span>
+
+                    <p data-edit-address-legacy class="hidden text-sm md:text-base bg-orange-light text-orange rounded-lg px-4 py-3">
+                        Este agendamento tem um endereço em texto livre: <strong data-edit-address-legacy-text></strong><br />
+                        Preencha os campos abaixo para organizar o endereço ou deixe todos em branco para mantê-lo como está.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-4 gap-y-4">
+                        <div class="flex flex-col gap-1.5 sm:col-span-4">
+                            <label for="input-edit-cep" class="font-sans font-medium text-sm md:text-base text-gray-600">CEP</label>
+                            <input id="input-edit-cep" type="text" name="cep" data-address="cep" inputmode="numeric" maxlength="9"
+                                placeholder="00000-000"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+
+                        <p data-address-status role="status" aria-live="polite"
+                            class="sm:col-span-8 sm:self-end text-sm text-gray-600 min-h-[1.5rem]"></p>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-12">
+                            <label for="input-edit-rua" class="font-sans font-medium text-sm md:text-base text-gray-600">Rua</label>
+                            <input id="input-edit-rua" type="text" name="rua" data-address="rua" maxlength="70"
+                                placeholder="Nome da rua"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-4">
+                            <label for="input-edit-numero" class="font-sans font-medium text-sm md:text-base text-gray-600">Número</label>
+                            <input id="input-edit-numero" type="text" name="numero" data-address="numero" maxlength="10"
+                                placeholder="Ex: 100 ou S/N"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-8">
+                            <label for="input-edit-bairro" class="font-sans font-medium text-sm md:text-base text-gray-600">Bairro</label>
+                            <input id="input-edit-bairro" type="text" name="bairro" data-address="bairro" maxlength="40"
+                                placeholder="Nome do bairro"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-8">
+                            <label for="input-edit-cidade" class="font-sans font-medium text-sm md:text-base text-gray-600">Cidade</label>
+                            <input id="input-edit-cidade" type="text" name="cidade" data-address="cidade" maxlength="40"
+                                placeholder="Nome da cidade"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-4">
+                            <label for="input-edit-estado" class="font-sans font-medium text-sm md:text-base text-gray-600">Estado</label>
+                            <input id="input-edit-estado" type="text" name="estado" data-address="estado" maxlength="2"
+                                placeholder="UF"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 uppercase outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400 placeholder:normal-case" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-12">
+                            <label for="input-edit-complemento" class="font-sans font-medium text-sm md:text-base text-gray-600">
+                                Complemento <span class="text-gray-400 font-normal">(opcional)</span>
+                            </label>
+                            <input id="input-edit-complemento" type="text" name="complemento" data-address="complemento" maxlength="40"
+                                placeholder="Ex: apto 12, na frente da pracinha"
+                                class="px-4 py-3 w-full border-2 border-gray-300 rounded-lg font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400" />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex flex-col gap-[10px]">
@@ -1404,6 +1461,96 @@
     </aside>
 
     <!-- Modal de Cancelamento de Agendamento com Quill e Notificação -->
+    <!-- Popup com os detalhes do agendamento (aberto ao clicar no card da Agenda) -->
+    <aside data-modal="scheduleDetails" role="dialog" aria-modal="true" aria-labelledby="schedule-details-title"
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-3 sm:p-4 md:p-6 overflow-y-auto animate-fadeTop">
+        <div class="relative w-full max-w-[720px] my-auto bg-white rounded-[15px] p-6 md:p-8 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.25)] flex flex-col gap-6">
+
+            <button type="button" data-button="closeScheduleDetails" aria-label="Fechar detalhes"
+                class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors outline-none focus:ring-2 focus:ring-green-500">
+                <img src="/images/icons/administrador/delete-slide.svg" alt="" />
+            </button>
+
+            <header class="flex items-start gap-4 pr-10">
+                <img data-details="serviceImage" alt="" class="hidden w-16 h-16 md:w-20 md:h-20 rounded-[10px] object-cover bg-gray-100 shrink-0" />
+                <div class="flex flex-col gap-1.5 min-w-0">
+                    <h3 id="schedule-details-title" data-details="serviceName" class="font-sans font-bold text-xl md:text-2xl text-green-700 break-words"></h3>
+                    <p data-details="when" class="font-sans font-medium text-sm md:text-base text-gray-700"></p>
+                    <span data-details="status" class="inline-block w-fit px-3 py-1 rounded-full font-sans font-semibold text-sm"></span>
+                </div>
+            </header>
+
+            <section class="flex flex-col gap-3">
+                <h4 class="font-sans font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-1.5">Sobre o serviço</h4>
+                <p data-details="serviceDescription" class="font-sans text-sm md:text-base text-gray-700"></p>
+                <dl class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Duração</dt>
+                        <dd data-details="duration" class="font-sans font-semibold text-sm md:text-base text-gray-900"></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Preço</dt>
+                        <dd data-details="price" class="font-sans font-semibold text-sm md:text-base text-gray-900"></dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="flex flex-col gap-3">
+                <h4 class="font-sans font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-1.5">Agendamento</h4>
+                <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Data</dt>
+                        <dd data-details="date" class="font-sans font-semibold text-sm md:text-base text-gray-900"></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Horário</dt>
+                        <dd data-details="time" class="font-sans font-semibold text-sm md:text-base text-gray-900"></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Buscar em casa</dt>
+                        <dd data-details="pickup" class="font-sans font-semibold text-sm md:text-base text-gray-900"></dd>
+                    </div>
+                    <div class="flex flex-col sm:col-span-2">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Observações do cliente</dt>
+                        <dd data-details="observation" class="font-sans text-sm md:text-base text-gray-900 whitespace-pre-line break-words"></dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="flex flex-col gap-3">
+                <h4 class="font-sans font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-1.5">Cliente e pet</h4>
+                <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Cliente</dt>
+                        <dd data-details="client" class="font-sans font-semibold text-sm md:text-base text-gray-900 break-words"></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Pet</dt>
+                        <dd data-details="pet" class="font-sans font-semibold text-sm md:text-base text-gray-900 break-words"></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">Telefone</dt>
+                        <dd class="font-sans font-semibold text-sm md:text-base text-gray-900"><a data-details="phone" class="hover:underline"></a></dd>
+                    </div>
+                    <div class="flex flex-col">
+                        <dt class="font-sans text-xs md:text-sm text-gray-500">E-mail</dt>
+                        <dd data-details="email" class="font-sans font-semibold text-sm md:text-base text-gray-900 break-all"></dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="flex flex-col gap-3">
+                <h4 class="font-sans font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-1.5">Endereço</h4>
+                <div data-details="address" class="flex flex-col gap-1 font-sans text-sm md:text-base text-gray-900"></div>
+            </section>
+
+            <button type="button" data-button="closeScheduleDetailsBottom"
+                class="w-full py-3 rounded-[10px] bg-green-600 hover:bg-green-700 font-sans font-semibold text-base md:text-lg text-gray-50 uppercase transition-colors outline-none focus:ring-4 focus:ring-green-300">
+                Fechar
+            </button>
+        </div>
+    </aside>
+
     <aside data-modal="cancelSchedule"
         class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 p-3 sm:p-4 md:p-6 overflow-y-auto animate-fadeTop">
         <div
@@ -1674,8 +1821,8 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.umd.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
     <script>
-        window.initialAgendamentos = <%- JSON.stringify(agendamentos || []) %>;
-        window.initialServicos = <%- JSON.stringify(servicos || []) %>;
+        window.initialAgendamentos = <%- JSON.stringify(agendamentos || []).replace(/</g, '\\u003c') %>;
+        window.initialServicos = <%- JSON.stringify(servicos || []).replace(/</g, '\\u003c') %>;
     </script>
     <script type="module" src="/javascript/administrador/script-adm.js"></script>
     <script type="module" src="/javascript/menu-user/script-menu-user.js"></script>

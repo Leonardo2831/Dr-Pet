@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../../database/mysql");
 const sendEmail = require("../../utils/SendEmail");
 const { cancelarAgendamento } = require("../../utils/cancelamento");
+const { montarEndereco, separarEndereco } = require("../../utils/endereco");
 
 function cleanPhoneForDatabase(rawPhone) {
     let digits = String(rawPhone || "").replace(/\D/g, "");
@@ -33,7 +34,8 @@ router.get("/administrador/agenda/dados", (req, res) => {
             u.telefone AS usuario_telefone,
             s.nome AS service_nome,
             s.duracao AS service_duracao,
-            s.preco AS service_preco
+            s.preco AS service_preco,
+            s.descricao AS service_descricao
         FROM agenda a
         LEFT JOIN usuario u ON a.fk_user = u.id
         LEFT JOIN service_infos s ON a.fk_service = s.id
@@ -53,6 +55,7 @@ router.get("/administrador/agenda/dados", (req, res) => {
             buscarResidencia: Boolean(a.buscarResidencia),
             observation: a.observation || "",
             endereco: a.endereco || "",
+            enderecoCampos: separarEndereco(a.endereco),
             pendente: a.pendente,
             nomePet: a.nomePet || "",
             nome: a.nome || a.usuario_nome || "Cliente",
@@ -74,6 +77,9 @@ router.get("/administrador/agenda/dados", (req, res) => {
                 id: a.fk_service,
                 name: a.service_nome || "",
                 nome: a.service_nome || "",
+                duracao: Number(a.service_duracao) || 0,
+                preco: Number(a.service_preco) || 0,
+                descricao: a.service_descricao || "",
                 observations: a.observation || ""
             }
         }));
@@ -104,7 +110,8 @@ router.get("/administrador/agenda/:id", (req, res) => {
             u.telefone AS usuario_telefone,
             s.nome AS service_nome,
             s.duracao AS service_duracao,
-            s.preco AS service_preco
+            s.preco AS service_preco,
+            s.descricao AS service_descricao
         FROM agenda a
         LEFT JOIN usuario u ON a.fk_user = u.id
         LEFT JOIN service_infos s ON a.fk_service = s.id
@@ -124,6 +131,7 @@ router.get("/administrador/agenda/:id", (req, res) => {
             buscarResidencia: Boolean(a.buscarResidencia),
             observation: a.observation || "",
             endereco: a.endereco || "",
+            enderecoCampos: separarEndereco(a.endereco),
             pendente: a.pendente,
             nomePet: a.nomePet || "",
             nome: a.nome || a.usuario_nome || "Cliente",
@@ -145,6 +153,9 @@ router.get("/administrador/agenda/:id", (req, res) => {
                 id: a.fk_service,
                 name: a.service_nome || "",
                 nome: a.service_nome || "",
+                duracao: Number(a.service_duracao) || 0,
+                preco: Number(a.service_preco) || 0,
+                descricao: a.service_descricao || "",
                 observations: a.observation || ""
             }
         };
@@ -199,7 +210,11 @@ router.post("/administrador/agenda/editar", async (req, res) => {
     const fk_service = payload.serviceId || payload.service?.id || payload.fk_service;
     const date = payload.date;
     const hour = payload.hour;
-    const endereco = String(payload.endereco || payload.user?.endereco || "").trim().slice(0, 255);
+    const resultadoEndereco = montarEndereco({ ...payload, endereco: payload.endereco || payload.user?.endereco });
+    if (resultadoEndereco.erro) {
+        return res.status(400).json({ erro: resultadoEndereco.erro });
+    }
+    const endereco = resultadoEndereco.endereco;
     const rawObservation = String(payload.descricao || payload.service?.observations || payload.observation || "").trim();
     const observation = rawObservation ? rawObservation.slice(0, 255) : null;
     const translado = Boolean(
