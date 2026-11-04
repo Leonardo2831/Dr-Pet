@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../database/mysql');
+const { verificarAdmin } = require('../middlewares');
 
 const produtosRouter = require('./produtos');
 const slideHomeRouter = require('./slide-home');
@@ -9,6 +10,10 @@ const servicosRouter = require('./servicos');
 const agendaRouter = require('./agendamentos');
 const acceptRouter  = require('./acceptAppointment');
 const relatoriosRouter = require('./relatorios');
+
+// Tudo que começa com /administrador (a página e todas as rotas de API) exige administrador logado.
+// Precisa vir ANTES dos routers abaixo e ser montado no prefixo, porque este router está montado em "/".
+router.use('/administrador', verificarAdmin);
 
 router.use(produtosRouter);
 router.use(slideHomeRouter);

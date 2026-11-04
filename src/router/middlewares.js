@@ -6,12 +6,17 @@ function verificarLogin(req, res, next) {
     next();
 }
 
+// Só administradores. Navegação do navegador (e envio de formulário) é redirecionada/recusada com página;
+// chamadas fetch/API recebem JSON com o status certo (401 = não logado, 403 = logado sem permissão).
 function verificarAdmin(req, res, next) {
-    if (!req.session || !req.session.usuario) {
-        return res.redirect('/login');
+    const usuario = req.session && req.session.usuario;
+    const querPagina = (req.headers.accept || '').includes('text/html');
+
+    if (!usuario) {
+        return querPagina ? res.redirect('/login') : res.status(401).json({ erro: 'É preciso estar logado como administrador.' });
     }
-    if (req.session.usuario.tipoUsuario !== 'admin') {
-        return res.status(403).send('Acesso negado.');
+    if (usuario.tipoUsuario !== 'admin') {
+        return querPagina ? res.status(403).send('Acesso negado.') : res.status(403).json({ erro: 'Acesso negado.' });
     }
     next();
 }
