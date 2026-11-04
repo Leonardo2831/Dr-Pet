@@ -8,6 +8,7 @@ const usuariosRouter = require('./usuarios');
 const servicosRouter = require('./servicos');
 const agendaRouter = require('./agendamentos');
 const acceptRouter  = require('./acceptAppointment');
+const relatoriosRouter = require('./relatorios');
 
 router.use(produtosRouter);
 router.use(slideHomeRouter);
@@ -15,6 +16,7 @@ router.use(usuariosRouter);
 router.use(servicosRouter);
 router.use(agendaRouter);
 router.use(acceptRouter);
+router.use(relatoriosRouter);
 
 function executarQuery(sql, params = []) {
     return new Promise((resolve) => {

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../../database/mysql");
 const sendEmail = require("../../utils/SendEmail");
+const { cancelarAgendamento } = require("../../utils/cancelamento");
 
 function cleanPhoneForDatabase(rawPhone) {
     let digits = String(rawPhone || "").replace(/\D/g, "");
@@ -160,9 +161,9 @@ router.post("/administrador/agenda/cancelar", async (req, res) => {
     }
 
     const id = payload.id;
-    const query = "DELETE FROM agenda WHERE id = ?";
 
-    db.query(query, [id], async (err) => {
+    // cancelar = guardar no histórico (relatórios) e liberar o horário
+    cancelarAgendamento(id, "admin").then(() => null, (erro) => erro).then(async (err) => {
         if (err) {
             console.error("Erro ao cancelar agendamento no banco:", err);
             return res.status(500).json({ erro: "Erro ao cancelar agendamento no banco." });

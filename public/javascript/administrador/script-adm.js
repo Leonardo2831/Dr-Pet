@@ -7,6 +7,7 @@ import eventoSlides from "./eventoSlides.js";
 import adminPrecosAgenda from "./admin-precos-agenda.js";
 import AppointmentRequests from "./AppointmentRequests.js";
 import UserReports from "./UserReports.js";
+import initReports from "./Reports.js";
 import Services from "./Services.js";
 import formatPhone from "../utils/formatPhone.js";
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tableBodySelector: '[data-content-users="table"]',
         paginationSelector: '[data-pagination="users"]'
     }).init();
+    initReports();
     adminPrecosAgenda();
     eventoSlides();
 });

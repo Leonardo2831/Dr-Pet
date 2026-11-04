@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql');
 const { verificarLogin } = require('./middlewares');
+const { cancelarAgendamento } = require('../utils/cancelamento');
 
 // Helper para criar slug amigável do serviço
 function getServiceSlug(nome) {
@@ -90,12 +91,16 @@ router.get('/agenda/:id', (req, res) => {
 });
 
 // CANCELAR / DELETAR AGENDAMENTO (POST /agenda/delete/:id ou POST /agenda/:id)
-const deletarAgendamento = (req, res) => {
+const deletarAgendamento = async (req, res) => {
     const { id } = req.params;
-    db.query('DELETE FROM agenda WHERE id = ?', [id], (err) => {
-        if (err) return res.status(500).json({ erro: 'Erro ao deletar agendamento.' });
+    try {
+        // cancelar = guardar no histórico (relatórios) e liberar o horário
+        await cancelarAgendamento(id, 'cliente');
         res.status(200).json({ mensagem: 'Agendamento cancelado com sucesso.' });
-    });
+    } catch (err) {
+        console.error('Erro ao cancelar agendamento:', err);
+        res.status(500).json({ erro: 'Erro ao deletar agendamento.' });
+    }
 };
 
 router.post('/agenda/delete/:id', deletarAgendamento);

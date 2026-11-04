@@ -83,6 +83,33 @@ async function main() {
         console.log('~ agenda recriada com o schema atual (estava vazia)');
     }
 
+    // --- agenda_cancelada: histórico de agendamentos cancelados/recusados (usado nos relatórios) ---
+    // Sem chaves estrangeiras de propósito: o histórico precisa sobreviver à exclusão de usuário ou serviço.
+    await db.query(`
+        CREATE TABLE IF NOT EXISTS agenda_cancelada (
+            id INTEGER NOT NULL AUTO_INCREMENT,
+            agenda_id INTEGER NULL,
+            dateAgendamento DATE NOT NULL,
+            hourAgendamento TIME NOT NULL,
+            buscarResidencia BOOLEAN NOT NULL DEFAULT FALSE,
+            observation VARCHAR(255),
+            endereco VARCHAR(255),
+            nome VARCHAR(255) NOT NULL,
+            telefone VARCHAR(20),
+            nomePet VARCHAR(100),
+            fk_user INTEGER NULL,
+            fk_service INTEGER NULL,
+            servico_nome VARCHAR(100),
+            estava_pendente BOOLEAN NOT NULL DEFAULT FALSE,
+            origem ENUM('cliente', 'admin', 'recusado') NOT NULL,
+            cancelado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY(id),
+            INDEX idx_cancelada_data (dateAgendamento),
+            INDEX idx_cancelada_servico (fk_service)
+        )
+    `);
+    console.log('agenda_cancelada ok');
+
     // --- avatar: versão antiga guardava só o link da foto do Google como texto; troca pela imagem de verdade ---
     const prefixoHttps = Buffer.from('https://').toString('hex').toUpperCase();
     const [legados] = await db.query(
