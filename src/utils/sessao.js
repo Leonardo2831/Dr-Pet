@@ -9,7 +9,9 @@ function iniciarSessao(req, usuario, callback) {
             email: usuario.email,
             telefone: usuario.telefone,
             tipoUsuario: usuario.tipo_usuario,
-            avatar: usuario.avatar
+            avatar: usuario.avatar,
+            // Contas criadas pelo Google chegam sem telefone e sem senha
+            perfilIncompleto: !usuario.telefone || !usuario.senha
         };
 
         req.session.save(callback);

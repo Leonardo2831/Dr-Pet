@@ -8,8 +8,7 @@ Site de petshop (Node.js + Express + EJS + MySQL + Tailwind).
 2. Copie `copy.env` para `.env` e preencha (banco, e-mail, Google).
 3. Crie o banco: `CREATE DATABASE petshop;` e importe `database.sql`.
    - Se o banco já existia de versões antigas, rode `npm run migrate` (idempotente).
-4. (Opcional) Produtos de teste para a loja: `npm run seed` (recriável, prefixo `[Teste]`).
-5. Inicie: `npm run node` (auto-reload) ou `npm start` em http://localhost:3000
+4. Inicie: `npm run node` (auto-reload) ou `npm start` em http://localhost:3000
    - `npm run tailwind` recompila o CSS ao editar as classes.
 
 ## Variáveis de ambiente

@@ -21,4 +21,17 @@ function loadUser(req, res, next) {
     next();
 }
 
-module.exports = { verificarLogin, verificarAdmin, loadUser };
+// Quem entrou com o Google e ainda não informou telefone/senha é levado a completar o cadastro
+const ROTAS_LIBERADAS_PERFIL_INCOMPLETO = ['/completar-cadastro', '/logout'];
+
+function exigirPerfilCompleto(req, res, next) {
+    const usuario = req.session && req.session.usuario;
+    const navegacao = req.method === 'GET' && (req.headers.accept || '').includes('text/html');
+
+    if (usuario && usuario.perfilIncompleto && navegacao && !ROTAS_LIBERADAS_PERFIL_INCOMPLETO.includes(req.path)) {
+        return res.redirect('/completar-cadastro');
+    }
+    next();
+}
+
+module.exports = { verificarLogin, verificarAdmin, loadUser, exigirPerfilCompleto };

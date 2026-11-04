@@ -24,7 +24,7 @@ function criarCliente() {
  *  2. existe conta com o mesmo e-mail        -> vincula o google_id (o Google garante o e-mail)
  *  3. não existe                             -> cria conta sem senha e sem telefone
  */
-async function resolverUsuarioGoogle({ sub, email, nome }) {
+async function resolverUsuarioGoogle({ sub, email, nome, picture }) {
     const emailNormalizado = String(email).trim().toLowerCase();
 
     const [porGoogle] = await db.query('SELECT * FROM usuario WHERE google_id = ?', [sub]);
@@ -42,19 +42,43 @@ async function resolverUsuarioGoogle({ sub, email, nome }) {
     }
 
     const nomeFinal = String(nome || emailNormalizado.split('@')[0]).trim().slice(0, 150);
+    // A foto do Google é guardada como URL (o header e "Minha conta" exibem user.avatar direto no <img src>)
+    const avatar = typeof picture === 'string' && picture.startsWith('https://') && picture.length <= 500
+        ? Buffer.from(picture)
+        : null;
+
     const [resultado] = await db.query(
-        'INSERT INTO usuario (nome, email, google_id, email_verificado) VALUES (?, ?, ?, TRUE)',
-        [nomeFinal, emailNormalizado, sub]
+        'INSERT INTO usuario (nome, email, google_id, email_verificado, avatar) VALUES (?, ?, ?, TRUE, ?)',
+        [nomeFinal, emailNormalizado, sub, avatar]
     );
     const [novo] = await db.query('SELECT * FROM usuario WHERE id = ?', [resultado.insertId]);
     return novo[0];
+}
+
+const COOKIE_STATE = 'google_oauth_state';
+
+function lerCookie(req, nome) {
+    const header = req.headers.cookie || '';
+    for (const parte of header.split(';')) {
+        const [chave, ...resto] = parte.trim().split('=');
+        if (chave === nome) return decodeURIComponent(resto.join('='));
+    }
+    return undefined;
 }
 
 router.get('/auth/google', (req, res) => {
     if (!googleConfigurado()) return res.redirect('/login?msg=google-indisponivel');
 
     const state = crypto.randomBytes(24).toString('hex');
-    req.session.googleState = state;
+
+    // O state fica em cookie (e não na sessão): as sessões estão na memória do servidor e
+    // se perdem quando ele reinicia (ex.: node --watch) entre ir ao Google e voltar.
+    res.cookie(COOKIE_STATE, state, {
+        httpOnly: true,
+        sameSite: 'lax', // o retorno do Google é uma navegação GET de nível superior, então o cookie é enviado
+        maxAge: 10 * 60 * 1000,
+        path: '/auth/google'
+    });
 
     const url = criarCliente().generateAuthUrl({
         scope: ['openid', 'email', 'profile'],
@@ -62,15 +86,15 @@ router.get('/auth/google', (req, res) => {
         prompt: 'select_account'
     });
 
-    req.session.save(() => res.redirect(url));
+    res.redirect(url);
 });
 
 router.get('/auth/google/callback', async (req, res) => {
     if (!googleConfigurado()) return res.redirect('/login?msg=google-indisponivel');
 
     const { code, state, error } = req.query;
-    const esperado = req.session.googleState;
-    delete req.session.googleState;
+    const esperado = lerCookie(req, COOKIE_STATE);
+    res.clearCookie(COOKIE_STATE, { path: '/auth/google' });
 
     if (error) return res.redirect('/login?msg=google-cancelado');
 
@@ -90,14 +114,15 @@ router.get('/auth/google/callback', async (req, res) => {
             return res.redirect('/login?msg=google-email-nao-verificado');
         }
 
-        const usuario = await resolverUsuarioGoogle({ sub: payload.sub, email: payload.email, nome: payload.name });
+        const usuario = await resolverUsuarioGoogle({ sub: payload.sub, email: payload.email, nome: payload.name, picture: payload.picture });
 
         iniciarSessao(req, usuario, (err) => {
             if (err) {
                 console.error('Erro ao salvar sessão (Google):', err);
                 return res.redirect('/login?msg=google-erro');
             }
-            res.redirect('/');
+            // Conta nova (ou sem telefone/senha): pede os dados que o Google não fornece
+            res.redirect(usuario.telefone && usuario.senha ? '/' : '/completar-cadastro');
         });
     } catch (err) {
         console.error('Erro no login com Google:', err.message);

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const { loadUser } = require('./router/middlewares');
+const { loadUser, exigirPerfilCompleto } = require('./router/middlewares');
 
 // Rotas
 const homeRouter = require('./router/home');
@@ -16,6 +16,7 @@ const produtoRouter = require('./router/produto');
 const apiProdutosRouter = require('./router/api-produtos');
 const verificacaoRouter = require('./router/verificacao');
 const googleAuthRouter = require('./router/google-auth');
+const completarCadastroRouter = require('./router/completar-cadastro');
 const servicosRouter = require('./router/servicos');
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(session({
 }));
 
 app.use(loadUser);
+app.use(exigirPerfilCompleto);
 
 // Roteador Home
 app.use('/', homeRouter);
@@ -49,6 +51,7 @@ app.use('/', formAgendarRouter);
 app.use('/', loginRouter);
 app.use('/', verificacaoRouter);
 app.use('/', googleAuthRouter);
+app.use('/', completarCadastroRouter);
 app.use('/', lojaRouter);
 app.use('/', optionUserRouter);
 app.use('/', produtoRouter);
