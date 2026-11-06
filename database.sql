@@ -16,7 +16,7 @@ CREATE TABLE usuario (
 CREATE TABLE codigo_verificacao (
     id INTEGER NOT NULL AUTO_INCREMENT,
     usuario_id INTEGER NOT NULL,
-    tipo ENUM('verificar_email', 'recuperar_senha') NOT NULL,
+    tipo ENUM('verificar_email', 'recuperar_senha', 'alterar_email') NOT NULL,
     codigo_hash VARCHAR(255) NOT NULL,
     expira_em DATETIME NOT NULL,
     tentativas INTEGER NOT NULL DEFAULT 0,

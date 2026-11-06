@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/mysql');
-const criptografia = require('../utils/Criptografia');
+const { enviarCodigo, enviarLinkRecuperacao, mascararEmail, AVISO_DEV } = require('../utils/enviarCodigo');
+const { emailValido } = require('../utils/sessao');
 
 const { verificarLogin } = require('./middlewares');
 
 router.get('/option-user', verificarLogin, (req, res) => {
     const userId = req.session.usuario.id;
+    const feedback = req.session.optionUserFeedback || null;
+    delete req.session.optionUserFeedback;
 
     db.query(
         'SELECT * FROM usuario WHERE id = ?',
@@ -38,7 +41,14 @@ router.get('/option-user', verificarLogin, (req, res) => {
                             }
                             const pets = petResult;
 
-                            res.render('option-user', {user, enderecos, pets, avatarV: req.session.usuario.avatarV});
+                            res.render('option-user', {
+                                user,
+                                enderecos,
+                                pets,
+                                avatarV: req.session.usuario.avatarV,
+                                feedback,
+                                emailMascarado: mascararEmail(user.email)
+                            });
                         }
                     );
                 }
@@ -128,35 +138,59 @@ router.post('/option-user/update-name', verificarLogin, (req,res) => {
     );
 });
 
-router.post('/option-user/update-email', verificarLogin, (req,res) => {
-    const { email } = req.body;
-    if(typeof email !== 'string' || !email.trim()) {
-        return res.status(400).send('Preencha o email e tente novamente.');
+router.post('/option-user/update-email', verificarLogin, async (req, res) => {
+    const novoEmail = String(req.body.email || '').trim().toLowerCase();
+    const userId = req.session.usuario.id;
+
+    const voltarComErro = (mensagem) => {
+        req.session.optionUserFeedback = { tipo: 'erro', mensagem };
+        req.session.save(() => res.redirect('/option-user'));
+    };
+
+    if (!emailValido(novoEmail)) {
+        return voltarComErro('Informe um endereço de e-mail válido.');
     }
 
-    const emailLimpo = email.trim();
-    const id = req.session.usuario.id;
-    
-    db.query(
-        'UPDATE usuario SET email = ? WHERE id = ?',
-        [emailLimpo, id],
-        (err, result) => {
-            if(err) {
-                console.log(err);
-                if(err.code === 'ER_DUP_ENTRY') {
-                    return res.status(409).send('Este email já está cadastrado.');
-                }
-                return res.status(500).send('Erro ao atualizar o email.');
-            }
-            if(result.affectedRows === 0) {
-                return res.status(404).send('Usuário não encontrado');
-            }
-            
-            req.session.usuario.email = emailLimpo;
-            
-            res.redirect('/option-user');
+    try {
+        const [usuarios] = await db.promise().query(
+            'SELECT id, nome, email FROM usuario WHERE id = ?',
+            [userId]
+        );
+        if (usuarios.length === 0) {
+            return res.status(404).send('Usuário não encontrado');
         }
-    );
+
+        if (usuarios[0].email.toLowerCase() === novoEmail) {
+            return voltarComErro('Esse já é o e-mail cadastrado na sua conta.');
+        }
+
+        const [existentes] = await db.promise().query(
+            'SELECT id FROM usuario WHERE email = ? AND id <> ?',
+            [novoEmail, userId]
+        );
+        if (existentes.length > 0) {
+            return voltarComErro('Este e-mail já está cadastrado.');
+        }
+
+        const resultado = await enviarCodigo(
+            { id: userId, nome: usuarios[0].nome, email: novoEmail },
+            'alterar_email'
+        );
+
+        if (!resultado.ok) {
+            const mensagem = resultado.erro === 'aguarde'
+                ? `Aguarde ${resultado.segundos}s para solicitar outro código.`
+                : 'Não foi possível enviar o código agora. Tente novamente em instantes.';
+            return voltarComErro(mensagem);
+        }
+
+        req.session.alteracaoEmailPendente = { usuarioId: userId, novoEmail };
+        req.session.alteracaoEmailInfo = resultado.dev ? AVISO_DEV : null;
+        req.session.save(() => res.redirect('/alterar-email'));
+    } catch (err) {
+        console.error('Erro ao solicitar alteração de e-mail:', err);
+        voltarComErro('Não foi possível iniciar a alteração de e-mail. Tente novamente em instantes.');
+    }
 });
 
 router.post('/option-user/update-phone', verificarLogin, (req,res) => {
@@ -191,44 +225,44 @@ router.post('/option-user/update-phone', verificarLogin, (req,res) => {
     );
 });
 
-router.post('/option-user/update-password', verificarLogin, (req,res) => {
-    const { senhaAtual, senha } = req.body;
-    if(typeof senha !== 'string' || senha.length < 8 || senha.length > 60) {
-        return res.status(400).send('A nova senha deve ter de 8 a 60 caracteres.');
-    }
+router.post('/option-user/request-password-reset', verificarLogin, async (req, res) => {
+    const userId = req.session.usuario.id;
 
-    const id = req.session.usuario.id; 
-    
-    db.query(
-        'SELECT senha FROM usuario WHERE id = ?',
-        [id],
-        (err, userResults) => {
-            if(err) {
-                console.log(err);
-                return res.status(500).send('Erro ao verificar a senha.');
-            }
-            if(userResults.length === 0) {
-                return res.status(404).send('Usuário não encontrado');
-            }
-            // Contas criadas com o Google não têm senha: podem definir uma sem informar a atual
-            const temSenha = Boolean(userResults[0].senha);
-            if(temSenha && (typeof senhaAtual !== 'string' || !criptografia.checkHash(senhaAtual, userResults[0].senha))) {
-                return res.status(400).send('A senha atual está incorreta.');
-            }
+    try {
+        const [usuarios] = await db.promise().query(
+            'SELECT id, nome, email FROM usuario WHERE id = ?',
+            [userId]
+        );
 
-            db.query(
-                'UPDATE usuario SET senha = ? WHERE id = ?',
-                [criptografia.generateHash(senha), id],
-                (err) => {
-                    if(err) {
-                        console.log(err);
-                        return res.status(500).send('Erro ao atualizar a senha.');
-                    }
-                    res.redirect('/option-user');
-                }
-            );
+        if (usuarios.length === 0) {
+            return res.status(404).send('Usuário não encontrado');
         }
-    );
+
+        const resultado = await enviarLinkRecuperacao(usuarios[0]);
+
+        if (!resultado.ok) {
+            const mensagem = resultado.erro === 'aguarde'
+                ? `Já enviamos um link. Aguarde ${resultado.segundos}s para solicitar outro.`
+                : 'Não foi possível enviar o e-mail agora. Tente novamente em instantes.';
+            req.session.optionUserFeedback = { tipo: 'erro', mensagem };
+        } else {
+            req.session.optionUserFeedback = {
+                tipo: 'sucesso',
+                mensagem: resultado.dev
+                    ? AVISO_DEV
+                    : `Enviamos o link para ${mascararEmail(usuarios[0].email)}. Ele vale por 30 minutos.`
+            };
+        }
+
+        req.session.save(() => res.redirect('/option-user'));
+    } catch (err) {
+        console.error('Erro ao solicitar alteração de senha:', err);
+        req.session.optionUserFeedback = {
+            tipo: 'erro',
+            mensagem: 'Não foi possível enviar o e-mail agora. Tente novamente em instantes.'
+        };
+        req.session.save(() => res.redirect('/option-user'));
+    }
 });
 
 router.post('/option-user/update-address/:id', verificarLogin, (req,res) => {

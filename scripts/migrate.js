@@ -33,7 +33,7 @@ async function main() {
         CREATE TABLE IF NOT EXISTS codigo_verificacao (
             id INTEGER NOT NULL AUTO_INCREMENT,
             usuario_id INTEGER NOT NULL,
-            tipo ENUM('verificar_email', 'recuperar_senha') NOT NULL,
+            tipo ENUM('verificar_email', 'recuperar_senha', 'alterar_email') NOT NULL,
             codigo_hash VARCHAR(255) NOT NULL,
             expira_em DATETIME NOT NULL,
             tentativas INTEGER NOT NULL DEFAULT 0,
@@ -44,13 +44,35 @@ async function main() {
             FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
         )
     `);
+    await db.query("ALTER TABLE codigo_verificacao MODIFY tipo ENUM('verificar_email', 'recuperar_senha', 'alterar_email') NOT NULL");
     console.log('codigo_verificacao ok');
 
     // --- Alinha tipos com o database.sql (imagens em LONGBLOB, categoria livre) ---
-    await db.query('ALTER TABLE service_infos MODIFY imagem LONGBLOB NULL');
+    if (!(await colunaExiste('service_infos', 'descricao'))) {
+        await db.query('ALTER TABLE service_infos ADD COLUMN descricao VARCHAR(500) NULL');
+        await db.query("UPDATE service_infos SET descricao = nome WHERE descricao IS NULL OR descricao = ''");
+        console.log('+ service_infos.descricao');
+    }
+    await db.query("UPDATE service_infos SET descricao = nome WHERE descricao IS NULL OR descricao = ''");
+    await db.query('ALTER TABLE service_infos MODIFY descricao VARCHAR(500) NOT NULL');
+
+    if (!(await colunaExiste('service_infos', 'imagem'))) {
+        await db.query('ALTER TABLE service_infos ADD COLUMN imagem LONGBLOB NULL');
+        console.log('+ service_infos.imagem');
+    } else {
+        await db.query('ALTER TABLE service_infos MODIFY imagem LONGBLOB NULL');
+    }
+
     await db.query('ALTER TABLE usuario MODIFY avatar LONGBLOB NULL');
     await db.query('ALTER TABLE slide_home MODIFY image LONGBLOB NOT NULL');
     await db.query('ALTER TABLE produto MODIFY main_image LONGBLOB NOT NULL');
+
+    if (!(await colunaExiste('produto', 'categoria'))) {
+        await db.query('ALTER TABLE produto ADD COLUMN categoria VARCHAR(100) NULL AFTER preco');
+        await db.query("UPDATE produto SET categoria = 'Outros' WHERE categoria IS NULL OR categoria = ''");
+        console.log('+ produto.categoria');
+    }
+    await db.query("UPDATE produto SET categoria = 'Outros' WHERE categoria IS NULL OR categoria = ''");
     await db.query('ALTER TABLE produto MODIFY categoria VARCHAR(100) NOT NULL');
     await db.query('ALTER TABLE produto_image MODIFY image LONGBLOB NOT NULL');
 

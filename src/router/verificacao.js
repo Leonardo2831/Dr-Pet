@@ -5,7 +5,8 @@ const db = require('../database/mysql').promise();
 const codigos = require('../utils/codigos');
 const criptografia = require('../utils/Criptografia');
 const { enviarCodigo, enviarLinkRecuperacao, mascararEmail, AVISO_DEV } = require('../utils/enviarCodigo');
-const { iniciarSessao, senhaValida } = require('../utils/sessao');
+const { iniciarSessao, senhaValida, emailValido } = require('../utils/sessao');
+const { verificarLogin } = require('./middlewares');
 
 const CAMPO_CODIGO = {
     name: 'codigo', label: 'Código de 6 dígitos', type: 'text', inputmode: 'numeric',
@@ -114,6 +115,101 @@ router.post('/verificar-email/reenviar', exigirPendente, async (req, res) => {
         salvarSessao(req, res, '/verificar-email');
     } catch (err) {
         erroInterno(res, 'reenviar código de verificação', err);
+    }
+});
+
+// ---------------------------------------------------------------------------
+// Confirmação do novo e-mail solicitado pelo usuário logado
+// ---------------------------------------------------------------------------
+
+function exigirAlteracaoEmailPendente(req, res, next) {
+    const pendente = req.session.alteracaoEmailPendente;
+    if (!pendente || pendente.usuarioId !== req.session.usuario.id || !emailValido(pendente.novoEmail)) {
+        return res.redirect('/option-user');
+    }
+    next();
+}
+
+function telaAlterarEmail(req, res, extra = {}) {
+    const { novoEmail } = req.session.alteracaoEmailPendente;
+    res.render('auth-simples', {
+        titulo: 'Confirme seu novo e-mail',
+        descricao: `Enviamos um código de 6 dígitos para ${mascararEmail(novoEmail)}. O e-mail da conta só será alterado depois da confirmação.`,
+        acao: '/alterar-email/confirmar',
+        reenviar: '/alterar-email/reenviar',
+        campos: [CAMPO_CODIGO],
+        botao: 'Confirmar e-mail',
+        voltarHref: '/option-user',
+        voltarTexto: 'Voltar para minha conta',
+        ...extra
+    });
+}
+
+router.get('/alterar-email', verificarLogin, exigirAlteracaoEmailPendente, (req, res) => {
+    const info = req.session.alteracaoEmailInfo;
+    delete req.session.alteracaoEmailInfo;
+    telaAlterarEmail(req, res, info ? { info } : {});
+});
+
+router.post('/alterar-email/confirmar', verificarLogin, exigirAlteracaoEmailPendente, async (req, res) => {
+    const { usuarioId, novoEmail } = req.session.alteracaoEmailPendente;
+
+    try {
+        const resultado = await codigos.validar(usuarioId, 'alterar_email', req.body.codigo);
+        if (!resultado.ok) {
+            res.status(400);
+            return telaAlterarEmail(req, res, { erro: MENSAGENS_CODIGO[resultado.motivo] });
+        }
+
+        const [existentes] = await db.query(
+            'SELECT id FROM usuario WHERE email = ? AND id <> ?',
+            [novoEmail, usuarioId]
+        );
+        if (existentes.length > 0) {
+            delete req.session.alteracaoEmailPendente;
+            req.session.optionUserFeedback = { tipo: 'erro', mensagem: 'Este e-mail foi cadastrado por outra conta.' };
+            return salvarSessao(req, res, '/option-user');
+        }
+
+        await db.query(
+            'UPDATE usuario SET email = ?, email_verificado = TRUE WHERE id = ?',
+            [novoEmail, usuarioId]
+        );
+
+        req.session.usuario.email = novoEmail;
+        delete req.session.alteracaoEmailPendente;
+        req.session.optionUserFeedback = { tipo: 'sucesso', mensagem: 'E-mail alterado e confirmado com sucesso.' };
+        salvarSessao(req, res, '/option-user');
+    } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+            delete req.session.alteracaoEmailPendente;
+            req.session.optionUserFeedback = { tipo: 'erro', mensagem: 'Este e-mail foi cadastrado por outra conta.' };
+            return salvarSessao(req, res, '/option-user');
+        }
+        erroInterno(res, 'confirmar alteração de e-mail', err);
+    }
+});
+
+router.post('/alterar-email/reenviar', verificarLogin, exigirAlteracaoEmailPendente, async (req, res) => {
+    const { usuarioId, novoEmail } = req.session.alteracaoEmailPendente;
+
+    try {
+        const [usuarios] = await db.query('SELECT id, nome FROM usuario WHERE id = ?', [usuarioId]);
+        if (usuarios.length === 0) return res.redirect('/login');
+
+        const resultado = await enviarCodigo(
+            { id: usuarioId, nome: usuarios[0].nome, email: novoEmail },
+            'alterar_email'
+        );
+        if (!resultado.ok) {
+            res.status(resultado.erro === 'aguarde' ? 429 : 500);
+            return telaAlterarEmail(req, res, { erro: mensagemEnvio(resultado) });
+        }
+
+        req.session.alteracaoEmailInfo = resultado.dev ? AVISO_DEV : 'Enviamos um novo código para o novo e-mail.';
+        salvarSessao(req, res, '/alterar-email');
+    } catch (err) {
+        erroInterno(res, 'reenviar código de alteração de e-mail', err);
     }
 });
 

@@ -4,6 +4,12 @@
 
     <div class="bg-gray-50">
         <main class="container min-h-[calc(100vh_-_570px)] w-full p-6 md:p-10 lg:p-20 flex flex-col justify-center">
+            <% if (locals.feedback) { %>
+                <p role="<%= feedback.tipo === 'erro' ? 'alert' : 'status' %>"
+                    class="mb-6 rounded-[10px] px-4 py-3 text-base sm:text-lg font-semibold <%= feedback.tipo === 'erro' ? 'bg-red-light text-red-alert' : 'bg-green-light text-green-600' %>">
+                    <%= feedback.mensagem %>
+                </p>
+            <% } %>
             <section
                 class="animate-fadeTop w-full shadow-md rounded-2xl overflow-hidden bg-gray-100"
                 id="menu-inicial"
@@ -735,7 +741,7 @@
 
                 <div class="flex flex-col gap-[10px]">
                     <label for="input-edit-email" class="font-sans font-semibold text-base md:text-lg text-gray-700">Novo Email</label>
-                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" value="<%= user.email || '' %>" placeholder="seu@email.com" minlength="5" maxlength="50" required
+                    <input data-input="editEmail" id="input-edit-email" type="email" name="email" value="<%= user.email || '' %>" placeholder="seu@email.com" minlength="5" maxlength="255" required
                         class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
                 </div>
 
@@ -773,33 +779,22 @@
 
     <aside data-modal="editSenha" class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/50 animate-fadeItem">
         <div class="relative w-[95%] max-w-[500px] rounded-[15px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]">
-            <form method="post" action="/option-user/update-password" data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
+            <form method="post" action="/option-user/request-password-reset" data-form="editSenha" class="relative bg-white p-6 md:p-10 flex flex-col gap-6">
 
                 <button type="button" data-button="closeEditSenha" class="absolute top-4 right-4 md:top-6 md:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-500 transition-colors text-xl font-bold leading-none">
                     <img src="/images/icons/administrador/delete-slide.svg" alt="Fechar">
                 </button>
 
-                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar Senha</h3>
+                <h3 class="font-sans font-bold text-xl md:text-2xl text-green-600 pr-10">Alterar senha</h3>
 
-                <div class="flex flex-col gap-[10px]">
-                    <% if (user.senha) { %>
-                    <label for="input-current-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Senha atual</label>
-                    <input id="input-current-Senha" type="password" name="senhaAtual" placeholder="Digite sua senha atual" minlength="8" maxlength="60" required
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
-                    <% } else { %>
-                    <p class="font-sans font-medium text-base text-gray-600">Sua conta foi criada com o Google e ainda não tem senha. Defina uma abaixo para também poder entrar com e-mail e senha.</p>
-                    <% } %>
-                </div>
-
-                <div class="flex flex-col gap-[10px]">
-                    <label for="input-edit-Senha" class="font-sans font-semibold text-base md:text-lg text-gray-700">Nova Senha</label>
-                    <input data-input="editSenha" id="input-edit-Senha" type="password" name="senha" placeholder="Digite sua nova senha" minlength="8" maxlength="60" required
-                        class="px-4 py-3 w-full border-2 border-gray-300 rounded-[8px] font-medium text-base md:text-lg text-gray-600 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all placeholder:text-gray-400">
-                </div>
+                <p class="font-sans font-medium text-base md:text-lg text-gray-600 leading-relaxed">
+                    Enviaremos um link de confirmação para <strong class="text-gray-800"><%= emailMascarado %></strong>.
+                    Abra o link para criar sua nova senha. Ele poderá ser usado uma única vez e expira em 30 minutos.
+                </p>
 
                 <button data-button="saveSenha" type="submit"
                     class="w-full flex items-center justify-center px-6 py-4 bg-green-600 rounded-[10px] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500 transition-all">
-                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Salvar</span>
+                    <span class="font-sans font-semibold text-lg md:text-xl text-white uppercase">Enviar link</span>
                 </button>
             </form>
         </div>

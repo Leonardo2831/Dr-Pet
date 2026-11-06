@@ -11,6 +11,11 @@ const TEXTOS = {
         assunto: 'Dr. Pet - Recuperação de senha',
         titulo: 'Recuperação de senha',
         intro: 'Recebemos um pedido para redefinir a senha da sua conta. Use o código abaixo para continuar.'
+    },
+    alterar_email: {
+        assunto: 'Dr. Pet - Confirme seu novo e-mail',
+        titulo: 'Confirme seu novo e-mail',
+        intro: 'Use o código abaixo para confirmar este endereço como o novo e-mail da sua conta na Dr. Pet.'
     }
 };
 
