@@ -2,15 +2,59 @@
 
 Site de petshop (Node.js + Express + EJS + MySQL + Tailwind).
 
-## Rodando localmente
+## Primeira execução em outro computador
 
-1. Instale as dependências: `npm install`
-2. Copie `copy.env` para `.env` e preencha (banco, e-mail, Google).
-3. Crie o banco: `CREATE DATABASE petshop;` e importe `database.sql`.
-   - Se o banco já existia de versões antigas, rode `npm run migrate` (idempotente).
-4. Inicie: `npm run node` (auto-reload) ou `npm start` em http://localhost:3000
-   - `npm run node` reinicia sozinho só quando o código muda (`src/router`, `src/utils`, `src/database`, `src/app.js`). Mudanças no `.env` exigem parar e iniciar de novo; views (`.ejs`), CSS e JS do navegador não precisam de reinício.
-   - `npm run tailwind` recompila o CSS ao editar as classes.
+### 1. Instale as dependências
+
+Na pasta do projeto, execute:
+
+```bash
+npm install
+```
+
+### 2. Prepare o banco de dados
+
+1. Inicie o MySQL.
+2. Crie o banco:
+
+```sql
+CREATE DATABASE petshop;
+```
+
+3. Importe e execute o arquivo `database.sql` no banco `petshop`. Isso pode ser feito pelo MySQL Workbench ou pelo terminal:
+
+```bash
+mysql -u root -p petshop < database.sql
+```
+
+4. Depois de importar o esquema inicial, execute a migração:
+
+```bash
+npm run migrate
+```
+
+O `npm run migrate` atualiza a estrutura e pode ser executado novamente sem problema, mas ele não substitui a importação inicial do `database.sql` em um banco vazio.
+
+### 3. Inicie o projeto
+
+Para iniciar normalmente em http://localhost:3000:
+
+```bash
+npm start
+```
+
+Durante o desenvolvimento, também é possível usar `npm run node` para reiniciar o servidor automaticamente quando arquivos do backend forem alterados.
+
+- Mudanças no `.env` exigem parar e iniciar o servidor novamente.
+- Views (`.ejs`), CSS e JavaScript do navegador não precisam de reinício.
+- `npm run tailwind` recompila o CSS ao editar as classes.
+
+## Acesso de administrador
+
+O `database.sql` cria uma conta administrativa para acessar o painel:
+
+- E-mail: `adm@hotmail.com`
+- Senha: `adm123456`
 
 ## Variáveis de ambiente
 
